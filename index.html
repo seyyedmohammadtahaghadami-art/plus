@@ -1,1994 +1,688 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-
-                /* =========================================
-   SchoolPDF - Persian Student Questions
-   Modern Educational Website Styles
-   ========================================= */
-
-/* ---------- CSS Variables (Theming) ---------- */
-:root {
-  --primary: #4f46e5;
-  --primary-dark: #3730a3;
-  --primary-light: #818cf8;
-  --secondary: #06b6d4;
-  --accent: #f59e0b;
-  --success: #10b981;
-  --danger: #ef4444;
-
-  --bg: #ffffff;
-  --bg-soft: #f8fafc;
-  --bg-card: #ffffff;
-  --text: #1e293b;
-  --text-soft: #64748b;
-  --border: #e2e8f0;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
-
-  --radius: 14px;
-  --radius-sm: 8px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --font: 'Vazirmatn', 'IRANSansX', Tahoma, sans-serif;
-}
-
-[data-theme="dark"] {
-  --bg: #0f172a;
-  --bg-soft: #1e293b;
-  --bg-card: #1e293b;
-  --text: #f1f5f9;
-  --text-soft: #94a3b8;
-  --border: #334155;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* ---------- Reset ---------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  direction: rtl;
-  text-align: right;
-  transition: background var(--transition), color var(--transition);
-  overflow-x: hidden;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: color var(--transition);
-}
-
-ul { list-style: none; }
-
-img { max-width: 100%; display: block; }
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: inherit;
-}
-
-input, textarea, select {
-  font-family: inherit;
-  outline: none;
-}
-
-/* ---------- Container ---------- */
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* ---------- Header ---------- */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-  transition: all var(--transition);
-}
-
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 0;
-  gap: 20px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--primary);
-}
-
-.logo i {
-  font-size: 1.8rem;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav a {
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  font-weight: 500;
-  font-size: 0.95rem;
-  color: var(--text-soft);
-  transition: all var(--transition);
-}
-
-.nav a:hover,
-.nav a.active {
-  color: var(--primary);
-  background: rgba(79, 70, 229, 0.08);
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.icon-btn {
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--bg-soft);
-  color: var(--text);
-  font-size: 1.1rem;
-  transition: all var(--transition);
-}
-
-.icon-btn:hover {
-  background: var(--primary);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.menu-toggle {
-  display: none;
-}
-
-/* Mobile Nav */
-.mobile-nav {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 80%;
-  max-width: 320px;
-  height: 100vh;
-  background: var(--bg);
-  box-shadow: var(--shadow-lg);
-  padding: 24px;
-  z-index: 1100;
-  transition: right var(--transition);
-  overflow-y: auto;
-}
-
-.mobile-nav.open { right: 0; }
-
-.mobile-nav-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.mobile-nav a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 12px;
-  border-radius: var(--radius-sm);
-  font-weight: 500;
-  color: var(--text);
-  transition: all var(--transition);
-}
-
-.mobile-nav a:hover {
-  background: rgba(79, 70, 229, 0.08);
-  color: var(--primary);
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1050;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition);
-}
-
-.overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* ---------- Hero / Slider ---------- */
-.hero {
-  position: relative;
-  height: 520px;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  text-align: center;
-  color: #fff;
-  padding: 20px;
-}
-
-.slide.active { opacity: 1; }
-
-.slide::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-.slide-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  animation: fadeUp 0.8s ease;
-}
-
-.slide-content h1 {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 800;
-  margin-bottom: 16px;
-  line-height: 1.3;
-}
-
-.slide-content p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  margin-bottom: 24px;
-  opacity: 0.95;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all var(--transition);
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: #fff;
-  color: var(--primary);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.btn-outline {
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-}
-
-.btn-outline:hover {
-  background: #fff;
-  color: var(--primary);
-}
-
-.btn-solid {
-  background: var(--primary);
-  color: #fff;
-}
-
-.btn-solid:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.slider-dots {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.dot.active {
-  background: #fff;
-  width: 32px;
-  border-radius: 6px;
-}
-
-.slider-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: all var(--transition);
-}
-
-.slider-arrow:hover { background: rgba(255, 255, 255, 0.35); }
-.slider-arrow.prev { right: 20px; }
-.slider-arrow.next { left: 20px; }
-
-/* ---------- Section ---------- */
-.section {
-  padding: 80px 0;
-}
-
-.section-head {
-  text-align: center;
-  margin-bottom: 48px;
-}
-
-.section-head h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 800;
-  margin-bottom: 12px;
-  position: relative;
-  display: inline-block;
-}
-
-.section-head h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  right: 50%;
-  transform: translateX(50%);
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  border-radius: 2px;
-}
-
-.section-head p {
-  color: var(--text-soft);
-  max-width: 600px;
-  margin: 20px auto 0;
-}
-
-/* ---------- Grades Grid ---------- */
-.grades-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
-}
-
-.grade-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px 24px;
-  text-align: center;
-  transition: all var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.grade-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform var(--transition);
-}
-
-.grade-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-light);
-}
-
-.grade-card:hover::before { transform: scaleX(1); }
-
-.grade-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: #fff;
-  transition: transform var(--transition);
-}
-
-.grade-card:hover .grade-icon {
-  transform: scale(1.1) rotate(-8deg);
-}
-
-.grade-card h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.grade-card p {
-  color: var(--text-soft);
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-}
-
-.grade-card .count {
-  display: inline-block;
-  padding: 4px 14px;
-  background: rgba(79, 70, 229, 0.1);
-  color: var(--primary);
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-/* ---------- Questions ---------- */
-.questions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-}
-
-.question-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  transition: all var(--transition);
-  display: flex;
-  flex-direction: column;
-}
-
-.question-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-light);
-}
-
-.question-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
-}
-
-.tag {
-  padding: 4px 12px;
-  background: rgba(79, 70, 229, 0.1);
-  color: var(--primary);
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.tag.hot {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--danger);
-}
-
-.question-card h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-.question-card .desc {
-  color: var(--text-soft);
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-  flex: 1;
-}
-
-.question-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-
-.question-stats {
-  display: flex;
-  gap: 14px;
-  color: var(--text-soft);
-  font-size: 0.85rem;
-}
-
-.question-stats span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: var(--primary);
-  color: #fff;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all var(--transition);
-}
-
-.download-btn:hover {
-  background: var(--primary-dark);
-  transform: scale(1.05);
-}
-
-/* ---------- Tabs ---------- */
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-}
-
-.tab {
-  padding: 10px 24px;
-  border-radius: 50px;
-  background: var(--bg-soft);
-  color: var(--text-soft);
-  font-weight: 600;
-  transition: all var(--transition);
-}
-
-.tab.active {
-  background: var(--primary);
-  color: #fff;
-}
-
-/* ---------- News ---------- */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-.news-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: all var(--transition);
-}
-
-.news-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.news-img {
-  height: 180px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 3rem;
-}
-
-.news-body {
-  padding: 20px;
-}
-
-.news-date {
-  color: var(--text-soft);
-  font-size: 0.85rem;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.news-body h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-.news-body p {
-  color: var(--text-soft);
-  font-size: 0.9rem;
-  margin-bottom: 14px;
-}
-
-.read-more {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 0.9rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.read-more:hover { gap: 10px; }
-
-/* ---------- Page Hero ---------- */
-.page-hero {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #fff;
-  padding: 80px 0 60px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="60" r="1.5" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="1" fill="white" opacity="0.1"/></svg>');
-}
-
-.page-hero h1 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 800;
-  margin-bottom: 12px;
-  position: relative;
-}
-
-.breadcrumb {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  align-items: center;
-  font-size: 0.95rem;
-  opacity: 0.9;
-  position: relative;
-}
-
-.breadcrumb a:hover { text-decoration: underline; }
-
-/* ---------- Search Page ---------- */
-.search-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  margin-bottom: 32px;
-  box-shadow: var(--shadow);
-}
-
-.search-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  gap: 12px;
-}
-
-.search-form input,
-.search-form select {
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--bg-soft);
-  color: var(--text);
-  font-size: 0.95rem;
-  transition: all var(--transition);
-}
-
-.search-form input:focus,
-.search-form select:focus {
-  border-color: var(--primary);
-  background: var(--bg);
-}
-
-.search-form button {
-  padding: 12px 28px;
-  background: var(--primary);
-  color: #fff;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  transition: all var(--transition);
-}
-
-.search-form button:hover {
-  background: var(--primary-dark);
-}
-
-/* ---------- About / Contact ---------- */
-.about-grid,
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.about-text h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: var(--primary);
-}
-
-.about-text p {
-  color: var(--text-soft);
-  margin-bottom: 14px;
-  line-height: 1.9;
-}
-
-.features-list {
-  margin-top: 24px;
-}
-
-.features-list li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--border);
-}
-
-.features-list li i {
-  color: var(--success);
-  font-size: 1.2rem;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.stat-card {
-  background: var(--bg-soft);
-  padding: 20px;
-  border-radius: var(--radius);
-  text-align: center;
-  border: 1px solid var(--border);
-}
-
-.stat-card .num {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--primary);
-  display: block;
-}
-
-.stat-card .label {
-  color: var(--text-soft);
-  font-size: 0.9rem;
-}
-
-.contact-info {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px;
-}
-
-.contact-info h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.contact-item:last-child { border: none; }
-
-.contact-item i {
-  width: 44px;
-  height: 44px;
-  background: rgba(79, 70, 229, 0.1);
-  color: var(--primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-.contact-item .info strong {
-  display: block;
-  margin-bottom: 4px;
-}
-
-.contact-item .info span {
-  color: var(--text-soft);
-  font-size: 0.9rem;
-}
-
-.contact-form {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px;
-}
-
-.contact-form h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 18px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--bg-soft);
-  color: var(--text);
-  transition: all var(--transition);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--primary);
-  background: var(--bg);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-/* ---------- Footer ---------- */
-.footer {
-  background: var(--bg-soft);
-  border-top: 1px solid var(--border);
-  padding: 60px 0 20px;
-  margin-top: 60px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.footer-col h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 18px;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.footer-col h4::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--primary);
-  border-radius: 2px;
-}
-
-.footer-col p {
-  color: var(--text-soft);
-  font-size: 0.9rem;
-  line-height: 1.8;
-  margin-bottom: 16px;
-}
-
-.footer-col ul li {
-  margin-bottom: 10px;
-}
-
-.footer-col ul a {
-  color: var(--text-soft);
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all var(--transition);
-}
-
-.footer-col ul a:hover {
-  color: var(--primary);
-  padding-right: 6px;
-}
-
-.social-links {
-  display: flex;
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.social-links a {
-  width: 40px;
-  height: 40px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-soft);
-  transition: all var(--transition);
-}
-
-.social-links a:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-  transform: translateY(-3px);
-}
-
-.footer-bottom {
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  color: var(--text-soft);
-  font-size: 0.9rem;
-}
-
-/* ---------- Back to Top ---------- */
-.back-to-top {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  width: 48px;
-  height: 48px;
-  background: var(--primary);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  box-shadow: var(--shadow-lg);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all var(--transition);
-  z-index: 999;
-}
-
-.back-to-top.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.back-to-top:hover {
-  background: var(--primary-dark);
-  transform: translateY(-4px);
-}
-
-/* ---------- Animations ---------- */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 992px) {
-  .nav { display: none; }
-  .menu-toggle { display: flex; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; }
-  .search-form { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 600px) {
-  .section { padding: 50px 0; }
-  .hero { height: 420px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-  .stats-grid { grid-template-columns: 1fr; }
-  .slider-arrow { display: none; }
-}
-
-/* ---------- Utility ---------- */
-.text-center { text-align: center; }
-.mt-20 { margin-top: 20px; }
-.mb-20 { margin-bottom: 20px; }
-.hidden { display: none !important; }
-
-
-              </style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="نمونه سؤالات امتحانی دانش‌آموزان ایران از پایه هفتم تا دوازدهم - دانلود رایگان PDF">
-  <meta name="keywords" content="نمونه سوال, نمونه سؤال, امتحان, دانش آموز, هفتم, هشتم, نهم, دهم, یازدهم, دوازدهم, PDF">
-  <meta name="author" content="SchoolPDF">
-  <meta property="og:title" content="نمونه سؤال - مرجع سؤالات امتحانی دانش‌آموزان">
-  <meta property="og:description" content="دانلود رایگان نمونه سؤالات امتحانی تمام پایه‌ها">
-  <meta property="og:type" content="website">
-  <title>نمونه سؤال | مرجع سؤالات امتحانی دانش‌آموزان ایران</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="header" id="header"></header>
-
-  <!-- Hero Slider -->
-  <section class="hero">
-    <div class="slide active" style="background: linear-gradient(135deg, #4f46e5, #06b6d4);">
-      <div class="slide-content">
-        <h1>نمونه سؤالات امتحانی تمام پایه‌ها</h1>
-        <p>بهترین منبع برای آمادگی در امتحانات - از هفتم تا دوازدهم</p>
-        <a href="#grades" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> شروع کنید</a>
-      </div>
-    </div>
-    <div class="slide" style="background: linear-gradient(135deg, #06b6d4, #10b981);">
-      <div class="slide-content">
-        <h1>دانلود رایگان فایل‌های PDF</h1>
-        <p>هزاران نمونه سؤال با پاسخ تشریحی در انتظار شماست</p>
-        <a href="search.html" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> جستجو</a>
-      </div>
-    </div>
-    <div class="slide" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
-      <div class="slide-content">
-        <h1>موفقیت تحصیلی با نمونه سؤال</h1>
-        <p>با تمرین مداوم، بهترین نتایج را در امتحانات کسب کنید</p>
-        <a href="about.html" class="btn btn-outline"><i class="fa-solid fa-circle-info"></i> درباره ما</a>
-      </div>
-    </div>
-
-    <button class="slider-arrow prev"><i class="fa-solid fa-chevron-right"></i></button>
-    <button class="slider-arrow next"><i class="fa-solid fa-chevron-left"></i></button>
-
-    <div class="slider-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  </section>
-
-  <!-- Grades Section -->
-  <section class="section" id="grades">
-    <div class="container">
-      <div class="section-head fade-in">
-        <h2>پایه‌های تحصیلی</h2>
-        <p>پایه تحصیلی خود را انتخاب کنید و به نمونه سؤالات دسترسی پیدا کنید</p>
-      </div>
-      <div class="grades-grid">
-        <a href="pages/grade7.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-7"></i></div>
-          <h3>پایه هفتم</h3>
-          <p>دوره اول متوسطه</p>
-          <span class="count">+۱۲۰ نمونه سؤال</span>
-        </a>
-        <a href="pages/grade8.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-8"></i></div>
-          <h3>پایه هشتم</h3>
-          <p>دوره اول متوسطه</p>
-          <span class="count">+۱۴۰ نمونه سؤال</span>
-        </a>
-        <a href="pages/grade9.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-9"></i></div>
-          <h3>پایه نهم</h3>
-          <p>دوره اول متوسطه</p>
-          <span class="count">+۱۸۰ نمونه سؤال</span>
-        </a>
-        <a href="pages/grade10.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-book"></i></div>
-          <h3>پایه دهم</h3>
-          <p>دوره دوم متوسطه</p>
-          <span class="count">+۲۰۰ نمونه سؤال</span>
-        </a>
-        <a href="pages/grade11.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-book-open"></i></div>
-          <h3>پایه یازدهم</h3>
-          <p>دوره دوم متوسطه</p>
-          <span class="count">+۲۲۰ نمونه سؤال</span>
-        </a>
-        <a href="pages/grade12.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-          <h3>پایه دوازدهم</h3>
-          <p>دوره دوم متوسطه</p>
-          <span class="count">+۲۵۰ نمونه سؤال</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Popular Questions -->
-  <section class="section" style="background: var(--bg-soft);">
-    <div class="container">
-      <div class="section-head fade-in">
-        <h2>پرطرفدارترین نمونه سؤالات</h2>
-        <p>محبوب‌ترین سؤالات که توسط دانش‌آموزان دانلود شده‌اند</p>
-      </div>
-      <div class="tabs">
-        <button class="tab active">همه</button>
-        <button class="tab">جدیدترین</button>
-        <button class="tab">پر بازدید</button>
-        <button class="tab">با پاسخ</button>
-      </div>
-      <div class="questions-grid" id="popularQuestions"></div>
-    </div>
-  </section>
-
-  <!-- News Section -->
-  <section class="section" id="news">
-    <div class="container">
-      <div class="section-head fade-in">
-        <h2>اخبار آموزشی</h2>
-        <p>آخرین اخبار و اطلاعیه‌های مربوط به آموزش و پرورش</p>
-      </div>
-      <div class="news-grid">
-        <article class="news-card fade-in">
-          <div class="news-img"><i class="fa-solid fa-newspaper"></i></div>
-          <div class="news-body">
-            <div class="news-date"><i class="fa-regular fa-calendar"></i> ۲۰ تیر ۱۴۰۵</div>
-            <h4>تغییرات جدید در برنامه درسی پایه دهم</h4>
-            <p>وزارت آموزش و پرورش تغییرات جدیدی را در برنامه درسی پایه دهم اعلام کرد...</p>
-            <a href="#" class="read-more">ادامه مطلب <i class="fa-solid fa-arrow-left"></i></a>
-          </div>
-        </article>
-        <article class="news-card fade-in">
-          <div class="news-img"><i class="fa-solid fa-bullhorn"></i></div>
-          <div class="news-body">
-            <div class="news-date"><i class="fa-regular fa-calendar"></i> ۱۸ تیر ۱۴۰۵</div>
-            <h4>زمان برگزاری امتحانات نهایی اعلام شد</h4>
-            <p>برنامه زمانی امتحانات نهایی خرداد ماه پایه‌های دوازدهم منتشر شد...</p>
-            <a href="#" class="read-more">ادامه مطلب <i class="fa-solid fa-arrow-left"></i></a>
-          </div>
-        </article>
-        <article class="news-card fade-in">
-          <div class="news-img"><i class="fa-solid fa-award"></i></div>
-          <div class="news-body">
-            <div class="news-date"><i class="fa-regular fa-calendar"></i> ۱۵ تیر ۱۴۰۵</div>
-            <h4>معرفی برترین دانش‌آموزان المپیادی</h4>
-            <p>نتایج المپیادهای علمی کشور اعلام و دانش‌آموزان برتر معرفی شدند...</p>
-            <a href="#" class="read-more">ادامه مطلب <i class="fa-solid fa-arrow-left"></i></a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer" id="footer"></footer>
-
-  <script src="script.js"></script>
-  <script>
-    // Render popular questions on homepage
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('popularQuestions');
-      if (!container) return;
-      const popular = [
-        { title: 'نمونه سؤال ریاضی نهم - خرداد ۱۴۰۴', grade: '9', subject: 'ریاضی', type: 'نوبت دوم', downloads: 2340, hot: true },
-        { title: 'نمونه سؤال فیزیک یازدهم - تجربی', grade: '11', subject: 'فیزیک', type: 'تجربی', downloads: 1890, hot: true },
-        { title: 'نمونه سؤال فارسی دهم - با پاسخ', grade: '10', subject: 'فارسی', type: 'با پاسخ', downloads: 1650, hot: true },
-        { title: 'نمونه سؤال زیست دوازدهم - کنکوری', grade: '12', subject: 'زیست', type: 'کنکوری', downloads: 2100, hot: true },
-        { title: 'نمونه سؤال شیمی نهم - فصل به فصل', grade: '9', subject: 'شیمی', type: 'فصل به فصل', downloads: 1420, hot: false },
-        { title: 'نمونه سؤال عربی هشتم - گرامر', grade: '8', subject: 'عربی', type: 'گرامر', downloads: 980, hot: false }
-      ];
-      container.innerHTML = popular.map(item => `
-        <div class="question-card fade-in">
-          <div class="question-meta">
-            <span class="tag">پایه ${toPersianNum(item.grade)}</span>
-            <span class="tag">${item.subject}</span>
-            ${item.hot ? '<span class="tag hot"><i class="fa-solid fa-fire"></i> پرطرفدار</span>' : ''}
-          </div>
-          <h4>${item.title}</h4>
-          <p class="desc">نمونه سؤال ${item.subject} پایه ${toPersianNum(item.grade)} - ${item.type}</p>
-          <div class="question-footer">
-            <div class="question-stats">
-              <span><i class="fa-solid fa-download"></i> ${toPersianNum(item.downloads)}</span>
-              <span><i class="fa-solid fa-file-pdf"></i> PDF</span>
-            </div>
-            <a href="#" class="download-btn" onclick="event.preventDefault(); alert('فایل نمونه به زودی اضافه می‌شود');">
-              <i class="fa-solid fa-download"></i> دانلود
-            </a>
-          </div>
-        </div>
-      `).join('');
-      initScrollAnimations();
-    });
-  </script>
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="جستجوی نمونه سؤالات امتحانی دانش‌آموزان ایران">
-  <title>جستجو | نمونه سؤال</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>استاد یار | دستیار هوشمند آموزشی</title>
+<meta name="description" content="استاد یار - پلتفرم هوشمند نمونه سوال، آزمون آنلاین و چت آموزشی برای دانش‌آموزان ایران">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--pri:#8b5cf6;--pri-g:rgba(139,92,246,.4);--acc:#ec4899;--bg:#f8fafc;--card:rgba(255,255,255,.88);--side:rgba(255,255,255,.96);--txt:#0f172a;--dim:#64748b;--brd:rgba(15,23,42,.08);--grad:linear-gradient(135deg,#8b5cf6,#ec4899);--shd:0 10px 40px rgba(0,0,0,.08);--r:16px;--font:'Vazirmatn',sans-serif}
+[data-theme="dark"]{--bg:#0a0a0f;--card:rgba(26,26,36,.8);--side:rgba(15,15,25,.96);--txt:#f1f5f9;--dim:#94a3b8;--brd:rgba(255,255,255,.08);--shd:0 10px 40px rgba(0,0,0,.5)}
+[data-theme="space"]{--bg:#020010;--card:rgba(10,10,40,.65);--side:rgba(5,5,25,.96);--txt:#e0e7ff;--dim:#818cf8;--pri:#6366f1;--brd:rgba(99,102,241,.25);--grad:linear-gradient(135deg,#6366f1,#06b6d4);--shd:0 0 30px rgba(99,102,241,.2)}
+[data-theme="thunder"]{--bg:#0c0a1a;--card:rgba(20,15,40,.75);--side:rgba(12,10,26,.96);--txt:#fff;--dim:#a78bfa;--pri:#a855f7;--acc:#facc15;--brd:rgba(168,85,247,.3);--grad:linear-gradient(135deg,#a855f7,#facc15);--shd:0 0 40px rgba(168,85,247,.3)}
+*{margin:0;padding:0;box-sizing:border-box;outline:none;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;min-height:100vh;display:flex;overflow-x:hidden;transition:background .5s,color .5s}
+canvas#fx-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none}
+a{text-decoration:none;color:inherit}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}input,select,textarea{font-family:inherit;border:none;background:none;color:inherit}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:var(--pri);border-radius:3px}::-webkit-scrollbar-track{background:transparent}
+.app{display:flex;width:100%;min-height:100vh}
+.sb{width:280px;height:100vh;position:fixed;right:0;top:0;background:var(--side);border-left:1px solid var(--brd);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;z-index:100;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.logo-area{padding:24px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--brd)}
+.logo-icon{width:44px;height:44px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;box-shadow:0 0 20px var(--pri-g)}
+.logo-text h1{font-size:1.3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-text span{font-size:.75rem;color:var(--dim);font-weight:500}
+.nav{flex:1;padding:16px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--r);color:var(--dim);font-weight:600;margin-bottom:4px;transition:all .2s;cursor:pointer;font-size:.95rem}
+.nav-item:hover{background:rgba(139,92,246,.08);color:var(--pri)}.nav-item.active{background:rgba(139,92,246,.12);color:var(--pri);font-weight:700}
+.nav-item svg{width:20px;height:20px;fill:currentColor;flex-shrink:0}
+.main{flex:1;margin-right:280px;padding:30px;max-width:1400px}
+.mob-hdr{display:none;position:fixed;top:0;left:0;right:0;height:60px;background:var(--side);border-bottom:1px solid var(--brd);backdrop-filter:blur(10px);z-index:90;padding:0 16px;align-items:center;justify-content:space-between}
+.card{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);padding:24px;backdrop-filter:blur(10px);transition:all .3s}.card:hover{transform:translateY(-3px);box-shadow:var(--shd)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:9999px;font-weight:700;transition:all .3s;font-size:.95rem}
+.btn-p{background:var(--grad);color:#fff;box-shadow:0 4px 15px var(--pri-g)}.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--pri-g)}
+.btn-s{background:var(--card);border:1px solid var(--brd)}.btn-s:hover{border-color:var(--pri)}
+.inp{width:100%;padding:14px 18px;border-radius:var(--r);background:var(--card);border:1px solid var(--brd);font-size:1rem;transition:all .2s}.inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px var(--pri-g)}
+.sec{display:none;animation:fadeIn .4s}.sec.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes thunderFlash{0%,100%{opacity:0}50%{opacity:.15}}
+.thunder-overlay{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:-1;opacity:0}
+[data-theme="thunder"] .thunder-overlay{animation:thunderFlash 4s ease-in-out infinite}
+.grade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:20px}
+.grade-card{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);cursor:pointer;transition:all .3s}
+.grade-card:hover{border-color:var(--pri);transform:scale(1.05)}.grade-card.selected{border-color:var(--pri);background:rgba(139,92,246,.1)}
+.grade-num{font-size:2rem;font-weight:900;color:var(--pri)}.grade-lbl{font-size:.8rem;color:var(--dim);font-weight:600}
+.chat-box{display:flex;flex-direction:column;height:calc(100vh - 120px);background:var(--card);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden}
+.chat-msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:85%;padding:14px 18px;border-radius:18px;line-height:1.8;font-size:.95rem;animation:fadeIn .3s}
+.msg.bot{align-self:flex-start;background:var(--bg);border:1px solid var(--brd);border-bottom-right-radius:4px}
+.msg.user{align-self:flex-end;background:var(--pri);color:#fff;border-bottom-left-radius:4px}
+.msg strong{color:var(--pri)}
+.msg .explain-box{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.15);border-radius:12px;padding:14px;margin:10px 0;font-size:.9rem;line-height:1.9}
+.msg .example-box{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:12px;margin:8px 0;font-size:.85rem;color:var(--txt)}
+.msg a.vlink{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:10px 16px;background:rgba(236,72,153,.1);color:var(--acc);border-radius:12px;font-weight:700;font-size:.85rem;border:1px solid rgba(236,72,153,.2);transition:all .2s;text-decoration:none}
+.msg a.vlink:hover{background:rgba(236,72,153,.2);transform:translateX(-3px)}
+.msg a.glink{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:10px 16px;background:rgba(139,92,246,.08);color:var(--pri);border-radius:12px;font-weight:700;font-size:.85rem;border:1px solid rgba(139,92,246,.15);transition:all .2s;text-decoration:none}
+.msg a.glink:hover{background:rgba(139,92,246,.15);transform:translateX(-3px)}
+.typing-indicator{display:flex;gap:4px;padding:14px 18px;align-self:flex-start;background:var(--bg);border:1px solid var(--brd);border-radius:18px;border-bottom-right-radius:4px;width:fit-content}
+.typing-dot{width:8px;height:8px;background:var(--dim);border-radius:50%;animation:typingBounce 1.4s infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
+.chat-in-area{padding:16px;border-top:1px solid var(--brd);display:flex;gap:10px;flex-wrap:wrap}
+.chat-in-area input{flex:1;min-width:200px}
+.voice-sel{padding:8px 12px;border-radius:var(--r);background:var(--card);border:1px solid var(--brd);font-size:.8rem;color:var(--txt)}
+.upload-zone{border:2px dashed var(--brd);border-radius:var(--r);padding:50px 20px;text-align:center;cursor:pointer;transition:all .3s;margin-bottom:24px}
+.upload-zone:hover{border-color:var(--pri);background:rgba(139,92,246,.03)}
+.file-list{display:grid;gap:12px}
+.file-item{display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);transition:all .2s;flex-wrap:wrap;gap:10px}
+.file-item:hover{border-color:var(--pri)}
+.file-btn{padding:8px 14px;border-radius:9999px;font-size:.8rem;font-weight:700;transition:all .2s}
+.file-btn.vw{background:rgba(139,92,246,.1);color:var(--pri)}.file-btn.vw:hover{background:rgba(139,92,246,.2)}
+.file-btn.dl{background:rgba(16,185,129,.1);color:#10b981}.file-btn.dl:hover{background:rgba(16,185,129,.2)}
+.file-btn.del{background:rgba(239,68,68,.1);color:#ef4444}.file-btn.del:hover{background:rgba(239,68,68,.2)}
+.pdf-ov{position:fixed;inset:0;background:var(--bg);z-index:200;display:none;flex-direction:column}.pdf-ov.active{display:flex}
+.pdf-tb{height:56px;background:var(--side);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 20px;justify-content:space-between;backdrop-filter:blur(10px)}
+.pdf-ct{flex:1;display:flex;justify-content:center;align-items:flex-start;padding:30px;overflow:auto;background:#525659}
+.pdf-ct iframe,.pdf-ct img{max-width:900px;width:100%;border:none;border-radius:var(--r);box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.pdf-ct img{object-fit:contain;max-height:90vh;background:#fff}
+.quiz-opt{padding:14px 18px;background:var(--card);border:1px solid var(--brd);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;font-size:.9rem}
+.quiz-opt:hover{border-color:var(--pri);background:rgba(139,92,246,.05)}
+.quiz-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15);color:#10b981}
+.quiz-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.15);color:#ef4444}
+.planner-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:16px}
+.planner-day{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:12px 8px;text-align:center;min-height:120px;cursor:pointer;transition:.2s}
+.planner-day:hover{border-color:var(--pri)}
+.planner-day h4{font-size:.8rem;color:var(--pri);margin-bottom:8px}
+.planner-task{font-size:.7rem;padding:4px 6px;background:rgba(139,92,246,.1);border-radius:6px;margin-bottom:4px;cursor:pointer}
+.comment-item{padding:16px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:10px}
+.comment-author{font-weight:700;font-size:.9rem;color:var(--pri);margin-bottom:4px}
+.comment-text{font-size:.9rem;line-height:1.7}
+.comment-date{font-size:.7rem;color:var(--dim);margin-top:6px}
+.room-msg{padding:10px 14px;border-radius:12px;margin-bottom:8px;font-size:.9rem;max-width:85%}
+.room-msg.mine{align-self:flex-end;background:var(--pri);color:#fff;border-bottom-left-radius:4px}
+.room-msg.other{align-self:flex-start;background:var(--card);border:1px solid var(--brd);border-bottom-right-radius:4px}
+.room-msg.blocked{background:rgba(239,68,68,.1);color:#ef4444;font-style:italic;font-size:.8rem}
+.toast-c{position:fixed;bottom:20px;left:20px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--card);backdrop-filter:blur(10px);padding:14px 20px;border-radius:var(--r);border-right:4px solid var(--pri);box-shadow:var(--shd);display:flex;align-items:center;gap:10px;animation:slideIn .3s;min-width:280px;font-weight:600;font-size:.9rem}
+@keyframes slideIn{from{transform:translateX(-100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.contact-item{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--brd)}.contact-item:last-child{border:none}
+.contact-icon{width:48px;height:48px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0}
+@media(max-width:768px){.sb{transform:translateX(100%);width:85%;max-width:320px}.sb.open{transform:translateX(0)}.main{margin-right:0;padding:76px 16px 16px}.mob-hdr{display:flex}.chat-box{height:calc(100vh - 140px)}.grade-grid{grid-template-columns:repeat(3,1fr)}.planner-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
 </head>
-<body>
-  <header class="header" id="header"></header>
+<body data-theme="light">
+<canvas id="fx-canvas"></canvas>
+<div class="thunder-overlay"></div>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1>جستجوی نمونه سؤال</h1>
-      <div class="breadcrumb">
-        <a href="index.html">خانه</a>
-        <span>/</span>
-        <span>جستجو</span>
-      </div>
-    </div>
-  </section>
+<div class="mob-hdr">
+<div style="display:flex;align-items:center;gap:8px"><div class="logo-icon" style="width:34px;height:34px;font-size:16px">🎓</div><span style="font-weight:900;font-size:1rem">استاد یار</span></div>
+<button onclick="document.getElementById('sidebar').classList.toggle('open')" style="font-size:1.4rem;padding:4px">☰</button>
+</div>
 
-  <section class="section">
-    <div class="container">
-      <div class="search-box">
-        <form class="search-form" id="searchForm">
-          <input type="text" id="searchInput" placeholder="نام درس یا عنوان سؤال را وارد کنید...">
-          <select id="gradeFilter">
-            <option value="">همه پایه‌ها</option>
-            <option value="7">پایه هفتم</option>
-            <option value="8">پایه هشتم</option>
-            <option value="9">پایه نهم</option>
-            <option value="10">پایه دهم</option>
-            <option value="11">پایه یازدهم</option>
-            <option value="12">پایه دوازدهم</option>
-          </select>
-          <select id="subjectFilter">
-            <option value="">همه دروس</option>
-            <option value="ریاضی">ریاضی</option>
-            <option value="علوم">علوم</option>
-            <option value="فارسی">فارسی</option>
-            <option value="عربی">عربی</option>
-            <option value="انگلیسی">انگلیسی</option>
-            <option value="فیزیک">فیزیک</option>
-            <option value="شیمی">شیمی</option>
-            <option value="زیست">زیست</option>
-            <option value="تاریخ">تاریخ</option>
-            <option value="هندسه">هندسه</option>
-            <option value="آمار">آمار</option>
-            <option value="فلسفه">فلسفه</option>
-          </select>
-          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> جستجو</button>
-        </form>
-      </div>
+<div class="app">
+<aside class="sb" id="sidebar">
+<div class="logo-area"><div class="logo-icon">🎓</div><div class="logo-text"><h1>استاد یار</h1><span>دستیار هوشمند آموزشی</span></div></div>
+<nav class="nav">
+<div class="nav-item active" data-page="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>خانه</div>
+<div class="nav-item" data-page="chat" onclick="go('chat')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>دستیار هوشمند</div>
+<div class="nav-item" data-page="library" onclick="go('library')"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>کتابخانه</div>
+<div class="nav-item" data-page="quiz" onclick="go('quiz')"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>آزمون آنلاین</div>
+<div class="nav-item" data-page="planner" onclick="go('planner')"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>برنامه‌ریزی</div>
+<div class="nav-item" data-page="room" onclick="go('room')"><svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>اتاق چت</div>
+<div class="nav-item" data-page="comments" onclick="go('comments')"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>نظرات</div>
+<div class="nav-item" data-page="support" onclick="go('support')"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>پشتیبانی</div>
+<div style="margin-top:16px;padding:0 16px"><div style="font-size:.75rem;color:var(--dim);font-weight:700;margin-bottom:8px;letter-spacing:1px">تم نمایش</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('light')">☀️ روز</button>
+<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('dark')">🌙 شب</button>
+<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('space')">🪐 فضایی</button>
+<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('thunder')">⚡ رعدوبرق</button>
+</div></div>
+</nav>
+<div style="padding:16px;border-top:1px solid var(--brd);margin-top:auto">
+<div id="uMini" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card);border-radius:var(--r);border:1px solid var(--brd);cursor:pointer" onclick="go('home')">
+<div style="width:36px;height:36px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem" id="avMini">?</div>
+<div style="min-width:0"><div style="font-weight:700;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="nmMini">تنظیم پروفایل</div><div style="font-size:.7rem;color:var(--dim)" id="grMini">کلیک کنید</div></div>
+</div>
+<div id="expiryInfo" style="font-size:.65rem;color:var(--dim);margin-top:8px;text-align:center"></div>
+</div>
+</aside>
 
-      <div class="questions-grid" id="searchResults"></div>
-    </div>
-  </section>
+<main class="main">
 
-  <footer class="footer" id="footer"></footer>
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="درباره سایت نمونه سؤال - مرجع سؤالات امتحانی دانش‌آموزان">
-  <title>درباره ما | نمونه سؤال</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="header" id="header"></header>
+<!-- HOME -->
+<div id="page-home" class="sec active">
+<div id="profGate" class="card" style="max-width:500px;margin:60px auto;text-align:center">
+<div class="logo-icon" style="width:64px;height:64px;font-size:32px;margin:0 auto 20px">🎓</div>
+<h2 style="font-size:2rem;margin-bottom:8px;font-weight:900">به استاد یار خوش آمدی!</h2>
+<p style="color:var(--dim);margin-bottom:30px">اطلاعاتت رو وارد کن تا تجربه شخصی‌سازی شده داشته باشی</p>
+<div style="margin-bottom:16px;text-align:right"><label style="display:block;margin-bottom:6px;font-weight:600;font-size:.9rem">نام</label><input type="text" id="fn" class="inp" placeholder="مثلاً: علی"></div>
+<div style="margin-bottom:16px;text-align:right"><label style="display:block;margin-bottom:6px;font-weight:600;font-size:.9rem">نام خانوادگی</label><input type="text" id="ln" class="inp" placeholder="مثلاً: محمدی"></div>
+<div style="margin-bottom:16px;text-align:right"><label style="display:block;margin-bottom:6px;font-weight:600;font-size:.9rem">پایه تحصیلی</label>
+<select id="grSel" class="inp"><option value="">انتخاب کنید...</option><option value="1">اول ابتدایی</option><option value="2">دوم ابتدایی</option><option value="3">سوم ابتدایی</option><option value="4">چهارم ابتدایی</option><option value="5">پنجم ابتدایی</option><option value="6">ششم ابتدایی</option><option value="7">هفتم متوسطه</option><option value="8">هشتم متوسطه</option><option value="9">نهم متوسطه</option></select></div>
+<button class="btn btn-p" style="width:100%;margin-top:10px" onclick="saveProf()">ذخیره و شروع یادگیری 🚀</button>
+</div>
+<div id="dash" style="display:none">
+<div style="margin-bottom:30px"><h2 style="font-size:1.8rem;font-weight:900;margin-bottom:6px" id="welMsg">سلام!</h2><p style="color:var(--dim)">امروز چه چیزی می‌خواهی یاد بگیری؟</p></div>
+<div class="info-grid" style="margin-bottom:30px">
+<div class="card" style="text-align:center;cursor:pointer" onclick="go('chat')"><div style="font-size:2.5rem;margin-bottom:8px">🧠</div><h3 style="font-weight:800;margin-bottom:6px">دستیار هوشمند</h3><p style="color:var(--dim);font-size:.9rem;margin-bottom:14px">مثل یک معلم خصوصی! توضیح میده، مثال میزنه، لینک پیدا میکنه</p><button class="btn btn-p">شروع گفتگو</button></div>
+<div class="card" style="text-align:center;cursor:pointer" onclick="go('quiz')"><div style="font-size:2.5rem;margin-bottom:8px">📝</div><h3 style="font-weight:800;margin-bottom:6px">آزمون آنلاین</h3><p style="color:var(--dim);font-size:.9rem;margin-bottom:14px">خودت رو محک بزن! آزمون تستی مخصوص پایه تو</p><button class="btn btn-p">شروع آزمون</button></div>
+<div class="card" style="text-align:center;cursor:pointer" onclick="go('library')"><div style="font-size:2.5rem;margin-bottom:8px">📚</div><h3 style="font-weight:800;margin-bottom:6px">کتابخانه</h3><p style="color:var(--dim);font-size:.9rem;margin-bottom:14px">PDF، عکس و Word آپلود و مطالعه کن</p><button class="btn btn-p">مشاهده کتابخانه</button></div>
+</div>
+<div class="card"><h3 style="font-weight:800;margin-bottom:16px">🎯 پایه تحصیلی من</h3><div class="grade-grid" id="dGrGrid"></div><button class="btn btn-s" style="margin-top:16px;width:100%" onclick="editProf()">ویرایش پروفایل</button></div>
+</div>
+</div>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1>درباره ما</h1>
-      <div class="breadcrumb">
-        <a href="index.html">خانه</a>
-        <span>/</span>
-        <span>درباره ما</span>
-      </div>
-    </div>
-  </section>
+<!-- CHAT -->
+<div id="page-chat" class="sec">
+<div style="margin-bottom:16px"><h2 style="font-size:1.5rem;font-weight:900">🧠 دستیار هوشمند آموزشی</h2><p style="color:var(--dim);font-size:.9rem">مثل یک معلم خصوصی! توضیح میدم، مثال میزنم، لینک پیدا میکنم</p></div>
+<div class="chat-box">
+<div class="chat-msgs" id="chatMsgs"><div class="msg bot">سلام دوست عزیزم! 👋😊<br><br>من <strong>استاد یار</strong> هستم، دستیار هوشمند آموزشی تو. هر سوال درسی داری بپرس تا:<br><br>✅ <strong>توضیح کامل</strong> بدم<br>✅ <strong>مثال ساده</strong> بزنم<br>✅ <strong>لینک ویدیوی آموزشی</strong> پیدا کنم<br><br>مثلاً بگو: «فتوسنتز چیست؟»، «جمع کسرها رو یاد بده»، «فرمول مساحت دایره» یا حتی فقط «سلام!» 😊</div></div>
+<div class="chat-in-area">
+<input type="text" id="chatIn" class="inp" placeholder="سوالت رو اینجا بنویس..." onkeypress="if(event.key==='Enter')sendChat()">
+<select class="voice-sel" id="voiceSel"><option value="female">👩 صدای زن</option><option value="male">👨 صدای مرد</option></select>
+<button class="btn btn-p" onclick="sendChat()">ارسال</button>
+<button class="btn btn-s" onclick="speakLast()">🔊 خواندن</button>
+</div>
+</div>
+</div>
 
-  <section class="section">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text fade-in">
-          <h3>ما کی هستیم؟</h3>
-          <p>سایت <strong>نمونه سؤال</strong> یک پلتفرم آموزشی رایگان است که با هدف کمک به دانش‌آموزان سراسر ایران طراحی شده است. ما معتقدیم هر دانش‌آموزی باید به منابع باکیفیت آموزشی دسترسی داشته باشد.</p>
-          <p>تیم ما متشکل از معلمان باتجربه، طراحان آموزشی و متخصصان فناوری اطلاعات است که با همکاری یکدیگر، بهترین نمونه سؤالات امتحانی را برای پایه‌های هفتم تا دوازدهم گردآوری و منتشر می‌کنند.</p>
-          <p>تمامی سؤالات با دقت انتخاب شده و دارای پاسخ تشریحی هستند تا دانش‌آموزان بتوانند خودشان را بهتر ارزیابی کنند.</p>
+<!-- LIBRARY -->
+<div id="page-library" class="sec">
+<div style="margin-bottom:20px"><h2 style="font-size:1.5rem;font-weight:900">📚 کتابخانه منابع آموزشی</h2><p style="color:var(--dim);font-size:.9rem">PDF، عکس (PNG/JPG) و Word آپلود و مشاهده کنید</p></div>
+<div class="upload-zone" id="upZone" onclick="document.getElementById('fileUp').click()">
+<div style="font-size:3rem;margin-bottom:12px">📁</div>
+<h3 style="font-weight:800;margin-bottom:6px">فایل را اینجا بکشید یا کلیک کنید</h3>
+<p style="color:var(--dim);font-size:.9rem">PDF, PNG, JPG, DOCX • حداکثر ۵ مگابایت</p>
+<input type="file" id="fileUp" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" hidden onchange="handleFile(this)">
+</div>
+<div class="file-list" id="fileList"><div style="text-align:center;color:var(--dim);padding:40px">هنوز فایلی آپلود نشده</div></div>
+</div>
 
-          <ul class="features-list">
-            <li><i class="fa-solid fa-circle-check"></i> نمونه سؤالات استاندارد و تأیید شده</li>
-            <li><i class="fa-solid fa-circle-check"></i> پاسخ‌های تشریحی و آموزشی</li>
-            <li><i class="fa-solid fa-circle-check"></i> به‌روزرسانی مداوم محتوا</li>
-            <li><i class="fa-solid fa-circle-check"></i> دسترسی رایگان برای همه</li>
-            <li><i class="fa-solid fa-circle-check"></i> پشتیبانی ۲۴ ساعته</li>
-          </ul>
-        </div>
+<!-- QUIZ -->
+<div id="page-quiz" class="sec">
+<div id="qStart" class="card" style="max-width:600px;margin:0 auto;text-align:center">
+<h2 style="margin-bottom:16px">📝 آزمون آنلاین</h2>
+<p style="color:var(--dim);margin-bottom:24px">پایه و درس خود را انتخاب کنید</p>
+<select id="qGrade" class="inp"><option value="1">اول ابتدایی</option><option value="2">دوم ابتدایی</option><option value="3">سوم ابتدایی</option><option value="4">چهارم ابتدایی</option><option value="5">پنجم ابتدایی</option><option value="6">ششم ابتدایی</option><option value="7">هفتم</option><option value="8">هشتم</option><option value="9">نهم</option></select>
+<select id="qSubj" class="inp"><option value="ریاضی">ریاضی</option><option value="علوم">علوم</option><option value="فارسی">فارسی</option><option value="انگلیسی">انگلیسی</option><option value="عربی">عربی</option><option value="مطالعات">مطالعات اجتماعی</option></select>
+<button class="btn btn-p" style="width:100%" onclick="startQuiz()">شروع آزمون 🚀</button>
+</div>
+<div id="qActive" style="display:none;max-width:700px;margin:0 auto"></div>
+<div id="qResult" class="card" style="display:none;max-width:600px;margin:0 auto;text-align:center"></div>
+</div>
 
-        <div class="fade-in">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <span class="num">۱۱۰۰+</span>
-              <span class="label">نمونه سؤال</span>
-            </div>
-            <div class="stat-card">
-              <span class="num">۵۰۰۰۰+</span>
-              <span class="label">دانش‌آموز فعال</span>
-            </div>
-            <div class="stat-card">
-              <span class="num">۶</span>
-              <span class="label">پایه تحصیلی</span>
-            </div>
-            <div class="stat-card">
-              <span class="num">۲۰+</span>
-              <span class="label">درس مختلف</span>
-            </div>
-          </div>
-          <div class="contact-info" style="margin-top: 24px;">
-            <h3>ارزش‌های ما</h3>
-            <div class="contact-item">
-              <i class="fa-solid fa-heart"></i>
-              <div class="info">
-                <strong>کیفیت</strong>
-                <span>ارائه محتوای باکیفیت و استاندارد</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <i class="fa-solid fa-handshake"></i>
-              <div class="info">
-                <strong>صداقت</strong>
-                <span>شفافیت در ارائه خدمات</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <i class="fa-solid fa-users"></i>
-              <div class="info">
-                <strong>همیاری</strong>
-                <span>کمک به موفقیت همه دانش‌آموزان</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- PLANNER -->
+<div id="page-planner" class="sec">
+<h2 style="margin-bottom:20px">📅 برنامه‌ریزی درسی پیشرفته</h2>
+<div class="card" style="background:var(--grad);color:#fff;text-align:center;margin-bottom:20px;border:none">
+<div style="font-size:.9rem;margin-bottom:8px;opacity:.9">⏳ شمارش معکوس تا امتحان بعدی</div>
+<div style="font-size:3rem;font-weight:900;letter-spacing:2px" id="cdNum">-- روز</div>
+<div style="margin-top:12px"><input type="date" id="examDate" onchange="updateCD()" style="width:auto;display:inline-block;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);color:#fff;padding:8px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.3)"></div>
+</div>
+<div class="card"><h3 style="margin-bottom:12px">📋 برنامه هفتگی</h3><p style="color:var(--dim);font-size:.8rem;margin-bottom:12px">روی هر روز کلیک کنید تا وظیفه اضافه شود. روی وظیفه کلیک کنید تا حذف شود.</p><div class="planner-grid" id="plGrid"></div></div>
+</div>
 
-  <footer class="footer" id="footer"></footer>
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="تماس با سایت نمونه سؤال">
-  <title>تماس با ما | نمونه سؤال</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="header" id="header"></header>
+<!-- CHAT ROOM -->
+<div id="page-room" class="sec">
+<div style="margin-bottom:16px"><h2 style="font-size:1.5rem;font-weight:900">💬 اتاق چت عمومی</h2><p style="color:var(--dim);font-size:.9rem">با دیگر دانش‌آموزان صحبت کنید. کلمات نامناسب به صورت خودکار مسدود می‌شوند.</p></div>
+<div class="chat-box">
+<div class="chat-msgs" id="roomMsgs" style="align-items:stretch"></div>
+<div class="chat-in-area">
+<input type="text" id="roomIn" class="inp" placeholder="پیام خود را بنویسید..." onkeypress="if(event.key==='Enter')sendRoom()">
+<button class="btn btn-p" onclick="sendRoom()">ارسال</button>
+</div>
+</div>
+</div>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1>تماس با ما</h1>
-      <div class="breadcrumb">
-        <a href="index.html">خانه</a>
-        <span>/</span>
-        <span>تماس با ما</span>
-      </div>
-    </div>
-  </section>
+<!-- COMMENTS -->
+<div id="page-comments" class="sec">
+<div style="margin-bottom:20px"><h2 style="font-size:1.5rem;font-weight:900">💭 نظرات دانش‌آموزان</h2><p style="color:var(--dim);font-size:.9rem">نظر خود را درباره استاد یار بنویسید</p></div>
+<div class="card" style="margin-bottom:20px">
+<div style="margin-bottom:12px"><label style="font-weight:600;font-size:.9rem;display:block;margin-bottom:6px">نام شما</label><input type="text" id="cmName" class="inp" placeholder="نام خود را وارد کنید"></div>
+<div style="margin-bottom:12px"><label style="font-weight:600;font-size:.9rem;display:block;margin-bottom:6px">نظر شما</label><textarea id="cmText" class="inp" placeholder="نظر خود را بنویسید..." style="min-height:80px;resize:vertical"></textarea></div>
+<button class="btn btn-p" onclick="addComment()">ثبت نظر ✅</button>
+</div>
+<div id="cmList"></div>
+</div>
 
-  <section class="section">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info fade-in">
-          <h3>راه‌های ارتباطی</h3>
-          <p style="color: var(--text-soft); margin-bottom: 20px;">ما همیشه آماده پاسخگویی به سؤالات و پیشنهادات شما هستیم.</p>
-          <div class="contact-item">
-            <i class="fa-solid fa-phone"></i>
-            <div class="info">
-              <strong>تلفن تماس</strong>
-              <span>۰۲۱-۱۲۳۴۵۶۷۸</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i class="fa-solid fa-envelope"></i>
-            <div class="info">
-              <strong>ایمیل</strong>
-              <span>info@schoolpdf.ir</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i class="fa-solid fa-location-dot"></i>
-            <div class="info">
-              <strong>آدرس</strong>
-              <span>تهران، خیابان ولیعصر، پلاک ۱۲۳</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i class="fa-solid fa-clock"></i>
-            <div class="info">
-              <strong>ساعات کاری</strong>
-              <span>شنبه تا چهارشنبه - ۹ صبح تا ۶ عصر</span>
-            </div>
-          </div>
-        </div>
+<!-- SUPPORT -->
+<div id="page-support" class="sec">
+<div class="card" style="max-width:800px;margin:0 auto">
+<h2 style="font-size:1.8rem;font-weight:900;margin-bottom:24px">📞 پشتیبانی و تماس با ما</h2>
+<p style="color:var(--dim);margin-bottom:30px;line-height:1.8">اگر سوالی دارید یا پیشنهادی برای بهبود استاد یار دارید، از راه‌های زیر با ما در ارتباط باشید.</p>
+<div class="contact-item"><div class="contact-icon">📱</div><div><strong style="display:block;margin-bottom:2px">شماره تماس</strong><a href="tel:06633428814" style="color:var(--pri);font-size:1.1rem;font-weight:bold;direction:ltr;display:block">06633428814</a></div></div>
+<div class="contact-item"><div class="contact-icon">📧</div><div><strong style="display:block;margin-bottom:2px">ایمیل</strong><a href="mailto:seyyedmohammadtahaghadami@gmail.com" style="color:var(--pri);word-break:break-all">seyyedmohammadtahaghadami@gmail.com</a></div></div>
+<div class="contact-item"><div class="contact-icon">🕐</div><div><strong style="display:block;margin-bottom:2px">ساعات پاسخگویی</strong><span style="color:var(--dim);font-size:.9rem">شنبه تا پنجشنبه - ۹ صبح تا ۹ شب</span></div></div>
+<div style="margin-top:30px;padding:24px;background:rgba(139,92,246,.05);border-radius:var(--r);text-align:center"><p>ما هر روز بهتر از دیروز برای دانش‌آموزان ایران تلاش می‌کنیم ❤️</p></div>
+</div>
+</div>
 
-        <form class="contact-form fade-in" id="contactForm">
-          <h3>ارسال پیام</h3>
-          <div class="form-group">
-            <label for="name">نام و نام خانوادگی</label>
-            <input type="text" id="name" required placeholder="نام خود را وارد کنید">
-          </div>
-          <div class="form-group">
-            <label for="email">ایمیل</label>
-            <input type="email" id="email" required placeholder="example@mail.com">
-          </div>
-          <div class="form-group">
-            <label for="subject">موضوع</label>
-            <input type="text" id="subject" required placeholder="موضوع پیام">
-          </div>
-          <div class="form-group">
-            <label for="message">پیام شما</label>
-            <textarea id="message" required placeholder="متن پیام خود را بنویسید..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-solid" style="width: 100%; justify-content: center;">
-            <i class="fa-solid fa-paper-plane"></i> ارسال پیام
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
+</main>
+</div>
 
-  <footer class="footer" id="footer"></footer>
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="نمونه سؤالات پایه هفتم - ریاضی، علوم، فارسی و...">
-  <title>نمونه سؤال پایه هفتم | نمونه سؤال</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-  <header class="header" id="header"></header>
+<!-- PDF/IMAGE OVERLAY -->
+<div class="pdf-ov" id="pdfOv">
+<div class="pdf-tb">
+<div style="display:flex;align-items:center;gap:10px"><button class="btn btn-s" style="padding:8px 14px;font-size:.85rem" onclick="closeViewer()">✕ بستن</button><span id="pvTitle" style="font-weight:700;font-size:.95rem"></span></div>
+<a id="pvDl" class="btn btn-p" style="padding:8px 14px;font-size:.85rem" download>⬇ دانلود</a>
+</div>
+<div class="pdf-ct" id="pvContent"></div>
+</div>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1>نمونه سؤالات پایه هفتم</h1>
-      <div class="breadcrumb">
-        <a href="../index.html">خانه</a>
-        <span>/</span>
-        <a href="../index.html#grades">پایه‌ها</a>
-        <span>/</span>
-        <span>پایه هفتم</span>
-      </div>
-    </div>
-  </section>
+<div class="toast-c" id="toastC"></div>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>دروس پایه هفتم</h2>
-        <p>روی درس مورد نظر کلیک کنید تا نمونه سؤالات آن را ببینید</p>
-      </div>
-
-      <div class="grades-grid">
-        <a href="../search.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-calculator"></i></div>
-          <h3>ریاضی هفتم</h3>
-          <p>نوبت اول و دوم</p>
-          <span class="count">+۲۵ سؤال</span>
-        </a>
-        <a href="../search.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-flask"></i></div>
-          <h3>علوم هفتم</h3>
-          <p>فیزیک، شیمی، زیست</p>
-          <span class="count">+۳۰ سؤال</span>
-        </a>
-        <a href="../search.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-book-open"></i></div>
-          <h3>فارسی هفتم</h3>
-          <p>دستور زبان و آرایه</p>
-          <span class="count">+۲۰ سؤال</span>
-        </a>
-        <a href="../search.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-mosque"></i></div>
-          <h3>عربی هفتم</h3>
-          <p>ترجمه و قواعد</p>
-          <span class="count">+۱۵ سؤال</span>
-        </a>
-        <a href="../search.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-language"></i></div>
-          <h3>انگلیسی هفتم</h3>
-          <p>گرامر و لغات</p>
-          <span class="count">+۱۵ سؤال</span>
-        </a>
-        <a href="../search.html" class="grade-card fade-in">
-          <div class="grade-icon"><i class="fa-solid fa-earth-americas"></i></div>
-          <h3>مطالعات اجتماعی</h3>
-          <p>تاریخ، جغرافیا، مدنی</p>
-          <span class="count">+۱۵ سؤال</span>
-        </a>
-      </div>
-
-      <div style="margin-top: 60px;">
-        <div class="section-head">
-          <h2>جدیدترین نمونه سؤالات</h2>
-        </div>
-        <div class="questions-grid" id="gradeQuestions"></div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer" id="footer"></footer>
-  <script src="../script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('gradeQuestions');
-      if (!container) return;
-      const questions = sampleData.filter(q => q.grade === '7');
-      renderResults(questions, container);
-    });
-  </script>
-</body>
-</html>
-
-
-              <script>
-                              /* =========================================
-   SchoolPDF - Main JavaScript
-   Modular & Clean Code
-   ========================================= */
-
-'use strict';
-
-/* ---------- 1. Header & Footer Injection ---------- */
-const headerHTML = `
-  <div class="container header-inner">
-    <a href="index.html" class="logo">
-      <i class="fa-solid fa-graduation-cap"></i>
-      <span>نمونه سؤال</span>
-    </a>
-    <nav class="nav" id="mainNav">
-      <a href="index.html">خانه</a>
-      <a href="search.html">جستجو</a>
-      <a href="index.html#grades">پایه‌ها</a>
-      <a href="index.html#news">اخبار</a>
-      <a href="about.html">درباره ما</a>
-      <a href="contact.html">تماس</a>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-btn" id="themeToggle" aria-label="تغییر تم">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="منو">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-  </div>
-`;
-
-const mobileNavHTML = `
-  <div class="overlay" id="overlay"></div>
-  <aside class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-header">
-      <span class="logo"><i class="fa-solid fa-graduation-cap"></i> منو</span>
-      <button class="icon-btn" id="closeMenu"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <a href="index.html"><i class="fa-solid fa-house"></i> خانه</a>
-    <a href="search.html"><i class="fa-solid fa-magnifying-glass"></i> جستجو</a>
-    <a href="pages/grade7.html"><i class="fa-solid fa-book"></i> پایه هفتم</a>
-    <a href="pages/grade8.html"><i class="fa-solid fa-book"></i> پایه هشتم</a>
-    <a href="pages/grade9.html"><i class="fa-solid fa-book"></i> پایه نهم</a>
-    <a href="pages/grade10.html"><i class="fa-solid fa-book"></i> پایه دهم</a>
-    <a href="pages/grade11.html"><i class="fa-solid fa-book"></i> پایه یازدهم</a>
-    <a href="pages/grade12.html"><i class="fa-solid fa-book"></i> پایه دوازدهم</a>
-    <a href="about.html"><i class="fa-solid fa-circle-info"></i> درباره ما</a>
-    <a href="contact.html"><i class="fa-solid fa-envelope"></i> تماس با ما</a>
-  </aside>
-`;
-
-const footerHTML = `
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>درباره نمونه سؤال</h4>
-        <p>پلتفرم جامع نمونه سؤالات امتحانی دانش‌آموزان ایران از پایه هفتم تا دوازدهم. هدف ما کمک به یادگیری بهتر و موفقیت تحصیلی شماست.</p>
-        <div class="social-links">
-          <a href="#" aria-label="اینستاگرام"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="تلگرام"><i class="fa-brands fa-telegram"></i></a>
-          <a href="#" aria-label="واتساپ"><i class="fa-brands fa-whatsapp"></i></a>
-          <a href="#" aria-label="یوتیوب"><i class="fa-brands fa-youtube"></i></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>دسترسی سریع</h4>
-        <ul>
-          <li><a href="index.html"><i class="fa-solid fa-angle-left"></i> خانه</a></li>
-          <li><a href="search.html"><i class="fa-solid fa-angle-left"></i> جستجو</a></li>
-          <li><a href="about.html"><i class="fa-solid fa-angle-left"></i> درباره ما</a></li>
-          <li><a href="contact.html"><i class="fa-solid fa-angle-left"></i> تماس با ما</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>پایه‌های تحصیلی</h4>
-        <ul>
-          <li><a href="pages/grade7.html"><i class="fa-solid fa-angle-left"></i> پایه هفتم</a></li>
-          <li><a href="pages/grade8.html"><i class="fa-solid fa-angle-left"></i> پایه هشتم</a></li>
-          <li><a href="pages/grade9.html"><i class="fa-solid fa-angle-left"></i> پایه نهم</a></li>
-          <li><a href="pages/grade10.html"><i class="fa-solid fa-angle-left"></i> پایه دهم</a></li>
-          <li><a href="pages/grade11.html"><i class="fa-solid fa-angle-left"></i> پایه یازدهم</a></li>
-          <li><a href="pages/grade12.html"><i class="fa-solid fa-angle-left"></i> پایه دوازدهم</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>تماس با ما</h4>
-        <ul>
-          <li><a href="tel:02112345678"><i class="fa-solid fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</a></li>
-          <li><a href="mailto:info@schoolpdf.ir"><i class="fa-solid fa-envelope"></i> info@schoolpdf.ir</a></li>
-          <li><a href="#"><i class="fa-solid fa-location-dot"></i> تهران، ایران</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© ۱۴۰۵ تمامی حقوق برای سایت نمونه سؤال محفوظ است. | طراحی با ❤️ برای دانش‌آموزان ایران</p>
-    </div>
-  </div>
-`;
-
-const backToTopHTML = `
-  <button class="back-to-top" id="backToTop" aria-label="بازگشت به بالا">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-`;
-
-function injectLayout() {
-  const header = document.getElementById('header');
-  const footer = document.getElementById('footer');
-  if (header) header.innerHTML = headerHTML;
-  if (footer) footer.innerHTML = footerHTML;
-  document.body.insertAdjacentHTML('beforeend', mobileNavHTML);
-  document.body.insertAdjacentHTML('beforeend', backToTopHTML);
+<script>
+// ===== EXPIRY SYSTEM (2 WEEKS) =====
+const EXPIRY_DAYS=14;
+function checkExpiry(){
+  const created=localStorage.getItem('oy_created');
+  if(!created){localStorage.setItem('oy_created',Date.now());return true}
+  const diff=(Date.now()-parseInt(created))/(1000*60*60*24);
+  const remain=Math.max(0,Math.ceil(EXPIRY_DAYS-diff));
+  const el=document.getElementById('expiryInfo');
+  if(el)el.textContent=`⏰ ${toFa(remain)} روز تا انقضای حافظه`;
+  if(diff>=EXPIRY_DAYS){localStorage.clear();location.reload();return false}
+  return true;
 }
 
-/* ---------- 2. Theme Management ---------- */
-function initTheme() {
-  const saved = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  updateThemeIcon(saved);
+// ===== STATE =====
+const S={
+  profile:JSON.parse(localStorage.getItem('oy_prof')||'null'),
+  files:JSON.parse(localStorage.getItem('oy_files')||'[]'),
+  theme:localStorage.getItem('oy_theme')||'light',
+  planner:JSON.parse(localStorage.getItem('oy_plan')||'{}'),
+  examDate:localStorage.getItem('oy_exam')||'',
+  comments:JSON.parse(localStorage.getItem('oy_comments')||'[]'),
+  roomMsgs:JSON.parse(localStorage.getItem('oy_room')||'[]'),
+  blockedUsers:JSON.parse(localStorage.getItem('oy_blocked')||'[]')
+};
+const save=()=>{
+  localStorage.setItem('oy_prof',JSON.stringify(S.profile));
+  localStorage.setItem('oy_files',JSON.stringify(S.files));
+  localStorage.setItem('oy_theme',S.theme);
+  localStorage.setItem('oy_plan',JSON.stringify(S.planner));
+  localStorage.setItem('oy_exam',S.examDate);
+  localStorage.setItem('oy_comments',JSON.stringify(S.comments));
+  localStorage.setItem('oy_room',JSON.stringify(S.roomMsgs));
+};
 
-  const btn = document.getElementById('themeToggle');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateThemeIcon(next);
-    });
+// ===== CANVAS FX =====
+const cv=document.getElementById('fx-canvas'),cx=cv.getContext('2d');
+let spheres=[];
+function rsz(){cv.width=innerWidth;cv.height=innerHeight}
+addEventListener('resize',rsz);rsz();
+class Sphere{
+  constructor(){this.reset()}
+  reset(){this.x=Math.random()*cv.width;this.y=Math.random()*cv.height;this.r=20+Math.random()*60;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.hue=Math.random()*360;this.rot=Math.random()*Math.PI*2;this.rs=(Math.random()-.5)*.02}
+  update(){this.x+=this.vx;this.y+=this.vy;this.rot+=this.rs;if(this.x<-100)this.x=cv.width+100;if(this.x>cv.width+100)this.x=-100;if(this.y<-100)this.y=cv.height+100;if(this.y>cv.height+100)this.y=-100}
+  draw(){
+    const g=cx.createRadialGradient(this.x-this.r*.3,this.y-this.r*.3,this.r*.1,this.x,this.y,this.r);
+    g.addColorStop(0,`hsla(${this.hue},80%,70%,.6)`);g.addColorStop(.7,`hsla(${this.hue},60%,40%,.3)`);g.addColorStop(1,`hsla(${this.hue},40%,20%,0)`);
+    cx.fillStyle=g;cx.beginPath();cx.arc(this.x,this.y,this.r,0,Math.PI*2);cx.fill();
+    cx.strokeStyle=`hsla(${this.hue},80%,60%,.15)`;cx.lineWidth=1;cx.beginPath();cx.ellipse(this.x,this.y,this.r*.8,this.r*.3,this.rot,0,Math.PI*2);cx.stroke();
   }
 }
+for(let i=0;i<12;i++)spheres.push(new Sphere());
+(function animFx(){cx.clearRect(0,0,cv.width,cv.height);if(S.theme==='space'){spheres.forEach(s=>{s.update();s.draw()})}requestAnimationFrame(animFx)})();
 
-function updateThemeIcon(theme) {
-  const btn = document.getElementById('themeToggle');
-  if (!btn) return;
-  const icon = btn.querySelector('i');
-  if (!icon) return;
-  icon.className = theme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+// ===== NAVIGATION =====
+function go(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`.nav-item[data-page="${id}"]`)?.classList.add('active');
+  document.getElementById('sidebar').classList.remove('open');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='home')checkProf();if(id==='planner')initPlanner();if(id==='comments')renderComments();if(id==='room')renderRoom();
 }
+function setTheme(t){S.theme=t;document.body.setAttribute('data-theme',t);save()}
 
-/* ---------- 3. Mobile Menu ---------- */
-function initMobileMenu() {
-  const toggle = document.getElementById('menuToggle');
-  const close = document.getElementById('closeMenu');
-  const nav = document.getElementById('mobileNav');
-  const overlay = document.getElementById('overlay');
-
-  const openMenu = () => {
-    nav.classList.add('open');
-    overlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeMenu = () => {
-    nav.classList.remove('open');
-    overlay.classList.remove('show');
-    document.body.style.overflow = '';
-  };
-
-  if (toggle) toggle.addEventListener('click', openMenu);
-  if (close) close.addEventListener('click', closeMenu);
-  if (overlay) overlay.addEventListener('click', closeMenu);
+// ===== PROFILE =====
+const GN={'1':'اول ابتدایی','2':'دوم ابتدایی','3':'سوم ابتدایی','4':'چهارم ابتدایی','5':'پنجم ابتدایی','6':'ششم ابتدایی','7':'هفتم','8':'هشتم','9':'نهم'};
+function checkProf(){
+  const gate=document.getElementById('profGate'),dash=document.getElementById('dash');
+  if(S.profile){
+    gate.style.display='none';dash.style.display='block';
+    document.getElementById('welMsg').textContent=`سلام ${S.profile.fn} عزیز! 👋`;
+    document.getElementById('nmMini').textContent=`${S.profile.fn} ${S.profile.ln}`;
+    document.getElementById('grMini').textContent=GN[S.profile.gr]||'';
+    document.getElementById('avMini').textContent=S.profile.fn.charAt(0);
+    document.getElementById('dGrGrid').innerHTML=Object.entries(GN).map(([k,v])=>`<div class="grade-card ${S.profile.gr===k?'selected':''}" onclick="chgGrade('${k}')"><div class="grade-num">${toFa(k)}</div><div class="grade-lbl">${v}</div></div>`).join('');
+  }else{gate.style.display='block';dash.style.display='none';document.getElementById('nmMini').textContent='تنظیم پروفایل';document.getElementById('grMini').textContent='کلیک کنید';document.getElementById('avMini').textContent='?'}
 }
+function saveProf(){const fn=document.getElementById('fn').value.trim(),ln=document.getElementById('ln').value.trim(),gr=document.getElementById('grSel').value;if(!fn||!ln||!gr)return toast('⚠️ لطفاً تمام فیلدها را پر کنید');S.profile={fn,ln,gr};save();checkProf();toast('✅ پروفایل ذخیره شد')}
+function editProf(){if(S.profile){document.getElementById('fn').value=S.profile.fn;document.getElementById('ln').value=S.profile.ln;document.getElementById('grSel').value=S.profile.gr}S.profile=null;localStorage.removeItem('oy_prof');checkProf()}
+function chgGrade(g){if(S.profile){S.profile.gr=g;save();checkProf();toast('✅ پایه تغییر کرد')}}
 
-/* ---------- 4. Slider ---------- */
-function initSlider() {
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot');
-  const prev = document.querySelector('.slider-arrow.prev');
-  const next = document.querySelector('.slider-arrow.next');
+// =============================================
+// 🧠 SMART AI ENGINE (Claude-Level Responses)
+// =============================================
+let lastAI='';
 
-  if (slides.length === 0) return;
+const KNOWLEDGE={
+  'فتوسنتز':{
+    explain:'فتوسنتز فرآیندی شگفت‌انگیز است که گیاهان سبز با استفاده از آن، نور خورشید را به انرژی شیمیایی تبدیل می‌کنند. در این فرآیند، گیاه آب (از ریشه) و دی‌اکسید کربن (از هوا) را می‌گیرد و با کمک نور خورشید و ماده سبز رنگ کلروفیل، گلوکز (غذا) و اکسیژن تولید می‌کند.',
+    example:'🌿 مثال ساده: تصور کن گیاه یک کارخانه کوچک است! نور خورشید = برق کارخانه، آب و CO₂ = مواد اولیه، و اکسیژن + غذا = محصولات کارخانه.',
+    followup:'آیا می‌دانستی بدون فتوسنتز، اکسیژن زمین تمام می‌شد و هیچ حیوانی نمی‌توانست نفس بکشد؟ 🤔'
+  },
+  'کسر':{
+    explain:'کسر نشان‌دهنده بخشی از یک کل است. هر کسر دو بخش دارد: صورت (عدد بالا) که تعداد قسمت‌های انتخاب شده را نشان می‌دهد، و مخرج (عدد پایین) که تعداد کل قسمت‌های مساوی را نشان می‌دهد.',
+    example:'🍕 مثال: اگر یک پیتزا را به ۴ قسمت مساوی تقسیم کنی و ۱ قسمت بخوری، یعنی ¼ پیتزا خورده‌ای! صورت=۱ (یک قسمت خوردی)، مخرج=۴ (کل پیتزا ۴ قسمت بود).',
+    followup:'حالا بگو: اگر ۳ قسمت از همان پیتزا را بخوری، کسرش چه می‌شود؟ 😊'
+  },
+  'جمع کسرها':{
+    explain:'برای جمع کسرها دو حالت داریم:\n\n۱. <strong>مخرج‌ها مساوی:</strong> فقط صورت‌ها را جمع می‌کنیم. مثلاً ²⁄₅ + ¹⁄₅ = ³⁄₅\n\n۲. <strong>مخرج‌ها متفاوت:</strong> اول باید مخرج مشترک بگیریم (کوچکترین مضرب مشترک مخرج‌ها)، سپس صورت‌ها را تبدیل و جمع کنیم.',
+    example:'✏️ مثال: ½ + ¼ = ؟\nمخرج مشترک ۲ و ۴ → ۴ است.\n½ = ²⁄₄\nپس: ²⁄₄ + ¼ = ¾ ✅',
+    followup:'تمرین: ⅓ + ⅙ چقدر می‌شود؟ (راهنمایی: مخرج مشترک ۳ و ۶ = ۶)'
+  },
+  'ضرب':{
+    explain:'ضرب در واقع جمع تکراری است. وقتی می‌گوییم ۳ × ۴، یعنی عدد ۴ را سه بار با هم جمع کنیم: ۴ + ۴ + ۴ = ۱۲',
+    example:'🍎 مثال: اگر ۳ کیسه داشته باشی و در هر کیسه ۴ سیب باشد، کل سیب‌ها = ۳ × ۴ = ۱۲ سیب!',
+    followup:'حفظ ضرب خیلی مهمه! ۷ × ۸ چند می‌شود؟ 🤔'
+  },
+  'تقسیم':{
+    explain:'تقسیم یعنی تقسیم کردن یک عدد به بخش‌های مساوی. در تقسیم: مقسوم ÷ مقسوم‌علیه = خارج‌قسمت. اگر باقی‌مانده داشته باشد، یعنی تقسیم کامل نیست.',
+    example:'🍰 مثال: ۱۲ تکه کیک بین ۳ نفر تقسیم شود: ۱۲ ÷ ۳ = ۴ تکه به هر نفر! اما ۱۳ ÷ ۳ = ۴ با باقی‌مانده ۱.',
+    followup:'سوال: ۲۰ ÷ ۴ چند می‌شود؟'
+  },
+  'مساحت دایره':{
+    explain:'مساحت دایره با فرمول <strong>A = π × r²</strong> محاسبه می‌شود. در این فرمول π (پی) تقریباً ۳.۱۴ است و r شعاع دایره است.',
+    example:'⭕ مثال: دایره‌ای با شعاع ۵ سانتی‌متر:\nA = ۳.۱۴ × ۵² = ۳.۱۴ × ۲۵ = ۷۸.۵ cm²',
+    followup:'تمرین: مساحت دایره‌ای با شعاع ۳ چقدر است؟'
+  },
+  'انرژی':{
+    explain:'انرژی توانایی انجام کار یا ایجاد تغییر است. قانون مهم فیزیک: انرژی نه به وجود می‌آید و نه از بین می‌رود، فقط از شکلی به شکل دیگر تبدیل می‌شود.',
+    example:'💡 مثال‌ها:\n• لامپ: انرژی الکتریکی → نورانی + گرمایی\n• ماشین: انرژی شیمیایی بنزین → جنبشی\n• پنل خورشیدی: نورانی → الکتریکی',
+    followup:'وقتی توپ را بالا پرتاب می‌کنی، انرژی جنبشی به چه انرژی‌ای تبدیل می‌شود؟ 🤔'
+  },
+  'نیرو':{
+    explain:'نیرو عاملی است که باعث حرکت، توقف یا تغییر شکل اجسام می‌شود. واحد اندازه‌گیری نیرو <strong>نیوتن (N)</strong> است. یک نیوتن نیرویی است که به جسم ۱ کیلوگرمی شتاب ۱ m/s² بدهد.',
+    example:'🏋️ مثال: وزن یک سیب متوسط تقریباً ۱ نیوتن است! وزن تو روی زمین = جرم × ۹.۸ نیوتن.',
+    followup:'جرمت چند کیلوگرم است؟ وزنت را حساب کن! 😊'
+  },
+  'نهاد و گزاره':{
+    explain:'هر جمله دو بخش اصلی دارد:\n• <strong>نهاد:</strong> کسی یا چیزی که درباره‌اش حرف می‌زنیم\n• <strong>گزاره:</strong> چیزی که درباره نهاد می‌گوییم (فعل + اطلاعات)',
+    example:'📝 مثال: «علی به مدرسه رفت.»\nنهاد = علی (درباره او حرف زدیم)\nگزاره = به مدرسه رفت (کاری که انجام داد)',
+    followup:'در جمله «باران شدید بارید»، نهاد کدام است؟'
+  },
+  'مفعول':{
+    explain:'مفعول کسی یا چیزی است که کار روی آن انجام می‌شود. معمولاً بعد از نهاد و قبل از فعل می‌آید و با «را» مشخص می‌شود.',
+    example:'📖 مثال: «مریم کتاب را خواند.»\nنهاد = مریم | مفعول = کتاب | فعل = خواند\n(چه چیزی خوانده شد؟ کتاب → مفعول)',
+    followup:'در جمله «پدر نامه را نوشت»، مفعول چیست؟'
+  },
+  'تاریخ ایران':{
+    explain:'تاریخ ایران یکی از غنی‌ترین تاریخ‌های جهان است. از تمدن‌های باستانی مثل ایلام و مادها تا امپراتوری‌های بزرگ هخامنشی، اشکانی و ساسانی، ایران همیشه نقش مهمی در تاریخ بشر داشته است.',
+    example:'🏛️ نکات کلیدی:\n• هخامنشیان (۵۵۰ ق.م): بزرگترین امپراتوری باستان توسط کوروش\n• تخت جمشید: پایتخت تشریفاتی هخامنشیان\n• اسلام آوردن ایرانیان: قرن اول هجری',
+    followup:'کوروش بزرگ چه سالی امپراتوری هخامنشی را تأسیس کرد؟'
+  },
+  'انگلیسی':{
+    explain:'یادگیری زبان انگلیسی با تمرین مداوم ممکن می‌شود. مهم‌ترین بخش‌ها: لغات (Vocabulary)، گرامر (Grammar)، شنیدن (Listening) و مکالمه (Speaking).',
+    example:'📚 نکته گرامری:\n• Present Simple: I go (عادت/واقعیت)\n• Present Continuous: I am going (همین الان)\n• Past Simple: I went (گذشته)',
+    followup:'جمله «من هر روز مدرسه می‌روم» به انگلیسی چه می‌شود؟'
+  },
+  'عربی':{
+    explain:'زبان عربی زبان قرآن و یکی از مهم‌ترین زبان‌های اسلامی است. یادگیری قواعد عربی به فهم بهتر قرآن و متون دینی کمک می‌کند.',
+    example:'📖 مثال قواعد:\n• فعل ماضی: ذَهَبَ (رفت)\n• فعل مضارع: یَذْهَبُ (می‌رود)\n• اسم فاعل: ذَاهِب (رونده)\n• جمع مکسر کتاب: کُتُب',
+    followup:'فعل مضارع «کَتَبَ» (نوشت) چیست؟'
+  }
+};
 
-  let current = 0;
-  let interval;
-
-  const show = (idx) => {
-    slides.forEach(s => s.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    slides[idx].classList.add('active');
-    if (dots[idx]) dots[idx].classList.add('active');
-    current = idx;
-  };
-
-  const nextSlide = () => show((current + 1) % slides.length);
-  const prevSlide = () => show((current - 1 + slides.length) % slides.length);
-
-  const startAuto = () => { interval = setInterval(nextSlide, 5000); };
-  const stopAuto = () => clearInterval(interval);
-
-  dots.forEach((dot, i) => dot.addEventListener('click', () => { stopAuto(); show(i); startAuto(); }));
-  if (next) next.addEventListener('click', () => { stopAuto(); nextSlide(); startAuto(); });
-  if (prev) prev.addEventListener('click', () => { stopAuto(); prevSlide(); startAuto(); });
-
-  startAuto();
-}
-
-/* ---------- 5. Back to Top ---------- */
-function initBackToTop() {
-  const btn = document.getElementById('backToTop');
-  if (!btn) return;
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('show', window.scrollY > 300);
-  });
-  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-}
-
-/* ---------- 6. Fade-in on Scroll ---------- */
-function initScrollAnimations() {
-  const items = document.querySelectorAll('.fade-in');
-  if (items.length === 0) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  items.forEach(el => observer.observe(el));
-}
-
-/* ---------- 7. Search Functionality ---------- */
-const sampleData = [
-  { title: 'نمونه سؤال ریاضی هفتم - نوبت اول', grade: '7', subject: 'ریاضی', type: 'نوبت اول', downloads: 1240, hot: true },
-  { title: 'نمونه سؤال علوم هشتم - فصل به فصل', grade: '8', subject: 'علوم', type: 'فصل به فصل', downloads: 890, hot: false },
-  { title: 'نمونه سؤال فارسی نهم - با پاسخ تشریحی', grade: '9', subject: 'فارسی', type: 'با پاسخ', downloads: 1560, hot: true },
-  { title: 'نمونه سؤال فیزیک دهم - تجربی', grade: '10', subject: 'فیزیک', type: 'تجربی', downloads: 720, hot: false },
-  { title: 'نمونه سؤال شیمی یازدهم - ریاضی', grade: '11', subject: 'شیمی', type: 'ریاضی', downloads: 640, hot: false },
-  { title: 'نمونه سؤال زیست دوازدهم - کنکوری', grade: '12', subject: 'زیست', type: 'کنکوری', downloads: 2100, hot: true },
-  { title: 'نمونه سؤال عربی هفتم - تمام درس‌ها', grade: '7', subject: 'عربی', type: 'کامل', downloads: 540, hot: false },
-  { title: 'نمونه سؤال انگلیسی هشتم - گرامر', grade: '8', subject: 'انگلیسی', type: 'گرامر', downloads: 430, hot: false },
-  { title: 'نمونه سؤال تاریخ نهم - امتحان نهایی', grade: '9', subject: 'تاریخ', type: 'نهایی', downloads: 380, hot: false },
-  { title: 'نمونه سؤال هندسه دهم - با جواب', grade: '10', subject: 'هندسه', type: 'با پاسخ', downloads: 910, hot: true },
-  { title: 'نمونه سؤال آمار یازدهم - انسانی', grade: '11', subject: 'آمار', type: 'انسانی', downloads: 290, hot: false },
-  { title: 'نمونه سؤال فلسفه دوازدهم - انسانی', grade: '12', subject: 'فلسفه', type: 'انسانی', downloads: 510, hot: false }
+const GREETINGS=['سلام','درود','صبح بخیر','شب بخیر','عصر بخیر','خداحافظ','بای','مرسی','ممنون','تشکر','خوبی','چطوری','هلو','hello','hi'];
+const GREET_RESPONSES=[
+  {match:/^(سلام|درود|هلو|hello|hi)/i,res:`سلام {name} جان! 😊✨\nخیلی خوشحالم که اینجایی!\n\nمن آماده‌ام هر سوال درسی داری جواب بدم. مثلاً بگو:\n• «فتوسنتز چیست؟»\n• «جمع کسرها رو یاد بده»\n• «فرمول مساحت دایره»\n\nچه کمکی از دستم برمیاد؟ 🎓`},
+  {match:/^(صبح بخیر)/i,res:`صبح بخیر {name} عزیز! ☀️\nامروز روز فوق‌العاده‌ای برای یادگیریه!\n\nچه درسی رو می‌خوای امروز مرور کنیم؟ 😊`},
+  {match:/^(شب بخیر|عصر بخیر)/i,res:`شب/عصر بخیر {name} جان! 🌙\nخسته نباشی! اگه سوالی داری بپرس، وگرنه استراحت کن و فردا با انرژی ادامه بده! 💪`},
+  {match:/^(خداحافظ|بای)/i,res:`خداحافظ {name} عزیز! 👋😊\nموفق باشی! هر وقت سوالی داشتی برگرد.\n\nیادت نره امروز حداقل ۳۰ دقیقه درس بخونی! 📚`},
+  {match:/^(مرسی|ممنون|تشکر)/i,res:`خواهش می‌کنم {name} جان! 😊❤️\nوظیفمه! هر وقت سوال دیگه‌ای داشتی حتماً بپرس.\n\nموفق باشی قهرمان! 🌟`}
 ];
 
-function initSearch() {
-  const form = document.getElementById('searchForm');
-  const results = document.getElementById('searchResults');
-  if (!form || !results) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const query = document.getElementById('searchInput').value.trim().toLowerCase();
-    const grade = document.getElementById('gradeFilter').value;
-    const subject = document.getElementById('subjectFilter').value;
-
-    const filtered = sampleData.filter(item => {
-      const matchQuery = !query || item.title.toLowerCase().includes(query) || item.subject.toLowerCase().includes(query);
-      const matchGrade = !grade || item.grade === grade;
-      const matchSubject = !subject || item.subject === subject;
-      return matchQuery && matchGrade && matchSubject;
-    });
-
-    renderResults(filtered, results);
-  });
-
-  // Initial render
-  renderResults(sampleData, results);
-}
-
-function renderResults(items, container) {
-  if (items.length === 0) {
-    container.innerHTML = '<p class="text-center" style="padding:40px;color:var(--text-soft);">نتیجه‌ای یافت نشد.</p>';
-    return;
-  }
-  container.innerHTML = items.map(item => `
-    <div class="question-card">
-      <div class="question-meta">
-        <span class="tag">پایه ${toPersianNum(item.grade)}</span>
-        <span class="tag">${item.subject}</span>
-        ${item.hot ? '<span class="tag hot"><i class="fa-solid fa-fire"></i> پرطرفدار</span>' : ''}
-      </div>
-      <h4>${item.title}</h4>
-      <p class="desc">نمونه سؤال ${item.subject} پایه ${toPersianNum(item.grade)} - ${item.type}</p>
-      <div class="question-footer">
-        <div class="question-stats">
-          <span><i class="fa-solid fa-download"></i> ${toPersianNum(item.downloads)}</span>
-          <span><i class="fa-solid fa-file-pdf"></i> PDF</span>
-        </div>
-        <a href="#" class="download-btn" onclick="event.preventDefault(); alert('فایل نمونه به زودی اضافه می‌شود');">
-          <i class="fa-solid fa-download"></i> دانلود
-        </a>
-      </div>
-    </div>
-  `).join('');
-}
-
-function toPersianNum(num) {
-  const persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-  return String(num).replace(/\d/g, d => persian[d]);
-}
-
-/* ---------- 8. Contact Form ---------- */
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('پیام شما با موفقیت ارسال شد. به زودی با شما تماس می‌گیریم.');
-    form.reset();
-  });
-}
-
-/* ---------- 9. Active Nav Link ---------- */
-function setActiveNav() {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('#mainNav a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === path || (path === '' && href === 'index.html')) {
-      link.classList.add('active');
+function aiThink(q){
+  const ql=q.toLowerCase().trim();
+  const name=S.profile?.fn||'دوست خوبم';
+  
+  // 1. Greetings
+  for(const g of GREET_RESPONSES){
+    if(g.match.test(ql)){
+      const t=g.res.replace('{name}',name);
+      return{html:t.replace(/\n/g,'<br>'),text:t};
     }
-  });
+  }
+  
+  // 2. Knowledge Base Match
+  let bestMatch=null,bestScore=0;
+  for(const[key,data] of Object.entries(KNOWLEDGE)){
+    const keywords=key.split(' ');
+    let score=0;
+    for(const kw of keywords){if(ql.includes(kw))score+=kw.length}
+    // Also check related terms
+    if(key==='کسر'&&/جمع.*کسر|کسر.*جمع/.test(ql))score+=10;
+    if(key==='جمع کسرها'&&/جمع.*کسر/.test(ql))score+=15;
+    if(key==='مساحت دایره'&&(/مساحت.*دایره|دایره.*مساحت|فرمول.*دایره/.test(ql)))score+=15;
+    if(key==='انرژی'&&/انرژی|تبدیل.*انرژی/.test(ql))score+=8;
+    if(key==='نیرو'&&/نیرو|نیوتن|شتاب/.test(ql))score+=8;
+    if(key==='نهاد و گزاره'&&/نهاد|گزاره|جمله/.test(ql))score+=8;
+    if(key==='مفعول'&&/مفعول/.test(ql))score+=10;
+    if(key==='تاریخ ایران'&&/تاریخ.*ایران|ایران.*تاریخ|هخامنشی|کوروش|ساسانی/.test(ql))score+=12;
+    if(key==='انگلیسی'&&/انگلیسی|english|گرامر.*انگلیسی/.test(ql))score+=10;
+    if(key==='عربی'&&/عربی|قرآن.*قاعده|فعل.*عربی/.test(ql))score+=10;
+    if(score>bestScore){bestScore=score;bestMatch={key,data}}
+  }
+  
+  if(bestMatch&&bestScore>=2){
+    const d=bestMatch.data;
+    const grLabel=S.profile?.gr?` (پایه ${GN[S.profile.gr]})`:'';
+    const sq=q+(S.profile?.gr?` پایه ${GN[S.profile.gr]}`:'')+ ' آموزش';
+    const aparat=`https://www.aparat.com/result/${encodeURIComponent(sq)}`;
+    const google=`https://www.google.com/search?q=${encodeURIComponent(sq)}`;
+    
+    const html=`عالیه ${name} جان! 😊 بذار <strong>${bestMatch.key}</strong> رو کامل برات توضیح بدم${grLabel}:
+<div class="explain-box">📖 <strong>توضیح:</strong><br>${d.explain.replace(/\n/g,'<br>')}</div>
+<div class="example-box">💡 <strong>مثال:</strong><br>${d.example.replace(/\n/g,'<br>')}</div>
+🤔 <strong>سوال برای فکر کردن:</strong> ${d.followup}
+<br><br>🎥 برای یادگیری عمیق‌تر، این ویدیوها رو ببین:
+<a href="${aparat}" target="_blank" class="vlink">▶️ ویدیوهای آموزشی در آپارات</a>
+<a href="${google}" target="_blank" class="glink">🔍 جستجوی بیشتر در گوگل</a>
+<br><br>اگه هنوز سوالی داری، حتماً بپرس! من اینجام 💪`;
+    
+    const text=`${d.explain}. ${d.example.replace(/[🍕🍰⭕💡📝📖🏛️📚]/g,'')}. ${d.followup}`;
+    return{html,text};
+  }
+  
+  // 3. Fallback Smart Search
+  const grLabel=S.profile?.gr?` (پایه ${GN[S.profile.gr]})`:'';
+  const sq=q+(S.profile?.gr?` پایه ${GN[S.profile.gr]}`:'')+ ' آموزش';
+  const aparat=`https://www.aparat.com/result/${encodeURIComponent(sq)}`;
+  const google=`https://www.google.com/search?q=${encodeURIComponent(sq)}`;
+  
+  const fallbacks=[
+    `سوال خوبی پرسیدی ${name} جان! 🤔\n\nمتأسفانه هنوز توضیح کامل «${q}» رو در حافظه‌ام ندارم، ولی بهترین منابع آموزشی رو برات پیدا کردم${grLabel}:`,
+    `${name} عزیز، این موضوع جالبیه! 😊\n\nفعلاً توضیح تخصصی‌اش رو آماده نکردم، ولی این ویدیوها عالی توضیح دادن${grLabel}:`,
+    `آفرین ${name} که دنبال یادگیری هستی! 🌟\n\nبذار بهترین منابع رو برات پیدا کنم${grLabel}:`
+  ];
+  const fb=fallbacks[Math.floor(Math.random()*fallbacks.length)];
+  
+  const html=`${fb.replace(/\n/g,'<br>')}
+<a href="${aparat}" target="_blank" class="vlink">▶️ ویدیوهای آموزشی در آپارات</a>
+<a href="${google}" target="_blank" class="glink">🔍 جستجوی بیشتر در گوگل</a>
+<br><br>💡 <strong>نکته:</strong> اگه سوالات رایج مثل «فتوسنتز»، «کسر»، «ضرب»، «مساحت دایره»، «انرژی»، «نیرو»، «نهاد و گزاره» یا «مفعول» بپرسی، توضیح کامل + مثال + تمرین بهت میدم! 😊`;
+  
+  const text=`${fb} از لینک‌های زیر استفاده کن.`;
+  return{html,text};
 }
 
-/* ---------- 10. Init ---------- */
-document.addEventListener('DOMContentLoaded', () => {
-  injectLayout();
-  initTheme();
-  initMobileMenu();
-  initSlider();
-  initBackToTop();
-  initScrollAnimations();
-  initSearch();
-  initContactForm();
-  setActiveNav();
+// ===== CHAT FUNCTIONS =====
+function showTyping(){
+  const box=document.getElementById('chatMsgs');
+  const t=document.createElement('div');t.className='typing-indicator';t.id='typingInd';
+  t.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  box.appendChild(t);box.scrollTop=box.scrollHeight;
+}
+function hideTyping(){document.getElementById('typingInd')?.remove()}
+
+function sendChat(){
+  const inp=document.getElementById('chatIn'),txt=inp.value.trim();if(!txt)return;
+  addChatMsg(txt,'user');inp.value='';
+  showTyping();
+  setTimeout(()=>{hideTyping();const r=aiThink(txt);addChatMsg(r.html,'bot');lastAI=r.text},800+Math.random()*700);
+}
+
+function addChatMsg(html,sender){
+  const d=document.createElement('div');d.className=`msg ${sender}`;d.innerHTML=html;
+  const box=document.getElementById('chatMsgs');box.appendChild(d);box.scrollTop=box.scrollHeight;
+}
+
+function speakLast(){
+  if(!lastAI)return;window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(lastAI);u.lang='fa-IR';
+  const voices=window.speechSynthesis.getVoices();
+  const sel=document.getElementById('voiceSel').value;
+  const faVoices=voices.filter(v=>v.lang.includes('fa')||v.lang.includes('ar'));
+  if(faVoices.length>0){u.voice=sel==='female'?faVoices.find(v=>v.name.toLowerCase().includes('female'))||faVoices[0]:faVoices.find(v=>v.name.toLowerCase().includes('male'))||faVoices[faVoices.length-1]}
+  u.rate=0.9;u.pitch=sel==='female'?1.1:0.9;
+  window.speechSynthesis.speak(u);toast('🔊 در حال خواندن...');
+}
+window.speechSynthesis.onvoiceschanged=()=>{};
+
+// ===== FILE MANAGER =====
+function handleFile(input){if(input.files[0])processFile(input.files[0]);input.value=''}
+function processFile(file){
+  const ext=file.name.split('.').pop().toLowerCase();
+  const allowed=['pdf','png','jpg','jpeg','doc','docx'];
+  if(!allowed.includes(ext))return toast('⚠️ فقط PDF, PNG, JPG, Word پشتیبانی می‌شود');
+  if(file.size>5*1024*1024)return toast('⚠️ حداکثر حجم: ۵ مگابایت');
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const doc={id:Date.now(),name:file.name,size:(file.size/1024).toFixed(1),date:new Date().toLocaleDateString('fa-IR'),data:e.target.result,type:ext};
+    try{S.files.unshift(doc);save();renderFiles();toast('✅ فایل آپلود شد')}catch(err){toast('⚠️ حافظه پر است')}
+  };reader.readAsDataURL(file);
+}
+function renderFiles(){
+  const el=document.getElementById('fileList');
+  if(!S.files.length){el.innerHTML='<div style="text-align:center;color:var(--dim);padding:40px">هنوز فایلی آپلود نشده</div>';return}
+  el.innerHTML=S.files.map(f=>{
+    const icon=f.type==='pdf'?'📄':['png','jpg','jpeg'].includes(f.type)?'🖼️':'📝';
+    return`<div class="file-item"><div><h4 style="font-weight:700;font-size:.95rem;margin-bottom:2px">${icon} ${f.name}</h4><span style="font-size:.8rem;color:var(--dim)">${f.size} KB • ${f.date}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="file-btn vw" onclick="previewFile(${f.id})">👁 مشاهده</button><a class="file-btn dl" href="${f.data}" download="${f.name}">⬇ دانلود</a><button class="file-btn del" onclick="delFile(${f.id})">🗑</button></div></div>`;
+  }).join('');
+}
+function delFile(id){if(confirm('حذف شود؟')){S.files=S.files.filter(f=>f.id!==id);save();renderFiles();toast('🗑 حذف شد')}}
+function previewFile(id){
+  const f=S.files.find(x=>x.id===id);if(!f)return;
+  document.getElementById('pvTitle').textContent=f.name;
+  document.getElementById('pvDl').href=f.data;document.getElementById('pvDl').download=f.name;
+  const ct=document.getElementById('pvContent');
+  if(['png','jpg','jpeg'].includes(f.type))ct.innerHTML=`<img src="${f.data}" alt="${f.name}">`;
+  else if(f.type==='pdf')ct.innerHTML=`<iframe src="${f.data}" style="width:100%;max-width:900px;height:90vh;border:none;border-radius:var(--r);box-shadow:0 10px 40px rgba(0,0,0,.3);background:#fff"></iframe>`;
+  else ct.innerHTML=`<div style="text-align:center;color:#fff;padding:60px"><div style="font-size:4rem;margin-bottom:20px">📝</div><h3>پیش‌نمایش Word در مرورگر ممکن نیست</h3><a href="${f.data}" download="${f.name}" class="btn btn-p" style="margin-top:20px;display:inline-flex">⬇ دانلود فایل</a></div>`;
+  document.getElementById('pdfOv').classList.add('active');
+}
+function closeViewer(){document.getElementById('pdfOv').classList.remove('active');document.getElementById('pvContent').innerHTML=''}
+document.addEventListener('DOMContentLoaded',()=>{
+  const z=document.getElementById('upZone');
+  if(z){z.addEventListener('dragover',e=>{e.preventDefault();z.style.borderColor='var(--pri)'});z.addEventListener('dragleave',()=>{z.style.borderColor='var(--brd)'});z.addEventListener('drop',e=>{e.preventDefault();z.style.borderColor='var(--brd)';if(e.dataTransfer.files[0])processFile(e.dataTransfer.files[0])})}
 });
 
+// ===== QUIZ ENGINE =====
+const QDB=[
+{g:'1',s:'ریاضی',q:'حاصل ۲ + ۳ چقدر است؟',o:['۴','۵','۶','۷'],a:1},
+{g:'1',s:'ریاضی',q:'کدام عدد بزرگتر است؟',o:['۳','۷','۵','۲'],a:1},
+{g:'2',s:'ریاضی',q:'حاصل ۸ + ۷ چقدر است؟',o:['۱۴','۱۵','۱۶','۱۳'],a:1},
+{g:'2',s:'ریاضی',q:'حاصل ۲۰ - ۸ چقدر است؟',o:['۱۰','۱۱','۱۲','۱۳'],a:2},
+{g:'3',s:'ریاضی',q:'حاصل ۶ × ۷ چقدر است؟',o:['۳۶','۴۲','۴۸','۳۵'],a:1},
+{g:'3',s:'ریاضی',q:'حاصل ۲۴ ÷ ۴ چقدر است؟',o:['۵','۶','۷','۸'],a:1},
+{g:'4',s:'ریاضی',q:'حاصل ½ + ¼ چقدر است؟',o:['۲/۶','۳/۴','۱/۶','۲/۴'],a:1},
+{g:'4',s:'ریاضی',q:'محیط مربعی به ضلع ۵ چقدر است؟',o:['۲۰','۲۵','۱۵','۱۰'],a:0},
+{g:'5',s:'ریاضی',q:'حاصل ۰/۵ × ۱۰ چقدر است؟',o:['۵','۵۰','۰/۵','۱۰'],a:0},
+{g:'5',s:'ریاضی',q:'۲۵٪ از ۲۰۰ چقدر است؟',o:['۲۵','۵۰','۷۵','۱۰۰'],a:1},
+{g:'6',s:'ریاضی',q:'حاصل ¾ ÷ ½ چقدر است؟',o:['۳/۸','۳/۲','۶/۴','۱/۲'],a:1},
+{g:'6',s:'ریاضی',q:'مساحت دایره‌ای به شعاع ۳ تقریباً؟',o:['۹','۱۸/۸۴','۲۸/۲۶','۶/۲۸'],a:2},
+{g:'7',s:'ریاضی',q:'حاصل (-۳) × (-۴) چقدر است؟',o:['-۱۲','-۷','۱۲','۷'],a:2},
+{g:'7',s:'ریاضی',q:'قدر مطلق -۸ چقدر است؟',o:['-۸','۸','۰','۱'],a:1},
+{g:'8',s:'ریاضی',q:'حاصل √۱۴۴ چقدر است؟',o:['۱۱','۱۲','۱۳','۱۴'],a:1},
+{g:'8',s:'ریاضی',q:'اگر ۲x = ۱۰ باشد، x = ؟',o:['۲','۵','۱۰','۲۰'],a:1},
+{g:'9',s:'ریاضی',q:'حاصل ۲³ چقدر است؟',o:['۶','۸','۹','۱۲'],a:1},
+{g:'9',s:'ریاضی',q:'مجموع زوایای مثلث؟',o:['۹۰','۱۸۰','۲۷۰','۳۶۰'],a:1},
+{g:'1',s:'علوم',q:'کدام حیوان پرواز می‌کند؟',o:['ماهی','گربه','پرنده','سگ'],a:2},
+{g:'2',s:'علوم',q:'گیاهان برای رشد نیاز دارند به؟',o:['فقط آب','آب و نور','فقط خاک','فقط نور'],a:1},
+{g:'3',s:'علوم',q:'آب در چه دمایی یخ می‌زند؟',o:['۱۰۰','۰','۵۰','-۱۰'],a:1},
+{g:'4',s:'علوم',q:'منبع انرژی تجدیدپذیر؟',o:['نفت','زغال‌سنگ','خورشید','گاز'],a:2},
+{g:'5',s:'علوم',q:'واحد اندازه‌گیری نیرو؟',o:['ژول','وات','نیوتن','پاسکال'],a:2},
+{g:'6',s:'علوم',q:'فتوسنتز در کدام بخش گیاه؟',o:['ریشه','ساقه','برگ','گل'],a:2},
+{g:'7',s:'علوم',q:'فرمول شیمیایی آب؟',o:['CO2','H2O','NaCl','O2'],a:1},
+{g:'8',s:'علوم',q:'سرعت نور تقریباً؟',o:['۳۰۰ هزار km/s','۱۵۰ هزار','۱۰۰۰','۳۰۰'],a:0},
+{g:'9',s:'علوم',q:'عنصر اصلی الماس؟',o:['آهن','کربن','اکسیژن','طلا'],a:1},
+{g:'3',s:'فارسی',q:'جمع «کتاب» چیست؟',o:['کتب','کتابان','کتاب‌ها','مکتوب'],a:0},
+{g:'4',s:'فارسی',q:'نهاد در «علی رفت»؟',o:['رفت','علی','جمله','هیچکدام'],a:1},
+{g:'5',s:'فارسی',q:'مفعول در «مادر غذا پخت»؟',o:['مادر','غذا','پخت','هیچکدام'],a:1},
+{g:'6',s:'فارسی',q:'«دست از سر برداشتن» یعنی؟',o:['مو کوتاه کردن','مزاحم شدن','رها کردن','کمک کردن'],a:2},
+{g:'7',s:'فارسی',q:'متضاد «آغاز»؟',o:['شروع','ابتدا','پایان','اول'],a:2},
+{g:'8',s:'فارسی',q:'سعدی شاعر کدام قرن؟',o:['پنجم','ششم','هفتم','هشتم'],a:2},
+{g:'9',s:'فارسی',q:'آرایه «جان جهان»؟',o:['تشبیه','استعاره','کنایه','مجاز'],a:1},
+{g:'3',s:'انگلیسی',q:'معنی "Book"؟',o:['مداد','کتاب','میز','صندلی'],a:1},
+{g:'5',s:'انگلیسی',q:'معنی "Scientist"؟',o:['معلم','دانشمند','دکتر','مهندس'],a:1},
+{g:'7',s:'انگلیسی',q:'Past tense of "go"?',o:['goed','gone','went','going'],a:2},
+{g:'9',s:'انگلیسی',q:'Which is correct?',o:["She don't know","She doesn't know","She not know","She no know"],a:1},
+{g:'7',s:'عربی',q:'جمع «کِتاب»؟',o:['کُتُب','کاتِب','مَکتوب','کِتابة'],a:0},
+{g:'8',s:'عربی',q:'«ذَهَبَ» یعنی؟',o:['آمد','رفت','نوشت','خواند'],a:1},
+{g:'9',s:'عربی',q:'فاعل در «کَتَبَ الطالِبُ»؟',o:['کَتَبَ','الطالِبُ','جمله','هیچکدام'],a:1},
+{g:'3',s:'مطالعات',q:'پایتخت ایران؟',o:['اصفهان','شیراز','تهران','تبریز'],a:2},
+{g:'5',s:'مطالعات',q:'بزرگترین سیاره منظومه شمسی؟',o:['زمین','مریخ','مشتری','زحل'],a:2},
+{g:'7',s:'مطالعات',q:'طولانی‌ترین رود ایران؟',o:['کارون','سفیدرود','زاینده‌رود','ارس'],a:0},
+{g:'9',s:'مطالعات',q:'انقلاب مشروطه چه سالی؟',o:['۱۲۸۵','۱۳۰۰','۱۲۵۰','۱۳۲۰'],a:0},
+];
+let QS={cur:0,score:0,qs:[],answered:false};
+function startQuiz(){
+  const g=document.getElementById('qGrade').value,s=document.getElementById('qSubj').value;
+  let qs=QDB.filter(q=>q.g===g&&q.s===s);
+  if(qs.length<3)qs=QDB.filter(q=>q.s===s).slice(0,5);
+  if(!qs.length){toast('⚠️ سوالی یافت نشد');return}
+  QS={cur:0,score:0,qs:qs.sort(()=>Math.random()-.5).slice(0,Math.min(5,qs.length)),answered:false};
+  document.getElementById('qStart').style.display='none';document.getElementById('qResult').style.display='none';
+  document.getElementById('qActive').style.display='block';renderQ();
+}
+function renderQ(){
+  const q=QS.qs[QS.cur];QS.answered=false;
+  document.getElementById('qActive').innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:16px;font-size:.8rem;color:var(--dim)"><span>سوال ${toFa(QS.cur+1)} از ${toFa(QS.qs.length)}</span><span>امتیاز: ${toFa(QS.score)}</span></div><div style="font-size:1.1rem;font-weight:700;margin-bottom:20px;line-height:1.8">${q.q}</div>${q.o.map((o,i)=>`<div class="quiz-opt" onclick="ansQ(${i})" id="qo-${i}">${o}</div>`).join('')}<button class="btn btn-p" style="width:100%;margin-top:16px;display:none" id="nqBtn" onclick="nextQ()">سوال بعدی ←</button></div>`;
+}
+function ansQ(i){if(QS.answered)return;QS.answered=true;const c=QS.qs[QS.cur].a;document.getElementById(`qo-${c}`).classList.add('correct');if(i===c){QS.score++;toast('✅ صحیح!')}else{document.getElementById(`qo-${i}`).classList.add('wrong');toast('❌ اشتباه!')}document.getElementById('nqBtn').style.display='block'}
+function nextQ(){QS.cur++;if(QS.cur>=QS.qs.length){showQR();return}renderQ()}
+function showQR(){
+  document.getElementById('qActive').style.display='none';const r=document.getElementById('qResult');r.style.display='block';
+  const pct=Math.round((QS.score/QS.qs.length)*100);
+  r.innerHTML=`<div style="font-size:3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px">${toFa(pct)}٪</div><h3 style="margin-bottom:8px">${pct>=80?'عالی! 🎉':pct>=50?'خوب بود! 👍':'نیاز به تمرین 💪'}</h3><p style="color:var(--dim);margin-bottom:20px">${toFa(QS.score)} از ${toFa(QS.qs.length)} صحیح</p><button class="btn btn-p" onclick="document.getElementById('qResult').style.display='none';document.getElementById('qStart').style.display='block'">آزمون جدید</button>`;
+}
 
-              </script>
-                        </body>
-                        </html>
-                    
+// ===== PLANNER =====
+const DAYS=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه'];
+function initPlanner(){
+  document.getElementById('plGrid').innerHTML=DAYS.map((d,i)=>{const tasks=S.planner[i]||[];return`<div class="planner-day" onclick="addTask(${i})"><h4>${d}</h4>${tasks.map((t,j)=>`<div class="planner-task" onclick="event.stopPropagation();rmTask(${i},${j})">${t}</div>`).join('')}</div>`}).join('');
+  updateCD();
+}
+function addTask(day){const t=prompt(`وظیفه برای ${DAYS[day]}:`);if(!t)return;if(!S.planner[day])S.planner[day]=[];S.planner[day].push(t);save();initPlanner();toast('✅ اضافه شد')}
+function rmTask(day,idx){S.planner[day].splice(idx,1);save();initPlanner()}
+function updateCD(){const el=document.getElementById('examDate');if(el.value){S.examDate=el.value;save()}if(!S.examDate){document.getElementById('cdNum').textContent='-- روز';return}const diff=Math.ceil((new Date(S.examDate)-new Date())/(1000*60*60*24));document.getElementById('cdNum').textContent=diff>0?`${toFa(diff)} روز`:'امتحان رسیده! 🔥'}
+
+// ===== CHAT ROOM =====
+const BAD_WORDS=['بد','زشت','لعنت','کثافت','حروم','جنده','گوه','خر','الاغ','بی‌شعور','احمق','گدا','کیری','کون','سگ','مادرجنده'];
+function renderRoom(){
+  const box=document.getElementById('roomMsgs');
+  box.innerHTML=S.roomMsgs.map(m=>{const isMine=m.name===(S.profile?.fn||'');const blocked=S.blockedUsers.includes(m.name);if(blocked)return`<div class="room-msg blocked">⛔ پیام مسدود شده</div>`;return`<div class="room-msg ${isMine?'mine':'other'}"><div style="font-size:.7rem;opacity:.7;margin-bottom:4px">${m.name} • ${m.time}</div>${m.text}</div>`}).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function sendRoom(){
+  const inp=document.getElementById('roomIn'),txt=inp.value.trim();if(!txt)return;
+  if(!S.profile){toast('⚠️ ابتدا پروفایل بسازید');return}
+  if(BAD_WORDS.some(w=>txt.toLowerCase().includes(w))){S.blockedUsers.push(S.profile.fn);save();S.roomMsgs.push({name:S.profile.fn,text:'⛔ پیام مسدود شد',time:new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})});save();renderRoom();inp.value='';toast('⛔ پیام مسدود شد');return}
+  S.roomMsgs.push({name:S.profile.fn,text:txt,time:new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})});save();renderRoom();inp.value='';
+}
+
+// ===== COMMENTS =====
+function renderComments(){
+  const el=document.getElementById('cmList');
+  if(!S.comments.length){el.innerHTML='<div style="text-align:center;color:var(--dim);padding:30px">هنوز نظری ثبت نشده</div>';return}
+  el.innerHTML=S.comments.map(c=>`<div class="comment-item"><div class="comment-author">${c.name}</div><div class="comment-text">${c.text}</div><div class="comment-date">${c.date}</div></div>`).join('');
+}
+function addComment(){const name=document.getElementById('cmName').value.trim(),text=document.getElementById('cmText').value.trim();if(!name||!text)return toast('⚠️ نام و نظر را وارد کنید');S.comments.unshift({name,text,date:new Date().toLocaleDateString('fa-IR')});save();renderComments();document.getElementById('cmName').value='';document.getElementById('cmText').value='';toast('✅ نظر ثبت شد')}
+
+// ===== UTILS =====
+function toFa(n){return String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
+function toast(msg){const c=document.getElementById('toastC'),t=document.createElement('div');t.className='toast';t.textContent=msg;c.appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-100%)';setTimeout(()=>t.remove(),300)},3000)}
+
+// ===== INIT =====
+checkExpiry();document.body.setAttribute('data-theme',S.theme);checkProf();renderFiles();
+if(S.examDate)document.getElementById('examDate').value=S.examDate;
+if(S.profile?.gr){const qg=document.getElementById('qGrade');if(qg)qg.value=S.profile.gr}
+</script>
+</body>
+  </html>
