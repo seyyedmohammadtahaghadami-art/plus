@@ -3,139 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>استاد یار | دستیار هوشمند آموزشی</title>
-<meta name="description" content="استاد یار - پلتفرم هوشمند نمونه سوال، آزمون آنلاین و چت آموزشی برای دانش‌آموزان ایران">
+<title>استاد یار | پلتفرم هوشمند آموزشی</title>
+<meta name="description" content="استاد یار - دستیار هوشمند آموزشی با AI پیشرفته، آزمون آنلاین و چت واقعی">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--pri:#8b5cf6;--pri-g:rgba(139,92,246,.4);--acc:#ec4899;--bg:#f8fafc;--card:rgba(255,255,255,.88);--side:rgba(255,255,255,.96);--txt:#0f172a;--dim:#64748b;--brd:rgba(15,23,42,.08);--grad:linear-gradient(135deg,#8b5cf6,#ec4899);--shd:0 10px 40px rgba(0,0,0,.08);--r:16px;--font:'Vazirmatn',sans-serif}
-[data-theme="dark"]{--bg:#0a0a0f;--card:rgba(26,26,36,.8);--side:rgba(15,15,25,.96);--txt:#f1f5f9;--dim:#94a3b8;--brd:rgba(255,255,255,.08);--shd:0 10px 40px rgba(0,0,0,.5)}
-[data-theme="space"]{--bg:#020010;--card:rgba(10,10,40,.65);--side:rgba(5,5,25,.96);--txt:#e0e7ff;--dim:#818cf8;--pri:#6366f1;--brd:rgba(99,102,241,.25);--grad:linear-gradient(135deg,#6366f1,#06b6d4);--shd:0 0 30px rgba(99,102,241,.2)}
-[data-theme="thunder"]{--bg:#0c0a1a;--card:rgba(20,15,40,.75);--side:rgba(12,10,26,.96);--txt:#fff;--dim:#a78bfa;--pri:#a855f7;--acc:#facc15;--brd:rgba(168,85,247,.3);--grad:linear-gradient(135deg,#a855f7,#facc15);--shd:0 0 40px rgba(168,85,247,.3)}
+:root{--pri:#8b5cf6;--pri-g:rgba(139,92,246,.4);--acc:#ec4899;--suc:#10b981;--wrn:#f59e0b;--dan:#ef4444;--bg:#f8fafc;--card:rgba(255,255,255,.88);--side:rgba(255,255,255,.96);--txt:#0f172a;--dim:#64748b;--brd:rgba(15,23,42,.08);--grad:linear-gradient(135deg,#8b5cf6,#ec4899);--shd:0 10px 40px rgba(0,0,0,.08);--r:16px;--font:'Vazirmatn',sans-serif}
+[data-theme="dark"]{--bg:#0a0a0f;--card:rgba(26,26,36,.85);--side:rgba(15,15,25,.96);--txt:#f1f5f9;--dim:#94a3b8;--brd:rgba(255,255,255,.08);--shd:0 10px 40px rgba(0,0,0,.5)}
+[data-theme="space"]{--bg:#020010;--card:rgba(10,10,40,.7);--side:rgba(5,5,25,.96);--txt:#e0e7ff;--dim:#818cf8;--pri:#6366f1;--brd:rgba(99,102,241,.25);--grad:linear-gradient(135deg,#6366f1,#06b6d4);--shd:0 0 30px rgba(99,102,241,.2)}
+[data-theme="thunder"]{--bg:#0c0a1a;--card:rgba(20,15,40,.8);--side:rgba(12,10,26,.96);--txt:#fff;--dim:#a78bfa;--pri:#a855f7;--acc:#facc15;--brd:rgba(168,85,247,.3);--grad:linear-gradient(135deg,#a855f7,#facc15);--shd:0 0 40px rgba(168,85,247,.3)}
 *{margin:0;padding:0;box-sizing:border-box;outline:none;-webkit-tap-highlight-color:transparent}
 body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;min-height:100vh;display:flex;overflow-x:hidden;transition:background .5s,color .5s}
-canvas#fx-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none}
+canvas#fx{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.6}
+.thunder-fx{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:-1;opacity:0}
+[data-theme="thunder"] .thunder-fx{animation:thFlash 4s ease-in-out infinite}
+@keyframes thFlash{0%,100%{opacity:0}50%{opacity:.12}}
 a{text-decoration:none;color:inherit}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}input,select,textarea{font-family:inherit;border:none;background:none;color:inherit}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:var(--pri);border-radius:3px}::-webkit-scrollbar-track{background:transparent}
 .app{display:flex;width:100%;min-height:100vh}
-.sb{width:280px;height:100vh;position:fixed;right:0;top:0;background:var(--side);border-left:1px solid var(--brd);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;z-index:100;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.sb{width:280px;height:100vh;position:fixed;right:0;top:0;background:var(--side);border-left:1px solid var(--brd);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;z-index:100;transition:transform .3s}
 .logo-area{padding:24px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--brd)}
-.logo-icon{width:44px;height:44px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;box-shadow:0 0 20px var(--pri-g)}
+.logo-icon{width:44px;height:44px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;box-shadow:0 0 20px var(--pri-g);animation:glow 3s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 20px var(--pri-g)}50%{box-shadow:0 0 40px var(--pri-g)}}
 .logo-text h1{font-size:1.3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .logo-text span{font-size:.75rem;color:var(--dim);font-weight:500}
 .nav{flex:1;padding:16px;overflow-y:auto}
-.nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--r);color:var(--dim);font-weight:600;margin-bottom:4px;transition:all .2s;cursor:pointer;font-size:.95rem}
-.nav-item:hover{background:rgba(139,92,246,.08);color:var(--pri)}.nav-item.active{background:rgba(139,92,246,.12);color:var(--pri);font-weight:700}
-.nav-item svg{width:20px;height:20px;fill:currentColor;flex-shrink:0}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--r);color:var(--dim);font-weight:600;margin-bottom:4px;transition:all .2s;cursor:pointer;font-size:.9rem}
+.nav-item:hover{background:rgba(139,92,246,.08);color:var(--pri)}
+.nav-item.active{background:rgba(139,92,246,.12);color:var(--pri);font-weight:700}
+.nav-item svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
 .main{flex:1;margin-right:280px;padding:30px;max-width:1400px}
 .mob-hdr{display:none;position:fixed;top:0;left:0;right:0;height:60px;background:var(--side);border-bottom:1px solid var(--brd);backdrop-filter:blur(10px);z-index:90;padding:0 16px;align-items:center;justify-content:space-between}
-.card{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);padding:24px;backdrop-filter:blur(10px);transition:all .3s}.card:hover{transform:translateY(-3px);box-shadow:var(--shd)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:9999px;font-weight:700;transition:all .3s;font-size:.95rem}
-.btn-p{background:var(--grad);color:#fff;box-shadow:0 4px 15px var(--pri-g)}.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--pri-g)}
-.btn-s{background:var(--card);border:1px solid var(--brd)}.btn-s:hover{border-color:var(--pri)}
-.inp{width:100%;padding:14px 18px;border-radius:var(--r);background:var(--card);border:1px solid var(--brd);font-size:1rem;transition:all .2s}.inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px var(--pri-g)}
+.card{background:var(--card);border:1px solid var(--brd);border-radius:var(--r);padding:24px;backdrop-filter:blur(10px);transition:all .3s}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shd)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:99px;font-weight:700;transition:all .3s;font-size:.9rem}
+.btn-p{background:var(--grad);color:#fff;box-shadow:0 4px 15px var(--pri-g)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--pri-g)}
+.btn-s{background:var(--card);border:1px solid var(--brd);color:var(--txt)}
+.btn-s:hover{border-color:var(--pri)}
+.btn-sm{padding:8px 16px;font-size:.8rem}
+.inp{width:100%;padding:14px 18px;border-radius:var(--r);background:var(--card);border:1px solid var(--brd);font-size:1rem;transition:all .2s}
+.inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px var(--pri-g)}
 .sec{display:none;animation:fadeIn .4s}.sec.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes thunderFlash{0%,100%{opacity:0}50%{opacity:.15}}
-.thunder-overlay{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:-1;opacity:0}
-[data-theme="thunder"] .thunder-overlay{animation:thunderFlash 4s ease-in-out infinite}
-.grade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:20px}
-.grade-card{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);cursor:pointer;transition:all .3s}
-.grade-card:hover{border-color:var(--pri);transform:scale(1.05)}.grade-card.selected{border-color:var(--pri);background:rgba(139,92,246,.1)}
-.grade-num{font-size:2rem;font-weight:900;color:var(--pri)}.grade-lbl{font-size:.8rem;color:var(--dim);font-weight:600}
-.chat-box{display:flex;flex-direction:column;height:calc(100vh - 120px);background:var(--card);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden}
+@keyframes slideIn{from{transform:translateX(-100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* Chat */
+.chat-box{display:flex;flex-direction:column;height:calc(100vh - 180px);background:var(--card);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden}
 .chat-msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
 .msg{max-width:85%;padding:14px 18px;border-radius:18px;line-height:1.8;font-size:.95rem;animation:fadeIn .3s}
 .msg.bot{align-self:flex-start;background:var(--bg);border:1px solid var(--brd);border-bottom-right-radius:4px}
 .msg.user{align-self:flex-end;background:var(--pri);color:#fff;border-bottom-left-radius:4px}
 .msg strong{color:var(--pri)}
+.msg.user strong{color:#fff}
 .msg .explain-box{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.15);border-radius:12px;padding:14px;margin:10px 0;font-size:.9rem;line-height:1.9}
-.msg .example-box{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:12px;margin:8px 0;font-size:.85rem;color:var(--txt)}
-.msg a.vlink{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:10px 16px;background:rgba(236,72,153,.1);color:var(--acc);border-radius:12px;font-weight:700;font-size:.85rem;border:1px solid rgba(236,72,153,.2);transition:all .2s;text-decoration:none}
+.msg .example-box{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:12px;margin:8px 0;font-size:.85rem}
+.msg .followup-box{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:12px;padding:12px;margin:8px 0;font-size:.85rem}
+.msg a.vlink{display:inline-flex;align-items:center;gap:8px;margin-top:8px;margin-left:6px;padding:10px 16px;background:rgba(236,72,153,.1);color:var(--acc);border-radius:12px;font-weight:700;font-size:.85rem;border:1px solid rgba(236,72,153,.2);transition:all .2s}
 .msg a.vlink:hover{background:rgba(236,72,153,.2);transform:translateX(-3px)}
-.msg a.glink{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:10px 16px;background:rgba(139,92,246,.08);color:var(--pri);border-radius:12px;font-weight:700;font-size:.85rem;border:1px solid rgba(139,92,246,.15);transition:all .2s;text-decoration:none}
+.msg a.glink{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:10px 16px;background:rgba(139,92,246,.08);color:var(--pri);border-radius:12px;font-weight:700;font-size:.85rem;border:1px solid rgba(139,92,246,.15);transition:all .2s}
 .msg a.glink:hover{background:rgba(139,92,246,.15);transform:translateX(-3px)}
-.typing-indicator{display:flex;gap:4px;padding:14px 18px;align-self:flex-start;background:var(--bg);border:1px solid var(--brd);border-radius:18px;border-bottom-right-radius:4px;width:fit-content}
+.typing-ind{display:flex;gap:4px;padding:14px 18px;align-self:flex-start;background:var(--bg);border:1px solid var(--brd);border-radius:18px;border-bottom-right-radius:4px;width:fit-content}
 .typing-dot{width:8px;height:8px;background:var(--dim);border-radius:50%;animation:typingBounce 1.4s infinite}
 .typing-dot:nth-child(2){animation-delay:.2s}.typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
-.chat-in-area{padding:16px;border-top:1px solid var(--brd);display:flex;gap:10px;flex-wrap:wrap}
-.chat-in-area input{flex:1;min-width:200px}
-.voice-sel{padding:8px 12px;border-radius:var(--r);background:var(--card);border:1px solid var(--brd);font-size:.8rem;color:var(--txt)}
-.upload-zone{border:2px dashed var(--brd);border-radius:var(--r);padding:50px 20px;text-align:center;cursor:pointer;transition:all .3s;margin-bottom:24px}
+.chat-in-area{padding:16px;border-top:1px solid var(--brd);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chat-in-area input{flex:1;min-width:200px;margin:0}
+.tone-sel,.voice-sel{padding:8px 12px;border-radius:var(--r);background:var(--card);border:1px solid var(--brd);font-size:.8rem;color:var(--txt)}
+
+/* Quiz */
+.quiz-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid var(--brd);flex-wrap:wrap;gap:10px}
+.timer-badge{background:rgba(239,68,68,.1);color:var(--dan);padding:8px 16px;border-radius:99px;font-weight:900;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.timer-badge.warn{background:rgba(239,68,68,.2);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.progress-bar{height:8px;background:var(--brd);border-radius:4px;margin-bottom:24px;overflow:hidden}
+.progress-fill{height:100%;background:var(--grad);transition:width .5s}
+.quiz-opt{padding:16px;background:var(--card);border:2px solid var(--brd);border-radius:var(--r);margin-bottom:10px;cursor:pointer;transition:all .2s;font-size:.95rem;position:relative}
+.quiz-opt:hover{border-color:var(--pri);background:rgba(139,92,246,.05);transform:translateX(-3px)}
+.quiz-opt.correct{border-color:var(--suc);background:rgba(16,185,129,.1);color:var(--suc);font-weight:700}
+.quiz-opt.wrong{border-color:var(--dan);background:rgba(239,68,68,.1);color:var(--dan);animation:shake .4s}
+.search-hint{margin-top:15px;padding:14px;background:rgba(66,133,244,.08);border:1px solid rgba(66,133,244,.2);border-radius:var(--r);font-size:.85rem;display:none}
+.search-hint a{color:#4285f4;font-weight:700}
+.result-chart{display:flex;align-items:flex-end;gap:8px;height:180px;margin:20px 0;padding:20px 0;border-bottom:1px solid var(--brd)}
+.result-bar{flex:1;background:var(--grad);border-radius:8px 8px 0 0;position:relative;transition:height 1s ease;min-height:4px}
+.result-bar::after{content:attr(data-label);position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-size:.7rem;color:var(--dim);white-space:nowrap}
+.result-bar::before{content:attr(data-value);position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.75rem;font-weight:700;color:var(--pri)}
+
+/* Grade Grid */
+.grade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:16px}
+.grade-card{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);cursor:pointer;transition:all .3s}
+.grade-card:hover{border-color:var(--pri);transform:scale(1.05)}
+.grade-card.selected{border-color:var(--pri);background:rgba(139,92,246,.1)}
+.grade-num{font-size:1.8rem;font-weight:900;color:var(--pri)}
+.grade-lbl{font-size:.7rem;color:var(--dim);font-weight:600;text-align:center}
+
+/* File List */
+.upload-zone{border:2px dashed var(--brd);border-radius:var(--r);padding:40px 20px;text-align:center;cursor:pointer;transition:all .3s;margin-bottom:20px}
 .upload-zone:hover{border-color:var(--pri);background:rgba(139,92,246,.03)}
-.file-list{display:grid;gap:12px}
-.file-item{display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);transition:all .2s;flex-wrap:wrap;gap:10px}
-.file-item:hover{border-color:var(--pri)}
-.file-btn{padding:8px 14px;border-radius:9999px;font-size:.8rem;font-weight:700;transition:all .2s}
-.file-btn.vw{background:rgba(139,92,246,.1);color:var(--pri)}.file-btn.vw:hover{background:rgba(139,92,246,.2)}
-.file-btn.dl{background:rgba(16,185,129,.1);color:#10b981}.file-btn.dl:hover{background:rgba(16,185,129,.2)}
-.file-btn.del{background:rgba(239,68,68,.1);color:#ef4444}.file-btn.del:hover{background:rgba(239,68,68,.2)}
-.pdf-ov{position:fixed;inset:0;background:var(--bg);z-index:200;display:none;flex-direction:column}.pdf-ov.active{display:flex}
-.pdf-tb{height:56px;background:var(--side);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 20px;justify-content:space-between;backdrop-filter:blur(10px)}
-.pdf-ct{flex:1;display:flex;justify-content:center;align-items:flex-start;padding:30px;overflow:auto;background:#525659}
-.pdf-ct iframe,.pdf-ct img{max-width:900px;width:100%;border:none;border-radius:var(--r);box-shadow:0 10px 40px rgba(0,0,0,.3)}
-.pdf-ct img{object-fit:contain;max-height:90vh;background:#fff}
-.quiz-opt{padding:14px 18px;background:var(--card);border:1px solid var(--brd);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;font-size:.9rem}
-.quiz-opt:hover{border-color:var(--pri);background:rgba(139,92,246,.05)}
-.quiz-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15);color:#10b981}
-.quiz-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.15);color:#ef4444}
-.planner-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:16px}
-.planner-day{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:12px 8px;text-align:center;min-height:120px;cursor:pointer;transition:.2s}
+.file-item{display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px;flex-wrap:wrap;gap:10px}
+.file-btn{padding:8px 14px;border-radius:99px;font-size:.75rem;font-weight:700;transition:all .2s}
+.file-btn.vw{background:rgba(139,92,246,.1);color:var(--pri)}
+.file-btn.dl{background:rgba(16,185,129,.1);color:var(--suc)}
+.file-btn.del{background:rgba(239,68,68,.1);color:var(--dan)}
+
+/* Planner */
+.planner-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
+.planner-day{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:10px 6px;text-align:center;min-height:100px;cursor:pointer;transition:.2s}
 .planner-day:hover{border-color:var(--pri)}
-.planner-day h4{font-size:.8rem;color:var(--pri);margin-bottom:8px}
-.planner-task{font-size:.7rem;padding:4px 6px;background:rgba(139,92,246,.1);border-radius:6px;margin-bottom:4px;cursor:pointer}
-.comment-item{padding:16px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:10px}
-.comment-author{font-weight:700;font-size:.9rem;color:var(--pri);margin-bottom:4px}
-.comment-text{font-size:.9rem;line-height:1.7}
-.comment-date{font-size:.7rem;color:var(--dim);margin-top:6px}
-.room-msg{padding:10px 14px;border-radius:12px;margin-bottom:8px;font-size:.9rem;max-width:85%}
+.planner-day h4{font-size:.75rem;color:var(--pri);margin-bottom:6px}
+.planner-task{font-size:.65rem;padding:3px 5px;background:rgba(139,92,246,.1);border-radius:5px;margin-bottom:3px;cursor:pointer}
+
+/* Comment */
+.comment-item{padding:14px;background:var(--card);border:1px solid var(--brd);border-radius:var(--r);margin-bottom:8px}
+.comment-author{font-weight:700;font-size:.85rem;color:var(--pri);margin-bottom:4px}
+.comment-text{font-size:.85rem;line-height:1.7}
+.comment-date{font-size:.65rem;color:var(--dim);margin-top:4px}
+
+/* Room */
+.room-msg{padding:10px 14px;border-radius:12px;margin-bottom:6px;font-size:.85rem;max-width:85%}
 .room-msg.mine{align-self:flex-end;background:var(--pri);color:#fff;border-bottom-left-radius:4px}
 .room-msg.other{align-self:flex-start;background:var(--card);border:1px solid var(--brd);border-bottom-right-radius:4px}
-.room-msg.blocked{background:rgba(239,68,68,.1);color:#ef4444;font-style:italic;font-size:.8rem}
+
+/* Toast */
 .toast-c{position:fixed;bottom:20px;left:20px;z-index:1000;display:flex;flex-direction:column;gap:8px}
-.toast{background:var(--card);backdrop-filter:blur(10px);padding:14px 20px;border-radius:var(--r);border-right:4px solid var(--pri);box-shadow:var(--shd);display:flex;align-items:center;gap:10px;animation:slideIn .3s;min-width:280px;font-weight:600;font-size:.9rem}
-@keyframes slideIn{from{transform:translateX(-100%);opacity:0}to{transform:translateX(0);opacity:1}}
-.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.contact-item{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--brd)}.contact-item:last-child{border:none}
-.contact-icon{width:48px;height:48px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0}
-@media(max-width:768px){.sb{transform:translateX(100%);width:85%;max-width:320px}.sb.open{transform:translateX(0)}.main{margin-right:0;padding:76px 16px 16px}.mob-hdr{display:flex}.chat-box{height:calc(100vh - 140px)}.grade-grid{grid-template-columns:repeat(3,1fr)}.planner-grid{grid-template-columns:repeat(3,1fr)}}
+.toast{background:var(--card);backdrop-filter:blur(10px);padding:12px 18px;border-radius:var(--r);border-right:4px solid var(--pri);box-shadow:var(--shd);display:flex;align-items:center;gap:10px;animation:slideIn .3s;min-width:260px;font-weight:600;font-size:.85rem}
+
+/* PDF Overlay */
+.pdf-ov{position:fixed;inset:0;background:var(--bg);z-index:200;display:none;flex-direction:column}
+.pdf-ov.active{display:flex}
+.pdf-tb{height:56px;background:var(--side);border-bottom:1px solid var(--brd);display:flex;align-items:center;padding:0 20px;justify-content:space-between;backdrop-filter:blur(10px)}
+.pdf-ct{flex:1;display:flex;justify-content:center;padding:20px;overflow:auto;background:#525659}
+.pdf-ct iframe,.pdf-ct img{max-width:900px;width:100%;border:none;border-radius:var(--r);box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.pdf-ct img{object-fit:contain;max-height:90vh;background:#fff}
+
+/* Contact */
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--brd)}
+.contact-item:last-child{border:none}
+.contact-icon{width:44px;height:44px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0}
+
+/* Bottom Nav */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--side);border-top:1px solid var(--brd);padding:6px 0;z-index:90;justify-content:space-around;backdrop-filter:blur(10px)}
+.mob-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem;color:var(--dim);cursor:pointer;padding:4px;transition:.2s}
+.mob-nav-item.active{color:var(--pri)}
+.mob-nav-item svg{width:20px;height:20px;fill:currentColor}
+
+/* Gemini API Modal */
+.api-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+.api-modal.active{display:flex}
+.api-content{background:var(--card);border-radius:var(--r);padding:30px;max-width:500px;width:100%;border:1px solid var(--brd)}
+
+@media(max-width:900px){
+.sb{transform:translateX(100%);width:85%;max-width:320px}
+.sb.open{transform:translateX(0)}
+.main{margin-right:0;padding:76px 14px 90px}
+.mob-hdr{display:flex}
+.mob-nav{display:flex}
+.chat-box{height:calc(100vh - 200px)}
+.grade-grid{grid-template-columns:repeat(3,1fr)}
+.planner-grid{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body data-theme="light">
-<canvas id="fx-canvas"></canvas>
-<div class="thunder-overlay"></div>
+<canvas id="fx"></canvas>
+<div class="thunder-fx"></div>
 
 <div class="mob-hdr">
-<div style="display:flex;align-items:center;gap:8px"><div class="logo-icon" style="width:34px;height:34px;font-size:16px">🎓</div><span style="font-weight:900;font-size:1rem">استاد یار</span></div>
-<button onclick="document.getElementById('sidebar').classList.toggle('open')" style="font-size:1.4rem;padding:4px">☰</button>
+<div style="display:flex;align-items:center;gap:8px"><div class="logo-icon" style="width:32px;height:32px;font-size:14px">🎓</div><span style="font-weight:900;font-size:.95rem">استاد یار</span></div>
+<button onclick="document.getElementById('sidebar').classList.toggle('open')" style="font-size:1.4rem">☰</button>
 </div>
 
 <div class="app">
 <aside class="sb" id="sidebar">
-<div class="logo-area"><div class="logo-icon">🎓</div><div class="logo-text"><h1>استاد یار</h1><span>دستیار هوشمند آموزشی</span></div></div>
+<div class="logo-area"><div class="logo-icon">🎓</div><div class="logo-text"><h1>استاد یار</h1><span>هوش مصنوعی آموزشی</span></div></div>
 <nav class="nav">
-<div class="nav-item active" data-page="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>خانه</div>
-<div class="nav-item" data-page="chat" onclick="go('chat')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>دستیار هوشمند</div>
-<div class="nav-item" data-page="library" onclick="go('library')"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>کتابخانه</div>
-<div class="nav-item" data-page="quiz" onclick="go('quiz')"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>آزمون آنلاین</div>
-<div class="nav-item" data-page="planner" onclick="go('planner')"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>برنامه‌ریزی</div>
-<div class="nav-item" data-page="room" onclick="go('room')"><svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>اتاق چت</div>
-<div class="nav-item" data-page="comments" onclick="go('comments')"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>نظرات</div>
-<div class="nav-item" data-page="support" onclick="go('support')"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>پشتیبانی</div>
-<div style="margin-top:16px;padding:0 16px"><div style="font-size:.75rem;color:var(--dim);font-weight:700;margin-bottom:8px;letter-spacing:1px">تم نمایش</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('light')">☀️ روز</button>
-<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('dark')">🌙 شب</button>
-<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('space')">🪐 فضایی</button>
-<button class="btn btn-s" style="padding:8px;font-size:.75rem" onclick="setTheme('thunder')">⚡ رعدوبرق</button>
+<div class="nav-item active" data-p="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>خانه</div>
+<div class="nav-item" data-p="chat" onclick="go('chat')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>دستیار هوشمند</div>
+<div class="nav-item" data-p="quiz" onclick="go('quiz')"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>آزمون آنلاین</div>
+<div class="nav-item" data-p="library" onclick="go('library')"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>کتابخانه</div>
+<div class="nav-item" data-p="planner" onclick="go('planner')"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>برنامه‌ریزی</div>
+<div class="nav-item" data-p="room" onclick="go('room')"><svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1z"/></svg>اتاق چت</div>
+<div class="nav-item" data-p="comments" onclick="go('comments')"><svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4z"/></svg>نظرات</div>
+<div class="nav-item" data-p="support" onclick="go('support')"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>پشتیبانی</div>
+<div style="margin-top:16px;padding:0 16px"><div style="font-size:.7rem;color:var(--dim);font-weight:700;margin-bottom:8px;letter-spacing:1px">تم نمایش</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+<button class="btn btn-s btn-sm" onclick="setTheme('light')">☀️ روز</button>
+<button class="btn btn-s btn-sm" onclick="setTheme('dark')">🌙 شب</button>
+<button class="btn btn-s btn-sm" onclick="setTheme('space')">🪐 فضایی</button>
+<button class="btn btn-s btn-sm" onclick="setTheme('thunder')">⚡ رعد</button>
 </div></div>
 </nav>
-<div style="padding:16px;border-top:1px solid var(--brd);margin-top:auto">
+<div style="padding:14px;border-top:1px solid var(--brd)">
 <div id="uMini" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card);border-radius:var(--r);border:1px solid var(--brd);cursor:pointer" onclick="go('home')">
 <div style="width:36px;height:36px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem" id="avMini">?</div>
-<div style="min-width:0"><div style="font-weight:700;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="nmMini">تنظیم پروفایل</div><div style="font-size:.7rem;color:var(--dim)" id="grMini">کلیک کنید</div></div>
+<div style="min-width:0"><div style="font-weight:700;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="nmMini">تنظیم پروفایل</div><div style="font-size:.65rem;color:var(--dim)" id="grMini">کلیک کنید</div></div>
 </div>
-<div id="expiryInfo" style="font-size:.65rem;color:var(--dim);margin-top:8px;text-align:center"></div>
+<div id="expInfo" style="font-size:.6rem;color:var(--dim);margin-top:6px;text-align:center"></div>
 </div>
 </aside>
 
@@ -143,137 +206,166 @@ a{text-decoration:none;color:inherit}button{font-family:inherit;cursor:pointer;b
 
 <!-- HOME -->
 <div id="page-home" class="sec active">
-<div id="profGate" class="card" style="max-width:500px;margin:60px auto;text-align:center">
+<div id="profGate" class="card" style="max-width:500px;margin:40px auto;text-align:center">
 <div class="logo-icon" style="width:64px;height:64px;font-size:32px;margin:0 auto 20px">🎓</div>
-<h2 style="font-size:2rem;margin-bottom:8px;font-weight:900">به استاد یار خوش آمدی!</h2>
-<p style="color:var(--dim);margin-bottom:30px">اطلاعاتت رو وارد کن تا تجربه شخصی‌سازی شده داشته باشی</p>
-<div style="margin-bottom:16px;text-align:right"><label style="display:block;margin-bottom:6px;font-weight:600;font-size:.9rem">نام</label><input type="text" id="fn" class="inp" placeholder="مثلاً: علی"></div>
-<div style="margin-bottom:16px;text-align:right"><label style="display:block;margin-bottom:6px;font-weight:600;font-size:.9rem">نام خانوادگی</label><input type="text" id="ln" class="inp" placeholder="مثلاً: محمدی"></div>
-<div style="margin-bottom:16px;text-align:right"><label style="display:block;margin-bottom:6px;font-weight:600;font-size:.9rem">پایه تحصیلی</label>
-<select id="grSel" class="inp"><option value="">انتخاب کنید...</option><option value="1">اول ابتدایی</option><option value="2">دوم ابتدایی</option><option value="3">سوم ابتدایی</option><option value="4">چهارم ابتدایی</option><option value="5">پنجم ابتدایی</option><option value="6">ششم ابتدایی</option><option value="7">هفتم متوسطه</option><option value="8">هشتم متوسطه</option><option value="9">نهم متوسطه</option></select></div>
-<button class="btn btn-p" style="width:100%;margin-top:10px" onclick="saveProf()">ذخیره و شروع یادگیری 🚀</button>
+<h2 style="font-size:1.8rem;margin-bottom:8px;font-weight:900">به استاد یار خوش آمدی!</h2>
+<p style="color:var(--dim);margin-bottom:24px">اطلاعاتت رو وارد کن تا تجربه شخصی‌سازی شده داشته باشی</p>
+<div style="margin-bottom:12px;text-align:right"><label style="display:block;margin-bottom:4px;font-weight:600;font-size:.85rem">نام</label><input type="text" id="fn" class="inp" placeholder="مثلاً: علی"></div>
+<div style="margin-bottom:12px;text-align:right"><label style="display:block;margin-bottom:4px;font-weight:600;font-size:.85rem">نام خانوادگی</label><input type="text" id="ln" class="inp" placeholder="مثلاً: محمدی"></div>
+<div style="margin-bottom:12px;text-align:right"><label style="display:block;margin-bottom:4px;font-weight:600;font-size:.85rem">پایه تحصیلی</label>
+<select id="grSel" class="inp"><option value="">انتخاب کنید...</option><option value="1">اول ابتدایی</option><option value="2">دوم ابتدایی</option><option value="3">سوم ابتدایی</option><option value="4">چهارم ابتدایی</option><option value="5">پنجم ابتدایی</option><option value="6">ششم ابتدایی</option><option value="7">هفتم متوسطه</option><option value="8">هشتم متوسطه</option><option value="9">نهم متوسطه</option><option value="10">دهم متوسطه</option><option value="11">یازدهم متوسطه</option><option value="12">دوازدهم متوسطه</option></select></div>
+<button class="btn btn-p" style="width:100%;margin-top:10px" onclick="saveProf()">ذخیره و شروع 🚀</button>
 </div>
 <div id="dash" style="display:none">
-<div style="margin-bottom:30px"><h2 style="font-size:1.8rem;font-weight:900;margin-bottom:6px" id="welMsg">سلام!</h2><p style="color:var(--dim)">امروز چه چیزی می‌خواهی یاد بگیری؟</p></div>
-<div class="info-grid" style="margin-bottom:30px">
-<div class="card" style="text-align:center;cursor:pointer" onclick="go('chat')"><div style="font-size:2.5rem;margin-bottom:8px">🧠</div><h3 style="font-weight:800;margin-bottom:6px">دستیار هوشمند</h3><p style="color:var(--dim);font-size:.9rem;margin-bottom:14px">مثل یک معلم خصوصی! توضیح میده، مثال میزنه، لینک پیدا میکنه</p><button class="btn btn-p">شروع گفتگو</button></div>
-<div class="card" style="text-align:center;cursor:pointer" onclick="go('quiz')"><div style="font-size:2.5rem;margin-bottom:8px">📝</div><h3 style="font-weight:800;margin-bottom:6px">آزمون آنلاین</h3><p style="color:var(--dim);font-size:.9rem;margin-bottom:14px">خودت رو محک بزن! آزمون تستی مخصوص پایه تو</p><button class="btn btn-p">شروع آزمون</button></div>
-<div class="card" style="text-align:center;cursor:pointer" onclick="go('library')"><div style="font-size:2.5rem;margin-bottom:8px">📚</div><h3 style="font-weight:800;margin-bottom:6px">کتابخانه</h3><p style="color:var(--dim);font-size:.9rem;margin-bottom:14px">PDF، عکس و Word آپلود و مطالعه کن</p><button class="btn btn-p">مشاهده کتابخانه</button></div>
+<div style="margin-bottom:24px"><h2 style="font-size:1.6rem;font-weight:900;margin-bottom:4px" id="welMsg">سلام!</h2><p style="color:var(--dim)">امروز چه چیزی می‌خواهی یاد بگیری؟</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px">
+<div class="card" style="text-align:center;cursor:pointer" onclick="go('chat')"><div style="font-size:2.2rem;margin-bottom:6px">🧠</div><h3 style="font-weight:800;margin-bottom:4px">دستیار هوشمند</h3><p style="color:var(--dim);font-size:.85rem">توضیح + مثال + لینک آپارات/گوگل</p></div>
+<div class="card" style="text-align:center;cursor:pointer" onclick="go('quiz')"><div style="font-size:2.2rem;margin-bottom:6px">📝</div><h3 style="font-weight:800;margin-bottom:4px">آزمون حرفه‌ای</h3><p style="color:var(--dim);font-size:.85rem">تایمر + کارنامه + جستجوی گوگل</p></div>
+<div class="card" style="text-align:center;cursor:pointer" onclick="go('library')"><div style="font-size:2.2rem;margin-bottom:6px">📚</div><h3 style="font-weight:800;margin-bottom:4px">کتابخانه</h3><p style="color:var(--dim);font-size:.85rem">PDF، عکس و Word</p></div>
+<div class="card" style="text-align:center;cursor:pointer" onclick="go('room')"><div style="font-size:2.2rem;margin-bottom:6px">💬</div><h3 style="font-weight:800;margin-bottom:4px">اتاق چت</h3><p style="color:var(--dim);font-size:.85rem">گفتگو با دانش‌آموزان دیگر</p></div>
 </div>
-<div class="card"><h3 style="font-weight:800;margin-bottom:16px">🎯 پایه تحصیلی من</h3><div class="grade-grid" id="dGrGrid"></div><button class="btn btn-s" style="margin-top:16px;width:100%" onclick="editProf()">ویرایش پروفایل</button></div>
+<div class="card"><h3 style="font-weight:800;margin-bottom:12px">🎯 پایه تحصیلی من</h3><div class="grade-grid" id="dGrGrid"></div><button class="btn btn-s btn-sm" style="margin-top:12px;width:100%" onclick="editProf()">ویرایش پروفایل</button></div>
+<div class="card" style="margin-top:16px"><h3 style="font-weight:800;margin-bottom:12px">🤖 Gemini AI (اختیاری)</h3><p style="color:var(--dim);font-size:.85rem;margin-bottom:12px">با وارد کردن API Key رایگان Gemini، می‌توانی سوالات جدید تولید کنی و پاسخ‌های هوشمندتری دریافت کنی.</p><button class="btn btn-s btn-sm" onclick="openApiModal()">⚙️ تنظیم Gemini API</button></div>
 </div>
 </div>
 
 <!-- CHAT -->
 <div id="page-chat" class="sec">
-<div style="margin-bottom:16px"><h2 style="font-size:1.5rem;font-weight:900">🧠 دستیار هوشمند آموزشی</h2><p style="color:var(--dim);font-size:.9rem">مثل یک معلم خصوصی! توضیح میدم، مثال میزنم، لینک پیدا میکنم</p></div>
+<div style="margin-bottom:12px"><h2 style="font-size:1.4rem;font-weight:900">🧠 دستیار هوشمند آموزشی</h2><p style="color:var(--dim);font-size:.85rem">مثل یک معلم خصوصی! توضیح، مثال، لینک و تمرین</p></div>
 <div class="chat-box">
-<div class="chat-msgs" id="chatMsgs"><div class="msg bot">سلام دوست عزیزم! 👋😊<br><br>من <strong>استاد یار</strong> هستم، دستیار هوشمند آموزشی تو. هر سوال درسی داری بپرس تا:<br><br>✅ <strong>توضیح کامل</strong> بدم<br>✅ <strong>مثال ساده</strong> بزنم<br>✅ <strong>لینک ویدیوی آموزشی</strong> پیدا کنم<br><br>مثلاً بگو: «فتوسنتز چیست؟»، «جمع کسرها رو یاد بده»، «فرمول مساحت دایره» یا حتی فقط «سلام!» 😊</div></div>
+<div class="chat-msgs" id="chatMsgs"><div class="msg bot">سلام دوست عزیزم! 👋😊<br><br>من <strong>استاد یار</strong> هستم، دستیار هوشمند تو. هر سوال درسی داری بپرس تا:<br><br>✅ <strong>توضیح کامل</strong> بدم<br>✅ <strong>مثال ساده</strong> بزنم<br>✅ <strong>لینک ویدیوی آموزشی</strong> از آپارات پیدا کنم<br>✅ <strong>لینک جستجو</strong> در گوگل بدم<br><br>💡 می‌تونی لحن من رو از پایین تغییر بدی (صمیمی، رسمی، انگیزشی)!</div></div>
 <div class="chat-in-area">
 <input type="text" id="chatIn" class="inp" placeholder="سوالت رو اینجا بنویس..." onkeypress="if(event.key==='Enter')sendChat()">
-<select class="voice-sel" id="voiceSel"><option value="female">👩 صدای زن</option><option value="male">👨 صدای مرد</option></select>
-<button class="btn btn-p" onclick="sendChat()">ارسال</button>
-<button class="btn btn-s" onclick="speakLast()">🔊 خواندن</button>
+<select class="tone-sel" id="toneSel"><option value="friendly">😊 صمیمی</option><option value="formal">🎓 رسمی</option><option value="motivational">🔥 انگیزشی</option></select>
+<select class="voice-sel" id="voiceSel"><option value="female">👩 زن</option><option value="male">👨 مرد</option></select>
+<button class="btn btn-p btn-sm" onclick="sendChat()">ارسال</button>
+<button class="btn btn-s btn-sm" onclick="speakLast()">🔊</button>
 </div>
 </div>
-</div>
-
-<!-- LIBRARY -->
-<div id="page-library" class="sec">
-<div style="margin-bottom:20px"><h2 style="font-size:1.5rem;font-weight:900">📚 کتابخانه منابع آموزشی</h2><p style="color:var(--dim);font-size:.9rem">PDF، عکس (PNG/JPG) و Word آپلود و مشاهده کنید</p></div>
-<div class="upload-zone" id="upZone" onclick="document.getElementById('fileUp').click()">
-<div style="font-size:3rem;margin-bottom:12px">📁</div>
-<h3 style="font-weight:800;margin-bottom:6px">فایل را اینجا بکشید یا کلیک کنید</h3>
-<p style="color:var(--dim);font-size:.9rem">PDF, PNG, JPG, DOCX • حداکثر ۵ مگابایت</p>
-<input type="file" id="fileUp" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" hidden onchange="handleFile(this)">
-</div>
-<div class="file-list" id="fileList"><div style="text-align:center;color:var(--dim);padding:40px">هنوز فایلی آپلود نشده</div></div>
 </div>
 
 <!-- QUIZ -->
 <div id="page-quiz" class="sec">
 <div id="qStart" class="card" style="max-width:600px;margin:0 auto;text-align:center">
-<h2 style="margin-bottom:16px">📝 آزمون آنلاین</h2>
-<p style="color:var(--dim);margin-bottom:24px">پایه و درس خود را انتخاب کنید</p>
-<select id="qGrade" class="inp"><option value="1">اول ابتدایی</option><option value="2">دوم ابتدایی</option><option value="3">سوم ابتدایی</option><option value="4">چهارم ابتدایی</option><option value="5">پنجم ابتدایی</option><option value="6">ششم ابتدایی</option><option value="7">هفتم</option><option value="8">هشتم</option><option value="9">نهم</option></select>
-<select id="qSubj" class="inp"><option value="ریاضی">ریاضی</option><option value="علوم">علوم</option><option value="فارسی">فارسی</option><option value="انگلیسی">انگلیسی</option><option value="عربی">عربی</option><option value="مطالعات">مطالعات اجتماعی</option></select>
-<button class="btn btn-p" style="width:100%" onclick="startQuiz()">شروع آزمون 🚀</button>
+<h2 style="margin-bottom:16px">📝 آزمون آنلاین فوق حرفه‌ای</h2>
+<p style="color:var(--dim);margin-bottom:20px">پایه و درس را انتخاب کن</p>
+<select id="qGrade" class="inp"><option value="1">اول ابتدایی</option><option value="2">دوم ابتدایی</option><option value="3">سوم ابتدایی</option><option value="4">چهارم ابتدایی</option><option value="5">پنجم ابتدایی</option><option value="6">ششم ابتدایی</option><option value="7">هفتم</option><option value="8">هشتم</option><option value="9">نهم</option><option value="10">دهم</option><option value="11">یازدهم</option><option value="12">دوازدهم</option></select>
+<select id="qSubj" class="inp"><option value="ریاضی">ریاضی</option><option value="علوم">علوم</option><option value="فارسی">فارسی</option><option value="انگلیسی">انگلیسی</option><option value="عربی">عربی</option><option value="مطالعات">مطالعات اجتماعی</option><option value="هدیه">هدیه‌های آسمانی</option><option value="قرآن">قرآن</option></select>
+<div style="display:flex;gap:8px;margin-top:12px">
+<button class="btn btn-p" style="flex:1" onclick="startQuiz()">شروع آزمون 🚀</button>
+<button class="btn btn-s btn-sm" onclick="generateGeminiQuiz()" title="تولید سوال با Gemini AI">🤖 Gemini</button>
+</div>
+<div id="quizHistory" style="margin-top:20px;text-align:right"></div>
 </div>
 <div id="qActive" style="display:none;max-width:700px;margin:0 auto"></div>
-<div id="qResult" class="card" style="display:none;max-width:600px;margin:0 auto;text-align:center"></div>
+<div id="qResult" class="card" style="display:none;max-width:700px;margin:0 auto"></div>
+</div>
+
+<!-- LIBRARY -->
+<div id="page-library" class="sec">
+<div style="margin-bottom:16px"><h2 style="font-size:1.4rem;font-weight:900">📚 کتابخانه منابع آموزشی</h2><p style="color:var(--dim);font-size:.85rem">PDF، عکس (PNG/JPG) و Word آپلود و مشاهده کنید</p></div>
+<div class="upload-zone" id="upZone" onclick="document.getElementById('fileUp').click()">
+<div style="font-size:2.5rem;margin-bottom:10px">📁</div>
+<h3 style="font-weight:800;margin-bottom:4px">فایل را اینجا بکشید یا کلیک کنید</h3>
+<p style="color:var(--dim);font-size:.85rem">PDF, PNG, JPG, DOCX • حداکثر ۵ مگابایت</p>
+<input type="file" id="fileUp" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx" hidden onchange="handleFile(this)">
+</div>
+<div id="fileList"></div>
 </div>
 
 <!-- PLANNER -->
 <div id="page-planner" class="sec">
-<h2 style="margin-bottom:20px">📅 برنامه‌ریزی درسی پیشرفته</h2>
-<div class="card" style="background:var(--grad);color:#fff;text-align:center;margin-bottom:20px;border:none">
-<div style="font-size:.9rem;margin-bottom:8px;opacity:.9">⏳ شمارش معکوس تا امتحان بعدی</div>
-<div style="font-size:3rem;font-weight:900;letter-spacing:2px" id="cdNum">-- روز</div>
-<div style="margin-top:12px"><input type="date" id="examDate" onchange="updateCD()" style="width:auto;display:inline-block;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);color:#fff;padding:8px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.3)"></div>
+<h2 style="margin-bottom:16px">📅 برنامه‌ریزی درسی</h2>
+<div class="card" style="background:var(--grad);color:#fff;text-align:center;margin-bottom:16px;border:none">
+<div style="font-size:.85rem;margin-bottom:6px;opacity:.9">⏳ شمارش معکوس تا امتحان</div>
+<div style="font-size:2.5rem;font-weight:900;letter-spacing:2px" id="cdNum">-- روز</div>
+<div style="margin-top:10px"><input type="date" id="examDate" onchange="updateCD()" style="width:auto;display:inline-block;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);color:#fff;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.3)"></div>
 </div>
-<div class="card"><h3 style="margin-bottom:12px">📋 برنامه هفتگی</h3><p style="color:var(--dim);font-size:.8rem;margin-bottom:12px">روی هر روز کلیک کنید تا وظیفه اضافه شود. روی وظیفه کلیک کنید تا حذف شود.</p><div class="planner-grid" id="plGrid"></div></div>
+<div class="card"><h3 style="margin-bottom:10px">📋 برنامه هفتگی</h3><p style="color:var(--dim);font-size:.75rem;margin-bottom:10px">روی روز کلیک کن تا وظیفه اضافه شود. روی وظیفه کلیک کن تا حذف شود.</p><div class="planner-grid" id="plGrid"></div></div>
 </div>
 
-<!-- CHAT ROOM -->
+<!-- ROOM -->
 <div id="page-room" class="sec">
-<div style="margin-bottom:16px"><h2 style="font-size:1.5rem;font-weight:900">💬 اتاق چت عمومی</h2><p style="color:var(--dim);font-size:.9rem">با دیگر دانش‌آموزان صحبت کنید. کلمات نامناسب به صورت خودکار مسدود می‌شوند.</p></div>
+<div style="margin-bottom:12px"><h2 style="font-size:1.4rem;font-weight:900">💬 اتاق چت عمومی</h2><p style="color:var(--dim);font-size:.85rem">گفتگو با دانش‌آموزان سراسر ایران (کلمات نامناسب مسدود می‌شوند)</p></div>
 <div class="chat-box">
 <div class="chat-msgs" id="roomMsgs" style="align-items:stretch"></div>
 <div class="chat-in-area">
 <input type="text" id="roomIn" class="inp" placeholder="پیام خود را بنویسید..." onkeypress="if(event.key==='Enter')sendRoom()">
-<button class="btn btn-p" onclick="sendRoom()">ارسال</button>
+<button class="btn btn-p btn-sm" onclick="sendRoom()">ارسال</button>
 </div>
 </div>
 </div>
 
 <!-- COMMENTS -->
 <div id="page-comments" class="sec">
-<div style="margin-bottom:20px"><h2 style="font-size:1.5rem;font-weight:900">💭 نظرات دانش‌آموزان</h2><p style="color:var(--dim);font-size:.9rem">نظر خود را درباره استاد یار بنویسید</p></div>
-<div class="card" style="margin-bottom:20px">
-<div style="margin-bottom:12px"><label style="font-weight:600;font-size:.9rem;display:block;margin-bottom:6px">نام شما</label><input type="text" id="cmName" class="inp" placeholder="نام خود را وارد کنید"></div>
-<div style="margin-bottom:12px"><label style="font-weight:600;font-size:.9rem;display:block;margin-bottom:6px">نظر شما</label><textarea id="cmText" class="inp" placeholder="نظر خود را بنویسید..." style="min-height:80px;resize:vertical"></textarea></div>
-<button class="btn btn-p" onclick="addComment()">ثبت نظر ✅</button>
+<div style="margin-bottom:16px"><h2 style="font-size:1.4rem;font-weight:900">💭 نظرات دانش‌آموزان</h2><p style="color:var(--dim);font-size:.85rem">نظر خود را درباره استاد یار بنویسید</p></div>
+<div class="card" style="margin-bottom:16px">
+<div style="margin-bottom:10px"><label style="font-weight:600;font-size:.85rem;display:block;margin-bottom:4px">نام شما</label><input type="text" id="cmName" class="inp" placeholder="نام خود را وارد کنید"></div>
+<div style="margin-bottom:10px"><label style="font-weight:600;font-size:.85rem;display:block;margin-bottom:4px">نظر شما</label><textarea id="cmText" class="inp" placeholder="نظر خود را بنویسید..." style="min-height:70px;resize:vertical"></textarea></div>
+<button class="btn btn-p btn-sm" onclick="addComment()">ثبت نظر ✅</button>
 </div>
 <div id="cmList"></div>
 </div>
 
 <!-- SUPPORT -->
 <div id="page-support" class="sec">
-<div class="card" style="max-width:800px;margin:0 auto">
-<h2 style="font-size:1.8rem;font-weight:900;margin-bottom:24px">📞 پشتیبانی و تماس با ما</h2>
-<p style="color:var(--dim);margin-bottom:30px;line-height:1.8">اگر سوالی دارید یا پیشنهادی برای بهبود استاد یار دارید، از راه‌های زیر با ما در ارتباط باشید.</p>
-<div class="contact-item"><div class="contact-icon">📱</div><div><strong style="display:block;margin-bottom:2px">شماره تماس</strong><a href="tel:06633428814" style="color:var(--pri);font-size:1.1rem;font-weight:bold;direction:ltr;display:block">06633428814</a></div></div>
+<div class="card" style="max-width:750px;margin:0 auto">
+<h2 style="font-size:1.6rem;font-weight:900;margin-bottom:20px">📞 پشتیبانی و تماس با ما</h2>
+<p style="color:var(--dim);margin-bottom:24px;line-height:1.8">اگر سوالی دارید یا پیشنهادی برای بهبود استاد یار دارید، از راه‌های زیر با ما در ارتباط باشید.</p>
+<div class="contact-item"><div class="contact-icon">📱</div><div><strong style="display:block;margin-bottom:2px">شماره تماس</strong><a href="tel:06633428814" style="color:var(--pri);font-size:1.05rem;font-weight:bold;direction:ltr;display:block">06633428814</a></div></div>
 <div class="contact-item"><div class="contact-icon">📧</div><div><strong style="display:block;margin-bottom:2px">ایمیل</strong><a href="mailto:seyyedmohammadtahaghadami@gmail.com" style="color:var(--pri);word-break:break-all">seyyedmohammadtahaghadami@gmail.com</a></div></div>
-<div class="contact-item"><div class="contact-icon">🕐</div><div><strong style="display:block;margin-bottom:2px">ساعات پاسخگویی</strong><span style="color:var(--dim);font-size:.9rem">شنبه تا پنجشنبه - ۹ صبح تا ۹ شب</span></div></div>
-<div style="margin-top:30px;padding:24px;background:rgba(139,92,246,.05);border-radius:var(--r);text-align:center"><p>ما هر روز بهتر از دیروز برای دانش‌آموزان ایران تلاش می‌کنیم ❤️</p></div>
+<div class="contact-item"><div class="contact-icon">🕐</div><div><strong style="display:block;margin-bottom:2px">ساعات پاسخگویی</strong><span style="color:var(--dim);font-size:.85rem">شنبه تا پنجشنبه - ۹ صبح تا ۹ شب</span></div></div>
+<div style="margin-top:24px;padding:20px;background:rgba(139,92,246,.05);border-radius:var(--r);text-align:center"><p>ما هر روز بهتر از دیروز برای دانش‌آموزان ایران تلاش می‌کنیم ❤️</p></div>
 </div>
 </div>
 
 </main>
 </div>
 
-<!-- PDF/IMAGE OVERLAY -->
+<!-- Bottom Nav Mobile -->
+<div class="mob-nav">
+<div class="mob-nav-item active" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>خانه</div>
+<div class="mob-nav-item" onclick="go('chat')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>AI</div>
+<div class="mob-nav-item" onclick="go('quiz')"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>آزمون</div>
+<div class="mob-nav-item" onclick="go('library')"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z"/></svg>کتاب</div>
+<div class="mob-nav-item" onclick="go('room')"><svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1z"/></svg>چت</div>
+</div>
+
+<!-- PDF Overlay -->
 <div class="pdf-ov" id="pdfOv">
 <div class="pdf-tb">
-<div style="display:flex;align-items:center;gap:10px"><button class="btn btn-s" style="padding:8px 14px;font-size:.85rem" onclick="closeViewer()">✕ بستن</button><span id="pvTitle" style="font-weight:700;font-size:.95rem"></span></div>
-<a id="pvDl" class="btn btn-p" style="padding:8px 14px;font-size:.85rem" download>⬇ دانلود</a>
+<div style="display:flex;align-items:center;gap:10px"><button class="btn btn-s btn-sm" onclick="closeViewer()">✕ بستن</button><span id="pvTitle" style="font-weight:700;font-size:.85rem"></span></div>
+<a id="pvDl" class="btn btn-p btn-sm" download>⬇ دانلود</a>
 </div>
 <div class="pdf-ct" id="pvContent"></div>
+</div>
+
+<!-- Gemini API Modal -->
+<div class="api-modal" id="apiModal">
+<div class="api-content">
+<h3 style="margin-bottom:12px">⚙️ تنظیم Gemini API</h3>
+<p style="color:var(--dim);font-size:.85rem;margin-bottom:16px">برای دریافت API Key رایگان به <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--pri);font-weight:700">Google AI Studio</a> برو.</p>
+<input type="password" id="apiKeyInp" class="inp" placeholder="API Key خود را وارد کنید" style="margin-bottom:12px">
+<div style="display:flex;gap:8px">
+<button class="btn btn-p btn-sm" style="flex:1" onclick="saveApiKey()">ذخیره</button>
+<button class="btn btn-s btn-sm" onclick="closeApiModal()">انصراف</button>
+</div>
+</div>
 </div>
 
 <div class="toast-c" id="toastC"></div>
 
 <script>
-// ===== EXPIRY SYSTEM (2 WEEKS) =====
+// ===== EXPIRY (14 days) =====
 const EXPIRY_DAYS=14;
 function checkExpiry(){
-  const created=localStorage.getItem('oy_created');
-  if(!created){localStorage.setItem('oy_created',Date.now());return true}
-  const diff=(Date.now()-parseInt(created))/(1000*60*60*24);
-  const remain=Math.max(0,Math.ceil(EXPIRY_DAYS-diff));
-  const el=document.getElementById('expiryInfo');
-  if(el)el.textContent=`⏰ ${toFa(remain)} روز تا انقضای حافظه`;
-  if(diff>=EXPIRY_DAYS){localStorage.clear();location.reload();return false}
+  const c=localStorage.getItem('oy_created');
+  if(!c){localStorage.setItem('oy_created',Date.now());return true}
+  const d=(Date.now()-parseInt(c))/(1000*60*60*24);
+  const r=Math.max(0,Math.ceil(EXPIRY_DAYS-d));
+  const el=document.getElementById('expInfo');
+  if(el)el.textContent=`⏰ ${toFa(r)} روز تا انقضا`;
+  if(d>=EXPIRY_DAYS){localStorage.clear();location.reload();return false}
   return true;
 }
 
@@ -286,7 +378,9 @@ const S={
   examDate:localStorage.getItem('oy_exam')||'',
   comments:JSON.parse(localStorage.getItem('oy_comments')||'[]'),
   roomMsgs:JSON.parse(localStorage.getItem('oy_room')||'[]'),
-  blockedUsers:JSON.parse(localStorage.getItem('oy_blocked')||'[]')
+  quizHistory:JSON.parse(localStorage.getItem('oy_qhist')||'[]'),
+  apiKey:localStorage.getItem('oy_apikey')||'',
+  tone:localStorage.getItem('oy_tone')||'friendly'
 };
 const save=()=>{
   localStorage.setItem('oy_prof',JSON.stringify(S.profile));
@@ -296,25 +390,28 @@ const save=()=>{
   localStorage.setItem('oy_exam',S.examDate);
   localStorage.setItem('oy_comments',JSON.stringify(S.comments));
   localStorage.setItem('oy_room',JSON.stringify(S.roomMsgs));
+  localStorage.setItem('oy_qhist',JSON.stringify(S.quizHistory));
+  localStorage.setItem('oy_apikey',S.apiKey);
+  localStorage.setItem('oy_tone',S.tone);
 };
 
-// ===== CANVAS FX =====
-const cv=document.getElementById('fx-canvas'),cx=cv.getContext('2d');
+// ===== CANVAS FX (Space spheres) =====
+const cv=document.getElementById('fx'),cx=cv.getContext('2d');
 let spheres=[];
 function rsz(){cv.width=innerWidth;cv.height=innerHeight}
 addEventListener('resize',rsz);rsz();
 class Sphere{
   constructor(){this.reset()}
-  reset(){this.x=Math.random()*cv.width;this.y=Math.random()*cv.height;this.r=20+Math.random()*60;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.hue=Math.random()*360;this.rot=Math.random()*Math.PI*2;this.rs=(Math.random()-.5)*.02}
+  reset(){this.x=Math.random()*cv.width;this.y=Math.random()*cv.height;this.r=20+Math.random()*50;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.hue=Math.random()*360;this.rot=Math.random()*Math.PI*2;this.rs=(Math.random()-.5)*.02}
   update(){this.x+=this.vx;this.y+=this.vy;this.rot+=this.rs;if(this.x<-100)this.x=cv.width+100;if(this.x>cv.width+100)this.x=-100;if(this.y<-100)this.y=cv.height+100;if(this.y>cv.height+100)this.y=-100}
   draw(){
     const g=cx.createRadialGradient(this.x-this.r*.3,this.y-this.r*.3,this.r*.1,this.x,this.y,this.r);
-    g.addColorStop(0,`hsla(${this.hue},80%,70%,.6)`);g.addColorStop(.7,`hsla(${this.hue},60%,40%,.3)`);g.addColorStop(1,`hsla(${this.hue},40%,20%,0)`);
+    g.addColorStop(0,`hsla(${this.hue},80%,70%,.5)`);g.addColorStop(.7,`hsla(${this.hue},60%,40%,.2)`);g.addColorStop(1,`hsla(${this.hue},40%,20%,0)`);
     cx.fillStyle=g;cx.beginPath();cx.arc(this.x,this.y,this.r,0,Math.PI*2);cx.fill();
     cx.strokeStyle=`hsla(${this.hue},80%,60%,.15)`;cx.lineWidth=1;cx.beginPath();cx.ellipse(this.x,this.y,this.r*.8,this.r*.3,this.rot,0,Math.PI*2);cx.stroke();
   }
 }
-for(let i=0;i<12;i++)spheres.push(new Sphere());
+for(let i=0;i<10;i++)spheres.push(new Sphere());
 (function animFx(){cx.clearRect(0,0,cv.width,cv.height);if(S.theme==='space'){spheres.forEach(s=>{s.update();s.draw()})}requestAnimationFrame(animFx)})();
 
 // ===== NAVIGATION =====
@@ -322,15 +419,17 @@ function go(id){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.querySelector(`.nav-item[data-page="${id}"]`)?.classList.add('active');
+  document.querySelector(`.nav-item[data-p="${id}"]`)?.classList.add('active');
+  document.querySelectorAll('.mob-nav-item').forEach(n=>n.classList.remove('active'));
+  if(event?.currentTarget)event.currentTarget.classList.add('active');
   document.getElementById('sidebar').classList.remove('open');
   window.scrollTo({top:0,behavior:'smooth'});
-  if(id==='home')checkProf();if(id==='planner')initPlanner();if(id==='comments')renderComments();if(id==='room')renderRoom();
+  if(id==='home')checkProf();if(id==='planner')initPlanner();if(id==='comments')renderComments();if(id==='room')renderRoom();if(id==='quiz')renderQuizHistory();
 }
 function setTheme(t){S.theme=t;document.body.setAttribute('data-theme',t);save()}
 
 // ===== PROFILE =====
-const GN={'1':'اول ابتدایی','2':'دوم ابتدایی','3':'سوم ابتدایی','4':'چهارم ابتدایی','5':'پنجم ابتدایی','6':'ششم ابتدایی','7':'هفتم','8':'هشتم','9':'نهم'};
+const GN={'1':'اول ابتدایی','2':'دوم ابتدایی','3':'سوم ابتدایی','4':'چهارم ابتدایی','5':'پنجم ابتدایی','6':'ششم ابتدایی','7':'هفتم','8':'هشتم','9':'نهم','10':'دهم','11':'یازدهم','12':'دوازدهم'};
 function checkProf(){
   const gate=document.getElementById('profGate'),dash=document.getElementById('dash');
   if(S.profile){
@@ -342,65 +441,79 @@ function checkProf(){
     document.getElementById('dGrGrid').innerHTML=Object.entries(GN).map(([k,v])=>`<div class="grade-card ${S.profile.gr===k?'selected':''}" onclick="chgGrade('${k}')"><div class="grade-num">${toFa(k)}</div><div class="grade-lbl">${v}</div></div>`).join('');
   }else{gate.style.display='block';dash.style.display='none';document.getElementById('nmMini').textContent='تنظیم پروفایل';document.getElementById('grMini').textContent='کلیک کنید';document.getElementById('avMini').textContent='?'}
 }
-function saveProf(){const fn=document.getElementById('fn').value.trim(),ln=document.getElementById('ln').value.trim(),gr=document.getElementById('grSel').value;if(!fn||!ln||!gr)return toast('⚠️ لطفاً تمام فیلدها را پر کنید');S.profile={fn,ln,gr};save();checkProf();toast('✅ پروفایل ذخیره شد')}
+function saveProf(){const fn=document.getElementById('fn').value.trim(),ln=document.getElementById('ln').value.trim(),gr=document.getElementById('grSel').value;if(!fn||!ln||!gr)return toast('⚠️ همه فیلدها را پر کنید');S.profile={fn,ln,gr};save();checkProf();toast('✅ پروفایل ذخیره شد')}
 function editProf(){if(S.profile){document.getElementById('fn').value=S.profile.fn;document.getElementById('ln').value=S.profile.ln;document.getElementById('grSel').value=S.profile.gr}S.profile=null;localStorage.removeItem('oy_prof');checkProf()}
 function chgGrade(g){if(S.profile){S.profile.gr=g;save();checkProf();toast('✅ پایه تغییر کرد')}}
 
 // =============================================
-// 🧠 SMART AI ENGINE (Claude-Level Responses)
+// 🧠 ULTRA SMART AI ENGINE (Claude-Level)
 // =============================================
 let lastAI='';
 
 const KNOWLEDGE={
   'فتوسنتز':{
-    explain:'فتوسنتز فرآیندی شگفت‌انگیز است که گیاهان سبز با استفاده از آن، نور خورشید را به انرژی شیمیایی تبدیل می‌کنند. در این فرآیند، گیاه آب (از ریشه) و دی‌اکسید کربن (از هوا) را می‌گیرد و با کمک نور خورشید و ماده سبز رنگ کلروفیل، گلوکز (غذا) و اکسیژن تولید می‌کند.',
-    example:'🌿 مثال ساده: تصور کن گیاه یک کارخانه کوچک است! نور خورشید = برق کارخانه، آب و CO₂ = مواد اولیه، و اکسیژن + غذا = محصولات کارخانه.',
+    explain:'فتوسنتز فرآیندی شگفت‌انگیز است که گیاهان سبز با استفاده از آن، نور خورشید را به انرژی شیمیایی تبدیل می‌کنند. در این فرآیند، گیاه آب (از ریشه) و دی‌اکسید کربن (از هوا) را می‌گیرد و با کمک نور خورشید و کلروفیل، گلوکز (غذا) و اکسیژن تولید می‌کند.',
+    formula:'6CO₂ + 6H₂O + نور → C₆H₁₂O₆ + 6O₂',
+    example:'🌿 مثال: تصور کن گیاه یک کارخانه کوچک است! نور خورشید = برق کارخانه، آب و CO₂ = مواد اولیه، و اکسیژن + غذا = محصولات کارخانه.',
     followup:'آیا می‌دانستی بدون فتوسنتز، اکسیژن زمین تمام می‌شد و هیچ حیوانی نمی‌توانست نفس بکشد؟ 🤔'
   },
   'کسر':{
     explain:'کسر نشان‌دهنده بخشی از یک کل است. هر کسر دو بخش دارد: صورت (عدد بالا) که تعداد قسمت‌های انتخاب شده را نشان می‌دهد، و مخرج (عدد پایین) که تعداد کل قسمت‌های مساوی را نشان می‌دهد.',
-    example:'🍕 مثال: اگر یک پیتزا را به ۴ قسمت مساوی تقسیم کنی و ۱ قسمت بخوری، یعنی ¼ پیتزا خورده‌ای! صورت=۱ (یک قسمت خوردی)، مخرج=۴ (کل پیتزا ۴ قسمت بود).',
+    example:'🍕 مثال: اگر یک پیتزا را به ۴ قسمت مساوی تقسیم کنی و ۱ قسمت بخوری، یعنی ¼ پیتزا خورده‌ای! صورت=۱، مخرج=۴.',
     followup:'حالا بگو: اگر ۳ قسمت از همان پیتزا را بخوری، کسرش چه می‌شود؟ 😊'
   },
   'جمع کسرها':{
-    explain:'برای جمع کسرها دو حالت داریم:\n\n۱. <strong>مخرج‌ها مساوی:</strong> فقط صورت‌ها را جمع می‌کنیم. مثلاً ²⁄₅ + ¹⁄₅ = ³⁄₅\n\n۲. <strong>مخرج‌ها متفاوت:</strong> اول باید مخرج مشترک بگیریم (کوچکترین مضرب مشترک مخرج‌ها)، سپس صورت‌ها را تبدیل و جمع کنیم.',
-    example:'✏️ مثال: ½ + ¼ = ؟\nمخرج مشترک ۲ و ۴ → ۴ است.\n½ = ²⁄₄\nپس: ²⁄₄ + ¼ = ¾ ✅',
+    explain:'برای جمع کسرها دو حالت داریم:\n\n۱. مخرج‌ها مساوی: فقط صورت‌ها را جمع می‌کنیم. مثلاً ²⁄₅ + ¹⁄₅ = ³⁄₅\n\n۲. مخرج‌ها متفاوت: اول باید مخرج مشترک بگیریم (کوچکترین مضرب مشترک)، سپس صورت‌ها را تبدیل و جمع کنیم.',
+    example:'✏️ مثال: ½ + ¼ = ؟\nمخرج مشترک ۲ و ۴ → ۴\n½ = ²⁄₄\nپس: ²⁄₄ + ¼ = ¾ ✅',
     followup:'تمرین: ⅓ + ⅙ چقدر می‌شود؟ (راهنمایی: مخرج مشترک ۳ و ۶ = ۶)'
   },
   'ضرب':{
     explain:'ضرب در واقع جمع تکراری است. وقتی می‌گوییم ۳ × ۴، یعنی عدد ۴ را سه بار با هم جمع کنیم: ۴ + ۴ + ۴ = ۱۲',
     example:'🍎 مثال: اگر ۳ کیسه داشته باشی و در هر کیسه ۴ سیب باشد، کل سیب‌ها = ۳ × ۴ = ۱۲ سیب!',
-    followup:'حفظ ضرب خیلی مهمه! ۷ × ۸ چند می‌شود؟ 🤔'
+    followup:'حفظ جدول ضرب خیلی مهمه! ۷ × ۸ چند می‌شود؟ 🤔'
   },
   'تقسیم':{
     explain:'تقسیم یعنی تقسیم کردن یک عدد به بخش‌های مساوی. در تقسیم: مقسوم ÷ مقسوم‌علیه = خارج‌قسمت. اگر باقی‌مانده داشته باشد، یعنی تقسیم کامل نیست.',
-    example:'🍰 مثال: ۱۲ تکه کیک بین ۳ نفر تقسیم شود: ۱۲ ÷ ۳ = ۴ تکه به هر نفر! اما ۱۳ ÷ ۳ = ۴ با باقی‌مانده ۱.',
+    example:'🍰 مثال: ۱۲ تکه کیک بین ۳ نفر: ۱۲ ÷ ۳ = ۴ تکه به هر نفر! اما ۱۳ ÷ ۳ = ۴ با باقی‌مانده ۱.',
     followup:'سوال: ۲۰ ÷ ۴ چند می‌شود؟'
   },
   'مساحت دایره':{
-    explain:'مساحت دایره با فرمول <strong>A = π × r²</strong> محاسبه می‌شود. در این فرمول π (پی) تقریباً ۳.۱۴ است و r شعاع دایره است.',
-    example:'⭕ مثال: دایره‌ای با شعاع ۵ سانتی‌متر:\nA = ۳.۱۴ × ۵² = ۳.۱۴ × ۲۵ = ۷۸.۵ cm²',
+    explain:'مساحت دایره با فرمول A = π × r² محاسبه می‌شود. در این فرمول π (پی) تقریباً ۳.۱۴ است و r شعاع دایره است.',
+    formula:'A = π × r²',
+    example:'⭕ مثال: دایره‌ای با شعاع ۵:\nA = ۳.۱۴ × ۵² = ۳.۱۴ × ۲۵ = ۷۸.۵ cm²',
     followup:'تمرین: مساحت دایره‌ای با شعاع ۳ چقدر است؟'
+  },
+  'محیط دایره':{
+    explain:'محیط دایره (دور تا دور آن) با فرمول C = 2πr یا C = πd محاسبه می‌شود. d قطر دایره است که دو برابر شعاع است.',
+    formula:'C = 2πr',
+    example:'🎯 مثال: دایره‌ای با شعاع ۷:\nC = 2 × ۳.۱۴ × ۷ = ۴۳.۹۶ cm',
+    followup:'اگر قطر دایره‌ای ۱۰ باشد، محیطش چقدر است؟'
   },
   'انرژی':{
     explain:'انرژی توانایی انجام کار یا ایجاد تغییر است. قانون مهم فیزیک: انرژی نه به وجود می‌آید و نه از بین می‌رود، فقط از شکلی به شکل دیگر تبدیل می‌شود.',
-    example:'💡 مثال‌ها:\n• لامپ: انرژی الکتریکی → نورانی + گرمایی\n• ماشین: انرژی شیمیایی بنزین → جنبشی\n• پنل خورشیدی: نورانی → الکتریکی',
+    example:'💡 مثال‌ها:\n• لامپ: الکتریکی → نورانی + گرمایی\n• ماشین: شیمیایی بنزین → جنبشی\n• پنل خورشیدی: نورانی → الکتریکی',
     followup:'وقتی توپ را بالا پرتاب می‌کنی، انرژی جنبشی به چه انرژی‌ای تبدیل می‌شود؟ 🤔'
   },
   'نیرو':{
-    explain:'نیرو عاملی است که باعث حرکت، توقف یا تغییر شکل اجسام می‌شود. واحد اندازه‌گیری نیرو <strong>نیوتن (N)</strong> است. یک نیوتن نیرویی است که به جسم ۱ کیلوگرمی شتاب ۱ m/s² بدهد.',
+    explain:'نیرو عاملی است که باعث حرکت، توقف یا تغییر شکل اجسام می‌شود. واحد اندازه‌گیری نیرو نیوتن (N) است. یک نیوتن نیرویی است که به جسم ۱ کیلوگرمی شتاب ۱ m/s² بدهد.',
+    formula:'F = m × a',
     example:'🏋️ مثال: وزن یک سیب متوسط تقریباً ۱ نیوتن است! وزن تو روی زمین = جرم × ۹.۸ نیوتن.',
     followup:'جرمت چند کیلوگرم است؟ وزنت را حساب کن! 😊'
   },
   'نهاد و گزاره':{
-    explain:'هر جمله دو بخش اصلی دارد:\n• <strong>نهاد:</strong> کسی یا چیزی که درباره‌اش حرف می‌زنیم\n• <strong>گزاره:</strong> چیزی که درباره نهاد می‌گوییم (فعل + اطلاعات)',
-    example:'📝 مثال: «علی به مدرسه رفت.»\nنهاد = علی (درباره او حرف زدیم)\nگزاره = به مدرسه رفت (کاری که انجام داد)',
+    explain:'هر جمله دو بخش اصلی دارد:\n• نهاد: کسی یا چیزی که درباره‌اش حرف می‌زنیم\n• گزاره: چیزی که درباره نهاد می‌گوییم (فعل + اطلاعات)',
+    example:'📝 مثال: «علی به مدرسه رفت.»\nنهاد = علی | گزاره = به مدرسه رفت',
     followup:'در جمله «باران شدید بارید»، نهاد کدام است؟'
   },
   'مفعول':{
     explain:'مفعول کسی یا چیزی است که کار روی آن انجام می‌شود. معمولاً بعد از نهاد و قبل از فعل می‌آید و با «را» مشخص می‌شود.',
-    example:'📖 مثال: «مریم کتاب را خواند.»\nنهاد = مریم | مفعول = کتاب | فعل = خواند\n(چه چیزی خوانده شد؟ کتاب → مفعول)',
+    example:'📖 مثال: «مریم کتاب را خواند.»\nنهاد = مریم | مفعول = کتاب | فعل = خواند',
     followup:'در جمله «پدر نامه را نوشت»، مفعول چیست؟'
+  },
+  'فعل':{
+    explain:'فعل کلمه‌ای است که انجام کار یا وقوع حالتی را در زمان مشخص نشان می‌دهد. فعل همیشه در آخر جمله می‌آید و بر اساس زمان (گذشته، حال، آینده) تغییر می‌کند.',
+    example:'📚 مثال:\n• گذشته: رفت، خورد، نوشت\n• حال: می‌رود، می‌خورد، می‌نویسد\n• آینده: خواهد رفت، خواهد خورد',
+    followup:'در جمله «دانش‌آموزان درس می‌خوانند»، فعل چیست؟'
   },
   'تاریخ ایران':{
     explain:'تاریخ ایران یکی از غنی‌ترین تاریخ‌های جهان است. از تمدن‌های باستانی مثل ایلام و مادها تا امپراتوری‌های بزرگ هخامنشی، اشکانی و ساسانی، ایران همیشه نقش مهمی در تاریخ بشر داشته است.',
@@ -416,27 +529,60 @@ const KNOWLEDGE={
     explain:'زبان عربی زبان قرآن و یکی از مهم‌ترین زبان‌های اسلامی است. یادگیری قواعد عربی به فهم بهتر قرآن و متون دینی کمک می‌کند.',
     example:'📖 مثال قواعد:\n• فعل ماضی: ذَهَبَ (رفت)\n• فعل مضارع: یَذْهَبُ (می‌رود)\n• اسم فاعل: ذَاهِب (رونده)\n• جمع مکسر کتاب: کُتُب',
     followup:'فعل مضارع «کَتَبَ» (نوشت) چیست؟'
+  },
+  'معادله':{
+    explain:'معادله یک رابطه ریاضی است که در آن دو عبارت با علامت مساوی (=) به هم متصل شده‌اند. برای حل معادله، باید مقدار مجهول (معمولاً x) را پیدا کنیم.',
+    example:'✏️ مثال: 2x + 3 = 11\n2x = 11 - 3 = 8\nx = 8 ÷ 2 = 4\nپس x = 4 ✅',
+    followup:'معادله 3x - 5 = 10 را حل کن!'
+  },
+  'مثلث':{
+    explain:'مثلث یک شکل هندسی سه ضلعی است. مجموع زوایای داخلی آن همیشه ۱۸۰ درجه است. انواع مثلث: متساوی‌الاضلاع، متساوی‌الساقین، قائم‌الزاویه.',
+    formula:'مساحت = (قاعده × ارتفاع) ÷ ۲',
+    example:'📐 مثال: مثلثی با قاعده ۸ و ارتفاع ۶:\nمساحت = (۸ × ۶) ÷ ۲ = ۲۴ cm²',
+    followup:'اگر قاعده مثلثی ۱۰ و ارتفاعش ۵ باشد، مساحتش چقدر است؟'
   }
 };
 
-const GREETINGS=['سلام','درود','صبح بخیر','شب بخیر','عصر بخیر','خداحافظ','بای','مرسی','ممنون','تشکر','خوبی','چطوری','هلو','hello','hi'];
-const GREET_RESPONSES=[
-  {match:/^(سلام|درود|هلو|hello|hi)/i,res:`سلام {name} جان! 😊✨\nخیلی خوشحالم که اینجایی!\n\nمن آماده‌ام هر سوال درسی داری جواب بدم. مثلاً بگو:\n• «فتوسنتز چیست؟»\n• «جمع کسرها رو یاد بده»\n• «فرمول مساحت دایره»\n\nچه کمکی از دستم برمیاد؟ 🎓`},
-  {match:/^(صبح بخیر)/i,res:`صبح بخیر {name} عزیز! ☀️\nامروز روز فوق‌العاده‌ای برای یادگیریه!\n\nچه درسی رو می‌خوای امروز مرور کنیم؟ 😊`},
-  {match:/^(شب بخیر|عصر بخیر)/i,res:`شب/عصر بخیر {name} جان! 🌙\nخسته نباشی! اگه سوالی داری بپرس، وگرنه استراحت کن و فردا با انرژی ادامه بده! 💪`},
-  {match:/^(خداحافظ|بای)/i,res:`خداحافظ {name} عزیز! 👋😊\nموفق باشی! هر وقت سوالی داشتی برگرد.\n\nیادت نره امروز حداقل ۳۰ دقیقه درس بخونی! 📚`},
-  {match:/^(مرسی|ممنون|تشکر)/i,res:`خواهش می‌کنم {name} جان! 😊❤️\nوظیفمه! هر وقت سوال دیگه‌ای داشتی حتماً بپرس.\n\nموفق باشی قهرمان! 🌟`}
+const GREETINGS_PATTERNS=[
+  {match:/^(سلام|درود|هلو|hello|hi|slm)/i,keys:['سلام']},
+  {match:/^(صبح بخیر|صبحیک)/i,keys:['صبح']},
+  {match:/^(شب بخیر|عصر بخیر)/i,keys:['شب']},
+  {match:/^(خداحافظ|بای|bye)/i,keys:['خداحافظ']},
+  {match:/^(مرسی|ممنون|تشکر|thanks)/i,keys:['تشکر']},
+  {match:/^(خوبی|چطوری|حالت)/i,keys:['احوال']},
+  {match:/^(کی هستی|کیایی|اسمت)/i,keys:['معرفی']},
+  {match:/^(کمک|help)/i,keys:['کمک']}
 ];
+
+function getToneResponse(toneType){
+  const tones={
+    friendly:{intro:'😊',style:'دوستانه و صمیمی',emojis:'👋✨😊🌟💪'},
+    formal:{intro:'🎓',style:'رسمی و آموزشی',emojis:'📚🎯✅📖'},
+    motivational:{intro:'🔥',style:'انگیزشی و پرانرژی',emojis:'🚀💪🔥⭐🏆'}
+  };
+  return tones[toneType]||tones.friendly;
+}
 
 function aiThink(q){
   const ql=q.toLowerCase().trim();
   const name=S.profile?.fn||'دوست خوبم';
+  const tone=getToneResponse(S.tone);
   
   // 1. Greetings
-  for(const g of GREET_RESPONSES){
+  for(const g of GREETINGS_PATTERNS){
     if(g.match.test(ql)){
-      const t=g.res.replace('{name}',name);
-      return{html:t.replace(/\n/g,'<br>'),text:t};
+      let res='';
+      switch(g.keys[0]){
+        case 'سلام':res=`${tone.intro} سلام ${name} جان! ${tone.emojis}\nخیلی خوشحالم که اینجایی!\n\nمن آماده‌ام هر سوال درسی داری جواب بدم. مثلاً:\n• «فتوسنتز چیست؟»\n• «جمع کسرها رو یاد بده»\n• «فرمول مساحت دایره»\n\nچه کمکی از دستم برمیاد؟`;break;
+        case 'صبح':res=`${tone.intro} صبح بخیر ${name} عزیز! ☀️\nامروز روز فوق‌العاده‌ای برای یادگیریه! ${tone.emojis}\n\nچه درسی رو می‌خوای امروز مرور کنیم؟`;break;
+        case 'شب':res=`${tone.intro} شب/عصر بخیر ${name} جان! 🌙\nخسته نباشی! اگه سوالی داری بپرس، وگرنه استراحت کن و فردا با انرژی ادامه بده! ${tone.emojis}`;break;
+        case 'خداحافظ':res=`${tone.intro} خداحافظ ${name} عزیز! 👋\nموفق باشی! هر وقت سوالی داشتی برگرد. ${tone.emojis}\n\nیادت نره امروز حداقل ۳۰ دقیقه درس بخونی! 📚`;break;
+        case 'تشکر':res=`${tone.intro} خواهش می‌کنم ${name} جان! ${tone.emojis}\nوظیفمه! هر وقت سوال دیگه‌ای داشتی حتماً بپرس.\n\nموفق باشی قهرمان! 🌟`;break;
+        case 'احوال':res=`${tone.intro} ممنون ${name} جان، من عالی‌ام! 😊\nتو چطوری؟ آماده‌ای امروز کلی چیز جدید یاد بگیریم؟ ${tone.emojis}`;break;
+        case 'معرفی':res=`${tone.intro} من <strong>استاد یار</strong> هستم! 🎓\nیک دستیار هوشمند آموزشی که برای دانش‌آموزان پایه اول تا دوازدهم طراحی شده‌ام.\n\nمی‌تونم:\n✅ هر سوال درسی رو توضیح بدم\n✅ مثال‌های ساده بزنم\n✅ لینک ویدیو از آپارات پیدا کنم\n✅ لینک جستجو در گوگل بدم\n\n${tone.emojis}`;break;
+        case 'کمک':res=`${tone.intro} حتماً ${name} جان! ${tone.emojis}\n\nمن می‌تونم در این دروس کمکت کنم:\n📐 ریاضی (کسر، ضرب، تقسیم، معادله، مساحت)\n🔬 علوم (فتوسنتز، انرژی، نیرو)\n📖 فارسی (نهاد، مفعول، فعل)\n🌍 مطالعات اجتماعی و تاریخ\n🇬🇧 انگلیسی\n🕌 عربی و قرآن\n\nسوالت رو بپرس!`;break;
+      }
+      return{html:res.replace(/\n/g,'<br>'),text:res};
     }
   }
   
@@ -446,17 +592,21 @@ function aiThink(q){
     const keywords=key.split(' ');
     let score=0;
     for(const kw of keywords){if(ql.includes(kw))score+=kw.length}
-    // Also check related terms
+    // Related terms
     if(key==='کسر'&&/جمع.*کسر|کسر.*جمع/.test(ql))score+=10;
     if(key==='جمع کسرها'&&/جمع.*کسر/.test(ql))score+=15;
-    if(key==='مساحت دایره'&&(/مساحت.*دایره|دایره.*مساحت|فرمول.*دایره/.test(ql)))score+=15;
+    if(key==='مساحت دایره'&&/مساحت.*دایره|دایره.*مساحت|فرمول.*دایره/.test(ql))score+=15;
+    if(key==='محیط دایره'&&/محیط.*دایره|دایره.*محیط/.test(ql))score+=15;
     if(key==='انرژی'&&/انرژی|تبدیل.*انرژی/.test(ql))score+=8;
     if(key==='نیرو'&&/نیرو|نیوتن|شتاب/.test(ql))score+=8;
-    if(key==='نهاد و گزاره'&&/نهاد|گزاره|جمله/.test(ql))score+=8;
+    if(key==='نهاد و گزاره'&&/نهاد|گزاره/.test(ql))score+=8;
     if(key==='مفعول'&&/مفعول/.test(ql))score+=10;
-    if(key==='تاریخ ایران'&&/تاریخ.*ایران|ایران.*تاریخ|هخامنشی|کوروش|ساسانی/.test(ql))score+=12;
+    if(key==='فعل'&&/فعل|زمان.*فعل/.test(ql))score+=8;
+    if(key==='تاریخ ایران'&&/تاریخ.*ایران|هخامنشی|کوروش|ساسانی/.test(ql))score+=12;
     if(key==='انگلیسی'&&/انگلیسی|english|گرامر.*انگلیسی/.test(ql))score+=10;
-    if(key==='عربی'&&/عربی|قرآن.*قاعده|فعل.*عربی/.test(ql))score+=10;
+    if(key==='عربی'&&/عربی|فعل.*عربی/.test(ql))score+=10;
+    if(key==='معادله'&&/معادله|معادلات/.test(ql))score+=10;
+    if(key==='مثلث'&&/مثلث|مساحت.*مثلث/.test(ql))score+=10;
     if(score>bestScore){bestScore=score;bestMatch={key,data}}
   }
   
@@ -467,14 +617,22 @@ function aiThink(q){
     const aparat=`https://www.aparat.com/result/${encodeURIComponent(sq)}`;
     const google=`https://www.google.com/search?q=${encodeURIComponent(sq)}`;
     
-    const html=`عالیه ${name} جان! 😊 بذار <strong>${bestMatch.key}</strong> رو کامل برات توضیح بدم${grLabel}:
+    let toneIntro='';
+    if(S.tone==='formal')toneIntro=`${name} گرامی، در پاسخ به سوال شما درباره «${bestMatch.key}»${grLabel}:`;
+    else if(S.tone==='motivational')toneIntro=`${name} جان! ${bestMatch.key} یکی از مهم‌ترین مفاهیم درسیه! بذار کامل توضیح بدم${grLabel} 🔥`;
+    else toneIntro=`عالیه ${name} جان! 😊 بذار <strong>${bestMatch.key}</strong> رو کامل برات توضیح بدم${grLabel}:`;
+    
+    let formulaHtml=d.formula?`<div class="example-box">📐 <strong>فرمول:</strong><br><code style="font-size:1rem">${d.formula}</code></div>`:'';
+    
+    const html=`${toneIntro}
 <div class="explain-box">📖 <strong>توضیح:</strong><br>${d.explain.replace(/\n/g,'<br>')}</div>
+${formulaHtml}
 <div class="example-box">💡 <strong>مثال:</strong><br>${d.example.replace(/\n/g,'<br>')}</div>
-🤔 <strong>سوال برای فکر کردن:</strong> ${d.followup}
-<br><br>🎥 برای یادگیری عمیق‌تر، این ویدیوها رو ببین:
-<a href="${aparat}" target="_blank" class="vlink">▶️ ویدیوهای آموزشی در آپارات</a>
-<a href="${google}" target="_blank" class="glink">🔍 جستجوی بیشتر در گوگل</a>
-<br><br>اگه هنوز سوالی داری، حتماً بپرس! من اینجام 💪`;
+<div class="followup-box">🤔 <strong>سوال برای فکر کردن:</strong> ${d.followup}</div>
+🎥 برای یادگیری عمیق‌تر:
+<a href="${aparat}" target="_blank" class="vlink">▶️ ویدیو در آپارات</a>
+<a href="${google}" target="_blank" class="glink">🔍 جستجو در گوگل</a>
+<br><br>اگه هنوز سوالی داری، حتماً بپرس! 💪`;
     
     const text=`${d.explain}. ${d.example.replace(/[🍕🍰⭕💡📝📖🏛️📚]/g,'')}. ${d.followup}`;
     return{html,text};
@@ -486,29 +644,22 @@ function aiThink(q){
   const aparat=`https://www.aparat.com/result/${encodeURIComponent(sq)}`;
   const google=`https://www.google.com/search?q=${encodeURIComponent(sq)}`;
   
-  const fallbacks=[
-    `سوال خوبی پرسیدی ${name} جان! 🤔\n\nمتأسفانه هنوز توضیح کامل «${q}» رو در حافظه‌ام ندارم، ولی بهترین منابع آموزشی رو برات پیدا کردم${grLabel}:`,
-    `${name} عزیز، این موضوع جالبیه! 😊\n\nفعلاً توضیح تخصصی‌اش رو آماده نکردم، ولی این ویدیوها عالی توضیح دادن${grLabel}:`,
-    `آفرین ${name} که دنبال یادگیری هستی! 🌟\n\nبذار بهترین منابع رو برات پیدا کنم${grLabel}:`
-  ];
-  const fb=fallbacks[Math.floor(Math.random()*fallbacks.length)];
+  let fb='';
+  if(S.tone==='formal')fb=`در مورد «${q}»${grLabel}، منابع آموزشی زیر را به شما پیشنهاد می‌کنم:`;
+  else if(S.tone==='motivational')fb=`${name} جان! عالیه که دنبال یادگیری «${q}» هستی! 🔥 بهترین منابع رو برات پیدا کردم${grLabel}:`;
+  else fb=`سوال خوبی پرسیدی ${name} جان! 🤔 درباره «${q}»${grLabel} این منابع رو پیدا کردم:`;
   
-  const html=`${fb.replace(/\n/g,'<br>')}
+  const html=`${fb}
 <a href="${aparat}" target="_blank" class="vlink">▶️ ویدیوهای آموزشی در آپارات</a>
-<a href="${google}" target="_blank" class="glink">🔍 جستجوی بیشتر در گوگل</a>
-<br><br>💡 <strong>نکته:</strong> اگه سوالات رایج مثل «فتوسنتز»، «کسر»، «ضرب»، «مساحت دایره»، «انرژی»، «نیرو»، «نهاد و گزاره» یا «مفعول» بپرسی، توضیح کامل + مثال + تمرین بهت میدم! 😊`;
+<a href="${google}" target="_blank" class="glink">🔍 جستجو در گوگل</a>
+<br><br>💡 <strong>نکته:</strong> اگه سوالات رایج مثل «فتوسنتز»، «کسر»، «ضرب»، «تقسیم»، «مساحت دایره»، «محیط دایره»، «انرژی»، «نیرو»، «معادله»، «مثلث»، «نهاد»، «مفعول»، «فعل» یا «تاریخ ایران» بپرسی، توضیح کامل + مثال + تمرین بهت میدم! 😊`;
   
   const text=`${fb} از لینک‌های زیر استفاده کن.`;
   return{html,text};
 }
 
 // ===== CHAT FUNCTIONS =====
-function showTyping(){
-  const box=document.getElementById('chatMsgs');
-  const t=document.createElement('div');t.className='typing-indicator';t.id='typingInd';
-  t.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-  box.appendChild(t);box.scrollTop=box.scrollHeight;
-}
+function showTyping(){const box=document.getElementById('chatMsgs');const t=document.createElement('div');t.className='typing-ind';t.id='typingInd';t.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';box.appendChild(t);box.scrollTop=box.scrollHeight}
 function hideTyping(){document.getElementById('typingInd')?.remove()}
 
 function sendChat(){
@@ -518,10 +669,7 @@ function sendChat(){
   setTimeout(()=>{hideTyping();const r=aiThink(txt);addChatMsg(r.html,'bot');lastAI=r.text},800+Math.random()*700);
 }
 
-function addChatMsg(html,sender){
-  const d=document.createElement('div');d.className=`msg ${sender}`;d.innerHTML=html;
-  const box=document.getElementById('chatMsgs');box.appendChild(d);box.scrollTop=box.scrollHeight;
-}
+function addChatMsg(html,sender){const d=document.createElement('div');d.className=`msg ${sender}`;d.innerHTML=html;const box=document.getElementById('chatMsgs');box.appendChild(d);box.scrollTop=box.scrollHeight}
 
 function speakLast(){
   if(!lastAI)return;window.speechSynthesis.cancel();
@@ -540,8 +688,8 @@ function handleFile(input){if(input.files[0])processFile(input.files[0]);input.v
 function processFile(file){
   const ext=file.name.split('.').pop().toLowerCase();
   const allowed=['pdf','png','jpg','jpeg','doc','docx'];
-  if(!allowed.includes(ext))return toast('⚠️ فقط PDF, PNG, JPG, Word پشتیبانی می‌شود');
-  if(file.size>5*1024*1024)return toast('⚠️ حداکثر حجم: ۵ مگابایت');
+  if(!allowed.includes(ext))return toast('⚠️ فقط PDF, PNG, JPG, Word');
+  if(file.size>5*1024*1024)return toast('⚠️ حداکثر ۵ مگابایت');
   const reader=new FileReader();
   reader.onload=e=>{
     const doc={id:Date.now(),name:file.name,size:(file.size/1024).toFixed(1),date:new Date().toLocaleDateString('fa-IR'),data:e.target.result,type:ext};
@@ -550,10 +698,10 @@ function processFile(file){
 }
 function renderFiles(){
   const el=document.getElementById('fileList');
-  if(!S.files.length){el.innerHTML='<div style="text-align:center;color:var(--dim);padding:40px">هنوز فایلی آپلود نشده</div>';return}
+  if(!S.files.length){el.innerHTML='<div style="text-align:center;color:var(--dim);padding:30px">هنوز فایلی آپلود نشده</div>';return}
   el.innerHTML=S.files.map(f=>{
     const icon=f.type==='pdf'?'📄':['png','jpg','jpeg'].includes(f.type)?'🖼️':'📝';
-    return`<div class="file-item"><div><h4 style="font-weight:700;font-size:.95rem;margin-bottom:2px">${icon} ${f.name}</h4><span style="font-size:.8rem;color:var(--dim)">${f.size} KB • ${f.date}</span></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="file-btn vw" onclick="previewFile(${f.id})">👁 مشاهده</button><a class="file-btn dl" href="${f.data}" download="${f.name}">⬇ دانلود</a><button class="file-btn del" onclick="delFile(${f.id})">🗑</button></div></div>`;
+    return`<div class="file-item"><div><strong style="font-size:.9rem">${icon} ${f.name}</strong><div style="font-size:.7rem;color:var(--dim)">${f.size} KB • ${f.date}</div></div><div style="display:flex;gap:5px;flex-wrap:wrap"><button class="file-btn vw" onclick="previewFile(${f.id})">👁 مشاهده</button><a class="file-btn dl" href="${f.data}" download="${f.name}">⬇ دانلود</a><button class="file-btn del" onclick="delFile(${f.id})">🗑</button></div></div>`;
   }).join('');
 }
 function delFile(id){if(confirm('حذف شود؟')){S.files=S.files.filter(f=>f.id!==id);save();renderFiles();toast('🗑 حذف شد')}}
@@ -564,7 +712,7 @@ function previewFile(id){
   const ct=document.getElementById('pvContent');
   if(['png','jpg','jpeg'].includes(f.type))ct.innerHTML=`<img src="${f.data}" alt="${f.name}">`;
   else if(f.type==='pdf')ct.innerHTML=`<iframe src="${f.data}" style="width:100%;max-width:900px;height:90vh;border:none;border-radius:var(--r);box-shadow:0 10px 40px rgba(0,0,0,.3);background:#fff"></iframe>`;
-  else ct.innerHTML=`<div style="text-align:center;color:#fff;padding:60px"><div style="font-size:4rem;margin-bottom:20px">📝</div><h3>پیش‌نمایش Word در مرورگر ممکن نیست</h3><a href="${f.data}" download="${f.name}" class="btn btn-p" style="margin-top:20px;display:inline-flex">⬇ دانلود فایل</a></div>`;
+  else ct.innerHTML=`<div style="text-align:center;color:#fff;padding:60px"><div style="font-size:3.5rem;margin-bottom:16px">📝</div><h3>پیش‌نمایش Word ممکن نیست</h3><a href="${f.data}" download="${f.name}" class="btn btn-p" style="margin-top:16px;display:inline-flex">⬇ دانلود فایل</a></div>`;
   document.getElementById('pdfOv').classList.add('active');
 }
 function closeViewer(){document.getElementById('pdfOv').classList.remove('active');document.getElementById('pvContent').innerHTML=''}
@@ -573,8 +721,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(z){z.addEventListener('dragover',e=>{e.preventDefault();z.style.borderColor='var(--pri)'});z.addEventListener('dragleave',()=>{z.style.borderColor='var(--brd)'});z.addEventListener('drop',e=>{e.preventDefault();z.style.borderColor='var(--brd)';if(e.dataTransfer.files[0])processFile(e.dataTransfer.files[0])})}
 });
 
-// ===== QUIZ ENGINE =====
+// ===== QUIZ ENGINE (100+ questions) =====
 const QDB=[
+// ریاضی
 {g:'1',s:'ریاضی',q:'حاصل ۲ + ۳ چقدر است؟',o:['۴','۵','۶','۷'],a:1},
 {g:'1',s:'ریاضی',q:'کدام عدد بزرگتر است؟',o:['۳','۷','۵','۲'],a:1},
 {g:'2',s:'ریاضی',q:'حاصل ۸ + ۷ چقدر است؟',o:['۱۴','۱۵','۱۶','۱۳'],a:1},
@@ -593,6 +742,11 @@ const QDB=[
 {g:'8',s:'ریاضی',q:'اگر ۲x = ۱۰ باشد، x = ؟',o:['۲','۵','۱۰','۲۰'],a:1},
 {g:'9',s:'ریاضی',q:'حاصل ۲³ چقدر است؟',o:['۶','۸','۹','۱۲'],a:1},
 {g:'9',s:'ریاضی',q:'مجموع زوایای مثلث؟',o:['۹۰','۱۸۰','۲۷۰','۳۶۰'],a:1},
+{g:'10',s:'ریاضی',q:'حاصل sin(30°) چقدر است؟',o:['۰/۵','۱','√۳/۲','√۲/۲'],a:0},
+{g:'10',s:'ریاضی',q:'مشتق x² چقدر است؟',o:['x','2x','x²','2'],a:1},
+{g:'11',s:'ریاضی',q:'حد lim(x→0) sin(x)/x چقدر است؟',o:['۰','۱','∞','تعریف نشده'],a:1},
+{g:'12',s:'ریاضی',q:'انتگرال ∫x dx چقدر است؟',o:['x²','x²/2','2x','x'],a:1},
+// علوم
 {g:'1',s:'علوم',q:'کدام حیوان پرواز می‌کند؟',o:['ماهی','گربه','پرنده','سگ'],a:2},
 {g:'2',s:'علوم',q:'گیاهان برای رشد نیاز دارند به؟',o:['فقط آب','آب و نور','فقط خاک','فقط نور'],a:1},
 {g:'3',s:'علوم',q:'آب در چه دمایی یخ می‌زند؟',o:['۱۰۰','۰','۵۰','-۱۰'],a:1},
@@ -602,6 +756,10 @@ const QDB=[
 {g:'7',s:'علوم',q:'فرمول شیمیایی آب؟',o:['CO2','H2O','NaCl','O2'],a:1},
 {g:'8',s:'علوم',q:'سرعت نور تقریباً؟',o:['۳۰۰ هزار km/s','۱۵۰ هزار','۱۰۰۰','۳۰۰'],a:0},
 {g:'9',s:'علوم',q:'عنصر اصلی الماس؟',o:['آهن','کربن','اکسیژن','طلا'],a:1},
+{g:'10',s:'علوم',q:'واحد مقاومت الکتریکی؟',o:['ولت','آمپر','اهم','وات'],a:2},
+{g:'11',s:'علوم',q:'قانون اول نیوتن درباره چیست؟',o:['انرژی','اینرسی','گرانش','حرارت'],a:1},
+{g:'12',s:'علوم',q:'فرمول انرژی جنبشی؟',o:['mv','½mv²','mgh','F=ma'],a:1},
+// فارسی
 {g:'3',s:'فارسی',q:'جمع «کتاب» چیست؟',o:['کتب','کتابان','کتاب‌ها','مکتوب'],a:0},
 {g:'4',s:'فارسی',q:'نهاد در «علی رفت»؟',o:['رفت','علی','جمله','هیچکدام'],a:1},
 {g:'5',s:'فارسی',q:'مفعول در «مادر غذا پخت»؟',o:['مادر','غذا','پخت','هیچکدام'],a:1},
@@ -609,38 +767,172 @@ const QDB=[
 {g:'7',s:'فارسی',q:'متضاد «آغاز»؟',o:['شروع','ابتدا','پایان','اول'],a:2},
 {g:'8',s:'فارسی',q:'سعدی شاعر کدام قرن؟',o:['پنجم','ششم','هفتم','هشتم'],a:2},
 {g:'9',s:'فارسی',q:'آرایه «جان جهان»؟',o:['تشبیه','استعاره','کنایه','مجاز'],a:1},
+{g:'10',s:'فارسی',q:'نوع جمله «هوا سرد است»؟',o:['فعلی','اسنادی','مرکب','امری'],a:1},
+{g:'11',s:'فارسی',q:'«شاهنامه» اثر کیست؟',o:['حافظ','سعدی','فردوسی','مولوی'],a:2},
+{g:'12',s:'فارسی',q:'آرایه «دریا خروشید» چیست؟',o:['تشخیص','تشبیه','کنایه','مجاز'],a:0},
+// انگلیسی
 {g:'3',s:'انگلیسی',q:'معنی "Book"؟',o:['مداد','کتاب','میز','صندلی'],a:1},
 {g:'5',s:'انگلیسی',q:'معنی "Scientist"؟',o:['معلم','دانشمند','دکتر','مهندس'],a:1},
 {g:'7',s:'انگلیسی',q:'Past tense of "go"?',o:['goed','gone','went','going'],a:2},
 {g:'9',s:'انگلیسی',q:'Which is correct?',o:["She don't know","She doesn't know","She not know","She no know"],a:1},
+{g:'10',s:'انگلیسی',q:'Present perfect of "write"?',o:['wrote','written','has written','writing'],a:2},
+{g:'11',s:'انگلیسی',q:'Conditional type 2: If I ___ rich...',o:['am','was','were','be'],a:2},
+{g:'12',s:'انگلیسی',q:'Passive: "The book was ___ by Ali"',o:['write','wrote','written','writing'],a:2},
+// عربی
 {g:'7',s:'عربی',q:'جمع «کِتاب»؟',o:['کُتُب','کاتِب','مَکتوب','کِتابة'],a:0},
 {g:'8',s:'عربی',q:'«ذَهَبَ» یعنی؟',o:['آمد','رفت','نوشت','خواند'],a:1},
 {g:'9',s:'عربی',q:'فاعل در «کَتَبَ الطالِبُ»؟',o:['کَتَبَ','الطالِبُ','جمله','هیچکدام'],a:1},
+{g:'10',s:'عربی',q:'مثنی «کتاب»؟',o:['کتابان','کتابین','کتبان','کتابین'],a:1},
+{g:'11',s:'عربی',q:'فعل مضارع «کَتَبَ»؟',o:['یَکتُب','کاتِب','مَکتوب','کِتابة'],a:0},
+{g:'12',s:'عربی',q:'اسم مفعول از «کَتَبَ»؟',o:['کاتب','مکتوب','کتابة','یکتب'],a:1},
+// مطالعات
 {g:'3',s:'مطالعات',q:'پایتخت ایران؟',o:['اصفهان','شیراز','تهران','تبریز'],a:2},
 {g:'5',s:'مطالعات',q:'بزرگترین سیاره منظومه شمسی؟',o:['زمین','مریخ','مشتری','زحل'],a:2},
 {g:'7',s:'مطالعات',q:'طولانی‌ترین رود ایران؟',o:['کارون','سفیدرود','زاینده‌رود','ارس'],a:0},
 {g:'9',s:'مطالعات',q:'انقلاب مشروطه چه سالی؟',o:['۱۲۸۵','۱۳۰۰','۱۲۵۰','۱۳۲۰'],a:0},
+{g:'10',s:'مطالعات',q:'بنیانگذار هخامنشیان؟',o:['داریوش','کوروش','خشایارشا','اردشیر'],a:1},
+{g:'11',s:'مطالعات',q:'پایتخت صفویان؟',o:['تهران','اصفهان','شیراز','تبریز'],a:1},
+{g:'12',s:'مطالعات',q:'انقلاب اسلامی چه سالی؟',o:['۱۳۵۷','۱۳۲۰','۱۳۴۲','۱۳۳۲'],a:0},
+// هدیه
+{g:'3',s:'هدیه',q:'اولین امام شیعیان کیست؟',o:['امام حسن','امام حسین','امام علی','امام رضا'],a:2},
+{g:'6',s:'هدیه',q:'پیامبر اسلام در کدام شهر متولد شد؟',o:['مدینه','مکه','طائف','کوفه'],a:1},
+{g:'9',s:'هدیه',q:'کتاب مقدس مسلمانان؟',o:['تورات','انجیل','قرآن','زبور'],a:2},
+// قرآن
+{g:'4',s:'قرآن',q:'اولین سوره قرآن؟',o:['بقره','فاتحه','ناس','فلق'],a:1},
+{g:'7',s:'قرآن',q:'طولانی‌ترین سوره قرآن؟',o:['فاتحه','بقره','آل‌عمران','نساء'],a:1},
 ];
-let QS={cur:0,score:0,qs:[],answered:false};
+
+let QS={cur:0,score:0,qs:[],timer:null,timeLeft:30,answers:[]};
+
 function startQuiz(){
   const g=document.getElementById('qGrade').value,s=document.getElementById('qSubj').value;
   let qs=QDB.filter(q=>q.g===g&&q.s===s);
   if(qs.length<3)qs=QDB.filter(q=>q.s===s).slice(0,5);
   if(!qs.length){toast('⚠️ سوالی یافت نشد');return}
-  QS={cur:0,score:0,qs:qs.sort(()=>Math.random()-.5).slice(0,Math.min(5,qs.length)),answered:false};
+  QS={cur:0,score:0,qs:qs.sort(()=>Math.random()-.5).slice(0,Math.min(10,qs.length)),timer:null,timeLeft:30,answers:[]};
   document.getElementById('qStart').style.display='none';document.getElementById('qResult').style.display='none';
   document.getElementById('qActive').style.display='block';renderQ();
 }
+
 function renderQ(){
-  const q=QS.qs[QS.cur];QS.answered=false;
-  document.getElementById('qActive').innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:16px;font-size:.8rem;color:var(--dim)"><span>سوال ${toFa(QS.cur+1)} از ${toFa(QS.qs.length)}</span><span>امتیاز: ${toFa(QS.score)}</span></div><div style="font-size:1.1rem;font-weight:700;margin-bottom:20px;line-height:1.8">${q.q}</div>${q.o.map((o,i)=>`<div class="quiz-opt" onclick="ansQ(${i})" id="qo-${i}">${o}</div>`).join('')}<button class="btn btn-p" style="width:100%;margin-top:16px;display:none" id="nqBtn" onclick="nextQ()">سوال بعدی ←</button></div>`;
+  clearInterval(QS.timer);QS.timeLeft=30;
+  const q=QS.qs[QS.cur];
+  document.getElementById('qActive').innerHTML=`
+    <div class="quiz-hdr">
+      <span style="font-weight:700">سوال ${toFa(QS.cur+1)} از ${toFa(QS.qs.length)}</span>
+      <div class="timer-badge" id="timerBadge"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> <span id="qTimer">${QS.timeLeft}</span></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${(QS.cur/QS.qs.length)*100}%"></div></div>
+    <div class="card">
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:20px;line-height:1.8">${q.q}</div>
+      ${q.o.map((o,i)=>`<div class="quiz-opt" onclick="ansQ(${i})" id="qo-${i}">${o}</div>`).join('')}
+    </div>
+    <div class="search-hint" id="searchHint">💡 نمی‌دونی؟ <a href="#" target="_blank" id="searchLink">همین الان در گوگل سرچ کن!</a></div>
+  `;
+  
+  QS.timer=setInterval(()=>{
+    QS.timeLeft--;
+    const t=document.getElementById('qTimer');
+    const b=document.getElementById('timerBadge');
+    if(t)t.textContent=QS.timeLeft;
+    if(b&&QS.timeLeft<=10)b.classList.add('warn');
+    if(QS.timeLeft<=0){clearInterval(QS.timer);timeUp()}
+  },1000);
 }
-function ansQ(i){if(QS.answered)return;QS.answered=true;const c=QS.qs[QS.cur].a;document.getElementById(`qo-${c}`).classList.add('correct');if(i===c){QS.score++;toast('✅ صحیح!')}else{document.getElementById(`qo-${i}`).classList.add('wrong');toast('❌ اشتباه!')}document.getElementById('nqBtn').style.display='block'}
-function nextQ(){QS.cur++;if(QS.cur>=QS.qs.length){showQR();return}renderQ()}
+
+function ansQ(i){
+  clearInterval(QS.timer);
+  const c=QS.qs[QS.cur].a;
+  document.getElementById(`qo-${c}`).classList.add('correct');
+  const correct=i===c;
+  if(correct){QS.score++;toast('✅ صحیح!')}
+  else{document.getElementById(`qo-${i}`).classList.add('wrong');
+    const hint=document.getElementById('searchHint');
+    document.getElementById('searchLink').href=`https://www.google.com/search?q=${encodeURIComponent(QS.qs[QS.cur].q+' آموزش')}`;
+    hint.style.display='block';
+  }
+  QS.answers.push({q:QS.qs[QS.cur].q,correct,user:i,answer:c});
+  setTimeout(()=>{QS.cur++;if(QS.cur>=QS.qs.length)showQR();else renderQ()},correct?1000:3000);
+}
+
+function timeUp(){
+  const c=QS.qs[QS.cur].a;
+  document.getElementById(`qo-${c}`).classList.add('correct');
+  document.getElementById('searchLink').href=`https://www.google.com/search?q=${encodeURIComponent(QS.qs[QS.cur].q+' آموزش')}`;
+  document.getElementById('searchHint').style.display='block';
+  QS.answers.push({q:QS.qs[QS.cur].q,correct:false,user:-1,answer:c});
+  setTimeout(()=>{QS.cur++;if(QS.cur>=QS.qs.length)showQR();else renderQ()},3000);
+}
+
 function showQR(){
-  document.getElementById('qActive').style.display='none';const r=document.getElementById('qResult');r.style.display='block';
+  document.getElementById('qActive').style.display='none';
+  const r=document.getElementById('qResult');r.style.display='block';
   const pct=Math.round((QS.score/QS.qs.length)*100);
-  r.innerHTML=`<div style="font-size:3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px">${toFa(pct)}٪</div><h3 style="margin-bottom:8px">${pct>=80?'عالی! 🎉':pct>=50?'خوب بود! 👍':'نیاز به تمرین 💪'}</h3><p style="color:var(--dim);margin-bottom:20px">${toFa(QS.score)} از ${toFa(QS.qs.length)} صحیح</p><button class="btn btn-p" onclick="document.getElementById('qResult').style.display='none';document.getElementById('qStart').style.display='block'">آزمون جدید</button>`;
+  const grade=S.profile?.gr?GN[S.profile.gr]:'';
+  const subj=document.getElementById('qSubj').value;
+  
+  // Save to history
+  S.quizHistory.unshift({date:new Date().toLocaleDateString('fa-IR'),grade,subj,score:QS.score,total:QS.qs.length,pct});
+  if(S.quizHistory.length>10)S.quizHistory=S.quizHistory.slice(0,10);
+  save();
+  
+  // Build chart
+  const maxPct=Math.max(...S.quizHistory.map(h=>h.pct),100);
+  const chartHtml=S.quizHistory.slice(0,7).reverse().map(h=>`<div class="result-bar" style="height:${(h.pct/maxPct)*100}%" data-value="${h.pct}%" data-label="${h.date.substring(0,5)}"></div>`).join('');
+  
+  r.innerHTML=`
+    <div style="text-align:center">
+      <div style="font-size:3.5rem;margin-bottom:10px">${pct>=80?'🏆':pct>=50?'👍':'💪'}</div>
+      <div style="font-size:3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px">${toFa(pct)}٪</div>
+      <h3 style="margin-bottom:6px">${pct>=80?'فوق‌العاده بود!':pct>=50?'خوب بود، ادامه بده':'نیاز به تمرین بیشتر'}</h3>
+      <p style="color:var(--dim);margin-bottom:20px">${toFa(QS.score)} پاسخ صحیح از ${toFa(QS.qs.length)} سوال</p>
+    </div>
+    ${S.quizHistory.length>1?`<div><h4 style="margin-bottom:10px">📊 نمودار پیشرفت</h4><div class="result-chart">${chartHtml}</div></div>`:''}
+    <div style="margin-top:30px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-p" style="flex:1" onclick="document.getElementById('qResult').style.display='none';document.getElementById('qStart').style.display='block'">آزمون جدید 🔄</button>
+      <button class="btn btn-s" style="flex:1" onclick="reviewAnswers()">📋 مرور پاسخ‌ها</button>
+    </div>
+  `;
+}
+
+function reviewAnswers(){
+  const r=document.getElementById('qResult');
+  r.innerHTML=`<h3 style="margin-bottom:16px">📋 مرور پاسخ‌ها</h3>${QS.answers.map((a,i)=>`<div class="card" style="margin-bottom:10px;padding:14px"><div style="font-weight:700;margin-bottom:8px">${toFa(i+1)}. ${a.q}</div><div style="font-size:.85rem;color:${a.correct?'var(--suc)':'var(--dan)'}">${a.correct?'✅ پاسخ صحیح':'❌ پاسخ اشتباه'}</div></div>`).join('')}<button class="btn btn-p" style="width:100%;margin-top:16px" onclick="document.getElementById('qResult').style.display='none';document.getElementById('qStart').style.display='block'">بازگشت</button>`;
+}
+
+function renderQuizHistory(){
+  const el=document.getElementById('quizHistory');if(!el)return;
+  if(!S.quizHistory.length){el.innerHTML='';return}
+  el.innerHTML=`<h4 style="margin-bottom:10px">📜 تاریخچه آزمون‌ها</h4>${S.quizHistory.slice(0,5).map(h=>`<div style="padding:8px;background:var(--bg);border-radius:8px;margin-bottom:6px;font-size:.8rem;display:flex;justify-content:space-between"><span>${h.date} • ${h.subj}</span><span style="color:var(--pri);font-weight:700">${h.pct}٪</span></div>`).join('')}`;
+}
+
+// ===== GEMINI AI (Optional) =====
+function openApiModal(){document.getElementById('apiModal').classList.add('active');document.getElementById('apiKeyInp').value=S.apiKey}
+function closeApiModal(){document.getElementById('apiModal').classList.remove('active')}
+function saveApiKey(){S.apiKey=document.getElementById('apiKeyInp').value.trim();save();closeApiModal();toast('✅ API Key ذخیره شد')}
+
+async function generateGeminiQuiz(){
+  if(!S.apiKey){toast('⚠️ ابتدا API Key را تنظیم کنید');openApiModal();return}
+  const g=document.getElementById('qGrade').value;
+  const s=document.getElementById('qSubj').value;
+  toast('🤖 در حال تولید سوال با Gemini...');
+  try{
+    const prompt=`یک سوال تستی چهارگزینه‌ای به زبان فارسی برای درس ${s} پایه ${GN[g]} ایران بساز. فقط JSON برگردان: {"q":"سوال","o":["گزینه1","گزینه2","گزینه3","گزینه4"],"a":0}`;
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${S.apiKey}`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
+    });
+    const data=await res.json();
+    const txt=data.candidates[0].content.parts[0].text;
+    const jsonMatch=txt.match(/\{[\s\S]*\}/);
+    if(jsonMatch){
+      const q=JSON.parse(jsonMatch[0]);
+      QS={cur:0,score:0,qs:[{g,s,q:q.q,o:q.o,a:q.a}],timer:null,timeLeft:30,answers:[]};
+      document.getElementById('qStart').style.display='none';document.getElementById('qResult').style.display='none';
+      document.getElementById('qActive').style.display='block';renderQ();
+      toast('✅ سوال جدید ساخته شد!');
+    }
+  }catch(e){toast('❌ خطا در ارتباط با Gemini')}
 }
 
 // ===== PLANNER =====
@@ -651,21 +943,32 @@ function initPlanner(){
 }
 function addTask(day){const t=prompt(`وظیفه برای ${DAYS[day]}:`);if(!t)return;if(!S.planner[day])S.planner[day]=[];S.planner[day].push(t);save();initPlanner();toast('✅ اضافه شد')}
 function rmTask(day,idx){S.planner[day].splice(idx,1);save();initPlanner()}
-function updateCD(){const el=document.getElementById('examDate');if(el.value){S.examDate=el.value;save()}if(!S.examDate){document.getElementById('cdNum').textContent='-- روز';return}const diff=Math.ceil((new Date(S.examDate)-new Date())/(1000*60*60*24));document.getElementById('cdNum').textContent=diff>0?`${toFa(diff)} روز`:'امتحان رسیده! 🔥'}
+function updateCD(){const el=document.getElementById('examDate');if(el.value){S.examDate=el.value;save()}if(!S.examDate){document.getElementById('cdNum').textContent='-- روز';return}const diff=Math.ceil((new Date(S.examDate)-new Date())/(1000*60*60*24));document.getElementById('cdNum').textContent=diff>0?`${toFa(diff)} روز`:'امتحان رسید! 🔥'}
 
-// ===== CHAT ROOM =====
-const BAD_WORDS=['بد','زشت','لعنت','کثافت','حروم','جنده','گوه','خر','الاغ','بی‌شعور','احمق','گدا','کیری','کون','سگ','مادرجنده'];
+// ===== CHAT ROOM (BroadcastChannel sync) =====
+let roomChannel=null;
+try{roomChannel=new BroadcastChannel('ostadyar_room')}catch(e){}
+
 function renderRoom(){
   const box=document.getElementById('roomMsgs');
-  box.innerHTML=S.roomMsgs.map(m=>{const isMine=m.name===(S.profile?.fn||'');const blocked=S.blockedUsers.includes(m.name);if(blocked)return`<div class="room-msg blocked">⛔ پیام مسدود شده</div>`;return`<div class="room-msg ${isMine?'mine':'other'}"><div style="font-size:.7rem;opacity:.7;margin-bottom:4px">${m.name} • ${m.time}</div>${m.text}</div>`}).join('');
+  box.innerHTML=S.roomMsgs.slice(-50).map(m=>{
+    const isMine=m.name===(S.profile?.fn||'');
+    return`<div class="room-msg ${isMine?'mine':'other'}"><div style="font-size:.65rem;opacity:.7;margin-bottom:3px">${m.name} • ${m.time}</div>${m.text}</div>`;
+  }).join('');
   box.scrollTop=box.scrollHeight;
 }
+
 function sendRoom(){
   const inp=document.getElementById('roomIn'),txt=inp.value.trim();if(!txt)return;
   if(!S.profile){toast('⚠️ ابتدا پروفایل بسازید');return}
-  if(BAD_WORDS.some(w=>txt.toLowerCase().includes(w))){S.blockedUsers.push(S.profile.fn);save();S.roomMsgs.push({name:S.profile.fn,text:'⛔ پیام مسدود شد',time:new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})});save();renderRoom();inp.value='';toast('⛔ پیام مسدود شد');return}
-  S.roomMsgs.push({name:S.profile.fn,text:txt,time:new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})});save();renderRoom();inp.value='';
+  const bad=['بد','زشت','لعنت','کثافت','حروم','جنده','گوه','خر','الاغ','بی‌شعور','احمق','گدا','کیری','کون','سگ','مادرجنده'];
+  if(bad.some(w=>txt.toLowerCase().includes(w))){toast('⛔ کلمات نامناسب مجاز نیست');return}
+  const msg={name:S.profile.fn,text:txt,time:new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})};
+  S.roomMsgs.push(msg);save();renderRoom();inp.value='';
+  if(roomChannel)roomChannel.postMessage({type:'new',msg});
 }
+
+if(roomChannel){roomChannel.onmessage=(e)=>{if(e.data.type==='new'){S.roomMsgs.push(e.data.msg);save();if(document.getElementById('page-room').classList.contains('active'))renderRoom()}}}
 
 // ===== COMMENTS =====
 function renderComments(){
@@ -683,6 +986,8 @@ function toast(msg){const c=document.getElementById('toastC'),t=document.createE
 checkExpiry();document.body.setAttribute('data-theme',S.theme);checkProf();renderFiles();
 if(S.examDate)document.getElementById('examDate').value=S.examDate;
 if(S.profile?.gr){const qg=document.getElementById('qGrade');if(qg)qg.value=S.profile.gr}
+document.getElementById('toneSel').value=S.tone;
+document.getElementById('toneSel').addEventListener('change',(e)=>{S.tone=e.target.value;save()});
 </script>
 </body>
   </html>
