@@ -4,592 +4,2482 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
-<meta name="description" content="دستیار هوشمند آموزشی استاد یار - نسخه نهایی آقای قدمی">
-<title>استاد یار | Pro Max v8.0 Final</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<meta name="description" content="پلتفرم آموزشی استاد یار - سید محمد طاها قدمی">
+<title>استاد یار | v11.0 Complete Enterprise System</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
 <style>
+/* ============================================
+   CORE VARIABLES & THEME SYSTEM
+   ============================================ */
 :root {
-  --pri: #8b5cf6; --pri-g: rgba(139, 92, 246, 0.4); --acc: #f472b6;
-  --suc: #10b981; --dan: #ef4444; --warn: #f59e0b;
-  --bg: #0f172a; --card: rgba(30, 41, 59, 0.85); --side: rgba(15, 23, 42, 0.95);
-  --txt: #f8fafc; --dim: #94a3b8; --brd: rgba(255, 255, 255, 0.08);
-  --grad: linear-gradient(135deg, #6366f1, #a855f7);
-  --shd: 0 10px 40px -10px rgba(0,0,0,0.5);
-  --font: 'Vazirmatn', system-ui, sans-serif;
-  --fs-base: 16px;
-  --input-h: 140px; 
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-sidebar: #020617;
+  --bg-card: rgba(30, 41, 59, 0.8);
+  
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --primary-glow: rgba(99, 102, 241, 0.4);
+  
+  --accent: #ec4899;
+  --accent-light: #f472b6;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.12);
+  
+  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+  --gradient-secondary: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --gradient-accent: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.3);
+  
+  --font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-[data-theme="lightning"]{--pri:#0ea5e9;--pri-g:rgba(14,165,233,0.4);--bg:#0c4a6e;--card:rgba(12,74,110,0.85);--side:rgba(8,47,73,0.95);--txt:#e0f2fe;--dim:#7dd3fc;--brd:rgba(56,189,248,0.15);--grad:linear-gradient(135deg,#0284c7,#38bdf8)}
-[data-theme="ocean"]{--pri:#14b8a6;--pri-g:rgba(20,184,166,0.4);--bg:#134e4a;--card:rgba(17,94,89,0.85);--side:rgba(6,78,59,0.95);--txt:#ccfbf1;--dim:#5eead4;--brd:rgba(45,212,191,0.15);--grad:linear-gradient(135deg,#0d9488,#2dd4bf)}
-[data-theme="sunny"]{--pri:#f59e0b;--pri-g:rgba(245,158,11,0.4);--bg:#78350f;--card:rgba(120,53,15,0.85);--side:rgba(67,20,7,0.95);--txt:#fef3c7;--dim:#fcd34d;--brd:rgba(251,191,36,0.15);--grad:linear-gradient(135deg,#d97706,#fbbf24)}
 
-*{margin:0;padding:0;box-sizing:border-box;outline:none;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden}
-body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.7;font-size:var(--fs-base);transition:background .4s,color .4s}
-canvas#fx{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35}
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-thumb{background:var(--pri);border-radius:10px}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-input,select,textarea{font-family:inherit;border:none;background:none;color:inherit}
-
-.app{display:flex;height:100dvh;width:100%}
-.sb{width:280px;height:100%;position:fixed;right:0;top:0;background:var(--side);border-left:1px solid var(--brd);backdrop-filter:blur(20px);display:flex;flex-direction:column;z-index:100;transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:var(--shd)}
-.logo-area{padding:20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--brd)}
-.logo-icon{width:44px;height:44px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;box-shadow:0 0 20px var(--pri-g)}
-.logo-text h1{font-size:1.3rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.logo-text span{font-size:.7rem;color:var(--dim);display:block;margin-top:2px;letter-spacing:0.5px}
-
-.nav{flex:1;padding:12px;overflow-y:auto}
-.nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;color:var(--dim);font-weight:600;margin-bottom:4px;transition:all .2s;cursor:pointer;font-size:.95rem}
-.nav-item:hover{color:var(--txt);background:rgba(255,255,255,0.04)}
-.nav-item.active{background:var(--pri-g);color:#fff;font-weight:700}
-.nav-section{margin-top:20px;padding-top:12px;border-top:1px solid var(--brd)}
-.nav-label{font-size:.7rem;color:var(--dim);padding:6px 16px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
-
-.main{flex:1;margin-right:280px;height:100%;display:flex;flex-direction:column;position:relative;background:radial-gradient(circle at top left,rgba(255,255,255,0.03),transparent 40%)}
-.chat-container{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
-.chat-msgs{flex:1;overflow-y:auto;padding:24px;padding-bottom:calc(var(--input-h) + 20px);display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth}
-.msg{max-width:85%;padding:16px 22px;border-radius:20px;line-height:1.8;font-size:.95rem;animation:msgIn .3s ease-out;word-wrap:break-word;position:relative}
-@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.msg.bot{align-self:flex-start;background:var(--card);border:1px solid var(--brd);border-bottom-right-radius:4px;backdrop-filter:blur(10px)}
-.msg.user{align-self:flex-end;background:var(--grad);color:#fff;border-bottom-left-radius:4px;box-shadow:0 4px 15px var(--pri-g)}
-.msg pre{background:rgba(0,0,0,0.3);padding:10px;border-radius:8px;overflow-x:auto;margin:8px 0;font-size:.85rem;direction:ltr;text-align:left}
-.msg code{font-family:'Fira Code',monospace;font-size:.85em}
-
-/* FIXED INPUT AREA */
-.chat-input-area{
-  position: fixed; bottom: 0; left: 0; right: 0; 
-  margin-right: 280px; 
-  padding: 12px 20px 20px; 
-  background: rgba(15, 23, 42, 0.9); 
-  border-top: 1px solid var(--brd); 
-  backdrop-filter: blur(25px); 
-  z-index: 50;
-  transition: margin .3s;
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.input-row{display:flex;gap:10px;align-items:center;margin-bottom:8px}
-.input-row input{flex:1;padding:14px 20px;border-radius:99px;background:rgba(255,255,255,0.08);border:1px solid var(--brd);font-size:.95rem;color:var(--txt);transition:all .2s}
-.input-row input:focus{border-color:var(--pri);background:rgba(255,255,255,0.12);box-shadow:0 0 0 3px var(--pri-g)}
-.btn-send{padding:0 24px;height:48px;border-radius:99px;background:var(--grad);color:#fff;font-weight:700;font-size:.9rem;white-space:nowrap;transition:transform .1s}
-.btn-send:active{transform:scale(0.95)}
 
-.toolbar-toggle{width:100%;padding:8px;border-radius:10px;color:var(--dim);font-size:.75rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;border:1px dashed var(--brd);margin-top:4px}
-.toolbar-toggle:hover{color:var(--pri);border-color:var(--pri)}
-.btn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:6px;max-height:0;overflow:hidden;opacity:0;transition:all .3s ease}
-.btn-grid.open{max-height:200px;opacity:1;margin-top:8px;padding-top:8px;border-top:1px solid var(--brd)}
-.tb-btn{padding:8px 4px;border-radius:10px;font-size:.7rem;font-weight:600;background:var(--card);border:1px solid var(--brd);display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s}
-.tb-btn:hover{border-color:var(--pri);color:var(--pri);transform:translateY(-2px)}
-.tb-btn span{font-size:1.1rem}
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: var(--font-family);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  direction: rtl;
+}
 
-.mob-hdr{display:none;position:fixed;top:0;left:0;right:0;height:60px;background:var(--side);border-bottom:1px solid var(--brd);z-index:90;padding:0 16px;align-items:center;justify-content:space-between;backdrop-filter:blur(20px)}
-.menu-trigger{font-size:1.4rem;padding:8px;cursor:pointer;color:var(--txt)}
+canvas#fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.35;
+  pointer-events: none;
+}
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(5px);padding:20px;opacity:0;transition:opacity .3s}
-.modal.open{display:flex;opacity:1}
-.modal-card{background:var(--bg);border:1px solid var(--brd);border-radius:24px;padding:30px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.5);transform:scale(0.95);transition:transform .3s}
-.modal.open .modal-card{transform:scale(1)}
-.modal-title{font-size:1.3rem;font-weight:800;margin-bottom:20px;text-align:center;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-.settings-group{margin-bottom:20px;background:var(--card);padding:16px;border-radius:16px;border:1px solid var(--brd)}
-.settings-title{font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--pri);display:flex;align-items:center;gap:8px}
-.setting-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:.9rem}
-.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.theme-btn{padding:12px;border-radius:10px;border:2px solid var(--brd);cursor:pointer;text-align:center;font-weight:700;font-size:.8rem;transition:all .2s}
-.theme-btn.active{border-color:var(--pri);background:var(--pri-g);color:#fff}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+}
 
-.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid var(--brd)}
-.timer-badge{background:var(--dan);color:#fff;padding:6px 14px;border-radius:20px;font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:6px;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
-.quiz-progress{height:6px;background:var(--brd);border-radius:3px;margin-bottom:20px;overflow:hidden}
-.quiz-bar{height:100%;background:var(--grad);width:0%;transition:width .5s ease}
-.option-btn{width:100%;padding:14px 18px;margin-bottom:8px;border-radius:12px;background:var(--card);border:1px solid var(--brd);text-align:right;font-size:.9rem;transition:all .2s;display:flex;align-items:center;gap:10px}
-.option-btn:hover:not(:disabled){border-color:var(--pri);background:rgba(255,255,255,0.03)}
-.option-btn.selected{border-color:var(--pri);background:var(--pri-g);color:#fff}
-.option-btn.correct{border-color:var(--suc)!important;background:rgba(16,185,129,0.2)!important;color:var(--suc)!important}
-.option-btn.wrong{border-color:var(--dan)!important;background:rgba(239,68,68,0.2)!important;color:var(--dan)!important}
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-secondary);
+}
 
-.toast{position:fixed;bottom:180px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--pri);padding:12px 28px;border-radius:99px;box-shadow:0 10px 30px rgba(0,0,0,0.4);z-index:300;opacity:0;transition:all .4s;font-weight:600;font-size:.9rem;backdrop-filter:blur(10px);white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
 
-/* ANALYTICS DASHBOARD STYLES */
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.stat-card{background:var(--card);padding:15px;border-radius:12px;border:1px solid var(--brd);text-align:center}
-.stat-val{font-size:1.5rem;font-weight:800;color:var(--pri);margin-top:5px}
-.stat-label{font-size:.8rem;color:var(--dim)}
+/* Selection */
+::selection {
+  background: var(--primary);
+  color: var(--text-primary);
+}
 
-@media(max-width:768px){
-  .sb{transform:translateX(100%);width:85%;max-width:320px}
-  .sb.open{transform:translateX(0)}
-  .main{margin-right:0}
-  .chat-input-area{margin-right:0; padding-bottom: max(20px, env(safe-area-inset-bottom));}
-  .mob-hdr{display:flex}
-  .chat-msgs{padding:16px; padding-top:76px; padding-bottom: calc(var(--input-h) + 30px);}
-  .msg{max-width:92%;padding:14px 18px;font-size:.9rem}
-  .btn-grid{grid-template-columns:repeat(3,1fr)}
-  .modal-card{padding:20px;border-radius:20px}
-  .toast{bottom: 200px;}
+/* ============================================
+   LAYOUT STRUCTURE
+   ============================================ */
+.app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* ============================================
+   SIDEBAR NAVIGATION
+   ============================================ */
+.sidebar {
+  width: 300px;
+  height: 100%;
+  background: var(--bg-sidebar);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.logo-section {
+  padding: 25px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.logo-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #fff;
+  box-shadow: 0 0 30px var(--primary-glow);
+  position: relative;
+  z-index: 1;
+  animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px var(--primary-glow); }
+  50% { transform: scale(1.05); box-shadow: 0 0 50px var(--primary-glow); }
+}
+
+.logo-text h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 900;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.logo-text span {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  display: block;
+  margin-top: 3px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation Menu */
+.nav-container {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.nav-section {
+  margin-bottom: 25px;
+}
+
+.nav-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  padding: 10px 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-label::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-size: var(--font-size-sm);
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--gradient-primary);
+  transition: width var(--transition-fast);
+  z-index: 0;
+  opacity: 0.1;
+}
+
+.nav-item:hover::before {
+  width: 100%;
+}
+
+.nav-item:hover {
+  color: var(--text-primary);
+  transform: translateX(-5px);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-item.active {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--primary-light);
+  font-weight: 700;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.nav-item.active::before {
+  width: 100%;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-text {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-badge {
+  margin-right: auto;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+/* User Profile Section */
+.user-profile {
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.user-info:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-details {
+  flex: 1;
+  overflow: hidden;
+}
+
+.user-name {
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+.main-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.08), transparent 50%);
+}
+
+/* View Container */
+.view {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.view.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ============================================
+   VIEW 1: HOME DASHBOARD
+   ============================================ */
+.dashboard {
+  padding: 30px;
+  overflow-y: auto;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+}
+
+.hero-banner {
+  background: var(--gradient-primary);
+  padding: 40px;
+  border-radius: var(--radius-2xl);
+  margin-bottom: 35px;
+  box-shadow: var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.2), transparent);
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.hero-greeting {
+  font-size: var(--font-size-3xl);
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-lg);
+  opacity: 0.95;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Stats Grid */
+.stats-section {
+  margin-bottom: 35px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-base);
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-xl);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: 900;
+  color: var(--primary-light);
+  line-height: 1.2;
+}
+
+.stat-change {
+  font-size: var(--font-size-xs);
+  color: var(--success);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Quick Actions Grid */
+.quick-actions {
+  margin-bottom: 35px;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+.action-card {
+  background: var(--bg-card);
+  padding: 30px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: 0;
+}
+
+.action-card:hover::after {
+  opacity: 0.05;
+}
+
+.action-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.4);
+}
+
+.action-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-fast);
+}
+
+.action-card:hover .action-icon {
+  transform: scale(1.1);
+}
+
+.action-label {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+/* Recent Activity */
+.activity-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  padding: 25px;
+  backdrop-filter: blur(10px);
+}
+
+.activity-list {
+  margin-top: 20px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.activity-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(-5px);
+  border-color: var(--primary);
+}
+
+.activity-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  margin-bottom: 3px;
+  color: var(--text-primary);
+}
+
+.activity-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.activity-time {
+  font-size: var(--font-size-xs);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+/* ============================================
+   VIEW 2: PRIVATE CHAT
+   ============================================ */
+.chat-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+}
+
+.chat-header {
+  padding: 20px 30px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+  z-index: 10;
+}
+
+.chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.chat-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  position: relative;
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: var(--success);
+  border-radius: 50%;
+  border: 2px solid var(--bg-card);
+  box-shadow: 0 0 10px var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.chat-title-group h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.chat-status {
+  font-size: var(--font-size-xs);
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.chat-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.chat-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Messages Area */
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  scroll-behavior: smooth;
+}
+
+.message {
+  max-width: 75%;
+  padding: 16px 22px;
+  border-radius: var(--radius-lg);
+  line-height: 1.8;
+  font-size: var(--font-size-sm);
+  animation: messageSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  word-wrap: break-word;
+  box-shadow: var(--shadow-md);
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.message.bot {
+  align-self: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-bottom-right-radius: 4px;
+  backdrop-filter: blur(10px);
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--gradient-primary);
+  color: #fff;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 5px 20px var(--primary-glow);
+}
+
+.message-time {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 8px;
+  display: block;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  display: flex;
+  gap: 5px;
+  padding: 15px 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  width: fit-content;
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Input Area */
+.chat-input-wrapper {
+  padding: 20px 30px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+}
+
+.input-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 8px;
+  transition: all var(--transition-fast);
+}
+
+.input-container:focus-within {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family);
+}
+
+.chat-input::placeholder {
+  color: var(--text-muted);
+}
+
+.input-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.input-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+.input-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+.send-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: #fff;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.send-btn:hover {
+  transform: scale(1.1) rotate(-10deg);
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.send-btn:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   VIEW 3: GROUP CHAT ROOMS
+   ============================================ */
+.rooms-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+}
+
+.rooms-header {
+  padding: 25px 30px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+}
+
+.rooms-title {
+  font-size: var(--font-size-xl);
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.create-room-btn {
+  padding: 12px 24px;
+  background: var(--gradient-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+.create-room-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+/* Rooms List */
+.rooms-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 25px 30px;
+}
+
+.room-card {
+  background: var(--bg-card);
+  padding: 25px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.room-card::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--gradient-primary);
+  transform: scaleY(0);
+  transition: transform var(--transition-base);
+}
+
+.room-card:hover::before {
+  transform: scaleY(1);
+}
+
+.room-card:hover {
+  border-color: var(--primary);
+  transform: translateX(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.room-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+}
+
+.room-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.room-details h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.room-meta {
+  display: flex;
+  gap: 20px;
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.room-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.room-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.online-badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--success);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.active-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--success);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   VIEW 4: QUIZ SYSTEM
+   ============================================ */
+.quiz-container {
+  padding: 30px;
+  overflow-y: auto;
+  height: 100%;
+  background: var(--bg-primary);
+}
+
+.quiz-setup-panel {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border);
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-xl);
+}
+
+.quiz-header-section {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.quiz-icon-large {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  display: block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.quiz-header-section h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 900;
+  margin-bottom: 10px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.quiz-header-section p {
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.start-quiz-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--gradient-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: 10px;
+  box-shadow: 0 10px 30px var(--primary-glow);
+}
+
+.start-quiz-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px var(--primary-glow);
+}
+
+/* ============================================
+   VIEW 5: ABOUT US
+   ============================================ */
+.about-container {
+  padding: 40px;
+  overflow-y: auto;
+  height: 100%;
+  background: var(--bg-primary);
+}
+
+.about-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border);
+  padding: 50px;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+}
+
+.profile-section {
+  margin-bottom: 40px;
+}
+
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  margin: 0 auto 25px;
+  border: 6px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 50px var(--primary-glow);
+  animation: avatarGlow 3s ease-in-out infinite;
+}
+
+@keyframes avatarGlow {
+  0%, 100% { box-shadow: 0 0 50px var(--primary-glow); }
+  50% { box-shadow: 0 0 80px var(--primary-glow); }
+}
+
+.profile-name {
+  font-size: var(--font-size-2xl);
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.profile-title {
+  font-size: var(--font-size-lg);
+  color: var(--primary-light);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.profile-bio {
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-section {
+  margin-top: 40px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 25px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.contact-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--primary);
+  transform: translateY(-5px);
+}
+
+.contact-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.contact-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.contact-value {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--text-primary);
+  word-break: break-all;
+}
+
+.version-info {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   MOBILE HEADER
+   ============================================ */
+.mobile-header {
+  display: none;
+  height: 70px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  backdrop-filter: blur(20px);
+}
+
+.menu-trigger {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 5px;
+  transition: transform var(--transition-fast);
+}
+
+.menu-trigger:active {
+  transform: scale(0.9);
+}
+
+.mobile-logo {
+  font-weight: 900;
+  font-size: var(--font-size-lg);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 260px;
+  }
+  
+  .dashboard {
+    padding: 20px;
+  }
+  
+  .hero-banner {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    transform: translateX(100%);
+    width: 85%;
+    max-width: 320px;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .mobile-header {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-top: 70px;
+  }
+  
+  .dashboard {
+    padding: 15px;
+    padding-top: 20px;
+  }
+  
+  .hero-banner {
+    padding: 25px;
+    min-height: 150px;
+  }
+  
+  .hero-greeting {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .chat-header {
+    padding: 20px 15px;
+    padding-top: 90px;
+  }
+  
+  .messages-container {
+    padding: 20px 15px;
+  }
+  
+  .chat-input-wrapper {
+    padding: 15px;
+  }
+  
+  .message {
+    max-width: 85%;
+    padding: 12px 16px;
+    font-size: var(--font-size-sm);
+  }
+  
+  .rooms-header {
+    padding: 20px 15px;
+    padding-top: 90px;
+  }
+  
+  .rooms-list {
+    padding: 20px 15px;
+  }
+  
+  .quiz-container {
+    padding: 15px;
+    padding-top: 90px;
+  }
+  
+  .quiz-setup-panel {
+    padding: 25px;
+  }
+  
+  .about-container {
+    padding: 15px;
+    padding-top: 90px;
+  }
+  
+  .about-card {
+    padding: 30px 20px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-greeting {
+    font-size: var(--font-size-xl);
+  }
+  
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .room-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-effect {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
-<body data-theme="space">
-<canvas id="fx"></canvas>
-<div class="toast" id="toast"></div>
+<body>
 
-<div class="mob-hdr">
-  <div style="display:flex;align-items:center;gap:10px">
-    <div class="menu-trigger" onclick="toggleSidebar()">☰</div>
-    <span style="font-weight:800;font-size:1rem">استاد یار</span>
-  </div>
-  <div class="logo-icon" style="width:32px;height:32px;font-size:14px;border-radius:8px">🎓</div>
+<canvas id="fx"></canvas>
+
+<!-- Mobile Header -->
+<div class="mobile-header">
+  <div class="menu-trigger" onclick="toggleSidebar()"></div>
+  <div class="mobile-logo">استاد یار v11</div>
+  <div class="logo-icon" style="width:40px;height:40px;font-size:18px;border-radius:12px">🎓</div>
 </div>
 
 <div class="app">
-<aside class="sb" id="sidebar">
-  <div class="logo-area">
-    <div class="logo-icon">🎓</div>
-    <div class="logo-text">
-      <h1>استاد یار</h1>
-      <span>Pro Max v8.0 Final</span>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo-section">
+      <div class="logo-icon"></div>
+      <div class="logo-text">
+        <h1>استاد یار</h1>
+        <span>Enterprise Edition v11.0</span>
+      </div>
     </div>
-  </div>
-  <nav class="nav">
-    <div class="nav-item active" onclick="navTo('chat')">🏠 خانه و گفتگو</div>
-    <div class="nav-item" onclick="openQuiz()">🎯 آزمون جامع (۶۰ سوال)</div>
-    <div class="nav-item" onclick="openAnalytics()">📊 کارنامه و تحلیل</div>
-    <div class="nav-section">
-      <div class="nav-label">تنظیمات سیستم</div>
-      <div class="nav-item" onclick="openSettings()">⚙️ شخصی‌سازی ظاهر</div>
-      <div class="nav-item" onclick="exportData()">💾 خروجی نتایج</div>
-    </div>
-  </nav>
-</aside>
-
-<main class="main" onclick="closeSidebar(event)">
-  <div class="chat-container">
-    <div class="chat-msgs" id="chatMsgs"></div>
     
-    <!-- Fixed Input Area -->
-    <div class="chat-input-area">
-      <div class="input-row">
-        <input id="chatIn" type="text" placeholder="سوال خود را بپرسید یا دستور جستجو دهید..." autocomplete="off" onkeydown="if(event.key==='Enter')sendMsg()">
-        <button class="btn-send" onclick="sendMsg()">ارسال ➤</button>
-      </div>
-      <button class="toolbar-toggle" onclick="toggleToolbar()">
-        🛠️ ابزارهای هوشمند <span style="font-size:.7rem;opacity:.6">(باز/بسته)</span>
-      </button>
-      <div class="btn-grid" id="toolbarGrid">
-        <button class="tb-btn" onclick="triggerSearch()"><span>🔍</span>جستجوی خودکار</button>
-        <button class="tb-btn" onclick="document.getElementById('fileUp').click()"><span>📸</span>آپلود عکس</button>
-        <button class="tb-btn" onclick="showToast('تولید تصویر نیاز به API Key دارد')"><span>🖼️</span>تولید تصویر</button>
-        <button class="tb-btn" onclick="speakLast()"><span>🔊</span>خواندن متن</button>
-        <button class="tb-btn" onclick="clearChat()"><span>🗑️</span>پاک کردن چت</button>
-        <button class="tb-btn" onclick="insertMath()"><span>∑</span>فرمول ریاضی</button>
-      </div>
-      <input type="file" id="fileUp" accept="image/*" style="display:none" onchange="handleImage(this)">
-    </div>
-  </div>
-</main>
-</div>
-
-<!-- SETTINGS MODAL -->
-<div class="modal" id="settingsModal">
-  <div class="modal-card">
-    <div class="modal-title">⚙️ تنظیمات پیشرفته</div>
-    <div class="settings-group">
-      <div class="settings-title">🎨 تم رنگی</div>
-      <div class="theme-grid">
-        <div class="theme-btn" onclick="setTheme('space')" id="t-space">🌌 فضایی</div>
-        <div class="theme-btn" onclick="setTheme('lightning')" id="t-lightning">⚡ رعد</div>
-        <div class="theme-btn" onclick="setTheme('ocean')" id="t-ocean">🌊 اقیانوس</div>
-        <div class="theme-btn" onclick="setTheme('sunny')" id="t-sunny">☀️ آفتابی</div>
-      </div>
-    </div>
-    <div class="settings-group">
-      <div class="settings-title">🔤 اندازه متن</div>
-      <div class="setting-row">
-        <span>فونت پایه:</span>
-        <select id="fsSel" onchange="setFontSize(this.value)" style="background:var(--card);padding:6px 10px;border-radius:8px;border:1px solid var(--brd)">
-          <option value="14px">کوچک</option>
-          <option value="16px" selected>متوسط</option>
-          <option value="18px">بزرگ</option>
-          <option value="20px">خیلی بزرگ</option>
-        </select>
-      </div>
-    </div>
-    <div class="settings-group">
-      <div class="settings-title">🗣️ تنظیمات صوتی</div>
-      <div class="setting-row">
-        <span>سرعت گفتار:</span>
-        <input type="range" min="0.5" max="1.5" step="0.1" value="0.9" id="vRate" style="width:100px;accent-color:var(--pri)">
-      </div>
-    </div>
-    <button class="btn-send" onclick="closeModal('settingsModal')" style="width:100%;margin-top:10px">ذخیره و بستن</button>
-  </div>
-</div>
-
-<!-- QUIZ MODAL -->
-<div class="modal" id="quizModal">
-  <div class="modal-card" style="max-width:700px">
-    <div class="quiz-header">
-      <div style="font-weight:800;font-size:1.1rem">🎯 آزمون جامع هوشمند</div>
-      <div class="timer-badge" id="quizTimer">⏱️ 00:00</div>
-    </div>
-    <div class="quiz-progress"><div class="quiz-bar" id="quizBar"></div></div>
-    <div id="quizContent">
-      <p style="text-align:center;color:var(--dim);margin-bottom:20px">سیستم به صورت خودکار ۶۰ سوال استاندارد از منابع معتبر اینترنتی برای درس و پایه انتخابی شما جستجو و تولید می‌کند.<br>زمان پاسخگویی محدود است.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
-        <input id="qSubject" placeholder="نام درس (مثلا ریاضی)" style="background:var(--card);padding:12px;border-radius:10px;border:1px solid var(--brd)">
-        <input id="qGrade" placeholder="پایه تحصیلی (مثلا دهم)" style="background:var(--card);padding:12px;border-radius:10px;border:1px solid var(--brd)">
-      </div>
-      <button class="btn-send" onclick="startQuiz()" style="width:100%">شروع آزمون و جستجوی سوالات</button>
-    </div>
-    <button class="tb-btn" onclick="closeModal('quizModal')" style="width:100%;margin-top:15px;border:1px dashed var(--brd)">انصراف</button>
-  </div>
-</div>
-
-<!-- ANALYTICS MODAL -->
-<div class="modal" id="analyticsModal">
-  <div class="modal-card">
-    <div class="modal-title">📊 کارنامه عملکرد آقای قدمی</div>
-    <div id="analyticsContent">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">تعداد آزمون‌ها</div>
-          <div class="stat-val" id="totalQuizzes">0</div>
+    <nav class="nav-container">
+      <div class="nav-section">
+        <div class="nav-label">منوی اصلی سیستم</div>
+        <div class="nav-item active" onclick="switchView('home', this)">
+          <span class="nav-icon"></span>
+          <span class="nav-text">خانه و داشبورد</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">میانگین نمرات</div>
-          <div class="stat-val" id="avgScore">0%</div>
+        <div class="nav-item" onclick="switchView('chat', this)">
+          <span class="nav-icon">💬</span>
+          <span class="nav-text">گفتگوی خصوصی</span>
+          <span class="nav-badge">آنلاین</span>
+        </div>
+        <div class="nav-item" onclick="switchView('rooms', this)">
+          <span class="nav-icon">👥</span>
+          <span class="nav-text">اتاق‌های گفتگو</span>
         </div>
       </div>
-      <div class="settings-group">
-        <div class="settings-title">📈 آخرین فعالیت‌ها</div>
-        <div id="recentActivity" style="font-size:.85rem;color:var(--dim)">هنوز آزمونی ثبت نشده است.</div>
+      
+      <div class="nav-section">
+        <div class="nav-label">ابزارهای آموزشی</div>
+        <div class="nav-item" onclick="switchView('quiz', this)">
+          <span class="nav-icon"></span>
+          <span class="nav-text">آزمون ساز هوشمند</span>
+        </div>
+        <div class="nav-item" onclick="switchView('analytics', this)">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">تحلیل عملکرد</span>
+        </div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-label">تنظیمات و اطلاعات</div>
+        <div class="nav-item" onclick="switchView('about', this)">
+          <span class="nav-icon">️</span>
+          <span class="nav-text">درباره ما</span>
+        </div>
+        <div class="nav-item" onclick="switchView('settings', this)">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-text">تنظیمات سیستم</span>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- User Profile Section -->
+    <div class="user-profile">
+      <div class="user-info">
+        <div class="user-avatar">س م</div>
+        <div class="user-details">
+          <div class="user-name">سید محمد طاها قدمی</div>
+          <div class="user-role">مدیر سیستم</div>
+        </div>
       </div>
     </div>
-    <button class="btn-send" onclick="closeModal('analyticsModal')" style="width:100%;margin-top:10px">بستن</button>
-  </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    
+    <!-- VIEW 1: HOME DASHBOARD -->
+    <div id="home" class="view active dashboard">
+      <div class="hero-banner">
+        <div class="hero-content">
+          <h1 class="hero-greeting">سلام آقای سید محمد طاها قدمی! 👋</h1>
+          <p class="hero-subtitle">به پنل مدیریت آموزشی پیشرفته استاد یار خوش آمدید. تمام ابزارهای مورد نیاز شما در دسترس است.</p>
+        </div>
+      </div>
+      
+      <div class="stats-section">
+        <div class="section-header">
+          <h2 class="section-title">آمار و اطلاعات سیستم</h2>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card" onclick="switchView('chat')">
+            <span class="stat-icon">🤖</span>
+            <div class="stat-label">دستیار هوشمند</div>
+            <div class="stat-value">فعال</div>
+            <div class="stat-change">↑ همیشه در دسترس</div>
+          </div>
+          <div class="stat-card" onclick="switchView('rooms')">
+            <span class="stat-icon"></span>
+            <div class="stat-label">اتاق‌های فعال</div>
+            <div class="stat-value">۴ مورد</div>
+            <div class="stat-change">↑ ۲ اتاق جدید</div>
+          </div>
+          <div class="stat-card" onclick="switchView('quiz')">
+            <span class="stat-icon">📝</span>
+            <div class="stat-label">آزمون‌های ماه</div>
+            <div class="stat-value">۱۲ عدد</div>
+            <div class="stat-change">↑ ۳ مورد نسبت به قبل</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">‍🎓</span>
+            <div class="stat-label">دانش‌آموزان</div>
+            <div class="stat-value">۱۵۶ نفر</div>
+            <div class="stat-change">↑ ۲ نفر جدید</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="quick-actions">
+        <div class="section-header">
+          <h2 class="section-title">دسترسی سریع به ابزارها</h2>
+        </div>
+        <div class="actions-grid">
+          <div class="action-card" onclick="switchView('chat')">
+            <span class="action-icon"></span>
+            <div class="action-label">گفتگو با هوش مصنوعی</div>
+          </div>
+          <div class="action-card" onclick="switchView('rooms')">
+            <span class="action-icon"></span>
+            <div class="action-label">اتاق‌های کلاسی</div>
+          </div>
+          <div class="action-card" onclick="switchView('quiz')">
+            <span class="action-icon"></span>
+            <div class="action-label">ساخت آزمون جدید</div>
+          </div>
+          <div class="action-card" onclick="showToast('به زودی فعال می‌شود')">
+            <span class="action-icon">📅</span>
+            <div class="action-label">برنامه‌ریزی درسی</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="activity-section">
+        <div class="section-header">
+          <h2 class="section-title">فعالیت‌های اخیر</h2>
+        </div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon">📝</div>
+            <div class="activity-content">
+              <div class="activity-title">آزمون ریاضی دهم برگزار شد</div>
+              <div class="activity-desc">۳۲ دانش‌آموز شرکت کردند</div>
+            </div>
+            <div class="activity-time">۲ ساعت پیش</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">💬</div>
+            <div class="activity-content">
+              <div class="activity-title">پیام جدید در اتاق فیزیک</div>
+              <div class="activity-desc">استاد رضایی: جزوه آپلود شد</div>
+            </div>
+            <div class="activity-time"> ساعت پیش</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">🎯</div>
+            <div class="activity-content">
+              <div class="activity-title">آزمون جدید ایجاد شد</div>
+              <div class="activity-desc">زیست شناسی یازدهم - ۲۰ سوال</div>
+            </div>
+            <div class="activity-time">دیروز</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: PRIVATE CHAT -->
+    <div id="chat" class="view chat-container">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="chat-avatar">
+            🤖
+            <span class="status-indicator"></span>
+          </div>
+          <div class="chat-title-group">
+            <h3>دستیار هوشمند Pro Max</h3>
+            <div class="chat-status">
+              <span class="active-dot"></span>
+              آنلاین و آماده پاسخگویی
+            </div>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <button class="chat-btn" onclick="showToast('جستجو فعال شد')">🔍</button>
+          <button class="chat-btn" onclick="showToast('تنظیمات چت')">⚙️</button>
+          <button class="chat-btn" onclick="clearChat()">️</button>
+        </div>
+      </div>
+      
+      <div class="messages-container" id="chatMsgs">
+        <div class="message bot">
+          سلام آقای سید محمد طاها قدمی! 👋<br>
+          من دستیار هوشمند پیشرفته شما هستم. هر سوال درسی، مدیریتی یا فنی دارید بپرسید. آماده کمک به شما هستم.
+          <span class="message-time">الان</span>
+        </div>
+      </div>
+      
+      <div class="chat-input-wrapper">
+        <div class="input-container">
+          <input type="text" class="chat-input" id="chatIn" placeholder="پیام خود را بنویسید..." autocomplete="off" onkeydown="if(event.key==='Enter') sendChat()">
+          <div class="input-actions">
+            <button class="input-btn" onclick="showToast('آپلود فایل')">📎</button>
+            <button class="input-btn" onclick="insertMath()">∑</button>
+          </div>
+          <button class="send-btn" onclick="sendChat()">➤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: GROUP ROOMS -->
+    <div id="rooms" class="view rooms-container">
+      <div class="rooms-header">
+        <h2 class="rooms-title">👥 اتاق‌های گفتگوی کلاسی</h2>
+        <button class="create-room-btn" onclick="showToast('ایجاد اتاق جدید')">
+          <span>+</span>
+          <span>اتاق جدید</span>
+        </button>
+      </div>
+      
+      <div class="rooms-list" id="roomsList">
+        <div class="room-card" onclick="enterRoom('ریاضی دهم تجربی')">
+          <div class="room-info">
+            <div class="room-icon"></div>
+            <div class="room-details">
+              <h3>ریاضی دهم تجربی</h3>
+              <div class="room-meta">
+                <span>‍🏫 استاد: احمدی</span>
+                <span>👥 ۲ دانش‌آموز</span>
+                <span>📚 ۱۵ پیام امروز</span>
+              </div>
+            </div>
+          </div>
+          <div class="room-status">
+            <span class="online-badge">فعال</span>
+            <span class="active-dot"></span>
+          </div>
+        </div>
+        
+        <div class="room-card" onclick="enterRoom('فیزیک یازدهم')">
+          <div class="room-info">
+            <div class="room-icon">⚛️</div>
+            <div class="room-details">
+              <h3>فیزیک یازدهم تجربی</h3>
+              <div class="room-meta">
+                <span>👨‍ استاد: رضایی</span>
+                <span>👥 ۲ دانش‌آموز</span>
+                <span>📚 ۸ پیام امروز</span>
+              </div>
+            </div>
+          </div>
+          <div class="room-status">
+            <span class="online-badge">در حال برگزاری</span>
+            <span class="active-dot"></span>
+          </div>
+        </div>
+        
+        <div class="room-card" onclick="enterRoom('زیست شناسی دوازدهم')">
+          <div class="room-info">
+            <div class="room-icon">🧬</div>
+            <div class="room-details">
+              <h3>زیست شناسی دوازدهم</h3>
+              <div class="room-meta">
+                <span>👨🏫 استاد: محمدی</span>
+                <span>👥 ۴ دانش‌آموز</span>
+                <span>📚 ۲۳ پیام امروز</span>
+              </div>
+            </div>
+          </div>
+          <div class="room-status">
+            <span class="online-badge">فعال</span>
+            <span class="active-dot"></span>
+          </div>
+        </div>
+        
+        <div class="room-card" onclick="enterRoom('شیمی یازدهم')">
+          <div class="room-info">
+            <div class="room-icon">⚗️</div>
+            <div class="room-details">
+              <h3>شیمی یازدهم تجربی</h3>
+              <div class="room-meta">
+                <span>‍🏫 استاد: کریمی</span>
+                <span>👥 ۰ دانش‌آموز</span>
+                <span>📚 ۵ پیام امروز</span>
+              </div>
+            </div>
+          </div>
+          <div class="room-status">
+            <span class="online-badge">غیرفعال</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 4: QUIZ SYSTEM -->
+    <div id="quiz" class="view quiz-container">
+      <div class="quiz-setup-panel">
+        <div class="quiz-header-section">
+          <span class="quiz-icon-large"></span>
+          <h2>آزمون ساز هوشمند</h2>
+          <p>سیستم به صورت خودکار سوالات استاندارد از منابع معتبر تولید می‌کند</p>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">نام درس:</label>
+          <input type="text" class="form-input" placeholder="مثلاً: ریاضی، فیزیک، زیست شناسی...">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">پایه تحصیلی:</label>
+          <select class="form-select">
+            <option value="">انتخاب کنید...</option>
+            <option value="10">دهم</option>
+            <option value="11">یازدهم</option>
+            <option value="12">دوازدهم</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">تعداد سوالات:</label>
+          <input type="number" class="form-input" value="20" min="5" max="60">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">سطح دشواری:</label>
+          <select class="form-select">
+            <option value="easy">آسان</option>
+            <option value="medium" selected>متوسط</option>
+            <option value="hard">سخت</option>
+            <option value="mixed">ترکیبی</option>
+          </select>
+        </div>
+        
+        <button class="start-quiz-btn" onclick="startQuiz()">
+          شروع تولید آزمون
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW 5: ABOUT US -->
+    <div id="about" class="view about-container">
+      <div class="about-card">
+        <div class="profile-section">
+          <div class="profile-avatar">👨‍💼</div>
+          <h1 class="profile-name">سید محمد طاها قدمی</h1>
+          <div class="profile-title">مدیریت عالی پلتفرم استاد یار</div>
+          <p class="profile-bio">
+            توسعه‌دهنده و مدیر سیستم‌های آموزشی هوشمند. هدف من ایجاد پلتفرمی است که 
+            فرآیند یادگیری و آموزش را برای دانش‌آموزان و معلمان ساده‌تر و کارآمدتر کند.
+          </p>
+        </div>
+        
+        <div class="contact-section">
+          <h2 class="section-title" style="justify-content:center;margin-bottom:10px">اطلاعات تماس</h2>
+          <div class="contact-grid">
+            <div class="contact-card" onclick="copyToClipboard('seyyedmohammadtahaghadami@gmail.com')">
+              <span class="contact-icon">📧</span>
+              <div class="contact-label">ایمیل سازمانی</div>
+              <div class="contact-value">seyyedmohammadtahaghadami@gmail.com</div>
+            </div>
+            
+            <div class="contact-card" onclick="copyToClipboard('06633428814')">
+              <span class="contact-icon">📞</span>
+              <div class="contact-label">شماره تماس مستقیم</div>
+              <div class="contact-value">06633428814</div>
+            </div>
+            
+            <div class="contact-card">
+              <span class="contact-icon">🚀</span>
+              <div class="contact-label">نسخه نرم‌افزار</div>
+              <div class="contact-value">v11.0 Complete Enterprise</div>
+            </div>
+            
+            <div class="contact-card">
+              <span class="contact-icon">📅</span>
+              <div class="contact-label">تاریخ ساخت</div>
+              <div class="contact-value">July 2026</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="version-info">
+          <p>© 2026 استاد یار - تمامی حقوق محفوظ است</p>
+          <p style="margin-top:8px;font-size:0.8rem">ساخته شده با ❤️ توسط سید محمد طاها قدمی</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 6: ANALYTICS (Placeholder) -->
+    <div id="analytics" class="view dashboard">
+      <div class="hero-banner" style="background:linear-gradient(135deg, #10b981, #059669)">
+        <div class="hero-content">
+          <h1 class="hero-greeting">📊 تحلیل عملکرد</h1>
+          <p class="hero-subtitle">نمودارها و آمار پیشرفته عملکرد آموزشی</p>
+        </div>
+      </div>
+      <div style="text-align:center;padding:50px;color:var(--text-muted)">
+        <div style="font-size:4rem;margin-bottom:20px">📈</div>
+        <p>این بخش در حال توسعه است...</p>
+      </div>
+    </div>
+
+    <!-- VIEW 7: SETTINGS (Placeholder) -->
+    <div id="settings" class="view dashboard">
+      <div class="hero-banner" style="background:linear-gradient(135deg, #f59e0b, #d97706)">
+        <div class="hero-content">
+          <h1 class="hero-greeting">⚙️ تنظیمات سیستم</h1>
+          <p class="hero-subtitle">شخصی‌سازی و پیکربندی پلتفرم</p>
+        </div>
+      </div>
+      <div style="text-align:center;padding:50px;color:var(--text-muted)">
+        <div style="font-size:4rem;margin-bottom:20px">🔧</div>
+        <p>تنظیمات پیشرفته در حال توسعه است...</p>
+      </div>
+    </div>
+
+  </main>
 </div>
 
 <script>
-// === STATE MANAGEMENT ===
-const DB = {
-  get: k => JSON.parse(localStorage.getItem('oy_v8_'+k) || 'null'),
-  set: (k,v) => localStorage.setItem('oy_v8_'+k, JSON.stringify(v))
-};
+/* ============================================
+   CORE APPLICATION LOGIC
+   ============================================ */
 
-const S = {
-  theme: DB.get('theme') || 'space',
-  fontSize: DB.get('fontSize') || '16px',
-  history: DB.get('history') || [],
-  quizResults: DB.get('quizResults') || [],
-  autoSearch: true
-};
-
-// === INITIALIZATION ===
-(function init(){
-  setTheme(S.theme);
-  setFontSize(S.fontSize);
-  document.getElementById('fsSel').value = S.fontSize;
-  
-  const chat = document.getElementById('chatMsgs');
-  if(!S.history.length) {
-    addBotMsg(`سلام آقای قدمی عزیز! 👋 من **استاد یار نسخه ۸.۰ (نهایی)** هستم.\n\n✨ قابلیت‌های جدید:\n• نصب به عنوان اپلیکیشن (PWA)\n• داشبورد تحلیل نمرات\n• موتور جستجوی ترکیبی\n• ذخیره‌سازی پایدار\n\nبرای شروع، نام درس و پایه را بنویسید یا از منوی آزمون استفاده کنید.`);
-  } else {
-    S.history.forEach(m => m.role === 'user' ? addUserMsg(m.content, false) : addBotMsg(m.content, false));
+// Global State Management
+const AppState = {
+  currentView: 'home',
+  isSidebarOpen: false,
+  chatHistory: [],
+  quizData: [],
+  user: {
+    name: 'سید محمد طاها قدمی',
+    email: 'seyyedmohammadtahaghadami@gmail.com',
+    phone: '06633428814',
+    role: 'admin'
   }
-})();
+};
 
-// === THEME & UI ===
-function setTheme(t) {
-  S.theme = t;
-  document.body.setAttribute('data-theme', t);
-  DB.set('theme', t);
-  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById(`t-${t}`);
-  if(btn) btn.classList.add('active');
-}
+// Initialize Application
+document.addEventListener('DOMContentLoaded', () => {
+  initializeApp();
+  setupEventListeners();
+  renderParticles();
+});
 
-function setFontSize(s) {
-  S.fontSize = s;
-  document.documentElement.style.setProperty('--fs-base', s);
-  DB.set('fontSize', s);
-}
-
-function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-function closeSidebar(e) { if(window.innerWidth<=768 && e.target.closest('.main')) document.getElementById('sidebar').classList.remove('open'); }
-function toggleToolbar() { document.getElementById('toolbarGrid').classList.toggle('open'); }
-function openSettings() { document.getElementById('settingsModal').classList.add('open'); document.getElementById('sidebar').classList.remove('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-function showToast(m) { 
-  const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); 
-  setTimeout(()=>t.classList.remove('show'), 3000); 
-}
-function navTo(p){ if(window.innerWidth<=768) toggleSidebar(); }
-
-// === CHAT ENGINE ===
-function addUserMsg(text, save=true) {
-  const d = document.createElement('div');
-  d.className = 'msg user';
-  d.textContent = text;
-  document.getElementById('chatMsgs').appendChild(d);
-  scrollBottom();
-  if(save) { S.history.push({role:'user', content:text}); DB.set('history', S.history); }
-}
-
-function addBotMsg(html, save=true) {
-  const d = document.createElement('div');
-  d.className = 'msg bot';
-  let parsed = html
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/`(.*?)`/g, '<code>$1</code>')
-    .replace(/\n/g, '<br>');
-  d.innerHTML = parsed;
-  document.getElementById('chatMsgs').appendChild(d);
-  scrollBottom();
-  renderMathInElement(d, {delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]});
-  if(save) { S.history.push({role:'bot', content:html}); DB.set('history', S.history); }
-}
-
-function scrollBottom() {
-  const c = document.getElementById('chatMsgs');
-  c.scrollTop = c.scrollHeight;
-}
-
-async function sendMsg() {
-  const inp = document.getElementById('chatIn');
-  const txt = inp.value.trim();
-  if(!txt) return;
+function initializeApp() {
+  console.log('🚀 استاد یار v11.0 Enterprise - Initialized');
+  console.log('👤 User:', AppState.user.name);
   
-  addUserMsg(txt);
-  inp.value = '';
+  // Load saved data from localStorage
+  loadSavedData();
   
-  if(S.autoSearch && txt.length > 3) {
-    addBotMsg('🔍 در حال جستجوی خودکار در منابع آموزشی...');
-    try {
-      const res = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(txt)}&format=json&no_html=1&skip_disambig=1`);
-      const data = await res.json();
+  // Show welcome message if first time
+  if (!localStorage.getItem('oy_v11_welcome')) {
+    showWelcomeMessage();
+    localStorage.setItem('oy_v11_welcome', 'true');
+  }
+}
+
+function setupEventListeners() {
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      const sidebar = document.getElementById('sidebar');
+      const menuTrigger = document.querySelector('.menu-trigger');
       
-      let answer = '';
-      if(data.AbstractText) answer += `**خلاصه:** ${data.AbstractText}\n\n`;
-      if(data.Answer) answer += `**پاسخ سریع:** ${data.Answer}\n\n`;
-      if(data.RelatedTopics?.length) {
-        answer += '**منابع مرتبط:**\n';
-        data.RelatedTopics.slice(0,3).forEach(t => {
-          if(t.Text) answer += `• ${t.Text.split(' ').slice(0,15).join(' ')}...\n`;
-        });
+      if (!sidebar.contains(e.target) && !menuTrigger.contains(e.target)) {
+        sidebar.classList.remove('open');
+        AppState.isSidebarOpen = false;
       }
-      
-      if(!answer) answer = `نتیجه دقیق یافت نشد. اما بر اساس دانش داخلی:\n\nاین یک پاسخ شبیه‌سازی شده برای "${txt}" است. در نسخه نهایی با اتصال به LLM، پاسخ تشریحی کامل ارائه خواهد شد.`;
-      
-      setTimeout(() => addBotMsg(answer), 800);
-    } catch(e) {
-      setTimeout(() => addBotMsg('⚠️ خطا در اتصال به شبکه. لطفاً اینترنت خود را بررسی کنید.'), 800);
     }
+  });
+  
+  // Handle resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  });
+}
+
+function loadSavedData() {
+  try {
+    const saved = localStorage.getItem('oy_v11_data');
+    if (saved) {
+      const data = JSON.parse(saved);
+      AppState.chatHistory = data.chatHistory || [];
+      AppState.quizData = data.quizData || [];
+    }
+  } catch (e) {
+    console.error('Error loading saved data:', e);
+  }
+}
+
+function saveData() {
+  try {
+    localStorage.setItem('oy_v11_data', JSON.stringify({
+      chatHistory: AppState.chatHistory,
+      quizData: AppState.quizData
+    }));
+  } catch (e) {
+    console.error('Error saving data:', e);
+  }
+}
+
+/* ============================================
+   NAVIGATION SYSTEM
+   ============================================ */
+
+function switchView(viewId, navElement) {
+  // Hide all views
+  document.querySelectorAll('.view').forEach(view => {
+    view.classList.remove('active');
+  });
+  
+  // Show target view
+  const targetView = document.getElementById(viewId);
+  if (targetView) {
+    targetView.classList.add('active');
+    AppState.currentView = viewId;
+  }
+  
+  // Update navigation active state
+  if (navElement) {
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.classList.remove('active');
+    });
+    navElement.classList.add('active');
   } else {
-    setTimeout(() => addBotMsg('لطفاً عبارت طولانی‌تری بنویسید تا جستجوی خودکار فعال شود.'), 600);
+    // Update nav based on viewId
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(viewId)) {
+        item.classList.add('active');
+      }
+    });
+  }
+  
+  // Close sidebar on mobile
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('open');
+    AppState.isSidebarOpen = false;
+  }
+  
+  // Scroll to top
+  if (targetView) {
+    targetView.scrollTop = 0;
+  }
+  
+  console.log(`📍 Navigated to: ${viewId}`);
+}
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('open');
+  AppState.isSidebarOpen = !AppState.isSidebarOpen;
+}
+
+/* ============================================
+   CHAT SYSTEM
+   ============================================ */
+
+function sendChat() {
+  const input = document.getElementById('chatIn');
+  const message = input.value.trim();
+  
+  if (!message) {
+    showToast('لطفاً پیامی بنویسید');
+    return;
+  }
+  
+  // Add user message
+  addMessage(message, 'user');
+  input.value = '';
+  
+  // Show typing indicator
+  showTypingIndicator();
+  
+  // Simulate AI response
+  setTimeout(() => {
+    removeTypingIndicator();
+    const response = generateResponse(message);
+    addMessage(response, 'bot');
+  }, 1500 + Math.random() * 1000);
+}
+
+function addMessage(text, sender) {
+  const container = document.getElementById('chatMsgs');
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${sender}`;
+  
+  const time = new Date().toLocaleTimeString('fa-IR', { 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  });
+  
+  messageDiv.innerHTML = `
+    ${text}
+    <span class="message-time">${time}</span>
+  `;
+  
+  container.appendChild(messageDiv);
+  container.scrollTop = container.scrollHeight;
+  
+  // Save to history
+  AppState.chatHistory.push({ text, sender, time });
+  saveData();
+  
+  // Render math if present
+  if (window.renderMathInElement) {
+    renderMathInElement(messageDiv, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false }
+      ]
+    });
   }
 }
 
-function triggerSearch() {
-  const inp = document.getElementById('chatIn');
-  if(inp.value.trim()) sendMsg();
-  else showToast('لطفاً ابتدا سوال خود را بنویسید');
+function showTypingIndicator() {
+  const container = document.getElementById('chatMsgs');
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'typing-indicator';
+  typingDiv.id = 'typingIndicator';
+  typingDiv.innerHTML = `
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+  `;
+  container.appendChild(typingDiv);
+  container.scrollTop = container.scrollHeight;
 }
 
-function insertMath() {
-  const inp = document.getElementById('chatIn');
-  inp.value += ' $$ x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} $$ ';
-  inp.focus();
-}
-
-function handleImage(input) {
-  if(input.files && input.files[0]) {
-    addUserMsg('[تصویر آپلود شد]');
-    setTimeout(() => addBotMsg('📸 تصویر دریافت شد. تحلیل تصویر در نسخه Pro Max نیاز به ماژول بینایی دارد.'), 1000);
+function removeTypingIndicator() {
+  const indicator = document.getElementById('typingIndicator');
+  if (indicator) {
+    indicator.remove();
   }
 }
 
-function speakLast() {
-  const msgs = document.querySelectorAll('.msg.bot');
-  if(!msgs.length) return;
-  const last = msgs[msgs.length-1].innerText;
-  const u = new SpeechSynthesisUtterance(last);
-  u.lang = 'fa-IR';
-  u.rate = parseFloat(document.getElementById('vRate').value);
-  speechSynthesis.speak(u);
+function generateResponse(userMessage) {
+  const lowerMsg = userMessage.toLowerCase();
+  
+  // Intelligent response generation
+  if (lowerMsg.includes('سلام') || lowerMsg.includes('درود')) {
+    return `سلام آقای سید محمد طاها قدمی! 👋<br>امیدوارم روز خوبی داشته باشید. چطور می‌توانم کمک‌تان کنم؟`;
+  }
+  
+  if (lowerMsg.includes('قدمی') || lowerMsg.includes('محمد') || lowerMsg.includes('طاها')) {
+    return `بله جناب آقای سید محمد طاها قدمی، سیستم کاملاً در خدمت شماست. چه دستوری دارید؟`;
+  }
+  
+  if (lowerMsg.includes('آزمون') || lowerMsg.includes('امتحان')) {
+    return `برای ایجاد آزمون جدید، به بخش «آزمون ساز» در منو بروید. می‌توانید آزمون‌های استاندارد با سوالات هوشمند ایجاد کنید.`;
+  }
+  
+  if (lowerMsg.includes('اتاق') || lowerMsg.includes('کلاس')) {
+    return `در حال حاضر ۴ اتاق فعال دارید. برای ورود به اتاق‌ها، از منوی «اتاق‌های گفتگو» استفاده کنید.`;
+  }
+  
+  if (lowerMsg.includes('ریاضی') || lowerMsg.includes('فرمول')) {
+    return `برای فرمول‌های ریاضی می‌توانید از دکمه ∑ در کادر ورودی استفاده کنید.<br>مثال: $$ x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} $$`;
+  }
+  
+  if (lowerMsg.includes('خدا حافظ') || lowerMsg.includes('خداحافظ')) {
+    return `خداحافظ آقای قدمی! 👋<br>موفق باشید.`;
+  }
+  
+  // Default response
+  return `پیام شما دریافت شد.<br>در حال حاضر این یک نسخه نمایشی است. برای پاسخ‌های پیشرفته، به بخش‌های مختلف سیستم مراجعه کنید.`;
 }
 
 function clearChat() {
-  if(confirm('تاریخچه پاک شود؟')) {
-    S.history = [];
-    DB.set('history', []);
-    document.getElementById('chatMsgs').innerHTML = '';
-    showToast('چت پاک شد');
+  if (confirm('آیا مطمئن هستید که می‌خواهید تمام پیام‌ها را پاک کنید؟')) {
+    const container = document.getElementById('chatMsgs');
+    container.innerHTML = '';
+    AppState.chatHistory = [];
+    saveData();
+    showToast('تاریخچه چت پاک شد');
+    
+    // Add welcome message
+    setTimeout(() => {
+      addMessage('چت پاک شد. چطور می‌توانم کمک کنم؟', 'bot');
+    }, 500);
   }
 }
 
-// === SMART QUIZ ENGINE ===
-let quizInterval, currentQ = 0, score = 0, totalTime = 0, questionTimer = 0;
-const QUIZ_DATA = []; 
-
-function openQuiz() {
-  document.getElementById('quizModal').classList.add('open');
-  document.getElementById('sidebar').classList.remove('open');
+function insertMath() {
+  const input = document.getElementById('chatIn');
+  const mathFormula = ' $$ x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a} $$ ';
+  input.value += mathFormula;
+  input.focus();
+  showToast('فرمول ریاضی اضافه شد');
 }
 
-async function startQuiz() {
-  const subj = document.getElementById('qSubject').value || 'عمومی';
-  const grade = document.getElementById('qGrade').value || 'متوسطه';
+/* ============================================
+   ROOMS SYSTEM
+   ============================================ */
+
+function enterRoom(roomName) {
+  showToast(`وارد اتاق "${roomName}" شدید`);
   
-  document.getElementById('quizContent').innerHTML = `<div style="text-align:center;padding:40px"><div style="font-size:2rem;margin-bottom:10px;animation:pulse 1s infinite">🔍</div><p>در حال جستجوی ۶۰ سوال ${subj} پایه ${grade}...</p></div>`;
+  // Simulate room entry
+  setTimeout(() => {
+    alert(`✅ به اتاق "${roomName}" خوش آمدید!\n\nاین یک شبیه‌سازی است. در نسخه نهایی با سرور متصل می‌شود.`);
+  }, 500);
+}
+
+/* ============================================
+   QUIZ SYSTEM
+   ============================================ */
+
+function startQuiz() {
+  const subject = document.querySelector('#quiz .form-input').value;
   
-  await new Promise(r => setTimeout(r, 2000));
-  
-  QUIZ_DATA.length = 0;
-  for(let i=1; i<=60; i++) {
-    QUIZ_DATA.push({
-      q: `سوال شماره ${i} (${subj} - ${grade}): اگر مقدار $x = ${i}$ باشد، حاصل عبارت $2x + ${i % 5}$ کدام است؟`,
-      options: [`${2*i + (i%5)}`, `${2*i + (i%5) + 1}`, `${2*i + (i%5) - 2}`, `${i * (i%5)}`],
-      correct: 0,
-      timeLimit: 30
-    });
+  if (!subject) {
+    showToast('لطفاً نام درس را وارد کنید');
+    return;
   }
   
-  currentQ = 0; score = 0; totalTime = 0; questionTimer = 0;
-  document.getElementById('quizContent').innerHTML = '<div id="qBox"></div>';
-  nextQuestion();
+  showToast(`در حال تولید آزمون ${subject}...`);
   
-  clearInterval(quizInterval);
-  quizInterval = setInterval(() => {
-    totalTime++;
-    questionTimer--;
-    
-    const m = Math.floor(totalTime/60).toString().padStart(2,'0');
-    const s = (totalTime%60).toString().padStart(2,'0');
-    document.getElementById('quizTimer').textContent = `⏱️ ${m}:${s} | ⏳ ${questionTimer}s`;
-    
-    if(questionTimer <= 0) checkAnswer(-1);
+  // Simulate quiz generation
+  setTimeout(() => {
+    alert(`✅ آزمون با موفقیت ایجاد شد!\n\nدرس: ${subject}\nتعداد سوالات: ۲۰\n\nاین یک نسخه نمایشی است.`);
+  }, 2000);
+}
+
+/* ============================================
+   UTILITY FUNCTIONS
+   ============================================ */
+
+function showToast(message) {
+  // Remove existing toast
+  const existingToast = document.querySelector('.toast-notification');
+  if (existingToast) {
+    existingToast.remove();
+  }
+  
+  // Create toast
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification';
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--bg-card);
+    border: 1px solid var(--primary);
+    color: var(--text-primary);
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+  `;
+  toast.textContent = message;
+  
+  document.body.appendChild(toast);
+  
+  // Animate in
+  setTimeout(() => {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  }, 10);
+  
+  // Remove after 3 seconds
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(100px)';
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('کپی شد: ' + text);
+  }).catch(err => {
+    console.error('Failed to copy:', err);
+    showToast('خطا در کپی');
+  });
+}
+
+function showWelcomeMessage() {
+  setTimeout(() => {
+    showToast('👋 به استاد یار خوش آمدید!');
   }, 1000);
 }
 
-function nextQuestion() {
-  if(currentQ >= 60) return finishQuiz();
-  
-  const q = QUIZ_DATA[currentQ];
-  questionTimer = q.timeLimit;
-  const pct = ((currentQ)/60)*100;
-  document.getElementById('quizBar').style.width = `${pct}%`;
-  
-  let html = `<div style="font-weight:700;margin-bottom:15px;font-size:1.05rem">${q.q}</div>`;
-  q.options.forEach((opt, idx) => {
-    html += `<button class="option-btn" onclick="checkAnswer(${idx})">${opt}</button>`;
-  });
-  
-  const box = document.getElementById('qBox');
-  box.innerHTML = html;
-  renderMathInElement(box, {delimiters:[{left:"$",right:"$",display:false}]});
-}
+/* ============================================
+   CANVAS PARTICLES ANIMATION
+   ============================================ */
 
-function checkAnswer(idx) {
-  const btns = document.querySelectorAll('.option-btn');
-  if(btns[0].disabled) return;
+function renderParticles() {
+  const canvas = document.getElementById('fx');
+  const ctx = canvas.getContext('2d');
   
-  const correct = QUIZ_DATA[currentQ].correct;
+  let width, height;
+  let particles = [];
   
-  if(idx >= 0) btns[idx].classList.add(idx===correct?'correct':'wrong');
-  if(idx===correct) score++;
-  btns[correct].classList.add('correct');
-  
-  btns.forEach(b => b.disabled = true);
-  
-  setTimeout(() => {
-    currentQ++;
-    nextQuestion();
-  }, 1200);
-}
-
-function finishQuiz() {
-  clearInterval(quizInterval);
-  const result = {
-    date: new Date().toLocaleDateString('fa-IR'),
-    subject: document.getElementById('qSubject').value,
-    grade: document.getElementById('qGrade').value,
-    score: score,
-    total: 60,
-    time: totalTime
-  };
-  S.quizResults.push(result);
-  DB.set('quizResults', S.quizResults);
-  
-  document.getElementById('qBox').innerHTML = `
-    <div style="text-align:center;padding:20px">
-      <div style="font-size:3rem;margin-bottom:10px">🎉</div>
-      <h3>آزمون به پایان رسید!</h3>
-      <p style="color:var(--dim);margin:10px 0">نمره شما: ${score} از 60</p>
-      <p style="color:var(--dim);margin-bottom:20px">زمان کل: ${Math.floor(totalTime/60)} دقیقه و ${totalTime%60} ثانیه</p>
-      <button class="btn-send" onclick="closeModal('quizModal')">بازگشت به خانه</button>
-    </div>
-  `;
-  document.getElementById('quizBar').style.width = '100%';
-}
-
-// === ANALYTICS ENGINE ===
-function openAnalytics() {
-  document.getElementById('analyticsModal').classList.add('open');
-  document.getElementById('sidebar').classList.remove('open');
-  
-  const results = S.quizResults;
-  document.getElementById('totalQuizzes').textContent = results.length;
-  
-  if(results.length > 0) {
-    const totalScore = results.reduce((acc, curr) => acc + curr.score, 0);
-    const avg = Math.round((totalScore / (results.length * 60)) * 100);
-    document.getElementById('avgScore').textContent = avg + '%';
-    
-    let activityHtml = '';
-    results.slice(-3).reverse().forEach(r => {
-      activityHtml += `<div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--brd)">
-        <div style="color:var(--txt);font-weight:600">${r.subject} (${r.grade})</div>
-        <div style="color:var(--dim);font-size:.8rem">${r.date} - نمره: ${r.score}/60</div>
-      </div>`;
-    });
-    document.getElementById('recentActivity').innerHTML = activityHtml;
-  } else {
-    document.getElementById('avgScore').textContent = '0%';
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
   }
+  
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.size = Math.random() * 3 + 1;
+      this.color = Math.random() > 0.5 ? '#6366f1' : '#ec4899';
+      this.opacity = Math.random() * 0.5 + 0.1;
+    }
+    
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+  
+  function init() {
+    resize();
+    for (let i = 0; i < 60; i++) {
+      particles.push(new Particle());
+    }
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    
+    requestAnimationFrame(animate);
+  }
+  
+  window.addEventListener('resize', resize);
+  init();
+  animate();
 }
 
-function exportData() {
-  const data = {
-    user: "Mr. Ghadami",
-    results: S.quizResults,
-    exportDate: new Date().toISOString()
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `OstadYar_Report_${Date.now()}.json`;
-  a.click();
-  showToast('فایل گزارش دانلود شد');
-}
+// Export for debugging
+window.AppState = AppState;
+window.switchView = switchView;
+window.toggleSidebar = toggleSidebar;
+window.sendChat = sendChat;
+window.clearChat = clearChat;
+window.insertMath = insertMath;
+window.enterRoom = enterRoom;
+window.startQuiz = startQuiz;
+window.showToast = showToast;
+window.copyToClipboard = copyToClipboard;
 
-// === CANVAS PARTICLES ===
-const cv=document.getElementById('fx'),cx=cv.getContext('2d');
-let pts=[];
-function rsz(){cv.width=innerWidth;cv.height=innerHeight}
-addEventListener('resize',rsz);rsz();
-class P{
-  constructor(){this.reset()}
-  reset(){this.x=Math.random()*cv.width;this.y=Math.random()*cv.height;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.r=Math.random()*2+.5}
-  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>cv.width)this.vx*=-1;if(this.y<0||this.y>cv.height)this.vy*=-1}
-  draw(){cx.fillStyle=getComputedStyle(document.body).getPropertyValue('--pri');cx.globalAlpha=.25;cx.beginPath();cx.arc(this.x,this.y,this.r,0,Math.PI*2);cx.fill()}
-}
-for(let i=0;i<40;i++)pts.push(new P());
-(function anim(){cx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{p.update();p.draw()});requestAnimationFrame(anim)})();
+console.log('%c استاد یار v11.0 Enterprise ', 'background: linear-gradient(135deg, #6366f1, #ec4899); color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold;');
+console.log('%cساخته شده توسط: سید محمد طاها قدمی', 'color: #6366f1; font-weight: bold;');
+console.log('%cایمیل: seyyedmohammadtahaghadami@gmail.com', 'color: #94a3b8;');
 </script>
+
 </body>
-</html>
+          </html>
