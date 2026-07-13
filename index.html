@@ -3,8 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>استاد یار | پلتفرم هوشمند آموزشی</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<title>استاد یار | دستیار آموزشی هوشمند Pro Max v4.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{
   --pri:#8b5cf6;
@@ -12,70 +18,76 @@
   --acc:#ec4899;
   --suc:#10b981;
   --dan:#ef4444;
+  --wrn:#f59e0b;
   --bg:#f8fafc;
-  --card:rgba(255,255,255,.88);
-  --side:rgba(255,255,255,.96);
+  --card:rgba(255,255,255,.95);
+  --side:rgba(255,255,255,.98);
   --txt:#0f172a;
   --dim:#64748b;
   --brd:rgba(15,23,42,.08);
   --grad:linear-gradient(135deg,#8b5cf6,#ec4899);
   --shd:0 10px 40px rgba(0,0,0,.08);
-  --r:16px;
-  --font:'Vazirmatn',sans-serif;
+  --r:24px;
+  --font:'Vazirmatn',sans-serif
 }
 [data-theme="dark"]{
   --bg:#0a0a0f;
-  --card:rgba(26,26,36,.85);
-  --side:rgba(15,15,25,.96);
+  --card:rgba(26,26,36,.92);
+  --side:rgba(15,15,25,.98);
   --txt:#f1f5f9;
   --dim:#94a3b8;
   --brd:rgba(255,255,255,.08);
-  --shd:0 10px 40px rgba(0,0,0,.5);
+  --shd:0 10px 40px rgba(0,0,0,.5)
 }
 [data-theme="space"]{
   --bg:#020010;
-  --card:rgba(10,10,40,.7);
-  --side:rgba(5,5,25,.96);
+  --card:rgba(10,10,40,.8);
+  --side:rgba(5,5,25,.98);
   --txt:#e0e7ff;
   --dim:#818cf8;
   --pri:#6366f1;
   --brd:rgba(99,102,241,.25);
-  --grad:linear-gradient(135deg,#6366f1,#06b6d4);
+  --grad:linear-gradient(135deg,#6366f1,#06b6d4)
 }
 [data-theme="thunder"]{
   --bg:#0c0a1a;
-  --card:rgba(20,15,40,.8);
-  --side:rgba(12,10,26,.96);
+  --card:rgba(20,15,40,.88);
+  --side:rgba(12,10,26,.98);
   --txt:#fff;
   --dim:#a78bfa;
   --pri:#a855f7;
   --acc:#facc15;
   --brd:rgba(168,85,247,.3);
-  --grad:linear-gradient(135deg,#a855f7,#facc15);
+  --grad:linear-gradient(135deg,#a855f7,#facc15)
 }
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  outline:none;
-  -webkit-tap-highlight-color:transparent;
+[data-theme="ocean"]{
+  --bg:#001a2b;
+  --card:rgba(0,40,60,.85);
+  --side:rgba(0,26,43,.95);
+  --txt:#e0f7ff;
+  --dim:#7dd3fc;
+  --pri:#0ea5e9;
+  --acc:#22d3ee;
+  --brd:rgba(14,165,233,.3);
+  --grad:linear-gradient(135deg,#0ea5e9,#22d3ee)
 }
+*{margin:0;padding:0;box-sizing:border-box;outline:none;-webkit-tap-highlight-color:transparent}
 body{
   font-family:var(--font);
   background:var(--bg);
   color:var(--txt);
-  line-height:1.6;
+  line-height:1.7;
   min-height:100vh;
   display:flex;
-  overflow-x:hidden;
-  transition:background .5s,color .5s;
+  overflow:hidden;
+  transition:background .5s ease,color .5s ease
 }
 canvas#fx{
   position:fixed;
   inset:0;
   z-index:-1;
   pointer-events:none;
-  opacity:.6;
+  opacity:.4
 }
 .thunder-fx{
   position:fixed;
@@ -83,14 +95,14 @@ canvas#fx{
   background:#fff;
   pointer-events:none;
   z-index:-1;
-  opacity:0;
+  opacity:0
 }
 [data-theme="thunder"] .thunder-fx{
-  animation:thFlash 4s ease-in-out infinite;
+  animation:thFlash 4s ease-in-out infinite
 }
 @keyframes thFlash{
   0%,100%{opacity:0}
-  50%{opacity:.12}
+  50%{opacity:.08}
 }
 a{text-decoration:none;color:inherit}
 button{
@@ -99,25 +111,30 @@ button{
   border:none;
   background:none;
   color:inherit;
+  transition:all .2s
 }
 input,select,textarea{
   font-family:inherit;
   border:none;
   background:none;
-  color:inherit;
+  color:inherit
 }
-::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-thumb{
   background:var(--pri);
-  border-radius:3px;
+  border-radius:3px
+}
+::-webkit-scrollbar-track{
+  background:var(--brd);
+  border-radius:3px
 }
 .app{
   display:flex;
   width:100%;
-  min-height:100vh;
+  height:100vh
 }
 .sb{
-  width:280px;
+  width:300px;
   height:100vh;
   position:fixed;
   right:0;
@@ -128,82 +145,333 @@ input,select,textarea{
   display:flex;
   flex-direction:column;
   z-index:100;
-  transition:transform .3s;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:var(--shd)
 }
 .logo-area{
-  padding:24px;
+  padding:24px 20px;
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
   border-bottom:1px solid var(--brd);
+  position:relative;
+  overflow:hidden
+}
+.logo-area::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:3px;
+  background:var(--grad);
+  animation:shimmer 3s infinite
+}
+@keyframes shimmer{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(100%)}
 }
 .logo-icon{
-  width:44px;
-  height:44px;
+  width:48px;
+  height:48px;
   background:var(--grad);
-  border-radius:12px;
+  border-radius:14px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:22px;
+  font-size:24px;
   color:#fff;
-  box-shadow:0 0 20px var(--pri-g);
-  animation:glow 3s infinite;
+  box-shadow:0 0 25px var(--pri-g);
+  animation:pulse 2s infinite
 }
-@keyframes glow{
-  0%,100%{box-shadow:0 0 20px var(--pri-g)}
-  50%{box-shadow:0 0 40px var(--pri-g)}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
 }
 .logo-text h1{
-  font-size:1.3rem;
+  font-size:1.4rem;
   font-weight:900;
   background:var(--grad);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  background-clip:text;
+  line-height:1.2
 }
 .logo-text span{
   font-size:.75rem;
   color:var(--dim);
+  display:block;
+  margin-top:2px
 }
 .nav{
   flex:1;
   padding:16px;
   overflow-y:auto;
+  overflow-x:hidden
 }
 .nav-item{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:12px 16px;
-  border-radius:var(--r);
+  padding:14px 18px;
+  border-radius:14px;
   color:var(--dim);
   font-weight:600;
-  margin-bottom:4px;
-  transition:all .2s;
+  margin-bottom:6px;
+  transition:all .25s cubic-bezier(.4,0,.2,1);
   cursor:pointer;
   font-size:.9rem;
+  position:relative;
+  overflow:hidden
 }
+.nav-item::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:0;
+  background:var(--pri-g);
+  transition:width .3s
+}
+.nav-item:hover::before{width:100%}
 .nav-item:hover{
-  background:rgba(139,92,246,.08);
   color:var(--pri);
+  transform:translateX(-4px)
 }
 .nav-item.active{
-  background:rgba(139,92,246,.12);
+  background:rgba(139,92,246,.15);
   color:var(--pri);
   font-weight:700;
+  box-shadow:0 4px 12px var(--pri-g)
 }
-.nav-item svg{
-  width:18px;
-  height:18px;
-  fill:currentColor;
-  flex-shrink:0;
+.nav-item.active::before{width:100%}
+.nav-section{
+  margin-top:24px;
+  padding-top:16px;
+  border-top:1px solid var(--brd)
+}
+.nav-label{
+  font-size:.75rem;
+  color:var(--dim);
+  padding:8px 16px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px
 }
 .main{
   flex:1;
-  margin-right:280px;
-  padding:30px;
-  max-width:1400px;
+  margin-right:300px;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  position:relative
+}
+.chat-container{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden
+}
+.chat-msgs{
+  flex:1;
+  overflow-y:auto;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  scroll-behavior:smooth
+}
+.msg{
+  max-width:85%;
+  padding:18px 24px;
+  border-radius:22px;
+  line-height:1.8;
+  font-size:.95rem;
+  animation:fadeIn .4s cubic-bezier(.4,0,.2,1);
+  word-wrap:break-word;
+  overflow-wrap:break-word;
+  position:relative;
+  box-shadow:0 2px 12px rgba(0,0,0,.05)
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(16px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.msg.bot{
+  align-self:flex-start;
+  background:var(--card);
+  border:1px solid var(--brd);
+  border-bottom-right-radius:6px
+}
+.msg.user{
+  align-self:flex-end;
+  background:var(--grad);
+  color:#fff;
+  border-bottom-left-radius:6px;
+  box-shadow:0 4px 16px var(--pri-g)
+}
+.msg strong{color:var(--pri)}
+.msg.user strong{color:#fff}
+.msg img{
+  max-width:320px;
+  border-radius:14px;
+  margin:12px 0;
+  display:block;
+  box-shadow:0 4px 16px rgba(0,0,0,.15);
+  cursor:pointer;
+  transition:transform .3s
+}
+.msg img:hover{transform:scale(1.02)}
+.msg-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  opacity:0;
+  transition:opacity .2s
+}
+.msg:hover .msg-actions{opacity:1}
+.action-btn{
+  padding:6px 12px;
+  border-radius:10px;
+  font-size:.75rem;
+  background:rgba(139,92,246,.1);
+  color:var(--pri);
+  border:none;
+  cursor:pointer;
+  transition:all .2s;
+  display:flex;
+  align-items:center;
+  gap:4px
+}
+.action-btn:hover{
+  background:var(--pri);
+  color:#fff;
+  transform:translateY(-2px)
+}
+.typing-ind{
+  display:flex;
+  gap:6px;
+  padding:18px 24px;
+  align-self:flex-start;
+  background:var(--card);
+  border:1px solid var(--brd);
+  border-radius:22px;
+  border-bottom-right-radius:6px;
+  width:fit-content;
+  box-shadow:0 2px 12px rgba(0,0,0,.05)
+}
+.typing-dot{
+  width:9px;
+  height:9px;
+  background:var(--pri);
+  border-radius:50%;
+  animation:bounce 1.4s infinite
+}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes bounce{
+  0%,60%,100%{transform:translateY(0)}
+  30%{transform:translateY(-10px)}
+}
+.chat-input-area{
+  padding:24px;
+  background:var(--side);
+  border-top:1px solid var(--brd);
+  backdrop-filter:blur(10px)
+}
+.input-row{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:12px
+}
+.input-row input{
+  flex:1;
+  padding:18px 28px;
+  border-radius:99px;
+  background:var(--card);
+  border:2px solid var(--brd);
+  font-size:1rem;
+  color:var(--txt);
+  transition:all .3s
+}
+.input-row input:focus{
+  border-color:var(--pri);
+  box-shadow:0 0 0 5px var(--pri-g)
+}
+.btn-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center
+}
+.btn-sm{
+  padding:11px 18px;
+  border-radius:99px;
+  font-size:.8rem;
+  font-weight:700;
+  transition:all .25s;
+  border:1px solid var(--brd);
+  background:var(--card);
+  color:var(--txt);
+  white-space:nowrap;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px
+}
+.btn-sm:hover{
+  border-color:var(--pri);
+  color:var(--pri);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px var(--pri-g)
+}
+.btn-p{
+  background:var(--grad);
+  color:#fff;
+  border:none;
+  box-shadow:0 4px 16px var(--pri-g)
+}
+.btn-p:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 22px var(--pri-g);
+  color:#fff
+}
+.status-badge{
+  font-size:.7rem;
+  padding:7px 14px;
+  border-radius:99px;
+  font-weight:700;
+  margin-right:auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:all .3s
+}
+.status-online{
+  background:rgba(16,185,129,.15);
+  color:var(--suc)
+}
+.status-offline{
+  background:rgba(239,68,68,.15);
+  color:var(--dan)
+}
+.status-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:currentColor;
+  animation:blink 2s infinite
+}
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:.5}
+}
+.katex-display{
+  margin:14px 0!important;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:10px 0
 }
 .mob-hdr{
   display:none;
@@ -211,655 +479,507 @@ input,select,textarea{
   top:0;
   left:0;
   right:0;
-  height:60px;
+  height:64px;
   background:var(--side);
   border-bottom:1px solid var(--brd);
-  backdrop-filter:blur(10px);
   z-index:90;
-  padding:0 16px;
+  padding:0 18px;
   align-items:center;
   justify-content:space-between;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--brd);
-  border-radius:var(--r);
-  padding:24px;
-  backdrop-filter:blur(10px);
-  transition:all .3s;
-  margin-bottom:20px;
-}
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shd);
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:12px 24px;
-  border-radius:99px;
-  font-weight:700;
-  transition:all .3s;
-  font-size:.9rem;
-}
-.btn-p{
-  background:var(--grad);
-  color:#fff;
-  box-shadow:0 4px 15px var(--pri-g);
-}
-.btn-p:hover{
-  transform:translateY(-2px);
-}
-.btn-s{
-  background:var(--card);
-  border:1px solid var(--brd);
-  color:var(--txt);
-}
-.btn-s:hover{border-color:var(--pri)}
-.btn-sm{
-  padding:8px 16px;
-  font-size:.8rem;
-}
-.inp{
-  width:100%;
-  padding:14px 18px;
-  border-radius:var(--r);
-  background:var(--card);
-  border:1px solid var(--brd);
-  font-size:1rem;
-  transition:all .2s;
-  color:var(--txt);
-}
-.inp:focus{
-  border-color:var(--pri);
-  box-shadow:0 0 0 3px var(--pri-g);
-}
-.sec{display:none;animation:fadeIn .4s}
-.sec.active{display:block}
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes slideIn{
-  from{transform:translateX(-100%);opacity:0}
-  to{transform:translateX(0);opacity:1}
-}
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  75%{transform:translateX(5px)}
+  backdrop-filter:blur(10px)
 }
 
-/* CHAT */
-.chat-box{
-  display:flex;
-  flex-direction:column;
-  height:calc(100vh - 180px);
-  background:var(--card);
-  border:1px solid var(--brd);
-  border-radius:var(--r);
-  overflow:hidden;
-}
-.chat-msgs{
-  flex:1;
-  overflow-y:auto;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.msg{
-  max-width:85%;
-  padding:14px 18px;
-  border-radius:18px;
-  line-height:1.8;
-  font-size:.95rem;
-  animation:fadeIn .3s;
-}
-.msg.bot{
-  align-self:flex-start;
-  background:var(--bg);
-  border:1px solid var(--brd);
-  border-bottom-right-radius:4px;
-}
-.msg.user{
-  align-self:flex-end;
-  background:var(--pri);
-  color:#fff;
-  border-bottom-left-radius:4px;
-}
-.msg strong{color:var(--pri)}
-.msg.user strong{color:#fff}
-.msg code{
-  background:rgba(139,92,246,.1);
-  padding:2px 6px;
-  border-radius:4px;
-  font-size:.85rem;
-}
-.typing-ind{
-  display:flex;
-  gap:4px;
-  padding:14px 18px;
-  align-self:flex-start;
-  background:var(--bg);
-  border:1px solid var(--brd);
-  border-radius:18px;
-  border-bottom-right-radius:4px;
-  width:fit-content;
-}
-.typing-dot{
-  width:8px;
-  height:8px;
-  background:var(--dim);
-  border-radius:50%;
-  animation:typingBounce 1.4s infinite;
-}
-.typing-dot:nth-child(2){animation-delay:.2s}
-.typing-dot:nth-child(3){animation-delay:.4s}
-@keyframes typingBounce{
-  0%,60%,100%{transform:translateY(0)}
-  30%{transform:translateY(-8px)}
-}
-.chat-in-area{
-  padding:16px;
-  border-top:1px solid var(--brd);
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-.chat-in-area input{
-  flex:1;
-  min-width:150px;
-  margin:0;
-}
-.tone-sel,.voice-sel,.ai-mode-sel{
-  padding:8px 12px;
-  border-radius:var(--r);
-  background:var(--card);
-  border:1px solid var(--brd);
-  font-size:.8rem;
-  color:var(--txt);
-}
-.ai-mode-sel{
-  border-color:var(--pri);
-  font-weight:700;
-}
-
-/* بقیه‌ی اجزا (آزمون، کتابخانه، برنامه‌ریز، ...) مثل نسخه‌ای است که خودت داشتی و نگه‌داشته‌ام */
-.quiz-hdr{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-  padding-bottom:15px;
-  border-bottom:1px solid var(--brd);
-  flex-wrap:wrap;
-  gap:10px;
-}
-.timer-badge{
-  background:rgba(239,68,68,.1);
-  color:var(--dan);
-  padding:8px 16px;
-  border-radius:99px;
-  font-weight:900;
-  font-size:1.1rem;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.timer-badge.warn{
-  background:rgba(239,68,68,.2);
-  animation:pulse 1s infinite;
-}
-@keyframes pulse{
-  0%,100%{opacity:1}
-  50%{opacity:.6}
-}
-.progress-bar{
-  height:8px;
-  background:var(--brd);
-  border-radius:4px;
-  margin-bottom:24px;
-  overflow:hidden;
-}
-.progress-fill{
-  height:100%;
-  background:var(--grad);
-  transition:width .5s;
-}
-.quiz-opt{
-  padding:16px;
-  background:var(--card);
-  border:2px solid var(--brd);
-  border-radius:var(--r);
-  margin-bottom:10px;
-  cursor:pointer;
-  transition:all .2s;
-  font-size:.95rem;
-}
-.quiz-opt:hover{
-  border-color:var(--pri);
-  background:rgba(139,92,246,.05);
-  transform:translateX(-3px);
-}
-.quiz-opt.correct{
-  border-color:var(--suc);
-  background:rgba(16,185,129,.1);
-  color:var(--suc);
-  font-weight:700;
-}
-.quiz-opt.wrong{
-  border-color:var(--dan);
-  background:rgba(239,68,68,.1);
-  color:var(--dan);
-  animation:shake .4s;
-}
-.search-hint{
-  margin-top:15px;
-  padding:14px;
-  background:rgba(66,133,244,.08);
-  border:1px solid rgba(66,133,244,.2);
-  border-radius:var(--r);
-  font-size:.85rem;
-  display:none;
-}
-.search-hint a{color:#4285f4;font-weight:700}
-.result-chart{
-  display:flex;
-  align-items:flex-end;
-  gap:8px;
-  height:180px;
-  margin:20px 0;
-  padding:20px 0;
-  border-bottom:1px solid var(--brd);
-}
-.result-bar{
-  flex:1;
-  background:var(--grad);
-  border-radius:8px 8px 0 0;
-  position:relative;
-  transition:height 1s ease;
-  min-height:4px;
-}
-.result-bar::after{
-  content:attr(data-label);
-  position:absolute;
-  bottom:-24px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:.7rem;
-  color:var(--dim);
-  white-space:nowrap;
-}
-.result-bar::before{
-  content:attr(data-value);
-  position:absolute;
-  top:-22px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:.75rem;
-  font-weight:700;
-  color:var(--pri);
-}
-.grade-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
-  gap:10px;
-  margin-top:16px;
-}
-.grade-card{
-  aspect-ratio:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  background:var(--card);
-  border:1px solid var(--brd);
-  border-radius:var(--r);
-  cursor:pointer;
-  transition:all .3s;
-}
-.grade-card:hover{
-  border-color:var(--pri);
-  transform:scale(1.05);
-}
-.grade-card.selected{
-  border-color:var(--pri);
-  background:rgba(139,92,246,.1);
-}
-.grade-num{
-  font-size:1.8rem;
-  font-weight:900;
-  color:var(--pri);
-}
-.grade-lbl{
-  font-size:.7rem;
-  color:var(--dim);
-  font-weight:600;
-  text-align:center;
-}
-.upload-zone{
-  border:2px dashed var(--brd);
-  border-radius:var(--r);
-  padding:40px 20px;
-  text-align:center;
-  cursor:pointer;
-  transition:all .3s;
-  margin-bottom:20px;
-}
-.upload-zone:hover{
-  border-color:var(--pri);
-  background:rgba(139,92,246,.03);
-}
-.file-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px;
-  background:var(--card);
-  border:1px solid var(--brd);
-  border-radius:var(--r);
-  margin-bottom:8px;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.file-btn{
-  padding:8px 14px;
-  border-radius:99px;
-  font-size:.75rem;
-  font-weight:700;
-  transition:all .2s;
-  cursor:pointer;
-  border:none;
-  background:none;
-}
-.file-btn.vw{
-  background:rgba(139,92,246,.1);
-  color:var(--pri);
-}
-.file-btn.dl{
-  background:rgba(16,185,129,.1);
-  color:var(--suc);
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-}
-.file-btn.del{
-  background:rgba(239,68,68,.1);
-  color:var(--dan);
-}
-.planner-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:6px;
-  margin-top:12px;
-}
-.planner-day{
-  background:var(--card);
-  border:1px solid var(--brd);
-  border-radius:12px;
-  padding:10px 6px;
-  text-align:center;
-  min-height:100px;
-  cursor:pointer;
-  transition:.2s;
-}
-.planner-day:hover{border-color:var(--pri)}
-.planner-day h4{
-  font-size:.75rem;
-  color:var(--pri);
-  margin-bottom:6px;
-}
-.planner-task{
-  font-size:.65rem;
-  padding:3px 5px;
-  background:rgba(139,92,246,.1);
-  border-radius:5px;
-  margin-bottom:3px;
-  cursor:pointer;
-}
-.comment-item{
-  padding:14px;
-  background:var(--card);
-  border:1px solid var(--brd);
-  border-radius:var(--r);
-  margin-bottom:8px;
-}
-.comment-author{
-  font-weight:700;
-  font-size:.85rem;
-  color:var(--pri);
-  margin-bottom:4px;
-}
-.comment-text{
-  font-size:.85rem;
-  line-height:1.7;
-}
-.comment-date{
-  font-size:.65rem;
-  color:var(--dim);
-  margin-top:4px;
-}
-.room-msg{
-  padding:10px 14px;
-  border-radius:12px;
-  margin-bottom:6px;
-  font-size:.85rem;
-  max-width:85%;
-}
-.room-msg.mine{
-  align-self:flex-end;
-  background:var(--pri);
-  color:#fff;
-  border-bottom-left-radius:4px;
-}
-.room-msg.other{
-  align-self:flex-start;
-  background:var(--card);
-  border:1px solid var(--brd);
-  border-bottom-right-radius:4px;
-}
-.toast-c{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  z-index:1000;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.toast{
-  background:var(--card);
-  backdrop-filter:blur(10px);
-  padding:12px 18px;
-  border-radius:var(--r);
-  border-right:4px solid var(--pri);
-  box-shadow:var(--shd);
-  display:flex;
-  align-items:center;
-  gap:10px;
-  animation:slideIn .3s;
-  min-width:260px;
-  font-weight:600;
-  font-size:.85rem;
-}
-.pdf-ov{
+/* Modal Styles */
+.quiz-modal{
   position:fixed;
   inset:0;
-  background:var(--bg);
+  background:rgba(0,0,0,.75);
   z-index:200;
   display:none;
-  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(8px);
+  padding:20px;
+  animation:fadeIn .3s
 }
-.pdf-ov.active{display:flex}
-.pdf-tb{
-  height:56px;
+.quiz-modal.open{display:flex}
+.quiz-card{
+  background:var(--card);
+  border:1px solid var(--brd);
+  border-radius:28px;
+  padding:36px;
+  max-width:700px;
+  width:100%;
+  max-height:90vh;
+  overflow-y:auto;
+  box-shadow:0 25px 80px rgba(0,0,0,.4);
+  animation:slideUp .4s cubic-bezier(.4,0,.2,1)
+}
+@keyframes slideUp{
+  from{transform:translateY(50px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.quiz-header{
+  text-align:center;
+  margin-bottom:28px;
+  padding-bottom:20px;
+  border-bottom:2px solid var(--brd)
+}
+.quiz-timer{
+  font-size:2.8rem;
+  font-weight:900;
+  background:var(--grad);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin:16px 0;
+  font-variant-numeric:tabular-nums
+}
+.quiz-progress{
+  height:10px;
+  background:var(--brd);
+  border-radius:5px;
+  overflow:hidden;
+  margin:20px 0
+}
+.quiz-progress-bar{
+  height:100%;
+  background:var(--grad);
+  transition:width .4s cubic-bezier(.4,0,.2,1)
+}
+.question-card{
   background:var(--side);
-  border-bottom:1px solid var(--brd);
+  border:2px solid var(--brd);
+  border-radius:18px;
+  padding:24px;
+  margin-bottom:20px;
+  transition:all .3s
+}
+.question-card:hover{
+  border-color:var(--pri);
+  box-shadow:0 4px 16px var(--pri-g)
+}
+.question-number{
+  font-size:.9rem;
+  color:var(--dim);
+  margin-bottom:12px;
+  font-weight:700;
   display:flex;
   align-items:center;
-  padding:0 20px;
-  justify-content:space-between;
-  backdrop-filter:blur(10px);
+  gap:8px
 }
-.pdf-ct{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  padding:20px;
-  overflow:auto;
-  background:#525659;
+.question-number::before{
+  content:'';
+  width:8px;
+  height:8px;
+  background:var(--pri);
+  border-radius:50%
 }
-.pdf-ct iframe,.pdf-ct img{
-  max-width:900px;
-  width:100%;
-  border:none;
-  border-radius:var(--r);
-  box-shadow:0 10px 40px rgba(0,0,0,.3);
+.question-text{
+  font-size:1.15rem;
+  margin-bottom:20px;
+  line-height:2;
+  font-weight:500
 }
-.pdf-ct img{
-  object-fit:contain;
-  max-height:90vh;
-  background:#fff;
+.options{
+  display:grid;
+  gap:12px
 }
-.contact-item{
+.option{
+  padding:16px 20px;
+  border:2px solid var(--brd);
+  border-radius:14px;
+  cursor:pointer;
+  transition:all .25s;
   display:flex;
   align-items:center;
   gap:14px;
-  padding:14px 0;
-  border-bottom:1px solid var(--brd);
+  font-size:.95rem
 }
-.contact-item:last-child{border:none}
-.contact-icon{
-  width:44px;
-  height:44px;
-  background:var(--grad);
-  border-radius:12px;
+.option:hover{
+  border-color:var(--pri);
+  background:rgba(139,92,246,.05);
+  transform:translateX(-4px)
+}
+.option.selected{
+  border-color:var(--pri);
+  background:rgba(139,92,246,.12);
+  font-weight:700
+}
+.option.correct{
+  border-color:var(--suc);
+  background:rgba(16,185,129,.15);
+  animation:correctPulse .5s
+}
+.option.wrong{
+  border-color:var(--dan);
+  background:rgba(239,68,68,.15);
+  animation:shake .5s
+}
+@keyframes correctPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.02)}
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-8px)}
+  75%{transform:translateX(8px)}
+}
+.option-letter{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:var(--card);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#fff;
-  font-size:1.1rem;
+  font-weight:700;
+  font-size:1rem;
   flex-shrink:0;
+  border:2px solid var(--brd)
 }
-.mob-nav{
-  display:none;
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:var(--side);
-  border-top:1px solid var(--brd);
-  padding:6px 0;
-  z-index:90;
-  justify-content:space-around;
-  backdrop-filter:blur(10px);
+.option.selected .option-letter{
+  background:var(--pri);
+  color:#fff;
+  border-color:var(--pri)
 }
-.mob-nav-item{
+.results-card{
+  text-align:center;
+  padding:24px
+}
+.score-circle{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:var(--grad);
   display:flex;
-  flex-direction:column;
   align-items:center;
-  gap:2px;
-  font-size:.6rem;
+  justify-content:center;
+  margin:24px auto;
+  box-shadow:0 10px 40px var(--pri-g);
+  position:relative;
+  overflow:hidden
+}
+.score-circle::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.3),transparent);
+  border-radius:50%
+}
+.score-text{
+  font-size:3.5rem;
+  font-weight:900;
+  color:#fff;
+  z-index:1
+}
+.result-details{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin:28px 0
+}
+.detail-box{
+  background:var(--side);
+  padding:20px;
+  border-radius:14px;
+  border:2px solid var(--brd);
+  transition:all .3s
+}
+.detail-box:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 20px var(--pri-g)
+}
+.detail-value{
+  font-size:2rem;
+  font-weight:900;
+  color:var(--pri)
+}
+.detail-label{
+  font-size:.85rem;
   color:var(--dim);
+  margin-top:6px
+}
+.history-list{
+  max-height:400px;
+  overflow-y:auto
+}
+.history-item{
+  padding:18px;
+  border-bottom:1px solid var(--brd);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:all .25s;
+  border-radius:12px;
+  margin-bottom:8px;
+  cursor:pointer
+}
+.history-item:hover{
+  background:rgba(139,92,246,.08);
+  transform:translateX(-4px)
+}
+.search-results{
+  max-height:450px;
+  overflow-y:auto;
+  margin-top:16px;
+  padding:16px;
+  background:var(--side);
+  border-radius:14px;
+  border:2px solid var(--brd)
+}
+.search-item{
+  padding:16px;
+  border-bottom:1px solid var(--brd);
   cursor:pointer;
-  padding:4px;
-  transition:.2s;
+  transition:all .25s;
+  border-radius:10px;
+  margin-bottom:8px
 }
-.mob-nav-item.active{color:var(--pri)}
-.mob-nav-item svg{
-  width:20px;
-  height:20px;
-  fill:currentColor;
+.search-item:hover{
+  background:rgba(139,92,246,.08);
+  transform:translateX(-4px)
 }
-.api-modal{
+.search-title{
+  font-weight:700;
+  margin-bottom:6px;
+  color:var(--pri)
+}
+.search-snippet{
+  font-size:.9rem;
+  color:var(--dim);
+  line-height:1.7
+}
+
+/* Toast & Loading */
+.toast{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--card);
+  border:2px solid var(--brd);
+  padding:16px 32px;
+  border-radius:14px;
+  box-shadow:0 10px 40px rgba(0,0,0,.3);
+  z-index:300;
+  opacity:0;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0)
+}
+.loading-overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
-  backdrop-filter:blur(5px);
-  z-index:300;
+  z-index:250;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
+  backdrop-filter:blur(4px)
 }
-.api-modal.active{display:flex}
-.api-content{
-  background:var(--card);
-  border-radius:var(--r);
-  padding:30px;
-  max-width:520px;
-  width:100%;
-  border:1px solid var(--brd);
-  max-height:90vh;
-  overflow-y:auto;
-}
-.guide-step{
-  display:flex;
-  gap:12px;
-  margin-bottom:16px;
-  align-items:flex-start;
-}
-.guide-num{
-  width:32px;
-  height:32px;
-  background:var(--grad);
+.loading-overlay.open{display:flex}
+.spinner{
+  width:60px;
+  height:60px;
+  border:5px solid var(--brd);
+  border-top-color:var(--pri);
   border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-weight:900;
+  animation:spin 1s linear infinite
+}
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* Review Mode */
+.review-item{
+  background:var(--side);
+  border:2px solid var(--brd);
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:16px
+}
+.review-item.correct{border-color:var(--suc)}
+.review-item.wrong{border-color:var(--dan)}
+.review-question{
+  font-weight:700;
+  margin-bottom:12px;
+  font-size:1.05rem
+}
+.review-answer{
+  padding:10px 14px;
+  border-radius:10px;
+  margin:6px 0;
+  font-size:.9rem
+}
+.review-answer.selected{background:rgba(139,92,246,.1)}
+.review-answer.correct{background:rgba(16,185,129,.15);color:var(--suc)}
+.review-answer.wrong{background:rgba(239,68,68,.15);color:var(--dan)}
+.review-explanation{
+  margin-top:12px;
+  padding:12px;
+  background:var(--card);
+  border-radius:10px;
   font-size:.9rem;
-  flex-shrink:0;
+  border-right:4px solid var(--pri)
 }
-.guide-text{
-  font-size:.85rem;
-  line-height:1.7;
-  color:var(--txt);
-}
-.guide-text a{color:var(--pri);font-weight:700}
-.guide-text code{
-  background:rgba(139,92,246,.1);
-  padding:2px 8px;
-  border-radius:6px;
-  font-size:.8rem;
-  direction:ltr;
-  display:inline-block;
-}
-@media(max-width:900px){
+
+/* Responsive */
+@media(max-width:768px){
   .sb{
     transform:translateX(100%);
     width:85%;
-    max-width:320px;
+    max-width:340px
   }
   .sb.open{transform:translateX(0)}
-  .main{
-    margin-right:0;
-    padding:76px 14px 90px;
+  .main{margin-right:0}
+  .mob-hdr{display:flex}
+  .chat-msgs{
+    padding:18px;
+    padding-top:78px
   }
-  .mob-hdr,.mob-nav{display:flex}
-  .chat-box{height:calc(100vh - 200px)}
-  .grade-grid,.planner-grid{
-    grid-template-columns:repeat(3,1fr);
+  .msg{
+    max-width:95%;
+    padding:16px 20px;
+    border-radius:18px
   }
+  .quiz-card{
+    padding:24px;
+    border-radius:22px
+  }
+  .result-details{grid-template-columns:1fr}
+  .score-circle{
+    width:130px;
+    height:130px
+  }
+  .score-text{font-size:2.8rem}
+  .quiz-timer{font-size:2.2rem}
+  .btn-row{justify-content:center}
+  .status-badge{margin:10px auto 0}
+}
+
+/* Print Styles */
+@media print{
+  .sb,.chat-input-area,.mob-hdr,.btn-row{display:none!important}
+  .main{margin:0}
+  .chat-msgs{overflow:visible}
+  .msg{break-inside:avoid}
+}
+
+/* Animations */
+.float{animation:float 3s ease-in-out infinite}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+.glow{
+  animation:glow 2s ease-in-out infinite
+}
+@keyframes glow{
+  0%,100%{box-shadow:0 0 20px var(--pri-g)}
+  50%{box-shadow:0 0 40px var(--pri-g)}
 }
 </style>
 </head>
-<body data-theme="light">
+<body data-theme="dark">
 <canvas id="fx"></canvas>
 <div class="thunder-fx"></div>
 
-<div class="mob-hdr">
-  <div style="display:flex;align-items:center;gap:8px">
-    <div class="logo-icon" style="width:32px;height:32px;font-size:14px">🎓</div>
-    <span style="font-weight:900;font-size:.95rem">استاد یار</span>
+<!-- Audio Elements -->
+<audio id="sndCorrect" preload="auto">
+  <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE" type="audio/wav">
+</audio>
+<audio id="sndWrong" preload="auto">
+  <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE" type="audio/wav">
+</audio>
+<audio id="sndClick" preload="auto">
+  <source src="data:audio/wav;base64,UklGRi4AAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=" type="audio/wav">
+</audio>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+</div>
+
+<!-- Quiz Modal -->
+<div class="quiz-modal" id="quizModal">
+  <div class="quiz-card">
+    <div class="quiz-header" id="quizHeader">
+      <h2 style="margin-bottom:10px" class="float">🎯 آزمون جامع پیشرفته</h2>
+      <p style="color:var(--dim);font-size:.9rem">۶۰ سوال • زمان‌دار • با کارنامه تفصیلی</p>
+      <div class="quiz-timer" id="quizTimer">10:00</div>
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar" id="quizProgress" style="width:0%"></div>
+      </div>
+      <p style="font-size:.9rem;color:var(--dim)">
+        سوال <span id="currentQ" style="font-weight:900;color:var(--pri)">1</span> از 60
+      </p>
+    </div>
+    <div id="quizContent"></div>
+    <div style="display:flex;gap:12px;margin-top:24px;justify-content:center;flex-wrap:wrap" id="quizActions">
+      <button class="btn-sm btn-p glow" onclick="startQuiz()" id="quizStartBtn" style="padding:14px 32px;font-size:1rem">
+        🚀 شروع آزمون
+      </button>
+      <button class="btn-sm" onclick="closeQuiz()" style="padding:14px 28px">بستن</button>
+    </div>
   </div>
-  <button onclick="document.getElementById('sidebar').classList.toggle('open')" style="font-size:1.4rem;background:none;border:none;color:var(--txt)">☰</button>
+</div>
+
+<!-- History Modal -->
+<div class="quiz-modal" id="historyModal">
+  <div class="quiz-card">
+    <h2 style="margin-bottom:20px;text-align:center"> تاریخچه آزمون‌ها</h2>
+    <div class="history-list" id="historyList"></div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn-sm btn-p" onclick="exportAllHistory()" style="flex:1">📥 دانلود همه</button>
+      <button class="btn-sm" onclick="closeHistory()" style="flex:1">بستن</button>
+    </div>
+  </div>
+</div>
+
+<!-- Search Modal -->
+<div class="quiz-modal" id="searchModal">
+  <div class="quiz-card">
+    <h2 style="margin-bottom:18px;text-align:center">🔍 جستجوی هوشمند</h2>
+    <input type="text" id="searchInput" placeholder="موضوع مورد نظر را وارد کنید..." 
+      style="width:100%;padding:16px 20px;border-radius:14px;border:2px solid var(--brd);background:var(--side);color:var(--txt);margin-bottom:16px;font-size:1rem">
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="btn-sm" onclick="setSearchQuery('ریاضیات')">ریاضیات</button>
+      <button class="btn-sm" onclick="setSearchQuery('فیزیک')">فیزیک</button>
+      <button class="btn-sm" onclick="setSearchQuery('برنامه‌نویسی')">برنامه‌نویسی</button>
+      <button class="btn-sm" onclick="setSearchQuery('شیمی')">شیمی</button>
+    </div>
+    <div id="searchResults" class="search-results" style="display:none"></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn-sm btn-p" onclick="performSearch()" style="flex:1">جستجو</button>
+      <button class="btn-sm" onclick="closeSearch()" style="flex:1">بستن</button>
+    </div>
+  </div>
+</div>
+
+<!-- Review Modal -->
+<div class="quiz-modal" id="reviewModal">
+  <div class="quiz-card" style="max-width:800px">
+    <h2 style="margin-bottom:20px;text-align:center"> بررسی پاسخ‌ها</h2>
+    <div id="reviewContent"></div>
+    <button class="btn-sm" onclick="closeReview()" style="margin-top:20px;width:100%;padding:14px">بستن</button>
+  </div>
+</div>
+
+<div class="mob-hdr">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="logo-icon" style="width:40px;height:40px;font-size:18px"></div>
+    <span style="font-weight:900;font-size:1.1rem">استاد یار</span>
+  </div>
+  <button onclick="toggleSidebar()" style="font-size:1.5rem;color:var(--txt);padding:8px">☰</button>
 </div>
 
 <div class="app">
@@ -868,723 +988,1074 @@ input,select,textarea{
     <div class="logo-icon">🎓</div>
     <div class="logo-text">
       <h1>استاد یار</h1>
-      <span>هوش مصنوعی آموزشی</span>
+      <span>Pro Max v4.0 • AI-Powered</span>
     </div>
   </div>
   <nav class="nav">
-    <div class="nav-item active" data-p="home" onclick="go('home')">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      خانه
-    </div>
-    <div class="nav-item" data-p="chat" onclick="go('chat')">
-      <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-      دستیار هوشمند
-    </div>
-    <div class="nav-item" data-p="quiz" onclick="go('quiz')">
-      <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-      آزمون آنلاین
-    </div>
-    <div class="nav-item" data-p="library" onclick="go('library')">
-      <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-      کتابخانه
-    </div>
-    <div class="nav-item" data-p="planner" onclick="go('planner')">
-      <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
-      برنامه‌ریزی
-    </div>
-    <div class="nav-item" data-p="room" onclick="go('room')">
-      <svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1z"/></svg>
-      اتاق چت
-    </div>
-    <div class="nav-item" data-p="comments" onclick="go('comments')">
-      <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4z"/></svg>
-      نظرات
-    </div>
-    <div class="nav-item" data-p="support" onclick="go('support')">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      پشتیبانی
-    </div>
-
-    <div style="margin-top:16px;padding:0 16px">
-      <div style="font-size:.7rem;color:var(--dim);font-weight:700;margin-bottom:8px;letter-spacing:1px">
-        تم نمایش
+    <div class="nav-item active" onclick="setActiveNav(this)"> چت هوشمند</div>
+    <div class="nav-item" onclick="openQuiz()">🎯 آزمون ۶۰ سوالی</div>
+    <div class="nav-item" onclick="openHistory()"> تاریخچه آزمون‌ها</div>
+    <div class="nav-item" onclick="openSearch()">🔍 جستجوی اینترنتی</div>
+    <div class="nav-item" onclick="exportChat()">💾 خروجی چت</div>
+    <div class="nav-item" onclick="showToast('به زودی...')">📚 کتابخانه دیجیتال</div>
+    <div class="nav-item" onclick="showToast('به زودی...')">📅 برنامه‌ریزی درسی</div>
+    
+    <div class="nav-section">
+      <div class="nav-label">🎨 تم نمایش</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px">
+        <button class="btn-sm" onclick="setTheme('light')">☀️ روز</button>
+        <button class="btn-sm" onclick="setTheme('dark')">🌙 شب</button>
+        <button class="btn-sm" onclick="setTheme('space')">🪐 فضایی</button>
+        <button class="btn-sm" onclick="setTheme('thunder')">⚡ رعد</button>
+        <button class="btn-sm" onclick="setTheme('ocean')">🌊 اقیانوس</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
-        <button class="btn btn-s btn-sm" onclick="setTheme('light')">☀️ روز</button>
-        <button class="btn btn-s btn-sm" onclick="setTheme('dark')">🌙 شب</button>
-        <button class="btn btn-s btn-sm" onclick="setTheme('space')">🪐 فضایی</button>
-        <button class="btn btn-s btn-sm" onclick="setTheme('thunder')">⚡ رعد</button>
+    </div>
+    
+    <div class="nav-section">
+      <div class="nav-label">⚙️ تنظیمات</div>
+      <div style="padding:12px;font-size:.8rem;color:var(--dim)">
+        <div style="margin-bottom:12px;padding:12px;background:var(--card);border-radius:12px;border:1px solid var(--brd)">
+          <div style="margin-bottom:8px;font-weight:700">وضعیت سیستم:</div>
+          <div id="systemStatus" class="status-badge status-offline" style="margin:0">
+            <span class="status-dot"></span>آفلاین
+          </div>
+        </div>
+        <div style="margin-bottom:10px">
+          <input type="password" id="apiKeyInput" placeholder="API Key Claude" 
+            style="width:100%;padding:12px;border-radius:10px;border:2px solid var(--brd);background:var(--card);color:var(--txt);font-size:.85rem;margin-bottom:8px">
+          <button class="btn-sm btn-p" onclick="saveApiKey()" style="width:100%;padding:10px">💾 ذخیره کلید</button>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--brd);font-size:.75rem">
+          <div>نسخه: 4.0 Pro Max</div>
+          <div style="margin-top:4px">IndexedDB + PDF Export</div>
+        </div>
       </div>
     </div>
   </nav>
-  <div style="padding:14px;border-top:1px solid var(--brd)">
-    <div id="uMini" style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card);border-radius:var(--r);border:1px solid var(--brd);cursor:pointer" onclick="go('home')">
-      <div style="width:36px;height:36px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem" id="avMini">?</div>
-      <div style="min-width:0">
-        <div style="font-weight:700;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="nmMini">تنظیم پروفایل</div>
-        <div style="font-size:.65rem;color:var(--dim)" id="grMini">کلیک کنید</div>
-      </div>
-    </div>
-    <div id="expInfo" style="font-size:.6rem;color:var(--dim);margin-top:6px;text-align:center"></div>
-  </div>
 </aside>
 
-<main class="main">
-<!-- HOME -->
-<div id="page-home" class="sec active">
-  <div id="profGate" class="card" style="max-width:500px;margin:40px auto;text-align:center">
-    <div class="logo-icon" style="width:64px;height:64px;font-size:32px;margin:0 auto 20px">🎓</div>
-    <h2 style="font-size:1.8rem;margin-bottom:8px;font-weight:900">به استاد یار خوش آمدی!</h2>
-    <p style="color:var(--dim);margin-bottom:24px">اطلاعاتت رو وارد کن</p>
-    <div style="margin-bottom:12px;text-align:right">
-      <label style="display:block;margin-bottom:4px;font-weight:600;font-size:.85rem">نام</label>
-      <input type="text" id="fn" class="inp" placeholder="مثلاً: علی">
-    </div>
-    <div style="margin-bottom:12px;text-align:right">
-      <label style="display:block;margin-bottom:4px;font-weight:600;font-size:.85rem">نام خانوادگی</label>
-      <input type="text" id="ln" class="inp" placeholder="مثلاً: محمدی">
-    </div>
-    <div style="margin-bottom:12px;text-align:right">
-      <label style="display:block;margin-bottom:4px;font-weight:600;font-size:.85rem">پایه تحصیلی</label>
-      <select id="grSel" class="inp">
-        <option value="">انتخاب کنید...</option>
-        <option value="1">اول ابتدایی</option>
-        <option value="2">دوم ابتدایی</option>
-        <option value="3">سوم ابتدایی</option>
-        <option value="4">چهارم ابتدایی</option>
-        <option value="5">پنجم ابتدایی</option>
-        <option value="6">ششم ابتدایی</option>
-        <option value="7">هفتم</option>
-        <option value="8">هشتم</option>
-        <option value="9">نهم</option>
-        <option value="10">دهم</option>
-        <option value="11">یازدهم</option>
-        <option value="12">دوازدهم</option>
-      </select>
-    </div>
-    <button class="btn btn-p" style="width:100%;margin-top:10px" onclick="saveProf()">ذخیره و شروع 🚀</button>
-  </div>
-
-  <div id="dash" style="display:none">
-    <div style="margin-bottom:24px">
-      <h2 style="font-size:1.6rem;font-weight:900;margin-bottom:4px" id="welMsg">سلام!</h2>
-      <p style="color:var(--dim)">امروز چه چیزی می‌خواهی یاد بگیری؟</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px">
-      <div class="card" style="text-align:center;cursor:pointer" onclick="go('chat')">
-        <div style="font-size:2.2rem;margin-bottom:6px">🧠</div>
-        <h3 style="font-weight:800;margin-bottom:4px">دستیار هوشمند</h3>
-        <p style="color:var(--dim);font-size:.85rem">ChatGPT یا استاد یار</p>
+<main class="main" onclick="closeSidebarOnMainClick(event)">
+  <div class="chat-container">
+    <div class="chat-msgs" id="chatMsgs"></div>
+    <div class="chat-input-area">
+      <div class="input-row">
+        <input id="chatIn" type="text" placeholder="سوال، معادله یا موضوع جستجو را وارد کنید..." autocomplete="off">
+        <button class="btn-sm btn-p" onclick="sendMessage()" style="padding:18px 28px;font-size:1rem">ارسال ➤</button>
       </div>
-      <div class="card" style="text-align:center;cursor:pointer" onclick="go('quiz')">
-        <div style="font-size:2.2rem;margin-bottom:6px">📝</div>
-        <h3 style="font-weight:800;margin-bottom:4px">آزمون حرفه‌ای</h3>
-        <p style="color:var(--dim);font-size:.85rem">تایمر + کارنامه + AI</p>
+      <div class="btn-row">
+        <button class="btn-sm" onclick="document.getElementById('fileUp').click()">📸 آپلود عکس</button>
+        <button class="btn-sm" onclick="generateImage()">️ تولید تصویر</button>
+        <button class="btn-sm" onclick="enableAutoSearch()">🔍 جستجوی خودکار</button>
+        <select class="btn-sm" id="voiceSel">
+          <option value="female"> صدای زن</option>
+          <option value="male">👨 صدای مرد</option>
+        </select>
+        <button class="btn-sm" onclick="speakLastMessage()">🔊 پخش صدا</button>
+        <button class="btn-sm" onclick="clearChat()">🗑️ پاک کردن چت</button>
       </div>
-      <div class="card" style="text-align:center;cursor:pointer" onclick="go('library')">
-        <div style="font-size:2.2rem;margin-bottom:6px">📚</div>
-        <h3 style="font-weight:800;margin-bottom:4px">کتابخانه</h3>
-        <p style="color:var(--dim);font-size:.85rem">PDF، عکس و Word</p>
-      </div>
-      <div class="card" style="text-align:center;cursor:pointer" onclick="go('room')">
-        <div style="font-size:2.2rem;margin-bottom:6px">💬</div>
-        <h3 style="font-weight:800;margin-bottom:4px">اتاق چت</h3>
-        <p style="color:var(--dim);font-size:.85rem">گفتگو با دانش‌آموزان</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3 style="font-weight:800;margin-bottom:12px">🎯 پایه تحصیلی من</h3>
-      <div class="grade-grid" id="dGrGrid"></div>
-      <button class="btn btn-s btn-sm" style="margin-top:12px;width:100%" onclick="editProf()">ویرایش پروفایل</button>
-    </div>
-
-    <div class="card" style="margin-top:16px;border-color:var(--pri);border-width:2px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <div style="font-size:2rem">🤖</div>
-        <div>
-          <h3 style="font-weight:800">فعال‌سازی ChatGPT با دورنا</h3>
-          <p style="color:var(--dim);font-size:.8rem">ثبت‌نام با شماره همراه ایران • بدون فیلترشکن</p>
-        </div>
-      </div>
-      <p style="color:var(--dim);font-size:.85rem;margin-bottom:12px">با وارد کردن API Key دورنا، گزینه ChatGPT در چت فعال می‌شود.</p>
-      <button class="btn btn-p btn-sm" onclick="openApiModal()">⚙️ تنظیم API Key</button>
-      <span id="apiStatus" style="font-size:.75rem;color:var(--dim);margin-right:10px">وضعیت: غیرفعال</span>
+      <input type="file" id="fileUp" accept="image/*" style="display:none">
     </div>
   </div>
-</div>
-
-<!-- CHAT -->
-<div id="page-chat" class="sec">
-  <div style="margin-bottom:12px">
-    <h2 style="font-size:1.4rem;font-weight:900">🧠 دستیار هوشمند</h2>
-    <p style="color:var(--dim);font-size:.85rem">حالت AI را از پایین انتخاب کن</p>
-  </div>
-  <div class="chat-box">
-    <div class="chat-msgs" id="chatMsgs">
-      <div class="msg bot">
-        سلام دوست عزیزم! 👋😊<br><br>
-        من <strong>استاد یار</strong> هستم.<br><br>
-        💡 <strong>دو حالت دارم:</strong><br>
-        • <strong>استاد یار</strong>: توضیح + مثال + تمرین<br>
-        • <strong>ChatGPT</strong>: پاسخ عمیق با هوش مصنوعی واقعی (نیاز به API Key)<br><br>
-        حالت مورد نظرت رو از پایین صفحه انتخاب کن!
-      </div>
-    </div>
-    <div class="chat-in-area">
-      <input type="text" id="chatIn" class="inp" placeholder="سوالت رو بنویس..." onkeypress="if(event.key==='Enter')sendChat()">
-      <select class="ai-mode-sel" id="aiModeSel">
-        <option value="ostadyar">🎓 استاد یار</option>
-        <option value="chatgpt">🤖 ChatGPT</option>
-      </select>
-      <select class="tone-sel" id="toneSel">
-        <option value="friendly">😊 صمیمی</option>
-        <option value="formal">🎓 رسمی</option>
-        <option value="motivational">🔥 انگیزشی</option>
-      </select>
-      <select class="voice-sel" id="voiceSel">
-        <option value="female">👩 زن</option>
-        <option value="male">👨 مرد</option>
-      </select>
-      <button class="btn btn-p btn-sm" onclick="sendChat()">ارسال</button>
-      <button class="btn btn-s btn-sm" onclick="speakLast()">🔊</button>
-    </div>
-  </div>
-</div>
-
-<!-- باقی صفحات: آزمون، کتابخانه، برنامه‌ریز، اتاق چت، نظرات، پشتیبانی -->
-<!-- برای کوتاه‌کردن، همان ساختاری است که خودت دادی. می‌توانیم در پیام بعدی دقیقاً برای هرکدام JS بنویسیم. -->
-
 </main>
 </div>
 
-<div class="mob-nav">
-  <div class="mob-nav-item active" onclick="go('home')">
-    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    خانه
-  </div>
-  <div class="mob-nav-item" onclick="go('chat')">
-    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    AI
-  </div>
-  <div class="mob-nav-item" onclick="go('quiz')">
-    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-    آزمون
-  </div>
-  <div class="mob-nav-item" onclick="go('library')">
-    <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z"/></svg>
-    کتاب
-  </div>
-  <div class="mob-nav-item" onclick="go('room')">
-    <svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1z"/></svg>
-    چت
-  </div>
-</div>
-
-<!-- PDF VIEWER -->
-<div class="pdf-ov" id="pdfOv">
-  <div class="pdf-tb">
-    <div style="display:flex;align-items:center;gap:10px">
-      <button class="btn btn-s btn-sm" onclick="closeViewer()">✕</button>
-      <span id="pvTitle" style="font-weight:700;font-size:.85rem"></span>
-    </div>
-    <a id="pvDl" class="btn btn-p btn-sm" download>⬇</a>
-  </div>
-  <div class="pdf-ct" id="pvContent"></div>
-</div>
-
-<!-- API MODAL -->
-<div class="api-modal" id="apiModal">
-  <div class="api-content">
-    <h3 style="font-weight:900;font-size:1.2rem;margin-bottom:16px">🤖 تنظیم ChatGPT با دورنا</h3>
-    <div style="padding:14px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;margin-bottom:20px;font-size:.8rem;line-height:1.8">
-      ✅ ثبت‌نام با <strong>شماره همراه ایران</strong> 🇮🇷<br>
-      ✅ <strong>بدون فیلترشکن</strong><br>
-      ✅ دسترسی به <strong>ChatGPT</strong>
-    </div>
-    <div class="guide-step">
-      <div class="guide-num">۱</div>
-      <div class="guide-text">برو به <a href="https://platform.doona.ai" target="_blank">platform.doona.ai</a></div>
-    </div>
-    <div class="guide-step">
-      <div class="guide-num">۲</div>
-      <div class="guide-text">با شماره موبایل ثبت‌نام کن</div>
-    </div>
-    <div class="guide-step">
-      <div class="guide-num">۳</div>
-      <div class="guide-text">از منو روی <strong>API Keys</strong> کلیک کن</div>
-    </div>
-    <div class="guide-step">
-      <div class="guide-num">۴</div>
-      <div class="guide-text">کلید جدید بساز و کپی کن</div>
-    </div>
-    <div class="guide-step">
-      <div class="guide-num">۵</div>
-      <div class="guide-text">کلید و آدرس API را زیر وارد کن</div>
-    </div>
-
-    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--brd)">
-      <label style="display:block;font-size:.8rem;font-weight:700;margin-bottom:4px">🔑 API Key:</label>
-      <input type="password" id="apiKeyInp" class="inp" placeholder="کلید API..." style="margin-bottom:12px">
-      <label style="display:block;font-size:.8rem;font-weight:700;margin-bottom:4px">🌐 آدرس API (اگر متفاوت است):</label>
-      <input type="text" id="apiUrlInp" class="inp" placeholder="https://api.doona.ai/v1/chat/completions" style="margin-bottom:12px;direction:ltr;text-align:left;font-size:.8rem">
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-p btn-sm" style="flex:1" onclick="saveApiKey()">✅ ذخیره</button>
-        <button class="btn btn-s btn-sm" onclick="testApiConnection()">🔍 تست اتصال</button>
-        <button class="btn btn-s btn-sm" onclick="closeApiModal()">انصراف</button>
-      </div>
-    </div>
-    <p style="color:var(--dim);font-size:.7rem;margin-top:12px;text-align:center">کلید در حافظه مرورگر ذخیره می‌شود 🔒</p>
-  </div>
-</div>
-
-<div class="toast-c" id="toastC"></div>
-
 <script>
-// ====== تنظیمات و localStorage ======
-const EXPIRY_DAYS = 14;
-
-function checkExpiry(){
-  const c = localStorage.getItem('oy_created');
-  if(!c){
-    localStorage.setItem('oy_created', Date.now());
-    return true;
+// ===== ADVANCED INDEXEDDB STORAGE =====
+const DB = {
+  db: null,
+  async init() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('OstadYarDB_v4', 3);
+      req.onupgradeneeded = e => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('quizResults')) {
+          db.createObjectStore('quizResults', { keyPath: 'id', autoIncrement: true });
+        }
+        if (!db.objectStoreNames.contains('chatHistory')) {
+          db.createObjectStore('chatHistory', { keyPath: 'id', autoIncrement: true });
+        }
+        if (!db.objectStoreNames.contains('questions')) {
+          db.createObjectStore('questions', { keyPath: 'id' });
+        }
+      };
+      req.onsuccess = e => {
+        this.db = e.target.result;
+        resolve();
+      };
+      req.onerror = () => reject(req.error);
+    });
+  },
+  async add(store, data) {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(store, 'readwrite');
+      const s = tx.objectStore(store);
+      const r = s.add(data);
+      r.onsuccess = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+    });
+  },
+  async getAll(store) {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(store, 'readonly');
+      const s = tx.objectStore(store);
+      const r = s.getAll();
+      r.onsuccess = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+    });
+  },
+  async clear(store) {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(store, 'readwrite');
+      const s = tx.objectStore(store);
+      const r = s.clear();
+      r.onsuccess = () => resolve();
+      r.onerror = () => reject(r.error);
+    });
   }
-  const d = (Date.now() - parseInt(c)) / 86400000;
-  const r = Math.max(0, Math.ceil(EXPIRY_DAYS - d));
-  const el = document.getElementById('expInfo');
-  if(el) el.textContent = `⏰ ${toFa(r)} روز تا انقضا`;
-  if(d >= EXPIRY_DAYS){
-    localStorage.clear();
-    location.reload();
-    return false;
-  }
-  return true;
-}
+};
 
+// ===== LOCAL STORAGE WRAPPER =====
+const Store = {
+  get(k, d=null) {
+    try {
+      const item = localStorage.getItem(k);
+      return item ? JSON.parse(item) : d;
+    } catch(e) { return d; }
+  },
+  set(k, v) {
+    try {
+      localStorage.setItem(k, JSON.stringify(v));
+      return true;
+    } catch(e) { return false; }
+  }
+};
+
+// ===== COMPREHENSIVE QUESTION BANK (60 Questions) =====
+const questionBank = [
+  {category:'math',q:'حاصل $\int_0^1 x^2 dx$ کدام است؟',options:['1/2','1/3','1/4','1'],correct:1,explanation:'انتگرال x² برابر است با x³/3 که در بازه 0 تا 1 برابر 1/3 می‌شود.'},
+  {category:'math',q:'مشتق تابع $f(x)=x^3+2x$ چیست؟',options:['$3x^2+2$','$x^2+2$','$3x^2$','$3x+2$'],correct:0,explanation:'مشتق x³ برابر 3x² و مشتق 2x برابر 2 است.'},
+  {category:'math',q:'ریشه‌های معادله $x^2-5x+6=0$ کدامند؟',options:['2 و 3','1 و 6','-2 و -3','0 و 5'],correct:0,explanation:'با فاکتورگیری: (x-2)(x-3)=0 پس x=2 یا x=3'},
+  {category:'math',q:'حد $\lim_{x\to 0} \frac{\sin x}{x}$ برابر است با:',options:['0','1','∞','-1'],correct:1,explanation:'این یک حد معروف است که برابر 1 می‌باشد.'},
+  {category:'math',q:'مساحت دایره‌ای به شعاع r کدام است؟',options:['$\pi r$','$2\pi r$','$\pi r^2$','$r^2$'],correct:2,explanation:'فرمول مساحت دایره πr² است.'},
+  {category:'math',q:'حاصل جمع زوایای داخلی مثلث چند درجه است؟',options:['90','180','270','360'],correct:1,explanation:'مجموع زوایای داخلی هر مثلث 180 درجه است.'},
+  {category:'math',q:'لگاریتم طبیعی عدد e برابر است با:',options:['0','1','e','∞'],correct:1,explanation:'ln(e) = 1 زیرا e¹ = e'},
+  {category:'math',q:'کدام گزینه اتحاد مربع دو جمله‌ای است؟',options:['$(a+b)^2=a^2+b^2$','$(a+b)^2=a^2+2ab+b^2$','$(a+b)^2=a^2+ab+b^2$','$(a+b)^2=2a+2b$'],correct:1,explanation:'اتحاد کامل: (a+b)² = a² + 2ab + b²'},
+  {category:'math',q:'تابع $f(x)=\frac{1}{x}$ در کدام نقطه تعریف نشده است؟',options:['x=1','x=0','x=-1','همه نقاط'],correct:1,explanation:'در x=0 مخرج صفر می‌شود که تعریف نشده است.'},
+  {category:'math',q:'حاصل $\sum_{n=1}^{5} n$ برابر است با:',options:['10','15','20','25'],correct:1,explanation:'1+2+3+4+5 = 15'},
+  {category:'math',q:'دامنه تابع $y=\sqrt{x}$ کدام است؟',options:['همه اعداد حقیقی','$x\geq 0$','$x>0$','$x\leq 0$'],correct:1,explanation:'زیر رادیکال باید نامنفی باشد.'},
+  {category:'math',q:'معکوس تابع $f(x)=2x+3$ کدام است؟',options:['$f^{-1}(x)=\frac{x-3}{2}$','$f^{-1}(x)=2x-3$','$f^{-1}(x)=\frac{x+3}{2}$','$f^{-1}(x)=\frac{1}{2x+3}$'],correct:0,explanation:'با حل y=2x+3 برای x: x=(y-3)/2'},
+  {category:'math',q:'حاصل $3!$ (فاکتوریل 3) برابر است با:',options:['3','6','9','1'],correct:1,explanation:'3! = 3×2×1 = 6'},
+  {category:'math',q:'کدام گزینه عدد اول است؟',options:['9','15','17','21'],correct:2,explanation:'17 فقط بر 1 و خودش بخش‌پذیر است.'},
+  {category:'math',q:'ب.م.م اعداد 12 و 18 کدام است؟',options:['2','3','6','12'],correct:2,explanation:'بزرگترین مقسوم‌علیه مشترک 12 و 18 برابر 6 است.'},
+  {category:'math',q:'حاصل $\log_2 8$ برابر است با:',options:['2','3','4','8'],correct:1,explanation:'2³ = 8 پس log₂8 = 3'},
+  {category:'math',q:'شیب خط $y=3x+2$ برابر است با:',options:['2','3','5','0'],correct:1,explanation:'در معادله y=mx+b، m شیب است که اینجا 3 می‌باشد.'},
+  {category:'math',q:'کدام گزینه فرمول فیثاغورس است؟',options:['$a+b=c$','$a^2+b^2=c^2$','$a^2-b^2=c^2$','$2a+2b=c$'],correct:1,explanation:'در مثلث قائم‌الزاویه: a² + b² = c²'},
+  {category:'math',q:'حاصل $\cos(0)$ برابر است با:',options:['0','1','-1','0.5'],correct:1,explanation:'cos(0) = 1'},
+  {category:'math',q:'تعداد جایگشت‌های 3 شیء مختلف برابر است با:',options:['3','6','9','12'],correct:1,explanation:'3! = 3×2×1 = 6'},
+  
+  {category:'physics',q:'قانون دوم نیوتن کدام است؟',options:['F=ma','E=mc²','P=mv','W=Fd'],correct:0,explanation:'نیرو = جرم × شتاب'},
+  {category:'physics',q:'واحد نیرو در سیستم SI کدام است؟',options:['ژول','وات','نیوتن','پاسکال'],correct:2,explanation:'نیوتن واحد نیرو است.'},
+  {category:'physics',q:'سرعت نور در خلأ تقریباً برابر است با:',options:['3×10 m/s','3×10⁸ m/s','3×10¹⁰ m/s','3×10 m/s'],correct:1,explanation:'سرعت نور 299,792,458 m/s ≈ 3×10⁸ m/s'},
+  {category:'physics',q:'انرژی جنبشی کدام فرمول را دارد؟',options:['mv','mgh','½mv²','Fd'],correct:2,explanation:'انرژی جنبشی = ½mv²'},
+  {category:'physics',q:'قانون اهم کدام است؟',options:['V=IR','P=VI','R=V/I','همه موارد'],correct:3,explanation:'همه این روابط از قانون اهم نتیجه می‌شوند.'},
+  {category:'physics',q:'شتاب گرانش زمین تقریباً برابر است با:',options:['8.9 m/s²','9.8 m/s²','10.8 m/s²','7.8 m/s²'],correct:1,explanation:'g ≈ 9.8 m/s²'},
+  {category:'physics',q:'کدام گزینه انرژی پتانسیل گرانشی است؟',options:['½mv²','mgh','mc²','kx²'],correct:1,explanation:'U = mgh'},
+  {category:'physics',q:'واحد توان الکتریکی چیست؟',options:['ژول','نیوتن','وات','کولن'],correct:2,explanation:'وات واحد توان است.'},
+  {category:'physics',q:'فرکانس موج با دوره تناوب چه رابطه‌ای دارد؟',options:['f=T','f=1/T','f=2πT','f=T/2π'],correct:1,explanation:'f = 1/T'},
+  {category:'physics',q:'قانون بقای انرژی می‌گوید:',options:['انرژی خلق می‌شود','انرژی نابود می‌شود','انرژی پایسته است','انرژی تغییر نمی‌کند'],correct:2,explanation:'انرژی نه خلق می‌شود نه نابود، فقط تبدیل می‌شود.'},
+  {category:'physics',q:'حجم مولکول‌های گاز ایده‌آل:',options:['صفر است','بی‌نهایت است','ثابت است','متغیر است'],correct:0,explanation:'در گاز ایده‌آل حجم مولکول‌ها ناچیز فرض می‌شود.'},
+  {category:'physics',q:'دمای صفر مطلق بر حسب کلوین:',options:['0 K','-273 K','100 K','273 K'],correct:0,explanation:'صفر مطلق = 0 K = -273.15°C'},
+  {category:'physics',q:'نیروی وارد بر جسم شناور برابر است با:',options:['وزن جسم','وزن سیال جابجا شده','حجم جسم','چگالی سیال'],correct:1,explanation:'اصل ارشمیدس: نیروی شناوری = وزن سیال جابجا شده'},
+  {category:'physics',q:'اندازه حرکت (تکانه) کدام است؟',options:['mv','ma','m/v','m+a'],correct:0,explanation:'p = mv'},
+  {category:'physics',q:'کار انجام شده برابر است با:',options:['F/d','Fd','F+d','F-d'],correct:1,explanation:'W = F×d'},
+  
+  {category:'prog',q:'خروجی کد `print(2**3)` در پایتون چیست؟',options:['6','8','5','9'],correct:1,explanation:'2 به توان 3 = 8'},
+  {category:'prog',q:'کدام نوع داده در پایتون تغییرناپذیر است؟',options:['list','dict','tuple','set'],correct:2,explanation:'tuple غیرقابل تغییر است.'},
+  {category:'prog',q:'حلقه for در پایتون با چه کلمه‌ای شروع می‌شود؟',options:['loop','for','foreach','while'],correct:1,explanation:'for item in sequence:'},
+  {category:'prog',q:'کدام گزینه صحیح است؟',options:['HTML زبان برنامه‌نویسی است','HTML زبان نشانه‌گذاری است','HTML سیستم عامل است','HTML پایگاه داده است'],correct:1,explanation:'HTML زبان نشانه‌گذاری ابرمتن است.'},
+  {category:'prog',q:'CSS برای چیست؟',options:['برنامه‌نویسی','استایل‌دهی','پایگاه داده','سرور'],correct:1,explanation:'CSS برای استایل‌دهی به صفحات وب است.'},
+  {category:'prog',q:'JavaScript یک زبان:',options:['سمت سرور','سمت کلاینت','هر دو','هیچکدام'],correct:2,explanation:'JavaScript هم در کلاینت و هم در سرور (Node.js) استفاده می‌شود.'},
+  {category:'prog',q:'کدام گزینه متغیر معتبر در پایتون است؟',options:['2var','var_2','var-2','var 2'],correct:1,explanation:'نام متغیر نمی‌تواند با عدد شروع شود یا فاصله داشته باشد.'},
+  {category:'prog',q:'تابع در پایتون با چه کلمه‌ای تعریف می‌شود؟',options:['function','def','func','define'],correct:1,explanation:'def function_name():'},
+  {category:'prog',q:'خروجی `len("hello")` چیست؟',options:['4','5','6','hello'],correct:1,explanation:'تعداد حروف hello برابر 5 است.'},
+  {category:'prog',q:'کدام گزینه عملگر منطقی نیست؟',options:['and','or','not','xor'],correct:3,explanation:'xor در پایتون وجود ندارد.'},
+  {category:'prog',q:'ساختار داده stack از کدام اصل پیروی می‌کند؟',options:['FIFO','LIFO','Random','Sorted'],correct:1,explanation:'Last In First Out'},
+  {category:'prog',q:'کدام زبان کامپایلری است؟',options:['Python','JavaScript','C++','PHP'],correct:2,explanation:'C++ زبان کامپایلری است.'},
+  {category:'prog',q:'Git برای چیست؟',options:['ویرایش متن','کنترل نسخه','طراحی وب','پایگاه داده'],correct:1,explanation:'Git سیستم کنترل نسخه است.'},
+  {category:'prog',q:'HTTP مخفف چیست؟',options:['HyperText Transfer Protocol','HyperText Transmission Process','HighText Transfer Protocol','HyperText Transfer Process'],correct:0,explanation:'HyperText Transfer Protocol'},
+  {category:'prog',q:'کدام گزینه صحیح است؟',options:['SQL زبان پایگاه داده است','SQL زبان برنامه‌نویسی است','SQL سیستم عامل است','SQL مرورگر است'],correct:0,explanation:'SQL زبان پرس‌وجوی پایگاه داده است.'},
+  
+  {category:'science',q:'عنصر شیمیایی با نماد O کدام است؟',options:['طلا','نقره','اکسیژن','آهن'],correct:2,explanation:'O نماد اکسیژن است.'},
+  {category:'science',q:'pH خنثی برابر است با:',options:['0','7','14','1'],correct:1,explanation:'pH=7 خنثی است.'},
+  {category:'science',q:'کدام سیاره به سیاره سرخ معروف است؟',options:['زهره','مشتری','مریخ','زحل'],correct:2,explanation:'مریخ به دلیل اکسید آهن سطحش قرمز است.'},
+  {category:'science',q:'سلول‌های خون قرمز توسط کدام اندام ساخته می‌شوند؟',options:['کبد','قلب','مغز استخوان','طحال'],correct:2,explanation:'مغز استخوان گلبول‌های قرمز تولید می‌کند.'},
+  {category:'science',q:'فرمول شیمیایی آب چیست؟',options:['CO2','H2O','NaCl','O2'],correct:1,explanation:'H₂O'},
+  {category:'science',q:'کدام گزینه از ویتامین‌های محلول در آب است؟',options:['A','D','C','E'],correct:2,explanation:'ویتامین C محلول در آب است.'},
+  {category:'science',q:'سریع‌ترین جانور خشکی کدام است؟',options:['شیر','یوزپلنگ','اسب','غزال'],correct:1,explanation:'یوزپلنگ تا 120 km/h می‌دود.'},
+  {category:'science',q:'بزرگترین سیاره منظومه شمسی:',options:['زمین','مریخ','مشتری','زحل'],correct:2,explanation:'مشتری بزرگترین سیاره است.'},
+  {category:'science',q:'عنصر اصلی تشکیل‌دهنده الماس:',options:['اکسیژن','کربن','نیتروژن','هیدروژن'],correct:1,explanation:'الماس از کربن خالص تشکیل شده.'},
+  {category:'science',q:'تعداد کروموزوم‌های انسان:',options:['23','46','48','44'],correct:1,explanation:'46 کروموزوم (23 جفت)'}
+];
+
+// ===== GLOBAL STATE =====
 const S = {
-  profile: JSON.parse(localStorage.getItem('oy_prof') || 'null'),
-  files: JSON.parse(localStorage.getItem('oy_files') || '[]'),
-  theme: localStorage.getItem('oy_theme') || 'light',
-  planner: JSON.parse(localStorage.getItem('oy_plan') || '{}'),
-  examDate: localStorage.getItem('oy_exam') || '',
-  comments: JSON.parse(localStorage.getItem('oy_comments') || '[]'),
-  roomMsgs: JSON.parse(localStorage.getItem('oy_room') || '[]'),
-  quizHistory: JSON.parse(localStorage.getItem('oy_qhist') || '[]'),
-  apiKey: localStorage.getItem('oy_apikey') || '',
-  apiUrl: localStorage.getItem('oy_apiurl') || 'https://api.doona.ai/v1/chat/completions',
-  tone: localStorage.getItem('oy_tone') || 'friendly',
-  aiMode: localStorage.getItem('oy_aimode') || 'ostadyar'
+  apiKey: Store.get('oy_claude_key', ''),
+  theme: Store.get('oy_theme', 'dark'),
+  history: [],
+  isOnline: false,
+  isStreaming: false,
+  autoSearch: false,
+  maxHistory: 20,
+  soundEnabled: true,
+  quiz: {
+    questions: [],
+    current: 0,
+    score: 0,
+    answers: [],
+    timer: null,
+    timeLeft: 600,
+    startTime: 0
+  }
 };
 
-const save = () => {
-  localStorage.setItem('oy_prof', JSON.stringify(S.profile));
-  localStorage.setItem('oy_files', JSON.stringify(S.files));
-  localStorage.setItem('oy_theme', S.theme);
-  localStorage.setItem('oy_plan', JSON.stringify(S.planner));
-  localStorage.setItem('oy_exam', S.examDate);
-  localStorage.setItem('oy_comments', JSON.stringify(S.comments));
-  localStorage.setItem('oy_room', JSON.stringify(S.roomMsgs));
-  localStorage.setItem('oy_qhist', JSON.stringify(S.quizHistory));
-  localStorage.setItem('oy_apikey', S.apiKey);
-  localStorage.setItem('oy_apiurl', S.apiUrl);
-  localStorage.setItem('oy_tone', S.tone);
-  localStorage.setItem('oy_aimode', S.aiMode);
-};
+// ===== DOM ELEMENTS =====
+const chatMsgs = document.getElementById('chatMsgs');
+const chatIn = document.getElementById('chatIn');
 
-// ====== پس‌زمینه (Space Theme) ======
-const cv = document.getElementById('fx'), cx = cv.getContext('2d');
-let spheres = [];
-function rsz(){cv.width = innerWidth;cv.height = innerHeight}
-addEventListener('resize', rsz);rsz();
-
-class Sphere{
-  constructor(){this.reset()}
-  reset(){
-    this.x = Math.random()*cv.width;
-    this.y = Math.random()*cv.height;
-    this.r = 20+Math.random()*50;
-    this.vx = (Math.random()-.5)*.3;
-    this.vy = (Math.random()-.5)*.3;
-    this.hue = Math.random()*360;
-    this.rot = Math.random()*Math.PI*2;
-    this.rs = (Math.random()-.5)*.02;
+// ===== INITIALIZATION =====
+(async function init() {
+  await DB.init();
+  setTheme(S.theme);
+  updateStatus(!!S.apiKey);
+  
+  if (S.apiKey) {
+    document.getElementById('apiKeyInput').placeholder = 'API Key ذخیره شده ✓';
   }
-  update(){
-    this.x += this.vx;this.y += this.vy;this.rot += this.rs;
-    if(this.x < -100) this.x = cv.width+100;
-    if(this.x > cv.width+100) this.x = -100;
-    if(this.y < -100) this.y = cv.height+100;
-    if(this.y > cv.height+100) this.y = -100;
-  }
-  draw(){
-    const g = cx.createRadialGradient(
-      this.x-this.r*.3,this.y-this.r*.3,this.r*.1,
-      this.x,this.y,this.r
-    );
-    g.addColorStop(0,`hsla(${this.hue},80%,70%,.5)`);
-    g.addColorStop(.7,`hsla(${this.hue},60%,40%,.2)`);
-    g.addColorStop(1,`hsla(${this.hue},40%,20%,0)`);
-    cx.fillStyle = g;
-    cx.beginPath();
-    cx.arc(this.x,this.y,this.r,0,Math.PI*2);
-    cx.fill();
-    cx.strokeStyle = `hsla(${this.hue},80%,60%,.15)`;
-    cx.lineWidth = 1;
-    cx.beginPath();
-    cx.ellipse(this.x,this.y,this.r*.8,this.r*.3,this.rot,0,Math.PI*2);
-    cx.stroke();
-  }
-}
-for(let i=0;i<10;i++) spheres.push(new Sphere());
-(function anim(){
-  cx.clearRect(0,0,cv.width,cv.height);
-  if(S.theme==='space') spheres.forEach(s=>{s.update();s.draw()});
-  requestAnimationFrame(anim);
+  
+  setTimeout(() => {
+    const welcomeMsg = `سلام! 👨‍\n<strong>استاد یار 4.0 Pro Max</strong> آماده است.\n\n<strong>✨ ویژگی‌های جدید:</strong>\n✅ بانک ۶ سوالی واقعی با توضیحات\n✅ تایمر پیشرفته با ذخیره خودکار\n✅ بررسی پاسخ‌ها با توضیح کامل\n✅ خروجی PDF از کارنامه\n✅ IndexedDB برای ذخیره‌سازی\n✅ فشرده‌سازی خودکار تصاویر\n✅ جستجوی هوشمند اینترنتی\n✅ افکت‌های صوتی\n✅ ۵ تم مختلف\n\n<strong>💡 پیشنهاد:</strong> یک آزمون آزمایشی بدهید!`;
+    addMsg(welcomeMsg, false, true);
+  }, 400);
 })();
 
-// ====== ناوبری ======
-function go(id){
-  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.querySelector(`.nav-item[data-p="${id}"]`)?.classList.add('active');
-
-  document.querySelectorAll('.mob-nav-item').forEach(n=>n.classList.remove('active'));
-  if(event?.currentTarget) event.currentTarget.classList.add('active');
-
-  document.getElementById('sidebar').classList.remove('open');
-  window.scrollTo({top:0,behavior:'smooth'});
-
-  if(id==='home'){checkProf();updateApiStatus()}
-  if(id==='planner') initPlanner();
-  if(id==='comments') renderComments();
-  if(id==='room') renderRoom();
-  if(id==='quiz') renderQuizHistory();
-}
-function setTheme(t){
+// ===== THEME SYSTEM =====
+function setTheme(t) {
   S.theme = t;
   document.body.setAttribute('data-theme', t);
-  save();
+  Store.set('oy_theme', t);
+  showToast(`تم ${t==='light'?'روز':t==='dark'?'شب':t==='space'?'فضایی':t==='thunder'?'رعد':'اقیانوس'} فعال شد 🎨`);
 }
 
-// ====== پروفایل ======
-const GN = {
-  '1':'اول','2':'دوم','3':'سوم','4':'چهارم','5':'پنجم','6':'ششم',
-  '7':'هفتم','8':'هشتم','9':'نهم','10':'دهم','11':'یازدهم','12':'دوازدهم'
-};
-
-function checkProf(){
-  const gate=document.getElementById('profGate'),dash=document.getElementById('dash');
-  if(S.profile){
-    gate.style.display='none';
-    dash.style.display='block';
-    document.getElementById('welMsg').textContent = `سلام ${S.profile.fn} عزیز! 👋`;
-    document.getElementById('nmMini').textContent = `${S.profile.fn} ${S.profile.ln}`;
-    document.getElementById('grMini').textContent = GN[S.profile.gr] || '';
-    document.getElementById('avMini').textContent = S.profile.fn.charAt(0);
-    document.getElementById('dGrGrid').innerHTML = Object.entries(GN).map(([k,v])=>
-      `<div class="grade-card ${S.profile.gr===k?'selected':''}" onclick="chgGrade('${k}')">
-        <div class="grade-num">${toFa(k)}</div>
-        <div class="grade-lbl">${v}</div>
-      </div>`
-    ).join('');
-  }else{
-    gate.style.display='block';
-    dash.style.display='none';
-    document.getElementById('nmMini').textContent='تنظیم پروفایل';
-    document.getElementById('grMini').textContent='کلیک کنید';
-    document.getElementById('avMini').textContent='?';
-  }
-}
-
-function saveProf(){
-  const fn=document.getElementById('fn').value.trim();
-  const ln=document.getElementById('ln').value.trim();
-  const gr=document.getElementById('grSel').value;
-  if(!fn || !ln || !gr) return toast('⚠️ همه فیلدها را پر کنید');
-  S.profile = {fn,ln,gr};
-  save();checkProf();updateApiStatus();
-  toast('✅ پروفایل ذخیره شد');
-}
-
-function editProf(){
-  if(S.profile){
-    document.getElementById('fn').value = S.profile.fn;
-    document.getElementById('ln').value = S.profile.ln;
-    document.getElementById('grSel').value = S.profile.gr;
-  }
-  S.profile = null;
-  localStorage.removeItem('oy_prof');
-  checkProf();
-}
-function chgGrade(g){
-  if(S.profile){
-    S.profile.gr = g;
-    save();checkProf();
-    toast('✅ پایه تغییر کرد');
-  }
-}
-
-// ====== موتور AI (لوکال + دورنا) ======
-let lastAI = '';
-
-const KB = {
-  'فتوسنتز':{
-    e:'فتوسنتز فرآیندی است که گیاهان با نور خورشید، آب و CO₂ غذا و اکسیژن تولید می‌کنند.',
-    f:'6CO₂ + 6H₂O + نور → C₆H₁₂O₆ + 6O₂',
-    x:'🌿 گیاه مثل کارخانه است: نور=برق، آب و CO₂=مواد اولیه.',
-    q:'اگر فتوسنتز نبود، چه بر سر اکسیژن هوا می‌آمد؟'
-  },
-  'کسر':{
-    e:'کسر بخشی از یک کل است. صورت، مقدار انتخاب‌شده و مخرج، تعداد کل قسمت‌هاست.',
-    x:'🍕 اگر پیتزا را به ۴ قسمت تقسیم کنیم و ۱ قسمت را بخوریم، کسر می‌شود ¼.',
-    q:'اگر ۳ قسمت از ۸ قسمت را بخوری، کسر را چگونه می‌نویسی؟'
-  },
-  'ضرب':{
-    e:'ضرب یعنی جمع تکراری چند عدد مساوی.',
-    x:'۳×۴ یعنی ۴ را سه بار جمع کنیم: ۴+۴+۴=۱۲.',
-    q:'۷×۸ را حساب کن.'
-  },
-  'نهاد':{
-    e:'نهاد کلمه‌ای است که درباره‌ی آن در جمله خبر داده می‌شود.',
-    x:'در جمله‌ی «علی درس می‌خواند»، کلمه‌ی «علی» نهاد است.',
-    q:'در جمله‌ی «مدرسه امروز تعطیل است» نهاد کدام کلمه است؟'
-  }
-};
-
-function localAIAnswer(q){
-  q = q.trim();
-  for(const k in KB){
-    if(q.includes(k)){
-      const item = KB[k];
-      let txt = `🧠 توضیح: ${item.e || ''}`;
-      if(item.f) txt += `<br><br>📐 فرمول: <code>${item.f}</code>`;
-      if(item.x) txt += `<br><br>مثال: ${item.x}`;
-      if(item.q) txt += `<br><br>❓ تمرین: ${item.q}`;
-      return txt;
-    }
-  }
-  return 'هنوز این موضوع در بانک اطلاعاتی «استاد یار» ثبت نشده؛ می‌توانی حالت ChatGPT را فعال کنی تا پاسخ دقیق‌تری بگیری. 😉';
-}
-
-async function callDoona(msg){
-  if(!S.apiKey) return null;
-  const name = S.profile?.fn || 'دانش‌آموز';
-  const grade = S.profile?.gr ? GN[S.profile.gr] : '';
-  const toneMap = {
-    friendly:`لحن صمیمی. ${name} را با نام صدا بزن.`,
-    formal:'لحن رسمی و دقیق.',
-    motivational:`لحن انگیزشی. ${name} را تشویق کن. 🔥`
+// ===== SOUND SYSTEM =====
+function playSound(type) {
+  if (!S.soundEnabled) return;
+  const sounds = {
+    correct: document.getElementById('sndCorrect'),
+    wrong: document.getElementById('sndWrong'),
+    click: document.getElementById('sndClick')
   };
-  const sys = `تو "استاد یار" هستی، معلم خصوصی برای دانش‌آموزان ایرانی.
-دانش‌آموز: ${name} | پایه: ${grade} | ${toneMap[S.tone] || toneMap.friendly}
-قوانین: 1.توضیح ساده 2.مثال کاربردی 3.فرمول اگر لازم است 4.سوال تمرینی در آخر 5.فارسی روان 6.markdown`;
-
-  try{
-    const url = S.apiUrl || 'https://api.doona.ai/v1/chat/completions';
-    const res = await fetch(url,{
-      method:'POST',
-      headers:{
-        'Authorization':`Bearer ${S.apiKey}`,
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({
-        model:'gpt-4o-mini',
-        messages:[
-          {role:'system',content:sys},
-          {role:'user',content:msg}
-        ],
-        temperature:0.7,
-        max_tokens:1500
-      })
-    });
-    if(!res.ok){
-      const txt = await res.text();
-      console.error('HTTP Error:',res.status,txt);
-      toast('❌ خطای سرور: '+res.status);
-      return null;
-    }
-    const data = await res.json();
-    if(data.error){
-      console.error('API Error:',data.error);
-      toast('❌ خطا: '+data.error.message);
-      return null;
-    }
-    if(!data.choices || !data.choices[0]){
-      toast('❌ پاسخ نامعتبر از API');
-      return null;
-    }
-    return data.choices[0].message.content;
-  }catch(e){
-    console.error('Fetch Error:',e);
-    toast('❌ خطا در اتصال: '+e.message);
-    return null;
+  if (sounds[type]) {
+    sounds[type].currentTime = 0;
+    sounds[type].play().catch(() => {});
   }
 }
 
-// ====== چت UI ======
-const chatMsgsEl = document.getElementById('chatMsgs');
-const chatInEl   = document.getElementById('chatIn');
-const aiModeSel  = document.getElementById('aiModeSel');
-const toneSel    = document.getElementById('toneSel');
+// ===== CANVAS ANIMATION =====
+const cv = document.getElementById('fx'), cx = cv.getContext('2d');
+let spheres = [], animId;
+function rsz() { cv.width = innerWidth; cv.height = innerHeight }
+addEventListener('resize', rsz); rsz();
 
-aiModeSel.value = S.aiMode;
-toneSel.value   = S.tone;
+class Sphere {
+  constructor() { this.reset() }
+  reset() {
+    this.x = Math.random() * cv.width;
+    this.y = Math.random() * cv.height;
+    this.r = 20 + Math.random() * 50;
+    this.vx = (Math.random() - .5) * 0.2;
+    this.vy = (Math.random() - .5) * 0.2;
+    this.hue = Math.random() * 360;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < -100) this.x = cv.width + 100;
+    if (this.x > cv.width + 100) this.x = -100;
+    if (this.y < -100) this.y = cv.height + 100;
+    if (this.y > cv.height + 100) this.y = -100;
+  }
+  draw() {
+    const g = cx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+    g.addColorStop(0, `hsla(${this.hue},70%,60%,0.3)`);
+    g.addColorStop(1, `hsla(${this.hue},40%,20%,0)`);
+    cx.fillStyle = g;
+    cx.beginPath(); cx.arc(this.x, this.y, this.r, 0, Math.PI*2); cx.fill();
+  }
+}
+for (let i = 0; i < 8; i++) spheres.push(new Sphere());
+(function anim() {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  if (S.theme === 'space' || S.theme === 'thunder' || S.theme === 'ocean') {
+    spheres.forEach(s => { s.update(); s.draw() });
+  }
+  animId = requestAnimationFrame(anim);
+})();
 
-function addMsg(content, who='bot'){
-  const div = document.createElement('div');
-  div.className = 'msg ' + (who==='user'?'user':'bot');
-  div.innerHTML = content;
-  chatMsgsEl.appendChild(div);
-  chatMsgsEl.scrollTop = chatMsgsEl.scrollHeight;
+// ===== MATH RENDERER =====
+function renderMath(text) {
+  if (!window.katex) return text;
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (_, e) => {
+    try { return katex.renderToString(e.trim(), { displayMode: true, throwOnError: false }) } catch { return e }
+  });
+  text = text.replace(/\$([^\$]+?)\$/g, (_, e) => {
+    try { return katex.renderToString(e.trim(), { displayMode: false, throwOnError: false }) } catch { return e }
+  });
+  return text;
 }
 
-let typingEl = null;
-function addTyping(){
-  if(typingEl) return;
-  typingEl = document.createElement('div');
-  typingEl.className = 'typing-ind';
-  typingEl.innerHTML = `
-    <div class="typing-dot"></div>
-    <div class="typing-dot"></div>
-    <div class="typing-dot"></div>
+// ===== MESSAGE RENDERING =====
+function addMsg(content, isUser, isHtml=false) {
+  const d = document.createElement('div');
+  d.className = `msg ${isUser ? 'user' : 'bot'}`;
+  
+  if (isUser || !isHtml) {
+    d.textContent = content;
+  } else {
+    d.innerHTML = renderMath(content);
+  }
+  
+  if (!isUser) {
+    const actions = document.createElement('div');
+    actions.className = 'msg-actions';
+    actions.innerHTML = `
+      <button class="action-btn" onclick="copyText(this)">📋 کپی</button>
+      <button class="action-btn" onclick="speakText(this.closest('.msg').textContent)">🔊 پخش</button>
+    `;
+    d.appendChild(actions);
+  }
+  
+  chatMsgs.appendChild(d);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  
+  // Auto-render math
+  if (window.renderMathInElement) {
+    renderMathInElement(d, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });
+  }
+  
+  return d;
+}
+
+function copyText(btn) {
+  const msg = btn.closest('.msg');
+  const text = msg.textContent.replace(/📋 کپی🔊 پخش/g, '').trim();
+  navigator.clipboard.writeText(text).then(() => showToast('متن کپی شد 📋'));
+}
+
+function showTyping() {
+  if (document.getElementById('typInd')) return;
+  const t = document.createElement('div');
+  t.className = 'typing-ind'; t.id = 'typInd';
+  t.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  chatMsgs.appendChild(t);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+}
+function hideTyping() { document.getElementById('typInd')?.remove() }
+
+function updateStatus(online) {
+  S.isOnline = online;
+  const el = document.getElementById('systemStatus');
+  if (el) {
+    el.className = `status-badge ${online ? 'status-online' : 'status-offline'}`;
+    el.innerHTML = online ? '<span class="status-dot"></span>آنلاین' : '⚡ آفلاین';
+  }
+}
+
+// ===== TOAST NOTIFICATION =====
+function showToast(msg, duration=3000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+// ===== TTS SYSTEM =====
+function speakText(text) {
+  speechSynthesis.cancel();
+  const cleanText = text.replace(/[\$\[\]#*]/g, '').replace(/📋 کپی🔊 پخش/g, '');
+  const u = new SpeechSynthesisUtterance(cleanText);
+  u.lang = 'fa-IR';
+  const sel = document.getElementById('voiceSel').value;
+  const voices = speechSynthesis.getVoices();
+  const fa = voices.filter(v => v.lang.includes('fa') || v.lang.includes('ar'));
+  
+  if (fa.length) {
+    u.voice = sel === 'female' ? fa[0] : fa[fa.length-1] || fa[0];
+  }
+  u.rate = 0.9; 
+  u.pitch = sel === 'female' ? 1.1 : 0.9;
+  speechSynthesis.speak(u);
+}
+
+function speakLastMessage() {
+  const msgs = document.querySelectorAll('.msg.bot');
+  if (msgs.length) {
+    speakText(msgs[msgs.length-1].textContent);
+  }
+}
+
+// ===== ADVANCED QUIZ SYSTEM =====
+function openQuiz() { 
+  document.getElementById('quizModal').classList.add('open');
+  document.getElementById('quizContent').innerHTML = `
+    <div style="text-align:center;padding:40px 20px">
+      <div style="font-size:5rem;margin-bottom:20px" class="float">🎯</div>
+      <h3 style="margin-bottom:16px;font-size:1.3rem">آزمون ۶۰ سوالی جامع</h3>
+      <p style="color:var(--dim);line-height:2.2;font-size:.95rem">
+        ✅ ۶ سوال از ۴ دسته (ریاضی، فیزیک، برنامه‌نویسی، علوم)<br>
+        ✅ زمان: ۰ دقیقه<br>
+        ✅ تصادفی و بدون تکرار<br>
+        ✅ ذخیره خودکار در IndexedDB<br>
+        ✅ کارنامه تفصیلی با PDF<br>
+        ✅ بررسی پاسخ‌ها با توضیح کامل<br>
+        ✅ افکت‌های صوتی
+      </p>
+    </div>
   `;
-  chatMsgsEl.appendChild(typingEl);
-  chatMsgsEl.scrollTop = chatMsgsEl.scrollHeight;
-}
-function removeTyping(){
-  if(!typingEl) return;
-  typingEl.remove();
-  typingEl = null;
+  playSound('click');
 }
 
-function sendChat(){
-  const txt = chatInEl.value.trim();
-  if(!txt) return;
+function closeQuiz() { 
+  document.getElementById('quizModal').classList.remove('open');
+  clearInterval(S.quiz.timer);
+}
 
-  S.aiMode = aiModeSel.value;
-  S.tone   = toneSel.value;
-  save();
+function shuffleArray(arr) {
+  const newArr = [...arr];
+  for (let i = newArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+  }
+  return newArr;
+}
 
-  addMsg(txt,'user');
-  chatInEl.value = '';
+async function startQuiz() {
+  const btn = document.getElementById('quizStartBtn');
+  const contentEl = document.getElementById('quizContent');
+  
+  btn.disabled = true; 
+  btn.innerHTML = '⏳ در حال آماده‌سازی...';
+  playSound('click');
+  
+  // Select 60 random questions
+  S.quiz.questions = shuffleArray(questionBank).slice(0, 60);
+  S.quiz.current = 0;
+  S.quiz.score = 0;
+  S.quiz.answers = [];
+  S.quiz.timeLeft = 600;
+  S.quiz.startTime = Date.now();
+  
+  setTimeout(() => {
+    showQuestion();
+    startTimer();
+    btn.style.display = 'none';
+  }, 800);
+}
 
-  const mode = S.aiMode || 'ostadyar';
-
-  if(mode === 'chatgpt'){
-    if(!S.apiKey){
-      addMsg('برای استفاده از ChatGPT باید اول API Key را تنظیم کنی. روی دکمه‌ی ⚙️ تنظیم API Key کلیک کن.','bot');
-      return;
-    }
-    addTyping();
-    callDoona(txt).then(res=>{
-      removeTyping();
-      if(res){
-        lastAI = res;
-        addMsg(res,'bot');
-      }else{
-        addMsg('❌ مشکلی در دریافت پاسخ از ChatGPT پیش آمد.','bot');
-      }
+function showQuestion() {
+  const q = S.quiz.questions[S.quiz.current];
+  const contentEl = document.getElementById('quizContent');
+  
+  document.getElementById('currentQ').textContent = S.quiz.current + 1;
+  document.getElementById('quizProgress').style.width = `${((S.quiz.current)/60)*100}%`;
+  
+  const letters = ['الف', 'ب', 'ج', 'د'];
+  let optionsHtml = '';
+  q.options.forEach((opt, idx) => {
+    optionsHtml += `
+      <div class="option" onclick="selectOption(${idx})" data-idx="${idx}">
+        <div class="option-letter">${letters[idx]}</div>
+        <div>${renderMath(opt)}</div>
+      </div>
+    `;
+  });
+  
+  contentEl.innerHTML = `
+    <div class="question-card">
+      <div class="question-number">سوال ${S.quiz.current + 1} از 60 • ${getCategoryName(q.category)}</div>
+      <div class="question-text">${renderMath(q.q)}</div>
+      <div class="options">${optionsHtml}</div>
+    </div>
+  `;
+  
+  // Auto-render math
+  if (window.renderMathInElement) {
+    renderMathInElement(contentEl, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
     });
-  }else{
-    const ans = localAIAnswer(txt);
-    lastAI = ans;
-    addMsg(ans,'bot');
   }
 }
 
-// ====== خواندن با صدا (Web Speech API) ======
-function getLastBotMessageText(){
-  const msgs = document.querySelectorAll('#chatMsgs .msg.bot');
-  if(!msgs.length) return '';
-  const last = msgs[msgs.length-1];
-  return last.innerText || last.textContent || '';
+function getCategoryName(cat) {
+  const names = {math:'ریاضیات', physics:'فیزیک', prog:'برنامه‌نویسی', science:'علوم'};
+  return names[cat] || cat;
 }
 
-function speakLast(){
-  const text = getLastBotMessageText();
-  if(!text){
-    toast('هیچ پاسخی برای خواندن پیدا نشد 😅');
-    return;
+function selectOption(idx) {
+  const options = document.querySelectorAll('.option');
+  options.forEach((opt, i) => {
+    opt.classList.toggle('selected', i === idx);
+  });
+  
+  const q = S.quiz.questions[S.quiz.current];
+  const isCorrect = idx === q.correct;
+  
+  if (isCorrect) {
+    S.quiz.score++;
+    playSound('correct');
+  } else {
+    playSound('wrong');
   }
-
-  if(!('speechSynthesis' in window)){ // Web Speech API [web:6]
-    toast('مرورگر شما از خواندن خودکار پشتیبانی نمی‌کند.');
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang  = 'fa-IR';
-  utter.rate  = 1;
-  utter.pitch = 1;
-
-  window.speechSynthesis.speak(utter);
-}
-
-// ====== API Key Modal ======
-function openApiModal(){
-  document.getElementById('apiModal').classList.add('active');
-  document.getElementById('apiKeyInp').value = S.apiKey || '';
-  document.getElementById('apiUrlInp').value = S.apiUrl || 'https://api.doona.ai/v1/chat/completions';
-}
-function closeApiModal(){
-  document.getElementById('apiModal').classList.remove('active');
-}
-function saveApiKey(){
-  const key = document.getElementById('apiKeyInp').value.trim();
-  const url = document.getElementById('apiUrlInp').value.trim();
-  if(!key) return toast('API Key را وارد کنید');
-  S.apiKey = key;
-  if(url) S.apiUrl = url;
-  save();
-  updateApiStatus();
-  toast('✅ API Key ذخیره شد');
-  closeApiModal();
-}
-async function testApiConnection(){
-  if(!S.apiKey) return toast('اول API Key را وارد کنید');
-  toast('⏳ در حال تست اتصال...');
-  try{
-    const resp = await callDoona('سلام! این فقط یک تست اتصال است.');
-    if(resp){
-      toast('✅ اتصال موفق بود!');
-    }else{
-      toast('❌ پاسخ معتبری از API دریافت نشد.');
+  
+  S.quiz.answers.push({
+    q: S.quiz.current, 
+    correct: isCorrect, 
+    selected: idx,
+    correctAnswer: q.correct,
+    explanation: q.explanation
+  });
+  
+  // Show correct/wrong
+  options[q.correct].classList.add('correct');
+  if (!isCorrect) options[idx].classList.add('wrong');
+  
+  setTimeout(() => {
+    S.quiz.current++;
+    if (S.quiz.current < 60) {
+      showQuestion();
+    } else {
+      finishQuiz();
     }
-  }catch(e){
-    toast('❌ خطا در تست اتصال: '+e.message);
+  }, 1200);
+}
+
+function startTimer() {
+  const timerEl = document.getElementById('quizTimer');
+  S.quiz.timer = setInterval(() => {
+    S.quiz.timeLeft--;
+    const m = Math.floor(S.quiz.timeLeft / 60).toString().padStart(2,'0');
+    const s = (S.quiz.timeLeft % 60).toString().padStart(2,'0');
+    timerEl.textContent = `${m}:${s}`;
+    
+    if (S.quiz.timeLeft <= 10) {
+      timerEl.style.animation = 'pulse 0.5s infinite';
+    }
+    
+    if (S.quiz.timeLeft <= 0) {
+      finishQuiz();
+    }
+  }, 1000);
+}
+
+async function finishQuiz() {
+  clearInterval(S.quiz.timer);
+  const contentEl = document.getElementById('quizContent');
+  const percentage = Math.round((S.quiz.score / 60) * 100);
+  const timeSpent = 600 - S.quiz.timeLeft;
+  
+  // Save result to IndexedDB
+  const result = {
+    date: new Date().toISOString(),
+    score: S.quiz.score,
+    total: 60,
+    percentage: percentage,
+    time: timeSpent,
+    answers: S.quiz.answers,
+    questions: S.quiz.questions
+  };
+  
+  try {
+    await DB.add('quizResults', result);
+  } catch (e) {
+    console.error('Failed to save quiz:', e);
+  }
+  
+  contentEl.innerHTML = `
+    <div class="results-card">
+      <h2 class="float">🎉 آزمون پایان یافت!</h2>
+      <div class="score-circle glow">
+        <div class="score-text">${percentage}%</div>
+      </div>
+      <div class="result-details">
+        <div class="detail-box">
+          <div class="detail-value" style="color:var(--suc)">${S.quiz.score}</div>
+          <div class="detail-label">پاسخ صحیح ✓</div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-value" style="color:var(--dan)">${60 - S.quiz.score}</div>
+          <div class="detail-label">پاسخ غلط ✗</div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-value">${Math.floor(timeSpent/60)}:${(timeSpent%60).toString().padStart(2,'0')}</div>
+          <div class="detail-label">زمان صرف شده ⏱</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+        <button class="btn-sm btn-p" onclick="downloadPDF()" style="padding:12px 24px">📥 دانلود PDF</button>
+        <button class="btn-sm" onclick="showReview()" style="padding:12px 24px">📝 بررسی پاسخ‌ها</button>
+        <button class="btn-sm" onclick="openHistory()" style="padding:12px 24px"> تاریخچه</button>
+        <button class="btn-sm btn-p" onclick="startQuiz()" style="padding:12px 24px">🔄 آزمون مجدد</button>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('quizProgress').style.width = '100%';
+  showToast(`آزمون پایان یافت! نمره: ${percentage}% `);
+}
+
+function showReview() {
+  const modal = document.getElementById('reviewModal');
+  const content = document.getElementById('reviewContent');
+  
+  let html = '';
+  S.quiz.answers.forEach((ans, i) => {
+    const q = S.quiz.questions[i];
+    const letters = ['الف', 'ب', 'ج', 'د'];
+    
+    html += `
+      <div class="review-item ${ans.correct ? 'correct' : 'wrong'}">
+        <div class="review-question">سوال ${i+1}: ${renderMath(q.q)}</div>
+        ${q.options.map((opt, idx) => `
+          <div class="review-answer ${idx === ans.selected ? 'selected' : ''} ${idx === q.correct ? 'correct' : ''} ${idx === ans.selected && !ans.correct ? 'wrong' : ''}">
+            ${letters[idx]}) ${renderMath(opt)}
+          </div>
+        `).join('')}
+        <div class="review-explanation">
+          <strong>💡 توضیح:</strong> ${q.explanation}
+        </div>
+      </div>
+    `;
+  });
+  
+  content.innerHTML = html;
+  
+  // Render math
+  if (window.renderMathInElement) {
+    renderMathInElement(content, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });
+  }
+  
+  modal.classList.add('open');
+  playSound('click');
+}
+
+function closeReview() {
+  document.getElementById('reviewModal').classList.remove('open');
+}
+
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({align: 'right'});
+  
+  const percentage = Math.round((S.quiz.score / 60) * 100);
+  
+  doc.setFont('Vazirmatn');
+  doc.setFontSize(20);
+  doc.text('کارنامه آزمون', 105, 20, {align: 'center'});
+  
+  doc.setFontSize(14);
+  doc.text(`تاریخ: ${new Date().toLocaleString('fa-IR')}`, 105, 35, {align: 'center'});
+  doc.text(`موضوع: آزمون جامع ۶۰ سوالی`, 105, 45, {align: 'center'});
+  
+  doc.setFontSize(16);
+  doc.text(`نمره: ${percentage}%`, 105, 65, {align: 'center'});
+  doc.text(`پاسخ صحیح: ${S.quiz.score} از 60`, 105, 80, {align: 'center'});
+  doc.text(`زمان: ${Math.floor((600-S.quiz.timeLeft)/60)} دقیقه و ${(600-S.quiz.timeLeft)%60} ثانیه`, 105, 95, {align: 'center'});
+  
+  doc.save(`quiz-result-${Date.now()}.pdf`);
+  showToast('PDF دانلود شد 📥');
+}
+
+// ===== HISTORY SYSTEM =====
+async function openHistory() {
+  const modal = document.getElementById('historyModal');
+  const list = document.getElementById('historyList');
+  
+  try {
+    const history = await DB.getAll('quizResults');
+    
+    if (history.length === 0) {
+      list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--dim)">هنوز آزمونی انجام نشده است</div>';
+    } else {
+      list.innerHTML = history.slice().reverse().map((h, i) => `
+        <div class="history-item" onclick="viewQuizResult(${h.id})">
+          <div>
+            <div style="font-weight:700;margin-bottom:6px">آزمون #${history.length - i}</div>
+            <div style="font-size:.85rem;color:var(--dim)">${new Date(h.date).toLocaleString('fa-IR')}</div>
+            <div style="font-size:.8rem;color:var(--dim);margin-top:4px">زمان: ${Math.floor(h.time/60)}دقیقه</div>
+          </div>
+          <div style="text-align:left">
+            <div style="font-size:2rem;font-weight:900;color:${h.percentage >= 60 ? 'var(--suc)' : 'var(--dan)'}">${h.percentage}%</div>
+            <div style="font-size:.8rem;color:var(--dim)">${h.score} از 60</div>
+          </div>
+        </div>
+      `).join('');
+    }
+  } catch (e) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--dan)">خطا در بارگذاری تاریخچه</div>';
+  }
+  
+  modal.classList.add('open');
+  playSound('click');
+}
+
+async function viewQuizResult(id) {
+  const history = await DB.getAll('quizResults');
+  const quiz = history.find(q => q.id === id);
+  if (quiz) {
+    S.quiz = {
+      questions: quiz.questions,
+      answers: quiz.answers,
+      score: quiz.score,
+      current: 0
+    };
+    showReview();
+    document.getElementById('historyModal').classList.remove('open');
   }
 }
-function updateApiStatus(){
-  const el = document.getElementById('apiStatus');
-  if(!el) return;
-  el.textContent = S.apiKey ? 'وضعیت: فعال ✅' : 'وضعیت: غیرفعال';
+
+async function exportAllHistory() {
+  try {
+    const history = await DB.getAll('quizResults');
+    const blob = new Blob([JSON.stringify(history, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `all-quiz-results-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('تاریخچه دانلود شد 📥');
+  } catch (e) {
+    showToast('خطا در دانلود تاریخچه');
+  }
 }
 
-// ====== Toast ======
-function toast(msg){
-  const c = document.getElementById('toastC');
-  const div = document.createElement('div');
-  div.className = 'toast';
-  div.textContent = msg;
-  c.appendChild(div);
-  setTimeout(()=>div.remove(),3000);
+function closeHistory() {
+  document.getElementById('historyModal').classList.remove('open');
 }
 
-// ====== ابزار کمکی ======
-function toFa(num){
-  return String(num).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+// ===== SEARCH SYSTEM =====
+function openSearch() {
+  document.getElementById('searchModal').classList.add('open');
+  document.getElementById('searchInput').focus();
+  playSound('click');
 }
 
-// ====== شروع ======
-document.body.setAttribute('data-theme', S.theme || 'light');
-checkExpiry();
-checkProf();
-updateApiStatus();
+function closeSearch() {
+  document.getElementById('searchModal').classList.remove('open');
+}
+
+function setSearchQuery(q) {
+  document.getElementById('searchInput').value = q;
+}
+
+async function performSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (!query) {
+    showToast('لطفاً موضوعی وارد کنید');
+    return;
+  }
+  
+  const resultsEl = document.getElementById('searchResults');
+  resultsEl.style.display = 'block';
+  resultsEl.innerHTML = '<div style="text-align:center;padding:30px"><div class="spinner" style="margin:0 auto 16px;width:40px;height:40px"></div>در حال جستجو...</div>';
+  
+  try {
+    // Wikipedia API
+    const response = await fetch(`https://fa.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
+    const data = await response.json();
+    
+    if (data.title) {
+      resultsEl.innerHTML = `
+        <div class="search-item" onclick="closeSearch(); sendMessage('${data.title} را توضیح بده')">
+          <div class="search-title">${data.title}</div>
+          <div class="search-snippet">${data.extract || 'بدون توضیح'}</div>
+        </div>
+      `;
+      showToast('نتیجه یافت شد. برای توضیح بیشتر کلیک کنید');
+      playSound('click');
+    } else {
+      resultsEl.innerHTML = '<div style="text-align:center;padding:30px;color:var(--dan)">نتیجه‌ای یافت نشد</div>';
+    }
+  } catch (e) {
+    resultsEl.innerHTML = '<div style="text-align:center;padding:30px;color:var(--dim)">از چت هوشمند استفاده کنید</div>';
+  }
+}
+
+function enableAutoSearch() {
+  S.autoSearch = !S.autoSearch;
+  showToast(S.autoSearch ? 'جستجوی خودکار فعال شد 🔍' : 'جستجوی خودکار غیرفعال شد');
+  playSound('click');
+}
+
+// ===== CLAUDE API INTEGRATION =====
+async function processAIResponse() {
+  showTyping();
+  
+  if (S.history.length > S.maxHistory) {
+    S.history = S.history.slice(-S.maxHistory);
+  }
+  
+  if (S.apiKey) {
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-api-key': S.apiKey,
+          'anthropic-version': '2023-06-01',
+          'dangerously-allow-browser': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-3-5-sonnet-20241022',
+          max_tokens: 1500,
+          stream: true,
+          system: 'تو «استاد یار» هستی، یک دستیار آموزشی هوشمند فارسی‌زبان. پاسخ‌هایت باید:\n1. به زبان فارسی و روان باشد\n2. مرحله‌به‌مرحله و آموزشی باشد\n3. فرمول‌ها را با $...$ یا $$...$$ بنویس\n4. جواب نهایی را برجسته کن',
+          messages: S.history.map(m => ({ role: m.role, content: m.content }))
+        })
+      });
+      
+      if (!response.ok) throw new Error(`API Error: ${response.status}`);
+      
+      hideTyping();
+      const botMsg = addMsg('', false);
+      let fullText = '';
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6);
+            if (data === '[DONE]') continue;
+            
+            try {
+              const json = JSON.parse(data);
+              if (json.type === 'content_block_delta' && json.delta?.text) {
+                fullText += json.delta.text;
+                botMsg.innerHTML = renderMath(fullText);
+                chatMsgs.scrollTop = chatMsgs.scrollHeight;
+              }
+            } catch (e) {}
+          }
+        }
+      }
+      
+      S.history.push({ role: 'assistant', content: fullText });
+      updateStatus(true);
+      return;
+      
+    } catch (e) {
+      console.warn('Claude API failed:', e);
+      updateStatus(false);
+      showToast('خطا در اتصال به Claude');
+    }
+  }
+  
+  // Fallback
+  setTimeout(() => {
+    hideTyping();
+    const lastMsg = S.history[S.history.length - 1];
+    const query = lastMsg?.content || '';
+    const response = getFallbackResponse(query);
+    addMsg(response, false, true);
+    S.history.push({ role: 'assistant', content: response });
+  }, 500);
+}
+
+function getFallbackResponse(query) {
+  const q = query.toLowerCase();
+  
+  if (/^(سلام|درود|hi|hello)/.test(q)) {
+    return '<strong>سلام! 👋</strong><br>من <strong>استاد یار 4.0</strong> هستم.<br><br>✅ <strong>قابلیت‌ها:</strong><br>• آزمون ۶۰ سوالی با کارنامه PDF<br>• جستجوی هوشمند اینترنت<br>• تحلیل عکس و تصویر<br>• حل مسائل ریاضی با LaTeX<br><br>💡 API Key Claude را برای پاسخ‌های پیشرفته تنظیم کنید.';
+  }
+  
+  if (/x\^2|درجه دو|معادله/.test(q)) {
+    return '<strong>📐 معادله درجه دوم:</strong><br>$$ax^2+bx+c=0$$<br>ریشه‌ها:<br>$$x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}$$';
+  }
+  
+  if (/مشتق|deriv/.test(q)) {
+    return '<strong>📐 مشتق:</strong><br>• $\\frac{d}{dx}(x^n)=nx^{n-1}$<br>• $\\frac{d}{dx}(\\sin x)=\\cos x$';
+  }
+  
+  return `<strong>❓ سوال:</strong> «${query}»<br><br>برای پاسخ دقیق‌تر:<br>1️⃣ API Key Claude را تنظیم کنید<br>2️ از جستجوی هوشمند استفاده کنید`;
+}
+
+// ===== SEND MESSAGE =====
+async function sendMessage(customText) {
+  const text = (customText || chatIn.value).trim();
+  if (!text || S.isStreaming) return;
+  
+  addMsg(text, true);
+  if (!customText) chatIn.value = '';
+  
+  S.history.push({ role: 'user', content: text });
+  S.isStreaming = true;
+  playSound('click');
+  
+  // Auto-search
+  if (S.autoSearch) {
+    try {
+      const response = await fetch(`https://fa.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(text)}`);
+      const data = await response.json();
+      if (data.extract) {
+        addMsg(`<strong>📚 نتیجه جستجو:</strong><br>${data.extract}`, false, true);
+      }
+    } catch (e) {}
+  }
+  
+  await processAIResponse();
+  S.isStreaming = false;
+}
+
+// ===== IMAGE HANDLING WITH COMPRESSION =====
+document.getElementById('fileUp').addEventListener('change', async function(e) {
+  const file = e.target.files[0]; 
+  if (!file) return;
+  
+  showToast('📸 در حال فشرده‌سازی تصویر...');
+  
+  try {
+    const compressed = await imageCompression(file, {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1024,
+      useWebWorker: true
+    });
+    
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const imgHtml = `<img src="${ev.target.result}" alt="uploaded" style="max-width:280px;border-radius:14px" onclick="window.open(this.src)">`;
+      addMsg(` عکس آپلود شد (${(compressed.size/1024).toFixed(0)}KB):<br>${imgHtml}`, true, true);
+      
+      const base64 = ev.target.result.split(',')[1];
+      S.history.push({ 
+        role: 'user', 
+        content: [
+          { type: 'image', source: { type: 'base64', media_type: compressed.type || 'image/jpeg', data: base64 } },
+          { type: 'text', text: 'این عکس را تحلیل کن.' }
+        ]
+      });
+      processAIResponse();
+    };
+    reader.readAsDataURL(compressed);
+  } catch (err) {
+    showToast('❌ خطا در پردازش تصویر');
+  }
+  e.target.value = '';
+});
+
+function generateImage() {
+  const prompt = prompt('توصیف تصویر آموزشی:', 'یک نمودار ریاضی');
+  if (!prompt) return;
+  
+  addMsg(`🖼️ درخواست: ${prompt}`, true);
+  S.history.push({ role: 'user', content: `تصویری درباره "${prompt}" توصیف کن.` });
+  processAIResponse();
+  playSound('click');
+}
+
+// ===== UTILITIES =====
+function setActiveNav(el) {
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  playSound('click');
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+function closeSidebarOnMainClick(e) {
+  if (window.innerWidth <= 768 && e.target === e.currentTarget) {
+    document.getElementById('sidebar').classList.remove('open');
+  }
+}
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key) {
+    S.apiKey = key;
+    Store.set('oy_claude_key', key);
+    updateStatus(true);
+    showToast('API Key ذخیره شد ✅');
+    document.getElementById('apiKeyInput').value = '';
+    playSound('click');
+  } else {
+    showToast('لطفاً کلید را وارد کنید');
+  }
+}
+
+function clearChat() {
+  if (confirm('آیا مطمئن هستید؟')) {
+    chatMsgs.innerHTML = '';
+    S.history = [];
+    showToast('چت پاک شد 🗑️');
+    playSound('click');
+  }
+}
+
+async function exportChat() {
+  if (S.history.length === 0) {
+    showToast('چتی برای خروجی وجود ندارد');
+    return;
+  }
+  
+  const text = S.history.map(m => `${m.role === 'user' ? 'شما' : 'استاد یار'}: ${m.content}`).join('\n\n');
+  const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `chat-history-${Date.now()}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('خروجی چت دانلود شد 💾');
+  playSound('click');
+}
+
+// ===== EVENT LISTENERS =====
+chatIn.addEventListener('keypress', e => { 
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+document.getElementById('searchInput')?.addEventListener('keypress', e => {
+  if (e.key === 'Enter') performSearch();
+});
+
+// Request notification permission
+if ('Notification' in window && Notification.permission === 'default') {
+  Notification.requestPermission();
+}
 </script>
 </body>
   </html>
