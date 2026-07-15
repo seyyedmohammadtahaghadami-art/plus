@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>استاد یار | v42.1 Ultimate Patched</title>
+    <title>استاد یار | v43.0 Ultimate Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -170,12 +170,12 @@
         /* POMODORO */
         .pomo-display { font-size: 4rem; font-weight: 900; font-variant-numeric: tabular-nums; color: var(--primary); text-align: center; margin: 1rem 0; letter-spacing: -2px; }
 
-        /* TOAST */
+        /* TOAST (FIXED RTL BORDER) */
         #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 20000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: 90%; max-width: 400px; }
-        .toast { background: var(--bg-sidebar); border: 1px solid var(--border); padding: 10px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); pointer-events: auto; backdrop-filter: blur(10px); animation: slideUp 0.3s ease; font-size: 0.9rem; }
+        .toast { background: var(--bg-sidebar); border: 1px solid var(--border); padding: 10px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); pointer-events: auto; backdrop-filter: blur(10px); animation: slideUp 0.3s ease; font-size: 0.9rem; border-inline-start: 4px solid var(--success); }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* CONTEXT MENU (FIXED RTL POSITIONING) */
+        /* CONTEXT MENU */
         .ctx-menu { 
             position: fixed; 
             background: var(--bg-sidebar); 
@@ -197,7 +197,7 @@
         .ctx-item.danger:hover { background: rgba(239,68,68,0.1); }
         .ctx-divider { height: 1px; background: var(--border); margin: 4px 0; }
 
-        /* FOOTER (FIXED MOBILE SPACING) */
+        /* FOOTER */
         .app-footer { padding: 0.8rem; text-align: center; font-size: 0.7rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--bg-sidebar); flex-shrink: 0; }
 
         /* MOBILE */
@@ -224,11 +224,7 @@
             .modal-content { padding: 1.2rem; }
             .brand { padding: 1rem; }
             .tools-grid { grid-template-columns: 1fr; }
-            /* FIX: Footer spacing on mobile to prevent overlap with nav bar */
-            .app-footer { 
-                padding-bottom: calc(var(--nav-height) + 20px); 
-                margin-bottom: 0;
-            }
+            .app-footer { padding-bottom: calc(var(--nav-height) + 20px); margin-bottom: 0; }
         }
         @media (min-width: 769px) { .mobile-nav { display: none; } .mobile-toggle { display: none !important; } }
 
@@ -269,6 +265,13 @@
                 <span style="font-weight:700; font-size:1rem;" id="page-title">داشبورد</span>
             </div>
             <div style="display:flex; gap:6px; align-items:center;">
+                <!-- NEW: Model Selector in Header for Quick Access -->
+                <select id="header-model-select" class="form-input" style="margin:0; width:auto; padding:4px 8px; font-size:0.7rem; min-height:32px; border-radius:30px; background:var(--bg-input); display:none;">
+                    <option value="claude-3-5-sonnet-20241022">Sonnet 3.5</option>
+                    <option value="claude-3-haiku-20240307">Haiku 3</option>
+                    <option value="claude-3-opus-20240229">Opus 3</option>
+                </select>
+                
                 <select id="ai-mode-select" class="form-input" style="margin:0; width:auto; padding:4px 10px; font-size:0.75rem; min-height:32px; border-radius:30px; background:var(--bg-input);">
                     <option value="local">🧠 استاد یار</option>
                     <option value="google">🌐 گوگل</option>
@@ -281,7 +284,7 @@
             </div>
         </header>
 
-        <!-- CONTEXT MENU (MOVED OUT OF HEADER FOR FIXED POS) -->
+        <!-- CONTEXT MENU -->
         <div class="ctx-menu" id="ctx-menu">
             <button class="ctx-item" onclick="Chat.exportJSON(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> خروجی JSON</button>
             <button class="ctx-item" onclick="Chat.shareLink(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg> اشتراک‌گذاری لینک</button>
@@ -317,9 +320,9 @@
         <div id="view-chat" class="view-section" style="display:none;">
             <div id="chat-history"></div>
             <div class="input-zone">
-                <button class="btn btn-icon voice-btn" id="voice-btn" onclick="Voice.toggle()" title="ورودی صوتی"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
+                <button class="btn btn-icon voice-btn" id="voice-btn" onclick="Voice.toggle()" title="دستیار صوتی هوشمند"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
                 <div class="input-wrapper">
-                    <textarea id="user-input" placeholder="سوال خود را بپرسید..." rows="1"></textarea>
+                    <textarea id="user-input" placeholder="سوال خود را بپرسید یا دستور صوتی دهید..." rows="1"></textarea>
                 </div>
                 <button class="btn btn-primary" onclick="Chat.send()" style="border-radius:50%; width:44px; height:44px; padding:0;"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
             </div>
@@ -517,9 +520,9 @@
             </div>
         </div>
 
-        <!-- FOOTER (FIXED MOBILE SPACING) -->
+        <!-- FOOTER -->
         <div class="app-footer">
-            استاد یار پلاس v42.1 | طراحی شده برای آموزش هوشمند
+            استاد یار پلاس v43.0 | طراحی شده برای آموزش هوشمند
         </div>
 
         <!-- MOBILE NAV -->
@@ -552,7 +555,7 @@
                 <option value="wikipedia">📚 ویکی‌پدیا</option>
                 <option value="multi">📝 چندبخشی</option>
             </select>
-            <label style="display:block; margin-bottom:4px; font-weight:600;">Proxy URL (اختیاری)</label>
+            <label style="display:block; margin-bottom:4px; font-weight:600;">Proxy URL (اختیاری - برای دور زدن تحریم)</label>
             <input type="url" id="proxy-url" class="form-input" placeholder="https://your-proxy.com/v1/messages" style="direction:ltr; text-align:left; margin-bottom:0.8rem;">
             <label style="display:block; margin-bottom:4px; font-weight:600;">API Key (Anthropic)</label>
             <input type="password" id="api-key-input" class="form-input" placeholder="sk-ant-..." style="direction:ltr; text-align:left; margin-bottom:0.8rem;">
@@ -566,7 +569,7 @@
                 <button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#f97316;" onclick="UI.setTheme('sunset')">🌅 غروب</button>
             </div>
             <button class="btn btn-primary" style="width:100%;" onclick="Storage.saveSettings()">💾 ذخیره تنظیمات</button>
-            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 42.1 Ultimate Patched</div>
+            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 43.0 Ultimate Pro</div>
         </div>
     </div>
 
@@ -586,7 +589,9 @@
                 warning: '<svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--warning);"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>' 
             };
             e.innerHTML = `${svgs[type]||svgs.success}<span>${msg}</span>`;
-            e.style.borderRight = `4px solid var(--${type === 'error' ? 'danger' : type === 'warning' ? 'warning' : 'success'})`;
+            // FIX: Use logical properties for RTL support
+            const colorVar = type === 'error' ? 'danger' : type === 'warning' ? 'warning' : 'success';
+            e.style.borderInlineStartColor = `var(--${colorVar})`;
             c.appendChild(e);
             setTimeout(() => { e.style.opacity='0'; setTimeout(()=>e.remove(), 300); }, duration);
         }
@@ -596,10 +601,10 @@
     // STORAGE
     // ============================================================
     const Storage = {
-        dbName: 'OstadYar_v42_Patched', db: null,
+        dbName: 'OstadYar_v43_Pro', db: null,
         async init() {
             return new Promise(r => {
-                const req = indexedDB.open(this.dbName, 17);
+                const req = indexedDB.open(this.dbName, 18);
                 req.onupgradeneeded = e => {
                     const db = e.target.result;
                     ['sessions', 'settings', 'quizzes', 'tasks', 'flashcards', 'bookmarks', 'profile'].forEach(s => {
@@ -623,8 +628,15 @@
             const model = document.getElementById('ai-model-select').value;
             const theme = document.body.getAttribute('data-theme') || 'dark';
             
+            // FIX: Validate API Key Format
+            if (key && !key.startsWith('sk-ant-')) {
+                Toast.show('فرمت کلید API نامعتبر است (باید با sk-ant- شروع شود)','error'); 
+                return; 
+            }
+            
             if (key && pass.length < 6) { Toast.show('رمز عبور باید حداقل ۶ کاراکتر باشد','error'); return; }
             
+            // FIX: Save theme inside config object to avoid conflict
             await this.put('settings', {id:'config', proxy, theme, mode, model});
             
             if (key && pass) {
@@ -672,7 +684,7 @@
         async getKey(p) {
             const e = new TextEncoder();
             const km = await window.crypto.subtle.importKey("raw", e.encode(p), {name:"PBKDF2"}, false, ["deriveKey"]);
-            return window.crypto.subtle.deriveKey({name:"PBKDF2", salt:e.encode("v42-patched-salt"), iterations:100000, hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
+            return window.crypto.subtle.deriveKey({name:"PBKDF2", salt:e.encode("v43-pro-salt"), iterations:100000, hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
         },
         async encrypt(t,p) {
             const k = await this.getKey(p);
@@ -694,7 +706,7 @@
     };
 
     // ============================================================
-    // PROFILE SYSTEM (NEW: Request Name on First Run)
+    // PROFILE SYSTEM
     // ============================================================
     const Profile = {
         async init() {
@@ -712,7 +724,6 @@
                 this.updateUI({ name: name.trim(), grade: 'نامشخص' });
                 Toast.show('پروفایل شما ساخته شد', 'success');
             } else {
-                // اگر کاربر لغو کرد، دوباره بپرس یا پیش‌فرض بگذار
                 await Storage.put('profile', { id: 'user', name: 'کاربر مهمان', grade: 'نامشخص' });
                 this.updateUI({ name: 'کاربر مهمان', grade: 'نامشخص' });
             }
@@ -736,14 +747,64 @@
     };
 
     // ============================================================
-    // LOCAL AI & KNOWLEDGE BASE
+    // LOCAL AI (ENHANCED OFFLINE MODE)
     // ============================================================
     const LocalAI = {
         knowledge: {
-            math: { keywords: ['معادله', 'ریاضی', 'جبر', 'هندسه', 'کسری', 'عدد', 'ضرب', 'جمع', 'تفریق', 'تقسیم', 'توان', 'ریشه'], responses: { 'معادله': 'برای حل معادله، باید مجهول را پیدا کنیم.', 'کسری': 'برای جمع کسرها، مخرج مشترک بگیریم.' } },
-            science: { keywords: ['علوم', 'فیزیک', 'شیمی', 'زیست', 'سلول', 'اتم', 'انرژی'], responses: { 'سلول': 'سلول واحد ساختاری همه موجودات زنده است.', 'اتم': 'کوچکترین واحد یک عنصر شیمیایی است.' } },
-            history: { keywords: ['تاریخ', 'ایران', 'صفویه', 'هخامنشی', 'قاجار'], responses: { 'صفویه': 'سلسله صفویه توسط شاه اسماعیل تأسیس شد.' } },
-            general: { keywords: [], responses: {} }
+            math: { 
+                keywords: ['معادله', 'ریاضی', 'جبر', 'هندسه', 'کسری', 'عدد', 'ضرب', 'جمع', 'تفریق', 'تقسیم', 'توان', 'ریشه', 'مثلثات', 'sin', 'cos', 'tan', 'انتگرال', 'مشتق', 'حد', 'پی', 'فاکتوریل'], 
+                responses: { 
+                    'معادله': 'برای حل معادله، باید مجهول را پیدا کنیم. مثال: x + 5 = 10 → x = 5', 
+                    'کسری': 'برای جمع کسرها، مخرج مشترک بگیریم. مثال: 1/2 + 1/3 = 5/6',
+                    'ضرب': 'ضرب یعنی چند بار یک عدد را با خودش جمع کنیم. مثال: 3 × 4 = 12',
+                    'توان': 'توان یعنی یک عدد را چند بار در خودش ضرب کنیم. مثال: 2³ = 8',
+                    'ریشه': 'ریشه دوم یعنی عددی که در خودش ضرب شود عدد مورد نظر شود. مثال: √16 = 4',
+                    'مثلثات': 'مثلثات مطالعه روابط بین زوایا و اضلاع مثلث است. sin, cos, tan توابع اصلی هستند.',
+                    'انتگرال': 'انتگرال عملیات معکوس مشتق است و برای محاسبه مساحت زیر نمودار استفاده می‌شود.',
+                    'مشتق': 'مشتق نرخ تغییرات لحظه‌ای یک تابع است. مشتق x^n برابر است با nx^(n-1).',
+                    'پی': 'عدد پی (π) نسبت محیط دایره به قطر آن است و تقریباً برابر 3.14159 می‌باشد.'
+                } 
+            },
+            science: { 
+                keywords: ['علوم', 'فیزیک', 'شیمی', 'زیست', 'سلول', 'اتم', 'انرژی', 'نیرو', 'جرم', 'سرعت', 'نور', 'صوت', 'الکتریسیته', 'مغناطیس', 'فتوسنتز', 'dna', 'ژن', 'مولکول', 'عنصر'], 
+                responses: { 
+                    'سلول': 'سلول واحد ساختاری و عملکردی همه موجودات زنده است. دو نوع اصلی: پروکاریوت و یوکاریوت.', 
+                    'اتم': 'اتم کوچکترین واحد یک عنصر شیمیایی است. از پروتون، نوترون و الکترون تشکیل شده است.', 
+                    'انرژی': 'انرژی توانایی انجام کار است. انواع: جنبشی، پتانسیل، گرمایی، نورانی و...',
+                    'نیرو': 'نیرو عاملی است که باعث تغییر حرکت جسم می‌شود. واحد آن نیوتون است.',
+                    'فتوسنتز': 'فرآیندی که گیاهان با استفاده از نور خورشید، آب و CO2 غذا تولید می‌کنند.',
+                    'dna': 'مولکولی که اطلاعات ژنتیکی را حمل می‌کند. ساختار مارپیچ دوگانه دارد.',
+                    'الکتریسیته': 'جریان الکترون‌ها در یک رسانا. ولتاژ عامل ایجاد جریان است.'
+                } 
+            },
+            literature: {
+                keywords: ['ادبیات', 'شعر', 'نثر', 'داستان', 'رمان', 'غزل', 'قصیده', 'آرایه', 'تشبیه', 'استعاره', 'فردوسی', 'سعدی', 'حافظ', 'مولوی', 'شاهنامه', 'بوستان', 'گلستان'],
+                responses: {
+                    'شعر': 'شعر نوعی ادبیات با وزن و قافیه است. انواع: غزل، قصیده، مثنوی، رباعی و...',
+                    'تشبیه': 'مانند کردن چیزی به چیز دیگر. ارکان: مشبه، مشبه‌به، وجه شبه، ادات تشبیه.',
+                    'استعاره': 'تشبیهی که یکی از طرفین آن حذف شده باشد. مثلاً "ماه من" برای یار زیبا.',
+                    'فردوسی': 'حکیم ابوالقاسم فردوسی، سراینده شاهنامه، بزرگترین حماسه‌سرای فارسی.',
+                    'سعدی': 'مصلح بن عبدالله شیرازی، معروف به سعدی، استاد سخن و نویسنده گلستان و بوستان.'
+                }
+            },
+            history: { 
+                keywords: ['تاریخ', 'ایران', 'صفویه', 'هخامنشی', 'ساسانی', 'قاجار', 'پهلوی', 'انقلاب', 'مشروطه', 'کوروش', 'داریوش', 'نادر', 'امیرکبیر', 'جنگ', 'صلح'], 
+                responses: { 
+                    'هخامنشی': 'اولین امپراتوری بزرگ ایران توسط کوروش بزرگ تأسیس شد. پایتخت: پاسارگاد و تخت جمشید.',
+                    'صفویه': 'سلسله صفویه توسط شاه اسماعیل صفوی در قرن دهم هجری تأسیس شد. مذهب رسمی: شیعه.',
+                    'مشروطه': 'جنبشی برای محدود کردن قدرت شاه و ایجاد مجلس قانون‌گذاری در سال 1285 شمسی.',
+                    'کوروش': 'بنیانگذار سلسله هخامنشیان و نویسنده منشور حقوق بشر کوروش.',
+                    'نادر': 'نادرشاه افشار، فاتح هند و احیاگر قدرت نظامی ایران در قرن 18.'
+                } 
+            },
+            general: { 
+                keywords: ['سلام', 'چگونه', 'چیست', 'معنی', 'تعریف', 'سوال', 'پرسش', 'چرا', 'کی', 'کجا'], 
+                responses: { 
+                    'سلام': 'سلام! من استاد یار هستم، یک دستیار آموزشی هوشمند. چطور می‌توانم کمکتان کنم؟', 
+                    'چگونه': 'با خوشحالی راهنمایی می‌کنم. لطفاً سوال خود را دقیق‌تر بپرسید.', 
+                    'تعریف': 'من استاد یار هستم، یک دستیار آموزشی هوشمند. سوال خود را بپرسید.' 
+                } 
+            }
         },
         detectTopic(text) {
             const lower = text.toLowerCase();
@@ -754,17 +815,40 @@
             return 'general';
         },
         generate(question) {
+            // Math calculation engine
+            try {
+                const match = question.match(/[\d]+[\s]*[+\-*/^][\s]*[\d]+/);
+                if (match) {
+                    const safe = match[0].replace(/[^0-9+\-*/().\s]/g, '');
+                    if (safe) return `🧮 **محاسبه:**\n\n${safe} = **${new Function('return '+safe)()}**`;
+                }
+            } catch(e) {}
+            
             const topic = this.detectTopic(question);
             const data = this.knowledge[topic];
-            for (const [key, response] of Object.entries(data.responses || {})) {
-                if (question.toLowerCase().includes(key)) return `🧠 **استاد یار:**\n\n${response}`;
+            for (const [key, response] of Object.entries(data.responses)) {
+                if (question.toLowerCase().includes(key)) {
+                    return `🧠 **استاد یار:**\n\n${response}\n\n---\n💡 *آیا سوال دیگری دارید؟*`;
+                }
             }
-            return `🧠 **حالت آفلاین فعال است**\n\nمتأسفانه کلید API تنظیم نشده یا ارتباط برقرار نشد.\nمن در حالت آفلاین نمی‌توانم سوالات پیچیده آموزشی، آزمون یا فلش‌کارت تولید کنم.\n\nلطفاً از بخش تنظیمات ⚙️ کلید API خود را وارد کنید.`;
+            return `🧠 **استاد یار (آفلاین):**\n\nمتاسفانه اتصال به هوش مصنوعی برقرار نیست و پاسخ دقیقی در حافظه محلی یافت نشد.\n\nموضوع شناسایی شده: **${this.getTopicName(topic)}**\n\n💡 **پیشنهاد:**\n1. کلید API را در تنظیمات وارد کنید\n2. سوال خود را ساده‌تر بپرسید\n3. از بخش "بانک سوالات" استفاده کنید`;
+        },
+        getTopicName(topic) {
+            const names = { math:'ریاضی', science:'علوم', literature:'ادبیات', history:'تاریخ', general:'عمومی' };
+            return names[topic] || 'عمومی';
+        },
+        generateMultiPart(topic) {
+            return `📝 **سوالات چندبخشی درباره "${topic}"**\n\n` +
+                   `**بخش اول - آشنایی:**\nسوال: درباره "${topic}" چه می‌دانید؟ تعریف کلی ارائه دهید.\n\n` +
+                   `**بخش دوم - تحلیل:**\nسوال: مهم‌ترین ویژگی‌ها یا اجزای "${topic}" چیست؟\n\n` +
+                   `**بخش سوم - کاربرد:**\nسوال: کاربردهای "${topic}" در زندگی روزمره یا صنعت چیست؟\n\n` +
+                   `**بخش چهارم - نقد و بررسی:**\nسوال: نقاط قوت و ضعف "${topic}" چیست؟\n\n` +
+                   `---\n✅ **راهنمای پاسخ:**\nسعی کنید به هر بخش جداگانه پاسخ دهید. برای دریافت پاسخ دقیق‌تر، کلید API را فعال کنید.`;
         }
     };
 
     // ============================================================
-    // VOICE INPUT (FIXED ERROR HANDLING)
+    // SMART VOICE ASSISTANT (NEW FEATURE)
     // ============================================================
     const Voice = {
         recognition: null, isRecording: false,
@@ -782,10 +866,7 @@
                 
                 this.recognition.onresult = (e) => {
                     const txt = e.results[0][0].transcript;
-                    const inp = document.getElementById('user-input');
-                    inp.value += (inp.value ? ' ' : '') + txt;
-                    inp.style.height = 'auto';
-                    inp.style.height = Math.min(inp.scrollHeight, 150) + 'px';
+                    this.processCommand(txt);
                     this.stop();
                 };
                 this.recognition.onerror = () => { this.stop(); Toast.show('خطا در تشخیص صدا', 'error'); };
@@ -796,6 +877,44 @@
                 if(btn) btn.style.display = 'none';
             }
         },
+        processCommand(txt) {
+            const lower = txt.toLowerCase();
+            const inp = document.getElementById('user-input');
+            
+            // Smart Commands
+            if (lower.includes('آزمون') || lower.includes('امتحان')) {
+                UI.nav('quiz');
+                document.getElementById('quiz-topic').value = txt.replace(/آزمون|امتحان|بساز|درست کن/gi, '').trim();
+                Toast.show('🎯 انتقال به بخش آزمون', 'info');
+                return;
+            }
+            if (lower.includes('فلش کارت') || lower.includes('فلش‌کارت')) {
+                UI.nav('flashcards');
+                document.getElementById('fc-topic').value = txt.replace(/فلش کارت|فلش‌کارت|بساز|درست کن/gi, '').trim();
+                Toast.show('🃏 انتقال به بخش فلش‌کارت', 'info');
+                return;
+            }
+            if (lower.includes('تنظیمات')) {
+                UI.openSettings();
+                Toast.show('⚙️ باز کردن تنظیمات', 'info');
+                return;
+            }
+            if (lower.includes('خانه') || lower.includes('داشبورد')) {
+                UI.nav('home');
+                Toast.show('🏠 انتقال به خانه', 'info');
+                return;
+            }
+            if (lower.includes('پاک کن') || lower.includes('حذف')) {
+                Chat.clearCurrent();
+                return;
+            }
+            
+            // Default: Type text
+            inp.value += (inp.value ? ' ' : '') + txt;
+            inp.style.height = 'auto';
+            inp.style.height = Math.min(inp.scrollHeight, 150) + 'px';
+            inp.focus();
+        },
         toggle() {
             if (!this.recognition) { Toast.show('مرورگر شما از ورودی صوتی پشتیبانی نمی‌کند', 'warning'); return; }
             if (this.isRecording) this.stop();
@@ -805,7 +924,7 @@
             this.isRecording = true;
             document.getElementById('voice-btn').classList.add('recording');
             try { this.recognition.start(); } catch(e){ this.stop(); }
-            Toast.show('🎤 در حال گوش دادن...', 'info');
+            Toast.show('🎤 در حال گوش دادن... (دستور بدهید)', 'info');
         },
         stop() {
             this.isRecording = false;
@@ -816,7 +935,7 @@
     };
 
     // ============================================================
-    // QUESTION BANK (FIXED INITIAL RENDER)
+    // QUESTION BANK
     // ============================================================
     const QuestionBank = {
         data: [
@@ -933,7 +1052,7 @@
     };
 
     // ============================================================
-    // CHAT ENGINE
+    // CHAT ENGINE (FIXED HIGHLIGHT & MULTI-PART)
     // ============================================================
     const Chat = {
         sessions: [], currentId: null, history: [],
@@ -967,7 +1086,8 @@
                 b.className = 'bubble';
                 if (m.role === 'assistant') {
                     b.innerHTML = DOMPurify.sanitize(marked.parse(m.content));
-                    hljs.highlightAll(b);
+                    // FIX: Only highlight new code blocks instead of entire DOM
+                    b.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
                     if (window.renderMathInElement) renderMathInElement(b);
                 } else {
                     b.textContent = m.content;
@@ -978,6 +1098,9 @@
                 
                 if (m.role === 'user') {
                     actions.innerHTML += `<button class="msg-action-btn" title="ویرایش" onclick="Chat.edit(${i})"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></button>`;
+                } else {
+                    // Add Regenerate button for AI messages
+                    actions.innerHTML += `<button class="msg-action-btn" title="تولید مجدد" onclick="Chat.regenerate(${i})"><svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>`;
                 }
                 actions.innerHTML += `<button class="msg-action-btn" title="کپی" onclick="Chat.copy(${i})"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>`;
                 
@@ -993,11 +1116,25 @@
             
             const newText = prompt('ویرایش پیام:', msg.content);
             if (newText !== null && newText.trim() !== '') {
+                // Truncate history at edit point
                 this.history = this.history.slice(0, index);
                 this.history.push({role:'user', content:newText.trim()});
                 await this.save();
                 this.render();
+                // Auto-regenerate response
                 await this.processAIResponse(newText.trim());
+            }
+        },
+        async regenerate(index) {
+            // Find the previous user message
+            const userMsgIndex = index - 1;
+            if (userMsgIndex >= 0 && this.history[userMsgIndex].role === 'user') {
+                // Remove current AI response
+                this.history.splice(index, 1);
+                await this.save();
+                this.render();
+                // Re-process
+                await this.processAIResponse(this.history[userMsgIndex].content);
             }
         },
         copy(index) {
@@ -1048,30 +1185,50 @@
             
             if (mode === 'google') { window.open(`https://www.google.com/search?q=${encodeURIComponent(txt)}`, '_blank'); Toast.show('جستجوی گوگل', 'success'); return; }
             if (mode === 'wikipedia') { window.open(`https://fa.wikipedia.org/wiki/${encodeURIComponent(txt)}`, '_blank'); Toast.show('جستجوی ویکی‌پدیا', 'success'); return; }
+            if (mode === 'multi') { res = LocalAI.generateMultiPart(txt); this.history.push({role:'assistant', content:res}); this.render(); await this.save(); return; }
             
             const config = await Storage.getConfig();
             const apiKey = await Storage.getKey();
             
-            if (apiKey && config.proxy) {
+            // FIX: Support Direct API without Proxy
+            if (apiKey) {
                 try {
                     const tempMsg = {role:'assistant', content:'⏳ در حال فکر کردن...'};
                     this.history.push(tempMsg);
                     this.render();
                     
                     const model = config.model || 'claude-3-5-sonnet-20241022';
-                    const r = await fetch(config.proxy, {
+                    const apiUrl = config.proxy || 'https://api.anthropic.com/v1/messages';
+                    
+                    // FIX: Add Timeout
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 30000);
+                    
+                    const r = await fetch(apiUrl, {
                         method:'POST', 
-                        headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+                        headers:{
+                            'Content-Type':'application/json',
+                            'x-api-key':apiKey,
+                            'anthropic-version':'2023-06-01',
+                            'anthropic-dangerous-direct-browser-access': 'true'
+                        },
+                        signal: controller.signal,
                         body: JSON.stringify({ model: model, max_tokens:4096, messages:[{role:'user',content:txt}] })
                     });
                     
+                    clearTimeout(timeoutId);
                     this.history.pop();
-                    if(!r.ok) throw new Error('API Error');
+                    
+                    if(!r.ok) throw new Error(`API Error: ${r.status}`);
                     const d = await r.json();
                     res = d.content?.[0]?.text || LocalAI.generate(txt);
                 } catch(e) { 
                     this.history.pop();
-                    res = LocalAI.generate(txt) + '\n\n*(خطا در اتصال به سرور)*'; 
+                    if (e.name === 'AbortError') {
+                        res = LocalAI.generate(txt) + '\n\n*(زمان درخواست منقضی شد)*';
+                    } else {
+                        res = LocalAI.generate(txt) + '\n\n*(خطا در اتصال به سرور)*'; 
+                    }
                 }
             } else {
                 res = LocalAI.generate(txt);
@@ -1114,7 +1271,7 @@
     };
 
     // ============================================================
-    // QUIZ ENGINE
+    // QUIZ ENGINE (FIXED PROXY DEPENDENCY)
     // ============================================================
     const Quiz = {
         questions: [], answers: {}, submitted: false,
@@ -1126,7 +1283,8 @@
             const config = await Storage.getConfig();
             const apiKey = await Storage.getKey();
             
-            if (!apiKey || !config.proxy) {
+            // FIX: Only require API Key, not proxy
+            if (!apiKey) {
                 Toast.show('برای تولید آزمون هوشمند باید API Key تنظیم شود','error');
                 UI.openSettings();
                 return;
@@ -1140,10 +1298,20 @@
             try {
                 const prompt = `Generate exactly ${count} multiple choice questions about "${topic}" in Persian language. Return ONLY a valid JSON array of objects. Each object must have: "question" (string), "options" (array of 4 strings), "correct" (integer index 0-3). No markdown.`;
                 const model = config.model || 'claude-3-5-sonnet-20241022';
+                const apiUrl = config.proxy || 'https://api.anthropic.com/v1/messages';
                 
-                const r = await fetch(config.proxy, {
+                const controller = new AbortController();
+                setTimeout(() => controller.abort(), 30000);
+                
+                const r = await fetch(apiUrl, {
                     method:'POST', 
-                    headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+                    headers:{
+                        'Content-Type':'application/json',
+                        'x-api-key':apiKey,
+                        'anthropic-version':'2023-06-01',
+                        'anthropic-dangerous-direct-browser-access': 'true'
+                    },
+                    signal: controller.signal,
                     body: JSON.stringify({ model: model, max_tokens:2000, messages:[{role:'user',content:prompt}] })
                 });
                 
@@ -1246,7 +1414,7 @@
     };
 
     // ============================================================
-    // FLASHCARDS
+    // FLASHCARDS (FIXED PROXY DEPENDENCY)
     // ============================================================
     const Flashcards = {
         cards: [], currentIndex: 0,
@@ -1257,7 +1425,8 @@
             const config = await Storage.getConfig();
             const apiKey = await Storage.getKey();
             
-            if (!apiKey || !config.proxy) {
+            // FIX: Only require API Key
+            if (!apiKey) {
                 Toast.show('برای تولید فلش‌کارت هوشمند باید API Key تنظیم شود','error');
                 UI.openSettings();
                 return;
@@ -1270,10 +1439,20 @@
             try {
                 const prompt = `Generate exactly 10 educational flashcards about "${topic}" in Persian language. Return ONLY a valid JSON array of objects with keys: "front" (string question/term), "back" (string answer/definition). No markdown.`;
                 const model = config.model || 'claude-3-5-sonnet-20241022';
+                const apiUrl = config.proxy || 'https://api.anthropic.com/v1/messages';
                 
-                const r = await fetch(config.proxy, {
+                const controller = new AbortController();
+                setTimeout(() => controller.abort(), 30000);
+                
+                const r = await fetch(apiUrl, {
                     method:'POST', 
-                    headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+                    headers:{
+                        'Content-Type':'application/json',
+                        'x-api-key':apiKey,
+                        'anthropic-version':'2023-06-01',
+                        'anthropic-dangerous-direct-browser-access': 'true'
+                    },
+                    signal: controller.signal,
                     body: JSON.stringify({ model: model, max_tokens:2000, messages:[{role:'user',content:prompt}] })
                 });
                 
@@ -1408,7 +1587,7 @@
     };
 
     // ============================================================
-    // WHITEBOARD
+    // WHITEBOARD (OPTIMIZED MEMORY)
     // ============================================================
     const WB = {
         cvs: null, ctx: null, drawing: false, tool: 'pen', color: '#ffffff', hist: [],
@@ -1460,7 +1639,11 @@
             document.querySelectorAll('.wb-btn').forEach(b => b.classList.remove('active'));
             document.querySelector('.wb-btn:first-child').classList.add('active');
         },
-        saveState() { if (this.hist.length > 20) this.hist.shift(); this.hist.push(this.cvs.toDataURL()); },
+        saveState() { 
+            // FIX: Reduced history limit for mobile memory optimization
+            if (this.hist.length > 10) this.hist.shift(); 
+            this.hist.push(this.cvs.toDataURL('image/jpeg', 0.8)); // Compress slightly
+        },
         undo() {
             if (this.hist.length <= 1) return;
             this.hist.pop();
@@ -1500,6 +1683,11 @@
             const titles = { home:'داشبورد', chat:'گفتگو', quiz:'آزمون', flashcards:'فلش‌کارت', planner:'برنامه‌ریزی', tools:'جعبه ابزار', profile:'پروفایل', bank:'بانک سوالات' };
             document.getElementById('page-title').textContent = titles[view] || 'استاد یار پلاس';
             
+            // Show/Hide Model Selector based on view
+            const modelSelect = document.getElementById('header-model-select');
+            if (view === 'chat') modelSelect.style.display = 'block';
+            else modelSelect.style.display = 'none';
+            
             if (view === 'home') { this.updateStats(); this.renderChart(); }
             if (view === 'tools') { setTimeout(()=>{ WB.init(); setTimeout(()=>WB.resize(), 50); }, 100); }
             if (view === 'planner') Planner.render();
@@ -1533,7 +1721,8 @@
         renderChart() {
             const c = document.getElementById('chart');
             if (!c) return;
-            if (window._ch) window._ch.destroy();
+            // FIX: Properly destroy previous chart instance
+            if (window._ch) { window._ch.destroy(); window._ch = null; }
             window._ch = new Chart(c, {
                 type: 'bar',
                 data: { labels: ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'], datasets: [{ data: [5,8,6,9,4,7,3], backgroundColor: '#6366f1', borderRadius: 6 }] },
@@ -1550,18 +1739,16 @@
             const btn = document.getElementById('ctx-toggle');
             const rect = btn.getBoundingClientRect();
             
-            // FIX: RTL Positioning Logic
             let top = rect.bottom + 5;
-            let left = rect.left - 180; // 220 (menu width) - 40 (btn width) approx
+            let left = rect.left - 180; 
             
-            // Boundary Checks
-            if (left < 10) left = 10; // Prevent left overflow
-            if (left + 220 > window.innerWidth) left = window.innerWidth - 230; // Prevent right overflow
-            if (top + 350 > window.innerHeight) top = rect.top - 350; // Prevent bottom overflow
+            if (left < 10) left = 10; 
+            if (left + 220 > window.innerWidth) left = window.innerWidth - 230; 
+            if (top + 350 > window.innerHeight) top = rect.top - 350; 
             
             menu.style.top = `${top}px`;
             menu.style.left = `${left}px`;
-            menu.style.right = 'auto'; // Important: Reset right
+            menu.style.right = 'auto'; 
             
             menu.classList.toggle('open'); 
         },
@@ -1571,7 +1758,10 @@
         toggleFullscreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); },
         async setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
-            await Storage.put('settings', {id:'theme', value:theme});
+            // FIX: Update theme within config object to persist correctly
+            const cfg = await Storage.getConfig();
+            cfg.theme = theme;
+            await Storage.put('settings', {id:'config', ...cfg});
             Toast.show(`تم ${theme}`, 'success');
             setTimeout(() => this.renderChart(), 100);
         }
@@ -1584,18 +1774,34 @@
         try {
             await Storage.init();
             Voice.init();
-            await Profile.init(); // NEW: Initialize Profile System
+            await Profile.init();
             
             const cfg = await Storage.getConfig();
             if (cfg.theme) document.body.setAttribute('data-theme', cfg.theme);
             if (cfg.proxy) document.getElementById('proxy-url').value = cfg.proxy;
             if (cfg.mode) document.getElementById('default-mode').value = cfg.mode;
-            if (cfg.model) document.getElementById('ai-model-select').value = cfg.model;
+            if (cfg.model) {
+                document.getElementById('ai-model-select').value = cfg.model;
+                document.getElementById('header-model-select').value = cfg.model;
+            }
+            
+            // Sync Model Selectors
+            const syncModel = (e) => {
+                const val = e.target.value;
+                document.getElementById('ai-model-select').value = val;
+                document.getElementById('header-model-select').value = val;
+                // Note: This only updates local state, user must save settings to persist
+                // Or we can auto-save here for better UX
+                Storage.get('settings', 'config').then(c => {
+                    if(c) Storage.put('settings', {id:'config', ...c, model: val});
+                });
+            };
+            document.getElementById('header-model-select').addEventListener('change', syncModel);
+            document.getElementById('ai-model-select').addEventListener('change', syncModel);
             
             await Chat.init();
             await Planner.init();
             
-            // FIX: Initial Render for Question Bank
             QuestionBank.render();
             
             const ta = document.getElementById('user-input');
@@ -1614,7 +1820,7 @@
             const modeSelect = document.getElementById('ai-mode-select');
             if (modeSelect && cfg.mode) modeSelect.value = cfg.mode;
             
-            Toast.show('🚀 استاد یار پلاس v42.1 آماده است!', 'success');
+            Toast.show('🚀 استاد یار پلاس v43 آماده است!', 'success');
         } catch (e) {
             console.error('Init error:', e);
             Toast.show('خطا در راه‌اندازی', 'error');
@@ -1622,4 +1828,5 @@
     });
     </script>
 </body>
-    </html>
+</html>
+بهتر شد
