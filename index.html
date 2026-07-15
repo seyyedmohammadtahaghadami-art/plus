@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>استاد یار | v41.0 Ultimate Plus</title>
+    <title>استاد یار | v42.1 Ultimate Patched</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -52,14 +52,14 @@
 
         /* MAIN */
         main { flex: 1; position: relative; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
-        header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg-glass); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; }
+        header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg-glass); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; position: relative; }
         .view-section { flex: 1; overflow-y: auto; padding: 0; display: none; }
         .view-section.active { display: flex; flex-direction: column; animation: fadeIn 0.25s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* CHAT */
-        #chat-history { flex: 1; overflow-y: auto; padding: 1.2rem; scroll-behavior: smooth; }
-        .message { max-width: 88%; margin-bottom: 1.2rem; display: flex; flex-direction: column; position: relative; group: message; }
+        #chat-history { flex: 1; overflow-y: auto; padding: 1.2rem; scroll-behavior: smooth; padding-bottom: 2rem; }
+        .message { max-width: 88%; margin-bottom: 1.2rem; display: flex; flex-direction: column; position: relative; }
         .message.user { align-self: flex-start; } .message.ai { align-self: flex-end; align-items: flex-end; }
         .bubble { padding: 0.9rem 1.3rem; border-radius: var(--radius-lg); line-height: 1.7; border: 1px solid var(--border); word-wrap: break-word; overflow-wrap: break-word; font-size: 0.95rem; position: relative; }
         .user .bubble { background: var(--msg-user); border-bottom-right-radius: 4px; }
@@ -68,17 +68,17 @@
         .bubble code.hljs { padding: 0.8rem !important; background: transparent !important; font-size: 0.85em; }
         .code-header { background: rgba(255,255,255,0.05); padding: 4px 12px; display: flex; justify-content: space-between; font-size: 0.7rem; color: #abb2bf; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 8px 8px 0 0; }
         
-        /* MESSAGE ACTIONS (Edit/Copy/Bookmark) */
-        .msg-actions { position: absolute; bottom: -24px; left: 0; display: flex; gap: 4px; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        /* MESSAGE ACTIONS */
+        .msg-actions { position: absolute; bottom: -28px; left: 0; display: flex; gap: 4px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 10; }
         .message:hover .msg-actions, .msg-actions.force-show { opacity: 1; pointer-events: auto; }
-        .msg-action-btn { background: var(--bg-sidebar); border: 1px solid var(--border); color: var(--text-muted); width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
-        .msg-action-btn:hover { color: var(--primary); border-color: var(--primary); }
-        .msg-action-btn svg { width: 12px; height: 12px; fill: currentColor; }
+        .msg-action-btn { background: var(--bg-sidebar); border: 1px solid var(--border); color: var(--text-muted); width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .msg-action-btn:hover { color: var(--primary); border-color: var(--primary); background: var(--bg-body); }
+        .msg-action-btn svg { width: 14px; height: 14px; fill: currentColor; }
         .message.ai .msg-actions { left: auto; right: 0; }
 
         /* INPUT */
-        .input-zone { padding: 0.8rem 1.2rem; background: var(--bg-glass); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0; position: relative; }
-        .input-wrapper { flex: 1; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 6px 14px; display: flex; align-items: center; transition: 0.2s; }
+        .input-zone { padding: 0.8rem 1.2rem; background: var(--bg-glass); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0; position: relative; z-index: 20; }
+        .input-wrapper { flex: 1; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 8px 14px; display: flex; align-items: center; transition: 0.2s; }
         .input-wrapper:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
         textarea { flex: 1; background: transparent; border: none; color: var(--text-main); resize: none; max-height: 150px; min-height: 24px; font-family: inherit; font-size: 0.95rem; padding: 4px 0; }
         textarea::placeholder { color: var(--text-muted); }
@@ -116,7 +116,7 @@
         .wb-color { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; }
         .wb-color.active { border-color: var(--text-main); transform: scale(1.15); }
 
-        /* CALCULATOR (RESTORED) */
+        /* CALCULATOR */
         .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 1rem; }
         .calc-display { background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); text-align: left; font-size: 1.5rem; font-family: monospace; margin-bottom: 1rem; border: 1px solid var(--border); direction: ltr; min-height: 60px; display: flex; align-items: center; justify-content: flex-end; overflow: hidden;}
         .calc-btn { padding: 12px; border-radius: var(--radius-sm); background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); font-size: 1.1rem; cursor: pointer; transition: 0.2s; }
@@ -124,7 +124,7 @@
         .calc-btn.op { color: var(--accent); font-weight: bold; }
         .calc-btn.eq { background: var(--primary); color: white; grid-column: span 2; }
 
-        /* QUESTION BANK (RESTORED) */
+        /* QUESTION BANK */
         .qb-filters { display: flex; gap: 8px; margin-bottom: 1rem; overflow-x: auto; padding-bottom: 4px; }
         .qb-tag { padding: 4px 12px; border-radius: 20px; background: var(--bg-input); border: 1px solid var(--border); font-size: 0.8rem; cursor: pointer; white-space: nowrap; }
         .qb-tag.active { background: var(--primary); color: white; border-color: var(--primary); }
@@ -175,14 +175,30 @@
         .toast { background: var(--bg-sidebar); border: 1px solid var(--border); padding: 10px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); pointer-events: auto; backdrop-filter: blur(10px); animation: slideUp 0.3s ease; font-size: 0.9rem; }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* CONTEXT MENU */
-        .ctx-menu { position: absolute; right: 0; top: 100%; margin-top: 4px; background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 200px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 2000; display: none; flex-direction: column; overflow: hidden; }
-        .ctx-menu.open { display: flex; }
-        .ctx-item { padding: 10px 14px; display: flex; align-items: center; gap: 10px; color: var(--text-main); cursor: pointer; font-size: 0.85rem; border: none; background: none; width: 100%; text-align: right; font-family: inherit; }
+        /* CONTEXT MENU (FIXED RTL POSITIONING) */
+        .ctx-menu { 
+            position: fixed; 
+            background: var(--bg-sidebar); 
+            border: 1px solid var(--border); 
+            border-radius: var(--radius-md); 
+            min-width: 220px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); 
+            z-index: 9999; 
+            display: none; 
+            flex-direction: column; 
+            overflow: hidden; 
+            backdrop-filter: blur(12px);
+        }
+        .ctx-menu.open { display: flex; animation: ctxFadeIn 0.15s ease-out; }
+        @keyframes ctxFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .ctx-item { padding: 12px 16px; display: flex; align-items: center; gap: 12px; color: var(--text-main); cursor: pointer; font-size: 0.9rem; border: none; background: none; width: 100%; text-align: right; font-family: inherit; transition: background 0.15s; }
         .ctx-item:hover { background: var(--bg-input); color: var(--primary); }
         .ctx-item.danger { color: var(--danger); }
         .ctx-item.danger:hover { background: rgba(239,68,68,0.1); }
         .ctx-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+        /* FOOTER (FIXED MOBILE SPACING) */
+        .app-footer { padding: 0.8rem; text-align: center; font-size: 0.7rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--bg-sidebar); flex-shrink: 0; }
 
         /* MOBILE */
         .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: var(--nav-height); background: var(--bg-sidebar); border-top: 1px solid var(--border); justify-content: space-around; align-items: center; z-index: 4000; padding-bottom: var(--safe-bottom); }
@@ -208,6 +224,11 @@
             .modal-content { padding: 1.2rem; }
             .brand { padding: 1rem; }
             .tools-grid { grid-template-columns: 1fr; }
+            /* FIX: Footer spacing on mobile to prevent overlap with nav bar */
+            .app-footer { 
+                padding-bottom: calc(var(--nav-height) + 20px); 
+                margin-bottom: 0;
+            }
         }
         @media (min-width: 769px) { .mobile-nav { display: none; } .mobile-toggle { display: none !important; } }
 
@@ -256,18 +277,20 @@
                 </select>
                 <div style="position:relative;">
                     <button class="btn btn-icon" id="ctx-toggle" style="min-width:36px; height:36px; width:36px;" onclick="UI.toggleContextMenu(event)"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></button>
-                    <div class="ctx-menu" id="ctx-menu">
-                        <button class="ctx-item" onclick="Chat.exportJSON(); UI.closeContextMenu()"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> خروجی JSON</button>
-                        <button class="ctx-item" onclick="Chat.shareLink(); UI.closeContextMenu()"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg> اشتراک‌گذاری لینک</button>
-                        <button class="ctx-item" onclick="window.print(); UI.closeContextMenu()"><svg viewBox="0 0 24 24"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-4h8v2zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg> چاپ / PDF</button>
-                        <button class="ctx-item" onclick="UI.toggleFullscreen(); UI.closeContextMenu()"><svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg> تمام صفحه</button>
-                        <div class="ctx-divider"></div>
-                        <button class="ctx-item danger" onclick="Chat.clearCurrent(); UI.closeContextMenu()"><svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg> پاک کردن چت</button>
-                        <button class="ctx-item" onclick="UI.openSettings(); UI.closeContextMenu()"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> تنظیمات</button>
-                    </div>
                 </div>
             </div>
         </header>
+
+        <!-- CONTEXT MENU (MOVED OUT OF HEADER FOR FIXED POS) -->
+        <div class="ctx-menu" id="ctx-menu">
+            <button class="ctx-item" onclick="Chat.exportJSON(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> خروجی JSON</button>
+            <button class="ctx-item" onclick="Chat.shareLink(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg> اشتراک‌گذاری لینک</button>
+            <button class="ctx-item" onclick="window.print(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-4h8v2zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg> چاپ / PDF</button>
+            <button class="ctx-item" onclick="UI.toggleFullscreen(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg> تمام صفحه</button>
+            <div class="ctx-divider"></div>
+            <button class="ctx-item danger" onclick="Chat.clearCurrent(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg> پاک کردن چت</button>
+            <button class="ctx-item" onclick="UI.openSettings(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> تنظیمات</button>
+        </div>
 
         <!-- HOME -->
         <div id="view-home" class="view-section active" style="overflow-y:auto;">
@@ -302,7 +325,7 @@
             </div>
         </div>
 
-        <!-- QUESTION BANK (RESTORED) -->
+        <!-- QUESTION BANK -->
         <div id="view-bank" class="view-section" style="display:none; overflow-y:auto; padding:1rem;">
             <div style="max-width:800px; margin:0 auto; width:100%;">
                 <h2 style="margin:0 0 1rem; font-size:1.2rem;"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:#8b5cf6;vertical-align:middle;margin-left:6px;"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9v2h10v-2zm0-4H9v2h10V7z"/></svg> بانک سوالات آموزشی</h2>
@@ -429,7 +452,7 @@
                         </div>
                     </div>
 
-                    <!-- CALCULATOR (RESTORED) -->
+                    <!-- CALCULATOR -->
                     <div class="card">
                         <div class="section-title"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg> ماشین حساب علمی</div>
                         <div class="calc-display" id="calc-display">0</div>
@@ -489,8 +512,14 @@
                     <div style="background:var(--bg-input); padding:1rem; border-radius:var(--radius-md);"><div style="font-size:1.5rem; font-weight:800; color:var(--primary);" id="prof-chats">0</div><div style="font-size:0.8rem; color:var(--text-muted);">گفتگوها</div></div>
                     <div style="background:var(--bg-input); padding:1rem; border-radius:var(--radius-md);"><div style="font-size:1.5rem; font-weight:800; color:var(--primary);" id="prof-quizzes">0</div><div style="font-size:0.8rem; color:var(--text-muted);">آزمون‌ها</div></div>
                 </div>
+                <button class="btn btn-primary" style="margin-bottom:0.8rem;" onclick="Profile.editName()">✏️ ویرایش نام و نام خانوادگی</button>
                 <button class="btn btn-danger" onclick="Storage.clearAll()"><svg viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg> خروج و پاکسازی</button>
             </div>
+        </div>
+
+        <!-- FOOTER (FIXED MOBILE SPACING) -->
+        <div class="app-footer">
+            استاد یار پلاس v42.1 | طراحی شده برای آموزش هوشمند
         </div>
 
         <!-- MOBILE NAV -->
@@ -537,7 +566,7 @@
                 <button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#f97316;" onclick="UI.setTheme('sunset')">🌅 غروب</button>
             </div>
             <button class="btn btn-primary" style="width:100%;" onclick="Storage.saveSettings()">💾 ذخیره تنظیمات</button>
-            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 41.0 Ultimate Plus</div>
+            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 42.1 Ultimate Patched</div>
         </div>
     </div>
 
@@ -567,13 +596,13 @@
     // STORAGE
     // ============================================================
     const Storage = {
-        dbName: 'OstadYar_v41_Plus', db: null,
+        dbName: 'OstadYar_v42_Patched', db: null,
         async init() {
             return new Promise(r => {
-                const req = indexedDB.open(this.dbName, 15);
+                const req = indexedDB.open(this.dbName, 17);
                 req.onupgradeneeded = e => {
                     const db = e.target.result;
-                    ['sessions', 'settings', 'quizzes', 'tasks', 'flashcards', 'bookmarks'].forEach(s => {
+                    ['sessions', 'settings', 'quizzes', 'tasks', 'flashcards', 'bookmarks', 'profile'].forEach(s => {
                         if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, {keyPath: 'id'});
                     });
                 };
@@ -643,7 +672,7 @@
         async getKey(p) {
             const e = new TextEncoder();
             const km = await window.crypto.subtle.importKey("raw", e.encode(p), {name:"PBKDF2"}, false, ["deriveKey"]);
-            return window.crypto.subtle.deriveKey({name:"PBKDF2", salt:e.encode("v41-plus-salt"), iterations:100000, hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
+            return window.crypto.subtle.deriveKey({name:"PBKDF2", salt:e.encode("v42-patched-salt"), iterations:100000, hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
         },
         async encrypt(t,p) {
             const k = await this.getKey(p);
@@ -661,6 +690,48 @@
                 const d = await window.crypto.subtle.decrypt({name:"AES-GCM", iv:c.slice(0,12)}, k, c.slice(12));
                 return new TextDecoder().decode(d);
             } catch { return null; }
+        }
+    };
+
+    // ============================================================
+    // PROFILE SYSTEM (NEW: Request Name on First Run)
+    // ============================================================
+    const Profile = {
+        async init() {
+            const profile = await Storage.get('profile', 'user');
+            if (!profile || !profile.name) {
+                this.requestName();
+            } else {
+                this.updateUI(profile);
+            }
+        },
+        async requestName() {
+            const name = prompt('👋 خوش آمدید!\nلطفاً نام و نام خانوادگی خود را وارد کنید:');
+            if (name && name.trim()) {
+                await Storage.put('profile', { id: 'user', name: name.trim(), grade: 'نامشخص' });
+                this.updateUI({ name: name.trim(), grade: 'نامشخص' });
+                Toast.show('پروفایل شما ساخته شد', 'success');
+            } else {
+                // اگر کاربر لغو کرد، دوباره بپرس یا پیش‌فرض بگذار
+                await Storage.put('profile', { id: 'user', name: 'کاربر مهمان', grade: 'نامشخص' });
+                this.updateUI({ name: 'کاربر مهمان', grade: 'نامشخص' });
+            }
+        },
+        async editName() {
+            const profile = await Storage.get('profile', 'user') || { name: '', grade: '' };
+            const newName = prompt('ویرایش نام و نام خانوادگی:', profile.name);
+            if (newName !== null && newName.trim()) {
+                profile.name = newName.trim();
+                await Storage.put('profile', profile);
+                this.updateUI(profile);
+                Toast.show('نام بروزرسانی شد', 'success');
+            }
+        },
+        updateUI(profile) {
+            const el = document.getElementById('p-name');
+            if (el) el.textContent = profile.name || 'کاربر مهمان';
+            const gr = document.getElementById('p-grade');
+            if (gr) gr.textContent = profile.grade || 'پایه تحصیلی نامشخص';
         }
     };
 
@@ -693,13 +764,17 @@
     };
 
     // ============================================================
-    // VOICE INPUT (RESTORED)
+    // VOICE INPUT (FIXED ERROR HANDLING)
     // ============================================================
     const Voice = {
         recognition: null, isRecording: false,
         init() {
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            try {
                 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+                if (!SR) { 
+                    document.getElementById('voice-btn').style.display = 'none';
+                    return; 
+                }
                 this.recognition = new SR();
                 this.recognition.lang = 'fa-IR';
                 this.recognition.continuous = false;
@@ -715,6 +790,10 @@
                 };
                 this.recognition.onerror = () => { this.stop(); Toast.show('خطا در تشخیص صدا', 'error'); };
                 this.recognition.onend = () => { this.stop(); };
+            } catch(e) {
+                console.error("Voice Init Error:", e);
+                const btn = document.getElementById('voice-btn');
+                if(btn) btn.style.display = 'none';
             }
         },
         toggle() {
@@ -725,18 +804,19 @@
         start() {
             this.isRecording = true;
             document.getElementById('voice-btn').classList.add('recording');
-            this.recognition.start();
+            try { this.recognition.start(); } catch(e){ this.stop(); }
             Toast.show('🎤 در حال گوش دادن...', 'info');
         },
         stop() {
             this.isRecording = false;
-            document.getElementById('voice-btn').classList.remove('recording');
+            const btn = document.getElementById('voice-btn');
+            if(btn) btn.classList.remove('recording');
             try { this.recognition.stop(); } catch(e){}
         }
     };
 
     // ============================================================
-    // QUESTION BANK (RESTORED WITH 60+ QUESTIONS)
+    // QUESTION BANK (FIXED INITIAL RENDER)
     // ============================================================
     const QuestionBank = {
         data: [
@@ -804,7 +884,7 @@
         currentFilter: 'all',
         render() {
             const list = document.getElementById('qb-list');
-            const search = document.getElementById('qb-search').value.toLowerCase();
+            const search = document.getElementById('qb-search')?.value.toLowerCase() || '';
             if(!list) return;
             
             const filtered = this.data.filter(item => {
@@ -829,7 +909,7 @@
     };
 
     // ============================================================
-    // CALCULATOR (RESTORED)
+    // CALCULATOR
     // ============================================================
     const Calc = {
         expression: '',
@@ -840,7 +920,6 @@
         },
         calc() {
             try {
-                // امنیت: فقط اجازه اعداد و عملگرها
                 const safe = this.expression.replace(/[^0-9+\-*/().]/g, '');
                 if (!safe) return;
                 const result = new Function('return ' + safe)();
@@ -854,7 +933,7 @@
     };
 
     // ============================================================
-    // CHAT ENGINE (WITH EDIT & BOOKMARK)
+    // CHAT ENGINE
     // ============================================================
     const Chat = {
         sessions: [], currentId: null, history: [],
@@ -894,7 +973,6 @@
                     b.textContent = m.content;
                 }
                 
-                // دکمه‌های عملیات (ویرایش، کپی، نشانک)
                 const actions = document.createElement('div');
                 actions.className = 'msg-actions';
                 
@@ -915,12 +993,10 @@
             
             const newText = prompt('ویرایش پیام:', msg.content);
             if (newText !== null && newText.trim() !== '') {
-                // حذف پیام فعلی و تمام پیام‌های بعدی
                 this.history = this.history.slice(0, index);
                 this.history.push({role:'user', content:newText.trim()});
                 await this.save();
                 this.render();
-                // ارسال مجدد برای دریافت پاسخ جدید
                 await this.processAIResponse(newText.trim());
             }
         },
@@ -942,7 +1018,6 @@
         shareLink() {
             const s = this.sessions.find(x=>x.id===this.currentId);
             if (!s) return;
-            // ایجاد لینک ساده بر اساس داده‌های فشرده (Base64)
             try {
                 const data = btoa(unescape(encodeURIComponent(JSON.stringify(s.messages.slice(-5)))));
                 const url = `${location.origin}${location.pathname}?shared=${data.substring(0,100)}...`;
@@ -1469,7 +1544,27 @@
             const sb = document.getElementById('sidebar');
             if (window.innerWidth <= 768) { if (forceClose) sb.classList.remove('mobile-open'); else sb.classList.toggle('mobile-open'); }
         },
-        toggleContextMenu(e) { e.stopPropagation(); document.getElementById('ctx-menu').classList.toggle('open'); },
+        toggleContextMenu(e) { 
+            e.stopPropagation(); 
+            const menu = document.getElementById('ctx-menu');
+            const btn = document.getElementById('ctx-toggle');
+            const rect = btn.getBoundingClientRect();
+            
+            // FIX: RTL Positioning Logic
+            let top = rect.bottom + 5;
+            let left = rect.left - 180; // 220 (menu width) - 40 (btn width) approx
+            
+            // Boundary Checks
+            if (left < 10) left = 10; // Prevent left overflow
+            if (left + 220 > window.innerWidth) left = window.innerWidth - 230; // Prevent right overflow
+            if (top + 350 > window.innerHeight) top = rect.top - 350; // Prevent bottom overflow
+            
+            menu.style.top = `${top}px`;
+            menu.style.left = `${left}px`;
+            menu.style.right = 'auto'; // Important: Reset right
+            
+            menu.classList.toggle('open'); 
+        },
         closeContextMenu() { document.getElementById('ctx-menu').classList.remove('open'); },
         openSettings() { document.getElementById('settings-modal').classList.add('open'); this.toggleSidebar(true); },
         closeSettings() { document.getElementById('settings-modal').classList.remove('open'); },
@@ -1489,6 +1584,7 @@
         try {
             await Storage.init();
             Voice.init();
+            await Profile.init(); // NEW: Initialize Profile System
             
             const cfg = await Storage.getConfig();
             if (cfg.theme) document.body.setAttribute('data-theme', cfg.theme);
@@ -1498,6 +1594,9 @@
             
             await Chat.init();
             await Planner.init();
+            
+            // FIX: Initial Render for Question Bank
+            QuestionBank.render();
             
             const ta = document.getElementById('user-input');
             if (ta) {
@@ -1515,7 +1614,7 @@
             const modeSelect = document.getElementById('ai-mode-select');
             if (modeSelect && cfg.mode) modeSelect.value = cfg.mode;
             
-            Toast.show('🚀 استاد یار پلاس v41 آماده است!', 'success');
+            Toast.show('🚀 استاد یار پلاس v42.1 آماده است!', 'success');
         } catch (e) {
             console.error('Init error:', e);
             Toast.show('خطا در راه‌اندازی', 'error');
