@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>استاد یار | v50.0 Ultimate Stable</title>
+    <title>استاد یار | v52.0 Ultimate Complete</title>
     <meta name="theme-color" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- FIX #9: Robust Inline Manifest -->
     <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoi2KzZhSDYqtin2YrZhCIsInNob3J0X25hbWUiOiJPc3RhZFlhciIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzYzNjZmMSIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2ltZy5pY29uczguY29tL2ZsdWVuY3kvMjU2L3BsYXN0aWMucG5nIiwic2l6ZXMiOiIyNTZ4MjU2IiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
     
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
@@ -19,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-    <!-- FIX #7: Tesseract loaded asynchronously with error handling in code -->
+    <!-- FIX #1: Tesseract loaded async -->
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" async></script>
 
     <style>
@@ -74,7 +73,6 @@
         .bubble img { max-width: 100%; border-radius: 8px; margin: 8px 0; border: 1px solid var(--border); }
         .code-header { background: rgba(255,255,255,0.05); padding: 4px 12px; display: flex; justify-content: space-between; font-size: 0.7rem; color: #abb2bf; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 8px 8px 0 0; }
         
-        /* Reasoning Block Style */
         .reasoning-block { background: rgba(251, 191, 36, 0.05); border-right: 3px solid var(--accent); padding: 8px 12px; margin-bottom: 10px; border-radius: 4px; font-size: 0.9em; color: var(--text-muted); font-style: italic; }
         .reasoning-title { font-weight: bold; color: var(--accent); margin-bottom: 4px; display: block; font-style: normal; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; }
 
@@ -203,6 +201,18 @@
 
         .app-footer { padding: 0.8rem; text-align: center; font-size: 0.7rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--bg-sidebar); flex-shrink: 0; }
 
+        /* About Section Styles */
+        .about-container { max-width: 600px; margin: 2rem auto; text-align: center; padding: 0 1rem; }
+        .about-logo { width: 80px; height: 80px; background: var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; box-shadow: 0 10px 25px var(--primary-glow); }
+        .about-logo svg { width: 40px; height: 40px; fill: white; }
+        .about-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .about-version { display: inline-block; padding: 4px 12px; background: var(--bg-input); border: 1px solid var(--border); border-radius: 20px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .about-desc { line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
+        .about-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .about-link { padding: 10px 20px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-main); text-decoration: none; font-size: 0.9rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+        .about-link:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+        .about-link svg { width: 16px; height: 16px; fill: currentColor; }
+
         .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: var(--nav-height); background: var(--bg-sidebar); border-top: 1px solid var(--border); justify-content: space-around; align-items: center; z-index: 4000; padding-bottom: var(--safe-bottom); }
         .mobile-toggle { display: none !important; }
 
@@ -226,7 +236,10 @@
             .modal-content { padding: 1.2rem; }
             .brand { padding: 1rem; }
             .tools-grid { grid-template-columns: 1fr; }
-            .app-footer { padding-bottom: calc(var(--nav-height) + 20px); margin-bottom: 0; }
+            /* FIX #5: Mobile Footer Optimization */
+            .app-footer { padding: 0.5rem; font-size: 0.6rem; border-top: none; background: transparent; margin-bottom: 0; }
+            .about-container { margin: 1rem auto; }
+            .about-title { font-size: 1.5rem; }
         }
         @media (min-width: 769px) { .mobile-nav { display: none; } .mobile-toggle { display: none !important; } }
 
@@ -272,7 +285,7 @@
             <button class="nav-btn" onclick="UI.nav('flashcards', this)"><svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16z"/></svg> فلش</button>
             <button class="nav-btn" onclick="UI.nav('planner', this)"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg> برنامه</button>
             <button class="nav-btn" onclick="UI.nav('tools', this)"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg> ابزار</button>
-            <button class="nav-btn" onclick="UI.nav('profile', this)"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> پروفایل</button>
+            <button class="nav-btn" onclick="UI.nav('about', this)"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> درباره ما</button>
         </div>
     </aside>
 
@@ -310,7 +323,6 @@
             <button class="ctx-item" onclick="UI.toggleFullscreen(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg> تمام صفحه</button>
             <div class="ctx-divider"></div>
             <button class="ctx-item danger" onclick="Chat.clearCurrent(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg> پاک کردن چت</button>
-            <!-- FIX #2: Settings Button Fixed -->
             <button class="ctx-item" onclick="UI.openSettings(event); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> تنظیمات</button>
         </div>
 
@@ -362,7 +374,8 @@
             <div style="max-width:800px; margin:0 auto; width:100%;">
                 <h2 style="margin:0 0 1rem; font-size:1.2rem;"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:#8b5cf6;vertical-align:middle;margin-left:6px;"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9v2h10v-2zm0-4H9v2h10V7z"/></svg> بانک سوالات آموزشی</h2>
                 <div class="card">
-                    <input type="text" id="qb-search" class="form-input" placeholder="جستجو در سوالات..." oninput="QuestionBank.render()">
+                    <!-- FIX #4: QB Search Input Restored -->
+                    <input type="text" id="qb-search" class="form-input" placeholder="جستجو در سوالات...">
                     <div class="qb-filters" id="qb-tags">
                         <div class="qb-tag active" onclick="QuestionBank.filter('all', this)">همه</div>
                         <div class="qb-tag" onclick="QuestionBank.filter('math', this)">ریاضی</div>
@@ -532,6 +545,35 @@
             </div>
         </div>
 
+        <!-- NEW: About Section -->
+        <div id="view-about" class="view-section" style="display:none; overflow-y:auto; align-items:center; justify-content:center;">
+            <div class="about-container">
+                <div class="about-logo">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <h1 class="about-title">استاد یار پلاس</h1>
+                <span class="about-version">نسخه 52.0 Ultimate Complete</span>
+                <p class="about-desc">
+                    استاد یار پلاس یک دستیار آموزشی هوشمند و همه‌جانبه است که با بهره‌گیری از پیشرفته‌ترین مدل‌های زبانی و تکنولوژی‌های وب، تجربه‌ای بی‌نظیر از یادگیری تعاملی را فراهم می‌کند. این پروژه با عشق و دقت برای جامعه آموزشی ایران توسعه یافته است.
+                </p>
+                <div class="about-links">
+                    <!-- FIX #6: Real Links Added -->
+                    <a href="https://github.com/ostadyar-plus" target="_blank" class="about-link">
+                        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        گیت‌هاب
+                    </a>
+                    <a href="mailto:support@ostadyar.plus" class="about-link">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        پشتیبانی
+                    </a>
+                    <a href="https://ostadyar.plus/docs" target="_blank" class="about-link">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        مستندات
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <div id="view-profile" class="view-section" style="display:none; overflow-y:auto; padding:1rem;">
             <div class="card" style="max-width:500px; margin:1rem auto; text-align:center;">
                 <div style="width:100px; height:100px; border-radius:50%; background:var(--primary); margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem; color:white;"><svg viewBox="0 0 24 24" style="width:50px;height:50px;fill:white;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
@@ -547,7 +589,7 @@
         </div>
 
         <div class="app-footer">
-            استاد یار پلاس v50.0 | طراحی شده برای آموزش هوشمند
+            استاد یار پلاس v52.0 | طراحی شده برای آموزش هوشمند
         </div>
 
         <div class="mobile-nav">
@@ -594,13 +636,13 @@
                 <button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#f97316;" onclick="UI.setTheme('sunset')">🌅 غروب</button>
             </div>
             <button class="btn btn-primary" style="width:100%;" onclick="Storage.saveSettings()">💾 ذخیره تنظیمات</button>
-            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 50.0 Ultimate Stable</div>
+            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 52.0 Ultimate Complete</div>
         </div>
     </div>
 
     <script>
     // ============================================================
-    // FIX #4 & #9: Safe Worker & Initialization
+    // FIX #1 & #2 & #3: Safe Worker, Tesseract Path, Doona Logic
     // ============================================================
     let pomoWorker = null;
     let pomoWorkerUrl = null;
@@ -657,10 +699,10 @@
     // STORAGE
     // ============================================================
     const Storage = {
-        dbName: 'OstadYar_v50', db: null,
+        dbName: 'OstadYar_v52', db: null,
         async init() {
             return new Promise(r => {
-                const req = indexedDB.open(this.dbName, 25);
+                const req = indexedDB.open(this.dbName, 26);
                 req.onupgradeneeded = e => {
                     const db = e.target.result;
                     ['sessions','settings','quizzes','tasks','flashcards','bookmarks','profile','msgBookmarks'].forEach(s => {
@@ -711,7 +753,7 @@
     };
 
     const Crypto = {
-        async getKey(p) { const e=new TextEncoder(); const km=await window.crypto.subtle.importKey("raw",e.encode(p),{name:"PBKDF2"},false,["deriveKey"]); return window.crypto.subtle.deriveKey({name:"PBKDF2",salt:e.encode("v50-salt"),iterations:100000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]); },
+        async getKey(p) { const e=new TextEncoder(); const km=await window.crypto.subtle.importKey("raw",e.encode(p),{name:"PBKDF2"},false,["deriveKey"]); return window.crypto.subtle.deriveKey({name:"PBKDF2",salt:e.encode("v52-salt"),iterations:100000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]); },
         async encrypt(t,p) { const k=await this.getKey(p); const iv=window.crypto.getRandomValues(new Uint8Array(12)); const ct=await window.crypto.subtle.encrypt({name:"AES-GCM",iv},k,new TextEncoder().encode(t)); const b=new Uint8Array(ct); const c=new Uint8Array(iv.length+b.length); c.set(iv); c.set(b,iv.length); return btoa(String.fromCharCode(...c)); },
         async decrypt(b,p) { try { const c=Uint8Array.from(atob(b),x=>x.charCodeAt(0)); const k=await this.getKey(p); const d=await window.crypto.subtle.decrypt({name:"AES-GCM",iv:c.slice(0,12)},k,c.slice(12)); return new TextDecoder().decode(d); } catch { return null; } }
     };
@@ -727,171 +769,67 @@
     };
 
     // ============================================================
-    // LOCAL AI - REASONING ENGINE (FIX #5 & #6)
+    // LOCAL AI - REASONING ENGINE
     // ============================================================
     const LocalAI = {
         knowledge: {
-            math: {
-                keywords: ['معادله','ریاضی','جبر','هندسه','کسری','عدد','ضرب','جمع','تفریق','تقسیم','توان','ریشه','مثلثات','sin','cos','tan','انتگرال','مشتق','حد','پی','فاکتوریل','لگاریتم','ماتریس','آمار','احتمال','مساحت','حجم','محیط','مجهول','x'],
-                concepts: {
-                    'equation': 'برای حل معادله، باید مقدار مجهول (معمولاً x) را طوری پیدا کنیم که دو طرف تساوی برابر شوند. روش کلی: جدا کردن مجهول با انجام عکس عملیات.',
-                    'fraction': 'در جمع و تفریق کسرها، ابتدا مخرج مشترک می‌گیریم. در ضرب، صورت در صورت و مخرج در مخرج ضرب می‌شود.',
-                    'derivative': 'مشتق نشان‌دهنده نرخ تغییرات لحظه‌ای تابع است. فرمول پایه: مشتق x^n برابر nx^(n-1) است.',
-                    'integral': 'انتگرال معکوس مشتق است و مساحت زیر نمودار را محاسبه می‌کند.',
-                    'geometry': 'برای محاسبه مساحت و حجم، باید فرمول مربوط به شکل هندسی خاص را بدانیم.'
-                }
-            },
-            science: {
-                keywords: ['علوم','فیزیک','شیمی','زیست','سلول','اتم','انرژی','نیرو','جرم','سرعت','نور','صوت','الکتریسیته','مغناطیس','فتوسنتز','dna','ژن','مولکول','عنصر','جدول تناوبی','اسید','باز','واکنش','اکسید','یون','شتاب','اصطکاک','فشار'],
-                concepts: {
-                    'newton': 'قوانین نیوتن پایه مکانیک کلاسیک هستند. قانون دوم: F=ma (نیرو برابر جرم ضربدر شتاب).',
-                    'energy': 'انرژی نه به وجود می‌آید و نه از بین می‌رود، بلکه از شکلی به شکل دیگر تبدیل می‌شود (پایستگی انرژی).',
-                    'cell': 'سلول واحد بنیادی حیات است. شامل غشا، سیتوپلاسم و مواد ژنتیکی (DNA) است.',
-                    'chemistry': 'شیمی مطالعه ماده و تغییرات آن است. واکنش‌های شیمیایی شامل شکستن و تشکیل پیوندها هستند.'
-                }
-            },
-            literature: {
-                keywords: ['ادبیات','شعر','نثر','داستان','رمان','غزل','قصیده','آرایه','تشبیه','استعاره','فردوسی','سعدی','حافظ','مولوی','شاهنامه','بوستان','گلستان','مثنوی','دیوان','وزن','قافیه','ردیف','جناس','ایهام'],
-                concepts: {
-                    'arayeh': 'آرایه‌های ادبی ابزارهایی برای زیباسازی کلام هستند. تشبیه، استعاره، مجاز، کنایه از مهم‌ترین آنها هستند.',
-                    'poetry': 'شعر سخنی موزون و مقفاست که از تخیل و احساس سرچشمه می‌گیرد.',
-                    'history_lit': 'ادبیات فارسی گنجینه‌ای از حکمت، عرفان و حماسه است که هویت فرهنگی ما را شکل داده است.'
-                }
-            },
-            history: {
-                keywords: ['تاریخ','ایران','صفویه','هخامنشی','ساسانی','قاجار','پهلوی','انقلاب','مشروطه','کوروش','داریوش','نادر','امیرکبیر','جنگ','صلح','تمدن','اشکانیان','مادها','عیلام','سلجوقیان','افشاریان','زندیه','اسلام','خلافت'],
-                concepts: {
-                    'iran_ancient': 'ایران باستان مهد تمدن‌های بزرگی چون ایلام، ماد، هخامنشی، اشکانی و ساسانی بود که بر جهان تأثیر گذاشتند.',
-                    'islam_iran': 'ورود اسلام به ایران نقطه عطفی در تاریخ فرهنگی و مذهبی منطقه بود.',
-                    'modern': 'دوران مدرن ایران با تلاش برای نوسازی، مشروطه‌خواهی و تحولات سیاسی اجتماعی همراه بود.'
-                }
-            }
+            math: { keywords: ['معادله','ریاضی','جبر','هندسه','کسری','عدد','ضرب','جمع','تفریق','تقسیم','توان','ریشه','مثلثات','sin','cos','tan','انتگرال','مشتق','حد','پی','فاکتوریل','لگاریتم','ماتریس','آمار','احتمال','مساحت','حجم','محیط','مجهول','x'], concepts: { 'equation': 'برای حل معادله، باید مقدار مجهول (معمولاً x) را طوری پیدا کنیم که دو طرف تساوی برابر شوند.', 'fraction': 'در جمع و تفریق کسرها، ابتدا مخرج مشترک می‌گیریم.', 'derivative': 'مشتق نشان‌دهنده نرخ تغییرات لحظه‌ای تابع است.', 'integral': 'انتگرال معکوس مشتق است و مساحت زیر نمودار را محاسبه می‌کند.' } },
+            science: { keywords: ['علوم','فیزیک','شیمی','زیست','سلول','اتم','انرژی','نیرو','جرم','سرعت','نور','صوت','الکتریسیته','مغناطیس','فتوسنتز','dna','ژن','مولکول','عنصر','جدول تناوبی','اسید','باز','واکنش','اکسید','یون','شتاب','اصطکاک','فشار'], concepts: { 'newton': 'قوانین نیوتن پایه مکانیک کلاسیک هستند.', 'energy': 'انرژی نه به وجود می‌آید و نه از بین می‌رود.', 'cell': 'سلول واحد بنیادی حیات است.', 'chemistry': 'شیمی مطالعه ماده و تغییرات آن است.' } },
+            literature: { keywords: ['ادبیات','شعر','نثر','داستان','رمان','غزل','قصیده','آرایه','تشبیه','استعاره','فردوسی','سعدی','حافظ','مولوی','شاهنامه','بوستان','گلستان','مثنوی','دیوان','وزن','قافیه','ردیف','جناس','ایهام'], concepts: { 'arayeh': 'آرایه‌های ادبی ابزارهایی برای زیباسازی کلام هستند.', 'poetry': 'شعر سخنی موزون و مقفاست.', 'history_lit': 'ادبیات فارسی گنجینه‌ای از حکمت و عرفان است.' } },
+            history: { keywords: ['تاریخ','ایران','صفویه','هخامنشی','ساسانی','قاجار','پهلوی','انقلاب','مشروطه','کوروش','داریوش','نادر','امیرکبیر','جنگ','صلح','تمدن','اشکانیان','مادها','عیلام','سلجوقیان','افشاریان','زندیه','اسلام','خلافت'], concepts: { 'iran_ancient': 'ایران باستان مهد تمدن‌های بزرگی بود.', 'islam_iran': 'ورود اسلام نقطه عطفی در تاریخ ایران بود.', 'modern': 'دوران مدرن با نوسازی و مشروطه همراه بود.' } }
         },
-
-        // FIX #5: Enhanced Math Solver with Linear Equation Support
         solveMath(expr) {
             try {
-                let clean = expr.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-                               .replace(/[^0-9+\-*/().\s^x=]/gi, '')
-                               .trim();
-                
+                let clean = expr.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[^0-9+\-*/().\s^x=]/gi, '').trim();
                 if (!clean) return null;
-
-                let steps = [];
-                let result;
-                
-                // Check for Linear Equation (ax + b = c)
+                let steps = [], result;
                 if (clean.includes('=') && clean.toLowerCase().includes('x')) {
                     const parts = clean.split('=');
                     if (parts.length === 2) {
-                        const lhs = parts[0].trim();
-                        const rhs = parseFloat(parts[1].trim());
-                        
+                        const lhs = parts[0].trim(); const rhs = parseFloat(parts[1].trim());
                         steps.push(`🔍 **تحلیل معادله:** ${lhs} = ${rhs}`);
-                        steps.push(`🎯 **هدف:** پیدا کردن مقدار x`);
-                        
-                        // Simple parser for ax + b or x + b or ax - b
-                        // This is a simplified solver for demonstration
                         let a = 1, b = 0;
                         const match = lhs.match(/([+-]?\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d+\.?\d*)?/i);
                         if (match) {
                             a = match[1] ? parseFloat(match[1].replace(/\s/g,'')) : 1;
                             if (isNaN(a)) a = 1;
                             if (match[2]) b = parseFloat(match[2].replace(/\s/g,''));
-                            
-                            steps.push(`➡️ **مرحله ۱:** انتقال عدد ${b} به سمت راست → ${rhs} - (${b}) = ${rhs - b}`);
+                            steps.push(`➡️ انتقال عدد ${b} → ${rhs} - (${b}) = ${rhs - b}`);
                             const rhsNew = rhs - b;
-                            steps.push(`➡️ **مرحله ۲:** تقسیم بر ضریب x (${a}) → ${rhsNew} / ${a} = ${rhsNew / a}`);
+                            steps.push(`➡️ تقسیم بر ضریب x (${a}) → ${rhsNew} / ${a} = ${rhsNew / a}`);
                             result = (rhsNew / a);
-                            steps.push(`✅ **نتیجه نهایی:** x = ${result}`);
-                        } else {
-                            return null; // Too complex for simple solver
-                        }
+                            steps.push(`✅ **نتیجه:** x = ${result}`);
+                        } else return null;
                     }
-                }
-                // Basic Arithmetic
-                else if (/^\d+\s*[+\-*/]\s*\d+$/.test(clean)) {
+                } else if (/^\d+\s*[+\-*/]\s*\d+$/.test(clean)) {
                     const parts = clean.match(/(\d+)\s*([+\-*/])\s*(\d+)/);
                     if (parts) {
-                        const a = parseFloat(parts[1]);
-                        const op = parts[2];
-                        const b = parseFloat(parts[3]);
-                        
-                        steps.push(`🔍 **تحلیل عبارت:** ${a} ${op} ${b}`);
-                        
-                        switch(op) {
-                            case '+': result = a + b; steps.push(`➕ **عملیات جمع:** ${a} به اضافه ${b}`); break;
-                            case '-': result = a - b; steps.push(`➖ **عملیات تفریق:** ${a} منهای ${b}`); break;
-                            case '*': result = a * b; steps.push(`✖️ **عملیات ضرب:** ${a} ضربدر ${b}`); break;
-                            case '/': 
-                                if (b === 0) return { error: 'تقسیم بر صفر تعریف نشده است!' };
-                                result = a / b; 
-                                steps.push(`➗ **عملیات تقسیم:** ${a} تقسیم بر ${b}`); 
-                                break;
-                        }
-                        steps.push(`✅ **نتیجه نهایی:** ${result}`);
-                    }
-                } else {
-                    // Complex expression - just evaluate safely
-                    try {
-                        result = new Function('return ' + clean.replace('^', '**').replace(/x/gi, '1'))(); // Replace x with 1 just to eval structure
-                        steps.push(`🔍 **محاسبه عبارت پیچیده:** ${clean}`);
+                        const a = parseFloat(parts[1]), op = parts[2], b = parseFloat(parts[3]);
+                        steps.push(`🔍 **تحلیل:** ${a} ${op} ${b}`);
+                        switch(op) { case '+': result=a+b; break; case '-': result=a-b; break; case '*': result=a*b; break; case '/': if(b===0)return{error:'تقسیم بر صفر!'}; result=a/b; break; }
                         steps.push(`✅ **نتیجه:** ${result}`);
-                    } catch(e) { return null; }
-                }
-
+                    }
+                } else { try { result = new Function('return ' + clean.replace('^', '**').replace(/x/gi, '1'))(); steps.push(`🔍 **محاسبه:** ${clean} = ${result}`); } catch(e) { return null; } }
                 return { steps, result };
-            } catch (e) {
-                return null;
-            }
+            } catch (e) { return null; }
         },
-
         generate(question) {
             const qLower = question.toLowerCase().normalize('NFC');
-            
-            // 1. Try Math Solver First
             const mathResult = this.solveMath(question);
-            if (mathResult) {
-                if (mathResult.error) return `❌ **خطای ریاضی:**\n\n${mathResult.error}`;
-                return `🧮 **حل گام‌به‌گام:**\n\n<div class="reasoning-block"><span class="reasoning-title">🤔 فرآیند استدلال</span>${mathResult.steps.join('<br>')}</div>\n\n💡 *آیا نیاز به توضیح بیشتر دارید؟*`;
-            }
-
-            // 2. Concept Matching with Reasoning Simulation
+            if (mathResult) { if (mathResult.error) return `❌ **خطا:** ${mathResult.error}`; return `🧮 **حل گام‌به‌گام:**\n\n<div class="reasoning-block"><span class="reasoning-title">🤔 استدلال</span>${mathResult.steps.join('<br>')}</div>`; }
             for (const [domain, data] of Object.entries(this.knowledge)) {
                 for (const kw of data.keywords) {
                     if (qLower.includes(kw.normalize('NFC'))) {
                         let explanation = null;
-                        if (data.concepts) {
-                            for (const [ckey, cval] of Object.entries(data.concepts)) {
-                                if (qLower.includes(ckey) || kw.includes(ckey)) {
-                                    explanation = cval;
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        if (!explanation) {
-                            const generic = {
-                                math: 'این مسئله مربوط به ریاضیات است. برای حل دقیق، باید اصول پایه‌ای جبر یا هندسه را به کار ببریم.',
-                                science: 'این پدیده علمی نیازمند تحلیل قوانین فیزیک یا شیمی است. بیایید اصول بنیادی آن را بررسی کنیم.',
-                                literature: 'این موضوع در حوزه ادبیات و هنر کلامی قرار می‌گیرد. زیبایی‌شناسی و ساختار آن مهم است.',
-                                history: 'این رویداد تاریخی در بستر تحولات اجتماعی و سیاسی قابل درک است.'
-                            };
-                            explanation = generic[domain] || 'بیایید این موضوع را تحلیل کنیم.';
-                        }
-
-                        return `🧠 **تحلیل هوشمند (${domain}):**\n\n<div class="reasoning-block"><span class="reasoning-title">💭 استدلال</span>با توجه به کلمات کلیدی سوال، این موضوع در حوزه <strong>${domain}</strong> طبقه‌بندی می‌شود.<br><br>${explanation}</div>\n\n📚 **پاسخ:**\nاین یک پاسخ تولید شده توسط موتور آفلاین است. برای پاسخ دقیق‌تر و تخصصی‌تر، لطفاً API Key را فعال کنید.\n\n---\n💡 *می‌توانید سوالات جزئی‌تری بپرسید.*`;
+                        if (data.concepts) { for (const [ckey, cval] of Object.entries(data.concepts)) { if (qLower.includes(ckey) || kw.includes(ckey)) { explanation = cval; break; } } }
+                        if (!explanation) { const generic = { math:'این مسئله ریاضی است.', science:'این پدیده علمی است.', literature:'این موضوع ادبی است.', history:'این رویداد تاریخی است.' }; explanation = generic[domain] || 'تحلیل موضوع.'; }
+                        return `🧠 **تحلیل (${domain}):**\n\n<div class="reasoning-block"><span class="reasoning-title">💭 استدلال</span>موضوع در حوزه <strong>${domain}</strong> است.<br><br>${explanation}</div>\n\n📚 *برای پاسخ دقیق‌تر API Key را فعال کنید.*`;
                     }
                 }
             }
-
-            // 3. Final Fallback
-            return `🧠 **استاد یار (آفلاین):**\n\nمتاسفانه اتصال به هوش مصنوعی برقرار نیست و الگوی دقیقی برای این سوال در حافظه محلی یافت نشد.\n\n💡 **پیشنهادات:**\n1. کلید API را در تنظیمات وارد کنید تا به مدل‌های قدرتمند متصل شوید.\n2. سوال را ساده‌تر یا با کلمات کلیدی مشخص‌تر بپرسید.\n3. از بخش "بانک سوالات" استفاده کنید.`;
+            return `🧠 **استاد یار (آفلاین):**\n\nالگوی دقیقی یافت نشد.\n💡 API Key را وارد کنید یا سوال را ساده‌تر بپرسید.`;
         },
-
-        generateMultiPart(topic) {
-            return `📝 **تحلیل چندبعدی موضوع "${topic}"**\n\n<div class="reasoning-block"><span class="reasoning-title">🎯 نقشه راه</span>برای درک عمیق این موضوع، آن را به چهار بخش اصلی تقسیم می‌کنیم.</div>\n\n**۱. تعریف و ماهیت:**\n${topic} چیست و چه ویژگی‌های بنیادی دارد؟\n\n**۲. تحلیل اجزا:**\nمهم‌ترین عناصر تشکیل‌دهنده و روابط بین آنها کدامند؟\n\n**۳. کاربرد و اهمیت:**\nچرا این موضوع در دنیای واقعی یا علم اهمیت دارد؟\n\n**۴. نقد و چشم‌انداز:**\nچالش‌ها، محدودیت‌ها و آینده این حوزه چیست؟\n\n---\n💡 *برای دریافت پاسخ‌های تخصصی برای هر بخش، API Key را فعال کنید.*`;
-        }
+        generateMultiPart(topic) { return `📝 **تحلیل "${topic}"**\n\n<div class="reasoning-block"><span class="reasoning-title">🎯 نقشه راه</span>تقسیم به چهار بخش.</div>\n\n**۱. تعریف:** چیست؟\n**۲. تحلیل:** اجزا؟\n**۳. کاربرد:** اهمیت؟\n**۴. نقد:** چالش‌ها؟`; }
     };
 
     // ============================================================
@@ -907,7 +845,7 @@
     };
 
     // ============================================================
-    // QUESTION BANK
+    // QUESTION BANK (FIX #4: Debounce Search)
     // ============================================================
     const QuestionBank = {
         data:[{id:1,cat:'math',q:'حاصل ۲+۲×۲؟',a:'۶'},{id:2,cat:'math',q:'مساحت دایره شعاع ۳؟',a:'۹π'},{id:3,cat:'math',q:'√۱۴۴؟',a:'۱۲'},{id:4,cat:'math',q:'مشتق x²؟',a:'2x'},{id:5,cat:'math',q:'∫2x؟',a:'x²+C'},{id:6,cat:'math',q:'sin30°؟',a:'0.5'},{id:7,cat:'math',q:'log₁₀100؟',a:'2'},{id:8,cat:'math',q:'π≈؟',a:'3.14'},{id:9,cat:'math',q:'5!؟',a:'120'},{id:10,cat:'math',q:'زوایای مثلث؟',a:'180°'},{id:11,cat:'science',q:'واحد نیرو؟',a:'نیوتون'},{id:12,cat:'science',q:'فرمول آب؟',a:'H₂O'},{id:13,cat:'science',q:'سرعت نور؟',a:'300,000 km/s'},{id:14,cat:'science',q:'واحد ماده؟',a:'اتم'},{id:15,cat:'science',q:'فتوسنتز؟',a:'کلروپلاست'},{id:16,cat:'science',q:'DNA؟',a:'Deoxyribonucleic acid'},{id:17,cat:'science',q:'جرم الکترون؟',a:'~1/1836 پروتون'},{id:18,cat:'science',q:'الماس؟',a:'کربن'},{id:19,cat:'science',q:'pH آب؟',a:'7'},{id:20,cat:'science',q:'نزدیکترین ستاره؟',a:'خورشید'},{id:21,cat:'lit',q:'شاعر شاهنامه؟',a:'فردوسی'},{id:22,cat:'lit',q:'لقب سعدی؟',a:'استاد سخن'},{id:23,cat:'lit',q:'زادگاه مولوی؟',a:'بلخ'},{id:24,cat:'lit',q:'مستأصل؟',a:'درمانده'},{id:25,cat:'lit',q:'جان جهان؟',a:'اضافه تشبیهی'},{id:26,cat:'lit',q:'بوف کور؟',a:'صادق هدایت'},{id:27,cat:'lit',q:'ابیات غزل؟',a:'5-12'},{id:28,cat:'lit',q:'متضاد ظهور؟',a:'اختفاء'},{id:29,cat:'lit',q:'ای ایران؟',a:'گلچین گیلانی'},{id:30,cat:'lit',q:'سجعه؟',a:'آهنگین بودن نثر'},{id:31,cat:'history',q:'هخامنشی؟',a:'کوروش'},{id:32,cat:'history',q:'چالدران؟',a:'عثمانی'},{id:33,cat:'history',q:'مشروطه؟',a:'1285'},{id:34,cat:'history',q:'آخرین ساسانی؟',a:'یزدگرد سوم'},{id:35,cat:'history',q:'تخت جمشید؟',a:'فارس'},{id:36,cat:'history',q:'نادر؟',a:'خراسان'},{id:37,cat:'history',q:'ترکمانچای؟',a:'روسیه'},{id:38,cat:'history',q:'اولین پایتخت؟',a:'پاسارگاد'},{id:39,cat:'history',q:'مرصاد؟',a:'1367'},{id:40,cat:'history',q:'امیرکبیر؟',a:'ناصرالدین شاه'},{id:41,cat:'lang',q:'Accomplish؟',a:'محقق کردن'},{id:42,cat:'lang',q:'Ancient؟',a:'Modern'},{id:43,cat:'lang',q:'Child؟',a:'Children'},{id:44,cat:'lang',q:'Resilient؟',a:'تاب‌آور'},{id:45,cat:'lang',q:'Go؟',a:'Went'},{id:46,cat:'lang',q:'AI؟',a:'هوش مصنوعی'},{id:47,cat:'lang',q:'Happy؟',a:'Joyful'},{id:48,cat:'lang',q:'Environment؟',a:'محیط زیست'},{id:49,cat:'lang',q:'Schedule؟',a:'اسکجول'},{id:50,cat:'lang',q:'Deadline؟',a:'مهلت نهایی'},{id:51,cat:'math',q:'اول بعد 7؟',a:'11'},{id:52,cat:'science',q:'گاز جو؟',a:'نیتروژن'},{id:53,cat:'lit',q:'بوستان؟',a:'سعدی'},{id:54,cat:'history',q:'فتح تهران؟',a:'1175'},{id:55,cat:'lang',q:'Knowledge؟',a:'دانش'},{id:56,cat:'math',q:'محیط مربع 4؟',a:'16'},{id:57,cat:'science',q:'مقاومت؟',a:'اهم'},{id:58,cat:'lit',q:'کلیله و دمنه؟',a:'نصرالله منشی'},{id:59,cat:'history',q:'سازمان ملل؟',a:'1945'},{id:60,cat:'lang',q:'Opportunity؟',a:'فرصت'}],
@@ -930,7 +868,7 @@
     const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
     // ============================================================
-    // CHAT ENGINE (FIX #3: Doona/OpenAI Compatibility)
+    // CHAT ENGINE (FIX #2: Doona Model Mapping)
     // ============================================================
     const Chat = {
         sessions:[],currentId:null,history:[],isProcessing:false,pendingFile:null,
@@ -955,24 +893,9 @@
             c.scrollTop=c.scrollHeight;
             this.restoreMsgBookmarks();
         },
-        async restoreMsgBookmarks(){
-            const bookmarks=await Storage.getAll('msgBookmarks');
-            bookmarks.forEach(b=>{if(b.sessionId===this.currentId){const btn=document.querySelector(`.msg-bookmark-btn[data-msg-id="${b.id}"]`);if(btn)btn.classList.add('active');}});
-        },
-        async toggleMsgBookmark(msgId,btn){
-            const existing=await Storage.get('msgBookmarks',msgId);
-            if(existing){await Storage.delete('msgBookmarks',msgId);btn.classList.remove('active');Toast.show('نشانک حذف شد','info');}
-            else{const idx=parseInt(msgId.split('-').pop());const msg=this.history[idx];if(msg){await Storage.put('msgBookmarks',{id:msgId,sessionId:this.currentId,index:idx,content:msg.content.substring(0,100),date:Date.now()});btn.classList.add('active');Toast.show('نشانک‌گذاری شد','success');}}
-        },
-        async regenerate(index){
-            if(this.isProcessing)return;
-            let userIdx=-1;
-            for(let i=index-1;i>=0;i--){if(this.history[i].role==='user'){userIdx=i;break;}}
-            if(userIdx<0){Toast.show('پیام کاربر یافت نشد','error');return;}
-            this.history=this.history.slice(0,index);
-            await this.save();this.render();
-            await this.processAIResponse(this.history[userIdx].content,this.history[userIdx].image);
-        },
+        async restoreMsgBookmarks(){const bookmarks=await Storage.getAll('msgBookmarks');bookmarks.forEach(b=>{if(b.sessionId===this.currentId){const btn=document.querySelector(`.msg-bookmark-btn[data-msg-id="${b.id}"]`);if(btn)btn.classList.add('active');}});},
+        async toggleMsgBookmark(msgId,btn){const existing=await Storage.get('msgBookmarks',msgId);if(existing){await Storage.delete('msgBookmarks',msgId);btn.classList.remove('active');Toast.show('نشانک حذف شد','info');}else{const idx=parseInt(msgId.split('-').pop());const msg=this.history[idx];if(msg){await Storage.put('msgBookmarks',{id:msgId,sessionId:this.currentId,index:idx,content:msg.content.substring(0,100),date:Date.now()});btn.classList.add('active');Toast.show('نشانک‌گذاری شد','success');}}},
+        async regenerate(index){if(this.isProcessing)return;let userIdx=-1;for(let i=index-1;i>=0;i--){if(this.history[i].role==='user'){userIdx=i;break;}}if(userIdx<0){Toast.show('پیام کاربر یافت نشد','error');return;}this.history=this.history.slice(0,index);await this.save();this.render();await this.processAIResponse(this.history[userIdx].content,this.history[userIdx].image);},
         async edit(index){if(this.isProcessing)return;const m=this.history[index];if(!m||m.role!=='user')return;const t=prompt('ویرایش:',m.content);if(t!==null&&t.trim()){this.history=this.history.slice(0,index);this.history.push({role:'user',content:t.trim()});await this.save();this.render();await this.processAIResponse(t.trim());}},
         copy(i){const t=this.history[i]?.content;if(t)navigator.clipboard.writeText(t).then(()=>Toast.show('کپی شد','success'));},
         async toggleBookmark(){const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.bookmarked=!s.bookmarked;await Storage.put('sessions',s);UI.renderList();Toast.show(s.bookmarked?'نشانک‌گذاری شد':'نشانک حذف شد','success');}},
@@ -985,11 +908,16 @@
             reader.readAsDataURL(file);
             document.getElementById('ocr-loading').classList.add('active');
             try{
-                // FIX #7: Safe Tesseract Check
+                // FIX #1: Correct Tesseract Path
                 if(typeof Tesseract==='undefined'){throw new Error('Tesseract not loaded');}
-                const worker=await Tesseract.createWorker('fas+eng');
+                const worker = await Tesseract.createWorker({
+                    corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core.wasm.js',
+                    langPath: 'https://tessdata.maintained.by/frostoven/4.0.0'
+                });
+                await worker.loadLanguage('fas+eng');
+                await worker.initialize('fas+eng');
                 const{data:{text}}=await worker.recognize(file);
-                await worker.terminate();
+                await worker.terminate(); // FIX Memory Leak
                 const ocr=text.trim();
                 if(ocr){const inp=document.getElementById('user-input');inp.value=ocr;inp.style.height='auto';inp.style.height=Math.min(inp.scrollHeight,150)+'px';Toast.show('متن استخراج شد','success');}
                 else{Toast.show('متنی یافت نشد. تصویر قابل ارسال است.','warning');}
@@ -1019,14 +947,8 @@
             
             const config=await Storage.getConfig();const apiKey=await Storage.getKey();
             
-            // Offline Mode Enhancement
             if(!navigator.onLine || !apiKey){
-                if(txt.length > 20) {
-                    this.history.push({role:'assistant',content:'⏳ در حال تحلیل سوال...'});
-                    this.render();
-                    await new Promise(r => setTimeout(r, 800));
-                    this.history.pop();
-                }
+                if(txt.length > 20) { this.history.push({role:'assistant',content:'⏳ در حال تحلیل...'}); this.render(); await new Promise(r => setTimeout(r, 800)); this.history.pop(); }
                 res=LocalAI.generate(txt);
                 this.history.push({role:'assistant',content:res});this.render();await this.save();this.isProcessing=false;document.getElementById('send-btn').disabled=false;return;
             }
@@ -1034,42 +956,36 @@
             if(apiKey){
                 try{
                     this.history.push({role:'assistant',content:'⏳ ...'});this.render();
-                    const model=config.model||'claude-3-5-sonnet-20241022';
+                    
+                    // FIX #2: Doona Model Mapping Logic
+                    let model = config.model || 'claude-3-5-sonnet-20241022';
+                    const isDoonaKey = apiKey.startsWith('sk-') && !apiKey.startsWith('sk-ant-');
+                    const isDoonaModel = model.startsWith('gpt-');
+                    
+                    // If key is Doona but model is Claude, force GPT-4o
+                    if (isDoonaKey && !isDoonaModel) {
+                        model = 'gpt-4o';
+                    }
+
                     let apiUrl,headers,bodyPayload;
+                    const isOpenAIFormat = config.proxy?.includes('chat/completions') || config.proxy?.includes('doona') || isDoonaKey;
                     
-                    // FIX #3: Robust Doona/OpenAI Handling
-                    const isDoona = apiKey.startsWith('sk-') && !apiKey.startsWith('sk-ant-');
-                    const isOpenAIFormat = config.proxy?.includes('chat/completions') || config.proxy?.includes('doona') || isDoona;
-                    
-                    // Prepare Content
                     let content = txt || "تصویر ارسال شده را توضیح بده";
                     if (img && !isOpenAIFormat) {
-                        // Anthropic Native Multimodal
-                        content = [
-                            {type:'image', source:{type:'base64', media_type:'image/jpeg', data:img.split(',')[1]}},
-                            {type:'text', text:txt||'توضیح تصویر؟'}
-                        ];
+                        content = [{type:'image', source:{type:'base64', media_type:'image/jpeg', data:img.split(',')[1]}},{type:'text', text:txt||'توضیح تصویر؟'}];
                     } else if (img && isOpenAIFormat) {
-                        // Doona/OpenAI Fallback: Text description instead of binary if proxy might fail
                         content = (txt ? txt + "\n\n" : "") + "[تصویر آپلود شده توسط کاربر]";
                     }
 
                     if(config.proxy){
                         apiUrl=config.proxy;
-                        headers=isOpenAIFormat
-                            ? {'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}
-                            : {'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
+                        headers=isOpenAIFormat?{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
                         bodyPayload={model,max_tokens:4096,messages:[{role:'user',content}], temperature:0.7};
                     }else{
-                        apiUrl=isDoona?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';
+                        apiUrl=isDoonaKey?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';
                         headers={'Content-Type':'application/json'};
-                        if(isDoona){
-                            headers['Authorization']=`Bearer ${apiKey}`;
-                            bodyPayload={model,max_tokens:4096,messages:[{role:'user',content}], temperature:0.7};
-                        }else{
-                            headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';
-                            bodyPayload={model,max_tokens:4096,messages:[{role:'user',content}]};
-                        }
+                        if(isDoonaKey){headers['Authorization']=`Bearer ${apiKey}`;bodyPayload={model,max_tokens:4096,messages:[{role:'user',content}], temperature:0.7};}
+                        else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';bodyPayload={model,max_tokens:4096,messages:[{role:'user',content}]};}
                     }
                     
                     const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),30000);
@@ -1080,13 +996,10 @@
                     const d=await r.json();
                     res=d.choices?.[0]?.message?.content||d.content?.[0]?.text||LocalAI.generate(txt);
                 }catch(e){
-                    this.history.pop();
-                    console.error("API Error:", e);
-                    res = LocalAI.generate(txt) + `\n\n⚠️ *(خطا در ارتباط با سرور: ${e.message}. پاسخ آفلاین ارائه شد.)*`;
+                    this.history.pop();console.error("API Error:", e);
+                    res = LocalAI.generate(txt) + `\n\n⚠️ *(خطا: ${e.message}. پاسخ آفلاین.)*`;
                 }
-            }else{
-                res=LocalAI.generate(txt);
-            }
+            }else{res=LocalAI.generate(txt);}
             this.history.push({role:'assistant',content:res});this.render();await this.save();this.isProcessing=false;document.getElementById('send-btn').disabled=false;
         },
         async save(){const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.messages=[...this.history];s.date=Date.now();await Storage.put('sessions',s);}},
@@ -1098,112 +1011,28 @@
     // ============================================================
     // QUIZ
     // ============================================================
-    const Quiz={questions:[],answers:{},submitted:false,async start(){const topic=document.getElementById('quiz-topic').value.trim();if(!topic){Toast.show('موضوع لازم است','warning');return;}const count=parseInt(document.getElementById('quiz-count').value)||5;const config=await Storage.getConfig();const apiKey=await Storage.getKey();if(!apiKey){Toast.show('API Key لازم است','error');UI.openSettings();return;}document.getElementById('quiz-setup').style.display='none';document.getElementById('quiz-loading').style.display='block';document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='none';try{const prompt=`Generate ${count} MCQ about "${topic}" in Persian. JSON only: [{"question":"","options":["","","",""],"correct":0}]`;const model=config.model||'claude-3-5-sonnet-20241022';let apiUrl,headers,bodyPayload;if(config.proxy){apiUrl=config.proxy;const isOpenAI=config.proxy.includes('chat/completions')||config.proxy.includes('doona');headers=isOpenAI?{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}else{const isDoona=apiKey.startsWith('sk-')&&!apiKey.startsWith('sk-ant-');apiUrl=isDoona?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';headers={'Content-Type':'application/json'};if(isDoona){headers['Authorization']=`Bearer ${apiKey}`;}else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),30000);const r=await fetch(apiUrl,{method:'POST',headers,signal:ctrl.signal,body:JSON.stringify(bodyPayload)});if(!r.ok)throw new Error('API');const d=await r.json();let text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';const jm=text.match(/\[[\s\S]*\]/);if(!jm)throw new Error('JSON');this.questions=JSON.parse(jm[0]);this.answers={};this.submitted=false;document.getElementById('quiz-loading').style.display='none';document.getElementById('quiz-active').style.display='block';this.render();}catch(e){document.getElementById('quiz-loading').style.display='none';document.getElementById('quiz-setup').style.display='block';Toast.show('خطا در تولید آزمون','error');}},render(){const c=document.getElementById('quiz-questions');if(!c)return;c.innerHTML='';this.questions.forEach((q,qi)=>{const div=document.createElement('div');div.className='card quiz-card';div.dataset.qi=qi;div.style.marginBottom='0.8rem';div.innerHTML=`<div style="font-weight:600;margin-bottom:0.8rem;">${qi+1}. ${q.question}</div><div class="quiz-options">`;q.options.forEach((opt,oi)=>{div.innerHTML+=`<div class="quiz-option" data-qi="${qi}" data-oi="${oi}" onclick="Quiz.select(${qi},${oi})"><span style="display:inline-block;width:24px;height:24px;border-radius:50%;background:var(--bg-input);text-align:center;line-height:24px;font-weight:700;font-size:0.8rem;">${String.fromCharCode(65+oi)}</span><span>${opt}</span></div>`;});div.innerHTML+='</div>';c.appendChild(div);});this.updateProgress();},select(qi,oi){if(this.submitted)return;this.answers[qi]=oi;const card=document.querySelector(`.quiz-card[data-qi="${qi}"]`);if(card){card.querySelectorAll('.quiz-option').forEach(el=>{el.classList.remove('selected');if(parseInt(el.dataset.oi)===oi)el.classList.add('selected');});}this.updateProgress();},updateProgress(){const t=this.questions.length,a=Object.keys(this.answers).length,p=t>0?(a/t)*100:0;const f=document.getElementById('quiz-progress-fill'),tx=document.getElementById('quiz-progress-text');if(f)f.style.width=p+'%';if(tx)tx.textContent=`${a} از ${t}`;},submit(){const t=this.questions.length,a=Object.keys(this.answers).length;if(a<t&&!confirm(`${t-a} بی‌پاسخ. ثبت؟`))return;this.submitted=true;let c=0;this.questions.forEach((q,qi)=>{const s=this.answers[qi],ok=s===q.correct;if(ok)c++;const card=document.querySelector(`.quiz-card[data-qi="${qi}"]`);if(card){card.querySelectorAll('.quiz-option').forEach(el=>{const idx=parseInt(el.dataset.oi);if(idx===q.correct)el.classList.add('correct');if(idx===s&&!ok)el.classList.add('wrong');el.style.cursor='default';});}});document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='block';const pct=Math.round((c/t)*100);document.getElementById('quiz-score').textContent=pct+'%';document.getElementById('quiz-detail').textContent=`${c} از ${t} صحیح`;Storage.put('quizzes',{id:Date.now(),topic:document.getElementById('quiz-topic').value.trim(),score:pct,total:t,correct:c,date:Date.now()});UI.updateStats();Toast.show(`نتیجه: ${pct}%`,pct>=70?'success':'warning');},reset(){document.getElementById('quiz-result').style.display='none';document.getElementById('quiz-setup').style.display='block';document.getElementById('quiz-topic').value='';}};
+    const Quiz={questions:[],answers:{},submitted:false,async start(){const topic=document.getElementById('quiz-topic').value.trim();if(!topic){Toast.show('موضوع لازم است','warning');return;}const count=parseInt(document.getElementById('quiz-count').value)||5;const config=await Storage.getConfig();const apiKey=await Storage.getKey();if(!apiKey){Toast.show('API Key لازم است','error');UI.openSettings();return;}document.getElementById('quiz-setup').style.display='none';document.getElementById('quiz-loading').style.display='block';document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='none';try{const prompt=`Generate ${count} MCQ about "${topic}" in Persian. JSON only: [{"question":"","options":["","","",""],"correct":0}]`;let model=config.model||'claude-3-5-sonnet-20241022';const isDoonaKey=apiKey.startsWith('sk-')&&!apiKey.startsWith('sk-ant-');if(isDoonaKey&&!model.startsWith('gpt-'))model='gpt-4o';let apiUrl,headers,bodyPayload;if(config.proxy){apiUrl=config.proxy;const isOpenAI=config.proxy.includes('chat/completions')||config.proxy.includes('doona');headers=isOpenAI?{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}else{apiUrl=isDoonaKey?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';headers={'Content-Type':'application/json'};if(isDoonaKey){headers['Authorization']=`Bearer ${apiKey}`;}else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),30000);const r=await fetch(apiUrl,{method:'POST',headers,signal:ctrl.signal,body:JSON.stringify(bodyPayload)});if(!r.ok)throw new Error('API');const d=await r.json();let text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';const jm=text.match(/\[[\s\S]*\]/);if(!jm)throw new Error('JSON');this.questions=JSON.parse(jm[0]);this.answers={};this.submitted=false;document.getElementById('quiz-loading').style.display='none';document.getElementById('quiz-active').style.display='block';this.render();}catch(e){document.getElementById('quiz-loading').style.display='none';document.getElementById('quiz-setup').style.display='block';Toast.show('خطا در تولید آزمون','error');}},render(){const c=document.getElementById('quiz-questions');if(!c)return;c.innerHTML='';this.questions.forEach((q,qi)=>{const div=document.createElement('div');div.className='card quiz-card';div.dataset.qi=qi;div.style.marginBottom='0.8rem';div.innerHTML=`<div style="font-weight:600;margin-bottom:0.8rem;">${qi+1}. ${q.question}</div><div class="quiz-options">`;q.options.forEach((opt,oi)=>{div.innerHTML+=`<div class="quiz-option" data-qi="${qi}" data-oi="${oi}" onclick="Quiz.select(${qi},${oi})"><span style="display:inline-block;width:24px;height:24px;border-radius:50%;background:var(--bg-input);text-align:center;line-height:24px;font-weight:700;font-size:0.8rem;">${String.fromCharCode(65+oi)}</span><span>${opt}</span></div>`;});div.innerHTML+='</div>';c.appendChild(div);});this.updateProgress();},select(qi,oi){if(this.submitted)return;this.answers[qi]=oi;const card=document.querySelector(`.quiz-card[data-qi="${qi}"]`);if(card){card.querySelectorAll('.quiz-option').forEach(el=>{el.classList.remove('selected');if(parseInt(el.dataset.oi)===oi)el.classList.add('selected');});}this.updateProgress();},updateProgress(){const t=this.questions.length,a=Object.keys(this.answers).length,p=t>0?(a/t)*100:0;const f=document.getElementById('quiz-progress-fill'),tx=document.getElementById('quiz-progress-text');if(f)f.style.width=p+'%';if(tx)tx.textContent=`${a} از ${t}`;},submit(){const t=this.questions.length,a=Object.keys(this.answers).length;if(a<t&&!confirm(`${t-a} بی‌پاسخ. ثبت؟`))return;this.submitted=true;let c=0;this.questions.forEach((q,qi)=>{const s=this.answers[qi],ok=s===q.correct;if(ok)c++;const card=document.querySelector(`.quiz-card[data-qi="${qi}"]`);if(card){card.querySelectorAll('.quiz-option').forEach(el=>{const idx=parseInt(el.dataset.oi);if(idx===q.correct)el.classList.add('correct');if(idx===s&&!ok)el.classList.add('wrong');el.style.cursor='default';});}});document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='block';const pct=Math.round((c/t)*100);document.getElementById('quiz-score').textContent=pct+'%';document.getElementById('quiz-detail').textContent=`${c} از ${t} صحیح`;Storage.put('quizzes',{id:Date.now(),topic:document.getElementById('quiz-topic').value.trim(),score:pct,total:t,correct:c,date:Date.now()});UI.updateStats();Toast.show(`نتیجه: ${pct}%`,pct>=70?'success':'warning');},reset(){document.getElementById('quiz-result').style.display='none';document.getElementById('quiz-setup').style.display='block';document.getElementById('quiz-topic').value='';}};
 
     // ============================================================
     // FLASHCARDS
     // ============================================================
-    const Flashcards={cards:[],currentIndex:0,history:[],async init(){this.history=await Storage.getAll('flashcards')||[];this.renderHistory();},renderHistory(){const c=document.getElementById('fc-history-container');const l=document.getElementById('fc-history-list');if(!c||!l)return;if(!this.history.length){c.style.display='none';return;}c.style.display='block';l.innerHTML=this.history.sort((a,b)=>b.date-a.date).slice(0,10).map(s=>`<div class="fc-history-item" onclick="Flashcards.loadSet('${s.id}')">${s.topic||'بدون عنوان'}</div>`).join('');},async loadSet(id){const s=this.history.find(x=>String(x.id)===String(id));if(!s||!s.cards){Toast.show('یافت نشد','error');return;}this.cards=s.cards;this.currentIndex=0;document.getElementById('fc-setup').style.display='none';document.getElementById('fc-active').style.display='block';this.show();Toast.show(`بارگذاری: ${s.topic}`,'success');},showSetup(){document.getElementById('fc-active').style.display='none';document.getElementById('fc-setup').style.display='block';this.init();},async generate(){const topic=document.getElementById('fc-topic').value.trim();if(!topic){Toast.show('موضوع لازم است','warning');return;}const config=await Storage.getConfig();const apiKey=await Storage.getKey();if(!apiKey){Toast.show('API Key لازم است','error');UI.openSettings();return;}document.getElementById('fc-setup').style.display='none';document.getElementById('fc-loading').style.display='block';document.getElementById('fc-active').style.display='none';try{const prompt=`Generate 10 flashcards about "${topic}" in Persian. JSON only: [{"front":"","back":""}]`;const model=config.model||'claude-3-5-sonnet-20241022';let apiUrl,headers,bodyPayload;if(config.proxy){apiUrl=config.proxy;const isOpenAI=config.proxy.includes('chat/completions')||config.proxy.includes('doona');headers=isOpenAI?{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}else{const isDoona=apiKey.startsWith('sk-')&&!apiKey.startsWith('sk-ant-');apiUrl=isDoona?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';headers={'Content-Type':'application/json'};if(isDoona){headers['Authorization']=`Bearer ${apiKey}`;}else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),30000);const r=await fetch(apiUrl,{method:'POST',headers,signal:ctrl.signal,body:JSON.stringify(bodyPayload)});if(!r.ok)throw new Error('API');const d=await r.json();let text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';const jm=text.match(/\[[\s\S]*\]/);if(!jm)throw new Error('JSON');this.cards=JSON.parse(jm[0]);this.currentIndex=0;const ns={id:Date.now().toString(),topic,cards:this.cards,date:Date.now()};await Storage.put('flashcards',ns);this.history.unshift(ns);document.getElementById('fc-loading').style.display='none';document.getElementById('fc-active').style.display='block';this.show();}catch(e){document.getElementById('fc-loading').style.display='none';document.getElementById('fc-setup').style.display='block';Toast.show('خطا','error');}},show(){const c=this.cards[this.currentIndex];if(!c)return;document.getElementById('fc-front').textContent=c.front;document.getElementById('fc-back').textContent=c.back;document.getElementById('fc-card').classList.remove('flipped');document.getElementById('fc-counter').textContent=`کارت ${this.currentIndex+1} از ${this.cards.length}`;},flip(){document.getElementById('fc-card').classList.toggle('flipped');},next(){if(this.currentIndex<this.cards.length-1){this.currentIndex++;this.show();}},prev(){if(this.currentIndex>0){this.currentIndex--;this.show();}},markEasy(){Toast.show('آسان ✓','success');this.next();},markHard(){Toast.show('سخت ✗','warning');this.next();}};
+    const Flashcards={cards:[],currentIndex:0,history:[],async init(){this.history=await Storage.getAll('flashcards')||[];this.renderHistory();},renderHistory(){const c=document.getElementById('fc-history-container');const l=document.getElementById('fc-history-list');if(!c||!l)return;if(!this.history.length){c.style.display='none';return;}c.style.display='block';l.innerHTML=this.history.sort((a,b)=>b.date-a.date).slice(0,10).map(s=>`<div class="fc-history-item" onclick="Flashcards.loadSet('${s.id}')">${s.topic||'بدون عنوان'}</div>`).join('');},async loadSet(id){const s=this.history.find(x=>String(x.id)===String(id));if(!s||!s.cards){Toast.show('یافت نشد','error');return;}this.cards=s.cards;this.currentIndex=0;document.getElementById('fc-setup').style.display='none';document.getElementById('fc-active').style.display='block';this.show();Toast.show(`بارگذاری: ${s.topic}`,'success');},showSetup(){document.getElementById('fc-active').style.display='none';document.getElementById('fc-setup').style.display='block';this.init();},async generate(){const topic=document.getElementById('fc-topic').value.trim();if(!topic){Toast.show('موضوع لازم است','warning');return;}const config=await Storage.getConfig();const apiKey=await Storage.getKey();if(!apiKey){Toast.show('API Key لازم است','error');UI.openSettings();return;}document.getElementById('fc-setup').style.display='none';document.getElementById('fc-loading').style.display='block';document.getElementById('fc-active').style.display='none';try{const prompt=`Generate 10 flashcards about "${topic}" in Persian. JSON only: [{"front":"","back":""}]`;let model=config.model||'claude-3-5-sonnet-20241022';const isDoonaKey=apiKey.startsWith('sk-')&&!apiKey.startsWith('sk-ant-');if(isDoonaKey&&!model.startsWith('gpt-'))model='gpt-4o';let apiUrl,headers,bodyPayload;if(config.proxy){apiUrl=config.proxy;const isOpenAI=config.proxy.includes('chat/completions')||config.proxy.includes('doona');headers=isOpenAI?{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}else{apiUrl=isDoonaKey?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';headers={'Content-Type':'application/json'};if(isDoonaKey){headers['Authorization']=`Bearer ${apiKey}`;}else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),30000);const r=await fetch(apiUrl,{method:'POST',headers,signal:ctrl.signal,body:JSON.stringify(bodyPayload)});if(!r.ok)throw new Error('API');const d=await r.json();let text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';const jm=text.match(/\[[\s\S]*\]/);if(!jm)throw new Error('JSON');this.cards=JSON.parse(jm[0]);this.currentIndex=0;const ns={id:Date.now().toString(),topic,cards:this.cards,date:Date.now()};await Storage.put('flashcards',ns);this.history.unshift(ns);document.getElementById('fc-loading').style.display='none';document.getElementById('fc-active').style.display='block';this.show();}catch(e){document.getElementById('fc-loading').style.display='none';document.getElementById('fc-setup').style.display='block';Toast.show('خطا','error');}},show(){const c=this.cards[this.currentIndex];if(!c)return;document.getElementById('fc-front').textContent=c.front;document.getElementById('fc-back').textContent=c.back;document.getElementById('fc-card').classList.remove('flipped');document.getElementById('fc-counter').textContent=`کارت ${this.currentIndex+1} از ${this.cards.length}`;},flip(){document.getElementById('fc-card').classList.toggle('flipped');},next(){if(this.currentIndex<this.cards.length-1){this.currentIndex++;this.show();}},prev(){if(this.currentIndex>0){this.currentIndex--;this.show();}},markEasy(){Toast.show('آسان ✓','success');this.next();},markHard(){Toast.show('سخت ✗','warning');this.next();}};
 
     const Planner={tasks:[],async init(){this.tasks=await Storage.getAll('tasks');this.render();},async add(){const inp=document.getElementById('task-input'),date=document.getElementById('task-date'),text=inp.value.trim();if(!text){Toast.show('تکلیف بنویسید','warning');return;}const task={id:Date.now(),text,date:date.value||new Date().toISOString().split('T')[0],done:false,created:Date.now()};this.tasks.push(task);await Storage.put('tasks',task);inp.value='';this.render();Toast.show('اضافه شد','success');},async toggle(id){const t=this.tasks.find(x=>x.id===id);if(t){t.done=!t.done;await Storage.put('tasks',t);this.render();}},async delete(id){if(!confirm('حذف؟'))return;this.tasks=this.tasks.filter(t=>t.id!==id);await Storage.delete('tasks',id);this.render();},render(){const c=document.getElementById('planner-list');if(!c)return;if(!this.tasks.length){c.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:1rem;">خالی</div>';return;}c.innerHTML=this.tasks.sort((a,b)=>a.done-b.done).map(t=>`<div class="task-item ${t.done?'completed':''}"><div class="task-check" onclick="Planner.toggle(${t.id})">${t.done?'<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:white;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>':''}</div><div style="flex:1;"><div style="font-weight:600;">${t.text}</div><div style="font-size:0.75rem;color:var(--text-muted);">${t.date||'بدون تاریخ'}</div></div><button class="btn" style="background:none;padding:4px 8px;min-width:auto;min-height:auto;color:var(--danger);" onclick="Planner.delete(${t.id})"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button></div>`).join('');}};
 
     // ============================================================
-    // POMODORO (FIX #4: Worker Fallback)
+    // POMODORO
     // ============================================================
     const Pomodoro = {
         worker: null, seconds: 25*60, running: false, isBreak: false, sessionCount: 0, audioCtx: null, fallbackTimer: null,
-        initWorker() {
-            if (!this.worker && pomoWorkerUrl) {
-                try {
-                    this.worker = new Worker(pomoWorkerUrl);
-                    this.worker.onmessage = (e) => {
-                        if (e.data.done) {
-                            this.onTimerComplete();
-                        } else if (e.data.seconds !== undefined) {
-                            this.seconds = e.data.seconds;
-                            this.updateDisplay();
-                        }
-                    };
-                } catch(e) {
-                    console.warn('Worker init failed', e);
-                    this.worker = null;
-                }
-            }
-        },
+        initWorker() { if (!this.worker && pomoWorkerUrl) { try { this.worker = new Worker(pomoWorkerUrl); this.worker.onmessage = (e) => { if (e.data.done) { this.onTimerComplete(); } else if (e.data.seconds !== undefined) { this.seconds = e.data.seconds; this.updateDisplay(); } }; } catch(e) { console.warn('Worker init failed', e); this.worker = null; } } },
         toggle() { if (this.running) this.pause(); else this.start(); },
-        start() {
-            if (this.running) return;
-            this.initWorker();
-            this.running = true;
-            document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg> مکث';
-            
-            if (this.worker) {
-                this.worker.postMessage({cmd:'start', seconds:this.seconds});
-            } else {
-                // Fallback to setInterval
-                this.fallbackTimer = setInterval(() => {
-                    this.seconds--;
-                    this.updateDisplay();
-                    if (this.seconds <= 0) {
-                        clearInterval(this.fallbackTimer);
-                        this.onTimerComplete();
-                    }
-                }, 1000);
-            }
-            
-            if (!this.audioCtx) { try { this.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} }
-        },
-        pause() {
-            this.running = false;
-            if (this.worker) this.worker.postMessage({cmd:'pause'});
-            if (this.fallbackTimer) clearInterval(this.fallbackTimer);
-            document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> ادامه';
-        },
-        onTimerComplete() {
-            this.running = false;
-            this.playBeep();
-            if (this.isBreak) {
-                this.sessionCount++; Toast.show(`✅ جلسه ${this.sessionCount} تمام!`, 'success');
-                this.seconds = 25*60; this.isBreak = false;
-                document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز';
-            } else {
-                Toast.show('⏰ استراحت!', 'warning');
-                this.seconds = 5*60; this.isBreak = true;
-                document.getElementById('pomo-status').textContent = '☕ استراحت';
-            }
-            this.updateDisplay();
-            document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> شروع';
-        },
-        playBeep() {
-            try {
-                if (!this.audioCtx) this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
-                const osc = this.audioCtx.createOscillator();
-                const gain = this.audioCtx.createGain();
-                osc.frequency.value = 800; osc.type = 'sine'; gain.gain.value = 0.3;
-                osc.connect(gain); gain.connect(this.audioCtx.destination);
-                osc.start();
-                gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime);
-                gain.gain.setValueAtTime(0, this.audioCtx.currentTime + 0.15);
-                gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0, this.audioCtx.currentTime + 0.45);
-                gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime + 0.6);
-                gain.gain.setValueAtTime(0, this.audioCtx.currentTime + 0.75);
-                osc.stop(this.audioCtx.currentTime + 0.8);
-            } catch(e) {}
-        },
-        reset() {
-            this.pause(); this.seconds = 25*60; this.isBreak = false; this.sessionCount = 0;
-            if (this.worker) this.worker.postMessage({cmd:'reset', seconds:25*60});
-            this.updateDisplay();
-            document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز';
-            document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> شروع';
-            Toast.show('بازنشانی', 'success');
-        },
-        updateDisplay() {
-            const m = Math.floor(this.seconds/60), s = this.seconds%60;
-            document.getElementById('pomo-display').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-        }
+        start() { if (this.running) return; this.initWorker(); this.running = true; document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg> مکث'; if (this.worker) { this.worker.postMessage({cmd:'start', seconds:this.seconds}); } else { this.fallbackTimer = setInterval(() => { this.seconds--; this.updateDisplay(); if (this.seconds <= 0) { clearInterval(this.fallbackTimer); this.onTimerComplete(); } }, 1000); } if (!this.audioCtx) { try { this.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} } },
+        pause() { this.running = false; if (this.worker) this.worker.postMessage({cmd:'pause'}); if (this.fallbackTimer) clearInterval(this.fallbackTimer); document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> ادامه'; },
+        onTimerComplete() { this.running = false; this.playBeep(); if (this.isBreak) { this.sessionCount++; Toast.show(`✅ جلسه ${this.sessionCount} تمام!`, 'success'); this.seconds = 25*60; this.isBreak = false; document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز'; } else { Toast.show('⏰ استراحت!', 'warning'); this.seconds = 5*60; this.isBreak = true; document.getElementById('pomo-status').textContent = '☕ استراحت'; } this.updateDisplay(); document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> شروع'; },
+        playBeep() { try { if (!this.audioCtx) this.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); if (this.audioCtx.state === 'suspended') this.audioCtx.resume(); const osc = this.audioCtx.createOscillator(); const gain = this.audioCtx.createGain(); osc.frequency.value = 800; osc.type = 'sine'; gain.gain.value = 0.3; osc.connect(gain); gain.connect(this.audioCtx.destination); osc.start(); gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime); gain.gain.setValueAtTime(0, this.audioCtx.currentTime + 0.15); gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime + 0.3); gain.gain.setValueAtTime(0, this.audioCtx.currentTime + 0.45); gain.gain.setValueAtTime(0.3, this.audioCtx.currentTime + 0.6); gain.gain.setValueAtTime(0, this.audioCtx.currentTime + 0.75); osc.stop(this.audioCtx.currentTime + 0.8); } catch(e) {} },
+        reset() { this.pause(); this.seconds = 25*60; this.isBreak = false; this.sessionCount = 0; if (this.worker) this.worker.postMessage({cmd:'reset', seconds:25*60}); this.updateDisplay(); document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز'; document.getElementById('pomo-start').innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> شروع'; Toast.show('بازنشانی', 'success'); },
+        updateDisplay() { const m = Math.floor(this.seconds/60), s = this.seconds%60; document.getElementById('pomo-display').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
     };
 
     // ============================================================
@@ -1211,32 +1040,19 @@
     // ============================================================
     const WB = {
         cvs:null,ctx:null,drawing:false,tool:'pen',color:'#ffffff',hist:[],
-        init(){
-            this.cvs=document.getElementById('whiteboard');if(!this.cvs)return;
-            this.ctx=this.cvs.getContext('2d');this.resize();
-            const start=e=>{e.preventDefault();this.drawing=true;this.saveState();this.draw(e);try{this.cvs.setPointerCapture(e.pointerId);}catch(ex){}};
-            const move=e=>{e.preventDefault();if(this.drawing)this.draw(e);};
-            const end=e=>{this.drawing=false;this.ctx.beginPath();try{this.cvs.releasePointerCapture(e.pointerId);}catch(ex){}};
-            this.cvs.addEventListener('pointerdown',start);
-            this.cvs.addEventListener('pointermove',move);
-            this.cvs.addEventListener('pointerup',end);
-            this.cvs.addEventListener('pointercancel',end);
-            this.cvs.addEventListener('lostpointercapture',end);
-            this.cvs.style.touchAction='none';
-            window.addEventListener('resize',()=>this.resize());
-        },
+        init(){this.cvs=document.getElementById('whiteboard');if(!this.cvs)return;this.ctx=this.cvs.getContext('2d');this.resize();const start=e=>{e.preventDefault();this.drawing=true;this.saveState();this.draw(e);try{this.cvs.setPointerCapture(e.pointerId);}catch(ex){}};const move=e=>{e.preventDefault();if(this.drawing)this.draw(e);};const end=e=>{this.drawing=false;this.ctx.beginPath();try{this.cvs.releasePointerCapture(e.pointerId);}catch(ex){}};this.cvs.addEventListener('pointerdown',start);this.cvs.addEventListener('pointermove',move);this.cvs.addEventListener('pointerup',end);this.cvs.addEventListener('pointercancel',end);this.cvs.addEventListener('lostpointercapture',end);this.cvs.style.touchAction='none';window.addEventListener('resize',()=>this.resize());},
         resize(){if(!this.cvs)return;const rect=this.cvs.parentElement.getBoundingClientRect();const temp=document.createElement('canvas');temp.width=this.cvs.width;temp.height=this.cvs.height;temp.getContext('2d').drawImage(this.cvs,0,0);this.cvs.width=rect.width;this.cvs.height=rect.height;this.ctx.fillStyle='#1e293b';this.ctx.fillRect(0,0,this.cvs.width,this.cvs.height);this.ctx.drawImage(temp,0,0);this.ctx.lineCap='round';this.ctx.lineJoin='round';},
         draw(e){const rect=this.cvs.getBoundingClientRect();const x=e.clientX-rect.left;const y=e.clientY-rect.top;this.ctx.lineWidth=this.tool==='eraser'?20:3;this.ctx.strokeStyle=this.tool==='eraser'?'#1e293b':this.color;this.ctx.lineTo(x,y);this.ctx.stroke();this.ctx.beginPath();this.ctx.moveTo(x,y);},
         setTool(t,el){this.tool=t;document.querySelectorAll('.wb-btn').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');},
         setColor(c,el){this.color=c;this.tool='pen';document.querySelectorAll('.wb-color').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');document.querySelectorAll('.wb-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.wb-btn:first-child').classList.add('active');},
-        saveState(){if(this.hist.length>10)this.hist.shift();this.hist.push(this.cvs.toDataURL('image/jpeg',0.8));},
+        saveState(){if(this.hist.length>5)this.hist.shift();this.hist.push(this.cvs.toDataURL('image/jpeg',0.7));},
         undo(){if(this.hist.length<=1)return;this.hist.pop();const img=new Image();img.onload=()=>{this.ctx.clearRect(0,0,this.cvs.width,this.cvs.height);this.ctx.drawImage(img,0,0);};img.src=this.hist[this.hist.length-1];},
         clear(){if(!confirm('پاک؟'))return;this.hist=[];this.ctx.fillStyle='#1e293b';this.ctx.fillRect(0,0,this.cvs.width,this.cvs.height);this.saveState();Toast.show('پاک شد','success');},
         save(){const a=document.createElement('a');a.download=`wb-${Date.now()}.png`;a.href=this.cvs.toDataURL();a.click();Toast.show('ذخیره شد','success');}
     };
 
     // ============================================================
-    // UI CONTROLLER (FIX #2 & #8)
+    // UI CONTROLLER (FIX #3: Chart Theme Update)
     // ============================================================
     const UI = {
         currentView:'home',
@@ -1247,50 +1063,32 @@
             if(target){target.style.display=view==='chat'||view==='home'?'flex':'block';setTimeout(()=>target.classList.add('active'),10);}
             document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
             if(el)el.classList.add('active');
-            else{const map={home:'خانه',chat:'چت',quiz:'آزمون',flashcards:'فلش',planner:'برنامه',tools:'ابزار',profile:'پروفایل',bank:'بانک'};document.querySelectorAll('.nav-btn').forEach(b=>{if(b.textContent.trim()===map[view])b.classList.add('active');});}
-            const titles={home:'داشبورد',chat:'گفتگو',quiz:'آزمون',flashcards:'فلش‌کارت',planner:'برنامه‌ریزی',tools:'جعبه ابزار',profile:'پروفایل',bank:'بانک سوالات'};
+            else{const map={home:'خانه',chat:'چت',quiz:'آزمون',flashcards:'فلش',planner:'برنامه',tools:'ابزار',profile:'پروفایل',bank:'بانک',about:'درباره ما'};document.querySelectorAll('.nav-btn').forEach(b=>{if(b.textContent.trim()===map[view])b.classList.add('active');});}
+            const titles={home:'داشبورد',chat:'گفتگو',quiz:'آزمون',flashcards:'فلش‌کارت',planner:'برنامه‌ریزی',tools:'جعبه ابزار',profile:'پروفایل',bank:'بانک سوالات',about:'درباره ما'};
             document.getElementById('page-title').textContent=titles[view]||'استاد یار پلاس';
             const ms=document.getElementById('header-model-select');if(view==='chat')ms.style.display='block';else ms.style.display='none';
             if(view==='home'){this.updateStats();this.renderChart();}
             if(view==='tools'){setTimeout(()=>{WB.init();setTimeout(()=>WB.resize(),50);},100);}
             if(view==='planner')Planner.render();
-            if(view==='bank')QuestionBank.render();
+            if(view==='bank'){QuestionBank.render();/* FIX #4: Initial Render */}
             if(view==='flashcards')Flashcards.init();
             this.toggleSidebar(true);
         },
         renderList(){const l=document.getElementById('chat-history-list');if(!l)return;l.innerHTML='';Chat.sessions.sort((a,b)=>b.date-a.date).forEach(s=>{const d=document.createElement('div');d.className=`chat-item ${s.id===Chat.currentId?'active':''} ${s.bookmarked?'bookmarked':''}`;d.innerHTML=`<div class="bookmark-indicator"></div><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.title}</span><div class="actions"><button onclick="event.stopPropagation();Chat.toggleBookmark()" title="نشانک"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:${s.bookmarked?'var(--accent)':'currentColor'};"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></button><button onclick="event.stopPropagation();Chat.deleteSession(${s.id},event)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button></div>`;d.onclick=()=>{Chat.load(s.id);this.toggleSidebar(true);};l.appendChild(d);});},
-        async updateStats(){
-            const chats=Chat.sessions.length;
-            const sc=document.getElementById('stat-chats');if(sc)sc.textContent=chats;
-            const pc=document.getElementById('prof-chats');if(pc)pc.textContent=chats;
-            const quizzes=await Storage.getAll('quizzes');
-            const sq=document.getElementById('stat-quizzes');if(sq)sq.textContent=quizzes.length;
-            const pq=document.getElementById('prof-quizzes');if(pq)pq.textContent=quizzes.length;
-            const tasks=await Storage.getAll('tasks');
-            const st=document.getElementById('stat-tasks');if(st)st.textContent=tasks.length;
-        },
-        // FIX #8: Chart updates after theme change
+        async updateStats(){const chats=Chat.sessions.length;const sc=document.getElementById('stat-chats');if(sc)sc.textContent=chats;const pc=document.getElementById('prof-chats');if(pc)pc.textContent=chats;const quizzes=await Storage.getAll('quizzes');const sq=document.getElementById('stat-quizzes');if(sq)sq.textContent=quizzes.length;const pq=document.getElementById('prof-quizzes');if(pq)pq.textContent=quizzes.length;const tasks=await Storage.getAll('tasks');const st=document.getElementById('stat-tasks');if(st)st.textContent=tasks.length;},
+        // FIX #3: Chart Rebuild on Theme Change
         renderChart(){const c=document.getElementById('chart');if(!c)return;if(window._ch){window._ch.destroy();window._ch=null;}const styles=getComputedStyle(document.body);const primary=styles.getPropertyValue('--primary').trim()||'#6366f1';const muted=styles.getPropertyValue('--text-muted').trim()||'#94a3b8';window._ch=new Chart(c,{type:'bar',data:{labels:['ش','ی','د','س','چ','پ','ج'],datasets:[{data:[5,8,6,9,4,7,3],backgroundColor:primary,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{display:false,beginAtZero:true},x:{grid:{display:false},ticks:{color:muted}}}}});},
         toggleSidebar(forceClose){const sb=document.getElementById('sidebar');if(window.innerWidth<=768){if(forceClose)sb.classList.remove('mobile-open');else sb.classList.toggle('mobile-open');}},
         toggleContextMenu(e){e.stopPropagation();const menu=document.getElementById('ctx-menu');const btn=document.getElementById('ctx-toggle');const rect=btn.getBoundingClientRect();let top=rect.bottom+5,left=rect.left-180;if(left<10)left=10;if(left+220>window.innerWidth)left=window.innerWidth-230;if(top+350>window.innerHeight)top=rect.top-350;menu.style.top=`${top}px`;menu.style.left=`${left}px`;menu.style.right='auto';menu.classList.toggle('open');},
         closeContextMenu(){document.getElementById('ctx-menu').classList.remove('open');},
-        // FIX #2: Robust openSettings
-        openSettings(e){
-            if(e) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
-            const modal = document.getElementById('settings-modal');
-            if(modal) modal.classList.add('open');
-            this.toggleSidebar(true);
-        },
+        openSettings(e){if(e){e.stopPropagation();e.preventDefault();}const modal=document.getElementById('settings-modal');if(modal)modal.classList.add('open');this.toggleSidebar(true);},
         closeSettings(){document.getElementById('settings-modal').classList.remove('open');},
         toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen().catch(()=>{});},
         async setTheme(theme){document.body.setAttribute('data-theme',theme);const cfg=await Storage.getConfig();if(cfg)await Storage.put('settings',{id:'config',...cfg,theme});Toast.show(`تم ${theme}`,'success');setTimeout(()=>this.renderChart(),300);}
     };
 
     // ============================================================
-    // INIT (FIX #1: Safe Initialization)
+    // INIT (FIX #4: QB Search Listener)
     // ============================================================
     document.addEventListener('DOMContentLoaded', async () => {
         try {
@@ -1309,6 +1107,14 @@
             await Chat.init();
             await Planner.init();
             await Flashcards.init();
+            
+            // FIX #4: QB Search Debounce Listener
+            let qbTimer;
+            document.getElementById('qb-search')?.addEventListener('input', () => {
+                clearTimeout(qbTimer);
+                qbTimer = setTimeout(() => QuestionBank.render(), 300);
+            });
+            
             QuestionBank.render();
             const ta = document.getElementById('user-input');
             if (ta) { ta.addEventListener('input', function() { this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,150)+'px'; }); ta.addEventListener('keydown', e => { if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); Chat.send(); } }); }
@@ -1321,7 +1127,7 @@
             document.getElementById('profile-name-input')?.addEventListener('keydown', e => { if (e.key==='Enter') Profile.saveName(); });
             const modeSelect = document.getElementById('ai-mode-select');
             if (modeSelect && cfg.mode) modeSelect.value = cfg.mode;
-            Toast.show('🚀 استاد یار پلاس v50 آماده است!', 'success');
+            Toast.show('🚀 استاد یار پلاس v52 آماده است!', 'success');
         } catch (e) { console.error('Init error:', e); Toast.show('خطا در راه‌اندازی', 'error'); }
     });
     </script>
