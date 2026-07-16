@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>استاد یار | v56.0 Ultimate AI Enhanced</title>
+    <title>استاد یار | v57.0 Ultimate Resilient</title>
     <meta name="theme-color" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-    <!-- FIX #4: Transformers.js CDN Added -->
     <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" async></script>
 
@@ -202,7 +201,6 @@
 
         .app-footer { padding: 0.8rem; text-align: center; font-size: 0.7rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--bg-sidebar); flex-shrink: 0; }
 
-        /* About Section Styles */
         .about-container { max-width: 600px; margin: 2rem auto; text-align: center; padding: 0 1rem; }
         .about-logo { width: 80px; height: 80px; background: var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; box-shadow: 0 10px 25px var(--primary-glow); }
         .about-logo svg { width: 40px; height: 40px; fill: white; }
@@ -217,19 +215,11 @@
         .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: var(--nav-height); background: var(--bg-sidebar); border-top: 1px solid var(--border); justify-content: space-around; align-items: center; z-index: 4000; padding-bottom: var(--safe-bottom); }
         .mobile-toggle { display: none !important; }
 
-        /* NEW: AI Status Indicator Styles */
+        /* AI Status Indicator */
         .ai-status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            transition: all 0.3s ease;
+            display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+            border-radius: 20px; font-size: 0.7rem; font-weight: 600;
+            background: var(--bg-input); border: 1px solid var(--border); color: var(--text-muted); transition: all 0.3s ease;
         }
         .ai-status-badge.active { border-color: var(--success); color: var(--success); }
         .ai-status-badge.loading { border-color: var(--warning); color: var(--warning); }
@@ -313,7 +303,6 @@
             <div style="display:flex; align-items:center; gap:8px;">
                 <button class="btn btn-icon mobile-toggle" style="min-width:36px; height:36px; width:36px;" onclick="UI.toggleSidebar()"><svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></button>
                 <span style="font-weight:700; font-size:1rem;" id="page-title">داشبورد</span>
-                <!-- NEW: AI Backend Status Indicator -->
                 <div id="ai-status-indicator" class="ai-status-badge" title="وضعیت موتور هوش مصنوعی">
                     <div class="ai-status-dot"></div>
                     <span id="ai-status-text">در حال بررسی...</span>
@@ -569,14 +558,13 @@
             </div>
         </div>
 
-        <!-- About Section -->
         <div id="view-about" class="view-section" style="display:none; overflow-y:auto; align-items:center; justify-content:center;">
             <div class="about-container">
                 <div class="about-logo">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                 </div>
                 <h1 class="about-title">استاد یار پلاس</h1>
-                <span class="about-version">نسخه 56.0 Ultimate AI Enhanced</span>
+                <span class="about-version">نسخه 57.0 Ultimate Resilient</span>
                 <p class="about-desc">
                     استاد یار پلاس یک دستیار آموزشی هوشمند و همه‌جانبه است که با بهره‌گیری از پیشرفته‌ترین مدل‌های زبانی و تکنولوژی‌های وب، تجربه‌ای بی‌نظیر از یادگیری تعاملی را فراهم می‌کند. این پروژه با عشق و دقت برای جامعه آموزشی ایران توسعه یافته است.
                 </p>
@@ -612,7 +600,7 @@
         </div>
 
         <div class="app-footer">
-            استاد یار پلاس v56.0 | طراحی شده برای آموزش هوشمند
+            استاد یار پلاس v57.0 | طراحی شده برای آموزش هوشمند
         </div>
 
         <div class="mobile-nav">
@@ -660,299 +648,257 @@
                 <button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#f97316;" onclick="UI.setTheme('sunset')">🌅 غروب</button>
             </div>
             <button class="btn btn-primary" style="width:100%;" onclick="Storage.saveSettings()">💾 ذخیره تنظیمات</button>
-            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 56.0 Ultimate AI Enhanced</div>
+            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 57.0 Ultimate Resilient</div>
         </div>
     </div>
 
     <script>
     // ============================================================
-    // NEW: Transformers.js AI Backend (Added BEFORE LocalAI)
+    // RESILIENT CORE MODULES (Never Crash)
+    // ============================================================
+    
+    // 1. TOAST MODULE (Safe Fallback)
+    const Toast = {
+        show(msg, type='success', duration=3000) {
+            try {
+                const c = document.getElementById('toast-container'); 
+                if (!c) return console.log(`[Toast ${type}] ${msg}`);
+                const e = document.createElement('div');
+                e.className = 'toast';
+                const svgs = { 
+                    success:'<svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--success);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>', 
+                    error:'<svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--danger);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>', 
+                    warning:'<svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--warning);"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>' 
+                };
+                e.innerHTML = `${svgs[type]||svgs.success}<span>${msg}</span>`;
+                e.style.borderInlineStartColor = `var(--${type==='error'?'danger':type==='warning'?'warning':'success'})`;
+                c.appendChild(e);
+                setTimeout(() => { e.style.opacity='0'; setTimeout(()=>e.remove(), 300); }, duration);
+            } catch(err) { console.error('Toast Error:', err); }
+        }
+    };
+
+    // 2. CRYPTO MODULE (Safe Fallback)
+    const Crypto = {
+        async getKey(p) { 
+            try {
+                if (!window.crypto?.subtle) throw new Error('No SubtleCrypto');
+                const e=new TextEncoder(); 
+                const km = await window.crypto.subtle.importKey("raw", e.encode(p), {name:"PBKDF2"}, false, ["deriveKey"]);
+                return window.crypto.subtle.deriveKey({name:"PBKDF2",salt:e.encode("v57-salt"),iterations:100000,hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]); 
+            } catch(e) { console.warn('Crypto unavailable'); return null; }
+        },
+        async encrypt(t,p) { 
+            try {
+                const k = await this.getKey(p);
+                if(!k) return btoa(t); // Fallback to Base64
+                const iv = window.crypto.getRandomValues(new Uint8Array(12));
+                const ct = await window.crypto.subtle.encrypt({name:"AES-GCM", iv}, k, new TextEncoder().encode(t));
+                const b = new Uint8Array(ct);
+                const c = new Uint8Array(iv.length + b.length);
+                c.set(iv); c.set(b, iv.length);
+                return btoa(String.fromCharCode(...c));
+            } catch(e) { return btoa(t); }
+        },
+        async decrypt(b,p) { 
+            try {
+                if (!window.crypto?.subtle) return atob(b);
+                const c = Uint8Array.from(atob(b), x=>x.charCodeAt(0));
+                const k = await this.getKey(p);
+                const d = await window.crypto.subtle.decrypt({name:"AES-GCM", iv:c.slice(0,12)}, k, c.slice(12));
+                return new TextDecoder().decode(d);
+            } catch { try { return atob(b); } catch { return null; } }
+        }
+    };
+
+    // 3. STORAGE MODULE (Safe Fallback to LocalStorage)
+    const Storage = {
+        dbName: 'OstadYar_v57', db: null, useLocalStorage: false,
+        async init() {
+            try {
+                if (!window.indexedDB) throw new Error('No IndexedDB');
+                return new Promise(r => {
+                    const req = indexedDB.open(this.dbName, 17);
+                    req.onupgradeneeded = e => {
+                        const db = e.target.result;
+                        ['sessions','settings','quizzes','tasks','flashcards','bookmarks','profile','msgBookmarks'].forEach(s => {
+                            if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, {keyPath: 'id'});
+                        });
+                    };
+                    req.onsuccess = e => { this.db = e.target.result; r(); };
+                    req.onerror = () => { this.useLocalStorage = true; r(); };
+                });
+            } catch(e) { this.useLocalStorage = true; console.warn('IndexedDB failed, using LocalStorage'); }
+        },
+        tx(s, m='readonly') { return this.db.transaction(s, m).objectStore(s); },
+        async get(s, id) { 
+            if (this.useLocalStorage) { try { const d = localStorage.getItem(`${s}_${id}`); return d ? JSON.parse(d) : null; } catch { return null; } }
+            try { return new Promise(r => { const q=this.tx(s).get(id); q.onsuccess=()=>r(q.result); q.onerror=()=>r(null); }); } catch { return null; } 
+        },
+        async put(s, d) { 
+            if (this.useLocalStorage) { try { localStorage.setItem(`${s}_${d.id}`, JSON.stringify(d)); return true; } catch { return false; } }
+            try { return new Promise(r => { const q=this.tx(s,'readwrite').put(d); q.onsuccess=()=>r(true); q.onerror=()=>r(false); }); } catch { return false; } 
+        },
+        async getAll(s) { 
+            if (this.useLocalStorage) { try { const keys = Object.keys(localStorage).filter(k=>k.startsWith(s+'_')); return keys.map(k=>JSON.parse(localStorage.getItem(k))); } catch { return []; } }
+            try { return new Promise(r => { const q=this.tx(s).getAll(); q.onsuccess=()=>r(q.result||[]); q.onerror=()=>r([]); }); } catch { return []; } 
+        },
+        async delete(s, id) { 
+            if (this.useLocalStorage) { try { localStorage.removeItem(`${s}_${id}`); return true; } catch { return false; } }
+            try { return new Promise(r => { this.tx(s,'readwrite').delete(id); r(true); }); } catch { return false; } 
+        },
+        async saveSettings() {
+            const key = document.getElementById('api-key-input').value.trim();
+            const pass = document.getElementById('passphrase-input').value.trim();
+            const proxy = document.getElementById('proxy-url').value.trim();
+            const mode = document.getElementById('default-mode').value.trim();
+            const model = document.getElementById('ai-model-select').value.trim();
+            const theme = document.body.getAttribute('data-theme') || 'dark';
+            
+            if (key && pass.length < 6) { Toast.show('رمز عبور باید حداقل ۶ کاراکتر باشد','error'); return; }
+            
+            await this.put('settings', {id:'config', proxy, theme, mode, model});
+            
+            if (key && pass) {
+                try {
+                    const encKey = await Crypto.encrypt(key, pass);
+                    await this.put('settings', {id:'apiKey', value:encKey});
+                    sessionStorage.setItem('oy_pass', pass);
+                    Toast.show('تنظیمات امن ذخیره شد'); UI.closeSettings();
+                } catch(e) { Toast.show('خطا در رمزنگاری','error'); }
+            } else {
+                if(!key) await this.delete('settings', 'apiKey');
+                Toast.show('تنظیمات ذخیره شد'); UI.closeSettings();
+            }
+        },
+        async getKey() {
+            const data = await this.get('settings', 'apiKey'); if (!data?.value) return null;
+            let pass = sessionStorage.getItem('oy_pass');
+            if (!pass) { pass = prompt('🔒 رمز عبور امنیتی خود را وارد کنید:'); if (!pass) return null; sessionStorage.setItem('oy_pass', pass); }
+            const dec = await Crypto.decrypt(data.value, pass);
+            if (dec === null) { sessionStorage.removeItem('oy_pass'); Toast.show('رمز عبور اشتباه است','error'); return null; }
+            return dec;
+        },
+        async getConfig() { return await this.get('settings', 'config') || {}; },
+        async clearAll() {
+            if (confirm('آیا مطمئن هستید؟')) { 
+                if (this.db) this.db.close(); 
+                try { indexedDB.deleteDatabase(this.dbName); } catch {}
+                localStorage.clear();
+                location.reload(); 
+            }
+        }
+    };
+
+    // 4. PROFILE MODULE
+    const Profile = {
+        async init() { const p=await Storage.get('profile','user'); if(!p||!p.name){document.getElementById('profile-modal').classList.add('open');setTimeout(()=>document.getElementById('profile-name-input')?.focus(),100);}else{this.updateUI(p);} },
+        async saveName() { 
+            const n=document.getElementById('profile-name-input')?.value.trim(); 
+            const g=document.getElementById('profile-grade-input')?.value||'نامشخص'; 
+            if(!n){Toast.show('لطفاً نام خود را وارد کنید','warning');return;} 
+            await Storage.put('profile',{id:'user',name:n,grade:g}); 
+            this.updateUI({name:n,grade:g}); 
+            document.getElementById('profile-modal').classList.remove('open'); 
+            Toast.show('پروفایل ساخته شد','success');
+        },
+        async editName() { const p=await Storage.get('profile','user')||{name:'',grade:''}; const n=prompt('ویرایش نام:',p.name); if(n!==null&&n.trim()){p.name=n.trim();await Storage.put('profile',p);this.updateUI(p);Toast.show('نام بروزرسانی شد','success');} },
+        updateUI(p) { const el=document.getElementById('p-name'); if(el)el.textContent=p.name||'کاربر مهمان'; const gr=document.getElementById('p-grade'); if(gr)gr.textContent=p.grade||'پایه تحصیلی نامشخص'; }
+    };
+
+    // ============================================================
+    // WORKER MODULE (Safe Fallback)
+    // ============================================================
+    let pomoWorker = null;
+    let pomoWorkerUrl = null;
+    try {
+        if (typeof Worker !== 'undefined') {
+            const PomoWorkerCode = `
+                let timer = null; let seconds = 0;
+                self.onmessage = function(e) {
+                    if (e.data.cmd === 'start') { seconds = e.data.seconds; clearInterval(timer); timer = setInterval(() => { seconds--; self.postMessage({seconds}); if (seconds <= 0) { clearInterval(timer); self.postMessage({done: true}); } }, 1000); }
+                    else if (e.data.cmd === 'pause') { clearInterval(timer); }
+                    else if (e.data.cmd === 'reset') { clearInterval(timer); seconds = e.data.seconds; self.postMessage({seconds}); }
+                };
+            `;
+            const blob = new Blob([PomoWorkerCode], {type: 'application/javascript'});
+            pomoWorkerUrl = URL.createObjectURL(blob);
+        }
+    } catch (e) { console.warn('Worker creation failed, using fallback timer.'); }
+
+    // ============================================================
+    // OFFLINE AI BACKENDS
     // ============================================================
     const TransformersAI = {
-        pipeline: null,
-        isLoaded: false,
-        isLoading: false,
-        modelName: 'Xenova/flan-t5-small',
-        
-        // بارگذاری مدل با نمایش وضعیت پیشرفت
+        pipeline: null, isLoaded: false, isLoading: false, modelName: 'Xenova/flan-t5-small',
         async init() {
             if (this.isLoaded || this.isLoading) return;
-            
             try {
                 this.isLoading = true;
-                UI.updateAIStatus('loading', 'در حال بارگذاری مدل...');
-                
-                // بررسی وجود کتابخانه Transformers.js
-                if (typeof transformers === 'undefined') {
-                    console.warn('Transformers.js library not loaded');
-                    this.isLoading = false;
-                    UI.updateAIStatus('inactive', 'مدل محلی');
-                    return;
-                }
-                
-                // بارگذاری پایپ‌لاین تولید متن
+                UI.updateAIStatus('loading', 'بارگذاری مدل...');
+                if (typeof transformers === 'undefined') { this.isLoading = false; UI.updateAIStatus('inactive', 'محلی'); return; }
                 this.pipeline = await transformers.pipeline('text2text-generation', this.modelName, {
-                    progress_callback: (progress) => {
-                        if (progress.status === 'progress') {
-                            const pct = Math.round(progress.progress || 0);
-                            UI.updateAIStatus('loading', `بارگذاری ${pct}%`);
-                        }
-                    }
+                    progress_callback: (progress) => { if (progress.status === 'progress') UI.updateAIStatus('loading', `بارگذاری ${Math.round(progress.progress||0)}%`); }
                 });
-                
-                this.isLoaded = true;
-                this.isLoading = false;
+                this.isLoaded = true; this.isLoading = false;
                 UI.updateAIStatus('active', 'Transformers.js');
-                console.log('✅ Transformers.js model loaded successfully');
-            } catch (e) {
-                console.error('Failed to load Transformers.js model:', e);
-                this.isLoaded = false;
-                this.isLoading = false;
-                UI.updateAIStatus('inactive', 'مدل محلی');
-            }
+            } catch (e) { this.isLoaded = false; this.isLoading = false; UI.updateAIStatus('inactive', 'محلی'); }
         },
-        
-        // تولید پاسخ با مدل Transformers.js
         async ask(question) {
             if (!this.isLoaded || !this.pipeline) return null;
-            
-            try {
-                const result = await this.pipeline(question, {
-                    max_new_tokens: 256,
-                    temperature: 0.7
-                });
-                
-                if (result && result[0] && result[0].generated_text) {
-                    return result[0].generated_text;
-                }
-                return null;
-            } catch (e) {
-                console.error('Transformers.js generation failed:', e);
-                return null;
-            }
+            try { const result = await this.pipeline(question, { max_new_tokens: 256, temperature: 0.7 }); return result?.[0]?.generated_text || null; } catch { return null; }
         }
     };
 
-    // ============================================================
-    // NEW: Ollama AI Backend (Local LLM)
-    // ============================================================
     const OllamaAI = {
-        baseUrl: 'http://localhost:11434',
-        isAvailable: false,
-        defaultModel: 'phi',
-        
-        // بررسی availability سرویس Ollama
+        baseUrl: 'http://localhost:11434', isAvailable: false, defaultModel: 'phi',
         async check() {
             try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 2000);
-                
-                const response = await fetch(`${this.baseUrl}/api/tags`, {
-                    method: 'GET',
-                    signal: controller.signal
-                });
-                
-                clearTimeout(timeoutId);
-                
-                if (response.ok) {
-                    this.isAvailable = true;
-                    console.log('✅ Ollama service detected');
-                    return true;
-                }
-            } catch (e) {
-                // Silent fallback - Ollama not available
-                this.isAvailable = false;
-            }
+                const ctrl = new AbortController(); const tid = setTimeout(() => ctrl.abort(), 2000);
+                const res = await fetch(`${this.baseUrl}/api/tags`, { signal: ctrl.signal });
+                clearTimeout(tid);
+                if (res.ok) { this.isAvailable = true; return true; }
+            } catch {}
             return false;
         },
-        
-        // تولید پاسخ با Ollama
         async ask(question, model = null) {
             if (!this.isAvailable) return null;
-            
-            const useModel = model || this.defaultModel;
-            
             try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 30000);
-                
-                const response = await fetch(`${this.baseUrl}/api/generate`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    signal: controller.signal,
-                    body: JSON.stringify({
-                        model: useModel,
-                        prompt: question,
-                        stream: false
-                    })
-                });
-                
-                clearTimeout(timeoutId);
-                
-                if (!response.ok) return null;
-                
-                const data = await response.json();
-                return data.response || null;
-            } catch (e) {
-                console.error('Ollama generation failed:', e);
-                return null;
-            }
+                const ctrl = new AbortController(); const tid = setTimeout(() => ctrl.abort(), 30000);
+                const res = await fetch(`${this.baseUrl}/api/generate`, { method: 'POST', headers: {'Content-Type':'application/json'}, signal: ctrl.signal, body: JSON.stringify({ model: model||this.defaultModel, prompt: question, stream: false }) });
+                clearTimeout(tid);
+                if (!res.ok) return null;
+                const data = await res.json(); return data.response || null;
+            } catch { return null; }
         }
     };
 
-    // ============================================================
-    // NEW: Offline AI Manager (Backend Priority Manager)
-    // ============================================================
     const OfflineAIManager = {
         currentBackend: 'local',
-        
-        // بررسی و انتخاب بهترین backend موجود
         async init() {
-            // 1. بررسی Ollama
-            const ollamaAvailable = await OllamaAI.check();
-            if (ollamaAvailable) {
-                this.currentBackend = 'ollama';
-                UI.updateAIStatus('active', 'Ollama');
-                return;
-            }
-            
-            // 2. بارگذاری Transformers.js
+            if (await OllamaAI.check()) { this.currentBackend = 'ollama'; UI.updateAIStatus('active', 'Ollama'); return; }
             await TransformersAI.init();
-            if (TransformersAI.isLoaded) {
-                this.currentBackend = 'transformers';
-                return;
-            }
-            
-            // 3. Fallback به LocalAI
-            this.currentBackend = 'local';
-            UI.updateAIStatus('inactive', 'مدل محلی');
+            if (TransformersAI.isLoaded) { this.currentBackend = 'transformers'; return; }
+            this.currentBackend = 'local'; UI.updateAIStatus('inactive', 'محلی');
         },
-        
-        // ارسال سوال به بهترین backend موجود
         async ask(question) {
-            // تلاش 1: Ollama
-            if (this.currentBackend === 'ollama' || OllamaAI.isAvailable) {
-                const result = await OllamaAI.ask(question);
-                if (result) {
-                    this.currentBackend = 'ollama';
-                    UI.updateAIStatus('active', 'Ollama');
-                    return result;
-                }
-            }
-            
-            // تلاش 2: Transformers.js
-            if (TransformersAI.isLoaded) {
-                const result = await TransformersAI.ask(question);
-                if (result) {
-                    this.currentBackend = 'transformers';
-                    UI.updateAIStatus('active', 'Transformers.js');
-                    return result;
-                }
-            }
-            
-            // تلاش 3: LocalAI (همیشه موجود)
-            this.currentBackend = 'local';
-            UI.updateAIStatus('inactive', 'مدل محلی');
+            if (this.currentBackend === 'ollama' || OllamaAI.isAvailable) { const r = await OllamaAI.ask(question); if (r) { this.currentBackend = 'ollama'; UI.updateAIStatus('active', 'Ollama'); return r; } }
+            if (TransformersAI.isLoaded) { const r = await TransformersAI.ask(question); if (r) { this.currentBackend = 'transformers'; UI.updateAIStatus('active', 'Transformers.js'); return r; } }
+            this.currentBackend = 'local'; UI.updateAIStatus('inactive', 'محلی');
             return LocalAI.generate(question);
         }
     };
 
     // ============================================================
-    // LOCAL AI - REASONING ENGINE (Fallback)
+    // LOCAL AI KNOWLEDGE BASE
     // ============================================================
     const LocalAI = {
         knowledge: {
-            math: { 
-                keywords: ['معادله','ریاضی','جبر','هندسه','کسری','عدد','ضرب','جمع','تفریق','تقسیم','توان','ریشه','مثلثات','sin','cos','tan','انتگرال','مشتق','حد','پی','فاکتوریل','لگاریتم','ماتریس','آمار','احتمال','مساحت','حجم','محیط','مجهول','x','تابع','مختصات','بردار','ماتریس','دترمینان','حد','پیوستگی','مشتق','انتگرال','دیفرانسیل','معادله دیفرانسیل','سری','توالی','اعداد مختلط','اعداد حقیقی','اعداد گویا','اعداد طبیعی','اول','مرکب','فاکتوریل','ترکیب','جایگشت','احتمال','آمار','میانگین','میانه','مد','واریانس','انحراف معیار','توزیع نرمال','رگرسیون','همبستگی'],
-                concepts: { 
-                    'equation': 'برای حل معادله، باید مقدار مجهول (معمولاً x) را طوری پیدا کنیم که دو طرف تساوی برابر شوند. روش کلی: جدا کردن مجهول با انجام عکس عملیات.',
-                    'fraction': 'در جمع و تفریق کسرها، ابتدا مخرج مشترک می‌گیریم. در ضرب، صورت در صورت و مخرج در مخرج ضرب می‌شود.',
-                    'derivative': 'مشتق نشان‌دهنده نرخ تغییرات لحظه‌ای تابع است. فرمول پایه: مشتق x^n برابر nx^(n-1) است.',
-                    'integral': 'انتگرال معکوس مشتق است و مساحت زیر نمودار را محاسبه می‌کند.',
-                    'geometry': 'برای محاسبه مساحت و حجم، باید فرمول مربوط به شکل هندسی خاص را بدانیم.',
-                    'trigonometry': 'مثلثات روابط بین زوایا و اضلاع مثلث را بررسی می‌کند. توابع اصلی: sin, cos, tan.',
-                    'statistics': 'آمار علم جمع‌آوری، تحلیل و تفسیر داده‌هاست. شاخص‌های مرکزی: میانگین، میانه، مد.',
-                    'probability': 'احتمال وقوع یک پیشامد برابر است با تعداد حالات مطلوب تقسیم بر تعداد کل حالات ممکن.',
-                    'function': 'تابع رابطه‌ای است که به هر ورودی دقیقاً یک خروجی نسبت می‌دهد.',
-                    'matrix': 'ماتریس آرایه‌ای مستطیلی از اعداد است که در جبر خطی کاربرد دارد.'
-                } 
-            },
-            science: { 
-                keywords: ['علوم','فیزیک','شیمی','زیست','سلول','اتم','انرژی','نیرو','جرم','سرعت','نور','صوت','الکتریسیته','مغناطیس','فتوسنتز','dna','ژن','مولکول','عنصر','جدول تناوبی','اسید','باز','واکنش','اکسید','یون','شتاب','اصطکاک','فشار','دما','گرما','حرارت','آنتروپی','ترمودینامیک','مکانیک','سینماتیک','دینامیک','الکترواستاتیک','الکتrodynamics','مغناطیس','الکترومغناطیس','موج','نور','اپتیک','صوت','اکوستیک','نسبیت','کوانتوم','هسته‌ای','اتمی','ذرات بنیادی','فوتون','الکترون','پروتون','نوترون','کوارک','گلوئون','بوزون','فرمیون','لپتون','ماده','ضدماده','پلاسما','گاز','مایع','جامد','حالت ماده','فاز','چگالی','ویسکوزیته','کشش سطحی','capillarity','نفوذ','اسمز','دیالیز','کروماتوگرافی','تیتراسیون','ph','اسید','باز','نمک','اکسید','هیدروکسید','آلی','معدنی','پلیمر','مونومر','ماکرومولکول','بیومولکول','پروتئین','کربوهیدرات','لیپید','نوکلئیک اسید','آنزیم','هورمون','ویتامین','مینرال','آب','هوا','خاک','سنگ','کانی','فسیل','زمین‌شناسی','زلزله','آتشفشان','فرسایش','رسوب','لایه‌های زمین','پوسته','گوشته','هسته','اتمسفر','تروپوسفر','استراتوسفر','مزوسفر','ترmosphere','exosphere','آب و هوا','اقلیم','گرمایش جهانی','تغییر اقلیم','گلخانه‌ای','اوزون','uv','اشعه','رادیاکتیو','نیمه عمر','واپاشی','همجوشی','شکافت','راکتور','نیروگاه','انرژی تجدیدپذیر','خورشیدی','بادی','آبی','زمین گرمایی','بیوماس','هیدروژن','پیل سوختی','باتری','الکترولیز','خوردگی','آلیاژ','فولاد','چدن','برنز','مس','آلومینیوم','تیتانیوم','طلا','نقره','پلاتین','اورانیوم','پلوتونیوم','سیلیکون','ژرمانیوم','نیمه رسانا','دیود','ترانزیستور','مدار','مقاومت','خازن','سلف','ترانسفورماتور','ژنراتور','موتور','الکتروموتور','سنکرون','آسنکرون','dc','ac','فرکانس','دامنه','فاز','impedance','رزونانس','فیلتر','تقویت کننده','اسیلاتور','مدولاتور','دمودولاتور','آنتن','ارسال','دریافت','سیگنال','نویز','snr','bandwidth','modulation','am','fm','pm','digital','analog','sample','quantize','bit','byte','data','information','entropy','coding','compression','encryption','protocol','network','internet','web','cloud','iot','ai','ml','dl','nn','cnn','rnn','lstm','transformer','bert','gpt','llm','nlp','cv','robotics','automation','control','pid','feedback','sensor','actuator','transducer','calibration','measurement','instrumentation','lab','experiment','hypothesis','theory','law','principle','axiom','postulate','theorem','proof','lemma','corollary','conjecture','paradox','fallacy','bias','error','uncertainty','accuracy','precision','validity','reliability','reproducibility','peer review','publication','citation','impact factor','journal','conference','symposium','seminar','workshop','lecture','presentation','poster','abstract','paper','article','book','textbook','manual','guide','tutorial','course','class','lesson','homework','assignment','project','thesis','dissertation','degree','diploma','certificate','license','patent','trademark','copyright','intellectual property','ethics','morality','responsibility','accountability','transparency','integrity','honesty','trust','respect','dignity','justice','fairness','equity','equality','diversity','inclusion','accessibility','sustainability','environment','ecology','conservation','preservation','restoration','remediation','pollution','waste','recycling','reuse','reduce','circular economy','green','clean','renewable','organic','natural','eco-friendly','biodegradable','compostable','carbon footprint','water footprint','life cycle assessment','lca','environmental impact assessment','eia','iso 14001','ems','auditing','reporting','disclosure','csr','esg','sdgs','un','who','unesco','unep','undp','fao','ilo','imo','icao','itu','wto','imf','world bank','oecd','g7','g20','brics','asean','eu','nafta','usmca','afcta','rcep','cptpp','ttip','ftaa','saarc','gcc','eco','shanghai cooperation organization','apec','oas','au','sadc','ecomowas','igad','comesa','cen-sad','amu','umoa','ueoa','waemu','cemac','eccas','eac','ioc','saarc','bimstec','ion','acss','trilateral','quadrilateral','bilateral','multilateral','unilateral','sanctions','embargo','boycott','tariff','quota','subsidy','dumping','anti-dumping','countervailing','safeguard','dispute settlement','arbitration','mediation','conciliation','negotiation','diplomacy','foreign policy','international relations','geopolitics','security','defense','military','army','navy','air force','marines','coast guard','intelligence','espionage','counterintelligence','cybersecurity','cyberwarfare','information warfare','psychological warfare','propaganda','disinformation','misinformation','fake news','deepfake','bot','troll','astroturfing','sockpuppet','shill','influencer','marketing','advertising','pr','public relations','branding','positioning','segmentation','targeting','promotion','sales','distribution','channel','retail','wholesale','ecommerce','marketplace','platform','app','website','blog','podcast','video','streaming','live','event','webinar','summit','expo','fair','bazaar','market','shop','store','boutique','outlet','mall','center','plaza','square','street','road','avenue','boulevard','highway','freeway','expressway','tollway','turnpike','parkway','drive','lane','alley','path','trail','track','route','corridor','passage','gateway','portal','entrance','exit','door','window','wall','floor','ceiling','roof','foundation','structure','building','construction','architecture','design','engineering','civil','mechanical','electrical','chemical','industrial','materials','metallurgical','petroleum','mining','geological','geophysical','oceanographic','meteorological','climatological','hydrological','glaciological','volcanological','seismological','paleontological','archaeological','anthropological','sociological','psychological','philosophical','theological','religious','spiritual','mystical','esoteric','occult','metaphysical','ontological','epistemological','ethical','aesthetic','political','economic','social','cultural','historical','geographical','demographical','statistical','mathematical','computational','algorithmic','heuristic','empirical','theoretical','applied','pure','basic','fundamental','advanced','specialized','general','interdisciplinary','multidisciplinary','transdisciplinary','holistic','systemic','complex','chaotic','nonlinear','dynamic','adaptive','evolutionary','emergent','self-organizing','autopoietic','cybernetic','informational','computational','digital','virtual','augmented','mixed','extended','immersive','interactive','responsive','intelligent','smart','connected','autonomous','robotic','bio-inspired','neuromorphic','quantum-inspired','swarm','collective','distributed','decentralized','peer-to-peer','blockchain','cryptocurrency','bitcoin','ethereum','defi','nft','dao','web3','metaverse','xr','vr','ar','mr','haptic','holographic','volumetric','spatial','3d','4d','5d','nd','dimensional','topological','geometric','algebraic','analytic','numeric','symbolic','hybrid','fuzzy','probabilistic','stochastic','random','deterministic','predictable','unpredictable','uncertain','ambiguous','vague','clear','precise','accurate','reliable','valid','sound','robust','resilient','flexible','scalable','efficient','effective','optimal','suboptimal','pareto','nash','equilibrium','stable','unstable','bifurcation','catastrophe','tipping point','threshold','limit','boundary','constraint','restriction','regulation','rule','law','norm','standard','protocol','procedure','process','workflow','pipeline','chain','network','graph','tree','hierarchy','taxonomy','ontology','schema','model','framework','architecture','pattern','template','blueprint','roadmap','strategy','tactic','plan','goal','objective','target','metric','kpi','okr','benchmark','baseline','gap','analysis','swot','pestel','porter','five forces','value chain','business model canvas','lean','agile','scrum','kanban','devops','ci/cd','mlops','dataops','gitops','finops','secops','aicps','llmops','prompt engineering','rag','fine-tuning','rlhf','dpo','constitutional ai','alignment','safety','red teaming','jailbreaking','adversarial attack','defense','robustness','fairness','bias mitigation','interpretability','explainability','transparency','accountability','auditability','traceability','provenance','lineage','versioning','reproducibility','replicability','generalizability','transferability','adaptability','portability','interoperability','compatibility','integration','orchestration','coordination','collaboration','cooperation','competition','coopetition','synergy','leverage','scale','scope','economies','diseconomies','returns','diminishing','increasing','constant','marginal','utility','satisfaction','preference','choice','decision','rationality','bounded rationality','heuristics','biases','cognitive','behavioral','neuro','psycho','socio','cultural','institutional','organizational','individual','group','team','community','society','nation','state','country','region','continent','world','planet','earth','moon','sun','star','galaxy','universe','cosmos','multiverse','parallel universe','alternate reality','simulation','matrix','illusion','maya','dream','lucid dream','astral projection','obe','nde','near death experience','reincarnation','past life','karma','dharma','moksha','nirvana','enlightenment','awakening','consciousness','awareness','mindfulness','meditation','contemplation','prayer','worship','devotion','bhakti','jnana','karma yoga','raja yoga','hatha yoga','kundalini','chakra','prana','qi','chi','ki','mana','ojas','tejas','tapas','shakti','shiva','vishnu','brahma','trinity','god','goddess','deity','divine','sacred','holy','profane','secular','mundane','ordinary','extraordinary','miracle','magic','sorcery','witchcraft','alchemy','hermeticism','gnosis','mysticism','sufism','kabbalah','zen','tao','buddhism','hinduism','christianity','islam','judaism','sikhism','jainism','zoroastrianism','bahai','shinto','animism','shamanism','paganism','wicca','new age','spirituality','religion','faith','belief','dogma','doctrine','creed','confession','catechism','scripture','canon','text','sutra','mantra','yantra','mandala','icon','symbol','sign','omen','portent','prophecy','revelation','inspiration','intuition','gut feeling','sixth sense','clairvoyance','telepathy','telekinesis','psychokinesis','remote viewing','precognition','retrocognition','psychometry','mediumship','channeling','possession','exorcism','deliverance','healing','therapy','counseling','coaching','mentoring','guidance','advice','consultation','diagnosis','treatment','cure','remedy','medicine','drug','pharmaceutical','pill','tablet','capsule','syrup','ointment','cream','lotion','gel','spray','injection','vaccine','immunization','antibiotic','antiviral','antifungal','antiparasitic','analgesic','painkiller','anesthetic','sedative','hypnotic','tranquilizer','antidepressant','antipsychotic','stimulant','nootropic','supplement','vitamin','mineral','herb','botanical','extract','tincture','essential oil','aromatherapy','homeopathy','naturopathy','ayurveda','tcm','traditional chinese medicine','acupuncture','acupressure','shiatsu','reflexology','massage','reiki','qigong','tai chi','yoga','pilates','barre','dance','movement','exercise','fitness','wellness','health','nutrition','diet','food','meal','recipe','ingredient','flavor','taste','smell','aroma','scent','fragrance','perfume','cosmetic','makeup','skincare','haircare','bodycare','oral care','hygiene','sanitation','cleanliness','purity','sterility','asepsis','antisepsis','disinfection','decontamination','sanitization','pasteurization','irradiation','filtration','distillation','evaporation','condensation','sublimation','deposition','melting','freezing','boiling','cooking','baking','roasting','grilling','frying','steaming','poaching','simmering','braising','stewing','marinating','pickling','fermenting','curing','smoking','drying','dehydrating','preserving','canning','jarring','bottling','packaging','wrapping','sealing','labeling','branding','marketing','selling','buying','consuming','using','utilizing','exploiting','harnessing','leveraging','optimizing','maximizing','minimizing','balancing','harmonizing','integrating','synthesizing','analyzing','evaluating','assessing','measuring','monitoring','tracking','logging','recording','documenting','archiving','storing','retrieving','accessing','sharing','distributing','disseminating','broadcasting','publishing','printing','copying','duplicating','reproducing','replicating','cloning','forking','branching','merging','rebasing','cherry-picking','squashing','amending','reverting','resetting','stashing','tagging','annotating','commenting','reviewing','approving','rejecting','accepting','declining','canceling','aborting','terminating','killing','stopping','halting','pausing','suspending','resuming','continuing','proceeding','advancing','progressing','moving','going','traveling','journeying','voyaging','exploring','discovering','finding','locating','searching','seeking','hunting','chasing','pursuing','following','tracking','trailing','shadowing','stalking','surveilling','observing','watching','seeing','looking','gazing','staring','peering','glancing','peeking','squinting','blinking','winking','nodding','shaking','tilting','turning','rotating','spinning','twisting','bending','flexing','stretching','extending','reaching','grabbing','holding','gripping','clasping','clutching','squeezing','pressing','pushing','pulling','dragging','lifting','carrying','transporting','hauling','towing','dragging','sliding','slipping','falling','dropping','tumbling','rolling','bouncing','jumping','leaping','hopping','skipping','running','sprinting','jogging','walking','strolling','sauntering','ambling','wandering','roaming','rambling','meandering','drifting','floating','gliding','soaring','flying','hovering','levitating','ascending','descending','rising','sinking','plunging','diving','submerging','immersing','dunking','dipping','splashing','spraying','sprinkling','pouring','spilling','leaking','dripping','oozing','seeping','flowing','streaming','gushing','rushing','surging','flooding','inundating','overwhelming','engulfing','swallowing','devouring','consuming','eating','drinking','sipping','gulping','chugging','quaffing','imbibing','tasting','sampling','trying','testing','experimenting','trialing','piloting','prototyping','mocking','simulating','emulating','virtualizing','containerizing','dockerizing','kubernetes','helm','terraform','ansible','puppet','chef','saltstack','vagrant','packer','consul','vault','nomad','boundary','waypoint','sentinel','atlantis','spacelift','env0','pulumi','cdk','serverless','lambda','azure functions','aws','gcp','cloudflare','vercel','netlify','heroku','render','railway','fly.io','digitalocean','linode','vultr','hetzner','ovh','scaleway','upcloud','akamai','fastly','cloudfront','cdn','edge','worker','wasm','webassembly','rust','go','zig','nim','crystal','elixir','erlang','clojure','scala','kotlin','swift','dart','flutter','react native','ionic','capacitor','cordova','phonegap','xamarin','maui','unity','unreal','godot','bevy','amethyst','macroquad','tetra','ggez','piston','sdl','glfw','vulkan','opengl','directx','metal','mantle','dx12','dx11','dx10','dx9','webgpu','webgl','canvas','svg','css','html','javascript','typescript','node','deno','bun','elysia','hono','express','fastify','koa','nest','adonis','sails','meteor','next','nuxt','remix','astro','svelte','solid','vue','react','angular','ember','backbone','jquery','vanilla','plain','native','bare','raw','pure','simple','minimal','lean','lightweight','tiny','micro','nano','pico','femto','atto','zepto','yocto'],
-                concepts: {
-                    'newton': 'قوانین نیوتن پایه مکانیک کلاسیک هستند. قانون دوم: F=ma (نیرو برابر جرم ضربدر شتاب).',
-                    'energy': 'انرژی نه به وجود می‌آید و نه از بین می‌رود، بلکه از شکلی به شکل دیگر تبدیل می‌شود (پایستگی انرژی).',
-                    'cell': 'سلول واحد بنیادی حیات است. شامل غشا، سیتوپلاسم و مواد ژنتیکی (DNA) است.',
-                    'chemistry': 'شیمی مطالعه ماده و تغییرات آن است. واکنش‌های شیمیایی شامل شکستن و تشکیل پیوندها هستند.',
-                    'photosynthesis': 'فتوسنتز فرآیندی است که گیاهان با استفاده از نور خورشید، آب و CO2 غذا تولید می‌کنند.',
-                    'dna': 'DNA مولکولی است که اطلاعات ژنتیکی را حمل می‌کند و ساختار مارپیچ دوگانه دارد.',
-                    'electricity': 'الکتریسیته جریان الکترون‌ها در یک رسانا است. ولتاژ عامل ایجاد این جریان است.',
-                    'periodic_table': 'جدول تناوبی عناصر شیمیایی را بر اساس عدد اتمی مرتب کرده است.',
-                    'acid': 'اسیدها موادی هستند که یون H+ آزاد می‌کنند و pH کمتر از 7 دارند.',
-                    'base': 'بازها موادی هستند که یون OH- آزاد می‌کنند و pH بیشتر از 7 دارند.'
-                }
-            },
-            literature: { 
-                keywords: ['ادبیات','شعر','نثر','داستان','رمان','غزل','قصیده','آرایه','تشبیه','استعاره','فردوسی','سعدی','حافظ','مولوی','شاهنامه','بوستان','گلستان','مثنوی','دیوان','وزن','قافیه','ردیف','جناس','ایهام'], 
-                concepts: { 
-                    'arayeh': 'آرایه‌های ادبی ابزارهایی برای زیباسازی کلام هستند. تشبیه، استعاره، مجاز، کنایه از مهم‌ترین آنها هستند.', 
-                    'poetry': 'شعر سخنی موزون و مقفاست که از تخیل و احساس سرچشمه می‌گیرد.', 
-                    'history_lit': 'ادبیات فارسی گنجینه‌ای از حکمت، عرفان و حماسه است که هویت فرهنگی ما را شکل داده است.',
-                    'ferdowsi': 'حکیم ابوالقاسم فردوسی، سراینده شاهنامه، بزرگترین حماسه‌سرای فارسی است.',
-                    'saadi': 'مصلح بن عبدالله شیرازی، معروف به سعدی، استاد سخن و نویسنده گلستان و بوستان است.',
-                    'hafez': 'شمس‌الدین محمد حافظ شیرازی، لسان‌الغیب و بزرگترین غزل‌سرای فارسی است.',
-                    'molavi': 'جلال‌الدین محمد بلخی، عارف و شاعر بزرگ قرن هفتم و سراینده مثنوی معنوی است.'
-                } 
-            },
-            history: { 
-                keywords: ['تاریخ','ایران','صفویه','هخامنشی','ساسانی','قاجار','پهلوی','انقلاب','مشروطه','کوروش','داریوش','نادر','امیرکبیر','جنگ','صلح','تمدن','اشکانیان','مادها','عیلام','سلجوقیان','افشاریان','زندیه','اسلام','خلافت'], 
-                concepts: { 
-                    'iran_ancient': 'ایران باستان مهد تمدن‌های بزرگی چون ایلام، ماد، هخامنشی، اشکانی و ساسانی بود که بر جهان تأثیر گذاشتند.', 
-                    'islam_iran': 'ورود اسلام نقطه عطفی در تاریخ فرهنگی و مذهبی ایران بود.', 
-                    'modern': 'دوران مدرن با نوسازی و مشروطه همراه بود.',
-                    'achaemenid': 'هخامنشیان اولین امپراتوری بزرگ ایران بودند که توسط کوروش بزرگ تأسیس شدند.',
-                    'safavid': 'سلسله صفویه توسط شاه اسماعیل صفوی در قرن دهم هجری تأسیس شد و مذهب شیعه رسمی شد.',
-                    'constitutional': 'انقلاب مشروطه جنبشی برای محدود کردن قدرت شاه و ایجاد مجلس قانون‌گذاری در سال 1285 شمسی بود.',
-                    'cyrus': 'کوروش بزرگ بنیانگذار سلسله هخامنشیان و نویسنده منشور حقوق بشر کوروش است.',
-                    'nader': 'نادرشاه افشار فاتح هند و احیاگر قدرت نظامی ایران در قرن 18 بود.',
-                    'amirkabir': 'امیرکبیر صدراعظم ناصرالدین شاه قاجار و بنیانگذار دارالفنون بود.'
-                } 
-            },
-            programming: {
-                keywords: ['برنامه‌نویسی','کد','پایتون','جاوااسکریپت','html','css','الگوریتم','تابع','متغیر','آرایه','حلقه','شرط','شیء','کلاس','ارث‌بری','پایتون','جاوا','سی','سی++','روبی','پی‌اچ‌پی','سوئیفت','کاتلین','گو','راست','اسکالا','پراسسینگ','متلب','آردوینو','raspberry pi','iot','هوش مصنوعی','یادگیری ماشین','یادگیری عمیق','شبکه عصبی','دیتابیس','sql','nosql','وب','فرانت‌اند','بک‌اند','full stack','api','rest','graphql','microservices','cloud','aws','azure','docker','kubernetes','devops','agile','scrum','git','github','gitlab','test','unit test','integration test','debug','debugging','performance','optimization','security','cybersecurity','encryption','hashing','authentication','authorization','jwt','oauth','ssl','https','dns','tcp/ip','http','websocket','socket','network','server','client','browser','dom','event','async','promise','callback','closure','scope','hoisting','prototype','inheritance','polymorphism','encapsulation','abstraction','design pattern','singleton','factory','observer','strategy','mvc','mvvm','solid','dry','kiss','yagni','clean code','refactoring','code review','version control','branch','merge','commit','pull request','ci/cd','pipeline','deployment','staging','production','monitoring','logging','analytics','metrics','kpi','okr','agile','scrum','kanban','lean','product owner','scrum master','user story','backlog','sprint','retrospective','daily standup','demo','review','planning','estimation','velocity','burndown chart','cumulative flow diagram','kanban board','scrum board','jira','trello','asana','clickup','monday','notion','slack','discord','teams','zoom','meet','hangouts','skype','whatsapp','telegram','signal','wechat','line','viber','kakao','qq','tiktok','instagram','facebook','twitter','linkedin','pinterest','snapchat','reddit','quora','medium','wordpress','ghost','substack','newsletter','blog','podcast','youtube','twitch','spotify','apple music','soundcloud','bandcamp','mixcloud','audius','deezer','tidal','qobuz','pandora','iheart','siriusxm','amazon music','youtube music','apple podcasts','google podcasts','overcast','castro','pocket casts','player fm','podbean','buzzsprout','anchor','libsyn','blubrry','soundcloud','mixcloud','hearthis','audioboom','podomatic','spreaker','podbean','buzzsprout','anchor','libsyn','blubrry','soundcloud','mixcloud','hearthis','audioboom','podomatic','spreaker'],
-                concepts: {
-                    'python': 'پایتون یک زبان برنامه‌نویسی سطح بالا، تفسیری و همه‌منظوره است که به دلیل سادگی و خوانایی بالا محبوب است.',
-                    'javascript': 'جاوااسکریپت زبان برنامه‌نویسی وب است که هم در سمت کلاینت و هم در سمت سرور استفاده می‌شود.',
-                    'html': 'HTML زبان نشانه‌گذاری استاندارد برای ایجاد صفحات وب است.',
-                    'css': 'CSS زبان سبک‌دهی صفحات وب است که ظاهر و قالب صفحه را کنترل می‌کند.',
-                    'algorithm': 'الگوریتم مجموعه‌ای از مراحل مشخص و متناهی برای حل یک مسئله است.',
-                    'function': 'تابع بلوکی از کد است که وظیفه خاصی را انجام می‌دهد و قابل استفاده مجدد است.',
-                    'variable': 'متغیر مکانی در حافظه است که مقداری را ذخیره می‌کند.',
-                    'array': 'آرایه ساختاری داده‌ای است که مجموعه‌ای از مقادیر را ذخیره می‌کند.',
-                    'loop': 'حلقه ساختاری است که اجازه می‌دهد کدی را چندین بار تکرار کنیم.',
-                    'condition': 'شرط ساختاری است که اجازه می‌دهد بر اساس شرایط مختلف، تصمیم‌گیری کنیم.',
-                    'object': 'شیء ساختاری داده‌ای است که ویژگی‌ها و رفتارها را zusammenfasst.',
-                    'class': 'کلاس الگویی برای ایجاد اشیاء است که ویژگی‌ها و رفتارها را تعریف می‌کند.',
-                    'inheritance': 'ارث‌بری مکانیزمی است که اجازه می‌دهد کلاس‌ها ویژگی‌ها و رفتارهای کلاس‌های دیگر را به ارث ببرند.',
-                    'ai': 'هوش مصنوعی شاخه‌ای از علوم کامپیوتر است که هدف آن ایجاد سیستم‌های هوشمند است.',
-                    'ml': 'یادگیری ماشین زیرشاخه‌ای از هوش مصنوعی است که به سیستم‌ها اجازه می‌دهد از داده‌ها یاد بگیرند.',
-                    'dl': 'یادگیری عمیق زیرشاخه‌ای از یادگیری ماشین است که از شبکه‌های عصبی عمیق استفاده می‌کند.',
-                    'nn': 'شبکه عصبی مدلی محاسباتی است که از ساختار مغز انسان الهام گرفته شده است.',
-                    'database': 'پایگاه داده مجموعه‌ای سازمان‌یافته از داده‌ها است.',
-                    'sql': 'SQL زبان استاندارد برای مدیریت پایگاه‌های داده رابطه‌ای است.',
-                    'web': 'وب شبکه‌ای جهانی از صفحات و منابع متصل به هم است.',
-                    'frontend': 'فرانت‌اند بخش سمت کلاینت وب است که کاربر با آن تعامل دارد.',
-                    'backend': 'بک‌اند بخش سمت سرور وب است که منطق و داده‌ها را مدیریت می‌کند.',
-                    'api': 'API رابطی است که اجازه می‌دهد نرم‌افزارها با هم ارتباط برقرار کنند.',
-                    'rest': 'REST سبک معماری برای طراحی APIهای وب است.',
-                    'git': 'Git سیستم کنترل نسخه توزیع‌شده است.',
-                    'docker': 'Docker پلتفرمی برای کانتینرسازی اپلیکیشن‌ها است.',
-                    'kubernetes': 'Kubernetes پلتفرمی برای ارکستراسیون کانتینرها است.',
-                    'devops': 'DevOps فرهنگی است که توسعه و عملیات را یکپارچه می‌کند.',
-                    'agile': 'Agile رویکردی چابک برای توسعه نرم‌افزار است.',
-                    'scrum': 'Scrum چارچوبی چابک برای مدیریت پروژه‌های نرم‌افزاری است.'
-                }
-            }
+            math: { keywords: ['معادله','ریاضی','جبر','هندسه','کسری','عدد','ضرب','جمع','تفریق','تقسیم','توان','ریشه','مثلثات','sin','cos','tan','انتگرال','مشتق','حد','پی','فاکتوریل','لگاریتم','ماتریس','آمار','احتمال','مساحت','حجم','محیط','مجهول','x','تابع','مختصات','بردار','دترمینان','پیوستگی','دیفرانسیل','سری','توالی','اعداد مختلط','اعداد حقیقی','اعداد گویا','اعداد طبیعی','اول','مرکب','ترکیب','جایگشت','میانگین','میانه','مد','واریانس','انحراف معیار','توزیع نرمال','رگرسیون','همبستگی'], concepts: { 'equation': 'برای حل معادله، باید مقدار مجهول را پیدا کنیم.', 'fraction': 'در جمع کسرها، مخرج مشترک می‌گیریم.', 'derivative': 'مشتق نرخ تغییرات لحظه‌ای تابع است.', 'integral': 'انتگرال معکوس مشتق است.', 'geometry': 'برای محاسبه مساحت و حجم، فرمول شکل هندسی لازم است.', 'trigonometry': 'مثلثات روابط زوایا و اضلاع مثلث است.', 'statistics': 'آمار علم تحلیل داده‌هاست.', 'probability': 'احتمال = حالات مطلوب / کل حالات.', 'function': 'تابع به هر ورودی یک خروجی نسبت می‌دهد.', 'matrix': 'ماتریس آرایه مستطیلی اعداد است.' } },
+            science: { keywords: ['علوم','فیزیک','شیمی','زیست','سلول','اتم','انرژی','نیرو','جرم','سرعت','نور','صوت','الکتریسیته','مغناطیس','فتوسنتز','dna','ژن','مولکول','عنصر','جدول تناوبی','اسید','باز','واکنش','اکسید','یون','شتاب','اصطکاک','فشار','دما','گرما','حرارت','آنتروپی','ترمودینامیک','مکانیک','سینماتیک','دینامیک','الکترواستاتیک','مغناطیس','الکترومغناطیس','موج','نور','اپتیک','صوت','اکوستیک','نسبیت','کوانتوم','هسته‌ای','اتمی','ذرات بنیادی','فوتون','الکترون','پروتون','نوترون','کوارک','گلوئون','بوزون','فرمیون','لپتون','ماده','ضدماده','پلاسما','گاز','مایع','جامد','حالت ماده','فاز','چگالی','ویسکوزیته','کشش سطحی','نفوذ','اسمز','دیالیز','کروماتوگرافی','تیتراسیون','ph','اسید','باز','نمک','اکسید','هیدروکسید','آلی','معدنی','پلیمر','مونومر','ماکرومولکول','بیومولکول','پروتئین','کربوهیدرات','لیپید','نوکلئیک اسید','آنزیم','هورمون','ویتامین','مینرال','آب','هوا','خاک','سنگ','کانی','فسیل','زمین‌شناسی','زلزله','آتشفشان','فرسایش','رسوب','لایه‌های زمین','پوسته','گوشته','هسته','اتمسفر','تروپوسفر','استراتوسفر','مزوسفر','آب و هوا','اقلیم','گرمایش جهانی','تغییر اقلیم','گلخانه‌ای','اوزون','uv','اشعه','رادیاکتیو','نیمه عمر','واپاشی','همجوشی','شکافت','راکتور','نیروگاه','انرژی تجدیدپذیر','خورشیدی','بادی','آبی','زمین گرمایی','بیوماس','هیدروژن','پیل سوختی','باتری','الکترولیز','خوردگی','آلیاژ','فولاد','چدن','برنز','مس','آلومینیوم','تیتانیوم','طلا','نقره','پلاتین','اورانیوم','پلوتونیوم','سیلیکون','ژرمانیوم','نیمه رسانا','دیود','ترانزیستور','مدار','مقاومت','خازن','سلف','ترانسفورماتور','ژنراتور','موتور','الکتروموتور','سنکرون','آسنکرون','dc','ac','فرکانس','دامنه','فاز','impedance','رزونانس','فیلتر','تقویت کننده','اسیلاتور','مدولاتور','دمودولاتور','آنتن','ارسال','دریافت','سیگنال','نویز','snr','bandwidth','modulation','am','fm','pm','digital','analog','sample','quantize','bit','byte','data','information','entropy','coding','compression','encryption','protocol','network','internet','web','cloud','iot','ai','ml','dl','nn','cnn','rnn','lstm','transformer','bert','gpt','llm','nlp','cv','robotics','automation','control','pid','feedback','sensor','actuator','transducer','calibration','measurement','instrumentation','lab','experiment','hypothesis','theory','law','principle','axiom','postulate','theorem','proof','lemma','corollary','conjecture','paradox','fallacy','bias','error','uncertainty','accuracy','precision','validity','reliability','reproducibility','peer review','publication','citation','impact factor','journal','conference','symposium','seminar','workshop','lecture','presentation','poster','abstract','paper','article','book','textbook','manual','guide','tutorial','course','class','lesson','homework','assignment','project','thesis','dissertation','degree','diploma','certificate','license','patent','trademark','copyright','intellectual property','ethics','morality','responsibility','accountability','transparency','integrity','honesty','trust','respect','dignity','justice','fairness','equity','equality','diversity','inclusion','accessibility','sustainability','environment','ecology','conservation','preservation','restoration','remediation','pollution','waste','recycling','reuse','reduce','circular economy','green','clean','renewable','organic','natural','eco-friendly','biodegradable','compostable','carbon footprint','water footprint','life cycle assessment','lca','environmental impact assessment','eia','iso 14001','ems','auditing','reporting','disclosure','csr','esg','sdgs','un','who','unesco','unep','undp','fao','ilo','imo','icao','itu','wto','imf','world bank','oecd','g7','g20','brics','asean','eu','nafta','usmca','afcta','rcep','cptpp','ttip','ftaa','saarc','gcc','eco','shanghai cooperation organization','apec','oas','au','sadc','ecomowas','igad','comesa','cen-sad','amu','umoa','ueoa','waemu','cemac','eccas','eac','ioc','saarc','bimstec','ion','acss','trilateral','quadrilateral','bilateral','multilateral','unilateral','sanctions','embargo','boycott','tariff','quota','subsidy','dumping','anti-dumping','countervailing','safeguard','dispute settlement','arbitration','mediation','conciliation','negotiation','diplomacy','foreign policy','international relations','geopolitics','security','defense','military','army','navy','air force','marines','coast guard','intelligence','espionage','counterintelligence','cybersecurity','cyberwarfare','information warfare','psychological warfare','propaganda','disinformation','misinformation','fake news','deepfake','bot','troll','astroturfing','sockpuppet','shill','influencer','marketing','advertising','pr','public relations','branding','positioning','segmentation','targeting','promotion','sales','distribution','channel','retail','wholesale','ecommerce','marketplace','platform','app','website','blog','podcast','youtube','twitch','spotify','apple music','soundcloud','bandcamp','mixcloud','audius','deezer','tidal','qobuz','pandora','iheart','siriusxm','amazon music','youtube music','apple podcasts','google podcasts','overcast','castro','pocket casts','player fm','podbean','buzzsprout','anchor','libsyn','blubrry','soundcloud','mixcloud','hearthis','audioboom','podomatic','spreaker'], concepts: { 'newton': 'قوانین نیوتن پایه مکانیک کلاسیک هستند.', 'energy': 'انرژی نه به وجود می‌آید و نه از بین می‌رود.', 'cell': 'سلول واحد بنیادی حیات است.', 'chemistry': 'شیمی مطالعه ماده و تغییرات آن است.', 'photosynthesis': 'فتوسنتز فرآیند تولید غذا در گیاهان است.', 'dna': 'DNA حامل اطلاعات ژنتیکی است.', 'electricity': 'الکتریسیته جریان الکترون‌ها است.', 'periodic_table': 'جدول تناوبی عناصر را مرتب کرده است.', 'acid': 'اسیدها یون H+ آزاد می‌کنند.', 'base': 'بازها یون OH- آزاد می‌کنند.' } },
+            literature: { keywords: ['ادبیات','شعر','نثر','داستان','رمان','غزل','قصیده','آرایه','تشبیه','استعاره','فردوسی','سعدی','حافظ','مولوی','شاهنامه','بوستان','گلستان','مثنوی','دیوان','وزن','قافیه','ردیف','جناس','ایهام'], concepts: { 'arayeh': 'آرایه‌های ادبی ابزار زیباسازی کلام هستند.', 'poetry': 'شعر سخنی موزون و مقفاست.', 'history_lit': 'ادبیات فارسی گنجینه حکمت و عرفان است.', 'ferdowsi': 'فردوسی سراینده شاهنامه است.', 'saadi': 'سعدی نویسنده گلستان و بوستان است.', 'hafez': 'حافظ بزرگترین غزل‌سرای فارسی است.', 'molavi': 'مولوی سراینده مثنوی معنوی است.' } },
+            history: { keywords: ['تاریخ','ایران','صفویه','هخامنشی','ساسانی','قاجار','پهلوی','انقلاب','مشروطه','کوروش','داریوش','نادر','امیرکبیر','جنگ','صلح','تمدن','اشکانیان','مادها','عیلام','سلجوقیان','افشاریان','زندیه','اسلام','خلافت'], concepts: { 'iran_ancient': 'ایران باستان مهد تمدن‌های بزرگ بود.', 'islam_iran': 'ورود اسلام نقطه عطف تاریخ ایران بود.', 'modern': 'دوران مدرن با نوسازی همراه بود.', 'achaemenid': 'هخامنشیان اولین امپراتوری بزرگ ایران بودند.', 'safavid': 'صفویه مذهب شیعه را رسمی کرد.', 'constitutional': 'مشروطه جنبش محدود کردن قدرت شاه بود.', 'cyrus': 'کوروش بنیانگذار هخامنشیان است.', 'nader': 'نادرشاه فاتح هند بود.', 'amirkabir': 'امیرکبیر بنیانگذار دارالفنون بود.' } },
+            programming: { keywords: ['برنامه‌نویسی','کد','پایتون','جاوااسکریپت','html','css','الگوریتم','تابع','متغیر','آرایه','حلقه','شرط','شیء','کلاس','ارث‌بری','جاوا','سی','سی++','روبی','پی‌اچ‌پی','سوئیفت','کاتلین','گو','راست','اسکالا','iot','هوش مصنوعی','یادگیری ماشین','یادگیری عمیق','شبکه عصبی','دیتابیس','sql','nosql','وب','فرانت‌اند','بک‌اند','full stack','api','rest','graphql','microservices','cloud','aws','azure','docker','kubernetes','devops','agile','scrum','git','github','gitlab','test','unit test','integration test','debug','debugging','performance','optimization','security','cybersecurity','encryption','hashing','authentication','authorization','jwt','oauth','ssl','https','dns','tcp/ip','http','websocket','socket','network','server','client','browser','dom','event','async','promise','callback','closure','scope','hoisting','prototype','inheritance','polymorphism','encapsulation','abstraction','design pattern','singleton','factory','observer','strategy','mvc','mvvm','solid','dry','kiss','yagni','clean code','refactoring','code review','version control','branch','merge','commit','pull request','ci/cd','pipeline','deployment','staging','production','monitoring','logging','analytics','metrics','kpi','okr','agile','scrum','kanban','lean','product owner','scrum master','user story','backlog','sprint','retrospective','daily standup','demo','review','planning','estimation','velocity','burndown chart','cumulative flow diagram','kanban board','scrum board','jira','trello','asana','clickup','monday','notion','slack','discord','teams','zoom','meet','hangouts','skype','whatsapp','telegram','signal','wechat','line','viber','kakao','qq','tiktok','instagram','facebook','twitter','linkedin','pinterest','snapchat','reddit','quora','medium','wordpress','ghost','substack','newsletter','blog','podcast','youtube','twitch','spotify','apple music','soundcloud','bandcamp','mixcloud','audius','deezer','tidal','qobuz','pandora','iheart','siriusxm','amazon music','youtube music','apple podcasts','google podcasts','overcast','castro','pocket casts','player fm','podbean','buzzsprout','anchor','libsyn','blubrry','soundcloud','mixcloud','hearthis','audioboom','podomatic','spreaker'], concepts: { 'python': 'پایتون زبان سطح بالا و خوانا است.', 'javascript': 'جاوااسکریپت زبان وب است.', 'html': 'HTML زبان نشانه‌گذاری وب است.', 'css': 'CSS زبان سبک‌دهی وب است.', 'algorithm': 'الگوریتم مراحل حل مسئله است.', 'function': 'تابع بلوک کد قابل استفاده مجدد است.', 'variable': 'متغیر مکان ذخیره مقدار است.', 'array': 'آرایه مجموعه مقادیر است.', 'loop': 'حلقه تکرار کد است.', 'condition': 'شرط تصمیم‌گیری است.', 'object': 'شیء ساختار داده ویژگی‌ها و رفتارها است.', 'class': 'کلاس الگوی ایجاد اشیاء است.', 'inheritance': 'ارث‌بری به ارث بردن ویژگی‌ها است.', 'ai': 'هوش مصنوعی ایجاد سیستم‌های هوشمند است.', 'ml': 'یادگیری ماشین یادگیری از داده‌ها است.', 'dl': 'یادگیری عمیق از شبکه‌های عصبی عمیق استفاده می‌کند.', 'nn': 'شبکه عصبی الهام گرفته از مغز است.', 'database': 'پایگاه داده مجموعه سازمان‌یافته داده‌ها است.', 'sql': 'SQL زبان مدیریت پایگاه داده رابطه‌ای است.', 'web': 'وب شبکه جهانی صفحات است.', 'frontend': 'فرانت‌اند بخش سمت کلاینت است.', 'backend': 'بک‌اند بخش سمت سرور است.', 'api': 'API رابط ارتباط نرم‌افزارها است.', 'rest': 'REST سبک معماری API وب است.', 'git': 'Git سیستم کنترل نسخه است.', 'docker': 'Docker پلتفرم کانتینرسازی است.', 'kubernetes': 'Kubernetes پلتفرم ارکستراسیون کانتینر است.', 'devops': 'DevOps یکپارچه‌سازی توسعه و عملیات است.', 'agile': 'Agile رویکرد چابک توسعه است.', 'scrum': 'Scrum چارچوب مدیریت پروژه چابک است.' } }
         },
         solveMath(expr) {
             try {
@@ -966,25 +912,11 @@
                         steps.push(`🔍 **تحلیل معادله:** ${lhs} = ${rhs}`);
                         let a = 1, b = 0;
                         const match = lhs.match(/([+-]?\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d+\.?\d*)?/i);
-                        if (match) {
-                            a = match[1] ? parseFloat(match[1].replace(/\s/g,'')) : 1;
-                            if (isNaN(a)) a = 1;
-                            if (match[2]) b = parseFloat(match[2].replace(/\s/g,''));
-                            steps.push(`➡️ انتقال عدد ${b} → ${rhs} - (${b}) = ${rhs - b}`);
-                            const rhsNew = rhs - b;
-                            steps.push(`➡️ تقسیم بر ضریب x (${a}) → ${rhsNew} / ${a} = ${rhsNew / a}`);
-                            result = (rhsNew / a);
-                            steps.push(`✅ **نتیجه:** x = ${result}`);
-                        } else return null;
+                        if (match) { a = match[1] ? parseFloat(match[1].replace(/\s/g,'')) : 1; if (isNaN(a)) a = 1; if (match[2]) b = parseFloat(match[2].replace(/\s/g,'')); steps.push(`➡️ انتقال عدد ${b} → ${rhs} - (${b}) = ${rhs - b}`); const rhsNew = rhs - b; steps.push(`➡️ تقسیم بر ضریب x (${a}) → ${rhsNew} / ${a} = ${rhsNew / a}`); result = (rhsNew / a); steps.push(`✅ **نتیجه:** x = ${result}`); } else return null;
                     }
                 } else if (/^\d+\s*[+\-*/]\s*\d+$/.test(clean)) {
                     const parts = clean.match(/(\d+)\s*([+\-*/])\s*(\d+)/);
-                    if (parts) {
-                        const a = parseFloat(parts[1]), op = parts[2], b = parseFloat(parts[3]);
-                        steps.push(`🔍 **تحلیل:** ${a} ${op} ${b}`);
-                        switch(op) { case '+': result=a+b; break; case '-': result=a-b; break; case '*': result=a*b; break; case '/': if(b===0)return{error:'تقسیم بر صفر!'}; result=a/b; break; }
-                        steps.push(`✅ **نتیجه:** ${result}`);
-                    }
+                    if (parts) { const a = parseFloat(parts[1]), op = parts[2], b = parseFloat(parts[3]); steps.push(`🔍 **تحلیل:** ${a} ${op} ${b}`); switch(op) { case '+': result=a+b; break; case '-': result=a-b; break; case '*': result=a*b; break; case '/': if(b===0)return{error:'تقسیم بر صفر!'}; result=a/b; break; } steps.push(`✅ **نتیجه:** ${result}`); }
                 } else { try { result = new Function('return ' + clean.replace('^', '**').replace(/x/gi, '1'))(); steps.push(`🔍 **محاسبه:** ${clean} = ${result}`); } catch(e) { return null; } }
                 return { steps, result };
             } catch (e) { return null; }
@@ -1009,7 +941,7 @@
     };
 
     // ============================================================
-    // VOICE
+    // VOICE MODULE
     // ============================================================
     const Voice = {
         recognition:null,isRecording:false,
@@ -1044,7 +976,7 @@
     const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
     // ============================================================
-    // CHAT ENGINE (MODIFIED: Uses OfflineAIManager)
+    // CHAT ENGINE
     // ============================================================
     const Chat = {
         sessions:[],currentId:null,history:[],isProcessing:false,pendingFile:null,
@@ -1085,23 +1017,14 @@
             document.getElementById('ocr-loading').classList.add('active');
             try{
                 if(typeof Tesseract==='undefined'){throw new Error('Tesseract not loaded');}
-                const worker = await Tesseract.createWorker({
-                    corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core.wasm.js',
-                    langPath: 'https://tessdata.maintained.by/frostoven/4.0.0'
-                });
-                await worker.loadLanguage('fas+eng');
-                await worker.initialize('fas+eng');
-                const{data:{text}}=await worker.recognize(file);
-                await worker.terminate();
+                const worker = await Tesseract.createWorker({corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core.wasm.js',langPath:'https://tessdata.maintained.by/frostoven/4.0.0'});
+                await worker.loadLanguage('fas+eng');await worker.initialize('fas+eng');
+                const{data:{text}}=await worker.recognize(file);await worker.terminate();
                 const ocr=text.trim();
                 if(ocr){const inp=document.getElementById('user-input');inp.value=ocr;inp.style.height='auto';inp.style.height=Math.min(inp.scrollHeight,150)+'px';Toast.show('متن استخراج شد','success');}
                 else{Toast.show('متنی یافت نشد. تصویر قابل ارسال است.','warning');}
-            }catch(e){
-                console.warn('OCR failed:',e);
-                Toast.show('OCR ناموفق. تصویر همچنان قابل ارسال است.','warning');
-            }
-            document.getElementById('ocr-loading').classList.remove('active');
-            input.value='';
+            }catch(e){console.warn('OCR failed:',e);Toast.show('OCR ناموفق. تصویر همچنان قابل ارسال است.','warning');}
+            document.getElementById('ocr-loading').classList.remove('active');input.value='';
         },
         clearFile(){this.pendingFile=null;document.getElementById('file-preview').classList.remove('active');},
         async send(){
@@ -1114,7 +1037,6 @@
             this.render();await this.save();await this.processAIResponse(txt,img);
             this.isProcessing=false;document.getElementById('send-btn').disabled=false;
         },
-        // MODIFIED: Uses OfflineAIManager instead of direct LocalAI call
         async processAIResponse(txt,img=null){
             const mode=document.getElementById('ai-mode-select').value;let res='';
             if(mode==='google'){window.open(`https://www.google.com/search?q=${encodeURIComponent(txt)}`,'_blank');Toast.show('گوگل','success');this.isProcessing=false;document.getElementById('send-btn').disabled=false;return;}
@@ -1122,12 +1044,9 @@
             if(mode==='multi'){res=LocalAI.generateMultiPart(txt);this.history.push({role:'assistant',content:res});this.render();await this.save();this.isProcessing=false;document.getElementById('send-btn').disabled=false;return;}
             
             const config=await Storage.getConfig();const apiKey=await Storage.getKey();
-            
-            // Check if Ostad Yar Offline Mode is selected
             const selectedModel = document.getElementById('header-model-select').value;
             if (selectedModel === 'ostadyar' || mode === 'local') {
                 if(txt.length > 20) { this.history.push({role:'assistant',content:'⏳ در حال تحلیل...'}); this.render(); await new Promise(r => setTimeout(r, 800)); this.history.pop(); }
-                // USE OfflineAIManager instead of direct LocalAI.generate()
                 res = await OfflineAIManager.ask(txt);
                 this.history.push({role:'assistant',content:res});this.render();await this.save();this.isProcessing=false;document.getElementById('send-btn').disabled=false;return;
             }
@@ -1135,24 +1054,16 @@
             if(apiKey){
                 try{
                     this.history.push({role:'assistant',content:'⏳ ...'});this.render();
-                    
                     let model = config.model || 'claude-3-5-sonnet-20241022';
                     const isDoonaKey = apiKey.startsWith('sk-') && !apiKey.startsWith('sk-ant-');
                     const isDoonaModel = model.startsWith('gpt-');
-                    
-                    if (isDoonaKey && !isDoonaModel) {
-                        model = 'gpt-4o';
-                    }
+                    if (isDoonaKey && !isDoonaModel) model = 'gpt-4o';
 
                     let apiUrl,headers,bodyPayload;
                     const isOpenAIFormat = config.proxy?.includes('chat/completions') || config.proxy?.includes('doona') || isDoonaKey;
-                    
                     let content = txt || "تصویر ارسال شده را توضیح بده";
-                    if (img && !isOpenAIFormat) {
-                        content = [{type:'image', source:{type:'base64', media_type:'image/jpeg', data:img.split(',')[1]}},{type:'text', text:txt||'توضیح تصویر؟'}];
-                    } else if (img && isOpenAIFormat) {
-                        content = (txt ? txt + "\n\n" : "") + "[تصویر آپلود شده توسط کاربر]";
-                    }
+                    if (img && !isOpenAIFormat) content = [{type:'image', source:{type:'base64', media_type:'image/jpeg', data:img.split(',')[1]}},{type:'text', text:txt||'توضیح تصویر؟'}];
+                    else if (img && isOpenAIFormat) content = (txt ? txt + "\n\n" : "") + "[تصویر آپلود شده توسط کاربر]";
 
                     if(config.proxy){
                         apiUrl=config.proxy;
@@ -1168,14 +1079,10 @@
                     const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),30000);
                     const r=await fetch(apiUrl,{method:'POST',headers,signal:ctrl.signal,body:JSON.stringify(bodyPayload)});
                     clearTimeout(tid);this.history.pop();
-                    
                     if(!r.ok) throw new Error(`API ${r.status}`);
                     const d=await r.json();
                     res=d.choices?.[0]?.message?.content||d.content?.[0]?.text||LocalAI.generate(txt);
-                }catch(e){
-                    this.history.pop();console.error("API Error:", e);
-                    res = LocalAI.generate(txt) + `\n\n⚠️ *(خطا: ${e.message}. پاسخ آفلاین.)*`;
-                }
+                }catch(e){this.history.pop();console.error("API Error:", e);res = LocalAI.generate(txt) + `\n\n⚠️ *(خطا: ${e.message}. پاسخ آفلاین.)*`;}
             }else{res=LocalAI.generate(txt);}
             this.history.push({role:'assistant',content:res});this.render();await this.save();this.isProcessing=false;document.getElementById('send-btn').disabled=false;
         },
@@ -1186,19 +1093,22 @@
     };
 
     // ============================================================
-    // QUIZ
+    // QUIZ MODULE
     // ============================================================
     const Quiz={questions:[],answers:{},submitted:false,async start(){const topic=document.getElementById('quiz-topic').value.trim();if(!topic){Toast.show('موضوع لازم است','warning');return;}const count=parseInt(document.getElementById('quiz-count').value)||5;const config=await Storage.getConfig();const apiKey=await Storage.getKey();if(!apiKey){Toast.show('API Key لازم است','error');UI.openSettings();return;}document.getElementById('quiz-setup').style.display='none';document.getElementById('quiz-loading').style.display='block';document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='none';try{const prompt=`Generate ${count} MCQ about "${topic}" in Persian. JSON only: [{"question":"","options":["","","",""],"correct":0}]`;let model=config.model||'claude-3-5-sonnet-20241022';const isDoonaKey=apiKey.startsWith('sk-')&&!apiKey.startsWith('sk-ant-');if(isDoonaKey&&!model.startsWith('gpt-'))model='gpt-4o';let apiUrl,headers,bodyPayload;if(config.proxy){apiUrl=config.proxy;const isOpenAI=config.proxy.includes('chat/completions')||config.proxy.includes('doona');headers=isOpenAI?{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}else{apiUrl=isDoonaKey?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';headers={'Content-Type':'application/json'};if(isDoonaKey){headers['Authorization']=`Bearer ${apiKey}`;}else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),30000);const r=await fetch(apiUrl,{method:'POST',headers,signal:ctrl.signal,body:JSON.stringify(bodyPayload)});if(!r.ok)throw new Error('API');const d=await r.json();let text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';const jm=text.match(/\[[\s\S]*\]/);if(!jm)throw new Error('JSON');this.questions=JSON.parse(jm[0]);this.answers={};this.submitted=false;document.getElementById('quiz-loading').style.display='none';document.getElementById('quiz-active').style.display='block';this.render();}catch(e){document.getElementById('quiz-loading').style.display='none';document.getElementById('quiz-setup').style.display='block';Toast.show('خطا در تولید آزمون','error');}},render(){const c=document.getElementById('quiz-questions');if(!c)return;c.innerHTML='';this.questions.forEach((q,qi)=>{const div=document.createElement('div');div.className='card quiz-card';div.dataset.qi=qi;div.style.marginBottom='0.8rem';div.innerHTML=`<div style="font-weight:600;margin-bottom:0.8rem;">${qi+1}. ${q.question}</div><div class="quiz-options">`;q.options.forEach((opt,oi)=>{div.innerHTML+=`<div class="quiz-option" data-qi="${qi}" data-oi="${oi}" onclick="Quiz.select(${qi},${oi})"><span style="display:inline-block;width:24px;height:24px;border-radius:50%;background:var(--bg-input);text-align:center;line-height:24px;font-weight:700;font-size:0.8rem;">${String.fromCharCode(65+oi)}</span><span>${opt}</span></div>`;});div.innerHTML+='</div>';c.appendChild(div);});this.updateProgress();},select(qi,oi){if(this.submitted)return;this.answers[qi]=oi;const card=document.querySelector(`.quiz-card[data-qi="${qi}"]`);if(card){card.querySelectorAll('.quiz-option').forEach(el=>{el.classList.remove('selected');if(parseInt(el.dataset.oi)===oi)el.classList.add('selected');});}this.updateProgress();},updateProgress(){const t=this.questions.length,a=Object.keys(this.answers).length,p=t>0?(a/t)*100:0;const f=document.getElementById('quiz-progress-fill'),tx=document.getElementById('quiz-progress-text');if(f)f.style.width=p+'%';if(tx)tx.textContent=`${a} از ${t}`;},submit(){const t=this.questions.length,a=Object.keys(this.answers).length;if(a<t&&!confirm(`${t-a} بی‌پاسخ. ثبت؟`))return;this.submitted=true;let c=0;this.questions.forEach((q,qi)=>{const s=this.answers[qi],ok=s===q.correct;if(ok)c++;const card=document.querySelector(`.quiz-card[data-qi="${qi}"]`);if(card){card.querySelectorAll('.quiz-option').forEach(el=>{const idx=parseInt(el.dataset.oi);if(idx===q.correct)el.classList.add('correct');if(idx===s&&!ok)el.classList.add('wrong');el.style.cursor='default';});}});document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='block';const pct=Math.round((c/t)*100);document.getElementById('quiz-score').textContent=pct+'%';document.getElementById('quiz-detail').textContent=`${c} از ${t} صحیح`;Storage.put('quizzes',{id:Date.now(),topic:document.getElementById('quiz-topic').value.trim(),score:pct,total:t,correct:c,date:Date.now()});UI.updateStats();Toast.show(`نتیجه: ${pct}%`,pct>=70?'success':'warning');},reset(){document.getElementById('quiz-result').style.display='none';document.getElementById('quiz-setup').style.display='block';document.getElementById('quiz-topic').value='';}};
 
     // ============================================================
-    // FLASHCARDS
+    // FLASHCARDS MODULE
     // ============================================================
     const Flashcards={cards:[],currentIndex:0,history:[],async init(){this.history=await Storage.getAll('flashcards')||[];this.renderHistory();},renderHistory(){const c=document.getElementById('fc-history-container');const l=document.getElementById('fc-history-list');if(!c||!l)return;if(!this.history.length){c.style.display='none';return;}c.style.display='block';l.innerHTML=this.history.sort((a,b)=>b.date-a.date).slice(0,10).map(s=>`<div class="fc-history-item" onclick="Flashcards.loadSet('${s.id}')">${s.topic||'بدون عنوان'}</div>`).join('');},async loadSet(id){const s=this.history.find(x=>String(x.id)===String(id));if(!s||!s.cards){Toast.show('یافت نشد','error');return;}this.cards=s.cards;this.currentIndex=0;document.getElementById('fc-setup').style.display='none';document.getElementById('fc-active').style.display='block';this.show();Toast.show(`بارگذاری: ${s.topic}`,'success');},showSetup(){document.getElementById('fc-active').style.display='none';document.getElementById('fc-setup').style.display='block';this.init();},async generate(){const topic=document.getElementById('fc-topic').value.trim();if(!topic){Toast.show('موضوع لازم است','warning');return;}const config=await Storage.getConfig();const apiKey=await Storage.getKey();if(!apiKey){Toast.show('API Key لازم است','error');UI.openSettings();return;}document.getElementById('fc-setup').style.display='none';document.getElementById('fc-loading').style.display='block';document.getElementById('fc-active').style.display='none';try{const prompt=`Generate 10 flashcards about "${topic}" in Persian. JSON only: [{"front":"","back":""}]`;let model=config.model||'claude-3-5-sonnet-20241022';const isDoonaKey=apiKey.startsWith('sk-')&&!apiKey.startsWith('sk-ant-');if(isDoonaKey&&!model.startsWith('gpt-'))model='gpt-4o';let apiUrl,headers,bodyPayload;if(config.proxy){apiUrl=config.proxy;const isOpenAI=config.proxy.includes('chat/completions')||config.proxy.includes('doona');headers=isOpenAI?{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`}:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}else{apiUrl=isDoonaKey?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages';headers={'Content-Type':'application/json'};if(isDoonaKey){headers['Authorization']=`Bearer ${apiKey}`;}else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}bodyPayload={model,max_tokens:2000,messages:[{role:'user',content:prompt}]};}const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),30000);const r=await fetch(apiUrl,{method:'POST',headers,signal:ctrl.signal,body:JSON.stringify(bodyPayload)});if(!r.ok)throw new Error('API');const d=await r.json();let text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';const jm=text.match(/\[[\s\S]*\]/);if(!jm)throw new Error('JSON');this.cards=JSON.parse(jm[0]);this.currentIndex=0;const ns={id:Date.now().toString(),topic,cards:this.cards,date:Date.now()};await Storage.put('flashcards',ns);this.history.unshift(ns);document.getElementById('fc-loading').style.display='none';document.getElementById('fc-active').style.display='block';this.show();}catch(e){document.getElementById('fc-loading').style.display='none';document.getElementById('fc-setup').style.display='block';Toast.show('خطا','error');}},show(){const c=this.cards[this.currentIndex];if(!c)return;document.getElementById('fc-front').textContent=c.front;document.getElementById('fc-back').textContent=c.back;document.getElementById('fc-card').classList.remove('flipped');document.getElementById('fc-counter').textContent=`کارت ${this.currentIndex+1} از ${this.cards.length}`;},flip(){document.getElementById('fc-card').classList.toggle('flipped');},next(){if(this.currentIndex<this.cards.length-1){this.currentIndex++;this.show();}},prev(){if(this.currentIndex>0){this.currentIndex--;this.show();}},markEasy(){Toast.show('آسان ✓','success');this.next();},markHard(){Toast.show('سخت ✗','warning');this.next();}};
 
+    // ============================================================
+    // PLANNER MODULE
+    // ============================================================
     const Planner={tasks:[],async init(){this.tasks=await Storage.getAll('tasks');this.render();},async add(){const inp=document.getElementById('task-input'),date=document.getElementById('task-date'),text=inp.value.trim();if(!text){Toast.show('تکلیف بنویسید','warning');return;}const task={id:Date.now(),text,date:date.value||new Date().toISOString().split('T')[0],done:false,created:Date.now()};this.tasks.push(task);await Storage.put('tasks',task);inp.value='';this.render();Toast.show('اضافه شد','success');},async toggle(id){const t=this.tasks.find(x=>x.id===id);if(t){t.done=!t.done;await Storage.put('tasks',t);this.render();}},async delete(id){if(!confirm('حذف؟'))return;this.tasks=this.tasks.filter(t=>t.id!==id);await Storage.delete('tasks',id);this.render();},render(){const c=document.getElementById('planner-list');if(!c)return;if(!this.tasks.length){c.innerHTML='<div style="color:var(--text-muted);text-align:center;padding:1rem;">خالی</div>';return;}c.innerHTML=this.tasks.sort((a,b)=>a.done-b.done).map(t=>`<div class="task-item ${t.done?'completed':''}"><div class="task-check" onclick="Planner.toggle(${t.id})">${t.done?'<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:white;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>':''}</div><div style="flex:1;"><div style="font-weight:600;">${t.text}</div><div style="font-size:0.75rem;color:var(--text-muted);">${t.date||'بدون تاریخ'}</div></div><button class="btn" style="background:none;padding:4px 8px;min-width:auto;min-height:auto;color:var(--danger);" onclick="Planner.delete(${t.id})"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button></div>`).join('');}};
 
     // ============================================================
-    // POMODORO
+    // POMODORO MODULE
     // ============================================================
     const Pomodoro = {
         worker: null, seconds: 25*60, running: false, isBreak: false, sessionCount: 0, audioCtx: null, fallbackTimer: null,
@@ -1213,7 +1123,7 @@
     };
 
     // ============================================================
-    // WHITEBOARD
+    // WHITEBOARD MODULE
     // ============================================================
     const WB = {
         cvs:null,ctx:null,drawing:false,tool:'pen',color:'#ffffff',hist:[],
@@ -1229,7 +1139,7 @@
     };
 
     // ============================================================
-    // UI CONTROLLER (MODIFIED: Added AI Status Indicator)
+    // UI CONTROLLER
     // ============================================================
     const UI = {
         currentView:'home',
@@ -1261,30 +1171,25 @@
         closeSettings(){document.getElementById('settings-modal').classList.remove('open');},
         toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen().catch(()=>{});},
         async setTheme(theme){document.body.setAttribute('data-theme',theme);const cfg=await Storage.getConfig();if(cfg)await Storage.put('settings',{id:'config',...cfg,theme});Toast.show(`تم ${theme}`,'success');setTimeout(()=>this.renderChart(),300);},
-        // NEW: AI Status Indicator Update Method
         updateAIStatus(status, text) {
             const badge = document.getElementById('ai-status-indicator');
             const textEl = document.getElementById('ai-status-text');
             if (!badge || !textEl) return;
-            
             badge.classList.remove('active', 'loading');
             if (status === 'active') badge.classList.add('active');
             if (status === 'loading') badge.classList.add('loading');
-            
             textEl.textContent = text || 'نامشخص';
         }
     };
 
     // ============================================================
-    // INIT (MODIFIED: Initialize OfflineAIManager)
+    // INITIALIZATION
     // ============================================================
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             await Storage.init();
             Voice.init();
             await Profile.init();
-            
-            // Initialize Offline AI Manager (checks Ollama, loads Transformers.js)
             await OfflineAIManager.init();
             
             const cfg = await Storage.getConfig();
@@ -1301,10 +1206,7 @@
             await Flashcards.init();
             
             let qbTimer;
-            document.getElementById('qb-search')?.addEventListener('input', () => {
-                clearTimeout(qbTimer);
-                qbTimer = setTimeout(() => QuestionBank.render(), 300);
-            });
+            document.getElementById('qb-search')?.addEventListener('input', () => { clearTimeout(qbTimer); qbTimer = setTimeout(() => QuestionBank.render(), 300); });
             
             QuestionBank.render();
             const ta = document.getElementById('user-input');
@@ -1318,7 +1220,7 @@
             document.getElementById('profile-name-input')?.addEventListener('keydown', e => { if (e.key==='Enter') Profile.saveName(); });
             const modeSelect = document.getElementById('ai-mode-select');
             if (modeSelect && cfg.mode) modeSelect.value = cfg.mode;
-            Toast.show('🚀 استاد یار پلاس v56 آماده است!', 'success');
+            Toast.show('🚀 استاد یار پلاس v57 آماده است!', 'success');
         } catch (e) { console.error('Init error:', e); Toast.show('خطا در راه‌اندازی', 'error'); }
     });
     </script>
