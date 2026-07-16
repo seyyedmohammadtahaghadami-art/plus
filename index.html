@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>استاد یار | v55.0 Ultimate Enhanced</title>
+    <title>استاد یار | v56.0 Ultimate AI Enhanced</title>
     <meta name="theme-color" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <!-- FIX #4: Transformers.js CDN Added -->
+    <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" async></script>
 
     <style>
@@ -173,7 +175,7 @@
 
         .pomo-display { font-size: 4rem; font-weight: 900; font-variant-numeric: tabular-nums; color: var(--primary); text-align: center; margin: 1rem 0; letter-spacing: -2px; }
 
-        #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: 90%; max-width: 400px; }
+        #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 20000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: 90%; max-width: 400px; }
         .toast { background: var(--bg-sidebar); border: 1px solid var(--border); padding: 10px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); pointer-events: auto; backdrop-filter: blur(10px); animation: slideUp 0.3s ease; font-size: 0.9rem; border-inline-start: 4px solid var(--success); }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -215,6 +217,25 @@
         .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: var(--nav-height); background: var(--bg-sidebar); border-top: 1px solid var(--border); justify-content: space-around; align-items: center; z-index: 4000; padding-bottom: var(--safe-bottom); }
         .mobile-toggle { display: none !important; }
 
+        /* NEW: AI Status Indicator Styles */
+        .ai-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+        .ai-status-badge.active { border-color: var(--success); color: var(--success); }
+        .ai-status-badge.loading { border-color: var(--warning); color: var(--warning); }
+        .ai-status-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+        .ai-status-badge.loading .ai-status-dot { animation: pulse 1s infinite; }
+
         @media (max-width: 768px) {
             body { flex-direction: column; }
             aside { position: fixed; bottom: 0; left: 0; right: 0; top: 0; width: 100%; height: 100%; transform: translateY(100%); z-index: 5000; border-left: none; }
@@ -235,7 +256,6 @@
             .modal-content { padding: 1.2rem; }
             .brand { padding: 1rem; }
             .tools-grid { grid-template-columns: 1fr; }
-            /* FIX #5: Mobile Footer Optimization */
             .app-footer { padding: 0.5rem; font-size: 0.6rem; border-top: none; background: transparent; margin-bottom: 0; }
             .about-container { margin: 1rem auto; }
             .about-title { font-size: 1.5rem; }
@@ -293,9 +313,13 @@
             <div style="display:flex; align-items:center; gap:8px;">
                 <button class="btn btn-icon mobile-toggle" style="min-width:36px; height:36px; width:36px;" onclick="UI.toggleSidebar()"><svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></button>
                 <span style="font-weight:700; font-size:1rem;" id="page-title">داشبورد</span>
+                <!-- NEW: AI Backend Status Indicator -->
+                <div id="ai-status-indicator" class="ai-status-badge" title="وضعیت موتور هوش مصنوعی">
+                    <div class="ai-status-dot"></div>
+                    <span id="ai-status-text">در حال بررسی...</span>
+                </div>
             </div>
             <div style="display:flex; gap:6px; align-items:center;">
-                <!-- FIX: Added "Ostad Yar" Offline Model Option -->
                 <select id="header-model-select" class="form-input" style="margin:0; width:auto; padding:4px 8px; font-size:0.7rem; min-height:32px; border-radius:30px; background:var(--bg-input); display:none;">
                     <option value="ostadyar">🧠 استاد یار (آفلاین)</option>
                     <option value="claude-3-5-sonnet-20241022">Sonnet 3.5</option>
@@ -324,7 +348,7 @@
             <button class="ctx-item" onclick="UI.toggleFullscreen(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg> تمام صفحه</button>
             <div class="ctx-divider"></div>
             <button class="ctx-item danger" onclick="Chat.clearCurrent(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg> پاک کردن چت</button>
-            <button class="ctx-item" onclick="UI.openSettings(event); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> تنظیمات</button>
+            <button class="ctx-item" onclick="UI.openSettings(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> تنظیمات</button>
         </div>
 
         <div id="view-home" class="view-section active" style="overflow-y:auto;">
@@ -375,7 +399,6 @@
             <div style="max-width:800px; margin:0 auto; width:100%;">
                 <h2 style="margin:0 0 1rem; font-size:1.2rem;"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:#8b5cf6;vertical-align:middle;margin-left:6px;"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9v2h10v-2zm0-4H9v2h10V7z"/></svg> بانک سوالات آموزشی</h2>
                 <div class="card">
-                    <!-- FIX #4: QB Search Input Restored -->
                     <input type="text" id="qb-search" class="form-input" placeholder="جستجو در سوالات...">
                     <div class="qb-filters" id="qb-tags">
                         <div class="qb-tag active" onclick="QuestionBank.filter('all', this)">همه</div>
@@ -546,19 +569,18 @@
             </div>
         </div>
 
-        <!-- NEW: About Section -->
+        <!-- About Section -->
         <div id="view-about" class="view-section" style="display:none; overflow-y:auto; align-items:center; justify-content:center;">
             <div class="about-container">
                 <div class="about-logo">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                 </div>
                 <h1 class="about-title">استاد یار پلاس</h1>
-                <span class="about-version">نسخه 55.0 Ultimate Enhanced</span>
+                <span class="about-version">نسخه 56.0 Ultimate AI Enhanced</span>
                 <p class="about-desc">
                     استاد یار پلاس یک دستیار آموزشی هوشمند و همه‌جانبه است که با بهره‌گیری از پیشرفته‌ترین مدل‌های زبانی و تکنولوژی‌های وب، تجربه‌ای بی‌نظیر از یادگیری تعاملی را فراهم می‌کند. این پروژه با عشق و دقت برای جامعه آموزشی ایران توسعه یافته است.
                 </p>
                 <div class="about-links">
-                    <!-- FIX #6: Real Links Added -->
                     <a href="https://github.com/ostadyar-plus" target="_blank" class="about-link">
                         <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                         گیت‌هاب
@@ -590,7 +612,7 @@
         </div>
 
         <div class="app-footer">
-            استاد یار پلاس v55.0 | طراحی شده برای آموزش هوشمند
+            استاد یار پلاس v56.0 | طراحی شده برای آموزش هوشمند
         </div>
 
         <div class="mobile-nav">
@@ -638,140 +660,205 @@
                 <button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#f97316;" onclick="UI.setTheme('sunset')">🌅 غروب</button>
             </div>
             <button class="btn btn-primary" style="width:100%;" onclick="Storage.saveSettings()">💾 ذخیره تنظیمات</button>
-            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 55.0 Ultimate Enhanced</div>
+            <div style="text-align:center; margin-top:1rem; font-size:0.7rem; color:var(--text-muted);">نسخه 56.0 Ultimate AI Enhanced</div>
         </div>
     </div>
 
     <script>
     // ============================================================
-    // FIX #1 & #2 & #3: Safe Worker, Tesseract Path, Doona Logic
+    // NEW: Transformers.js AI Backend (Added BEFORE LocalAI)
     // ============================================================
-    let pomoWorker = null;
-    let pomoWorkerUrl = null;
-    
-    try {
-        if (typeof Worker !== 'undefined') {
-            const PomoWorkerCode = `
-                let timer = null;
-                let seconds = 0;
-                self.onmessage = function(e) {
-                    if (e.data.cmd === 'start') {
-                        seconds = e.data.seconds;
-                        clearInterval(timer);
-                        timer = setInterval(() => {
-                            seconds--;
-                            self.postMessage({seconds});
-                            if (seconds <= 0) {
-                                clearInterval(timer);
-                                self.postMessage({done: true});
-                            }
-                        }, 1000);
-                    } else if (e.data.cmd === 'pause') {
-                        clearInterval(timer);
-                    } else if (e.data.cmd === 'reset') {
-                        clearInterval(timer);
-                        seconds = e.data.seconds;
-                        self.postMessage({seconds});
-                    }
-                };
-            `;
-            const blob = new Blob([PomoWorkerCode], {type: 'application/javascript'});
-            pomoWorkerUrl = URL.createObjectURL(blob);
-        }
-    } catch (e) {
-        console.warn('Web Worker not supported, using fallback.', e);
-    }
-
-    // ============================================================
-    // UTILS
-    // ============================================================
-    const Toast = {
-        show(msg, type='success', duration=3000) {
-            const c = document.getElementById('toast-container'); if (!c) return;
-            const e = document.createElement('div'); e.className = 'toast';
-            const svgs = { success:'<svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--success);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>', error:'<svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--danger);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>', warning:'<svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--warning);"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>' };
-            e.innerHTML = `${svgs[type]||svgs.success}<span>${msg}</span>`;
-            e.style.borderInlineStartColor = `var(--${type==='error'?'danger':type==='warning'?'warning':'success'})`;
-            c.appendChild(e);
-            setTimeout(() => { e.style.opacity='0'; setTimeout(()=>e.remove(), 300); }, duration);
-        }
-    };
-
-    // ============================================================
-    // STORAGE
-    // ============================================================
-    const Storage = {
-        dbName: 'OstadYar_v55', db: null,
+    const TransformersAI = {
+        pipeline: null,
+        isLoaded: false,
+        isLoading: false,
+        modelName: 'Xenova/flan-t5-small',
+        
+        // بارگذاری مدل با نمایش وضعیت پیشرفت
         async init() {
-            return new Promise(r => {
-                const req = indexedDB.open(this.dbName, 29);
-                req.onupgradeneeded = e => {
-                    const db = e.target.result;
-                    ['sessions','settings','quizzes','tasks','flashcards','bookmarks','profile','msgBookmarks'].forEach(s => {
-                        if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, {keyPath: 'id'});
-                    });
-                };
-                req.onsuccess = e => { this.db = e.target.result; r(); };
-                req.onerror = () => r();
-            });
-        },
-        tx(s, m='readonly') { return this.db.transaction(s, m).objectStore(s); },
-        async get(s, id) { try { return new Promise(r => { const q=this.tx(s).get(id); q.onsuccess=()=>r(q.result); q.onerror=()=>r(null); }); } catch { return null; } },
-        async put(s, d) { try { return new Promise(r => { const q=this.tx(s,'readwrite').put(d); q.onsuccess=()=>r(true); q.onerror=()=>r(false); }); } catch { return false; } },
-        async getAll(s) { try { return new Promise(r => { const q=this.tx(s).getAll(); q.onsuccess=()=>r(q.result||[]); q.onerror=()=>r([]); }); } catch { return []; } },
-        async delete(s, id) { try { return new Promise(r => { this.tx(s,'readwrite').delete(id); r(true); }); } catch { return false; } },
-        async saveSettings() {
-            const key = document.getElementById('api-key-input').value.trim();
-            const pass = document.getElementById('passphrase-input').value.trim();
-            const proxy = document.getElementById('proxy-url').value.trim();
-            const mode = document.getElementById('default-mode').value.trim();
-            const model = document.getElementById('ai-model-select').value.trim();
-            const theme = document.body.getAttribute('data-theme') || 'dark';
-            if (key && !key.startsWith("sk-ant-") && !key.startsWith("sk-")) { Toast.show('فرمت کلید API نامعتبر است','error'); return; }
-            if (key && pass.length < 6) { Toast.show('رمز عبور باید حداقل ۶ کاراکتر باشد','error'); return; }
-            await this.put('settings', {id:'config', proxy, theme, mode, model});
-            if (key && pass) {
-                try {
-                    const encKey = await Crypto.encrypt(key, pass);
-                    await this.put('settings', {id:'apiKey', value:encKey});
-                    sessionStorage.setItem('oy_pass', pass);
-                    Toast.show('تنظیمات امن ذخیره شد'); UI.closeSettings();
-                } catch(e) { Toast.show('خطا در رمزنگاری','error'); }
-            } else {
-                if(!key) await this.delete('settings', 'apiKey');
-                Toast.show('تنظیمات ذخیره شد'); UI.closeSettings();
+            if (this.isLoaded || this.isLoading) return;
+            
+            try {
+                this.isLoading = true;
+                UI.updateAIStatus('loading', 'در حال بارگذاری مدل...');
+                
+                // بررسی وجود کتابخانه Transformers.js
+                if (typeof transformers === 'undefined') {
+                    console.warn('Transformers.js library not loaded');
+                    this.isLoading = false;
+                    UI.updateAIStatus('inactive', 'مدل محلی');
+                    return;
+                }
+                
+                // بارگذاری پایپ‌لاین تولید متن
+                this.pipeline = await transformers.pipeline('text2text-generation', this.modelName, {
+                    progress_callback: (progress) => {
+                        if (progress.status === 'progress') {
+                            const pct = Math.round(progress.progress || 0);
+                            UI.updateAIStatus('loading', `بارگذاری ${pct}%`);
+                        }
+                    }
+                });
+                
+                this.isLoaded = true;
+                this.isLoading = false;
+                UI.updateAIStatus('active', 'Transformers.js');
+                console.log('✅ Transformers.js model loaded successfully');
+            } catch (e) {
+                console.error('Failed to load Transformers.js model:', e);
+                this.isLoaded = false;
+                this.isLoading = false;
+                UI.updateAIStatus('inactive', 'مدل محلی');
             }
         },
-        async getKey() {
-            const data = await this.get('settings', 'apiKey'); if (!data?.value) return null;
-            let pass = sessionStorage.getItem('oy_pass');
-            if (!pass) { pass = prompt('🔒 رمز عبور امنیتی خود را وارد کنید:'); if (!pass) return null; sessionStorage.setItem('oy_pass', pass); }
-            const dec = await Crypto.decrypt(data.value, pass);
-            if (dec === null) { sessionStorage.removeItem('oy_pass'); Toast.show('رمز عبور اشتباه است','error'); return null; }
-            return dec;
+        
+        // تولید پاسخ با مدل Transformers.js
+        async ask(question) {
+            if (!this.isLoaded || !this.pipeline) return null;
+            
+            try {
+                const result = await this.pipeline(question, {
+                    max_new_tokens: 256,
+                    temperature: 0.7
+                });
+                
+                if (result && result[0] && result[0].generated_text) {
+                    return result[0].generated_text;
+                }
+                return null;
+            } catch (e) {
+                console.error('Transformers.js generation failed:', e);
+                return null;
+            }
+        }
+    };
+
+    // ============================================================
+    // NEW: Ollama AI Backend (Local LLM)
+    // ============================================================
+    const OllamaAI = {
+        baseUrl: 'http://localhost:11434',
+        isAvailable: false,
+        defaultModel: 'phi',
+        
+        // بررسی availability سرویس Ollama
+        async check() {
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                
+                const response = await fetch(`${this.baseUrl}/api/tags`, {
+                    method: 'GET',
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    this.isAvailable = true;
+                    console.log('✅ Ollama service detected');
+                    return true;
+                }
+            } catch (e) {
+                // Silent fallback - Ollama not available
+                this.isAvailable = false;
+            }
+            return false;
         },
-        async getConfig() { return await this.get('settings', 'config') || {}; },
-        async clearAll() { if (confirm('آیا مطمئن هستید؟')) { if (this.db) this.db.close(); indexedDB.deleteDatabase(this.dbName); location.reload(); } }
-    };
-
-    const Crypto = {
-        async getKey(p) { const e=new TextEncoder(); const km=await window.crypto.subtle.importKey("raw",e.encode(p),{name:"PBKDF2"},false,["deriveKey"]); return window.crypto.subtle.deriveKey({name:"PBKDF2",salt:e.encode("v55-salt"),iterations:100000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]); },
-        async encrypt(t,p) { const k=await this.getKey(p); const iv=window.crypto.getRandomValues(new Uint8Array(12)); const ct=await window.crypto.subtle.encrypt({name:"AES-GCM",iv},k,new TextEncoder().encode(t)); const b=new Uint8Array(ct); const c=new Uint8Array(iv.length+b.length); c.set(iv); c.set(b,iv.length); return btoa(String.fromCharCode(...c)); },
-        async decrypt(b,p) { try { const c=Uint8Array.from(atob(b),x=>x.charCodeAt(0)); const k=await this.getKey(p); const d=await window.crypto.subtle.decrypt({name:"AES-GCM",iv:c.slice(0,12)},k,c.slice(12)); return new TextDecoder().decode(d); } catch { return null; } }
+        
+        // تولید پاسخ با Ollama
+        async ask(question, model = null) {
+            if (!this.isAvailable) return null;
+            
+            const useModel = model || this.defaultModel;
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000);
+                
+                const response = await fetch(`${this.baseUrl}/api/generate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    signal: controller.signal,
+                    body: JSON.stringify({
+                        model: useModel,
+                        prompt: question,
+                        stream: false
+                    })
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (!response.ok) return null;
+                
+                const data = await response.json();
+                return data.response || null;
+            } catch (e) {
+                console.error('Ollama generation failed:', e);
+                return null;
+            }
+        }
     };
 
     // ============================================================
-    // PROFILE
+    // NEW: Offline AI Manager (Backend Priority Manager)
     // ============================================================
-    const Profile = {
-        async init() { const p=await Storage.get('profile','user'); if(!p||!p.name){document.getElementById('profile-modal').classList.add('open');setTimeout(()=>document.getElementById('profile-name-input').focus(),100);}else{this.updateUI(p);} },
-        async saveName() { const n=document.getElementById('profile-name-input').value.trim(); const g=document.getElementById('profile-grade-input').value||'نامشخص'; if(!n){Toast.show('لطفاً نام خود را وارد کنید','warning');return;} await Storage.put('profile',{id:'user',name:n,grade:g}); this.updateUI({name:n,grade:g}); document.getElementById('profile-modal').classList.remove('open'); Toast.show('پروفایل ساخته شد','success'); },
-        async editName() { const p=await Storage.get('profile','user')||{name:'',grade:''}; const n=prompt('ویرایش نام:',p.name); if(n!==null&&n.trim()){p.name=n.trim();await Storage.put('profile',p);this.updateUI(p);Toast.show('نام بروزرسانی شد','success');} },
-        updateUI(p) { const el=document.getElementById('p-name'); if(el)el.textContent=p.name||'کاربر مهمان'; const gr=document.getElementById('p-grade'); if(gr)gr.textContent=p.grade||'پایه تحصیلی نامشخص'; }
+    const OfflineAIManager = {
+        currentBackend: 'local',
+        
+        // بررسی و انتخاب بهترین backend موجود
+        async init() {
+            // 1. بررسی Ollama
+            const ollamaAvailable = await OllamaAI.check();
+            if (ollamaAvailable) {
+                this.currentBackend = 'ollama';
+                UI.updateAIStatus('active', 'Ollama');
+                return;
+            }
+            
+            // 2. بارگذاری Transformers.js
+            await TransformersAI.init();
+            if (TransformersAI.isLoaded) {
+                this.currentBackend = 'transformers';
+                return;
+            }
+            
+            // 3. Fallback به LocalAI
+            this.currentBackend = 'local';
+            UI.updateAIStatus('inactive', 'مدل محلی');
+        },
+        
+        // ارسال سوال به بهترین backend موجود
+        async ask(question) {
+            // تلاش 1: Ollama
+            if (this.currentBackend === 'ollama' || OllamaAI.isAvailable) {
+                const result = await OllamaAI.ask(question);
+                if (result) {
+                    this.currentBackend = 'ollama';
+                    UI.updateAIStatus('active', 'Ollama');
+                    return result;
+                }
+            }
+            
+            // تلاش 2: Transformers.js
+            if (TransformersAI.isLoaded) {
+                const result = await TransformersAI.ask(question);
+                if (result) {
+                    this.currentBackend = 'transformers';
+                    UI.updateAIStatus('active', 'Transformers.js');
+                    return result;
+                }
+            }
+            
+            // تلاش 3: LocalAI (همیشه موجود)
+            this.currentBackend = 'local';
+            UI.updateAIStatus('inactive', 'مدل محلی');
+            return LocalAI.generate(question);
+        }
     };
 
     // ============================================================
-    // LOCAL AI - REASONING ENGINE (ENHANCED KNOWLEDGE BASE)
+    // LOCAL AI - REASONING ENGINE (Fallback)
     // ============================================================
     const LocalAI = {
         knowledge: {
@@ -934,7 +1021,7 @@
     };
 
     // ============================================================
-    // QUESTION BANK (FIX #4: Debounce Search)
+    // QUESTION BANK
     // ============================================================
     const QuestionBank = {
         data:[{id:1,cat:'math',q:'حاصل ۲+۲×۲؟',a:'۶'},{id:2,cat:'math',q:'مساحت دایره شعاع ۳؟',a:'۹π'},{id:3,cat:'math',q:'√۱۴۴؟',a:'۱۲'},{id:4,cat:'math',q:'مشتق x²؟',a:'2x'},{id:5,cat:'math',q:'∫2x؟',a:'x²+C'},{id:6,cat:'math',q:'sin30°؟',a:'0.5'},{id:7,cat:'math',q:'log₁₀100؟',a:'2'},{id:8,cat:'math',q:'π≈؟',a:'3.14'},{id:9,cat:'math',q:'5!؟',a:'120'},{id:10,cat:'math',q:'زوایای مثلث؟',a:'180°'},{id:11,cat:'science',q:'واحد نیرو؟',a:'نیوتون'},{id:12,cat:'science',q:'فرمول آب؟',a:'H₂O'},{id:13,cat:'science',q:'سرعت نور؟',a:'300,000 km/s'},{id:14,cat:'science',q:'واحد ماده؟',a:'اتم'},{id:15,cat:'science',q:'فتوسنتز؟',a:'کلروپلاست'},{id:16,cat:'science',q:'DNA؟',a:'Deoxyribonucleic acid'},{id:17,cat:'science',q:'جرم الکترون؟',a:'~1/1836 پروتون'},{id:18,cat:'science',q:'الماس؟',a:'کربن'},{id:19,cat:'science',q:'pH آب؟',a:'7'},{id:20,cat:'science',q:'نزدیکترین ستاره؟',a:'خورشید'},{id:21,cat:'lit',q:'شاعر شاهنامه؟',a:'فردوسی'},{id:22,cat:'lit',q:'لقب سعدی؟',a:'استاد سخن'},{id:23,cat:'lit',q:'زادگاه مولوی؟',a:'بلخ'},{id:24,cat:'lit',q:'مستأصل؟',a:'درمانده'},{id:25,cat:'lit',q:'جان جهان؟',a:'اضافه تشبیهی'},{id:26,cat:'lit',q:'بوف کور؟',a:'صادق هدایت'},{id:27,cat:'lit',q:'ابیات غزل؟',a:'5-12'},{id:28,cat:'lit',q:'متضاد ظهور؟',a:'اختفاء'},{id:29,cat:'lit',q:'ای ایران؟',a:'گلچین گیلانی'},{id:30,cat:'lit',q:'سجعه؟',a:'آهنگین بودن نثر'},{id:31,cat:'history',q:'هخامنشی؟',a:'کوروش'},{id:32,cat:'history',q:'چالدران؟',a:'عثمانی'},{id:33,cat:'history',q:'مشروطه؟',a:'1285'},{id:34,cat:'history',q:'آخرین ساسانی؟',a:'یزدگرد سوم'},{id:35,cat:'history',q:'تخت جمشید؟',a:'فارس'},{id:36,cat:'history',q:'نادر؟',a:'خراسان'},{id:37,cat:'history',q:'ترکمانچای؟',a:'روسیه'},{id:38,cat:'history',q:'اولین پایتخت؟',a:'پاسارگاد'},{id:39,cat:'history',q:'مرصاد؟',a:'1367'},{id:40,cat:'history',q:'امیرکبیر؟',a:'ناصرالدین شاه'},{id:41,cat:'lang',q:'Accomplish؟',a:'محقق کردن'},{id:42,cat:'lang',q:'Ancient؟',a:'Modern'},{id:43,cat:'lang',q:'Child؟',a:'Children'},{id:44,cat:'lang',q:'Resilient؟',a:'تاب‌آور'},{id:45,cat:'lang',q:'Go؟',a:'Went'},{id:46,cat:'lang',q:'AI؟',a:'هوش مصنوعی'},{id:47,cat:'lang',q:'Happy؟',a:'Joyful'},{id:48,cat:'lang',q:'Environment؟',a:'محیط زیست'},{id:49,cat:'lang',q:'Schedule؟',a:'اسکجول'},{id:50,cat:'lang',q:'Deadline؟',a:'مهلت نهایی'},{id:51,cat:'math',q:'اول بعد 7؟',a:'11'},{id:52,cat:'science',q:'گاز جو؟',a:'نیتروژن'},{id:53,cat:'lit',q:'بوستان؟',a:'سعدی'},{id:54,cat:'history',q:'فتح تهران؟',a:'1175'},{id:55,cat:'lang',q:'Knowledge؟',a:'دانش'},{id:56,cat:'math',q:'محیط مربع 4؟',a:'16'},{id:57,cat:'science',q:'مقاومت؟',a:'اهم'},{id:58,cat:'lit',q:'کلیله و دمنه؟',a:'نصرالله منشی'},{id:59,cat:'history',q:'سازمان ملل؟',a:'1945'},{id:60,cat:'lang',q:'Opportunity؟',a:'فرصت'}],
@@ -957,7 +1044,7 @@
     const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
     // ============================================================
-    // CHAT ENGINE (FIX #2: Doona Model Mapping)
+    // CHAT ENGINE (MODIFIED: Uses OfflineAIManager)
     // ============================================================
     const Chat = {
         sessions:[],currentId:null,history:[],isProcessing:false,pendingFile:null,
@@ -997,7 +1084,6 @@
             reader.readAsDataURL(file);
             document.getElementById('ocr-loading').classList.add('active');
             try{
-                // FIX #1: Correct Tesseract Path
                 if(typeof Tesseract==='undefined'){throw new Error('Tesseract not loaded');}
                 const worker = await Tesseract.createWorker({
                     corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core.wasm.js',
@@ -1006,7 +1092,7 @@
                 await worker.loadLanguage('fas+eng');
                 await worker.initialize('fas+eng');
                 const{data:{text}}=await worker.recognize(file);
-                await worker.terminate(); // FIX Memory Leak
+                await worker.terminate();
                 const ocr=text.trim();
                 if(ocr){const inp=document.getElementById('user-input');inp.value=ocr;inp.style.height='auto';inp.style.height=Math.min(inp.scrollHeight,150)+'px';Toast.show('متن استخراج شد','success');}
                 else{Toast.show('متنی یافت نشد. تصویر قابل ارسال است.','warning');}
@@ -1028,6 +1114,7 @@
             this.render();await this.save();await this.processAIResponse(txt,img);
             this.isProcessing=false;document.getElementById('send-btn').disabled=false;
         },
+        // MODIFIED: Uses OfflineAIManager instead of direct LocalAI call
         async processAIResponse(txt,img=null){
             const mode=document.getElementById('ai-mode-select').value;let res='';
             if(mode==='google'){window.open(`https://www.google.com/search?q=${encodeURIComponent(txt)}`,'_blank');Toast.show('گوگل','success');this.isProcessing=false;document.getElementById('send-btn').disabled=false;return;}
@@ -1040,7 +1127,8 @@
             const selectedModel = document.getElementById('header-model-select').value;
             if (selectedModel === 'ostadyar' || mode === 'local') {
                 if(txt.length > 20) { this.history.push({role:'assistant',content:'⏳ در حال تحلیل...'}); this.render(); await new Promise(r => setTimeout(r, 800)); this.history.pop(); }
-                res=LocalAI.generate(txt);
+                // USE OfflineAIManager instead of direct LocalAI.generate()
+                res = await OfflineAIManager.ask(txt);
                 this.history.push({role:'assistant',content:res});this.render();await this.save();this.isProcessing=false;document.getElementById('send-btn').disabled=false;return;
             }
             
@@ -1048,12 +1136,10 @@
                 try{
                     this.history.push({role:'assistant',content:'⏳ ...'});this.render();
                     
-                    // FIX #2: Doona Model Mapping Logic
                     let model = config.model || 'claude-3-5-sonnet-20241022';
                     const isDoonaKey = apiKey.startsWith('sk-') && !apiKey.startsWith('sk-ant-');
                     const isDoonaModel = model.startsWith('gpt-');
                     
-                    // If key is Doona but model is Claude, force GPT-4o
                     if (isDoonaKey && !isDoonaModel) {
                         model = 'gpt-4o';
                     }
@@ -1143,7 +1229,7 @@
     };
 
     // ============================================================
-    // UI CONTROLLER (FIX #3: Chart Theme Update)
+    // UI CONTROLLER (MODIFIED: Added AI Status Indicator)
     // ============================================================
     const UI = {
         currentView:'home',
@@ -1161,13 +1247,12 @@
             if(view==='home'){this.updateStats();this.renderChart();}
             if(view==='tools'){setTimeout(()=>{WB.init();setTimeout(()=>WB.resize(),50);},100);}
             if(view==='planner')Planner.render();
-            if(view==='bank'){QuestionBank.render();/* FIX #4: Initial Render */}
+            if(view==='bank'){QuestionBank.render();}
             if(view==='flashcards')Flashcards.init();
             this.toggleSidebar(true);
         },
         renderList(){const l=document.getElementById('chat-history-list');if(!l)return;l.innerHTML='';Chat.sessions.sort((a,b)=>b.date-a.date).forEach(s=>{const d=document.createElement('div');d.className=`chat-item ${s.id===Chat.currentId?'active':''} ${s.bookmarked?'bookmarked':''}`;d.innerHTML=`<div class="bookmark-indicator"></div><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.title}</span><div class="actions"><button onclick="event.stopPropagation();Chat.toggleBookmark()" title="نشانک"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:${s.bookmarked?'var(--accent)':'currentColor'};"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></button><button onclick="event.stopPropagation();Chat.deleteSession(${s.id},event)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button></div>`;d.onclick=()=>{Chat.load(s.id);this.toggleSidebar(true);};l.appendChild(d);});},
         async updateStats(){const chats=Chat.sessions.length;const sc=document.getElementById('stat-chats');if(sc)sc.textContent=chats;const pc=document.getElementById('prof-chats');if(pc)pc.textContent=chats;const quizzes=await Storage.getAll('quizzes');const sq=document.getElementById('stat-quizzes');if(sq)sq.textContent=quizzes.length;const pq=document.getElementById('prof-quizzes');if(pq)pq.textContent=quizzes.length;const tasks=await Storage.getAll('tasks');const st=document.getElementById('stat-tasks');if(st)st.textContent=tasks.length;},
-        // FIX #3: Chart Rebuild on Theme Change
         renderChart(){const c=document.getElementById('chart');if(!c)return;if(window._ch){window._ch.destroy();window._ch=null;}const styles=getComputedStyle(document.body);const primary=styles.getPropertyValue('--primary').trim()||'#6366f1';const muted=styles.getPropertyValue('--text-muted').trim()||'#94a3b8';window._ch=new Chart(c,{type:'bar',data:{labels:['ش','ی','د','س','چ','پ','ج'],datasets:[{data:[5,8,6,9,4,7,3],backgroundColor:primary,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{display:false,beginAtZero:true},x:{grid:{display:false},ticks:{color:muted}}}}});},
         toggleSidebar(forceClose){const sb=document.getElementById('sidebar');if(window.innerWidth<=768){if(forceClose)sb.classList.remove('mobile-open');else sb.classList.toggle('mobile-open');}},
         toggleContextMenu(e){e.stopPropagation();const menu=document.getElementById('ctx-menu');const btn=document.getElementById('ctx-toggle');const rect=btn.getBoundingClientRect();let top=rect.bottom+5,left=rect.left-180;if(left<10)left=10;if(left+220>window.innerWidth)left=window.innerWidth-230;if(top+350>window.innerHeight)top=rect.top-350;menu.style.top=`${top}px`;menu.style.left=`${left}px`;menu.style.right='auto';menu.classList.toggle('open');},
@@ -1175,17 +1260,33 @@
         openSettings(e){if(e){e.stopPropagation();e.preventDefault();}const modal=document.getElementById('settings-modal');if(modal)modal.classList.add('open');this.toggleSidebar(true);},
         closeSettings(){document.getElementById('settings-modal').classList.remove('open');},
         toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen().catch(()=>{});},
-        async setTheme(theme){document.body.setAttribute('data-theme',theme);const cfg=await Storage.getConfig();if(cfg)await Storage.put('settings',{id:'config',...cfg,theme});Toast.show(`تم ${theme}`,'success');setTimeout(()=>this.renderChart(),300);}
+        async setTheme(theme){document.body.setAttribute('data-theme',theme);const cfg=await Storage.getConfig();if(cfg)await Storage.put('settings',{id:'config',...cfg,theme});Toast.show(`تم ${theme}`,'success');setTimeout(()=>this.renderChart(),300);},
+        // NEW: AI Status Indicator Update Method
+        updateAIStatus(status, text) {
+            const badge = document.getElementById('ai-status-indicator');
+            const textEl = document.getElementById('ai-status-text');
+            if (!badge || !textEl) return;
+            
+            badge.classList.remove('active', 'loading');
+            if (status === 'active') badge.classList.add('active');
+            if (status === 'loading') badge.classList.add('loading');
+            
+            textEl.textContent = text || 'نامشخص';
+        }
     };
 
     // ============================================================
-    // INIT (FIX #4: QB Search Listener)
+    // INIT (MODIFIED: Initialize OfflineAIManager)
     // ============================================================
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             await Storage.init();
             Voice.init();
             await Profile.init();
+            
+            // Initialize Offline AI Manager (checks Ollama, loads Transformers.js)
+            await OfflineAIManager.init();
+            
             const cfg = await Storage.getConfig();
             if (!cfg.theme) { document.body.setAttribute('data-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
             else { document.body.setAttribute('data-theme', cfg.theme); }
@@ -1199,7 +1300,6 @@
             await Planner.init();
             await Flashcards.init();
             
-            // FIX #4: QB Search Debounce Listener
             let qbTimer;
             document.getElementById('qb-search')?.addEventListener('input', () => {
                 clearTimeout(qbTimer);
@@ -1218,7 +1318,7 @@
             document.getElementById('profile-name-input')?.addEventListener('keydown', e => { if (e.key==='Enter') Profile.saveName(); });
             const modeSelect = document.getElementById('ai-mode-select');
             if (modeSelect && cfg.mode) modeSelect.value = cfg.mode;
-            Toast.show('🚀 استاد یار پلاس v55 آماده است!', 'success');
+            Toast.show('🚀 استاد یار پلاس v56 آماده است!', 'success');
         } catch (e) { console.error('Init error:', e); Toast.show('خطا در راه‌اندازی', 'error'); }
     });
     </script>
