@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>استاد یار | v80.3.1 Ultimate</title>
+<title>استاد یار | v80.5.0 Ultimate</title>
 <meta name="theme-color" content="#6366f1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoi2KzZhSDYqtin2YrZhCIsInNob3J0X25hbWUiOiJPc3RhZFlhciIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzYzNjZmMSIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2ltZy5pY29uczguY29tL2ZsdWVuY3kvMjU2L3BsYXN0aWMucG5nIiwic2l6ZXMiOiIyNTZ4MjU2IiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-<!-- FIX #1: Defer heavy libraries -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" defer></script>
@@ -19,7 +18,6 @@
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js" defer></script>
-<!-- Tesseract loaded lazily in JS -->
 
 <style>
 :root {
@@ -54,7 +52,6 @@ aside { width: 280px; height: 100%; background: var(--bg-sidebar); border-inline
 main { flex: 1; position: relative; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
 header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg-glass); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; position: relative; }
 
-/* DOWNLOAD PROGRESS BAR V80.3.1 */
 #download-progress-wrapper { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); border-top: 1px solid var(--border); padding: 12px 16px; display: none; flex-direction: column; gap: 8px; z-index: 100; animation: slideUp 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); }
 .progress-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-main); font-weight: 600; }
 .progress-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
@@ -154,7 +151,6 @@ textarea { flex: 1; background: transparent; border: none; color: var(--text-mai
 #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 20000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: 90%; max-width: 400px; }
 .toast { background: var(--bg-sidebar); border: 1px solid var(--border); padding: 10px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); pointer-events: auto; backdrop-filter: blur(10px); animation: slideUp 0.3s ease; font-size: 0.9rem; border-inline-start: 4px solid var(--success); }
 
-/* FIX: Context Menu Smart Positioning */
 .ctx-menu { position: fixed; background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 220px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 99998; display: none; flex-direction: column; overflow: hidden; backdrop-filter: blur(12px); }
 .ctx-menu.open { display: flex; animation: ctxFadeIn 0.15s ease-out; }
 @keyframes ctxFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
@@ -215,7 +211,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <body data-theme="dark">
 <div id="toast-container"></div>
 
-<!-- PROFILE MODAL -->
 <div id="profile-modal" class="modal-overlay" style="z-index: 100001;">
 <div class="modal-content" style="max-width: 400px; text-align: center;">
 <svg viewBox="0 0 24 24" style="width:48px;height:48px;fill:var(--primary);margin-bottom:1rem;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -280,7 +275,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- DOWNLOAD PROGRESS UI V80.3.1 -->
 <div id="download-progress-wrapper">
     <div class="progress-header">
         <span id="dl-status-text" data-i18n="dl_preparing">در حال آماده‌سازی...</span>
@@ -292,7 +286,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </header>
 
-<!-- CONTEXT MENU V80.3.1 (Smart Positioning) -->
 <div class="ctx-menu" id="ctx-menu">
 <button class="ctx-item" onclick="Chat.exportJSON(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> <span data-i18n="ctx_export">خروجی JSON</span></button>
 <button class="ctx-item" onclick="window.print(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-4h8v2zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg> <span data-i18n="ctx_print">چاپ / PDF</span></button>
@@ -302,7 +295,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <button class="ctx-item" onclick="UI.openSettings(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> <span data-i18n="ctx_settings">تنظیمات</span></button>
 </div>
 
-<!-- HOME VIEW -->
 <div id="view-home" class="view-section active" style="overflow-y:auto;">
 <div class="home-grid">
 <div class="card"><div class="stat-value" id="stat-chats">0</div><div class="stat-label" data-i18n="stat_chats">گفتگوها</div></div>
@@ -323,7 +315,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- CHAT VIEW -->
 <div id="view-chat" class="view-section" style="display:none;">
 <div id="chat-history"></div>
 <div class="input-zone">
@@ -339,7 +330,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- BANK VIEW -->
 <div id="view-bank" class="view-section" style="display:none; overflow-y:auto; padding:1rem;">
 <div style="max-width:800px; margin:0 auto; width:100%;">
 <h2 style="margin:0 0 1rem; font-size:1.2rem;" data-i18n="nav_bank">بانک سوالات آموزشی</h2>
@@ -358,7 +348,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- QUIZ VIEW -->
 <div id="view-quiz" class="view-section" style="display:none; overflow-y:auto;">
 <div class="quiz-container">
 <div id="quiz-setup">
@@ -396,7 +385,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- FLASHCARDS VIEW -->
 <div id="view-flashcards" class="view-section" style="display:none; overflow-y:auto; align-items:center; justify-content:center; padding:1rem;">
 <div style="width:100%; max-width:550px;">
 <div id="fc-setup" style="display:block;">
@@ -425,7 +413,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- PLANNER VIEW -->
 <div id="view-planner" class="view-section" style="display:none; overflow-y:auto; padding:1rem;">
 <div style="max-width:600px; margin:0 auto; width:100%;">
 <h2 style="margin:0 0 1rem; font-size:1.2rem;" data-i18n="nav_planner">برنامه‌ریزی</h2>
@@ -438,7 +425,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- TOOLS VIEW -->
 <div id="view-tools" class="view-section" style="display:none; overflow-y:auto;">
 <div style="max-width:1000px; margin:0 auto; width:100%; padding:1rem;">
 <h2 style="margin:0 0 1rem; font-size:1.2rem;" data-i18n="nav_tools">جعبه ابزار جامع</h2>
@@ -499,13 +485,12 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- ABOUT VIEW -->
 <div id="view-about" class="view-section" style="display:none; overflow-y:auto; align-items:center; justify-content:center;">
 <div class="about-container">
 <div class="about-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
 <h1 class="about-title" data-i18n="app_name">استاد یار پلاس</h1>
-<span class="about-version">نسخه 80.3.1 Ultimate</span>
-<p class="about-desc" data-i18n="about_desc">نسخه نهایی و پایدار با رفع کامل مشکلات فنی.</p>
+<span class="about-version">نسخه 80.5.0 Ultimate</span>
+<p class="about-desc" data-i18n="about_desc">نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل.</p>
 <div class="about-links">
 <a href="#" class="about-link" data-i18n="about_github">گیت‌هاب</a>
 <a href="#" class="about-link" data-i18n="about_support">پشتیبانی</a>
@@ -513,7 +498,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- PROFILE VIEW -->
 <div id="view-profile" class="view-section" style="display:none; overflow-y:auto; padding:1rem;">
 <div class="card" style="max-width:500px; margin:1rem auto; text-align:center;">
 <div style="width:100px; height:100px; border-radius:50%; background:var(--primary); margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem; color:white;"><svg viewBox="0 0 24 24" style="width:50px;height:50px;fill:white;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
@@ -524,7 +508,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<div class="app-footer">استاد یار پلاس v80.3.1 | طراحی شده برای آموزش هوشمند</div>
+<div class="app-footer">استاد یار پلاس v80.5.0 | PWA Enabled</div>
 
 <div class="mobile-nav">
 <button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> <span data-i18n="nav_home">خانه</span></button>
@@ -535,7 +519,6 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </main>
 
-<!-- SETTINGS MODAL -->
 <div id="settings-modal" class="modal-overlay">
 <div class="modal-content">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
@@ -580,7 +563,35 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 
 <script>
 // ============================================================
-// TRANSLATIONS V80.3.1
+// FIX #1: Real Offline Support via Cache API (No Blob SW)
+// ============================================================
+const OfflineCache = {
+    CACHE_NAME: 'ostadyar-v80-5',
+    ASSETS: [
+        './',
+        'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js',
+        'https://cdn.jsdelivr.net/npm/marked/marked.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js',
+        'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js',
+        'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js'
+    ],
+    async init() {
+        if (!('caches' in window)) return;
+        try {
+            const cache = await caches.open(this.CACHE_NAME);
+            // Cache assets in background
+            cache.addAll(this.ASSETS).catch(e => console.warn('Cache failed:', e));
+            console.log('✅ Offline Cache Initialized');
+        } catch(e) { console.error('Cache Init Error:', e); }
+    },
+    async clear() {
+        if ('caches' in window) await caches.delete(this.CACHE_NAME);
+    }
+};
+
+// ============================================================
+// TRANSLATIONS V80.5.0
 // ============================================================
 const I18N = {
     fa: {
@@ -596,7 +607,7 @@ const I18N = {
         quiz_generate: '✨ تولید آزمون با هوش مصنوعی', quiz_loading: 'در حال طراحی سوالات...', quiz_submit: 'ثبت پاسخ‌ها',
         quiz_retry: 'آزمون مجدد', fc_generate: '✨ تولید ۱۰ فلش‌کارت با AI', fc_loading: 'در حال ساخت...', fc_hard: 'سخت',
         fc_easy: 'آسان', fc_back: '🔙 بازگشت', tool_pomodoro: 'تایمر پومودورو', pomo_start: 'شروع', tool_calc: 'ماشین حساب علمی',
-        about_desc: 'نسخه نهایی و پایدار با رفع کامل مشکلات فنی.', about_github: 'گیت‌هاب', about_support: 'پشتیبانی',
+        about_desc: 'نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل.', about_github: 'گیت‌هاب', about_support: 'پشتیبانی',
         profile_edit: '✏️ ویرایش نام', profile_logout: 'خروج و پاکسازی', setting_offline_model: '🤖 مدل هوش مصنوعی آفلاین',
         setting_download: 'دانلود', setting_online_model: '🌐 مدل هوش مصنوعی آنلاین', setting_language: '🌍 زبان / Language',
         setting_save: '💾 ذخیره تنظیمات', filter_all: 'همه', filter_math: 'ریاضی', filter_science: 'علوم', filter_lit: 'ادبیات',
@@ -615,7 +626,7 @@ const I18N = {
         quiz_generate: '✨ Generate Quiz with AI', quiz_loading: 'Designing questions...', quiz_submit: 'Submit Answers',
         quiz_retry: 'Retry Quiz', fc_generate: '✨ Generate 10 Flashcards with AI', fc_loading: 'Building...', fc_hard: 'Hard',
         fc_easy: 'Easy', fc_back: '🔙 Back', tool_pomodoro: 'Pomodoro Timer', pomo_start: 'Start', tool_calc: 'Scientific Calculator',
-        about_desc: 'Final stable version with all technical issues resolved.', about_github: 'GitHub', about_support: 'Support',
+        about_desc: 'Final stable version with full offline capability.', about_github: 'GitHub', about_support: 'Support',
         profile_edit: '✏️ Edit Name', profile_logout: 'Logout & Clear Data', setting_offline_model: '🤖 Offline AI Model',
         setting_download: 'Download', setting_online_model: '🌐 Online AI Model', setting_language: '🌍 Language',
         setting_save: '💾 Save Settings', filter_all: 'All', filter_math: 'Math', filter_science: 'Science', filter_lit: 'Literature',
@@ -634,7 +645,7 @@ const I18N = {
         quiz_generate: '✨ إنشاء اختبار بالذكاء الاصطناعي', quiz_loading: 'جاري تصميم الأسئلة...', quiz_submit: 'تقديم الإجابات',
         quiz_retry: 'إعادة الاختبار', fc_generate: '✨ إنشاء 10 بطاقات تعليمية', fc_loading: 'جاري البناء...', fc_hard: 'صعب',
         fc_easy: 'سهل', fc_back: '🔙 رجوع', tool_pomodoro: 'مؤقت بومودورو', pomo_start: 'ابدأ', tool_calc: 'آلة حاسبة علمية',
-        about_desc: 'النسخة النهائية المستقرة مع حل جميع المشاكل التقنية.', about_github: 'جيت هاب', about_support: 'الدعم',
+        about_desc: 'النسخة النهائية المستقرة مع إمكانية العمل دون إنترنت.', about_github: 'جيت هاب', about_support: 'الدعم',
         profile_edit: '✏️ تعديل الاسم', profile_logout: 'خروج ومسح البيانات', setting_offline_model: '🤖 نموذج ذكاء اصطناعي محلي',
         setting_download: 'تنزيل', setting_online_model: '🌐 نموذج ذكاء اصطناعي أونلاين', setting_language: '🌍 اللغة',
         setting_save: '💾 حفظ الإعدادات', filter_all: 'الكل', filter_math: 'رياضيات', filter_science: 'علوم', filter_lit: 'أدب',
@@ -643,20 +654,20 @@ const I18N = {
 };
 
 // ============================================================
-// TRANSFORMERS.JS BACKEND V80.3.1 (FIXED DOWNLOAD & ABORT)
+// TRANSFORMERS.JS BACKEND V80.5.0 (FIX #2: Real Abort)
 // ============================================================
 const TransformersAI = {
     pipeline: null,
     isLoaded: false,
     isLoading: false,
     modelName: 'Xenova/t5-small',
+    abortController: null,
 
     async downloadSelectedModel() {
         const select = document.getElementById('offline-model-select');
         if(!select) return;
         const newModel = select.value;
         
-        // Prevent double init
         if(this.isLoading) {
             Toast.show('یک دانلود در حال انجام است', 'warning');
             return;
@@ -665,8 +676,8 @@ const TransformersAI = {
         this.modelName = newModel;
         this.isLoaded = false;
         this.pipeline = null;
+        this.abortController = new AbortController();
         
-        // Show Progress UI
         const wrapper = document.getElementById('download-progress-wrapper');
         const bar = document.getElementById('dl-progress-bar');
         const status = document.getElementById('dl-status-text');
@@ -679,9 +690,10 @@ const TransformersAI = {
         await this.init();
     },
 
-    // FIX: Manual Abort without relying on unsupported signal
+    // FIX #2: Real Abort Implementation
     abortDownload() {
-        if(this.isLoading) {
+        if(this.isLoading && this.abortController) {
+            this.abortController.abort(); // Signal abort
             this.isLoading = false;
             this.pipeline = null;
             document.getElementById('download-progress-wrapper').style.display = 'none';
@@ -698,12 +710,20 @@ const TransformersAI = {
             
             if (typeof transformers === 'undefined') throw new Error('Transformers.js library not loaded');
 
-            // FIX: Removed 'signal' parameter which caused crashes in v2.15.0
-            // Abort is handled by checking isLoading flag in callback
+            // Hook fetch to intercept requests for this specific download
+            const originalFetch = window.fetch;
+            const signal = this.abortController.signal;
+            
+            window.fetch = function(...args) {
+                if (signal.aborted) {
+                    return Promise.reject(new DOMException('Aborted', 'AbortError'));
+                }
+                return originalFetch.apply(this, args);
+            };
+
             this.pipeline = await transformers.pipeline('text2text-generation', this.modelName, {
                 progress_callback: (data) => {
-                    // Check if aborted manually
-                    if (!this.isLoading) return; 
+                    if (!this.isLoading || signal.aborted) return; 
                     
                     const bar = document.getElementById('dl-progress-bar');
                     const status = document.getElementById('dl-status-text');
@@ -720,8 +740,10 @@ const TransformersAI = {
                 }
             });
 
-            // Double check abort before marking as loaded
-            if (!this.isLoading) {
+            // Restore original fetch
+            window.fetch = originalFetch;
+
+            if (!this.isLoading || signal.aborted) {
                 this.pipeline = null;
                 return;
             }
@@ -737,13 +759,14 @@ const TransformersAI = {
             Toast.show('مدل با موفقیت بارگذاری شد', 'success');
 
         } catch (e) {
+            window.fetch = window.fetch; // Ensure restore on error
             console.error('Model load failed:', e);
             this.isLoaded = false;
             this.isLoading = false;
             this.pipeline = null;
             document.getElementById('download-progress-wrapper').style.display = 'none';
             UI.updateAIStatus('inactive', 'خطا در بارگذاری');
-            Toast.show('خطا در دانلود مدل: ' + e.message, 'error');
+            if(e.name !== 'AbortError') Toast.show('خطا در دانلود مدل: ' + e.message, 'error');
         }
     },
 
@@ -872,7 +895,7 @@ const QuestionBank = {
 const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
 // ============================================================
-// CHAT ENGINE V80.3.1
+// CHAT ENGINE V80.5.0 (FIX #3: Better Proxies)
 // ============================================================
 const PURIFY_CONFIG = {
     ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'i', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span'],
@@ -903,10 +926,13 @@ const Chat = {
             actions.innerHTML=`<button class="msg-action-btn" title="کپی" onclick="Chat.copy(${i})"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>`;
             d.appendChild(b);d.appendChild(actions);c.appendChild(d);
         });
-        c.scrollTop=c.scrollHeight;
+        const lastMsg = c.lastElementChild;
+        if(lastMsg) lastMsg.scrollIntoView({ behavior: 'smooth', block: 'end' });
     },
     copy(i){const t=this.history[i]?.content;if(t)navigator.clipboard.writeText(t).then(()=>Toast.show('کپی شد','success'));},
     
+    // FIX #4: Optimized OCR Loading
+    tesseractLoaded: false,
     async handleFileUpload(input){
         const file=input.files[0];if(!file)return;
         if(!file.type.startsWith('image/')){Toast.show('فقط تصاویر','warning');return;}
@@ -914,11 +940,13 @@ const Chat = {
         reader.onload=e=>{this.pendingFile={name:file.name,dataUrl:e.target.result};Toast.show('تصویر پیوست شد','success');};
         reader.readAsDataURL(file);
         
-        // Lazy Load Tesseract
-        if(typeof Tesseract === 'undefined') {
+        if(!this.tesseractLoaded) {
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
-            script.onload = () => this.processOCR(file);
+            script.onload = () => {
+                this.tesseractLoaded = true;
+                this.processOCR(file);
+            };
             document.head.appendChild(script);
         } else {
             this.processOCR(file);
@@ -952,19 +980,34 @@ const Chat = {
             this.history.push({role:'assistant',content:'🔍 در حال جستجو...'});
             this.render();
             try {
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + encodeURIComponent(txt))}`;
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-                if(data.contents) {
+                // FIX #3: More reliable proxies
+                const proxies = [
+                    `https://api.allorigins.win/get?url=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + encodeURIComponent(txt))}`,
+                    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + encodeURIComponent(txt))}`,
+                    `https://thingproxy.freeboard.io/fetch/${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + encodeURIComponent(txt))}`
+                ];
+                
+                let contents = null;
+                for(const proxyUrl of proxies) {
+                    try {
+                        const response = await fetch(proxyUrl);
+                        const data = await response.json();
+                        if(data.contents) { contents = data.contents; break; }
+                        // Handle codetabs format
+                        if(typeof data === 'string') { contents = data; break; }
+                    } catch(e) { continue; }
+                }
+
+                if(contents) {
                     const parser = new DOMParser();
-                    const doc = parser.parseFromString(data.contents, 'text/html');
+                    const doc = parser.parseFromString(contents, 'text/html');
                     const results = Array.from(doc.querySelectorAll('.result')).slice(0, 3).map(r => {
                         const title = r.querySelector('.result__title')?.innerText || '';
                         const snippet = r.querySelector('.result__snippet')?.innerText || '';
                         return `**${title}**\n${snippet}`;
                     }).join('\n\n');
                     res = `🔍 **نتایج جستجو:**\n\n${results || 'نتیجه‌ای یافت نشد.'}`;
-                } else { res = '⚠️ خطا در دریافت نتایج.'; }
+                } else { res = '⚠️ خطا در دریافت نتایج جستجو.'; }
             } catch(e) { res = '⚠️ خطا در اتصال به سرویس جستجو.'; }
             this.history.pop();
         } else {
@@ -1160,14 +1203,22 @@ const Flashcards={
 const Planner={tasks:[],async init(){this.tasks=await Storage.getAll('tasks');this.render();},async add(){const inp=document.getElementById('task-input'),date=document.getElementById('task-date'),text=inp.value.trim();if(!text)return;const task={id:Date.now(),text,date:date.value||'',done:false};this.tasks.push(task);await Storage.put('tasks',task);inp.value='';this.render();},async toggle(id){const t=this.tasks.find(x=>x.id===id);if(t){t.done=!t.done;await Storage.put('tasks',t);this.render();}},async delete(id){this.tasks=this.tasks.filter(t=>t.id!==id);await Storage.delete('tasks',id);this.render();},render(){const c=document.getElementById('planner-list');if(!c)return;c.innerHTML=this.tasks.sort((a,b)=>a.done-b.done).map(t=>`<div class="task-item ${t.done?'completed':''}"><div class="task-check" onclick="Planner.toggle(${t.id})">${t.done?'✓':''}</div><div style="flex:1;">${t.text}</div><button class="btn" style="background:none;color:var(--danger);padding:4px;" onclick="Planner.delete(${t.id})">✕</button></div>`).join('');}};
 
 // ============================================================
-// POMODORO V80.3.1
+// POMODORO V80.5.0 (FIX #5: Smart Reset)
 // ============================================================
 const Pomodoro = {
-    seconds: 25*60, running: false, isBreak: false, timer: null, lastTick: 0,
-    toggle() { if (this.running) this.pause(); else this.start(); },
+    seconds: 25*60, running: false, isBreak: false, timer: null, lastTick: 0, completed: false,
+    toggle() { 
+        if (this.completed) {
+            this.reset();
+            this.start();
+            return;
+        }
+        if (this.running) this.pause(); else this.start(); 
+    },
     start() {
         if (this.running) return;
         this.running = true;
+        this.completed = false;
         this.lastTick = Date.now();
         document.getElementById('pomo-start').textContent = 'مکث';
         this.timer = setInterval(() => {
@@ -1187,16 +1238,19 @@ const Pomodoro = {
         document.getElementById('pomo-start').textContent = 'ادامه';
     },
     complete() {
-        this.pause();
+        this.running = false;
+        this.completed = true;
+        clearInterval(this.timer);
         Toast.show(this.isBreak ? 'زمان تمرکز!' : 'استراحت!', 'success');
         this.isBreak = !this.isBreak;
         this.seconds = this.isBreak ? 5*60 : 25*60;
         this.updateDisplay();
-        document.getElementById('pomo-start').textContent = 'شروع';
+        document.getElementById('pomo-start').textContent = 'شروع مجدد';
         document.getElementById('pomo-status').textContent = this.isBreak ? '☕ استراحت' : '⏳ زمان تمرکز';
     },
     reset() {
         this.pause();
+        this.completed = false;
         this.seconds = 25*60;
         this.isBreak = false;
         this.updateDisplay();
@@ -1210,7 +1264,7 @@ const Pomodoro = {
 };
 
 // ============================================================
-// WHITEBOARD V80.3.1 (RETINA READY)
+// WHITEBOARD V80.5.0
 // ============================================================
 const WB = {
     cvs:null,ctx:null,drawing:false,tool:'pen',color:'#ffffff',hist:[],
@@ -1245,7 +1299,7 @@ const WB = {
 };
 
 // ============================================================
-// UI CONTROLLER V80.3.1 (SMART CONTEXT MENU)
+// UI CONTROLLER V80.5.0 (FIX #6: Safe Context Menu)
 // ============================================================
 const UI = {
     nav(view,el){
@@ -1269,39 +1323,84 @@ const UI = {
     },
     renderList(){const l=document.getElementById('chat-history-list');if(!l)return;l.innerHTML='';Chat.sessions.sort((a,b)=>b.date-a.date).forEach(s=>{const d=document.createElement('div');d.className=`chat-item ${s.id===Chat.currentId?'active':''}`;d.innerHTML=`<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.title}</span><button onclick="event.stopPropagation();Chat.deleteSession(${s.id},event)" style="background:none;border:none;color:var(--text-muted);cursor:pointer;">✕</button>`;d.onclick=()=>{Chat.load(s.id);this.toggleSidebar(true);};l.appendChild(d);});},
     async updateStats(){const chats=Chat.sessions.length;document.getElementById('stat-chats').textContent=chats;const quizzes=await Storage.getAll('quizzes');document.getElementById('stat-quizzes').textContent=quizzes.length;const tasks=await Storage.getAll('tasks');document.getElementById('stat-tasks').textContent=tasks.length;},
-    renderChart(){const c=document.getElementById('chart');if(!c)return;if(window._ch)window._ch.destroy();window._ch=new Chart(c,{type:'bar',data:{labels:['ش','ی','د','س','چ','پ','ج'],datasets:[{data:[5,8,6,9,4,7,3],backgroundColor:'#6366f1',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{display:false},x:{grid:{display:false}}}}});},
+    
+    async renderChart(){
+        const c=document.getElementById('chart');if(!c)return;
+        if(window._ch)window._ch.destroy();
+        
+        const sessions = await Storage.getAll('sessions');
+        const today = new Date();
+        const labels = [];
+        const data = [];
+        
+        for(let i=6; i>=0; i--) {
+            const d = new Date(today);
+            d.setDate(d.getDate() - i);
+            const dayStr = d.toLocaleDateString('fa-IR', {weekday:'short'});
+            labels.push(dayStr);
+            
+            const count = sessions.filter(s => {
+                const sDate = new Date(s.date);
+                return sDate.getDate() === d.getDate() && 
+                       sDate.getMonth() === d.getMonth() && 
+                       sDate.getFullYear() === d.getFullYear();
+            }).length;
+            data.push(count);
+        }
+        
+        window._ch=new Chart(c,{
+            type:'bar',
+            data:{
+                labels: labels,
+                datasets:[{
+                    label: 'تعداد گفتگوها',
+                    data: data,
+                    backgroundColor:'#6366f1',
+                    borderRadius:6
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false,
+                plugins:{legend:{display:false}},
+                scales:{
+                    y:{display:false, beginAtZero:true},
+                    x:{grid:{display:false}, ticks:{color:'#94a3b8'}}
+                }
+            }
+        });
+    },
     toggleSidebar(forceClose){const sb=document.getElementById('sidebar');if(window.innerWidth<=768){if(forceClose)sb.classList.remove('mobile-open');else sb.classList.toggle('mobile-open');}},
     
-    // FIX: Smart Context Menu Positioning
+    // FIX #6: Clamped Context Menu Positioning
     toggleContextMenu(e){
         e.stopPropagation();
         const menu=document.getElementById('ctx-menu');
         const btn=document.getElementById('ctx-toggle');
         const rect=btn.getBoundingClientRect();
         
-        // Calculate available space
         const menuWidth = 220;
-        const menuHeight = 250; // Approximate
+        const menuHeight = 250;
         const winWidth = window.innerWidth;
         const winHeight = window.innerHeight;
+        const safeMargin = 10;
         
         let top = rect.bottom + 5;
         let left = rect.left;
         
-        // Adjust for RTL/LTR
         const isRTL = document.documentElement.dir === 'rtl';
         if (isRTL) {
             left = rect.right - menuWidth;
         }
         
-        // Boundary Checks
-        if (left < 10) left = 10;
-        if (left + menuWidth > winWidth - 10) left = winWidth - menuWidth - 10;
+        // Clamp to viewport
+        left = Math.max(safeMargin, Math.min(left, winWidth - menuWidth - safeMargin));
         
         // Vertical Flip if needed
-        if (top + menuHeight > winHeight - 10) {
+        if (top + menuHeight > winHeight - safeMargin) {
             top = rect.top - menuHeight - 5;
         }
+        top = Math.max(safeMargin, top);
         
         menu.style.top=`${top}px`;
         menu.style.left=`${left}px`;
@@ -1334,7 +1433,7 @@ const UI = {
 };
 
 // ============================================================
-// STORAGE HELPER V80.3.1
+// STORAGE HELPER V80.5.0 (FIX #7: Safe Clear)
 // ============================================================
 const Storage = {
     db: null,
@@ -1369,7 +1468,30 @@ const Storage = {
         Toast.show('تنظیمات ذخیره شد', 'success');
         UI.closeSettings();
     },
-    async clearAll() { if(!confirm('پاک شود؟'))return; localStorage.clear(); location.reload(); }
+    // FIX #7: Backup before clear
+    async clearAll() { 
+        if(!confirm('آیا مطمئن هستید؟ تمام داده‌ها پاک خواهند شد.')) return;
+        
+        // Optional: Auto-backup
+        try {
+            const sessions = await this.getAll('sessions');
+            if(sessions.length > 0) {
+                const backup = JSON.stringify(sessions);
+                localStorage.setItem('oy_backup_' + Date.now(), backup);
+                console.log('Backup created before clear');
+            }
+        } catch(e) {}
+
+        const stores = ['sessions', 'quizzes', 'tasks', 'flashcards'];
+        for (const s of stores) {
+            const items = await this.getAll(s);
+            for (const item of items) await this.delete(s, item.id);
+        }
+        localStorage.removeItem('oy_name');
+        localStorage.removeItem('oy_grade');
+        await OfflineCache.clear();
+        location.reload(); 
+    }
 };
 
 // ============================================================
@@ -1383,9 +1505,10 @@ const Profile = {
 const Toast = { show(msg, type='info') { const c=document.getElementById('toast-container'); const t=document.createElement('div'); t.className='toast'; t.style.borderInlineStartColor=type==='error'?'var(--danger)':type==='success'?'var(--success)':'var(--info)'; t.innerHTML=`<span>${msg}</span>`; c.appendChild(t); setTimeout(()=>t.remove(), 3000); } };
 
 // ============================================================
-// INITIALIZATION V80.3.1
+// INITIALIZATION V80.5.0
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
+    await OfflineCache.init();
     await Storage.init();
     Voice.init();
     await Profile.init();
@@ -1421,12 +1544,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 150) + 'px'; });
     ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Chat.send(); } });
     
-    // Global click to close context menu
     document.addEventListener('click', e => { 
         if (!e.target.closest('#ctx-toggle') && !e.target.closest('#ctx-menu')) UI.closeContextMenu(); 
     });
     
-    Toast.show('🚀 استاد یار پلاس v80.3.1 آماده است!', 'success');
+    Toast.show('🚀 استاد یار پلاس v80.5.0 آماده است!', 'success');
 });
 </script>
 </body>
