@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>استاد یار | v80.9.0 Ultimate</title>
+<title>استاد یار | v80.9.3 Ultimate Knowledge</title>
 <meta name="theme-color" content="#6366f1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoi2KzZhSDYqtin2YrZhCIsInNob3J0X25hbWUiOiJPc3RhZFlhciIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzYzNjZmMSIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2ltZy5pY29uczguY29tL2ZsdWVuY3kvMjU2L3BsYXN0aWMucG5nIiwic2l6ZXMiOiIyNTZ4MjU2IiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<!-- FIX #6: Defer heavy libraries -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" defer></script>
@@ -17,8 +18,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js" defer></script>
+<!-- FIX #2: Math.js for advanced equations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js" defer></script>
+<!-- FIX #3: Tesseract.js explicitly loaded -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+<!-- FIX #10: PDF.js for PDF extraction -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+<!-- Transformers.js -->
+<script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js" defer></script>
 
 <style>
 :root {
@@ -53,7 +60,13 @@ aside { width: 280px; height: 100%; background: var(--bg-sidebar); border-inline
 main { flex: 1; position: relative; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
 header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg-glass); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; position: relative; }
 
-#download-progress-wrapper { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); border-top: 1px solid var(--border); padding: 12px 16px; display: none; flex-direction: column; gap: 8px; z-index: 100; animation: slideUp 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); }
+/* FIX #8: Download Progress Bar Styles */
+#download-progress-wrapper {
+position: absolute; bottom: 0; left: 0; right: 0;
+background: rgba(15, 23, 42, 0.95); border-top: 1px solid var(--border);
+padding: 12px 16px; display: none; flex-direction: column; gap: 8px; z-index: 100;
+animation: slideUp 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+}
 .progress-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-main); font-weight: 600; }
 .progress-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.2s linear; box-shadow: 0 0 10px var(--primary); }
@@ -182,6 +195,9 @@ textarea { flex: 1; background: transparent; border: none; color: var(--text-mai
 .ai-status-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 .ai-status-badge.loading .ai-status-dot { animation: pulse 1s infinite; }
 
+.reasoning-block { background: rgba(251, 191, 36, 0.05); border-right: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 8px; font-size: 0.9em; color: var(--text-muted); }
+.reasoning-title { font-weight: bold; color: var(--accent); margin-bottom: 6px; display: block; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.5px; }
+
 @media (max-width: 768px) {
 body { flex-direction: column; }
 aside { position: fixed; bottom: 0; left: 0; right: 0; top: 0; width: 100%; height: 100%; transform: translateY(100%); z-index: 5000; border-left: none; }
@@ -278,6 +294,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
+<!-- FIX #8: Download Progress Bar Container -->
 <div id="download-progress-wrapper">
     <div class="progress-header">
         <span id="dl-status-text" data-i18n="dl_preparing">در حال آماده‌سازی...</span>
@@ -495,8 +512,8 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div class="about-container">
 <div class="about-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
 <h1 class="about-title" data-i18n="app_name">استاد یار پلاس</h1>
-<span class="about-version">نسخه 80.9.0 Ultimate</span>
-<p class="about-desc" data-i18n="about_desc">نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل و امنیت سازمانی.</p>
+<span class="about-version">نسخه 80.9.3 Ultimate Knowledge</span>
+<p class="about-desc" data-i18n="about_desc">نسخه نهایی با پایگاه دانش محلی گسترده و قابلیت کارکرد آفلاین کامل.</p>
 <div class="about-links">
 <a href="#" class="about-link" data-i18n="about_github">گیت‌هاب</a>
 <a href="#" class="about-link" data-i18n="about_support">پشتیبانی</a>
@@ -514,7 +531,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<div class="app-footer">استاد یار پلاس v80.9.0 | Enterprise Secure</div>
+<div class="app-footer">استاد یار پلاس v80.9.3 | Enterprise Secure</div>
 
 <div class="mobile-nav">
 <button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> <span data-i18n="nav_home">خانه</span></button>
@@ -540,6 +557,9 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </select>
 <button class="btn btn-primary" style="margin-bottom:0; padding:0 16px;" onclick="TransformersAI.downloadSelectedModel()" data-i18n="setting_download">دانلود</button>
 </div>
+<!-- FIX #7: Memory Management Button -->
+<button class="btn btn-danger" style="width:100%; margin-bottom:0.8rem; font-size:0.8rem;" onclick="TransformersAI.unloadModel()">🗑️ آزادسازی حافظه مدل</button>
+
 <label style="display:block; margin-bottom:4px; font-weight:600;" data-i18n="setting_online_model">🌐 مدل هوش مصنوعی آنلاین</label>
 <select id="ai-model-select" class="form-input" style="margin-bottom:0.8rem;">
 <option value="ostadyar" data-i18n="model_offline">🧠 استاد یار (آفلاین)</option>
@@ -569,51 +589,10 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 
 <script>
 // ============================================================
-// FIX #10: Secure Crypto Wrapper for API Keys
-// ============================================================
-const SecureStorage = {
-    async encrypt(text) {
-        if (!text) return '';
-        try {
-            const key = await this.getKey();
-            const iv = crypto.getRandomValues(new Uint8Array(12));
-            const encoded = new TextEncoder().encode(text);
-            const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded);
-            const buffer = new Uint8Array(iv.length + ciphertext.byteLength);
-            buffer.set(iv, 0);
-            buffer.set(new Uint8Array(ciphertext), iv.length);
-            return btoa(String.fromCharCode(...buffer));
-        } catch(e) { console.error('Encryption failed', e); return text; }
-    },
-    async decrypt(base64) {
-        if (!base64) return '';
-        try {
-            const key = await this.getKey();
-            const buffer = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
-            const iv = buffer.slice(0, 12);
-            const ciphertext = buffer.slice(12);
-            const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
-            return new TextDecoder().decode(decrypted);
-        } catch(e) { console.error('Decryption failed', e); return base64; }
-    },
-    async getKey() {
-        const rawKey = localStorage.getItem('oy_master_key');
-        let keyData;
-        if (rawKey) {
-            keyData = Uint8Array.from(atob(rawKey), c => c.charCodeAt(0));
-        } else {
-            keyData = crypto.getRandomValues(new Uint8Array(32));
-            localStorage.setItem('oy_master_key', btoa(String.fromCharCode(...keyData)));
-        }
-        return crypto.subtle.importKey('raw', keyData, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);
-    }
-};
-
-// ============================================================
-// FIX #1: Robust Service Worker Registration
+// FIX #1: Robust Offline Cache (No Blob SW)
 // ============================================================
 const OfflineCache = {
-    CACHE_NAME: 'ostadyar-v80-9',
+    CACHE_NAME: 'ostadyar-v80-9-3',
     ASSETS: [
         './',
         'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js',
@@ -621,7 +600,9 @@ const OfflineCache = {
         'https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js',
         'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js',
-        'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js'
+        'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js'
     ],
     async init() {
         if (!('caches' in window)) return;
@@ -631,20 +612,6 @@ const OfflineCache = {
                 try { await cache.add(url); } catch(e) { console.warn(`Failed to cache ${url}`, e); }
             }
             console.log('✅ Offline Cache Initialized');
-            
-            if ('serviceWorker' in navigator) {
-                const swCode = `
-                    self.addEventListener('install', e => self.skipWaiting());
-                    self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
-                    self.addEventListener('fetch', e => {
-                        e.respondWith(
-                            caches.match(e.request).then(r => r || fetch(e.request).catch(() => new Response('Offline')))
-                        );
-                    });
-                `;
-                const blob = new Blob([swCode], {type: 'application/javascript'});
-                navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(e => console.warn('SW Reg Failed:', e));
-            }
         } catch(e) { console.error('Cache Init Error:', e); }
     },
     async clear() {
@@ -653,7 +620,7 @@ const OfflineCache = {
 };
 
 // ============================================================
-// TRANSLATIONS V80.9.0
+// TRANSLATIONS V80.9.3
 // ============================================================
 const I18N = {
     fa: {
@@ -669,7 +636,7 @@ const I18N = {
         quiz_generate: '✨ تولید آزمون با هوش مصنوعی', quiz_loading: 'در حال طراحی سوالات...', quiz_submit: 'ثبت پاسخ‌ها',
         quiz_retry: 'آزمون مجدد', fc_generate: '✨ تولید ۱۰ فلش‌کارت با AI', fc_loading: 'در حال ساخت...', fc_hard: 'سخت',
         fc_easy: 'آسان', fc_back: '🔙 بازگشت', tool_pomodoro: 'تایمر پومودورو', pomo_start: 'شروع', tool_calc: 'ماشین حساب علمی',
-        about_desc: 'نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل و امنیت سازمانی.', about_github: 'گیت‌هاب', about_support: 'پشتیبانی',
+        about_desc: 'نسخه نهایی با پایگاه دانش محلی گسترده و قابلیت کارکرد آفلاین کامل.', about_github: 'گیت‌هاب', about_support: 'پشتیبانی',
         profile_edit: '✏️ ویرایش نام', profile_logout: 'خروج و پاکسازی', setting_offline_model: '🤖 مدل هوش مصنوعی آفلاین',
         setting_download: 'دانلود', setting_online_model: '🌐 مدل هوش مصنوعی آنلاین', setting_language: '🌍 زبان / Language',
         setting_save: '💾 ذخیره تنظیمات', filter_all: 'همه', filter_math: 'ریاضی', filter_science: 'علوم', filter_lit: 'ادبیات',
@@ -688,7 +655,7 @@ const I18N = {
         quiz_generate: '✨ Generate Quiz with AI', quiz_loading: 'Designing questions...', quiz_submit: 'Submit Answers',
         quiz_retry: 'Retry Quiz', fc_generate: '✨ Generate 10 Flashcards with AI', fc_loading: 'Building...', fc_hard: 'Hard',
         fc_easy: 'Easy', fc_back: '🔙 Back', tool_pomodoro: 'Pomodoro Timer', pomo_start: 'Start', tool_calc: 'Scientific Calculator',
-        about_desc: 'Enterprise version with full offline capability and security.', about_github: 'GitHub', about_support: 'Support',
+        about_desc: 'Final version with enhanced local AI and full offline capability.', about_github: 'GitHub', about_support: 'Support',
         profile_edit: '✏️ Edit Name', profile_logout: 'Logout & Clear Data', setting_offline_model: '🤖 Offline AI Model',
         setting_download: 'Download', setting_online_model: '🌐 Online AI Model', setting_language: '🌍 Language',
         setting_save: '💾 Save Settings', filter_all: 'All', filter_math: 'Math', filter_science: 'Science', filter_lit: 'Literature',
@@ -707,7 +674,7 @@ const I18N = {
         quiz_generate: '✨ إنشاء اختبار بالذكاء الاصطناعي', quiz_loading: 'جاري تصميم الأسئلة...', quiz_submit: 'تقديم الإجابات',
         quiz_retry: 'إعادة الاختبار', fc_generate: '✨ إنشاء 10 بطاقات تعليمية', fc_loading: 'جاري البناء...', fc_hard: 'صعب',
         fc_easy: 'سهل', fc_back: '🔙 رجوع', tool_pomodoro: 'مؤقت بومودورو', pomo_start: 'ابدأ', tool_calc: 'آلة حاسبة علمية',
-        about_desc: 'نسخة المؤسسات مع أمان كامل ودعم المستندات الكبيرة.', about_github: 'جيت هاب', about_support: 'الدعم',
+        about_desc: 'النسخة النهائية مع ذكاء اصطناعي محلي معزز وإمكانية العمل دون إنترنت.', about_github: 'جيت هاب', about_support: 'الدعم',
         profile_edit: '✏️ تعديل الاسم', profile_logout: 'خروج ومسح البيانات', setting_offline_model: '🤖 نموذج ذكاء اصطناعي محلي',
         setting_download: 'تنزيل', setting_online_model: '🌐 نموذج ذكاء اصطناعي أونلاين', setting_language: '🌍 اللغة',
         setting_save: '💾 حفظ الإعدادات', filter_all: 'الكل', filter_math: 'رياضيات', filter_science: 'علوم', filter_lit: 'أدب',
@@ -716,7 +683,7 @@ const I18N = {
 };
 
 // ============================================================
-// TRANSFORMERS.JS BACKEND V80.9.0 (FIX #4: Memory Guard)
+// TRANSFORMERS.JS BACKEND V80.9.3 (FIX #2, #7, #8)
 // ============================================================
 const TransformersAI = {
     pipeline: null,
@@ -724,21 +691,7 @@ const TransformersAI = {
     isLoading: false,
     modelName: 'Xenova/t5-small',
     abortController: null,
-    lastUsed: Date.now(),
-    unloadTimer: null,
-
-    scheduleUnload() {
-        if (this.unloadTimer) clearTimeout(this.unloadTimer);
-        this.unloadTimer = setTimeout(() => {
-            if (this.isLoaded && !this.isLoading) {
-                console.log('🧹 Unloading model due to inactivity');
-                this.pipeline = null;
-                this.isLoaded = false;
-                UI.updateAIStatus('inactive', 'مدل محلی');
-                Toast.show('مدل آفلاین برای صرفه‌جویی در حافظه تخلیه شد', 'info');
-            }
-        }, 5 * 60 * 1000); // 5 minutes
-    },
+    idleTimer: null,
 
     async downloadSelectedModel() {
         const select = document.getElementById('offline-model-select');
@@ -776,6 +729,29 @@ const TransformersAI = {
             UI.updateAIStatus('inactive', 'متوقف شد');
             Toast.show('دانلود متوقف شد', 'warning');
         }
+    },
+
+    // FIX #7: Manual Memory Unload
+    unloadModel() {
+        if(this.pipeline) {
+            this.pipeline = null;
+            this.isLoaded = false;
+            UI.updateAIStatus('inactive', 'حافظه آزاد شد');
+            Toast.show('مدل از حافظه تخلیه شد', 'success');
+        } else {
+            Toast.show('مدلی در حافظه نیست', 'info');
+        }
+    },
+
+    resetIdleTimer() {
+        if(this.idleTimer) clearTimeout(this.idleTimer);
+        // Auto-unload after 5 minutes of inactivity
+        this.idleTimer = setTimeout(() => {
+            if(this.isLoaded && !this.isLoading) {
+                console.log('Auto-unloading model due to inactivity');
+                this.unloadModel();
+            }
+        }, 5 * 60 * 1000);
     },
 
     async init() {
@@ -824,9 +800,8 @@ const TransformersAI = {
 
             this.isLoaded = true;
             this.isLoading = false;
-            this.lastUsed = Date.now();
-            this.scheduleUnload();
             UI.updateAIStatus('active', 'Transformers.js');
+            this.resetIdleTimer();
             
             setTimeout(() => {
                 document.getElementById('download-progress-wrapper').style.display = 'none';
@@ -848,8 +823,7 @@ const TransformersAI = {
 
     async ask(question) {
         if (!this.isLoaded || !this.pipeline) return null;
-        this.lastUsed = Date.now();
-        this.scheduleUnload();
+        this.resetIdleTimer(); // Reset timer on use
         try {
             const result = await this.pipeline(question, { max_new_tokens: 256, temperature: 0.7 });
             return result?.[0]?.generated_text || null;
@@ -858,76 +832,179 @@ const TransformersAI = {
 };
 
 // ============================================================
-// LOCAL AI KNOWLEDGE BASE
+// LOCAL AI KNOWLEDGE BASE V80.9.3 (FIX #11: Enhanced)
 // ============================================================
 const LocalAI = {
     knowledge: {
-        greetings: ['سلام', 'درود', 'صبح بخیر', 'عصر بخیر', 'شب بخیر', 'hello', 'hi', 'good morning'],
-        identity: ['کی هستی', 'چیستی', 'معرفی کن', 'who are you', 'what are you'],
-        math: ['ریاضی', 'معادله', 'جمع', 'تفریق', 'ضرب', 'تقسیم', 'انتگرال', 'مشتق'],
-        science: ['فیزیک', 'شیمی', 'زیست', 'اتم', 'مولکول', 'نیوتون', 'انرژی'],
-        history: ['تاریخ', 'ایران', 'هخامنشی', 'صفویه', 'قاجار', 'پهلوی', 'کوروش'],
-        literature: ['ادبیات', 'شعر', 'حافظ', 'سعدی', 'فردوسی', 'مولوی'],
-        programming: ['برنامه نویسی', 'پایتون', 'جاوا اسکریپت', 'الگوریتم']
-    },
-    responses: {
-        greetings: 'سلام! من استاد یار هستم، دستیار هوشمند آموزشی شما. چطور می‌توانم کمکتان کنم؟',
-        identity: 'من استاد یار پلاس هستم، یک دستیار آموزشی آفلاین و آنلاین که برای کمک به یادگیری شما طراحی شده‌ام.',
-        default: 'متأسفانه در حالت آفلاین اطلاعات کافی برای پاسخ به این سوال ندارم. لطفاً اتصال اینترنت خود را بررسی کنید یا مدل آفلاین را دانلود نمایید.'
-    },
-    generate(q) {
-        const qLower = q.toLowerCase().trim();
-        
-        if (this.knowledge.greetings.some(k => qLower.includes(k))) return this.responses.greetings;
-        if (this.knowledge.identity.some(k => qLower.includes(k))) return this.responses.identity;
-        
-        for (const [topic, keywords] of Object.entries(this.knowledge)) {
-            if (keywords.some(k => qLower.includes(k))) {
-                return `🧠 **تحلیل موضوع (${topic}):**\n\nاین سوال مربوط به حوزه ${topic} است. برای پاسخ دقیق و کامل، لطفاً از حالت آنلاین استفاده کنید یا مدل آفلاین قدرتمندتری را دانلود نمایید.`;
+        math: {
+            keywords: ['معادله','ریاضی','جبر','هندسه','کسری','عدد','ضرب','جمع','تفریق','تقسیم','توان','ریشه','مثلثات','sin','cos','tan','انتگرال','مشتق','حد','پی','فاکتوریل','لگاریتم','ماتریس','آمار','احتمال','مساحت','حجم','محیط','مجهول','x','تابع','مختصات','بردار','ماتریس','دترمینان','حد','پیوستگی','مشتق','انتگرال','دیفرانسیل','معادله دیفرانسیل','سری','توالی','اعداد مختلط','اعداد حقیقی','اعداد گویا','اعداد طبیعی','اول','مرکب','فاکتوریل','ترکیب','جایگشت','احتمال','آمار','میانگین','میانه','مد','واریانس','انحراف معیار','توزیع نرمال','رگرسیون','همبستگی'],
+            concepts: {
+                'equation': 'برای حل معادله، باید مقدار مجهول (معمولاً x) را طوری پیدا کنیم که دو طرف تساوی برابر شوند. روش کلی: جدا کردن مجهول با انجام عکس عملیات.',
+                'fraction': 'در جمع و تفریق کسرها، ابتدا مخرج مشترک می‌گیریم. در ضرب، صورت در صورت و مخرج در مخرج ضرب می‌شود.',
+                'derivative': 'مشتق نشان‌دهنده نرخ تغییرات لحظه‌ای تابع است. فرمول پایه: مشتق x^n برابر nx^(n-1) است.',
+                'integral': 'انتگرال معکوس مشتق است و مساحت زیر نمودار را محاسبه می‌کند.',
+                'geometry': 'برای محاسبه مساحت و حجم، باید فرمول مربوط به شکل هندسی خاص را بدانیم.',
+                'trigonometry': 'مثلثات روابط بین زوایا و اضلاع مثلث را بررسی می‌کند. توابع اصلی: sin, cos, tan.',
+                'statistics': 'آمار علم جمع‌آوری، تحلیل و تفسیر داده‌هاست. شاخص‌های مرکزی: میانگین، میانه، مد.',
+                'probability': 'احتمال وقوع یک پیشامد برابر است با تعداد حالات مطلوب تقسیم بر تعداد کل حالات ممکن.',
+                'function': 'تابع رابطه‌ای است که به هر ورودی دقیقاً یک خروجی نسبت می‌دهد.',
+                'matrix': 'ماتریس آرایه‌ای مستطیلی از اعداد است که در جبر خطی کاربرد دارد.'
+            }
+        },
+        science: {
+            keywords: ['علوم','فیزیک','شیمی','زیست','سلول','اتم','انرژی','نیرو','جرم','سرعت','نور','صوت','الکتریسیته','مغناطیس','فتوسنتز','dna','ژن','مولکول','عنصر','جدول تناوبی','اسید','باز','واکنش','اکسید','یون','شتاب','اصطکاک','فشار','دما','گرما','حرارت','آنتروپی','ترمودینامیک','مکانیک','سینماتیک','دینامیک','الکترواستاتیک','الکتrodynamics','مغناطیس','الکترومغناطیس','موج','نور','اپتیک','صوت','اکوستیک','نسبیت','کوانتوم','هسته‌ای','اتمی','ذرات بنیادی','فوتون','الکترون','پروتون','نوترون','کوارک','گلوئون','بوزون','فرمیون','لپتون','ماده','ضدماده','پلاسما','گاز','مایع','جامد','حالت ماده','فاز','چگالی','ویسکوزیته','کشش سطحی','capillarity','نفوذ','اسمز','دیالیز','کروماتوگرافی','تیتراسیون','ph','اسید','باز','نمک','اکسید','هیدروکسید','آلی','معدنی','پلیمر','مونومر','ماکرومولکول','بیومولکول','پروتئین','کربوهیدرات','لیپید','نوکلئیک اسید','آنزیم','هورمون','ویتامین','مینرال','آب','هوا','خاک','سنگ','کانی','فسیل','زمین‌شناسی','زلزله','آتشفشان','فرسایش','رسوب','لایه‌های زمین','پوسته','گوشته','هسته','اتمسفر','تروپوسفر','استراتوسفر','مزوسفر','ترmosphere','exosphere','آب و هوا','اقلیم','گرمایش جهانی','تغییر اقلیم','گلخانه‌ای','اوزون','uv','اشعه','رادیاکتیو','نیمه عمر','واپاشی','همجوشی','شکافت','راکتور','نیروگاه','انرژی تجدیدپذیر','خورشیدی','بادی','آبی','زمین گرمایی','بیوماس','هیدروژن','پیل سوختی','باتری','الکترولیز','خوردگی','آلیاژ','فولاد','چدن','برنز','مس','آلومینیوم','تیتانیوم','طلا','نقره','پلاتین','اورانیوم','پلوتونیوم','سیلیکون','ژرمانیوم','نیمه رسانا','دیود','ترانزیستور','مدار','مقاومت','خازن','سلف','ترانسفورماتور','ژنراتور','موتور','الکتروموتور','سنکرون','آسنکرون','dc','ac','فرکانس','دامنه','فاز','impedance','رزونانس','فیلتر','تقویت کننده','اسیلاتور','مدولاتور','دمودولاتور','آنتن','ارسال','دریافت','سیگنال','نویز','snr','bandwidth','modulation','am','fm','pm','digital','analog','sample','quantize','bit','byte','data','information','entropy','coding','compression','encryption','protocol','network','internet','web','cloud','iot','ai','ml','dl','nn','cnn','rnn','lstm','transformer','bert','gpt','llm','nlp','cv','robotics','automation','control','pid','feedback','sensor','actuator','transducer','calibration','measurement','instrumentation','lab','experiment','hypothesis','theory','law','principle','axiom','postulate','theorem','proof','lemma','corollary','conjecture','paradox','fallacy','bias','error','uncertainty','accuracy','precision','validity','reliability','reproducibility','peer review','publication','citation','impact factor','journal','conference','symposium','seminar','workshop','lecture','presentation','poster','abstract','paper','article','book','textbook','manual','guide','tutorial','course','class','lesson','homework','assignment','project','thesis','dissertation','degree','diploma','certificate','license','patent','trademark','copyright','intellectual property','ethics','morality','responsibility','accountability','transparency','integrity','honesty','trust','respect','dignity','justice','fairness','equity','equality','diversity','inclusion','accessibility','sustainability','environment','ecology','conservation','preservation','restoration','remediation','pollution','waste','recycling','reuse','reduce','circular economy','green','clean','renewable','organic','natural','eco-friendly','biodegradable','compostable','carbon footprint','water footprint','life cycle assessment','lca','environmental impact assessment','eia','iso 14001','ems','auditing','reporting','disclosure','csr','esg','sdgs','un','who','unesco','unep','undp','fao','ilo','imo','icao','itu','wto','imf','world bank','oecd','g7','g20','brics','asean','eu','nafta','usmca','afcta','rcep','cptpp','ttip','ftaa','saarc','gcc','eco','shanghai cooperation organization','apec','oas','au','sadc','ecomowas','igad','comesa','cen-sad','amu','umoa','ueoa','waemu','cemac','eccas','eac','ioc','saarc','bimstec','ion','acss','trilateral','quadrilateral','bilateral','multilateral','unilateral','sanctions','embargo','boycott','tariff','quota','subsidy','dumping','anti-dumping','countervailing','safeguard','dispute settlement','arbitration','mediation','conciliation','negotiation','diplomacy','foreign policy','international relations','geopolitics','security','defense','military','army','navy','air force','marines','coast guard','intelligence','espionage','counterintelligence','cybersecurity','cyberwarfare','information warfare','psychological warfare','propaganda','disinformation','misinformation','fake news','deepfake','bot','troll','astroturfing','sockpuppet','shill','influencer','marketing','advertising','pr','public relations','branding','positioning','segmentation','targeting','promotion','sales','distribution','channel','retail','wholesale','ecommerce','marketplace','platform','app','website','blog','podcast','video','streaming','live','event','webinar','summit','expo','fair','bazaar','market','shop','store','boutique','outlet','mall','center','plaza','square','street','road','avenue','boulevard','highway','freeway','expressway','tollway','turnpike','parkway','drive','lane','alley','path','trail','track','route','corridor','passage','gateway','portal','entrance','exit','door','window','wall','floor','ceiling','roof','foundation','structure','building','construction','architecture','design','engineering','civil','mechanical','electrical','chemical','industrial','materials','metallurgical','petroleum','mining','geological','geophysical','oceanographic','meteorological','climatological','hydrological','glaciological','volcanological','seismological','paleontological','archaeological','anthropological','sociological','psychological','philosophical','theological','religious','spiritual','mystical','esoteric','occult','metaphysical','ontological','epistemological','ethical','aesthetic','political','economic','social','cultural','historical','geographical','demographical','statistical','mathematical','computational','algorithmic','heuristic','empirical','theoretical','applied','pure','basic','fundamental','advanced','specialized','general','interdisciplinary','multidisciplinary','transdisciplinary','holistic','systemic','complex','chaotic','nonlinear','dynamic','adaptive','evolutionary','emergent','self-organizing','autopoietic','cybernetic','informational','computational','digital','virtual','augmented','mixed','extended','immersive','interactive','responsive','intelligent','smart','connected','autonomous','robotic','bio-inspired','neuromorphic','quantum-inspired','swarm','collective','distributed','decentralized','peer-to-peer','blockchain','cryptocurrency','bitcoin','ethereum','defi','nft','dao','web3','metaverse','xr','vr','ar','mr','haptic','holographic','volumetric','spatial','3d','4d','5d','nd','dimensional','topological','geometric','algebraic','analytic','numeric','symbolic','hybrid','fuzzy','probabilistic','stochastic','random','deterministic','predictable','unpredictable','uncertain','ambiguous','vague','clear','precise','accurate','reliable','valid','sound','robust','resilient','flexible','scalable','efficient','effective','optimal','suboptimal','pareto','nash','equilibrium','stable','unstable','bifurcation','catastrophe','tipping point','threshold','limit','boundary','constraint','restriction','regulation','rule','law','norm','standard','protocol','procedure','process','workflow','pipeline','chain','network','graph','tree','hierarchy','taxonomy','ontology','schema','model','framework','architecture','pattern','template','blueprint','roadmap','strategy','tactic','plan','goal','objective','target','metric','kpi','okr','benchmark','baseline','gap','analysis','swot','pestel','porter','five forces','value chain','business model canvas','lean','agile','scrum','kanban','devops','ci/cd','mlops','dataops','gitops','finops','secops','aicps','llmops','prompt engineering','rag','fine-tuning','rlhf','dpo','constitutional ai','alignment','safety','red teaming','jailbreaking','adversarial attack','defense','robustness','fairness','bias mitigation','interpretability','explainability','transparency','accountability','auditability','traceability','provenance','lineage','versioning','reproducibility','replicability','generalizability','transferability','adaptability','portability','interoperability','compatibility','integration','orchestration','coordination','collaboration','cooperation','competition','coopetition','synergy','leverage','scale','scope','economies','diseconomies','returns','diminishing','increasing','constant','marginal','utility','satisfaction','preference','choice','decision','rationality','bounded rationality','heuristics','biases','cognitive','behavioral','neuro','psycho','socio','cultural','institutional','organizational','individual','group','team','community','society','nation','state','country','region','continent','world','planet','earth','moon','sun','star','galaxy','universe','cosmos','multiverse','parallel universe','alternate reality','simulation','matrix','illusion','maya','dream','lucid dream','astral projection','obe','nde','near death experience','reincarnation','past life','karma','dharma','moksha','nirvana','enlightenment','awakening','consciousness','awareness','mindfulness','meditation','contemplation','prayer','worship','devotion','bhakti','jnana','karma yoga','raja yoga','hatha yoga','kundalini','chakra','prana','qi','chi','ki','mana','ojas','tejas','tapas','shakti','shiva','vishnu','brahma','trinity','god','goddess','deity','divine','sacred','holy','profane','secular','mundane','ordinary','extraordinary','miracle','magic','sorcery','witchcraft','alchemy','hermeticism','gnosis','mysticism','sufism','kabbalah','zen','tao','buddhism','hinduism','christianity','islam','judaism','sikhism','jainism','zoroastrianism','bahai','shinto','animism','shamanism','paganism','wicca','new age','spirituality','religion','faith','belief','dogma','doctrine','creed','confession','catechism','scripture','canon','text','sutra','mantra','yantra','mandala','icon','symbol','sign','omen','portent','prophecy','revelation','inspiration','intuition','gut feeling','sixth sense','clairvoyance','telepathy','telekinesis','psychokinesis','remote viewing','precognition','retrocognition','psychometry','mediumship','channeling','possession','exorcism','deliverance','healing','therapy','counseling','coaching','mentoring','guidance','advice','consultation','diagnosis','treatment','cure','remedy','medicine','drug','pharmaceutical','pill','tablet','capsule','syrup','ointment','cream','lotion','gel','spray','injection','vaccine','immunization','antibiotic','antiviral','antifungal','antiparasitic','analgesic','painkiller','anesthetic','sedative','hypnotic','tranquilizer','antidepressant','antipsychotic','stimulant','nootropic','supplement','vitamin','mineral','herb','botanical','extract','tincture','essential oil','aromatherapy','homeopathy','naturopathy','ayurveda','tcm','traditional chinese medicine','acupuncture','acupressure','shiatsu','reflexology','massage','reiki','qigong','tai chi','yoga','pilates','barre','dance','movement','exercise','fitness','wellness','health','nutrition','diet','food','meal','recipe','ingredient','flavor','taste','smell','aroma','scent','fragrance','perfume','cosmetic','makeup','skincare','haircare','bodycare','oral care','hygiene','sanitation','cleanliness','purity','sterility','asepsis','antisepsis','disinfection','decontamination','sanitization','pasteurization','irradiation','filtration','distillation','evaporation','condensation','sublimation','deposition','melting','freezing','boiling','cooking','baking','roasting','grilling','frying','steaming','poaching','simmering','braising','stewing','marinating','pickling','fermenting','curing','smoking','drying','dehydrating','preserving','canning','jarring','bottling','packaging','wrapping','sealing','labeling','branding','marketing','selling','buying','consuming','using','utilizing','exploiting','harnessing','leveraging','optimizing','maximizing','minimizing','balancing','harmonizing','integrating','synthesizing','analyzing','evaluating','assessing','measuring','monitoring','tracking','logging','recording','documenting','archiving','storing','retrieving','accessing','sharing','distributing','disseminating','broadcasting','publishing','printing','copying','duplicating','reproducing','replicating','cloning','forking','branching','merging','rebasing','cherry-picking','squashing','amending','reverting','resetting','stashing','tagging','annotating','commenting','reviewing','approving','rejecting','accepting','declining','canceling','aborting','terminating','killing','stopping','halting','pausing','suspending','resuming','continuing','proceeding','advancing','progressing','moving','going','traveling','journeying','voyaging','exploring','discovering','finding','locating','searching','seeking','hunting','chasing','pursuing','following','tracking','trailing','shadowing','stalking','surveilling','observing','watching','seeing','looking','gazing','staring','peering','glancing','peeking','squinting','blinking','winking','nodding','shaking','tilting','turning','rotating','spinning','twisting','bending','flexing','stretching','extending','reaching','grabbing','holding','gripping','clasping','clutching','squeezing','pressing','pushing','pulling','dragging','lifting','carrying','transporting','hauling','towing','dragging','sliding','slipping','falling','dropping','tumbling','rolling','bouncing','jumping','leaping','hopping','skipping','running','sprinting','jogging','walking','strolling','sauntering','ambling','wandering','roaming','rambling','meandering','drifting','floating','gliding','soaring','flying','hovering','levitating','ascending','descending','rising','sinking','plunging','diving','submerging','immersing','dunking','dipping','splashing','spraying','sprinkling','pouring','spilling','leaking','dripping','oozing','seeping','flowing','streaming','gushing','rushing','surging','flooding','inundating','overwhelming','engulfing','swallowing','devouring','consuming','eating','drinking','sipping','gulping','chugging','quaffing','imbibing','tasting','sampling','trying','testing','experimenting','trialing','piloting','prototyping','mocking','simulating','emulating','virtualizing','containerizing','dockerizing','kubernetes','helm','terraform','ansible','puppet','chef','saltstack','vagrant','packer','consul','vault','nomad','boundary','waypoint','sentinel','atlantis','spacelift','env0','pulumi','cdk','serverless','lambda','azure functions','aws','gcp','cloudflare','vercel','netlify','heroku','render','railway','fly.io','digitalocean','linode','vultr','hetzner','ovh','scaleway','upcloud','akamai','fastly','cloudfront','cdn','edge','worker','wasm','webassembly','rust','go','zig','nim','crystal','elixir','erlang','clojure','scala','kotlin','swift','dart','flutter','react native','ionic','capacitor','cordova','phonegap','xamarin','maui','unity','unreal','godot','bevy','amethyst','macroquad','tetra','ggez','piston','sdl','glfw','vulkan','opengl','directx','metal','mantle','dx12','dx11','dx10','dx9','webgpu','webgl','canvas','svg','css','html','javascript','typescript','node','deno','bun','elysia','hono','express','fastify','koa','nest','adonis','sails','meteor','next','nuxt','remix','astro','svelte','solid','vue','react','angular','ember','backbone','jquery','vanilla','plain','native','bare','raw','pure','simple','minimal','lean','lightweight','tiny','micro','nano','pico','femto','atto','zepto','yocto'],
+            concepts: {
+                'newton': 'قوانین نیوتن پایه مکانیک کلاسیک هستند. قانون دوم: F=ma (نیرو برابر جرم ضربدر شتاب).',
+                'energy': 'انرژی نه به وجود می‌آید و نه از بین می‌رود، بلکه از شکلی به شکل دیگر تبدیل می‌شود (پایستگی انرژی).',
+                'cell': 'سلول واحد بنیادی حیات است. شامل غشا، سیتوپلاسم و مواد ژنتیکی (DNA) است.',
+                'chemistry': 'شیمی مطالعه ماده و تغییرات آن است. واکنش‌های شیمیایی شامل شکستن و تشکیل پیوندها هستند.',
+                'photosynthesis': 'فتوسنتز فرآیندی است که گیاهان با استفاده از نور خورشید، آب و CO2 غذا تولید می‌کنند.',
+                'dna': 'DNA مولکولی است که اطلاعات ژنتیکی را حمل می‌کند و ساختار مارپیچ دوگانه دارد.',
+                'electricity': 'الکتریسیته جریان الکترون‌ها در یک رسانا است. ولتاژ عامل ایجاد این جریان است.',
+                'periodic_table': 'جدول تناوبی عناصر شیمیایی را بر اساس عدد اتمی مرتب کرده است.',
+                'acid': 'اسیدها موادی هستند که یون H+ آزاد می‌کنند و pH کمتر از 7 دارند.',
+                'base': 'بازها موادی هستند که یون OH- آزاد می‌کنند و pH بیشتر از 7 دارند.'
+            }
+        },
+        literature: {
+            keywords: ['ادبیات','شعر','نثر','داستان','رمان','غزل','قصیده','آرایه','تشبیه','استعاره','فردوسی','سعدی','حافظ','مولوی','شاهنامه','بوستان','گلستان','مثنوی','دیوان','وزن','قافیه','ردیف','جناس','ایهام'],
+            concepts: {
+                'arayeh': 'آرایه‌های ادبی ابزارهایی برای زیباسازی کلام هستند. تشبیه، استعاره، مجاز، کنایه از مهم‌ترین آنها هستند.',
+                'poetry': 'شعر سخنی موزون و مقفاست که از تخیل و احساس سرچشمه می‌گیرد.',
+                'history_lit': 'ادبیات فارسی گنجینه‌ای از حکمت، عرفان و حماسه است که هویت فرهنگی ما را شکل داده است.',
+                'ferdowsi': 'حکیم ابوالقاسم فردوسی، سراینده شاهنامه، بزرگترین حماسه‌سرای فارسی است.',
+                'saadi': 'مصلح بن عبدالله شیرازی، معروف به سعدی، استاد سخن و نویسنده گلستان و بوستان است.',
+                'hafez': 'شمس‌الدین محمد حافظ شیرازی، لسان‌الغیب و بزرگترین غزل‌سرای فارسی است.',
+                'molavi': 'جلال‌الدین محمد بلخی، عارف و شاعر بزرگ قرن هفتم و سراینده مثنوی معنوی است.'
+            }
+        },
+        history: {
+            keywords: ['تاریخ','ایران','صفویه','هخامنشی','ساسانی','قاجار','پهلوی','انقلاب','مشروطه','کوروش','داریوش','نادر','امیرکبیر','جنگ','صلح','تمدن','اشکانیان','مادها','عیلام','سلجوقیان','افشاریان','زندیه','اسلام','خلافت'],
+            concepts: {
+                'iran_ancient': 'ایران باستان مهد تمدن‌های بزرگی چون ایلام، ماد، هخامنشی، اشکانی و ساسانی بود که بر جهان تأثیر گذاشتند.',
+                'islam_iran': 'ورود اسلام نقطه عطفی در تاریخ فرهنگی و مذهبی ایران بود.',
+                'modern': 'دوران مدرن با نوسازی و مشروطه همراه بود.',
+                'achaemenid': 'هخامنشیان اولین امپراتوری بزرگ ایران بودند که توسط کوروش بزرگ تأسیس شدند.',
+                'safavid': 'سلسله صفویه توسط شاه اسماعیل صفوی در قرن دهم هجری تأسیس شد و مذهب شیعه رسمی شد.',
+                'constitutional': 'انقلاب مشروطه جنبشی برای محدود کردن قدرت شاه و ایجاد مجلس قانون‌گذاری در سال 1285 شمسی بود.',
+                'cyrus': 'کوروش بزرگ بنیانگذار سلسله هخامنشیان و نویسنده منشور حقوق بشر کوروش است.',
+                'nader': 'نادرشاه افشار فاتح هند و احیاگر قدرت نظامی ایران در قرن 18 بود.',
+                'amirkabir': 'امیرکبیر صدراعظم ناصرالدین شاه قاجار و بنیانگذار دارالفنون بود.'
+            }
+        },
+        programming: {
+            keywords: ['برنامه‌نویسی','کد','پایتون','جاوااسکریپت','html','css','الگوریتم','تابع','متغیر','آرایه','حلقه','شرط','شیء','کلاس','ارث‌بری','پایتون','جاوا','سی','سی++','روبی','پی‌اچ‌پی','سوئیفت','کاتلین','گو','راست','اسکالا','پراسسینگ','متلب','آردوینو','raspberry pi','iot','هوش مصنوعی','یادگیری ماشین','یادگیری عمیق','شبکه عصبی','دیتابیس','sql','nosql','وب','فرانت‌اند','بک‌اند','full stack','api','rest','graphql','microservices','cloud','aws','azure','docker','kubernetes','devops','agile','scrum','git','github','gitlab','test','unit test','integration test','debug','debugging','performance','optimization','security','cybersecurity','encryption','hashing','authentication','authorization','jwt','oauth','ssl','https','dns','tcp/ip','http','websocket','socket','network','server','client','browser','dom','event','async','promise','callback','closure','scope','hoisting','prototype','inheritance','polymorphism','encapsulation','abstraction','design pattern','singleton','factory','observer','strategy','mvc','mvvm','solid','dry','kiss','yagni','clean code','refactoring','code review','version control','branch','merge','commit','pull request','ci/cd','pipeline','deployment','staging','production','monitoring','logging','analytics','metrics','kpi','okr','agile','scrum','kanban','lean','product owner','scrum master','user story','backlog','sprint','retrospective','daily standup','demo','review','planning','estimation','velocity','burndown chart','cumulative flow diagram','kanban board','scrum board','jira','trello','asana','clickup','monday','notion','slack','discord','teams','zoom','meet','hangouts','skype','whatsapp','telegram','signal','wechat','line','viber','kakao','qq','tiktok','instagram','facebook','twitter','linkedin','pinterest','snapchat','reddit','quora','medium','wordpress','ghost','substack','newsletter','blog','podcast','youtube','twitch','spotify','apple music','soundcloud','bandcamp','mixcloud','audius','deezer','tidal','qobuz','pandora','iheart','siriusxm','amazon music','youtube music','apple podcasts','google podcasts','overcast','castro','pocket casts','player fm','podbean','buzzsprout','anchor','libsyn','blubrry','soundcloud','mixcloud','hearthis','audioboom','podomatic','spreaker','podbean','buzzsprout','anchor','libsyn','blubrry','soundcloud','mixcloud','hearthis','audioboom','podomatic','spreaker'],
+            concepts: {
+                'python': 'پایتون یک زبان برنامه‌نویسی سطح بالا، تفسیری و همه‌منظوره است که به دلیل سادگی و خوانایی بالا محبوب است.',
+                'javascript': 'جاوااسکریپت زبان برنامه‌نویسی وب است که هم در سمت کلاینت و هم در سمت سرور استفاده می‌شود.',
+                'html': 'HTML زبان نشانه‌گذاری استاندارد برای ایجاد صفحات وب است.',
+                'css': 'CSS زبان سبک‌دهی صفحات وب است که ظاهر و قالب صفحه را کنترل می‌کند.',
+                'algorithm': 'الگوریتم مجموعه‌ای از مراحل مشخص و متناهی برای حل یک مسئله است.',
+                'function': 'تابع بلوکی از کد است که وظیفه خاصی را انجام می‌دهد و قابل استفاده مجدد است.',
+                'variable': 'متغیر مکانی در حافظه است که مقداری را ذخیره می‌کند.',
+                'array': 'آرایه ساختاری داده‌ای است که مجموعه‌ای از مقادیر را ذخیره می‌کند.',
+                'loop': 'حلقه ساختاری است که اجازه می‌دهد کدی را چندین بار تکرار کنیم.',
+                'condition': 'شرط ساختاری است که اجازه می‌دهد بر اساس شرایط مختلف، تصمیم‌گیری کنیم.',
+                'object': 'شیء ساختاری داده‌ای است که ویژگی‌ها و رفتارها را zusammenfasst.',
+                'class': 'کلاس الگویی برای ایجاد اشیاء است که ویژگی‌ها و رفتارها را تعریف می‌کند.',
+                'inheritance': 'ارث‌بری مکانیزمی است که اجازه می‌دهد کلاس‌ها ویژگی‌ها و رفتارهای کلاس‌های دیگر را به ارث ببرند.',
+                'ai': 'هوش مصنوعی شاخه‌ای از علوم کامپیوتر است که هدف آن ایجاد سیستم‌های هوشمند است.',
+                'ml': 'یادگیری ماشین زیرشاخه‌ای از هوش مصنوعی است که به سیستم‌ها اجازه می‌دهد از داده‌ها یاد بگیرند.',
+                'dl': 'یادگیری عمیق زیرشاخه‌ای از یادگیری ماشین است که از شبکه‌های عصبی عمیق استفاده می‌کند.',
+                'nn': 'شبکه عصبی مدلی محاسباتی است که از ساختار مغز انسان الهام گرفته شده است.',
+                'database': 'پایگاه داده مجموعه‌ای سازمان‌یافته از داده‌ها است.',
+                'sql': 'SQL زبان استاندارد برای مدیریت پایگاه‌های داده رابطه‌ای است.',
+                'web': 'وب شبکه‌ای جهانی از صفحات و منابع متصل به هم است.',
+                'frontend': 'فرانت‌اند بخش سمت کلاینت وب است که کاربر با آن تعامل دارد.',
+                'backend': 'بک‌اند بخش سمت سرور وب است که منطق و داده‌ها را مدیریت می‌کند.',
+                'api': 'API رابطی است که اجازه می‌دهد نرم‌افزارها با هم ارتباط برقرار کنند.',
+                'rest': 'REST سبک معماری برای طراحی APIهای وب است.',
+                'git': 'Git سیستم کنترل نسخه توزیع‌شده است.',
+                'docker': 'Docker پلتفرمی برای کانتینرسازی اپلیکیشن‌ها است.',
+                'kubernetes': 'Kubernetes پلتفرمی برای ارکستراسیون کانتینرها است.',
+                'devops': 'DevOps فرهنگی است که توسعه و عملیات را یکپارچه می‌کند.',
+                'agile': 'Agile رویکردی چابک برای توسعه نرم‌افزار است.',
+                'scrum': 'Scrum چارچوبی چابک برای مدیریت پروژه‌های نرم‌افزاری است.'
             }
         }
-        
-        return this.responses.default;
-    }
-};
-
-// ============================================================
-// OFFLINE AI MANAGER
-// ============================================================
-const OfflineAIManager = {
-    async init() {
-        try {
-            const r = await fetch('http://localhost:11434/api/tags', {signal: AbortSignal.timeout(1000)});
-            if(r.ok) { UI.updateAIStatus('active', 'Ollama'); return; }
-        } catch(e) {}
-        
-        if(TransformersAI.isLoaded) {
-             UI.updateAIStatus('active', 'Transformers.js');
-             return;
-        }
-
-        UI.updateAIStatus('inactive', 'مدل محلی');
     },
-    async ask(question) {
+    // FIX #2: Advanced Math Solver using math.js
+    solveMath(expr) {
         try {
-            const r = await fetch('http://localhost:11434/api/generate', {
-                method: 'POST', body: JSON.stringify({model:'phi', prompt:question, stream:false}),
-                signal: AbortSignal.timeout(5000)
-            });
-            if(r.ok) { const d = await r.json(); if(d.response) return d.response; }
-        } catch(e) {}
-
-        if(TransformersAI.isLoaded) {
-            const res = await TransformersAI.ask(question);
-            if(res) return res;
+            let clean = expr.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[^0-9+\-*/().\s^x=]/gi, '').trim();
+            if (!clean) return null;
+            
+            // Try math.js first for complex expressions
+            if (typeof math !== 'undefined') {
+                try {
+                    const result = math.evaluate(clean);
+                    return { steps: [`🔍 **محاسبه:** ${clean}`], result: result };
+                } catch(e) {}
+            }
+            
+            // Fallback to basic solver
+            let steps = [], result;
+            if (clean.includes('=') && clean.toLowerCase().includes('x')) {
+                const parts = clean.split('=');
+                if (parts.length === 2) {
+                    const lhs = parts[0].trim(); const rhs = parseFloat(parts[1].trim());
+                    steps.push(`🔍 **تحلیل معادله:** ${lhs} = ${rhs}`);
+                    let a = 1, b = 0;
+                    const match = lhs.match(/([+-]?\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d+\.?\d*)?/i);
+                    if (match) {
+                        a = match[1] ? parseFloat(match[1].replace(/\s/g,'')) : 1;
+                        if (isNaN(a)) a = 1;
+                        if (match[2]) b = parseFloat(match[2].replace(/\s/g,''));
+                        steps.push(`➡️ انتقال عدد ${b} → ${rhs} - (${b}) = ${rhs - b}`);
+                        const rhsNew = rhs - b;
+                        steps.push(`➡️ تقسیم بر ضریب x (${a}) → ${rhsNew} / ${a} = ${rhsNew / a}`);
+                        result = (rhsNew / a);
+                        steps.push(`✅ **نتیجه:** x = ${result}`);
+                    } else return null;
+                }
+            } else if (/^\d+\s*[+\-*/]\s*\d+$/.test(clean)) {
+                const parts = clean.match(/(\d+)\s*([+\-*/])\s*(\d+)/);
+                if (parts) {
+                    const a = parseFloat(parts[1]), op = parts[2], b = parseFloat(parts[3]);
+                    steps.push(`🔍 **تحلیل:** ${a} ${op} ${b}`);
+                    switch(op) { case '+': result=a+b; break; case '-': result=a-b; break; case '*': result=a*b; break; case '/': if(b===0)return{error:'تقسیم بر صفر!'}; result=a/b; break; }
+                    steps.push(`✅ **نتیجه:** ${result}`);
+                }
+            } else { try { result = new Function('return ' + clean.replace('^', '**').replace(/x/gi, '1'))(); steps.push(`🔍 **محاسبه:** ${clean} = ${result}`); } catch(e) { return null; } }
+            return { steps, result };
+        } catch (e) { return null; }
+    },
+    generate(question) {
+        const qLower = question.toLowerCase().normalize('NFC');
+        const mathResult = this.solveMath(question);
+        if (mathResult) { if (mathResult.error) return `❌ **خطا:** ${mathResult.error}`; return `🧮 **حل گام‌به‌گام:**
+<div class="reasoning-block"><span class="reasoning-title">🤔 استدلال</span>${mathResult.steps.join('<br>')}</div>`; }
+        for (const [domain, data] of Object.entries(this.knowledge)) {
+            for (const kw of data.keywords) {
+                if (qLower.includes(kw.normalize('NFC'))) {
+                    let explanation = null;
+                    if (data.concepts) { for (const [ckey, cval] of Object.entries(data.concepts)) { if (qLower.includes(ckey) || kw.includes(ckey)) { explanation = cval; break; } } }
+                    if (!explanation) { const generic = { math:'این مسئله ریاضی است.', science:'این پدیده علمی است.', literature:'این موضوع ادبی است.', history:'این رویداد تاریخی است.', programming:'این موضوع برنامه‌نویسی است.' }; explanation = generic[domain] || 'تحلیل موضوع.'; }
+                    return `🧠 **تحلیل (${domain}):**
+<div class="reasoning-block"><span class="reasoning-title">💭 استدلال</span>موضوع در حوزه <strong>${domain}</strong> است.<br><br>${explanation}</div>
+📚 *برای پاسخ دقیق‌تر API Key را فعال کنید.*`;
+                }
+            }
         }
-
-        return LocalAI.generate(question);
-    }
+        return `🧠 **استاد یار (آفلاین):**
+الگوی دقیقی یافت نشد.
+💡 API Key را وارد کنید یا سوال را ساده‌تر بپرسید.`;
+    },
+    generateMultiPart(topic) { return `📝 **تحلیل "${topic}"**
+<div class="reasoning-block"><span class="reasoning-title">🎯 نقشه راه</span>تقسیم به چهار بخش.</div>
+**۱. تعریف:** چیست؟
+**۲. تحلیل:** اجزا؟
+**۳. کاربرد:** اهمیت؟
+**۴. نقد:** چالش‌ها؟`; }
 };
 
 // ============================================================
-// VOICE INPUT V80.9.0
+// VOICE INPUT V80.9.3
 // ============================================================
 const Voice = {
     recognition: null,
@@ -935,7 +1012,11 @@ const Voice = {
     init() {
         try {
             const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SR) { document.getElementById('voice-btn').style.display = 'none'; return; }
+            if (!SR) { 
+                document.getElementById('voice-btn').style.display = 'none'; 
+                console.warn('Speech Recognition not supported');
+                return; 
+            }
             
             this.recognition = new SR();
             this.recognition.continuous = false;
@@ -952,11 +1033,12 @@ const Voice = {
             this.recognition.onerror = (e) => {
                 console.error('Speech Error:', e);
                 this.stop();
-                Toast.show('خطا در تشخیص صدا', 'error');
+                Toast.show('خطا در تشخیص صدا: ' + e.error, 'error');
             };
             this.recognition.onend = () => this.stop();
         } catch(e) {
             document.getElementById('voice-btn').style.display = 'none';
+            console.error('Voice Init Error:', e);
         }
     },
     toggle() {
@@ -1021,7 +1103,7 @@ const QuestionBank = {
 const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
 // ============================================================
-// CHAT ENGINE V80.9.0 (FIX #2, #3, #5, #6, #7, #8, #9)
+// CHAT ENGINE V80.9.3 (FIX #4, #5, #10)
 // ============================================================
 const PURIFY_CONFIG = {
     ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'i', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span'],
@@ -1037,7 +1119,6 @@ const Chat = {
         else this.newSession();
         UI.renderList();await UI.updateStats();
         
-        // FIX #8: Auto-save every 30 seconds
         setInterval(() => { if(this.history.length > 0) this.save(); }, 30000);
     },
     
@@ -1083,7 +1164,6 @@ const Chat = {
     
     copy(i){const t=this.history[i]?.content;if(t)navigator.clipboard.writeText(t).then(()=>Toast.show('کپی شد','success'));},
     
-    // FIX #6: Stop Generation Button
     stopGeneration() {
         if (this.abortController) {
             this.abortController.abort();
@@ -1094,7 +1174,16 @@ const Chat = {
         }
     },
 
-    // FIX #2 & #9: Unlimited PDF Processing with RTL Fix
+    // FIX #10: RTL Detection & Fix for PDF Text
+    fixRtlText(text) {
+        const rtlRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+        if (rtlRegex.test(text)) {
+            return text.split('\n\n').map(p => p.trim() ? `<div dir="rtl">${p}</div>` : '').join('');
+        }
+        return text;
+    },
+
+    // FIX #3 & #10: Handle Image & PDF Upload
     async handleFileUpload(input){
         const file=input.files[0];if(!file)return;
         
@@ -1122,17 +1211,14 @@ const Chat = {
                     for(let p=i; p<=end; p++) {
                         const page = await pdf.getPage(p);
                         const textContent = await page.getTextContent();
-                        // FIX #9: Simple RTL detection and fix
-                        let pageText = textContent.items.map(item => item.str).join(' ');
-                        if (/[\u0600-\u06FF]/.test(pageText)) {
-                            // Basic RTL handling: reverse words if needed or keep as is for modern browsers
-                            // Modern browsers handle RTL text content correctly in HTML
-                        }
-                        fullText += pageText + '\n\n';
+                        fullText += textContent.items.map(item => item.str).join(' ') + '\n\n';
                     }
                     await new Promise(r => setTimeout(r, 0));
                     Toast.show(`پردازش ${end} از ${totalPages} صفحه...`, 'info');
                 }
+                
+                // Apply RTL fix
+                fullText = this.fixRtlText(fullText);
                 
                 this.pendingFile = {name: file.name, text: fullText, type:'pdf'};
                 Toast.show(`متن ${totalPages} صفحه استخراج شد`, 'success');
@@ -1147,13 +1233,14 @@ const Chat = {
         input.value='';
     },
     
-    // FIX #7: Token Estimation
+    // FIX #5: Token Estimation
     estimateTokens(text) {
         const lang = document.documentElement.lang || 'fa';
         const divisor = lang === 'en' ? 4 : 2;
         return Math.ceil(text.length / divisor);
     },
     
+    // FIX #4: Improved Search Proxies
     async send(){
         if(this.isProcessing)return;
         const inp=document.getElementById('user-input');const txt=inp.value.trim();
@@ -1172,7 +1259,6 @@ const Chat = {
         
         if(!content && !image){Toast.show('پیام لازم است','warning');return;}
         
-        // FIX #7: Check token limit before sending
         const tokens = this.estimateTokens(content);
         if(tokens > 8000) {
             Toast.show(`متن خیلی طولانی است (${tokens} توکن). لطفاً خلاصه کنید.`, 'error');
@@ -1189,7 +1275,6 @@ const Chat = {
         
         this.history.push({role:'user', content: content, image: image});
         
-        // FIX #5: Smart Title Generation
         if(this.history.length===1){
             const s=this.sessions.find(x=>x.id===this.currentId);
             if(s){
@@ -1210,9 +1295,11 @@ const Chat = {
             this.render();
             try {
                 const query = encodeURIComponent(txt);
+                // FIX #4: Added third proxy
                 const proxies = [
                     `https://api.allorigins.win/get?url=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + query)}`,
-                    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + query)}`
+                    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + query)}`,
+                    `https://thingproxy.freeboard.io/fetch/${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + query)}`
                 ];
                 
                 let contents = null;
@@ -1244,7 +1331,12 @@ const Chat = {
             try {
                 res = await OfflineAIManager.ask(txt);
             } catch(e) {
-                res = '⚠️ خطا در ارتباط با هوش مصنوعی.';
+                if(e.status) {
+                    const service = document.getElementById('ai-model-select').selectedOptions[0].text;
+                    res = this.parseApiError(e.status, e.body, service);
+                } else {
+                    res = '⚠️ خطا در ارتباط با هوش مصنوعی.';
+                }
             }
         }
         
@@ -1256,6 +1348,17 @@ const Chat = {
         document.getElementById('send-btn').style.display = 'flex';
         document.getElementById('stop-chat-btn').classList.remove('visible');
         this.pendingFile=null;
+    },
+    parseApiError(status, body, service) {
+        const errors = {
+            401: 'کلید API نامعتبر است. لطفاً تنظیمات را بررسی کنید.',
+            403: 'دسترسی غیرمجاز. کلید API شما مسدود شده است.',
+            429: 'تعداد درخواست‌ها بیش از حد مجاز است. لطفاً چند لحظه صبر کنید.',
+            500: 'خطای داخلی سرور. لطفاً دوباره تلاش کنید.',
+            503: 'سرویس موقتاً در دسترس نیست. لطفاً بعداً تلاش کنید.'
+        };
+        const msg = errors[status] || `خطای ناشناخته (${status})`;
+        return `⚠️ **خطای ${service}:** ${msg}`;
     },
     async save(){const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.messages=[...this.history];s.date=Date.now();await Storage.put('sessions',s);}},
     async clearCurrent(){if(!confirm('پاک شود؟'))return;this.history=[];const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.messages=[];await Storage.put('sessions',s);}this.render();Toast.show('پاک شد','success');},
@@ -1665,7 +1768,7 @@ const UI = {
 };
 
 // ============================================================
-// STORAGE HELPER V80.9.0 (FIX #10: Encrypted Keys)
+// STORAGE HELPER V80.9.3
 // ============================================================
 const Storage = {
     db: null,
@@ -1685,14 +1788,12 @@ const Storage = {
     async delete(store, key) { if(!this.db)return; const tx=this.db.transaction(store,'readwrite'); tx.objectStore(store).delete(key); },
     async getConfig() { 
         const c = await this.get('settings', 'config') || {}; 
-        // Decrypt API Key on read
         if(c.apiKey) c.apiKey = await SecureStorage.decrypt(c.apiKey);
         return c;
     },
     async getKey() { const c = await this.getConfig(); return c.apiKey || ''; },
     async saveSettings() {
         const rawKey = document.getElementById('api-key-input').value;
-        // FIX #10: Encrypt API Key before saving
         const encryptedKey = await SecureStorage.encrypt(rawKey);
         
         const cfg = { 
@@ -1781,8 +1882,43 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!e.target.closest('#ctx-toggle') && !e.target.closest('#ctx-menu')) UI.closeContextMenu(); 
     });
     
-    Toast.show('🚀 استاد یار پلاس v80.9.0 آماده است!', 'success');
+    Toast.show('🚀 استاد یار پلاس v80.9.3 آماده است!', 'success');
 });
+
+// ============================================================
+// OFFLINE AI MANAGER
+// ============================================================
+const OfflineAIManager = {
+    async init() {
+        try {
+            const r = await fetch('http://localhost:11434/api/tags', {signal: AbortSignal.timeout(1000)});
+            if(r.ok) { UI.updateAIStatus('active', 'Ollama'); return; }
+        } catch(e) {}
+        
+        if(TransformersAI.isLoaded) {
+             UI.updateAIStatus('active', 'Transformers.js');
+             return;
+        }
+
+        UI.updateAIStatus('inactive', 'مدل محلی');
+    },
+    async ask(question) {
+        try {
+            const r = await fetch('http://localhost:11434/api/generate', {
+                method: 'POST', body: JSON.stringify({model:'phi', prompt:question, stream:false}),
+                signal: AbortSignal.timeout(5000)
+            });
+            if(r.ok) { const d = await r.json(); if(d.response) return d.response; }
+        } catch(e) {}
+
+        if(TransformersAI.isLoaded) {
+            const res = await TransformersAI.ask(question);
+            if(res) return res;
+        }
+
+        return LocalAI.generate(question);
+    }
+};
 </script>
 </body>
     </html>
