@@ -3,15 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>استاد یار پلاس | v100.8 Ultimate</title>
+<title>استاد یار پلاس | v101.0 Ultimate</title>
 <meta name="theme-color" content="#6366f1">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
-<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="https://meet.jit.si/external_api.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" defer></script>
@@ -24,7 +20,7 @@
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js" defer></script>
 
 <style>
-:root{--bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--glass:rgba(30,41,59,.85);--primary:#6366f1;--primary2:#818cf8;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--border:rgba(255,255,255,.08);--success:#22c55e;--danger:#ef4444;--warning:#f59e0b;--info:#0ea5e9;--r:16px;--r2:12px;--r3:8px}
+:root{--bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--glass:rgba(30,41,59,.86);--primary:#6366f1;--primary2:#818cf8;--accent:#fbbf24;--text:#f8fafc;--muted:#94a3b8;--border:rgba(255,255,255,.08);--success:#22c55e;--danger:#ef4444;--warning:#f59e0b;--info:#0ea5e9;--r:16px;--r2:12px;--r3:8px}
 *{box-sizing:border-box;margin:0;padding:0;outline:none;-webkit-tap-highlight-color:transparent}
 body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);height:100dvh;overflow:hidden}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
@@ -35,9 +31,9 @@ body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);h
 .content{flex:1;overflow-y:auto;padding:1rem}
 .btn{border:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:var(--r2);background:var(--bg3);color:var(--text);font-size:.9rem;transition:.2s;min-height:40px}
 .btn:hover{opacity:.9;transform:translateY(-1px)}
-.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:600}
-.btn-success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff;font-weight:600}
-.btn-danger{background:linear-gradient(135deg,var(--danger),#b91c1c);color:#fff;font-weight:600}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:700}
+.btn-success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff;font-weight:700}
+.btn-danger{background:linear-gradient(135deg,var(--danger),#b91c1c);color:#fff;font-weight:700}
 .btn-icon{width:40px;height:40px;border-radius:50%;padding:0}
 .btn svg{width:18px;height:18px;fill:currentColor}
 .card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;margin-bottom:1rem}
@@ -49,8 +45,8 @@ select.input{cursor:pointer}
 .nav-btn svg{width:20px;height:20px;fill:currentColor}
 .nav-btn.active,.nav-btn:hover{background:var(--bg3);color:var(--primary)}
 .view{display:none}
-.view.active{display:block;animation:fadeIn .3s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.view.active{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .chat-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:1rem}
 .msg{max-width:85%;padding:.9rem 1.2rem;border-radius:var(--r);line-height:1.7;font-size:.95rem;position:relative;word-wrap:break-word}
 .msg.user{align-self:flex-start;background:rgba(99,102,241,.15);border-bottom-right-radius:4px}
@@ -71,30 +67,21 @@ select.input{cursor:pointer}
 .typing span:nth-child(2){animation-delay:.15s}
 .typing span:nth-child(3){animation-delay:.3s}
 @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
-.classroom-grid{display:grid;grid-template-columns:1fr 320px;gap:1rem;height:calc(100dvh - 140px)}
-.classroom-main{display:flex;flex-direction:column;gap:1rem}
-.classroom-sidebar{display:flex;flex-direction:column;gap:1rem;overflow-y:auto}
-.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;flex:1}
-.video-tile{background:var(--bg);border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
-.video-tile video{width:100%;height:100%;object-fit:cover}
-.video-tile .name-tag{position:absolute;bottom:8px;inset-inline-start:8px;background:rgba(0,0,0,.7);padding:4px 10px;border-radius:20px;font-size:.75rem}
-.video-tile .controls{position:absolute;top:8px;inset-inline-end:8px;display:flex;gap:4px}
-.video-tile .ctrl-btn{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.6);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem}
-.video-tile .ctrl-btn:hover{background:var(--primary)}
-.video-tile .ctrl-btn.muted{background:var(--danger)}
-.classroom-controls{display:flex;justify-content:center;gap:12px;padding:1rem;background:var(--bg2);border-radius:var(--r);flex-wrap:wrap}
-.ctrl-btn-lg{width:50px;height:50px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:.2s;background:var(--bg3);color:var(--text)}
-.ctrl-btn-lg:hover{transform:scale(1.1)}
-.ctrl-btn-lg.active{background:var(--primary);color:#fff}
-.ctrl-btn-lg.danger{background:var(--danger);color:#fff}
-.ctrl-btn-lg.muted{background:var(--bg3);color:var(--muted)}
-.wb-container{position:relative;background:#1e293b;border-radius:var(--r);overflow:hidden;touch-action:none;flex:1;min-height:300px}
-.wb-canvas{width:100%;height:100%;cursor:crosshair;display:block}
-.wb-tools{position:absolute;top:10px;inset-inline-start:10px;display:flex;gap:6px;background:var(--bg2);padding:6px;border-radius:30px;border:1px solid var(--border);flex-wrap:wrap;align-items:center}
-.wb-tool{width:32px;height:32px;border-radius:50%;border:none;background:transparent;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
-.wb-tool:hover,.wb-tool.active{background:var(--primary);color:#fff}
-.wb-color{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);cursor:pointer;transition:.2s}
-.wb-color:hover,.wb-color.active{border-color:#fff;transform:scale(1.15)}
+.classroom-center{max-width:720px;margin:1rem auto}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem}
+.role-btn{min-height:130px;flex-direction:column;font-size:1.05rem;font-weight:800}
+.role-btn span{font-size:2.4rem}
+.classroom-active{display:none;height:calc(100dvh - 140px);flex-direction:column;gap:10px}
+.classroom-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0}
+.classroom-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 330px;gap:10px}
+#jitsi-container{min-height:0;background:#000;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+#jitsi-container iframe{width:100%;height:100%;border:0}
+.classroom-side{min-height:0;overflow:auto;margin:0}
+.link-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--r2);padding:12px;margin:8px 0;font-family:monospace;font-size:.82rem;direction:ltr;text-align:left;word-break:break-all;color:#dbeafe}
+.hint{color:var(--muted);font-size:.82rem;line-height:1.9;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.18);border-radius:12px;padding:10px 12px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:700;background:var(--bg3);border:1px solid var(--border)}
+.badge.success{border-color:var(--success);color:var(--success)}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
 .calc-display{background:var(--bg);padding:1rem;border-radius:var(--r2);text-align:left;font-size:1.5rem;font-family:monospace;margin-bottom:1rem;border:1px solid var(--border);direction:ltr;min-height:60px;display:flex;align-items:center;justify-content:flex-end;overflow:hidden}
 .calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -105,9 +92,16 @@ select.input{cursor:pointer}
 .pomo-display{font-size:3.5rem;font-weight:900;font-variant-numeric:tabular-nums;color:var(--primary);text-align:center;margin:1rem 0}
 .qr-output{display:flex;justify-content:center;margin:1rem 0}
 .qr-output canvas,.qr-output img{border-radius:12px;border:4px solid #fff}
+.wb-container{position:relative;background:#1e293b;border-radius:var(--r);overflow:hidden;touch-action:none;flex:1;min-height:300px}
+.wb-canvas{width:100%;height:100%;cursor:crosshair;display:block}
+.wb-tools{position:absolute;top:10px;inset-inline-start:10px;display:flex;gap:6px;background:var(--bg2);padding:6px;border-radius:30px;border:1px solid var(--border);flex-wrap:wrap;align-items:center}
+.wb-tool{width:32px;height:32px;border-radius:50%;border:none;background:transparent;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.wb-tool:hover,.wb-tool.active{background:var(--primary);color:#fff}
+.wb-color{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);cursor:pointer;transition:.2s}
+.wb-color:hover,.wb-color.active{border-color:#fff;transform:scale(1.15)}
 .fact-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.8rem;transition:.2s}
 .fact-card:hover{transform:translateY(-2px);border-color:var(--primary)}
-.fact-cat{display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(99,102,241,.15);color:var(--primary);font-size:.7rem;font-weight:600;margin-bottom:6px}
+.fact-cat{display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(99,102,241,.15);color:var(--primary);font-size:.7rem;font-weight:700;margin-bottom:6px}
 .quiz-option{padding:12px 16px;border:2px solid var(--border);border-radius:var(--r2);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .quiz-option:hover{border-color:var(--primary);background:var(--bg3)}
 .quiz-option.selected{border-color:var(--primary);background:rgba(99,102,241,.1)}
@@ -117,29 +111,21 @@ select.input{cursor:pointer}
 .fc-card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;border-radius:var(--r)}
 .fc-card.flipped{transform:rotateY(180deg)}
 .fc-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center;font-size:1.1rem;line-height:1.8;border-radius:var(--r);border:1px solid var(--border);background:var(--glass)}
-.fc-back{transform:rotateY(180deg);background:rgba(99,102,241,.1);color:var(--primary);font-weight:600}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:var(--bg3);border:1px solid var(--border)}
-.badge.success{border-color:var(--success);color:var(--success)}
-.badge.warning{border-color:var(--warning);color:var(--warning)}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
-.link-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--r2);padding:12px;margin:8px 0;font-family:monospace;font-size:.85rem;direction:ltr;text-align:left;word-break:break-all;color:var(--text)}
-.class-chat-msg{padding:8px 12px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:.85rem;word-break:break-word}
-.class-chat-file img{max-width:100%;border-radius:8px;margin-top:6px;display:block}
-.class-chat-file a{color:var(--primary2)}
-.source-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px;margin:6px 0;font-size:.85rem}
-.toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:400px}
+.fc-back{transform:rotateY(180deg);background:rgba(99,102,241,.1);color:var(--primary);font-weight:700}
+.toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:420px}
 .toast{background:var(--bg2);border:1px solid var(--border);padding:12px 18px;border-radius:var(--r2);display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);pointer-events:auto;animation:slideUp .3s ease;font-size:.9rem;border-inline-start:4px solid var(--success)}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--bg2);border-top:1px solid var(--border);justify-content:space-around;align-items:center;z-index:999}
 .mobile-nav button{background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem;font-family:inherit}
 .mobile-nav button svg{width:22px;height:22px;fill:currentColor}
 .mobile-nav button.active{color:var(--primary)}
+@media(max-width:950px){.classroom-grid{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto}.classroom-side{max-height:35vh}}
 @media(max-width:768px){
 .sidebar{position:fixed;inset:0;z-index:1000;transform:translateX(100%);transition:.3s}
 .sidebar.open{transform:translateX(0)}
-.classroom-grid{grid-template-columns:1fr;height:auto}
 .tools-grid{grid-template-columns:1fr}
 .mobile-nav{display:flex!important}
+.role-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -153,7 +139,7 @@ select.input{cursor:pointer}
       <svg viewBox="0 0 24 24" style="width:32px;height:32px;fill:var(--primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
       <div>
         <div style="font-weight:800;font-size:1.1rem;color:var(--primary)">استاد یار پلاس</div>
-        <div style="font-size:.7rem;color:var(--muted)">v100.8 Ultimate</div>
+        <div style="font-size:.7rem;color:var(--muted)">v101.0 Ultimate</div>
       </div>
     </div>
 
@@ -204,6 +190,7 @@ select.input{cursor:pointer}
     </header>
 
     <div class="content" id="content">
+
       <div class="view active" id="view-home">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1rem">
           <div class="card" style="text-align:center"><div style="font-size:2rem;font-weight:900;color:var(--primary)" id="stat-chats">0</div><div style="color:var(--muted);font-size:.85rem">گفتگوها</div></div>
@@ -238,88 +225,84 @@ select.input{cursor:pointer}
       </div>
 
       <div class="view" id="view-classroom">
-        <div id="classroom-lobby">
-          <div class="card" style="max-width:520px;margin:2rem auto;text-align:center">
-            <div style="font-size:3rem;margin-bottom:1rem">🎓</div>
-            <h2 style="margin-bottom:1rem">کلاس مجازی</h2>
-            <input class="input" id="class-name" placeholder="نام کلاس (مثلاً: ریاضی دهم)">
-            <input class="input" id="class-teacher" placeholder="نام معلم">
-            <input class="input" id="class-display-name" placeholder="نام شما (اختیاری)">
-            <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="Classroom.create()">🚀 ایجاد کلاس</button>
-            <div style="margin:1rem 0;color:var(--muted);font-size:.85rem">یا</div>
-            <input class="input" id="class-code" placeholder="کد کلاس یا لینک کلاس را وارد کنید">
-            <button class="btn btn-success" style="width:100%" onclick="Classroom.join()">📥 ورود به کلاس</button>
+        <div id="classroom-step-role" class="card classroom-center" style="text-align:center">
+          <div style="font-size:3.2rem;margin-bottom:.4rem">🎓</div>
+          <h2 style="margin-bottom:.5rem">کلاس مجازی</h2>
+          <p style="color:var(--muted);margin-bottom:1rem">ابتدا انتخاب کنید معلم هستید یا دانش‌آموز.</p>
+
+          <div class="role-grid">
+            <button class="btn btn-primary role-btn" onclick="Classroom.chooseRole('teacher')"><span>👨‍🏫</span> معلم هستم</button>
+            <button class="btn btn-success role-btn" onclick="Classroom.chooseRole('student')"><span>👨‍🎓</span> دانش‌آموز هستم</button>
+          </div>
+
+          <div style="margin-top:1.2rem;text-align:right">
+            <label style="display:block;margin-bottom:6px;font-weight:600">🌐 دامنه Jitsi (اختیاری)</label>
+            <input class="input" id="classroom-domain" style="margin:0" placeholder="meet.jit.si" oninput="Classroom.setDomain(this.value)">
+            <p style="color:var(--muted);font-size:.82rem;line-height:1.8;margin-top:8px">
+              برای اتصال پایدار و ۳۰ نفر، از Jitsi/SFU استفاده می‌شود. اگر دامنه عمومی ناپایدار بود، دامنه Jitsi اختصاصی خودتان را وارد کنید.
+            </p>
           </div>
         </div>
 
-        <div id="classroom-active" style="display:none">
-          <div class="classroom-grid">
-            <div class="classroom-main">
-              <div class="video-grid" id="video-grid">
-                <div class="video-tile" id="local-video-tile">
-                  <video id="local-video" autoplay muted playsinline></video>
-                  <div class="name-tag">شما</div>
-                  <div class="controls">
-                    <button class="ctrl-btn" onclick="Classroom.toggleMic()" id="mic-btn">🎤</button>
-                    <button class="ctrl-btn" onclick="Classroom.toggleCam()" id="cam-btn">📷</button>
-                  </div>
-                </div>
-              </div>
+        <div id="classroom-step-teacher" class="card classroom-center" style="display:none">
+          <button class="btn" onclick="Classroom.back()" style="margin-bottom:12px">🔙 بازگشت</button>
+          <h2 style="margin-bottom:1rem">👨‍🏫 معلم</h2>
+          <p style="color:var(--muted);margin-bottom:1rem">
+            برای ساخت کلاس جدید، نام معلم و نام کلاس را وارد کنید. اگر کد کلاس موجود دارید، آن را وارد کنید تا وارد همان کلاس شوید.
+          </p>
+          <input class="input" id="teacher-name" placeholder="نام معلم (اجباری)">
+          <input class="input" id="teacher-class-name" placeholder="نام کلاس (برای ساخت کلاس جدید)">
+          <input class="input" id="teacher-display-name" placeholder="نام نمایشی شما (اختیاری)">
+          <input class="input" id="teacher-class-code" placeholder="کد کلاس موجود (اختیاری)" oninput="Classroom.updateTeacherButton()">
+          <button class="btn btn-primary" id="teacher-submit" style="width:100%" onclick="Classroom.teacherSubmit()">🚀 ساخت کلاس و دریافت کد</button>
+        </div>
 
-              <div class="wb-container" id="wb-container" style="display:none">
-                <canvas class="wb-canvas" id="wb-canvas"></canvas>
-                <div class="wb-tools">
-                  <button class="wb-tool active" onclick="WB.setTool('pen',this)">✏️</button>
-                  <button class="wb-tool" onclick="WB.setTool('eraser',this)">🧹</button>
-                  <button class="wb-tool" onclick="WB.undo()">↩️</button>
-                  <div class="wb-color active" style="background:#fff" onclick="WB.setColor('#fff',this)"></div>
-                  <div class="wb-color" style="background:#ef4444" onclick="WB.setColor('#ef4444',this)"></div>
-                  <div class="wb-color" style="background:#22c55e" onclick="WB.setColor('#22c55e',this)"></div>
-                  <div class="wb-color" style="background:#6366f1" onclick="WB.setColor('#6366f1',this)"></div>
-                  <button class="wb-tool" onclick="WB.clear()">🗑️</button>
-                  <button class="wb-tool" onclick="WB.save()">💾</button>
-                </div>
-              </div>
+        <div id="classroom-step-student" class="card classroom-center" style="display:none">
+          <button class="btn" onclick="Classroom.back()" style="margin-bottom:12px">🔙 بازگشت</button>
+          <h2 style="margin-bottom:1rem">👨‍🎓 دانش‌آموز</h2>
+          <p style="color:var(--muted);margin-bottom:1rem">اول نام خود را وارد کنید، سپس کد کلاسی که معلم ساخته است را بزنید و وارد شوید.</p>
+          <input class="input" id="student-name" placeholder="نام شما (اجباری)">
+          <input class="input" id="student-code" placeholder="کد کلاس (اجباری)">
+          <button class="btn btn-success" style="width:100%" onclick="Classroom.studentJoin()">📥 ورود به کلاس</button>
+        </div>
 
-              <div class="classroom-controls">
-                <button class="ctrl-btn-lg muted" onclick="Classroom.toggleMic()" id="ctrl-mic">🎤</button>
-                <button class="ctrl-btn-lg muted" onclick="Classroom.toggleCam()" id="ctrl-cam">📷</button>
-                <button class="ctrl-btn-lg" onclick="Classroom.toggleScreen()" id="ctrl-screen">🖥️</button>
-                <button class="ctrl-btn-lg" onclick="Classroom.toggleWhiteboard()" id="ctrl-wb">✏️</button>
-                <button class="ctrl-btn-lg" onclick="Classroom.uploadFile()">📁</button>
-                <button class="ctrl-btn-lg danger" onclick="Classroom.end()">📞</button>
-              </div>
+        <div id="classroom-active" class="classroom-active">
+          <div class="card classroom-topbar">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span class="badge" id="active-role">نقش</span>
+              <strong>کد کلاس:</strong>
+              <span id="active-code" style="font-family:monospace;color:var(--accent);font-weight:900"></span>
             </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn" onclick="Classroom.copyCode()">📋 کپی کد</button>
+              <button class="btn btn-primary" onclick="Classroom.copyStudentLink()">🔗 لینک دانش‌آموز</button>
+              <button class="btn btn-danger" onclick="Classroom.leave(true)">📞 خروج</button>
+            </div>
+          </div>
 
-            <div class="classroom-sidebar">
-              <div class="card">
-                <div style="font-weight:700;margin-bottom:8px">👥 شرکت‌کنندگان (<span id="participant-count">1</span>)</div>
-                <div id="participant-list"></div>
-              </div>
+          <div class="classroom-grid">
+            <div id="jitsi-container"></div>
 
-              <div class="card" style="flex:1;display:flex;flex-direction:column">
-                <div style="font-weight:700;margin-bottom:8px">💬 چت کلاس</div>
-                <div id="class-chat" style="flex:1;overflow-y:auto;margin-bottom:8px;max-height:300px"></div>
-                <div style="display:flex;gap:6px">
-                  <input class="input" id="class-chat-input" placeholder="پیام..." style="margin:0;flex:1" onkeydown="if(event.key==='Enter')Classroom.sendChat()">
-                  <button class="btn btn-primary btn-icon" onclick="Classroom.sendChat()">📤</button>
-                </div>
-              </div>
+            <div class="card classroom-side">
+              <h3 style="margin-bottom:.6rem">🔗 لینک‌ها</h3>
 
-              <div class="card">
-                <div style="font-weight:700;margin-bottom:8px">🔗 لینک‌های کلاس</div>
+              <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">لینک دانش‌آموز:</div>
+              <div class="link-box" id="student-link"></div>
+              <button class="btn" style="width:100%;margin-bottom:12px" onclick="Classroom.copyStudentLink()">📋 کپی لینک دانش‌آموز</button>
 
-                <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">کد کلاس:</div>
-                <div class="link-box" id="class-id-box"></div>
-                <button class="btn" style="width:100%;margin-bottom:8px" onclick="Classroom.copyText('class-id-box')">📋 کپی کد</button>
+              <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">لینک معلم:</div>
+              <div class="link-box" id="teacher-link"></div>
+              <button class="btn" style="width:100%;margin-bottom:14px" onclick="Classroom.copyTeacherLink()">📋 کپی لینک معلم</button>
 
-                <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">لینک معلم:</div>
-                <div class="link-box" id="teacher-link"></div>
-                <button class="btn" style="width:100%;margin-bottom:8px" onclick="Classroom.copyLink('teacher')">📋 کپی لینک معلم</button>
-
-                <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">لینک دانش‌آموز:</div>
-                <div class="link-box" id="student-link"></div>
-                <button class="btn" style="width:100%" onclick="Classroom.copyLink('student')">📋 کپی لینک دانش‌آموز</button>
+              <div class="hint">
+                <b>اشتراک صفحه با صدا:</b><br>
+                داخل کلاس دکمه <b>Screen Share</b> را بزنید. در کروم/اج هنگام انتخاب صفحه یا تب، گزینه <b>Share audio</b> را فعال کنید.
+                <br><br>
+                <b>۳۰ نفر:</b><br>
+                این نسخه از Jitsi SFU استفاده می‌کند؛ ویدیو/صدا/صفحه از سرور بین شرکت‌کننده‌ها توزیع می‌شود.
+                <br><br>
+                <b>اتصال پایدار:</b><br>
+                اگر دامنه عمومی ناپایدار بود، دامنه Jitsi اختصاصی خودتان را در همین صفحه یا تنظیمات وارد کنید.
               </div>
             </div>
           </div>
@@ -505,20 +488,15 @@ select.input{cursor:pointer}
             <label style="display:block;margin-bottom:6px;font-weight:600">🧠 System Prompt</label>
             <textarea class="input" id="system-prompt" rows="3" placeholder="تو یک دستیار آموزشی فارسی هستی..."></textarea>
 
-            <label style="display:block;margin-bottom:6px;font-weight:600">🎨 Image Token (اختیاری)</label>
-            <input class="input" id="image-token" type="password" placeholder="hf_...">
-
-            <label style="display:block;margin-bottom:6px;font-weight:600">🧊 RTC / TURN JSON</label>
-            <textarea class="input" id="rtc-config" rows="3" placeholder='{"iceServers":[{"urls":"stun:stun.l.google.com:19302"}]}'></textarea>
-
-            <label style="display:block;margin-bottom:6px;font-weight:600">🔥 Firebase Config</label>
-            <textarea class="input" id="firebase-config" rows="4" placeholder='{"apiKey":"...","authDomain":"...","projectId":"..."}'></textarea>
+            <label style="display:block;margin-bottom:6px;font-weight:600">🎓 دامنه Jitsi</label>
+            <input class="input" id="jitsi-domain" placeholder="meet.jit.si">
 
             <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="Settings.save()">💾 ذخیره</button>
             <button class="btn btn-danger" style="width:100%" onclick="Settings.clearAll()">🗑️ پاک کردن همه داده‌ها</button>
           </div>
         </div>
       </div>
+
     </div>
   </main>
 </div>
@@ -537,24 +515,12 @@ const Utils = {
   normalizeFa(t) {
     return (t || '').replace(/[\u200c\u200f\u200e]/g, ' ').replace(/[يى]/g, 'ی').replace(/[ك]/g, 'ک').replace(/\s+/g, ' ').toLowerCase().trim();
   },
-  uid() {
-    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-  },
-  escapeHtml(t) {
-    const d = document.createElement('div');
-    d.textContent = t == null ? '' : String(t);
-    return d.innerHTML;
-  },
+  uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); },
+  escapeHtml(t) { const d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; },
   faDigits(s) {
-    return String(s || '')
-      .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-      .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+    return String(s || '').replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
   },
-  timeoutSignal(ms) {
-    const c = new AbortController();
-    setTimeout(() => c.abort(), ms);
-    return c.signal;
-  },
+  timeoutSignal(ms) { const c = new AbortController(); setTimeout(() => c.abort(), ms); return c.signal; },
   safeDataUrl(u) {
     if (typeof u !== 'string') return '#';
     const s = u.trim();
@@ -574,11 +540,7 @@ const Toast = {
     t.style.borderInlineStartColor = colors[type] || colors.info;
     t.innerHTML = `<span>${Utils.escapeHtml(msg)}</span>`;
     c.appendChild(t);
-    setTimeout(() => {
-      t.style.opacity = '0';
-      t.style.transform = 'translateY(20px)';
-      setTimeout(() => t.remove(), 300);
-    }, 3500);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateY(20px)'; setTimeout(() => t.remove(), 300); }, 3800);
   }
 };
 
@@ -587,10 +549,10 @@ const Storage = {
   async init() {
     return new Promise((resolve, reject) => {
       try {
-        const req = indexedDB.open('OstadYarDB_v100', 1);
+        const req = indexedDB.open('OstadYarDB_v101', 1);
         req.onupgradeneeded = e => {
           const db = e.target.result;
-          ['settings', 'sessions', 'quizzes', 'tasks', 'flashcards', 'facts', 'qa'].forEach(s => {
+          ['settings', 'sessions', 'quizzes', 'flashcards', 'facts', 'qa'].forEach(s => {
             if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, { keyPath: 'id' });
           });
         };
@@ -611,9 +573,7 @@ const Storage = {
       } catch (e) { r(null); }
     });
   },
-  async getAll(store) {
-    return await this.get(store, null) || [];
-  },
+  async getAll(store) { return await this.get(store, null) || []; },
   async put(store, data) {
     return new Promise(r => {
       if (!this.db) return r(false);
@@ -637,52 +597,37 @@ const Storage = {
       } catch (e) { r(false); }
     });
   },
-  async delete(store, key) {
-    return new Promise(r => {
-      if (!this.db) return r(false);
-      try {
-        const tx = this.db.transaction(store, 'readwrite');
-        tx.objectStore(store).delete(key);
-        tx.oncomplete = () => r(true);
-      } catch (e) { r(false); }
-    });
-  },
-  async getConfig() {
-    return await this.get('settings', 'config') || {};
-  },
-  async saveSettings(cfg) {
-    await this.put('settings', { id: 'config', ...cfg });
-  }
+  async getConfig() { return await this.get('settings', 'config') || {}; },
+  async saveSettings(cfg) { await this.put('settings', { id: 'config', ...cfg }); }
 };
 
 const KnowledgeDB = {
   facts: [
-    { id: 'f1', category: 'نجوم', title: 'نزدیک‌ترین ستاره', body: 'نزدیک‌ترین ستاره به زمین، خورشید است که حدود ۱۵۰ میلیون کیلومتر با ما فاصله دارد.', tags: ['نجوم', 'ستاره'] },
-    { id: 'f2', category: 'نجوم', title: 'کهکشان راه شیری', body: 'منظومه شمسی ما در کهکشان راه شیری قرار دارد که حدود ۲۰۰ میلیارد ستاره دارد.', tags: ['نجوم', 'کهکشان'] },
-    { id: 'f3', category: 'ریاضی', title: 'عدد پی', body: 'عدد پی تقریباً برابر ۳٫۱۴۱۵۹ است و نسبت محیط دایره به قطر آن است.', tags: ['ریاضی', 'پی'] },
-    { id: 'f4', category: 'ریاضی', title: 'مجموع زوایای مثلث', body: 'مجموع زوایای داخلی هر مثلث ۱۸۰ درجه است.', tags: ['ریاضی', 'هندسه'] },
+    { id: 'f1', category: 'نجوم', title: 'نزدیک‌ترین ستاره', body: 'نزدیک‌ترین ستاره به زمین، خورشید است که حدود ۱۵۰ میلیون کیلومتر با ما فاصله دارد.', tags: ['نجوم'] },
+    { id: 'f2', category: 'نجوم', title: 'کهکشان راه شیری', body: 'منظومه شمسی ما در کهکشان راه شیری قرار دارد که حدود ۲۰۰ میلیارد ستاره دارد.', tags: ['نجوم'] },
+    { id: 'f3', category: 'ریاضی', title: 'عدد پی', body: 'عدد پی تقریباً برابر ۳٫۱۴۱۵۹ است و نسبت محیط دایره به قطر آن است.', tags: ['ریاضی'] },
+    { id: 'f4', category: 'ریاضی', title: 'مجموع زوایای مثلث', body: 'مجموع زوایای داخلی هر مثلث ۱۸۰ درجه است.', tags: ['ریاضی'] },
     { id: 'f5', category: 'حیوانات', title: 'بزرگ‌ترین پستاندار', body: 'نهنگ آبی بزرگ‌ترین پستاندار جهان است و طول آن به ۳۰ متر می‌رسد.', tags: ['حیوانات'] },
-    { id: 'f6', category: 'علوم', title: 'قلب انسان', body: 'قلب انسان به‌طور متوسط روزانه حدود ۱۰۰ هزار بار می‌تپد.', tags: ['علوم', 'سلامت'] },
-    { id: 'f7', category: 'تاریخ', title: 'کوروش بزرگ', body: 'کوروش بزرگ بنیان‌گذار امپراتوری هخامنشی و نویسنده نخستین منشور حقوق بشر بود.', tags: ['تاریخ', 'ایران'] },
+    { id: 'f6', category: 'علوم', title: 'قلب انسان', body: 'قلب انسان به‌طور متوسط روزانه حدود ۱۰۰ هزار بار می‌تپد.', tags: ['علوم'] },
+    { id: 'f7', category: 'تاریخ', title: 'کوروش بزرگ', body: 'کوروش بزرگ بنیان‌گذار امپراتوری هخامنشی و نویسنده نخستین منشور حقوق بشر بود.', tags: ['تاریخ'] },
     { id: 'f8', category: 'ادبیات', title: 'فردوسی', body: 'فردوسی سراینده شاهنامه، حدود ۳۰ سال برای سرودن آن وقت گذاشت.', tags: ['ادبیات'] },
     { id: 'f9', category: 'تکنولوژی', title: 'اینترنت', body: 'اینترنت ابتدا با نام ARPANET در سال ۱۹۶۹ برای اهداف نظامی ساخته شد.', tags: ['تکنولوژی'] },
     { id: 'f10', category: 'جغرافیا', title: 'اورست', body: 'قله اورست با ارتفاع ۸۸۴۹ متر بلندترین نقطه زمین است.', tags: ['جغرافیا'] },
-    { id: 'f11', category: 'فیزیک', title: 'سرعت نور', body: 'سرعت نور در خلأ تقریباً ۲۹۹٬۷۹۲٬۴۵۸ متر بر ثانیه است.', tags: ['فیزیک', 'نور'] },
+    { id: 'f11', category: 'فیزیک', title: 'سرعت نور', body: 'سرعت نور در خلأ تقریباً ۲۹۹٬۷۹۲٬۴۵۸ متر بر ثانیه است.', tags: ['فیزیک'] },
     { id: 'f12', category: 'شیمی', title: 'فرمول آب', body: 'آب از دو اتم هیدروژن و یک اتم اکسیژن تشکیل شده و فرمول آن H₂O است.', tags: ['شیمی'] },
-    { id: 'f13', category: 'ریاضی', title: 'قضیه فیثاغورس', body: 'در مثلث قائم‌الزاویه، مربع وتر برابر مجموع مربع دو ضلع دیگر است: a² + b² = c².', tags: ['ریاضی', 'هندسه'] },
+    { id: 'f13', category: 'ریاضی', title: 'قضیه فیثاغورس', body: 'در مثلث قائم‌الزاویه، مربع وتر برابر مجموع مربع دو ضلع دیگر است: a² + b² = c².', tags: ['ریاضی'] },
     { id: 'f14', category: 'زیست', title: 'فتوسنتز', body: 'گیاهان با فتوسنتز، نور خورشید، آب و کربن‌دی‌اکسید را به گلوکز و اکسیژن تبدیل می‌کنند.', tags: ['زیست'] },
-    { id: 'f15', category: 'تاریخ', title: 'صفویه', body: 'دولت صفویه توسط شاه اسماعیل یکم بنیان گذاشته شد و تبریز نخستین پایتخت آن بود.', tags: ['تاریخ', 'ایران'] },
+    { id: 'f15', category: 'تاریخ', title: 'صفویه', body: 'دولت صفویه توسط شاه اسماعیل یکم بنیان گذاشته شد و تبریز نخستین پایتخت آن بود.', tags: ['تاریخ'] },
     { id: 'f16', category: 'ادبیات', title: 'حافظ', body: 'حافظ شیرازی از بزرگ‌ترین شاعران غزل‌سرای فارسی است و دیوان او شهرت جهانی دارد.', tags: ['ادبیات'] },
-    { id: 'f17', category: 'کامپیوتر', title: 'هوش مصنوعی', body: 'هوش مصنوعی شاخه‌ای از علوم کامپیوتر است که به ساخت سیستم‌های توانمند در یادگیری و استدلال می‌پردازد.', tags: ['کامپیوتر', 'AI'] },
-    { id: 'f18', category: 'جغرافیا', title: 'خلیج فارس', body: 'خلیج فارس آبراهی مهم در جنوب ایران است و از نظر تاریخی و اقتصادی اهمیت زیادی دارد.', tags: ['جغرافیا', 'ایران'] }
+    { id: 'f17', category: 'کامپیوتر', title: 'هوش مصنوعی', body: 'هوش مصنوعی شاخه‌ای از علوم کامپیوتر است که به ساخت سیستم‌های توانمند در یادگیری و استدلال می‌پردازد.', tags: ['کامپیوتر'] },
+    { id: 'f18', category: 'جغرافیا', title: 'خلیج فارس', body: 'خلیج فارس آبراهی مهم در جنوب ایران است و از نظر تاریخی و اقتصادی اهمیت زیادی دارد.', tags: ['جغرافیا'] }
   ],
   qa: [
     { id: 'qa1', q: 'سلام', a: 'سلام! من استاد یار پلاس هستم. چطور می‌تونم کمکت کنم؟', cat: 'general' },
     { id: 'qa2', q: 'درود', a: 'درود بر شما! آماده‌ام کمک کنم.', cat: 'general' },
     { id: 'qa3', q: 'خداحافظ', a: 'خداحافظ! هر وقت سوال داشتی در خدمتم.', cat: 'general' },
     { id: 'qa4', q: 'ممنون', a: 'خواهش می‌کنم! موفق باشی.', cat: 'general' },
-    { id: 'qa5', q: 'تو کی هستی؟', a: 'من استاد یار پلاس هستم؛ دستیار هوشمند آموزشی، پژوهشی و عمومی.', cat: 'general' },
-    { id: 'qa6', q: 'امروز چه روزی است؟', a: 'برای تاریخ دقیق دستگاه، می‌توانی از تقویم سیستم استفاده کنی.', cat: 'general' }
+    { id: 'qa5', q: 'تو کی هستی؟', a: 'من استاد یار پلاس هستم؛ دستیار هوشمند آموزشی، پژوهشی و عمومی.', cat: 'general' }
   ],
   async seed() {
     const existingFacts = await Storage.getAll('facts');
@@ -721,26 +666,15 @@ const LocalAI = {
     'قضیه فیثاغورس': { def: 'رابطه بین اضلاع مثلث قائم‌الزاویه.', formula: 'a² + b² = c²' },
     'عدد پی': { def: 'نسبت محیط دایره به قطر آن.', formula: 'π ≈ 3.14159' }
   },
-
   cleanMath(expr) {
-    return Utils.faDigits(expr || '')
-      .replace(/[×]/g, '*')
-      .replace(/[÷]/g, '/')
-      .replace(/[−–—]/g, '-')
-      .replace(/\^/g, '**')
-      .replace(/[^0-9+\-*/().\sx=]/gi, '')
-      .trim();
+    return Utils.faDigits(expr || '').replace(/[×]/g, '*').replace(/[÷]/g, '/').replace(/[−–—]/g, '-').replace(/\^/g, '**').replace(/[^0-9+\-*/().\sx=]/gi, '').trim();
   },
-
   evalExpr(expr, x) {
     const clean = this.cleanMath(expr);
     if (!clean) return NaN;
-    if (window.math) {
-      return math.evaluate(clean.replace(/\*\*/g, '^'), { x });
-    }
+    if (window.math) return math.evaluate(clean.replace(/\*\*/g, '^'), { x });
     return new Function('x', `return ${clean};`)(x);
   },
-
   solveMath(input) {
     const clean = this.cleanMath(input);
     if (!clean) return null;
@@ -748,77 +682,36 @@ const LocalAI = {
     if (clean.includes('=')) {
       const parts = clean.split('=');
       if (parts.length !== 2) return null;
-      const lhs = parts[0];
-      const rhs = parts[1];
+      const lhs = parts[0], rhs = parts[1];
 
       if (lhs.includes('x') || rhs.includes('x')) {
         try {
-          const b1 = this.evalExpr(lhs, 0);
-          const a1 = this.evalExpr(lhs, 1) - b1;
-          const b2 = this.evalExpr(rhs, 0);
-          const a2 = this.evalExpr(rhs, 1) - b2;
-          const a = a1 - a2;
-          const b = b2 - b1;
-
-          if (Math.abs(a) < 1e-12) {
-            return { error: Math.abs(b) < 1e-12 ? 'معادله بی‌نهایت جواب دارد.' : 'معادله جواب ندارد.' };
-          }
-
+          const b1 = this.evalExpr(lhs, 0), a1 = this.evalExpr(lhs, 1) - b1;
+          const b2 = this.evalExpr(rhs, 0), a2 = this.evalExpr(rhs, 1) - b2;
+          const a = a1 - a2, b = b2 - b1;
+          if (Math.abs(a) < 1e-12) return { error: Math.abs(b) < 1e-12 ? 'معادله بی‌نهایت جواب دارد.' : 'معادله جواب ندارد.' };
           const x = b / a;
-          return {
-            steps: [
-              `🔍 معادله: ${lhs} = ${rhs}`,
-              `➡️ ضریب x در سمت چپ: ${a1}`,
-              `➡️ عدد ثابت در سمت چپ: ${b1}`,
-              `➡️ ضریب x در سمت راست: ${a2}`,
-              `➡️ عدد ثابت در سمت راست: ${b2}`,
-              `➡️ انتقال متغیرها: (${a1} - ${a2})x = ${b2} - ${b1}`,
-              `➡️ ساده‌سازی: ${a}x = ${b}`,
-              `✅ x = ${x}`
-            ],
-            result: x
-          };
-        } catch (e) {
-          return null;
-        }
+          return { steps: [`🔍 معادله: ${lhs} = ${rhs}`, `➡️ ضریب x: ${a}`, `➡️ عدد ثابت: ${b}`, `✅ x = ${x}`], result: x };
+        } catch (e) { return null; }
       } else {
         try {
-          const l = this.evalExpr(lhs, 0);
-          const r = this.evalExpr(rhs, 0);
-          return {
-            steps: [
-              `🔍 بررسی تساوی: ${lhs} = ${rhs}`,
-              `➡️ سمت چپ: ${l}`,
-              `➡️ سمت راست: ${r}`,
-              l === r ? '✅ تساوی برقرار است.' : '❌ تساوی برقرار نیست.'
-            ],
-            result: l === r
-          };
-        } catch (e) {
-          return null;
-        }
+          const l = this.evalExpr(lhs, 0), r = this.evalExpr(rhs, 0);
+          return { steps: [`🔍 ${lhs} = ${rhs}`, `➡️ سمت چپ: ${l}`, `➡️ سمت راست: ${r}`, l === r ? '✅ برقرار است' : '❌ برقرار نیست'], result: l === r };
+        } catch (e) { return null; }
       }
     }
 
     try {
-      const result = window.math
-        ? math.evaluate(clean.replace(/\*\*/g, '^'))
-        : new Function('return ' + clean)();
-      if (typeof result === 'number' || typeof result === 'boolean' || typeof result === 'string') {
-        return { steps: [`🔍 محاسبه: ${clean} = ${result}`], result };
-      }
+      const result = window.math ? math.evaluate(clean.replace(/\*\*/g, '^')) : new Function('return ' + clean)();
+      if (typeof result === 'number' || typeof result === 'boolean' || typeof result === 'string') return { steps: [`🔍 ${clean} = ${result}`], result };
       return null;
-    } catch (e) {
-      return null;
-    }
+    } catch (e) { return null; }
   },
-
   formatMath(r) {
     if (!r) return null;
     if (r.error) return `❌ ${r.error}`;
     return `🧮 حل گام‌به‌گام:\n${r.steps.join('\n')}`;
   },
-
   shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -827,16 +720,14 @@ const LocalAI = {
     }
     return a;
   },
-
   async generate(question) {
     const q = Utils.normalizeFa(question);
-
     if (/^(سلام|درود|hello|hi|hey)/.test(q)) return 'سلام! من استاد یار پلاس هستم. چطور می‌تونم کمکت کنم؟';
     if (/خداحافظ|بای|goodbye/.test(q)) return 'خداحافظ! هر وقت سوال داشتی در خدمتم.';
     if (/ممنون|مرسی|thanks/.test(q)) return 'خواهش می‌کنم! موفق باشی.';
 
-    const mathResult = this.solveMath(question);
-    if (mathResult) return this.formatMath(mathResult);
+    const math = this.solveMath(question);
+    if (math) return this.formatMath(math);
 
     for (const [key, concept] of Object.entries(this.concepts)) {
       if (q.includes(Utils.normalizeFa(key))) {
@@ -851,13 +742,10 @@ const LocalAI = {
     }
 
     const facts = await KnowledgeDB.search(question, 3);
-    if (facts.length) {
-      return `📚 **یافته‌های دانش محلی:**\n\n` + facts.map((f, i) => `${i + 1}. **${f.item.title}**\n${f.item.body}`).join('\n\n');
-    }
+    if (facts.length) return `📚 **یافته‌های دانش محلی:**\n\n` + facts.map((f, i) => `${i + 1}. **${f.item.title}**\n${f.item.body}`).join('\n\n');
 
-    return `🧠 **استاد یار (آفلاین):**\n\nالگوی دقیقی یافت نشد.\n\n💡 برای پاسخ قوی‌تر:\n- API Key وارد کنید\n- یا حالت «جستجو/پژوهش» را انتخاب کنید.`;
+    return `🧠 **استاد یار (آفلاین):**\n\nالگوی دقیقی یافت نشد.\n\n💡 برای پاسخ قوی‌تر API Key را وارد کنید یا حالت جستجو/پژوهش را انتخاب کنید.`;
   },
-
   async generateQuiz(topic, count = 5) {
     count = Number(count) || 5;
     const all = await Storage.getAll('facts');
@@ -868,26 +756,15 @@ const LocalAI = {
       const chosen = this.shuffle(source).slice(0, Math.min(count, source.length));
       return chosen.map(f => {
         const correct = f.title || (f.body || '').substring(0, 60);
-        const distractors = this.shuffle(all.filter(x => x.id !== f.id).map(x => x.title).filter(Boolean))
-          .filter((v, i, a) => a.indexOf(v) === i)
-          .slice(0, 3);
-
+        const distractors = this.shuffle(all.filter(x => x.id !== f.id).map(x => x.title).filter(Boolean)).filter((v, i, a) => a.indexOf(v) === i).slice(0, 3);
         while (distractors.length < 3) distractors.push(`گزینه ${distractors.length + 1}`);
-
         const options = [correct, ...distractors];
         const shuffled = this.shuffle(options.map((t, i) => ({ t, ok: i === 0 })));
-
-        return {
-          question: `کدام گزینه درباره «${f.title || topic}» صحیح است؟`,
-          options: shuffled.map(o => o.t),
-          correct: shuffled.findIndex(o => o.ok)
-        };
+        return { question: `کدام گزینه درباره «${f.title || topic}» صحیح است؟`, options: shuffled.map(o => o.t), correct: shuffled.findIndex(o => o.ok) };
       });
     }
-
     return this.sampleQuiz(count);
   },
-
   sampleQuiz(count = 5) {
     const base = [
       { question: 'پایتخت ایران کجاست؟', options: ['تهران', 'اصفهان', 'شیراز', 'تبریز'], correct: 0 },
@@ -898,19 +775,11 @@ const LocalAI = {
     ];
     return base.slice(0, Math.min(count, base.length));
   },
-
   async generateFlashcards(topic, count = 10) {
     const facts = (await KnowledgeDB.search(topic, count)).map(x => x.item);
-    if (facts.length >= 3) {
-      return facts.map(f => ({ front: f.title, back: f.body }));
-    }
-
-    const concepts = Object.entries(this.concepts)
-      .filter(([k]) => Utils.normalizeFa(topic).split(' ').some(w => Utils.normalizeFa(k).includes(w)))
-      .map(([k, v]) => ({ front: k, back: v.def + (v.formula ? `\nفرمول: ${v.formula}` : '') }));
-
+    if (facts.length >= 3) return facts.map(f => ({ front: f.title, back: f.body }));
+    const concepts = Object.entries(this.concepts).filter(([k]) => Utils.normalizeFa(topic).split(' ').some(w => Utils.normalizeFa(k).includes(w))).map(([k, v]) => ({ front: k, back: v.def + (v.formula ? `\nفرمول: ${v.formula}` : '') }));
     if (concepts.length) return concepts.slice(0, count);
-
     return [
       { front: 'پایتخت فرانسه؟', back: 'پاریس' },
       { front: 'بزرگ‌ترین سیاره؟', back: 'مشتری' },
@@ -929,38 +798,29 @@ const SearchEngine = {
     u => `https://thingproxy.freeboard.io/fetch/${u}`,
     u => `https://cors.eu.org/${u}`
   ],
-
   async fetchWithProxy(url, timeout = 7000) {
     for (const proxy of this.proxies) {
       try {
         const res = await fetch(proxy(url), { signal: Utils.timeoutSignal(timeout) });
         if (res.ok) return await res.text();
-      } catch (e) { }
+      } catch (e) {}
     }
     return null;
   },
-
   async ddg(query) {
     const html = await this.fetchWithProxy(`https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(query)}`);
     if (!html) return [];
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const results = [];
-
     doc.querySelectorAll('div.result, div.web-result, div.links_main, table').forEach(el => {
       const a = el.querySelector('a.result__a, a.result-link, h2 a, a[href^="http"]');
       const snippet = el.querySelector('.result__snippet, .snippet, td.result-snippet');
       if (a && a.href && a.href.startsWith('http')) {
-        results.push({
-          title: a.textContent.trim(),
-          link: a.href,
-          snippet: snippet ? snippet.textContent.trim() : ''
-        });
+        results.push({ title: a.textContent.trim(), link: a.href, snippet: snippet ? snippet.textContent.trim() : '' });
       }
     });
-
     return results.slice(0, 8);
   },
-
   async wikipedia(query) {
     try {
       const url = `https://fa.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*&srlimit=5`;
@@ -972,25 +832,11 @@ const SearchEngine = {
         snippet: new DOMParser().parseFromString(s.snippet || '', 'text/html').documentElement.textContent,
         link: `https://fa.wikipedia.org/?curid=${s.pageid}`
       }));
-    } catch (e) {
-      return [];
-    }
+    } catch (e) { return []; }
   },
-
   async research(query) {
-    const [ddg, wiki] = await Promise.all([
-      this.ddg(query),
-      this.wikipedia(query)
-    ]);
-
-    const merged = [...wiki, ...ddg]
-      .filter(x => x && x.title)
-      .map(x => ({
-        title: x.title,
-        snippet: x.snippet || '',
-        link: x.link || '#'
-      }));
-
+    const [ddg, wiki] = await Promise.all([this.ddg(query), this.wikipedia(query)]);
+    const merged = [...wiki, ...ddg].filter(x => x && x.title).map(x => ({ title: x.title, snippet: x.snippet || '', link: x.link || '#' }));
     const seen = new Set();
     return merged.filter(x => {
       const k = Utils.normalizeFa(x.title);
@@ -999,7 +845,6 @@ const SearchEngine = {
       return true;
     }).slice(0, 8);
   },
-
   isSearchIntent(text) {
     const t = Utils.normalizeFa(text);
     const keywords = ['جستجو', 'سرچ', 'بگرد', 'پیدا کن', 'search', 'find', 'قیمت', 'خرید', 'دانلود', 'لینک', 'سایت', 'آخرین', 'اخبار'];
@@ -1014,31 +859,21 @@ const AI = {
 - برای پژوهش، منابع را ذکر کن.
 - اگر نمی‌دانی، صادقانه بگو.
 - از Markdown مناسب استفاده کن.`,
-
-  getSystemPrompt(cfg) {
-    return (cfg.systemPrompt || '').trim() || this.defaultSystem;
-  },
-
+  getSystemPrompt(cfg) { return (cfg.systemPrompt || '').trim() || this.defaultSystem; },
   getFormat(cfg, url, model) {
     const f = (cfg.proxyFormat || 'auto').toLowerCase();
     if (f === 'openai') return 'openai';
     if (f === 'anthropic') return 'anthropic';
-
     if (url.includes('openai') || url.includes('chat/completions')) return 'openai';
     if (url.includes('anthropic')) return 'anthropic';
     if (model.startsWith('gpt')) return 'openai';
     if (model.startsWith('claude')) return 'anthropic';
-
     return cfg.proxy?.trim() ? 'anthropic' : 'openai';
   },
-
   async callRemote(messages, cfg, opts = {}) {
     const model = cfg.model || 'claude-3-5-sonnet-20241022';
     const proxy = (cfg.proxy || '').trim();
-    const url = proxy || (model.startsWith('gpt')
-      ? 'https://api.openai.com/v1/chat/completions'
-      : 'https://api.anthropic.com/v1/messages');
-
+    const url = proxy || (model.startsWith('gpt') ? 'https://api.openai.com/v1/chat/completions' : 'https://api.anthropic.com/v1/messages');
     const format = this.getFormat(cfg, url, model);
     const headers = { 'Content-Type': 'application/json' };
 
@@ -1052,29 +887,13 @@ const AI = {
     }
 
     const system = opts.system || this.getSystemPrompt(cfg);
-
     let body;
+
     if (format === 'openai') {
-      body = {
-        model: model.startsWith('gpt') ? model : 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: system },
-          ...messages
-        ],
-        max_tokens: opts.maxTokens || 2000,
-        temperature: opts.temperature ?? 0.7
-      };
-      if (opts.jsonMode) {
-        body.response_format = { type: 'json_object' };
-      }
+      body = { model: model.startsWith('gpt') ? model : 'gpt-4o-mini', messages: [{ role: 'system', content: system }, ...messages], max_tokens: opts.maxTokens || 2000, temperature: opts.temperature ?? 0.7 };
+      if (opts.jsonMode) body.response_format = { type: 'json_object' };
     } else {
-      body = {
-        model: model.startsWith('claude') ? model : 'claude-3-5-sonnet-20241022',
-        system,
-        messages,
-        max_tokens: opts.maxTokens || 2000,
-        temperature: opts.temperature ?? 0.7
-      };
+      body = { model: model.startsWith('claude') ? model : 'claude-3-5-sonnet-20241022', system, messages, max_tokens: opts.maxTokens || 2000, temperature: opts.temperature ?? 0.7 };
     }
 
     const controller = new AbortController();
@@ -1082,37 +901,21 @@ const AI = {
     if (opts.signal) opts.signal.addEventListener('abort', () => controller.abort());
 
     try {
-      const r = await fetch(url, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(body),
-        signal: controller.signal
-      });
-
+      const r = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body), signal: controller.signal });
       if (!r.ok) {
         const txt = await r.text().catch(() => '');
         throw new Error(`API ${r.status} ${txt.substring(0, 140)}`);
       }
-
       const d = await r.json();
-      return format === 'openai'
-        ? (d.choices?.[0]?.message?.content || '')
-        : (d.content?.[0]?.text || d.choices?.[0]?.message?.content || '');
-    } finally {
-      clearTimeout(timer);
-    }
+      return format === 'openai' ? (d.choices?.[0]?.message?.content || '') : (d.content?.[0]?.text || d.choices?.[0]?.message?.content || '');
+    } finally { clearTimeout(timer); }
   },
-
   async complete(prompt, opts = {}) {
     const cfg = await Storage.getConfig();
     const model = cfg.model || 'ostadyar';
-
-    if (opts.localOnly || !cfg.apiKey || model === 'ostadyar') {
-      return LocalAI.generate(prompt);
-    }
+    if (opts.localOnly || !cfg.apiKey || model === 'ostadyar') return LocalAI.generate(prompt);
 
     const messages = opts.messages || [{ role: 'user', content: prompt }];
-
     try {
       const text = await this.callRemote(messages, cfg, opts);
       if (text && text.trim()) return text;
@@ -1122,56 +925,37 @@ const AI = {
       return await LocalAI.generate(prompt) + `\n\n⚠️ *(خطای API: ${e.message})*`;
     }
   },
-
   async json(prompt, opts = {}) {
     const cfg = await Storage.getConfig();
     if (!cfg.apiKey || cfg.model === 'ostadyar') throw new Error('API Key فعال نیست.');
-
-    const text = await this.callRemote(
-      [{ role: 'user', content: prompt + '\nفقط JSON معتبر بدون توضیح اضافه بده.' }],
-      cfg,
-      { ...opts, jsonMode: true }
-    );
-
+    const text = await this.callRemote([{ role: 'user', content: prompt + '\nفقط JSON معتبر بدون توضیح اضافه بده.' }], cfg, { ...opts, jsonMode: true });
     const cleaned = String(text || '').replace(/```json/gi, '').replace(/```/g, '').trim();
     const m = cleaned.match(/\[[\s\S]*\]|\{[\s\S]*\}/);
     if (!m) throw new Error('JSON پیدا نشد.');
     return JSON.parse(m[0]);
   },
-
   async image(prompt) {
     const seed = Math.floor(Math.random() * 1e6);
     const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${seed}`;
     return `![generated image](${url})\n\n🎨 پرامپت: ${prompt}`;
   },
-
   async search(query) {
     const results = await SearchEngine.research(query);
     if (!results.length) return `⚠️ نتیجه‌ای برای «${query}» یافت نشد.`;
     return `🔍 نتایج برای «${query}»:\n\n` + results.map((r, i) => `**${i + 1}. ${r.title}**\n${r.snippet}\n🔗 ${r.link}`).join('\n\n');
   },
-
   async research(query) {
     const sources = await SearchEngine.research(query);
     if (!sources.length) return `🧪 پژوهشی برای «${query}» یافت نشد.`;
-
     const context = sources.map((s, i) => `[${i + 1}] ${s.title}: ${s.snippet}`).join('\n');
     const cfg = await Storage.getConfig();
 
     if (cfg.apiKey && cfg.model !== 'ostadyar') {
       try {
-        const prompt = `با استفاده از منابع زیر به فارسی پاسخ جامع، دقیق و مستند بده.
-اگر اطلاعات کافی نیست، بگو اطلاعات کافی نیست.
-منابع:
-${context}
-
-سوال:
-${query}
-
-در پایان، منابع را با شماره فهرست کن.`;
+        const prompt = `با استفاده از منابع زیر به فارسی پاسخ جامع، دقیق و مستند بده. اگر اطلاعات کافی نیست، بگو اطلاعات کافی نیست.\nمنابع:\n${context}\n\nسوال:\n${query}\n\nدر پایان منابع را با شماره فهرست کن.`;
         const answer = await this.callRemote([{ role: 'user', content: prompt }], cfg, { maxTokens: 3000 });
         return `🧪 پژوهش درباره «${query}»\n\n${answer}\n\n**منابع:**\n${sources.map((s, i) => `${i + 1}. ${s.title}\n${s.link}`).join('\n')}`;
-      } catch (e) { }
+      } catch (e) {}
     }
 
     return `🧪 یافته‌های پژوهش برای «${query}»:\n\n${sources.map((s, i) => `**${i + 1}. ${s.title}**\n${s.snippet}\n🔗 ${s.link}`).join('\n\n')}`;
@@ -1184,16 +968,8 @@ function renderRichMessage(el, text) {
       if (window.marked.setOptions) marked.setOptions({ breaks: true });
       const html = DOMPurify.sanitize(marked.parse(text || ''), { ADD_ATTR: ['target'] });
       el.innerHTML = html;
-
-      el.querySelectorAll('a').forEach(a => {
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-      });
-
-      if (window.hljs) {
-        el.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
-      }
-
+      el.querySelectorAll('a').forEach(a => { a.target = '_blank'; a.rel = 'noopener noreferrer'; });
+      if (window.hljs) el.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
       if (window.renderMathInElement) {
         renderMathInElement(el, {
           delimiters: [
@@ -1206,189 +982,70 @@ function renderRichMessage(el, text) {
         });
       }
       return;
-    } catch (e) { }
+    } catch (e) {}
   }
   el.textContent = text || '';
 }
 
 function createWhiteboard(canvasId) {
   return {
-    canvas: null,
-    ctx: null,
-    drawing: false,
-    tool: 'pen',
-    color: '#fff',
-    history: [],
-    initialized: false,
-    afterStroke: null,
-    pendingImage: null,
-
+    canvas: null, ctx: null, drawing: false, tool: 'pen', color: '#fff', history: [], initialized: false,
     init() {
       this.canvas = document.getElementById(canvasId);
       if (!this.canvas) return;
-
-      if (this.initialized) {
-        this.resize();
-        return;
-      }
-
+      if (this.initialized) { this.resize(); return; }
       this.ctx = this.canvas.getContext('2d');
       this.resize();
-
       this.canvas.addEventListener('pointerdown', e => this.pointerDown(e));
       this.canvas.addEventListener('pointermove', e => this.pointerMove(e));
       this.canvas.addEventListener('pointerup', () => this.pointerUp());
       this.canvas.addEventListener('pointerleave', () => this.pointerUp());
       window.addEventListener('resize', () => this.resize());
-
       this.initialized = true;
     },
-
     resize() {
       if (!this.canvas || !this.canvas.parentElement) return;
       const rect = this.canvas.parentElement.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
-
       const temp = document.createElement('canvas');
-      temp.width = this.canvas.width;
-      temp.height = this.canvas.height;
+      temp.width = this.canvas.width; temp.height = this.canvas.height;
       if (this.canvas.width > 0) temp.getContext('2d').drawImage(this.canvas, 0, 0);
-
-      this.canvas.width = rect.width;
-      this.canvas.height = rect.height;
-
-      this.ctx.fillStyle = '#1e293b';
-      this.ctx.fillRect(0, 0, rect.width, rect.height);
-
+      this.canvas.width = rect.width; this.canvas.height = rect.height;
+      this.ctx.fillStyle = '#1e293b'; this.ctx.fillRect(0, 0, rect.width, rect.height);
       if (temp.width > 0) this.ctx.drawImage(temp, 0, 0);
-
-      this.ctx.lineCap = 'round';
-      this.ctx.lineJoin = 'round';
-
+      this.ctx.lineCap = 'round'; this.ctx.lineJoin = 'round';
       if (!this.history.length) this.history.push(this.canvas.toDataURL());
-      this.drawPending();
     },
-
-    pos(e) {
-      const r = this.canvas.getBoundingClientRect();
-      return { x: e.clientX - r.left, y: e.clientY - r.top };
-    },
-
-    applyStyle() {
-      this.ctx.lineWidth = this.tool === 'eraser' ? 20 : 3;
-      this.ctx.strokeStyle = this.tool === 'eraser' ? '#1e293b' : this.color;
-    },
-
-    pointerDown(e) {
-      this.drawing = true;
-      this.applyStyle();
-      const { x, y } = this.pos(e);
-      this.ctx.beginPath();
-      this.ctx.moveTo(x, y);
-      this.ctx.lineTo(x + 0.1, y + 0.1);
-      this.ctx.stroke();
-    },
-
-    pointerMove(e) {
-      if (!this.drawing) return;
-      const { x, y } = this.pos(e);
-      this.ctx.lineTo(x, y);
-      this.ctx.stroke();
-    },
-
-    pointerUp() {
-      if (!this.drawing) return;
-      this.drawing = false;
-      this.ctx.beginPath();
-      this.saveState();
-      if (this.afterStroke) this.afterStroke();
-    },
-
-    setTool(t, el) {
-      this.tool = t;
-      const scope = el?.closest('.wb-tools') || this.canvas?.parentElement;
-      scope?.querySelectorAll('.wb-tool').forEach(b => b.classList.remove('active'));
-      el?.classList.add('active');
-    },
-
-    setColor(c, el) {
-      this.color = c;
-      this.tool = 'pen';
-      const scope = el?.closest('.wb-tools') || this.canvas?.parentElement;
-      scope?.querySelectorAll('.wb-color').forEach(b => b.classList.remove('active'));
-      scope?.querySelectorAll('.wb-tool').forEach(b => b.classList.remove('active'));
-      scope?.querySelector('.wb-tool')?.classList.add('active');
-      el?.classList.add('active');
-    },
-
-    saveState() {
-      if (!this.canvas) return;
-      if (this.history.length > 30) this.history.shift();
-      this.history.push(this.canvas.toDataURL());
-    },
-
+    pos(e) { const r = this.canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; },
+    applyStyle() { this.ctx.lineWidth = this.tool === 'eraser' ? 20 : 3; this.ctx.strokeStyle = this.tool === 'eraser' ? '#1e293b' : this.color; },
+    pointerDown(e) { this.drawing = true; this.applyStyle(); const { x, y } = this.pos(e); this.ctx.beginPath(); this.ctx.moveTo(x, y); this.ctx.lineTo(x + 0.1, y + 0.1); this.ctx.stroke(); },
+    pointerMove(e) { if (!this.drawing) return; const { x, y } = this.pos(e); this.ctx.lineTo(x, y); this.ctx.stroke(); },
+    pointerUp() { if (!this.drawing) return; this.drawing = false; this.ctx.beginPath(); this.saveState(); },
+    setTool(t, el) { this.tool = t; const scope = el?.closest('.wb-tools') || this.canvas?.parentElement; scope?.querySelectorAll('.wb-tool').forEach(b => b.classList.remove('active')); el?.classList.add('active'); },
+    setColor(c, el) { this.color = c; this.tool = 'pen'; const scope = el?.closest('.wb-tools') || this.canvas?.parentElement; scope?.querySelectorAll('.wb-color').forEach(b => b.classList.remove('active')); scope?.querySelectorAll('.wb-tool').forEach(b => b.classList.remove('active')); scope?.querySelector('.wb-tool')?.classList.add('active'); el?.classList.add('active'); },
+    saveState() { if (!this.canvas) return; if (this.history.length > 30) this.history.shift(); this.history.push(this.canvas.toDataURL()); },
     undo() {
       if (this.history.length <= 1) return;
       this.history.pop();
       const img = new Image();
-      img.onload = () => {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(img, 0, 0);
-      };
+      img.onload = () => { this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); this.ctx.drawImage(img, 0, 0); };
       img.src = this.history[this.history.length - 1];
     },
-
-    clear() {
-      if (!this.canvas || !confirm('پاک شود؟')) return;
-      this.ctx.fillStyle = '#1e293b';
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.saveState();
-      if (this.afterStroke) this.afterStroke();
-    },
-
-    save() {
-      if (!this.canvas) return;
-      const a = document.createElement('a');
-      a.download = `whiteboard-${Date.now()}.png`;
-      a.href = this.canvas.toDataURL();
-      a.click();
-      Toast.show('ذخیره شد', 'success');
-    },
-
-    loadImage(dataUrl) {
-      this.pendingImage = dataUrl;
-      this.drawPending();
-    },
-
-    drawPending() {
-      if (!this.pendingImage || !this.canvas || !this.canvas.width) return;
-      const img = new Image();
-      img.onload = () => {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
-      };
-      img.src = this.pendingImage;
-    }
+    clear() { if (!this.canvas || !confirm('پاک شود؟')) return; this.ctx.fillStyle = '#1e293b'; this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height); this.saveState(); },
+    save() { if (!this.canvas) return; const a = document.createElement('a'); a.download = `whiteboard-${Date.now()}.png`; a.href = this.canvas.toDataURL(); a.click(); Toast.show('ذخیره شد', 'success'); }
   };
 }
 
-const WB = createWhiteboard('wb-canvas');
 const ToolsWB = createWhiteboard('tools-wb-canvas');
 
 const Chat = {
-  sessions: [],
-  currentId: null,
-  history: [],
-  isProcessing: false,
-  controller: null,
-
+  sessions: [], currentId: null, history: [], isProcessing: false, controller: null,
   async init() {
     this.sessions = await Storage.getAll('sessions');
     if (this.sessions.length) this.load(this.sessions.sort((a, b) => b.date - a.date)[0].id);
     else this.newSession();
     this.renderList();
   },
-
   newSession() {
     const s = { id: Date.now(), title: 'گفتگوی جدید', date: Date.now(), messages: [] };
     this.sessions.push(s);
@@ -1396,43 +1053,29 @@ const Chat = {
     this.load(s.id);
     this.renderList();
   },
-
-  load(id) {
-    this.currentId = id;
-    const s = this.sessions.find(x => x.id === id);
-    this.history = s?.messages || [];
-    this.render();
-  },
-
+  load(id) { this.currentId = id; const s = this.sessions.find(x => x.id === id); this.history = s?.messages || []; this.render(); },
   render() {
     const c = document.getElementById('chat-messages');
     if (!c) return;
     c.innerHTML = '';
-
     this.history.forEach((m, i) => {
       const d = document.createElement('div');
       d.className = `msg ${m.role === 'user' ? 'user' : 'ai'}`;
-
       if (m.role === 'assistant') renderRichMessage(d, m.content);
       else d.textContent = m.content;
-
       const actions = document.createElement('div');
       actions.className = 'msg-actions';
       actions.innerHTML = `<button class="msg-action" onclick="Chat.copy(${i})">📋</button>`;
       if (m.role === 'assistant') actions.innerHTML += `<button class="msg-action" onclick="Chat.regenerate(${i})">🔄</button>`;
       d.appendChild(actions);
-
       c.appendChild(d);
     });
-
     c.scrollTop = c.scrollHeight;
   },
-
   renderList() {
     const l = document.getElementById('chat-list');
     if (!l) return;
     l.innerHTML = '';
-
     this.sessions.sort((a, b) => b.date - a.date).forEach(s => {
       const d = document.createElement('div');
       d.style.cssText = 'padding:10px 12px;border-radius:8px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:.85rem';
@@ -1442,778 +1085,382 @@ const Chat = {
       l.appendChild(d);
     });
   },
-
-  copy(i) {
-    const t = this.history[i]?.content;
-    if (t) navigator.clipboard.writeText(t).then(() => Toast.show('کپی شد', 'success'));
-  },
-
+  copy(i) { const t = this.history[i]?.content; if (t) navigator.clipboard.writeText(t).then(() => Toast.show('کپی شد', 'success')); },
   async regenerate(index) {
     if (this.isProcessing) return;
-
     let userIdx = -1;
-    for (let i = index - 1; i >= 0; i--) {
-      if (this.history[i].role === 'user') { userIdx = i; break; }
-    }
+    for (let i = index - 1; i >= 0; i--) { if (this.history[i].role === 'user') { userIdx = i; break; } }
     if (userIdx < 0) return;
-
     this.history = this.history.slice(0, index);
     await this.save();
     this.render();
     await this.processAI(this.history[userIdx].content);
   },
-
-  triggerImageGen() {
-    document.getElementById('ai-mode').value = 'image';
-    Toast.show('حالت تولید عکس فعال شد', 'info');
-  },
-
+  triggerImageGen() { document.getElementById('ai-mode').value = 'image'; Toast.show('حالت تولید عکس فعال شد', 'info'); },
   setTyping(show) {
     const c = document.getElementById('chat-messages');
     let t = document.getElementById('typing-indicator');
     if (show) {
-      if (!t) {
-        t = document.createElement('div');
-        t.id = 'typing-indicator';
-        t.className = 'msg ai typing';
-        t.innerHTML = '<span></span><span></span><span></span>';
-        c.appendChild(t);
-      }
+      if (!t) { t = document.createElement('div'); t.id = 'typing-indicator'; t.className = 'msg ai typing'; t.innerHTML = '<span></span><span></span><span></span>'; c.appendChild(t); }
       c.scrollTop = c.scrollHeight;
-    } else {
-      t?.remove();
-    }
+    } else t?.remove();
   },
-
   async send() {
     if (this.isProcessing) return;
     const inp = document.getElementById('chat-input');
     const txt = inp.value.trim();
     if (!txt) return;
-
     this.isProcessing = true;
     this.controller = new AbortController();
     inp.value = '';
     inp.style.height = 'auto';
-
     this.history.push({ role: 'user', content: txt });
-
     if (this.history.length === 1) {
       const s = this.sessions.find(x => x.id === this.currentId);
-      if (s) {
-        s.title = txt.substring(0, 30);
-        Storage.put('sessions', s);
-      }
+      if (s) { s.title = txt.substring(0, 30); Storage.put('sessions', s); }
       this.renderList();
     }
-
     this.render();
     await this.save();
     await this.processAI(txt);
     this.isProcessing = false;
     this.controller = null;
   },
-
   async processAI(txt) {
     const mode = document.getElementById('ai-mode').value;
     let res = '';
-
     this.setTyping(true);
-
     try {
-      if (mode === 'image') {
-        res = await AI.image(txt);
-      } else if (mode === 'search') {
-        res = await AI.search(txt);
-      } else if (mode === 'research') {
-        res = await AI.research(txt);
-      } else if (mode === 'local') {
-        res = await LocalAI.generate(txt);
-      } else {
+      if (mode === 'image') res = await AI.image(txt);
+      else if (mode === 'search') res = await AI.search(txt);
+      else if (mode === 'research') res = await AI.research(txt);
+      else if (mode === 'local') res = await LocalAI.generate(txt);
+      else {
         const math = LocalAI.solveMath(txt);
-        if (math) {
-          res = LocalAI.formatMath(math);
-        } else if (SearchEngine.isSearchIntent(txt)) {
-          res = await AI.search(txt);
-        } else {
-          const messages = this.history
-            .filter(m => m.role === 'user' || m.role === 'assistant')
-            .slice(-12)
-            .map(m => ({ role: m.role, content: m.content }));
-
-          res = await AI.complete(txt, {
-            messages,
-            signal: this.controller?.signal,
-            maxTokens: 4096
-          });
+        if (math) res = LocalAI.formatMath(math);
+        else if (SearchEngine.isSearchIntent(txt)) res = await AI.search(txt);
+        else {
+          const messages = this.history.filter(m => m.role === 'user' || m.role === 'assistant').slice(-12).map(m => ({ role: m.role, content: m.content }));
+          res = await AI.complete(txt, { messages, signal: this.controller?.signal, maxTokens: 4096 });
         }
       }
     } catch (e) {
       if (e.name === 'AbortError') res = '⏹️ درخواست متوقف شد.';
       else res = await LocalAI.generate(txt) + `\n\n⚠️ ${e.message}`;
-    } finally {
-      this.setTyping(false);
-    }
-
+    } finally { this.setTyping(false); }
     this.history.push({ role: 'assistant', content: res });
     this.render();
     await this.save();
   },
-
   async save() {
     const s = this.sessions.find(x => x.id === this.currentId);
-    if (s) {
-      s.messages = [...this.history];
-      s.date = Date.now();
-      await Storage.put('sessions', s);
-    }
+    if (s) { s.messages = [...this.history]; s.date = Date.now(); await Storage.put('sessions', s); }
   }
 };
 
 const Classroom = {
-  peer: null,
-  localStream: null,
-  calls: {},
-  dataConns: {},
-  teacherConn: null,
+  api: null,
+  role: null,
   classId: null,
   className: '',
   teacherName: '',
   displayName: '',
-  isTeacher: false,
-  micEnabled: true,
-  camEnabled: true,
-  participants: [],
-  rtcConfig: {
-    iceServers: [
-      { urls: 'stun:stun.l.google.com:19302' },
-      { urls: 'stun:stun1.l.google.com:19302' }
-    ]
+  domain: 'meet.jit.si',
+
+  initDomain(cfgDomain) {
+    this.domain = (cfgDomain || '').trim() || 'meet.jit.si';
+    const el = document.getElementById('classroom-domain');
+    if (el) el.value = this.domain;
   },
 
-  parseCode(input) {
-    input = (input || '').trim();
-    const m = input.match(/[?&]class=([^&]+)/);
-    if (m) return decodeURIComponent(m[1]);
-    return input;
+  setDomain(value) {
+    this.domain = (value || '').trim() || 'meet.jit.si';
   },
 
-  getBaseUrl() {
-    return location.href.split('?')[0];
-  },
+  showStep(step) {
+    ['role', 'teacher', 'student'].forEach(s => {
+      const el = document.getElementById('classroom-step-' + s);
+      if (el) el.style.display = 'none';
+    });
 
-  async create() {
-    const name = document.getElementById('class-name').value.trim();
-    const teacher = document.getElementById('class-teacher').value.trim();
-    const display = document.getElementById('class-display-name').value.trim();
+    const active = document.getElementById('classroom-active');
+    if (active) active.style.display = 'none';
 
-    if (!name || !teacher) {
-      Toast.show('نام کلاس و معلم را وارد کنید', 'warning');
-      return;
+    if (step === 'active') {
+      if (active) active.style.display = 'flex';
+    } else {
+      const el = document.getElementById('classroom-step-' + step);
+      if (el) el.style.display = 'block';
     }
-
-    this.classId = Utils.uid();
-    this.className = name;
-    this.teacherName = teacher;
-    this.displayName = display || teacher;
-    this.isTeacher = true;
-
-    await this.enterRoom();
-    await this.saveFirebase();
-    Toast.show(`کلاس «${name}» ایجاد شد`, 'success');
   },
 
-  async join() {
-    const raw = document.getElementById('class-code').value.trim();
-    const code = this.parseCode(raw);
-    if (!code) {
-      Toast.show('کد یا لینک کلاس را وارد کنید', 'warning');
-      return;
-    }
+  chooseRole(role) {
+    this.showStep(role);
+  },
 
+  back() {
+    this.showStep('role');
+  },
+
+  updateTeacherButton() {
+    const code = document.getElementById('teacher-class-code').value.trim();
+    const btn = document.getElementById('teacher-submit');
+    if (!btn) return;
+    btn.innerHTML = code ? '📥 ورود به کلاس موجود' : '🚀 ساخت کلاس و دریافت کد';
+  },
+
+  generateCode() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    return code;
+  },
+
+  teacherSubmit() {
+    const name = document.getElementById('teacher-name').value.trim();
+    const className = document.getElementById('teacher-class-name').value.trim();
+    const display = document.getElementById('teacher-display-name').value.trim();
+    let code = document.getElementById('teacher-class-code').value.trim().toUpperCase();
+
+    if (!name) { Toast.show('نام معلم را وارد کنید.', 'warning'); return; }
+    if (!code && !className) { Toast.show('برای ساخت کلاس جدید، نام کلاس را وارد کنید.', 'warning'); return; }
+
+    const isNew = !code;
+    if (!code) code = this.generateCode();
+
+    this.role = 'teacher';
     this.classId = code;
-    this.isTeacher = false;
-    this.displayName = document.getElementById('class-display-name').value.trim() || 'دانش‌آموز';
-    this.teacherName = document.getElementById('class-teacher').value.trim() || 'معلم';
-    this.className = document.getElementById('class-name').value.trim() || '';
+    this.className = className || 'کلاس';
+    this.teacherName = name;
+    this.displayName = display || name;
 
-    await this.enterRoom();
-    Toast.show('در حال اتصال به کلاس...', 'info');
+    this.startActive();
+
+    if (isNew) {
+      this.copyText(code);
+      Toast.show(`کد کلاس ساخته شد: ${code} — کپی شد.`, 'success');
+    } else {
+      Toast.show(`به کلاس ${code} وارد شدید.`, 'success');
+    }
   },
 
-  async enterRoom() {
-    document.getElementById('classroom-lobby').style.display = 'none';
-    document.getElementById('classroom-active').style.display = 'block';
+  studentJoin() {
+    const name = document.getElementById('student-name').value.trim();
+    const code = document.getElementById('student-code').value.trim().toUpperCase();
 
-    this.addLocalParticipant();
-    this.updateLinks();
-    this.updateParticipants();
+    if (!name) { Toast.show('اول نام خود را وارد کنید.', 'warning'); return; }
+    if (!code) { Toast.show('کد کلاس را وارد کنید.', 'warning'); return; }
 
-    await this.startMedia();
-    this.initPeer();
+    this.role = 'student';
+    this.classId = code;
+    this.displayName = name;
+    this.teacherName = 'معلم';
+    this.className = '';
 
-    WB.afterStroke = () => Classroom.broadcastWB();
+    this.startActive();
+    Toast.show('در حال ورود به کلاس...', 'info');
   },
 
-  addLocalParticipant() {
-    this.participants = [
-      {
-        id: 'local',
-        name: this.displayName || (this.isTeacher ? 'معلم' : 'دانش‌آموز'),
-        role: this.isTeacher ? 'teacher' : 'student'
-      }
+  startActive() {
+    this.updateActiveUI();
+    this.showStep('active');
+    this.startJitsi();
+  },
+
+  updateActiveUI() {
+    const roleEl = document.getElementById('active-role');
+    const codeEl = document.getElementById('active-code');
+    const studentLink = document.getElementById('student-link');
+    const teacherLink = document.getElementById('teacher-link');
+
+    if (roleEl) roleEl.textContent = this.role === 'teacher' ? '👨‍🏫 معلم' : '👨‍🎓 دانش‌آموز';
+    if (codeEl) codeEl.textContent = this.classId || '';
+    if (studentLink) studentLink.textContent = this.buildLink('student');
+    if (teacherLink) teacherLink.textContent = this.buildLink('teacher');
+  },
+
+  buildLink(role) {
+    const base = location.href.split('?')[0];
+    const params = new URLSearchParams();
+    params.set('class', this.classId || '');
+    params.set('role', role);
+
+    if (role === 'teacher') {
+      if (this.className) params.set('class_name', this.className);
+      if (this.teacherName) params.set('name', this.teacherName);
+    } else {
+      if (this.teacherName) params.set('teacher', this.teacherName);
+    }
+
+    return `${base}?${params.toString()}`;
+  },
+
+  copyCode() { this.copyText(this.classId || ''); },
+  copyStudentLink() { this.copyText(this.buildLink('student')); },
+  copyTeacherLink() { this.copyText(this.buildLink('teacher')); },
+
+  copyText(text) {
+    if (!text) return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => Toast.show('کپی شد.', 'success')).catch(() => this.fallbackCopy(text));
+      return;
+    }
+    this.fallbackCopy(text);
+  },
+
+  fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+    Toast.show('کپی شد.', 'success');
+  },
+
+  startJitsi() {
+    if (typeof JitsiMeetExternalAPI === 'undefined') {
+      Toast.show('Jitsi API بارگذاری نشد. اینترنت یا دامنه Jitsi را بررسی کنید.', 'error');
+      return;
+    }
+
+    if (this.api) {
+      try { this.api.dispose(); } catch (e) {}
+      this.api = null;
+    }
+
+    const container = document.getElementById('jitsi-container');
+    if (container) container.innerHTML = '';
+
+    const domain = this.domain || 'meet.jit.si';
+    const roomName = `OstadYarPlus_${(this.classId || 'class').toUpperCase()}`;
+    const isTeacher = this.role === 'teacher';
+
+    const toolbarButtons = [
+      'microphone',
+      'camera',
+      'toggle-screen-share',
+      'chat',
+      'participants-pane',
+      'videoquality',
+      'tileview',
+      'settings',
+      'fullscreen',
+      'mute-everyone',
+      'hangup'
     ];
 
-    if (!this.isTeacher) {
-      this.participants.push({
-        id: `ostadyar-teacher-${this.classId}`,
-        name: this.teacherName || 'معلم',
-        role: 'teacher'
-      });
-    }
-  },
-
-  updateLinks() {
-    if (!this.classId) return;
-
-    const base = this.getBaseUrl();
-    const teacherUrl = `${base}?class=${encodeURIComponent(this.classId)}&role=teacher&class_name=${encodeURIComponent(this.className || '')}&name=${encodeURIComponent(this.teacherName || this.displayName || 'معلم')}`;
-    const studentUrl = `${base}?class=${encodeURIComponent(this.classId)}&role=student&class_name=${encodeURIComponent(this.className || '')}&teacher=${encodeURIComponent(this.teacherName || 'معلم')}`;
-
-    document.getElementById('class-id-box').textContent = this.classId;
-    document.getElementById('teacher-link').textContent = teacherUrl;
-    document.getElementById('student-link').textContent = studentUrl;
-  },
-
-  copyLink(role) {
-    const id = role === 'teacher' ? 'teacher-link' : 'student-link';
-    this.copyText(id);
-  },
-
-  copyText(id) {
-    const txt = document.getElementById(id)?.textContent || '';
-    navigator.clipboard.writeText(txt).then(() => Toast.show('کپی شد', 'success'));
-  },
-
-  async saveFirebase() {
-    const cfg = await Storage.getConfig();
-    if (!cfg.firebaseConfig || !window.firebase) return;
-
-    try {
-      const fbCfg = JSON.parse(cfg.firebaseConfig);
-      if (!firebase.apps.length) firebase.initializeApp(fbCfg);
-      await firebase.firestore().collection('classes').doc(this.classId).set({
-        name: this.className,
-        teacher: this.teacherName,
-        createdAt: Date.now(),
-        active: true
-      });
-      Toast.show('کلاس در Firebase ثبت شد', 'success');
-    } catch (e) {
-      console.warn('Firebase error:', e);
-    }
-  },
-
-  async startMedia() {
-    try {
-      this.localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    } catch (e) {
-      try {
-        this.localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        Toast.show('دوربین در دسترس نبود؛ فقط صدا فعال شد', 'warning');
-      } catch (e2) {
-        Toast.show('دسترسی به دوربین/میکروفون ممکن نشد', 'error');
+    const options = {
+      roomName,
+      parentNode: container,
+      width: '100%',
+      height: '100%',
+      userInfo: { displayName: this.displayName || (isTeacher ? 'معلم' : 'دانش‌آموز') },
+      configOverwrite: {
+        startWithAudioMuted: !isTeacher,
+        startWithVideoMuted: !isTeacher,
+        enableWelcomePage: false,
+        prejoinPageEnabled: false,
+        disableDeepLinking: true,
+        disableScreenSharing: false,
+        enableScreenSharing: true,
+        enableIceRestart: true,
+        enableForcedReload: true,
+        useTurnUdp: true,
+        channelLastN: isTeacher ? 12 : 9,
+        enableLayerSuspension: true,
+        enableAdaptiveMode: true,
+        resolution: 720,
+        constraints: { video: { height: { ideal: 720, max: 720, min: 180 }, frameRate: { max: 30 } } },
+        videoQuality: { maxBitratesVideo: { low: 200000, standard: 700000, high: 2500000 }, minHeight: 180, maxHeight: 720 },
+        p2p: { enabled: true, stunServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }, { urls: 'stun:stun2.l.google.com:19302' }] },
+        analytics: { disabled: true },
+        disableAudioLevels: false,
+        enableNoisyMicDetection: true,
+        disableSimulcast: false,
+        toolbarButtons
+      },
+      interfaceConfigOverwrite: {
+        TOOLBAR_BUTTONS: toolbarButtons,
+        SHOW_JITSI_WATERMARK: false,
+        SHOW_BRAND_WATERMARK: false,
+        SHOW_CHROME_EXTENSION_BANNER: false,
+        DISABLE_JOIN_LEAVE_NOTIFICATIONS: false,
+        DISABLE_DOMINANT_SPEAKER_INDICATOR: false,
+        DISABLE_FOCUS_INDICATOR: true,
+        DISABLE_VIDEO_BACKGROUND: true,
+        TILE_VIEW_MAX_COLUMNS: 4,
+        VERTICAL_FILMSTRIP: true,
+        FILM_STRIP_MAX_HEIGHT: 130,
+        DEFAULT_REMOTE_DISPLAY_NAME: 'شرکت‌کننده',
+        DEFAULT_LOCAL_DISPLAY_NAME: this.displayName || 'شما'
       }
-    }
-
-    const video = document.getElementById('local-video');
-    if (video && this.localStream) video.srcObject = this.localStream;
-
-    this.updateMediaUI();
-    this.updateLocalRole();
-  },
-
-  updateMediaUI() {
-    const mic = document.getElementById('ctrl-mic');
-    const cam = document.getElementById('ctrl-cam');
-    const micSmall = document.getElementById('mic-btn');
-    const camSmall = document.getElementById('cam-btn');
-
-    if (mic) mic.className = `ctrl-btn-lg ${this.micEnabled ? 'active' : 'muted'}`;
-    if (cam) cam.className = `ctrl-btn-lg ${this.camEnabled ? 'active' : 'muted'}`;
-    if (micSmall) micSmall.className = `ctrl-btn ${this.micEnabled ? '' : 'muted'}`;
-    if (camSmall) camSmall.className = `ctrl-btn ${this.camEnabled ? '' : 'muted'}`;
-  },
-
-  updateLocalRole() {
-    const tag = document.querySelector('#local-video-tile .name-tag');
-    if (tag) tag.textContent = this.isTeacher ? 'شما (معلم)' : 'شما (دانش‌آموز)';
-  },
-
-  initPeer() {
-    if (this.peer) {
-      try { this.peer.destroy(); } catch (e) { }
-      this.peer = null;
-    }
-
-    const peerId = this.isTeacher
-      ? `ostadyar-teacher-${this.classId}`
-      : `ostadyar-student-${this.classId}-${Utils.uid()}`;
-
-    this.peer = new Peer(peerId, { config: this.rtcConfig, debug: 1 });
-
-    this.peer.on('open', () => {
-      if (this.isTeacher) {
-        Toast.show('کلاس آماده دریافت اتصال است', 'success');
-      } else {
-        this.connectTeacher();
-        this.callTeacher();
-      }
-    });
-
-    this.peer.on('call', call => this.handleCall(call));
-    this.peer.on('connection', conn => this.handleConnection(conn));
-
-    this.peer.on('error', err => {
-      console.error('Peer error:', err);
-      if (err.type === 'unavailable-id') Toast.show('این شناسه کلاس قبلاً فعال است. صفحه را رفرش کنید.', 'error');
-      else Toast.show('خطا در اتصال: ' + err.type, 'error');
-    });
-
-    this.peer.on('disconnected', () => {
-      Toast.show('اتصال قطع شد؛ تلاش مجدد...', 'warning');
-      setTimeout(() => this.peer?.reconnect?.(), 2500);
-    });
-  },
-
-  handleCall(call) {
-    call.answer(this.localStream || undefined);
-
-    call.on('stream', remoteStream => {
-      const name = call.metadata?.name || (call.peer.includes('teacher') ? this.teacherName || 'معلم' : 'دانش‌آموز');
-      this.addRemoteVideo(call.peer, remoteStream, name);
-    });
-
-    call.on('close', () => this.removeRemoteVideo(call.peer));
-    this.calls[call.peer] = call;
-  },
-
-  connectTeacher() {
-    const teacherId = `ostadyar-teacher-${this.classId}`;
-    this.teacherConn = this.peer.connect(teacherId, {
-      metadata: { name: this.displayName || 'دانش‌آموز', role: 'student' }
-    });
-
-    this.teacherConn.on('open', () => {
-      this.teacherConn.send({ type: 'join', name: this.displayName || 'دانش‌آموز', role: 'student' });
-      this.teacherConn.send({ type: 'request-wb' });
-      Toast.show('اتصال داده با معلم برقرار شد', 'success');
-    });
-
-    this.teacherConn.on('data', data => this.onData(this.teacherConn, data));
-
-    this.teacherConn.on('close', () => {
-      this.teacherConn = null;
-      Toast.show('اتصال با معلم قطع شد؛ تلاش مجدد...', 'warning');
-      setTimeout(() => this.connectTeacher(), 3000);
-    });
-
-    this.teacherConn.on('error', e => console.error('teacherConn error', e));
-  },
-
-  callTeacher() {
-    const teacherId = `ostadyar-teacher-${this.classId}`;
-    if (!this.localStream) return;
-
-    const call = this.peer.call(teacherId, this.localStream, {
-      metadata: { name: this.displayName || 'دانش‌آموز', role: 'student' }
-    });
-
-    call.on('stream', remoteStream => {
-      this.addRemoteVideo(call.peer, remoteStream, this.teacherName || 'معلم');
-    });
-
-    call.on('close', () => this.removeRemoteVideo(call.peer));
-    this.calls[teacherId] = call;
-  },
-
-  handleConnection(conn) {
-    if (!this.isTeacher) {
-      conn.on('open', () => conn.close?.());
-      return;
-    }
-
-    conn.on('open', () => {
-      this.dataConns[conn.peer] = conn;
-
-      const name = conn.metadata?.name || 'دانش‌آموز';
-      if (!this.participants.find(p => p.id === conn.peer)) {
-        this.participants.push({ id: conn.peer, name, role: 'student' });
-      }
-
-      this.updateParticipants();
-      this.broadcastParticipants();
-
-      conn.send({ type: 'welcome', list: this.participants });
-      if (WB.canvas && WB.canvas.width) {
-        conn.send({ type: 'wb', image: WB.canvas.toDataURL('image/jpeg', 0.55) });
-      }
-
-      Toast.show(`${name} به کلاس پیوست`, 'success');
-    });
-
-    conn.on('data', data => this.onData(conn, data));
-
-    conn.on('close', () => {
-      delete this.dataConns[conn.peer];
-      this.participants = this.participants.filter(p => p.id !== conn.peer);
-      this.updateParticipants();
-      this.broadcastParticipants();
-      this.removeRemoteVideo(conn.peer);
-    });
-
-    conn.on('error', e => console.error('student conn error', e));
-  },
-
-  onData(conn, data) {
-    if (!data || !data.type) return;
-
-    if (data.type === 'chat') {
-      this.renderChatMessage(data);
-      if (this.isTeacher) this.broadcast(data, conn.peer);
-    }
-
-    else if (data.type === 'participants') {
-      if (!this.isTeacher && Array.isArray(data.list)) {
-        this.participants = data.list;
-        this.updateParticipants();
-      }
-    }
-
-    else if (data.type === 'wb') {
-      WB.loadImage(data.image);
-      if (this.isTeacher) this.broadcast(data, conn.peer);
-    }
-
-    else if (data.type === 'request-wb') {
-      if (this.isTeacher && WB.canvas && WB.canvas.width) {
-        conn.send({ type: 'wb', image: WB.canvas.toDataURL('image/jpeg', 0.55) });
-      }
-    }
-
-    else if (data.type === 'join') {
-      if (this.isTeacher && data.name) {
-        const p = this.participants.find(x => x.id === conn.peer);
-        if (p) p.name = data.name;
-        this.updateParticipants();
-        this.broadcastParticipants();
-      }
-    }
-  },
-
-  broadcast(payload, excludePeerId = null) {
-    if (!this.isTeacher) {
-      if (this.teacherConn?.open) {
-        try { this.teacherConn.send(payload); } catch (e) { console.warn(e); }
-      }
-      return;
-    }
-
-    Object.values(this.dataConns).forEach(c => {
-      if (c.open && c.peer !== excludePeerId) {
-        try { c.send(payload); } catch (e) { console.warn(e); }
-      }
-    });
-  },
-
-  broadcastParticipants() {
-    if (!this.isTeacher) return;
-    this.broadcast({ type: 'participants', list: this.participants });
-  },
-
-  broadcastWB() {
-    if (!WB.canvas || !WB.canvas.width) return;
-    const image = WB.canvas.toDataURL('image/jpeg', 0.55);
-    this.broadcast({ type: 'wb', image });
-  },
-
-  sendChat() {
-    const input = document.getElementById('class-chat-input');
-    const txt = input.value.trim();
-    if (!txt) return;
-
-    const msg = {
-      type: 'chat',
-      id: Utils.uid(),
-      fromId: this.peer?.id || 'local',
-      fromName: this.displayName || (this.isTeacher ? 'معلم' : 'دانش‌آموز'),
-      role: this.isTeacher ? 'teacher' : 'student',
-      text: txt,
-      ts: Date.now()
     };
 
-    this.renderChatMessage(msg);
-
-    if (this.isTeacher) this.broadcast(msg);
-    else if (this.teacherConn?.open) this.teacherConn.send(msg);
-    else Toast.show('اتصال برقرار نیست', 'warning');
-
-    input.value = '';
-  },
-
-  renderChatMessage(msg) {
-    const chat = document.getElementById('class-chat');
-    if (!chat) return;
-    if (msg.id && chat.querySelector(`[data-id="${msg.id}"]`)) return;
-
-    const div = document.createElement('div');
-    div.className = 'class-chat-msg';
-    if (msg.id) div.dataset.id = msg.id;
-
-    const roleLabel = msg.role === 'teacher' ? '👨‍🏫' : '👤';
-    const name = Utils.escapeHtml(msg.fromName || (msg.role === 'teacher' ? 'معلم' : 'دانش‌آموز'));
-
-    let fileHtml = '';
-    if (msg.file) {
-      const safe = Utils.safeDataUrl(msg.file.data);
-      if ((msg.file.type || '').startsWith('image/') && safe.startsWith('data:image/')) {
-        fileHtml = `<div class="class-chat-file"><img src="${safe}" alt="${Utils.escapeHtml(msg.file.name)}"></div>`;
-      } else {
-        fileHtml = `<div class="class-chat-file"><a href="${safe}" download="${Utils.escapeHtml(msg.file.name)}">📥 ${Utils.escapeHtml(msg.file.name)}</a></div>`;
-      }
-    }
-
-    div.innerHTML = `<strong>${roleLabel} ${name}:</strong> ${msg.text ? Utils.escapeHtml(msg.text) : ''}${fileHtml}`;
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
-  },
-
-  uploadFile() {
-    const input = document.createElement('input');
-    input.type = 'file';
-
-    input.onchange = e => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      if (file.size > 1.5 * 1024 * 1024) {
-        Toast.show('حداکثر حجم فایل برای ارسال P2P: 1.5 مگابایت', 'warning');
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const msg = {
-          type: 'chat',
-          id: Utils.uid(),
-          fromId: this.peer?.id || 'local',
-          fromName: this.displayName || (this.isTeacher ? 'معلم' : 'دانش‌آموز'),
-          role: this.isTeacher ? 'teacher' : 'student',
-          text: '',
-          file: { name: file.name, type: file.type, data: reader.result },
-          ts: Date.now()
-        };
-
-        this.renderChatMessage(msg);
-        if (this.isTeacher) this.broadcast(msg);
-        else if (this.teacherConn?.open) this.teacherConn.send(msg);
-        else Toast.show('اتصال برقرار نیست', 'warning');
-      };
-      reader.readAsDataURL(file);
-    };
-
-    input.click();
-  },
-
-  addRemoteVideo(peerId, stream, name) {
-    const grid = document.getElementById('video-grid');
-    if (!grid) return;
-
-    let tile = document.getElementById(`video-${peerId}`);
-    if (!tile) {
-      tile = document.createElement('div');
-      tile.className = 'video-tile';
-      tile.id = `video-${peerId}`;
-      tile.innerHTML = `
-        <video autoplay playsinline></video>
-        <div class="name-tag"></div>
-        <div class="controls">
-          <button class="ctrl-btn" onclick="Classroom.removeParticipant('${peerId}')">✖️</button>
-        </div>
-      `;
-      grid.appendChild(tile);
-    }
-
-    tile.querySelector('video').srcObject = stream;
-    tile.querySelector('.name-tag').textContent = name || (peerId.includes('teacher') ? 'معلم' : 'دانش‌آموز');
-  },
-
-  removeRemoteVideo(peerId) {
-    const tile = document.getElementById(`video-${peerId}`);
-    if (tile) tile.remove();
-  },
-
-  removeParticipant(peerId) {
-    if (this.calls[peerId]) {
-      this.calls[peerId].close();
-      delete this.calls[peerId];
-    }
-
-    if (this.dataConns[peerId]) {
-      this.dataConns[peerId].close();
-      delete this.dataConns[peerId];
-    }
-
-    this.participants = this.participants.filter(p => p.id !== peerId);
-    this.updateParticipants();
-    this.broadcastParticipants();
-    this.removeRemoteVideo(peerId);
-  },
-
-  updateParticipants() {
-    const count = this.participants.length || 1;
-    const el = document.getElementById('participant-count');
-    if (el) el.textContent = count;
-
-    const list = document.getElementById('participant-list');
-    if (!list) return;
-
-    list.innerHTML = this.participants.map(p => {
-      const icon = p.role === 'teacher' ? '👨‍🏫' : '👤';
-      return `<div style="padding:6px 0;font-size:.85rem">${icon} ${Utils.escapeHtml(p.name || 'کاربر')}</div>`;
-    }).join('');
-  },
-
-  toggleMic() {
-    if (!this.localStream) {
-      Toast.show('جریان رسانه‌ای فعال نیست', 'warning');
-      return;
-    }
-
-    this.micEnabled = !this.micEnabled;
-    this.localStream.getAudioTracks().forEach(t => t.enabled = this.micEnabled);
-    this.updateMediaUI();
-    Toast.show(this.micEnabled ? 'میکروفون روشن' : 'میکروفون خاموش', 'info');
-  },
-
-  toggleCam() {
-    if (!this.localStream) {
-      Toast.show('جریان رسانه‌ای فعال نیست', 'warning');
-      return;
-    }
-
-    this.camEnabled = !this.camEnabled;
-    this.localStream.getVideoTracks().forEach(t => t.enabled = this.camEnabled);
-    this.updateMediaUI();
-    Toast.show(this.camEnabled ? 'دوربین روشن' : 'دوربین خاموش', 'info');
-  },
-
-  async toggleScreen() {
     try {
-      const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-      const screenTrack = screenStream.getVideoTracks()[0];
-      const video = document.getElementById('local-video');
-      const cameraTrack = this.localStream?.getVideoTracks()?.[0] || null;
+      this.api = new JitsiMeetExternalAPI(domain, options);
 
-      Object.values(this.calls).forEach(call => {
-        const pc = call.peerConnection;
-        const sender = pc?.getSenders?.().find(s => s.track?.kind === 'video');
-        if (sender) sender.replaceTrack(screenTrack).catch(console.warn);
+      this.api.addEventListener('videoConferenceLeft', () => this.leave(false));
+      this.api.addEventListener('readyToClose', () => this.leave(false));
+      this.api.addEventListener('errorOccurred', error => console.error('Jitsi error:', error));
+      this.api.addEventListener('participantJoined', p => Toast.show(`${p.displayName || 'شرکت‌کننده'} وارد شد.`, 'info'));
+      this.api.addEventListener('participantLeft', p => Toast.show(`${p.displayName || 'شرکت‌کننده'} خارج شد.`, 'warning'));
+      this.api.addEventListener('screenSharingStatusChanged', status => {
+        if (status && status.sharing) Toast.show('اشتراک صفحه فعال شد.', 'success');
       });
-
-      if (video) video.srcObject = screenStream;
-
-      screenTrack.onended = () => {
-        Object.values(this.calls).forEach(call => {
-          const pc = call.peerConnection;
-          const sender = pc?.getSenders?.().find(s => s.track?.kind === 'video');
-          if (sender && cameraTrack) sender.replaceTrack(cameraTrack).catch(console.warn);
-        });
-
-        if (video && this.localStream) video.srcObject = this.localStream;
-        Toast.show('اشتراک صفحه متوقف شد', 'info');
-      };
-
-      Toast.show('اشتراک صفحه شروع شد', 'success');
     } catch (e) {
-      Toast.show('اشتراک صفحه لغو شد', 'warning');
+      console.error(e);
+      Toast.show('خطا در شروع Jitsi. دامنه یا اتصال را بررسی کنید.', 'error');
     }
   },
 
-  toggleWhiteboard() {
-    const wb = document.getElementById('wb-container');
-    const vg = document.querySelector('.video-grid');
+  leave(ask) {
+    if (ask && !confirm('از کلاس خارج شوید؟')) return;
 
-    if (wb.style.display === 'none') {
-      wb.style.display = 'block';
-      if (vg) vg.style.display = 'none';
+    if (this.api) {
+      try { this.api.dispose(); } catch (e) {}
+      this.api = null;
+    }
 
-      setTimeout(() => {
-        WB.init();
-        if (!this.isTeacher && this.teacherConn?.open) {
-          this.teacherConn.send({ type: 'request-wb' });
-        }
-      }, 50);
+    const container = document.getElementById('jitsi-container');
+    if (container) container.innerHTML = '';
 
-      Toast.show('تخته سفید فعال شد', 'info');
+    this.showStep('role');
+  },
+
+  initFromUrl(params) {
+    const cls = params.get('class');
+    if (!cls) return false;
+
+    const role = params.get('role');
+    const name = params.get('name') || '';
+    const className = params.get('class_name') || '';
+    const teacher = params.get('teacher') || '';
+
+    UI.nav('classroom');
+
+    if (role === 'teacher') {
+      this.showStep('teacher');
+      document.getElementById('teacher-class-code').value = cls;
+      document.getElementById('teacher-name').value = teacher || name;
+      document.getElementById('teacher-class-name').value = className;
+      document.getElementById('teacher-display-name').value = name;
+      this.updateTeacherButton();
     } else {
-      wb.style.display = 'none';
-      if (vg) vg.style.display = 'grid';
-    }
-  },
-
-  end() {
-    if (!confirm('پایان کلاس؟')) return;
-
-    Object.values(this.calls).forEach(c => c.close());
-    this.calls = {};
-
-    Object.values(this.dataConns).forEach(c => c.close());
-    this.dataConns = {};
-
-    if (this.teacherConn) {
-      this.teacherConn.close();
-      this.teacherConn = null;
+      this.showStep('student');
+      document.getElementById('student-code').value = cls;
+      document.getElementById('student-name').value = name;
+      setTimeout(() => document.getElementById('student-name').focus(), 100);
     }
 
-    if (this.peer) {
-      this.peer.destroy();
-      this.peer = null;
-    }
-
-    if (this.localStream) {
-      this.localStream.getTracks().forEach(t => t.stop());
-      this.localStream = null;
-    }
-
-    WB.afterStroke = null;
-
-    document.getElementById('classroom-active').style.display = 'none';
-    document.getElementById('classroom-lobby').style.display = 'block';
-
-    const grid = document.getElementById('video-grid');
-    if (grid) {
-      grid.querySelectorAll('.video-tile:not(#local-video-tile)').forEach(el => el.remove());
-    }
-
-    const chat = document.getElementById('class-chat');
-    if (chat) chat.innerHTML = '';
-
-    Toast.show('کلاس پایان یافت', 'info');
+    return true;
   }
 };
 
 const Calc = {
   expression: '',
-  input(v) {
-    if (v === 'C') this.expression = '';
-    else this.expression += v;
-    document.getElementById('calc-display').textContent = this.expression || '0';
-  },
-  backspace() {
-    this.expression = this.expression.slice(0, -1);
-    document.getElementById('calc-display').textContent = this.expression || '0';
-  },
+  input(v) { if (v === 'C') this.expression = ''; else this.expression += v; document.getElementById('calc-display').textContent = this.expression || '0'; },
+  backspace() { this.expression = this.expression.slice(0, -1); document.getElementById('calc-display').textContent = this.expression || '0'; },
   calc() {
     try {
       const s = this.expression.replace(/[^0-9+\-*/().]/g, '');
@@ -2229,60 +1476,38 @@ const Calc = {
 };
 
 const Pomodoro = {
-  seconds: 25 * 60,
-  running: false,
-  isBreak: false,
-  timer: null,
-
-  toggle() {
-    if (this.running) this.pause();
-    else this.start();
-  },
-
+  seconds: 25 * 60, running: false, isBreak: false, timer: null,
+  toggle() { if (this.running) this.pause(); else this.start(); },
   start() {
     this.running = true;
     document.getElementById('pomo-start').textContent = 'مکث';
     this.timer = setInterval(() => {
       this.seconds--;
       this.updateDisplay();
-      if (this.seconds <= 0) {
-        clearInterval(this.timer);
-        this.onComplete();
-      }
+      if (this.seconds <= 0) { clearInterval(this.timer); this.onComplete(); }
     }, 1000);
   },
-
-  pause() {
-    this.running = false;
-    clearInterval(this.timer);
-    document.getElementById('pomo-start').textContent = 'شروع';
-  },
-
+  pause() { this.running = false; clearInterval(this.timer); document.getElementById('pomo-start').textContent = 'شروع'; },
   onComplete() {
     this.running = false;
     if (this.isBreak) {
-      this.seconds = 25 * 60;
-      this.isBreak = false;
+      this.seconds = 25 * 60; this.isBreak = false;
       document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز';
       Toast.show('استراحت تمام شد!', 'success');
     } else {
-      this.seconds = 5 * 60;
-      this.isBreak = true;
+      this.seconds = 5 * 60; this.isBreak = true;
       document.getElementById('pomo-status').textContent = '☕ استراحت';
       Toast.show('وقت استراحت است!', 'info');
     }
     this.updateDisplay();
     document.getElementById('pomo-start').textContent = 'شروع';
   },
-
   reset() {
     this.pause();
-    this.seconds = 25 * 60;
-    this.isBreak = false;
+    this.seconds = 25 * 60; this.isBreak = false;
     this.updateDisplay();
     document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز';
   },
-
   updateDisplay() {
     const m = Math.floor(this.seconds / 60), s = this.seconds % 60;
     document.getElementById('pomo-display').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
@@ -2292,11 +1517,7 @@ const Pomodoro = {
 const QRGen = {
   generate() {
     const txt = document.getElementById('qr-input').value.trim();
-    if (!txt) {
-      Toast.show('متن یا لینک را وارد کنید', 'warning');
-      return;
-    }
-
+    if (!txt) { Toast.show('متن یا لینک را وارد کنید', 'warning'); return; }
     const output = document.getElementById('qr-output');
     if (window.qrcode) {
       const qr = qrcode(0, 'M');
@@ -2309,7 +1530,6 @@ const QRGen = {
       output.innerHTML = '<p style="color:var(--muted)">کتابخانه QR بارگذاری نشده</p>';
     }
   },
-
   download() {
     const img = document.querySelector('#qr-output img');
     if (img) {
@@ -2324,44 +1544,28 @@ const QRGen = {
 
 const Facts = {
   currentCat: 'all',
-
   async init() {
     await KnowledgeDB.seed();
     const facts = await Storage.getAll('facts');
     const cats = ['all', ...new Set(facts.map(f => f.category || 'عمومی'))];
     const tags = document.getElementById('facts-tags');
-
-    if (tags) {
-      tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentCat ? 'background:var(--primary);color:#fff' : ''}" onclick="Facts.setCat('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
-    }
-
+    if (tags) tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentCat ? 'background:var(--primary);color:#fff' : ''}" onclick="Facts.setCat('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
     this.render();
     document.getElementById('stat-facts').textContent = facts.length;
   },
-
   setCat(cat, el) {
     this.currentCat = cat;
-    document.querySelectorAll('#facts-tags .btn').forEach(b => {
-      b.style.background = 'var(--bg3)';
-      b.style.color = 'var(--text)';
-    });
-    if (el) {
-      el.style.background = 'var(--primary)';
-      el.style.color = '#fff';
-    }
+    document.querySelectorAll('#facts-tags .btn').forEach(b => { b.style.background = 'var(--bg3)'; b.style.color = 'var(--text)'; });
+    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#fff'; }
     this.render();
   },
-
   async render() {
     const list = document.getElementById('facts-list');
     const search = Utils.normalizeFa(document.getElementById('facts-search')?.value || '');
     let facts = await Storage.getAll('facts');
-
     if (this.currentCat !== 'all') facts = facts.filter(f => (f.category || 'عمومی') === this.currentCat);
     if (search) facts = facts.filter(f => Utils.normalizeFa(f.title).includes(search) || Utils.normalizeFa(f.body).includes(search));
-
     if (!list) return;
-
     list.innerHTML = facts.map(f => `
       <div class="fact-card">
         <div class="fact-cat">${Utils.escapeHtml(f.category || 'عمومی')}</div>
@@ -2370,7 +1574,6 @@ const Facts = {
       </div>
     `).join('') || '<p style="text-align:center;color:var(--muted);padding:2rem">دانستنی‌ای یافت نشد</p>';
   },
-
   async random() {
     const facts = await Storage.getAll('facts');
     if (!facts.length) return;
@@ -2380,45 +1583,31 @@ const Facts = {
 };
 
 const Quiz = {
-  questions: [],
-  answers: {},
-  submitted: false,
-
+  questions: [], answers: {}, submitted: false,
   normalizeQuestions(arr) {
     return (Array.isArray(arr) ? arr : []).map(q => {
       const question = String(q.question || q.q || '').trim();
       let options = (q.options || q.choices || []).map(String);
-
       while (options.length < 4) options.push('گزینه ' + (options.length + 1));
       options = options.slice(0, 4);
-
       let correct = parseInt(q.correct ?? q.answer ?? 0);
       if (isNaN(correct) || correct < 0 || correct >= options.length) correct = 0;
-
       return { question, options, correct };
     }).filter(q => q.question);
   },
-
   loadSample() {
     this.questions = LocalAI.sampleQuiz(5);
     this.answers = {};
     this.submitted = false;
-
     document.getElementById('quiz-setup').style.display = 'none';
     document.getElementById('quiz-active').style.display = 'block';
     document.getElementById('quiz-result').style.display = 'none';
-
     this.render();
     Toast.show('آزمون نمونه بارگذاری شد', 'success');
   },
-
   async start() {
     const topic = document.getElementById('quiz-topic').value.trim();
-    if (!topic) {
-      Toast.show('موضوع را وارد کنید', 'warning');
-      return;
-    }
-
+    if (!topic) { Toast.show('موضوع را وارد کنید', 'warning'); return; }
     const count = Number(document.getElementById('quiz-count').value) || 5;
 
     document.getElementById('quiz-setup').style.display = 'none';
@@ -2434,32 +1623,24 @@ const Quiz = {
         const prompt = `Generate ${count} multiple-choice questions in Persian about "${topic}". Return ONLY a JSON array: [{"question":"...","options":["...","...","...","..."],"correct":0}]`;
         const data = await AI.json(prompt, { maxTokens: 2500 });
         questions = this.normalizeQuestions(data);
-      } catch (e) {
-        console.warn('AI quiz failed:', e);
-      }
+      } catch (e) { console.warn('AI quiz failed:', e); }
     }
 
-    if (!questions || !questions.length) {
-      questions = this.normalizeQuestions(await LocalAI.generateQuiz(topic, count));
-    }
+    if (!questions || !questions.length) questions = this.normalizeQuestions(await LocalAI.generateQuiz(topic, count));
 
     this.questions = questions.slice(0, count);
     this.answers = {};
     this.submitted = false;
     this.render();
   },
-
   render() {
     const c = document.getElementById('quiz-questions');
     if (!c) return;
     c.innerHTML = '';
-
     this.questions.forEach((q, qi) => {
       const div = document.createElement('div');
       div.className = 'card';
-
       div.innerHTML = `<div style="font-weight:700;margin-bottom:12px">${qi + 1}. ${Utils.escapeHtml(q.question)}</div>`;
-
       q.options.forEach((opt, oi) => {
         div.innerHTML += `
           <div class="quiz-option" data-qi="${qi}" data-oi="${oi}" onclick="Quiz.select(${qi},${oi})">
@@ -2468,34 +1649,27 @@ const Quiz = {
           </div>
         `;
       });
-
       c.appendChild(div);
     });
   },
-
   select(qi, oi) {
     if (this.submitted) return;
     this.answers[qi] = oi;
-
     document.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(el => {
       el.classList.remove('selected');
       if (parseInt(el.dataset.oi) === oi) el.classList.add('selected');
     });
   },
-
   submit() {
     const t = this.questions.length;
     const a = Object.keys(this.answers).length;
     if (a < t && !confirm(`${t - a} سوال بی‌پاسخ است. ثبت شود؟`)) return;
-
     this.submitted = true;
     let c = 0;
-
     this.questions.forEach((q, qi) => {
       const s = this.answers[qi];
       const ok = s === q.correct;
       if (ok) c++;
-
       document.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(el => {
         const idx = parseInt(el.dataset.oi);
         if (idx === q.correct) el.classList.add('correct');
@@ -2503,27 +1677,15 @@ const Quiz = {
         el.style.cursor = 'default';
       });
     });
-
     document.getElementById('quiz-active').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'block';
-
     const pct = Math.round((c / t) * 100);
     document.getElementById('quiz-score').textContent = pct + '%';
     document.getElementById('quiz-detail').textContent = `${c} از ${t} صحیح`;
-
-    Storage.put('quizzes', {
-      id: Date.now(),
-      topic: document.getElementById('quiz-topic').value.trim() || 'بدون موضوع',
-      score: pct,
-      total: t,
-      correct: c,
-      date: Date.now()
-    });
-
+    Storage.put('quizzes', { id: Date.now(), topic: document.getElementById('quiz-topic').value.trim() || 'بدون موضوع', score: pct, total: t, correct: c, date: Date.now() });
     document.getElementById('stat-quizzes').textContent = (parseInt(document.getElementById('stat-quizzes').textContent) || 0) + 1;
     Toast.show(`نتیجه: ${pct}%`, pct >= 70 ? 'success' : 'warning');
   },
-
   reset() {
     document.getElementById('quiz-result').style.display = 'none';
     document.getElementById('quiz-setup').style.display = 'block';
@@ -2532,16 +1694,10 @@ const Quiz = {
 };
 
 const Flashcards = {
-  cards: [],
-  currentIndex: 0,
-
+  cards: [], currentIndex: 0,
   normalizeCards(arr) {
-    return (Array.isArray(arr) ? arr : []).map(c => ({
-      front: String(c.front || c.question || '').trim(),
-      back: String(c.back || c.answer || '').trim()
-    })).filter(c => c.front && c.back);
+    return (Array.isArray(arr) ? arr : []).map(c => ({ front: String(c.front || c.question || '').trim(), back: String(c.back || c.answer || '').trim() })).filter(c => c.front && c.back);
   },
-
   loadSample() {
     this.cards = [
       { front: 'پایتخت فرانسه؟', back: 'پاریس' },
@@ -2550,20 +1706,15 @@ const Flashcards = {
       { front: 'شاعر شاهنامه؟', back: 'فردوسی' },
       { front: 'واحد نیرو؟', back: 'نیوتون' }
     ];
-
     this.currentIndex = 0;
     document.getElementById('fc-setup').style.display = 'none';
     document.getElementById('fc-active').style.display = 'block';
     this.show();
     Toast.show('فلش‌کارت نمونه بارگذاری شد', 'success');
   },
-
   async generate() {
     const topic = document.getElementById('fc-topic').value.trim();
-    if (!topic) {
-      Toast.show('موضوع را وارد کنید', 'warning');
-      return;
-    }
+    if (!topic) { Toast.show('موضوع را وارد کنید', 'warning'); return; }
 
     document.getElementById('fc-setup').style.display = 'none';
     document.getElementById('fc-active').style.display = 'block';
@@ -2578,80 +1729,38 @@ const Flashcards = {
         const prompt = `Generate 10 flashcards in Persian about "${topic}". Return ONLY a JSON array: [{"front":"...","back":"..."}]`;
         const data = await AI.json(prompt, { maxTokens: 2000 });
         cards = this.normalizeCards(data);
-      } catch (e) {
-        console.warn('AI flashcards failed:', e);
-      }
+      } catch (e) { console.warn('AI flashcards failed:', e); }
     }
 
-    if (!cards || !cards.length) {
-      cards = this.normalizeCards(await LocalAI.generateFlashcards(topic, 10));
-    }
+    if (!cards || !cards.length) cards = this.normalizeCards(await LocalAI.generateFlashcards(topic, 10));
 
     this.cards = cards;
     this.currentIndex = 0;
-
     await Storage.put('flashcards', { id: Utils.uid(), topic, cards: this.cards, date: Date.now() });
     this.show();
   },
-
   show() {
     const c = this.cards[this.currentIndex];
     if (!c) return;
-
     document.getElementById('fc-front').textContent = c.front;
     document.getElementById('fc-back').textContent = c.back;
     document.getElementById('fc-card').classList.remove('flipped');
     document.getElementById('fc-counter').textContent = `کارت ${this.currentIndex + 1} از ${this.cards.length}`;
   },
-
-  flip() {
-    document.getElementById('fc-card').classList.toggle('flipped');
-  },
-
-  next() {
-    if (this.currentIndex < this.cards.length - 1) {
-      this.currentIndex++;
-      this.show();
-    }
-  },
-
-  prev() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.show();
-    }
-  },
-
-  markEasy() {
-    Toast.show('آسان ✓', 'success');
-    this.next();
-  },
-
-  markHard() {
-    Toast.show('سخت ✗', 'warning');
-    this.next();
-  },
-
-  showSetup() {
-    document.getElementById('fc-active').style.display = 'none';
-    document.getElementById('fc-setup').style.display = 'block';
-  }
+  flip() { document.getElementById('fc-card').classList.toggle('flipped'); },
+  next() { if (this.currentIndex < this.cards.length - 1) { this.currentIndex++; this.show(); } },
+  prev() { if (this.currentIndex > 0) { this.currentIndex--; this.show(); } },
+  markEasy() { Toast.show('آسان ✓', 'success'); this.next(); },
+  markHard() { Toast.show('سخت ✗', 'warning'); this.next(); },
+  showSetup() { document.getElementById('fc-active').style.display = 'none'; document.getElementById('fc-setup').style.display = 'block'; }
 };
 
 const Bank = {
-  data: [],
-  currentFilter: 'all',
-
+  data: [], currentFilter: 'all',
   async init() {
     const stored = await Storage.getAll('qa');
-
     if (stored.length) {
-      this.data = stored.filter(x => x.q && x.a).map(x => ({
-        id: x.id,
-        cat: x.cat || 'general',
-        q: x.q,
-        a: x.a
-      }));
+      this.data = stored.filter(x => x.q && x.a).map(x => ({ id: x.id, cat: x.cat || 'general', q: x.q, a: x.a }));
     } else {
       this.data = [
         { id: 1, cat: 'math', q: 'حاصل ۲+۲×۲؟', a: '۶' },
@@ -2664,66 +1773,44 @@ const Bank = {
         { id: 8, cat: 'lang', q: 'معنی Knowledge؟', a: 'دانش' }
       ];
     }
-
     this.initTags();
     this.render();
   },
-
   initTags() {
     const cats = ['all', ...new Set(this.data.map(q => q.cat || 'general'))];
     const tags = document.getElementById('bank-tags');
-    if (tags) {
-      tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentFilter ? 'background:var(--primary);color:#fff' : ''}" onclick="Bank.setFilter('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
-    }
+    if (tags) tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentFilter ? 'background:var(--primary);color:#fff' : ''}" onclick="Bank.setFilter('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
   },
-
   setFilter(cat, el) {
     this.currentFilter = cat;
-    document.querySelectorAll('#bank-tags .btn').forEach(b => {
-      b.style.background = 'var(--bg3)';
-      b.style.color = 'var(--text)';
-    });
-    if (el) {
-      el.style.background = 'var(--primary)';
-      el.style.color = '#fff';
-    }
+    document.querySelectorAll('#bank-tags .btn').forEach(b => { b.style.background = 'var(--bg3)'; b.style.color = 'var(--text)'; });
+    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#fff'; }
     this.render();
   },
-
   async add() {
     const q = document.getElementById('bank-q').value.trim();
     const a = document.getElementById('bank-a').value.trim();
     const cat = document.getElementById('bank-cat').value.trim() || 'general';
-
-    if (!q || !a) {
-      Toast.show('سوال و پاسخ را وارد کنید', 'warning');
-      return;
-    }
-
+    if (!q || !a) { Toast.show('سوال و پاسخ را وارد کنید', 'warning'); return; }
     const item = { id: Utils.uid(), cat, q, a };
     this.data.unshift(item);
     await Storage.put('qa', item);
-
     document.getElementById('bank-q').value = '';
     document.getElementById('bank-a').value = '';
     document.getElementById('bank-cat').value = '';
-
     this.initTags();
     this.render();
     Toast.show('سوال اضافه شد', 'success');
   },
-
   render() {
     const list = document.getElementById('bank-list');
     const search = Utils.normalizeFa(document.getElementById('bank-search')?.value || '');
     if (!list) return;
-
     const filtered = this.data.filter(item => {
       const mc = this.currentFilter === 'all' || (item.cat || 'general') === this.currentFilter;
       const ms = Utils.normalizeFa(item.q).includes(search) || Utils.normalizeFa(item.a).includes(search);
       return mc && ms;
     });
-
     list.innerHTML = filtered.slice(0, 200).map(i => `
       <div style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer"
            onclick="this.querySelector('.bank-answer').style.display=this.querySelector('.bank-answer').style.display==='block'?'none':'block'">
@@ -2739,17 +1826,14 @@ const Bank = {
 const Settings = {
   async init() {
     const cfg = await Storage.getConfig();
-
     if (cfg.apiKey) document.getElementById('api-key').value = cfg.apiKey;
     if (cfg.proxy) document.getElementById('proxy-url').value = cfg.proxy;
     if (cfg.proxyFormat) document.getElementById('proxy-format').value = cfg.proxyFormat;
     if (cfg.model) document.getElementById('model-select').value = cfg.model;
     if (cfg.systemPrompt) document.getElementById('system-prompt').value = cfg.systemPrompt;
-    if (cfg.imageToken) document.getElementById('image-token').value = cfg.imageToken;
-    if (cfg.rtcConfig) document.getElementById('rtc-config').value = cfg.rtcConfig;
-    if (cfg.firebaseConfig) document.getElementById('firebase-config').value = cfg.firebaseConfig;
+    if (cfg.jitsiDomain) document.getElementById('jitsi-domain').value = cfg.jitsiDomain;
+    Classroom.initDomain(cfg.jitsiDomain);
   },
-
   async save() {
     const cfg = {
       apiKey: document.getElementById('api-key').value.trim(),
@@ -2757,42 +1841,24 @@ const Settings = {
       proxyFormat: document.getElementById('proxy-format').value,
       model: document.getElementById('model-select').value,
       systemPrompt: document.getElementById('system-prompt').value.trim(),
-      imageToken: document.getElementById('image-token').value.trim(),
-      rtcConfig: document.getElementById('rtc-config').value.trim(),
-      firebaseConfig: document.getElementById('firebase-config').value.trim()
+      jitsiDomain: document.getElementById('jitsi-domain').value.trim()
     };
-
     await Storage.saveSettings(cfg);
-
-    if (cfg.rtcConfig) {
-      try {
-        Classroom.rtcConfig = JSON.parse(cfg.rtcConfig);
-      } catch (e) {
-        Toast.show('RTC JSON نامعتبر است', 'error');
-      }
-    }
-
+    Classroom.initDomain(cfg.jitsiDomain);
     Toast.show('تنظیمات ذخیره شد', 'success');
   },
-
   async clearAll() {
     if (!confirm('همه داده‌های محلی پاک شود؟')) return;
-    indexedDB.deleteDatabase('OstadYarDB_v100');
+    indexedDB.deleteDatabase('OstadYarDB_v101');
     location.reload();
   }
 };
 
 const UI = {
   currentView: 'home',
-
   nav(view, el) {
     this.currentView = view;
-
-    document.querySelectorAll('.view').forEach(v => {
-      v.classList.remove('active');
-      v.style.display = 'none';
-    });
-
+    document.querySelectorAll('.view').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; });
     const target = document.getElementById(`view-${view}`);
     if (target) {
       target.style.display = view === 'chat' ? 'flex' : 'block';
@@ -2800,28 +1866,15 @@ const UI = {
     }
 
     document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b => b.classList.remove('active'));
-
-    if (el) {
-      el.classList.add('active');
-    } else {
+    if (el) el.classList.add('active');
+    else {
       document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b => {
         const onclick = b.getAttribute('onclick') || '';
         if (onclick.includes(`UI.nav('${view}'`)) b.classList.add('active');
       });
     }
 
-    const titles = {
-      home: 'داشبورد',
-      chat: 'گفتگو',
-      classroom: 'کلاس مجازی',
-      facts: 'دانستنی',
-      quiz: 'آزمون',
-      flashcards: 'فلش‌کارت',
-      bank: 'بانک سوالات',
-      tools: 'جعبه ابزار',
-      settings: 'تنظیمات'
-    };
-
+    const titles = { home: 'داشبورد', chat: 'گفتگو', classroom: 'کلاس مجازی', facts: 'دانستنی', quiz: 'آزمون', flashcards: 'فلش‌کارت', bank: 'بانک سوالات', tools: 'جعبه ابزار', settings: 'تنظیمات' };
     document.getElementById('page-title').textContent = titles[view] || 'استاد یار پلاس';
 
     if (view === 'tools') setTimeout(() => ToolsWB.init(), 100);
@@ -2830,7 +1883,6 @@ const UI = {
 
     this.toggleSidebar(false);
   },
-
   toggleSidebar(show) {
     const sb = document.getElementById('sidebar');
     if (window.innerWidth <= 768) {
@@ -2839,7 +1891,6 @@ const UI = {
       else sb.classList.remove('open');
     }
   },
-
   filterChats(query) {
     const q = Utils.normalizeFa(query);
     document.querySelectorAll('#chat-list > div').forEach(el => {
@@ -2847,7 +1898,6 @@ const UI = {
       el.style.display = text.includes(q) ? '' : 'none';
     });
   },
-
   renderQuickLinks() {
     const links = [
       { title: 'دیجی‌کالا', url: 'https://www.digikala.com' },
@@ -2856,11 +1906,8 @@ const UI = {
       { title: 'دیوار', url: 'https://divar.ir' },
       { title: 'ویکی‌پدیا', url: 'https://fa.wikipedia.org' }
     ];
-
     const el = document.getElementById('quick-links');
-    if (el) {
-      el.innerHTML = links.map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer" style="padding:8px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:.85rem;transition:.2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">${l.title}</a>`).join('');
-    }
+    if (el) el.innerHTML = links.map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer" style="padding:8px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:.85rem;transition:.2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">${l.title}</a>`).join('');
   }
 };
 
@@ -2874,14 +1921,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     await Settings.init();
 
     UI.renderQuickLinks();
-
     document.getElementById('stat-chats').textContent = Chat.sessions.length;
     document.getElementById('stat-quizzes').textContent = (await Storage.getAll('quizzes')).length;
-
-    const cfg = await Storage.getConfig();
-    if (cfg.rtcConfig) {
-      try { Classroom.rtcConfig = JSON.parse(cfg.rtcConfig); } catch (e) { }
-    }
 
     const chatInput = document.getElementById('chat-input');
     chatInput.addEventListener('input', function () {
@@ -2890,36 +1931,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     const params = new URLSearchParams(location.search);
-    const classId = params.get('class');
-    const role = params.get('role');
+    Classroom.initFromUrl(params);
 
-    if (classId) {
-      UI.nav('classroom');
-
-      Classroom.classId = classId;
-      Classroom.isTeacher = role === 'teacher';
-      Classroom.className = params.get('class_name') || '';
-      Classroom.teacherName = params.get('teacher') || (Classroom.isTeacher ? (params.get('name') || 'معلم') : 'معلم');
-      Classroom.displayName = params.get('name') || (Classroom.isTeacher ? Classroom.teacherName : 'دانش‌آموز');
-
-      document.getElementById('class-name').value = Classroom.className;
-      document.getElementById('class-teacher').value = Classroom.teacherName;
-      document.getElementById('class-display-name').value = Classroom.displayName;
-      document.getElementById('class-code').value = classId;
-
-      await Classroom.enterRoom();
-      Toast.show(Classroom.isTeacher ? 'کلاس از لینک معلم باز شد' : 'به کلاس پیوستید', 'success');
-    }
-
-    if (window.innerWidth <= 768) {
-      document.getElementById('menu-btn').style.display = 'flex';
-    }
-
+    if (window.innerWidth <= 768) document.getElementById('menu-btn').style.display = 'flex';
     window.addEventListener('resize', () => {
       document.getElementById('menu-btn').style.display = window.innerWidth <= 768 ? 'flex' : 'none';
     });
 
-    Toast.show('🚀 استاد یار پلاس v100.8 آماده است!', 'success');
+    Toast.show('🚀 استاد یار پلاس v101.0 آماده است!', 'success');
   } catch (e) {
     console.error('Init error:', e);
     Toast.show('خطا در راه‌اندازی: ' + e.message, 'error');
