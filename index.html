@@ -2,23 +2,17 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>استاد یار پلاس | v100.7 Ultimate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>استاد یار پلاس | v100.8 Ultimate</title>
 <meta name="theme-color" content="#6366f1">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 
-<!-- PeerJS for WebRTC -->
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 
-<!-- Other Libraries -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
@@ -34,15 +28,11 @@
 *{box-sizing:border-box;margin:0;padding:0;outline:none;-webkit-tap-highlight-color:transparent}
 body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);height:100dvh;overflow:hidden}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
-
-/* ===== LAYOUT ===== */
 .app{display:flex;height:100dvh}
 .sidebar{width:280px;background:var(--bg2);border-inline-start:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.header{padding:.6rem 1rem;border-bottom:1px solid var(--border);background:var(--glass);backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.header{padding:.6rem 1rem;border-bottom:1px solid var(--border);background:var(--glass);backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:10px}
 .content{flex:1;overflow-y:auto;padding:1rem}
-
-/* ===== COMPONENTS ===== */
 .btn{border:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:var(--r2);background:var(--bg3);color:var(--text);font-size:.9rem;transition:.2s;min-height:40px}
 .btn:hover{opacity:.9;transform:translateY(-1px)}
 .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:600}
@@ -54,23 +44,21 @@ body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);h
 .input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:.9rem;margin-bottom:.8rem;transition:.2s}
 .input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.2)}
 select.input{cursor:pointer}
-
-/* ===== NAV ===== */
 .nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:.8rem}
 .nav-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:var(--r3);background:none;border:none;color:var(--muted);cursor:pointer;font-family:inherit;font-size:.65rem;transition:.2s}
 .nav-btn svg{width:20px;height:20px;fill:currentColor}
 .nav-btn.active,.nav-btn:hover{background:var(--bg3);color:var(--primary)}
-
-/* ===== VIEWS ===== */
 .view{display:none}
 .view.active{display:block;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* ===== CHAT ===== */
 .chat-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:1rem}
-.msg{max-width:85%;padding:.9rem 1.2rem;border-radius:var(--r);line-height:1.7;font-size:.95rem;position:relative}
+.msg{max-width:85%;padding:.9rem 1.2rem;border-radius:var(--r);line-height:1.7;font-size:.95rem;position:relative;word-wrap:break-word}
 .msg.user{align-self:flex-start;background:rgba(99,102,241,.15);border-bottom-right-radius:4px}
 .msg.ai{align-self:flex-end;background:var(--bg3);border-bottom-left-radius:4px}
+.msg img{max-width:100%;border-radius:8px;margin-top:6px}
+.msg pre{background:#0b1220;padding:10px;border-radius:8px;overflow:auto;margin:8px 0}
+.msg code{font-family:monospace;font-size:.85em}
+.msg a{color:var(--primary2)}
 .msg-actions{position:absolute;bottom:-24px;inset-inline-start:0;display:flex;gap:4px;opacity:0;transition:.2s}
 .msg:hover .msg-actions{opacity:1}
 .msg-action{width:24px;height:24px;border-radius:6px;background:var(--bg2);border:1px solid var(--border);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7rem}
@@ -78,8 +66,11 @@ select.input{cursor:pointer}
 .chat-input-zone{padding:.8rem 1rem;border-top:1px solid var(--border);background:var(--glass);display:flex;gap:8px;align-items:flex-end}
 .chat-input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;color:var(--text);font-family:inherit;font-size:.95rem;resize:none;max-height:120px;min-height:44px}
 .chat-input:focus{border-color:var(--primary)}
-
-/* ===== CLASSROOM ===== */
+.typing{display:flex;gap:5px;align-items:center;min-height:24px}
+.typing span{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:bounce 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
 .classroom-grid{display:grid;grid-template-columns:1fr 320px;gap:1rem;height:calc(100dvh - 140px)}
 .classroom-main{display:flex;flex-direction:column;gap:1rem}
 .classroom-sidebar{display:flex;flex-direction:column;gap:1rem;overflow-y:auto}
@@ -91,23 +82,19 @@ select.input{cursor:pointer}
 .video-tile .ctrl-btn{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.6);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem}
 .video-tile .ctrl-btn:hover{background:var(--primary)}
 .video-tile .ctrl-btn.muted{background:var(--danger)}
-.classroom-controls{display:flex;justify-content:center;gap:12px;padding:1rem;background:var(--bg2);border-radius:var(--r)}
-.ctrl-btn-lg{width:50px;height:50px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:.2s}
+.classroom-controls{display:flex;justify-content:center;gap:12px;padding:1rem;background:var(--bg2);border-radius:var(--r);flex-wrap:wrap}
+.ctrl-btn-lg{width:50px;height:50px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:.2s;background:var(--bg3);color:var(--text)}
 .ctrl-btn-lg:hover{transform:scale(1.1)}
 .ctrl-btn-lg.active{background:var(--primary);color:#fff}
 .ctrl-btn-lg.danger{background:var(--danger);color:#fff}
 .ctrl-btn-lg.muted{background:var(--bg3);color:var(--muted)}
-
-/* ===== WHITEBOARD ===== */
 .wb-container{position:relative;background:#1e293b;border-radius:var(--r);overflow:hidden;touch-action:none;flex:1;min-height:300px}
-.wb-canvas{width:100%;height:100%;cursor:crosshair}
-.wb-tools{position:absolute;top:10px;inset-inline-start:10px;display:flex;gap:6px;background:var(--bg2);padding:6px;border-radius:30px;border:1px solid var(--border);flex-wrap:wrap}
+.wb-canvas{width:100%;height:100%;cursor:crosshair;display:block}
+.wb-tools{position:absolute;top:10px;inset-inline-start:10px;display:flex;gap:6px;background:var(--bg2);padding:6px;border-radius:30px;border:1px solid var(--border);flex-wrap:wrap;align-items:center}
 .wb-tool{width:32px;height:32px;border-radius:50%;border:none;background:transparent;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .wb-tool:hover,.wb-tool.active{background:var(--primary);color:#fff}
 .wb-color{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);cursor:pointer;transition:.2s}
 .wb-color:hover,.wb-color.active{border-color:#fff;transform:scale(1.15)}
-
-/* ===== TOOLS ===== */
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
 .calc-display{background:var(--bg);padding:1rem;border-radius:var(--r2);text-align:left;font-size:1.5rem;font-family:monospace;margin-bottom:1rem;border:1px solid var(--border);direction:ltr;min-height:60px;display:flex;align-items:center;justify-content:flex-end;overflow:hidden}
 .calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -118,46 +105,35 @@ select.input{cursor:pointer}
 .pomo-display{font-size:3.5rem;font-weight:900;font-variant-numeric:tabular-nums;color:var(--primary);text-align:center;margin:1rem 0}
 .qr-output{display:flex;justify-content:center;margin:1rem 0}
 .qr-output canvas,.qr-output img{border-radius:12px;border:4px solid #fff}
-
-/* ===== FACTS ===== */
 .fact-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.8rem;transition:.2s}
 .fact-card:hover{transform:translateY(-2px);border-color:var(--primary)}
 .fact-cat{display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(99,102,241,.15);color:var(--primary);font-size:.7rem;font-weight:600;margin-bottom:6px}
-
-/* ===== QUIZ ===== */
 .quiz-option{padding:12px 16px;border:2px solid var(--border);border-radius:var(--r2);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .quiz-option:hover{border-color:var(--primary);background:var(--bg3)}
 .quiz-option.selected{border-color:var(--primary);background:rgba(99,102,241,.1)}
 .quiz-option.correct{border-color:var(--success)!important;background:rgba(34,197,94,.15)!important}
 .quiz-option.wrong{border-color:var(--danger)!important;background:rgba(239,68,68,.15)!important}
-
-/* ===== FLASHCARDS ===== */
 .fc-scene{perspective:1000px;width:100%;max-width:500px;height:260px;margin:1rem auto;cursor:pointer}
 .fc-card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;border-radius:var(--r)}
 .fc-card.flipped{transform:rotateY(180deg)}
 .fc-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center;font-size:1.1rem;line-height:1.8;border-radius:var(--r);border:1px solid var(--border);background:var(--glass)}
 .fc-back{transform:rotateY(180deg);background:rgba(99,102,241,.1);color:var(--primary);font-weight:600}
-
-/* ===== MODAL ===== */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:9999;display:none;align-items:center;justify-content:center;padding:1rem}
-.modal-overlay.open{display:flex;animation:fadeIn .2s}
-.modal{width:100%;max-width:500px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;max-height:90dvh;overflow-y:auto}
-
-/* ===== TOAST ===== */
-.toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:400px}
-.toast{background:var(--bg2);border:1px solid var(--border);padding:12px 18px;border-radius:var(--r2);display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);pointer-events:auto;animation:slideUp .3s ease;font-size:.9rem;border-inline-start:4px solid var(--success)}
-@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
-
-/* ===== BADGES ===== */
 .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:var(--bg3);border:1px solid var(--border)}
 .badge.success{border-color:var(--success);color:var(--success)}
 .badge.warning{border-color:var(--warning);color:var(--warning)}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
-
-/* ===== LINKS ===== */
 .link-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--r2);padding:12px;margin:8px 0;font-family:monospace;font-size:.85rem;direction:ltr;text-align:left;word-break:break-all;color:var(--text)}
-
-/* ===== MOBILE ===== */
+.class-chat-msg{padding:8px 12px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:.85rem;word-break:break-word}
+.class-chat-file img{max-width:100%;border-radius:8px;margin-top:6px;display:block}
+.class-chat-file a{color:var(--primary2)}
+.source-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px;margin:6px 0;font-size:.85rem}
+.toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:400px}
+.toast{background:var(--bg2);border:1px solid var(--border);padding:12px 18px;border-radius:var(--r2);display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);pointer-events:auto;animation:slideUp .3s ease;font-size:.9rem;border-inline-start:4px solid var(--success)}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--bg2);border-top:1px solid var(--border);justify-content:space-around;align-items:center;z-index:999}
+.mobile-nav button{background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem;font-family:inherit}
+.mobile-nav button svg{width:22px;height:22px;fill:currentColor}
+.mobile-nav button.active{color:var(--primary)}
 @media(max-width:768px){
 .sidebar{position:fixed;inset:0;z-index:1000;transform:translateX(100%);transition:.3s}
 .sidebar.open{transform:translateX(0)}
@@ -165,41 +141,35 @@ select.input{cursor:pointer}
 .tools-grid{grid-template-columns:1fr}
 .mobile-nav{display:flex!important}
 }
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--bg2);border-top:1px solid var(--border);justify-content:space-around;align-items:center;z-index:999}
-.mobile-nav button{background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem;font-family:inherit}
-.mobile-nav button svg{width:22px;height:22px;fill:currentColor}
-.mobile-nav button.active{color:var(--primary)}
 </style>
 </head>
 <body>
 
 <div class="toast-container" id="toast-container"></div>
 
-<!-- ===== APP ===== -->
 <div class="app">
-  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div style="padding:1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
       <svg viewBox="0 0 24 24" style="width:32px;height:32px;fill:var(--primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
       <div>
         <div style="font-weight:800;font-size:1.1rem;color:var(--primary)">استاد یار پلاس</div>
-        <div style="font-size:.7rem;color:var(--muted)">v100.7 Ultimate</div>
+        <div style="font-size:.7rem;color:var(--muted)">v100.8 Ultimate</div>
       </div>
     </div>
-    
+
     <div style="padding:.8rem">
       <button class="btn btn-primary" style="width:100%" onclick="Chat.newSession()">
         <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
         گفتگوی جدید
       </button>
     </div>
-    
+
     <div style="padding:0 .8rem .8rem">
       <input class="input" placeholder="جستجو در چت‌ها..." oninput="UI.filterChats(this.value)" style="margin:0">
     </div>
-    
+
     <div id="chat-list" style="flex:1;overflow-y:auto;padding:0 .8rem"></div>
-    
+
     <div class="nav-grid">
       <button class="nav-btn active" onclick="UI.nav('home',this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>خانه</button>
       <button class="nav-btn" onclick="UI.nav('chat',this)"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>چت</button>
@@ -213,7 +183,6 @@ select.input{cursor:pointer}
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
     <header class="header">
       <div style="display:flex;align-items:center;gap:10px">
@@ -235,7 +204,6 @@ select.input{cursor:pointer}
     </header>
 
     <div class="content" id="content">
-      <!-- HOME -->
       <div class="view active" id="view-home">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1rem">
           <div class="card" style="text-align:center"><div style="font-size:2rem;font-weight:900;color:var(--primary)" id="stat-chats">0</div><div style="color:var(--muted);font-size:.85rem">گفتگوها</div></div>
@@ -258,7 +226,6 @@ select.input{cursor:pointer}
         </div>
       </div>
 
-      <!-- CHAT -->
       <div class="view" id="view-chat" style="display:none;flex-direction:column;height:calc(100dvh - 120px)">
         <div class="chat-messages" id="chat-messages"></div>
         <div class="chat-input-zone">
@@ -270,35 +237,35 @@ select.input{cursor:pointer}
         </div>
       </div>
 
-      <!-- CLASSROOM -->
       <div class="view" id="view-classroom">
         <div id="classroom-lobby">
-          <div class="card" style="max-width:500px;margin:2rem auto;text-align:center">
+          <div class="card" style="max-width:520px;margin:2rem auto;text-align:center">
             <div style="font-size:3rem;margin-bottom:1rem">🎓</div>
             <h2 style="margin-bottom:1rem">کلاس مجازی</h2>
             <input class="input" id="class-name" placeholder="نام کلاس (مثلاً: ریاضی دهم)">
             <input class="input" id="class-teacher" placeholder="نام معلم">
+            <input class="input" id="class-display-name" placeholder="نام شما (اختیاری)">
             <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="Classroom.create()">🚀 ایجاد کلاس</button>
             <div style="margin:1rem 0;color:var(--muted);font-size:.85rem">یا</div>
-            <input class="input" id="class-code" placeholder="کد کلاس را وارد کنید">
+            <input class="input" id="class-code" placeholder="کد کلاس یا لینک کلاس را وارد کنید">
             <button class="btn btn-success" style="width:100%" onclick="Classroom.join()">📥 ورود به کلاس</button>
           </div>
         </div>
-        
+
         <div id="classroom-active" style="display:none">
           <div class="classroom-grid">
             <div class="classroom-main">
               <div class="video-grid" id="video-grid">
                 <div class="video-tile" id="local-video-tile">
                   <video id="local-video" autoplay muted playsinline></video>
-                  <div class="name-tag">شما (معلم)</div>
+                  <div class="name-tag">شما</div>
                   <div class="controls">
                     <button class="ctrl-btn" onclick="Classroom.toggleMic()" id="mic-btn">🎤</button>
                     <button class="ctrl-btn" onclick="Classroom.toggleCam()" id="cam-btn">📷</button>
                   </div>
                 </div>
               </div>
-              
+
               <div class="wb-container" id="wb-container" style="display:none">
                 <canvas class="wb-canvas" id="wb-canvas"></canvas>
                 <div class="wb-tools">
@@ -313,7 +280,7 @@ select.input{cursor:pointer}
                   <button class="wb-tool" onclick="WB.save()">💾</button>
                 </div>
               </div>
-              
+
               <div class="classroom-controls">
                 <button class="ctrl-btn-lg muted" onclick="Classroom.toggleMic()" id="ctrl-mic">🎤</button>
                 <button class="ctrl-btn-lg muted" onclick="Classroom.toggleCam()" id="ctrl-cam">📷</button>
@@ -323,13 +290,13 @@ select.input{cursor:pointer}
                 <button class="ctrl-btn-lg danger" onclick="Classroom.end()">📞</button>
               </div>
             </div>
-            
+
             <div class="classroom-sidebar">
               <div class="card">
                 <div style="font-weight:700;margin-bottom:8px">👥 شرکت‌کنندگان (<span id="participant-count">1</span>)</div>
                 <div id="participant-list"></div>
               </div>
-              
+
               <div class="card" style="flex:1;display:flex;flex-direction:column">
                 <div style="font-weight:700;margin-bottom:8px">💬 چت کلاس</div>
                 <div id="class-chat" style="flex:1;overflow-y:auto;margin-bottom:8px;max-height:300px"></div>
@@ -338,12 +305,18 @@ select.input{cursor:pointer}
                   <button class="btn btn-primary btn-icon" onclick="Classroom.sendChat()">📤</button>
                 </div>
               </div>
-              
+
               <div class="card">
                 <div style="font-weight:700;margin-bottom:8px">🔗 لینک‌های کلاس</div>
+
+                <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">کد کلاس:</div>
+                <div class="link-box" id="class-id-box"></div>
+                <button class="btn" style="width:100%;margin-bottom:8px" onclick="Classroom.copyText('class-id-box')">📋 کپی کد</button>
+
                 <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">لینک معلم:</div>
                 <div class="link-box" id="teacher-link"></div>
                 <button class="btn" style="width:100%;margin-bottom:8px" onclick="Classroom.copyLink('teacher')">📋 کپی لینک معلم</button>
+
                 <div style="font-size:.8rem;color:var(--muted);margin-bottom:4px">لینک دانش‌آموز:</div>
                 <div class="link-box" id="student-link"></div>
                 <button class="btn" style="width:100%" onclick="Classroom.copyLink('student')">📋 کپی لینک دانش‌آموز</button>
@@ -353,7 +326,6 @@ select.input{cursor:pointer}
         </div>
       </div>
 
-      <!-- FACTS -->
       <div class="view" id="view-facts">
         <div style="max-width:900px;margin:0 auto">
           <h2 style="margin-bottom:1rem">⭐ دانستنی‌ها</h2>
@@ -368,7 +340,6 @@ select.input{cursor:pointer}
         </div>
       </div>
 
-      <!-- QUIZ -->
       <div class="view" id="view-quiz">
         <div style="max-width:700px;margin:0 auto">
           <h2 style="margin-bottom:1rem">📝 آزمون هوشمند</h2>
@@ -386,7 +357,7 @@ select.input{cursor:pointer}
             <div id="quiz-questions"></div>
             <button class="btn btn-primary" style="width:100%;margin-top:1rem" onclick="Quiz.submit()">ثبت پاسخ‌ها</button>
           </div>
-          <div id="quiz-result" style="display:none" class="card" style="text-align:center">
+          <div id="quiz-result" class="card" style="display:none;text-align:center">
             <div style="font-size:3rem;font-weight:900;color:var(--primary)" id="quiz-score">0%</div>
             <p style="color:var(--muted)" id="quiz-detail"></p>
             <button class="btn btn-primary" onclick="Quiz.reset()">آزمون مجدد</button>
@@ -394,7 +365,6 @@ select.input{cursor:pointer}
         </div>
       </div>
 
-      <!-- FLASHCARDS -->
       <div class="view" id="view-flashcards">
         <div style="max-width:550px;margin:0 auto">
           <h2 style="margin-bottom:1rem">🃏 فلش‌کارت</h2>
@@ -422,19 +392,21 @@ select.input{cursor:pointer}
         </div>
       </div>
 
-      <!-- BANK -->
       <div class="view" id="view-bank">
         <div style="max-width:800px;margin:0 auto">
           <h2 style="margin-bottom:1rem">📚 بانک سوالات</h2>
           <div class="card">
+            <input class="input" id="bank-q" placeholder="سوال جدید">
+            <input class="input" id="bank-a" placeholder="پاسخ">
+            <input class="input" id="bank-cat" placeholder="دسته (مثلاً: math)">
+            <button class="btn btn-primary" style="width:100%;margin-bottom:12px" onclick="Bank.add()">➕ افزودن سوال</button>
             <input class="input" id="bank-search" placeholder="جستجو..." oninput="Bank.render()">
             <div id="bank-tags" style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap"></div>
-            <div id="bank-list" style="max-height:60vh;overflow-y:auto"></div>
+            <div id="bank-list" style="max-height:55vh;overflow-y:auto"></div>
           </div>
         </div>
       </div>
 
-      <!-- TOOLS -->
       <div class="view" id="view-tools">
         <div style="max-width:1100px;margin:0 auto">
           <h2 style="margin-bottom:1rem">🧰 جعبه ابزار</h2>
@@ -448,7 +420,7 @@ select.input{cursor:pointer}
                 <button class="btn" onclick="Pomodoro.reset()">🔄 ریست</button>
               </div>
             </div>
-            
+
             <div class="card">
               <div style="font-weight:700;margin-bottom:1rem;color:var(--accent)">🔢 ماشین حساب</div>
               <div class="calc-display" id="calc-display">0</div>
@@ -475,7 +447,7 @@ select.input{cursor:pointer}
                 <button class="calc-btn eq" onclick="Calc.calc()">=</button>
               </div>
             </div>
-            
+
             <div class="card">
               <div style="font-weight:700;margin-bottom:1rem;color:var(--accent)">📱 QR ساز</div>
               <input class="input" id="qr-input" placeholder="متن یا لینک...">
@@ -483,7 +455,7 @@ select.input{cursor:pointer}
               <div class="qr-output" id="qr-output"></div>
               <button class="btn btn-success" style="width:100%;display:none" id="qr-download" onclick="QRGen.download()">💾 دانلود</button>
             </div>
-            
+
             <div class="card" style="grid-column:1/-1">
               <div style="font-weight:700;margin-bottom:1rem;color:var(--accent)">✏️ تخته سفید</div>
               <div class="wb-container" style="height:400px">
@@ -505,31 +477,45 @@ select.input{cursor:pointer}
         </div>
       </div>
 
-      <!-- SETTINGS -->
       <div class="view" id="view-settings">
-        <div style="max-width:500px;margin:0 auto">
+        <div style="max-width:560px;margin:0 auto">
           <h2 style="margin-bottom:1rem">⚙️ تنظیمات</h2>
           <div class="card">
             <label style="display:block;margin-bottom:6px;font-weight:600">🔑 API Key</label>
             <input class="input" id="api-key" type="password" placeholder="sk-... یا sk-ant-...">
-            
+
             <label style="display:block;margin-bottom:6px;font-weight:600">🌐 Proxy URL</label>
             <input class="input" id="proxy-url" placeholder="https://...">
-            
+
+            <label style="display:block;margin-bottom:6px;font-weight:600">🧩 Proxy Format</label>
+            <select class="input" id="proxy-format">
+              <option value="auto">Auto</option>
+              <option value="openai">OpenAI Compatible</option>
+              <option value="anthropic">Anthropic Compatible</option>
+            </select>
+
             <label style="display:block;margin-bottom:6px;font-weight:600">🤖 مدل</label>
             <select class="input" id="model-select">
               <option value="ostadyar">🧠 استاد یار (آفلاین)</option>
               <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option>
               <option value="gpt-4o">GPT-4o</option>
+              <option value="gpt-4o-mini">GPT-4o Mini</option>
             </select>
-            
-            <label style="display:block;margin-bottom:6px;font-weight:600">🎨 Image Token</label>
+
+            <label style="display:block;margin-bottom:6px;font-weight:600">🧠 System Prompt</label>
+            <textarea class="input" id="system-prompt" rows="3" placeholder="تو یک دستیار آموزشی فارسی هستی..."></textarea>
+
+            <label style="display:block;margin-bottom:6px;font-weight:600">🎨 Image Token (اختیاری)</label>
             <input class="input" id="image-token" type="password" placeholder="hf_...">
-            
+
+            <label style="display:block;margin-bottom:6px;font-weight:600">🧊 RTC / TURN JSON</label>
+            <textarea class="input" id="rtc-config" rows="3" placeholder='{"iceServers":[{"urls":"stun:stun.l.google.com:19302"}]}'></textarea>
+
             <label style="display:block;margin-bottom:6px;font-weight:600">🔥 Firebase Config</label>
             <textarea class="input" id="firebase-config" rows="4" placeholder='{"apiKey":"...","authDomain":"...","projectId":"..."}'></textarea>
-            
-            <button class="btn btn-primary" style="width:100%" onclick="Settings.save()">💾 ذخیره</button>
+
+            <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="Settings.save()">💾 ذخیره</button>
+            <button class="btn btn-danger" style="width:100%" onclick="Settings.clearAll()">🗑️ پاک کردن همه داده‌ها</button>
           </div>
         </div>
       </div>
@@ -537,7 +523,6 @@ select.input{cursor:pointer}
   </main>
 </div>
 
-<!-- MOBILE NAV -->
 <div class="mobile-nav">
   <button class="active" onclick="UI.nav('home',this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>خانه</button>
   <button onclick="UI.nav('chat',this)"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>چت</button>
@@ -546,1337 +531,2398 @@ select.input{cursor:pointer}
 </div>
 
 <script>
-// ============================================================
-// v100.7 Ultimate - Complete Edition
-// ============================================================
 'use strict';
 
-// ===== UTILS =====
 const Utils = {
-  normalizeFa(t){return(t||'').replace(/[\u200c\u200f\u200e]/g,' ').replace(/[يى]/g,'ی').replace(/[ك]/g,'ک').replace(/\s+/g,' ').toLowerCase().trim()},
-  uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)},
-  escapeHtml(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
-};
-
-// ===== TOAST =====
-const Toast = {
-  show(msg,type='info'){
-    const c=document.getElementById('toast-container');
-    if(!c)return;
-    const t=document.createElement('div');
-    t.className='toast';
-    const colors={success:'var(--success)',error:'var(--danger)',warning:'var(--warning)',info:'var(--info)'};
-    t.style.borderInlineStartColor=colors[type]||colors.info;
-    t.innerHTML=`<span>${msg}</span>`;
-    c.appendChild(t);
-    setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(20px)';setTimeout(()=>t.remove(),300)},3000);
+  normalizeFa(t) {
+    return (t || '').replace(/[\u200c\u200f\u200e]/g, ' ').replace(/[يى]/g, 'ی').replace(/[ك]/g, 'ک').replace(/\s+/g, ' ').toLowerCase().trim();
+  },
+  uid() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  },
+  escapeHtml(t) {
+    const d = document.createElement('div');
+    d.textContent = t == null ? '' : String(t);
+    return d.innerHTML;
+  },
+  faDigits(s) {
+    return String(s || '')
+      .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+      .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+  },
+  timeoutSignal(ms) {
+    const c = new AbortController();
+    setTimeout(() => c.abort(), ms);
+    return c.signal;
+  },
+  safeDataUrl(u) {
+    if (typeof u !== 'string') return '#';
+    const s = u.trim();
+    if (!s.startsWith('data:')) return '#';
+    if (/^data:text\/html/i.test(s) || /^data:application\/xhtml/i.test(s)) return '#';
+    return s;
   }
 };
 
-// ===== STORAGE =====
+const Toast = {
+  show(msg, type = 'info') {
+    const c = document.getElementById('toast-container');
+    if (!c) return;
+    const t = document.createElement('div');
+    t.className = 'toast';
+    const colors = { success: 'var(--success)', error: 'var(--danger)', warning: 'var(--warning)', info: 'var(--info)' };
+    t.style.borderInlineStartColor = colors[type] || colors.info;
+    t.innerHTML = `<span>${Utils.escapeHtml(msg)}</span>`;
+    c.appendChild(t);
+    setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateY(20px)';
+      setTimeout(() => t.remove(), 300);
+    }, 3500);
+  }
+};
+
 const Storage = {
-  db:null,
-  async init(){
-    return new Promise((resolve,reject)=>{
-      try{
-        const req=indexedDB.open('OstadYarDB_v100',1);
-        req.onupgradeneeded=e=>{
-          const db=e.target.result;
-          ['settings','sessions','quizzes','tasks','flashcards','facts','qa'].forEach(s=>{
-            if(!db.objectStoreNames.contains(s))db.createObjectStore(s,{keyPath:'id'});
+  db: null,
+  async init() {
+    return new Promise((resolve, reject) => {
+      try {
+        const req = indexedDB.open('OstadYarDB_v100', 1);
+        req.onupgradeneeded = e => {
+          const db = e.target.result;
+          ['settings', 'sessions', 'quizzes', 'tasks', 'flashcards', 'facts', 'qa'].forEach(s => {
+            if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, { keyPath: 'id' });
           });
         };
-        req.onsuccess=e=>{this.db=e.target.result;resolve()};
-        req.onerror=e=>reject(e);
-      }catch(e){reject(e)}
+        req.onsuccess = e => { this.db = e.target.result; resolve(); };
+        req.onerror = e => reject(e);
+      } catch (e) { reject(e); }
     });
   },
-  async get(store,key){
-    return new Promise(r=>{
-      if(!this.db)return r(null);
-      try{
-        const tx=this.db.transaction(store,'readonly');
-        const s=tx.objectStore(store);
-        const req=key?s.get(key):s.getAll();
-        req.onsuccess=()=>r(req.result);
-        req.onerror=()=>r(null);
-      }catch(e){r(null)}
+  async get(store, key) {
+    return new Promise(r => {
+      if (!this.db) return r(null);
+      try {
+        const tx = this.db.transaction(store, 'readonly');
+        const s = tx.objectStore(store);
+        const req = key ? s.get(key) : s.getAll();
+        req.onsuccess = () => r(req.result);
+        req.onerror = () => r(null);
+      } catch (e) { r(null); }
     });
   },
-  async getAll(store){return await this.get(store,null)||[]},
-  async put(store,data){
-    return new Promise(r=>{
-      if(!this.db)return r(false);
-      try{
-        const tx=this.db.transaction(store,'readwrite');
+  async getAll(store) {
+    return await this.get(store, null) || [];
+  },
+  async put(store, data) {
+    return new Promise(r => {
+      if (!this.db) return r(false);
+      try {
+        const tx = this.db.transaction(store, 'readwrite');
         tx.objectStore(store).put(data);
-        tx.oncomplete=()=>r(true);
-        tx.onerror=()=>r(false);
-      }catch(e){r(false)}
+        tx.oncomplete = () => r(true);
+        tx.onerror = () => r(false);
+      } catch (e) { r(false); }
     });
   },
-  async putBatch(store,items){
-    return new Promise(r=>{
-      if(!this.db||!items.length)return r(false);
-      try{
-        const tx=this.db.transaction(store,'readwrite');
-        const s=tx.objectStore(store);
-        items.forEach(i=>s.put(i));
-        tx.oncomplete=()=>r(true);
-        tx.onerror=()=>r(false);
-      }catch(e){r(false)}
+  async putBatch(store, items) {
+    return new Promise(r => {
+      if (!this.db || !items.length) return r(false);
+      try {
+        const tx = this.db.transaction(store, 'readwrite');
+        const s = tx.objectStore(store);
+        items.forEach(i => s.put(i));
+        tx.oncomplete = () => r(true);
+        tx.onerror = () => r(false);
+      } catch (e) { r(false); }
     });
   },
-  async delete(store,key){
-    return new Promise(r=>{
-      if(!this.db)return r(false);
-      try{
-        const tx=this.db.transaction(store,'readwrite');
+  async delete(store, key) {
+    return new Promise(r => {
+      if (!this.db) return r(false);
+      try {
+        const tx = this.db.transaction(store, 'readwrite');
         tx.objectStore(store).delete(key);
-        tx.oncomplete=()=>r(true);
-      }catch(e){r(false)}
+        tx.oncomplete = () => r(true);
+      } catch (e) { r(false); }
     });
   },
-  async getConfig(){return await this.get('settings','config')||{}},
-  async saveSettings(cfg){await this.put('settings',{id:'config',...cfg})}
-};
-
-// ===== KNOWLEDGE DB =====
-const KnowledgeDB = {
-  facts:[
-    {id:'f1',category:'نجوم',title:'نزدیک‌ترین ستاره',body:'نزدیک‌ترین ستاره به زمین، خورشید است که حدود ۱۵۰ میلیون کیلومتر با ما فاصله دارد.',tags:['نجوم','ستاره']},
-    {id:'f2',category:'نجوم',title:'کهکشان راه شیری',body:'منظومه شمسی ما در کهکشان راه شیری قرار دارد که حدود ۲۰۰ میلیارد ستاره دارد.',tags:['نجوم','کهکشان']},
-    {id:'f3',category:'ریاضی',title:'عدد پی',body:'عدد پی تقریباً برابر ۳٫۱۴۱۵۹ است و نسبت محیط دایره به قطر آن است.',tags:['ریاضی','پی']},
-    {id:'f4',category:'ریاضی',title:'مجموع زوایای مثلث',body:'مجموع زوایای داخلی هر مثلث ۱۸۰ درجه است.',tags:['ریاضی','هندسه']},
-    {id:'f5',category:'حیوانات',title:'بزرگ‌ترین پستاندار',body:'نهنگ آبی بزرگ‌ترین پستاندار جهان است و طول آن به ۳۰ متر می‌رسد.',tags:['حیوانات']},
-    {id:'f6',category:'علوم',title:'قلب انسان',body:'قلب انسان به‌طور متوسط روزانه حدود ۱۰۰ هزار بار می‌تپد.',tags:['علوم','سلامت']},
-    {id:'f7',category:'تاریخ',title:'کوروش بزرگ',body:'کوروش بزرگ بنیان‌گذار امپراتوری هخامنشی و نویسنده نخستین منشور حقوق بشر بود.',tags:['تاریخ','ایران']},
-    {id:'f8',category:'ادبیات',title:'فردوسی',body:'فردوسی سراینده شاهنامه، حدود ۳۰ سال برای سرودن آن وقت گذاشت.',tags:['ادبیات']},
-    {id:'f9',category:'تکنولوژی',title:'اینترنت',body:'اینترنت ابتدا با نام ARPANET در سال ۱۹۶۹ برای اهداف نظامی ساخته شد.',tags:['تکنولوژی']},
-    {id:'f10',category:'جغرافیا',title:'اورست',body:'قله اورست با ارتفاع ۸۸۴۹ متر بلندترین نقطه زمین است.',tags:['جغرافیا']}
-  ],
-  qa:[
-    {id:'qa1',q:'سلام',a:'سلام! من استاد یار پلاس هستم. چطور می‌تونم کمکت کنم؟'},
-    {id:'qa2',q:'درود',a:'درود بر شما! آماده‌ام کمک کنم.'},
-    {id:'qa3',q:'خداحافظ',a:'خداحافظ! هر وقت سوال داشتی در خدمتم.'},
-    {id:'qa4',q:'ممنون',a:'خواهش می‌کنم! موفق باشی.'},
-    {id:'qa5',q:'تو کی هستی؟',a:'من استاد یار پلاس هستم؛ دستیار هوشمند آموزشی، پژوهشی و عمومی.'}
-  ],
-  async seed(){
-    const existing=await Storage.getAll('facts');
-    if(existing.length<5)await Storage.putBatch('facts',this.facts);
-    const existingQA=await Storage.getAll('qa');
-    if(existingQA.length<5)await Storage.putBatch('qa',this.qa);
+  async getConfig() {
+    return await this.get('settings', 'config') || {};
   },
-  async search(query,limit=5){
-    const q=Utils.normalizeFa(query);
-    if(!q)return[];
-    const items=await Storage.getAll('facts');
-    const words=q.split(' ').filter(Boolean);
-    return items.map(item=>{
-      const title=Utils.normalizeFa(item.title||'');
-      const body=Utils.normalizeFa(item.body||'');
-      const tags=Utils.normalizeFa((item.tags||[]).join(' '));
-      let score=0;
-      words.forEach(w=>{
-        if(title.includes(w))score+=5;
-        if(body.includes(w))score+=2;
-        if(tags.includes(w))score+=3;
-      });
-      return{item,score};
-    }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,limit);
+  async saveSettings(cfg) {
+    await this.put('settings', { id: 'config', ...cfg });
   }
 };
 
-// ===== LOCAL AI =====
+const KnowledgeDB = {
+  facts: [
+    { id: 'f1', category: 'نجوم', title: 'نزدیک‌ترین ستاره', body: 'نزدیک‌ترین ستاره به زمین، خورشید است که حدود ۱۵۰ میلیون کیلومتر با ما فاصله دارد.', tags: ['نجوم', 'ستاره'] },
+    { id: 'f2', category: 'نجوم', title: 'کهکشان راه شیری', body: 'منظومه شمسی ما در کهکشان راه شیری قرار دارد که حدود ۲۰۰ میلیارد ستاره دارد.', tags: ['نجوم', 'کهکشان'] },
+    { id: 'f3', category: 'ریاضی', title: 'عدد پی', body: 'عدد پی تقریباً برابر ۳٫۱۴۱۵۹ است و نسبت محیط دایره به قطر آن است.', tags: ['ریاضی', 'پی'] },
+    { id: 'f4', category: 'ریاضی', title: 'مجموع زوایای مثلث', body: 'مجموع زوایای داخلی هر مثلث ۱۸۰ درجه است.', tags: ['ریاضی', 'هندسه'] },
+    { id: 'f5', category: 'حیوانات', title: 'بزرگ‌ترین پستاندار', body: 'نهنگ آبی بزرگ‌ترین پستاندار جهان است و طول آن به ۳۰ متر می‌رسد.', tags: ['حیوانات'] },
+    { id: 'f6', category: 'علوم', title: 'قلب انسان', body: 'قلب انسان به‌طور متوسط روزانه حدود ۱۰۰ هزار بار می‌تپد.', tags: ['علوم', 'سلامت'] },
+    { id: 'f7', category: 'تاریخ', title: 'کوروش بزرگ', body: 'کوروش بزرگ بنیان‌گذار امپراتوری هخامنشی و نویسنده نخستین منشور حقوق بشر بود.', tags: ['تاریخ', 'ایران'] },
+    { id: 'f8', category: 'ادبیات', title: 'فردوسی', body: 'فردوسی سراینده شاهنامه، حدود ۳۰ سال برای سرودن آن وقت گذاشت.', tags: ['ادبیات'] },
+    { id: 'f9', category: 'تکنولوژی', title: 'اینترنت', body: 'اینترنت ابتدا با نام ARPANET در سال ۱۹۶۹ برای اهداف نظامی ساخته شد.', tags: ['تکنولوژی'] },
+    { id: 'f10', category: 'جغرافیا', title: 'اورست', body: 'قله اورست با ارتفاع ۸۸۴۹ متر بلندترین نقطه زمین است.', tags: ['جغرافیا'] },
+    { id: 'f11', category: 'فیزیک', title: 'سرعت نور', body: 'سرعت نور در خلأ تقریباً ۲۹۹٬۷۹۲٬۴۵۸ متر بر ثانیه است.', tags: ['فیزیک', 'نور'] },
+    { id: 'f12', category: 'شیمی', title: 'فرمول آب', body: 'آب از دو اتم هیدروژن و یک اتم اکسیژن تشکیل شده و فرمول آن H₂O است.', tags: ['شیمی'] },
+    { id: 'f13', category: 'ریاضی', title: 'قضیه فیثاغورس', body: 'در مثلث قائم‌الزاویه، مربع وتر برابر مجموع مربع دو ضلع دیگر است: a² + b² = c².', tags: ['ریاضی', 'هندسه'] },
+    { id: 'f14', category: 'زیست', title: 'فتوسنتز', body: 'گیاهان با فتوسنتز، نور خورشید، آب و کربن‌دی‌اکسید را به گلوکز و اکسیژن تبدیل می‌کنند.', tags: ['زیست'] },
+    { id: 'f15', category: 'تاریخ', title: 'صفویه', body: 'دولت صفویه توسط شاه اسماعیل یکم بنیان گذاشته شد و تبریز نخستین پایتخت آن بود.', tags: ['تاریخ', 'ایران'] },
+    { id: 'f16', category: 'ادبیات', title: 'حافظ', body: 'حافظ شیرازی از بزرگ‌ترین شاعران غزل‌سرای فارسی است و دیوان او شهرت جهانی دارد.', tags: ['ادبیات'] },
+    { id: 'f17', category: 'کامپیوتر', title: 'هوش مصنوعی', body: 'هوش مصنوعی شاخه‌ای از علوم کامپیوتر است که به ساخت سیستم‌های توانمند در یادگیری و استدلال می‌پردازد.', tags: ['کامپیوتر', 'AI'] },
+    { id: 'f18', category: 'جغرافیا', title: 'خلیج فارس', body: 'خلیج فارس آبراهی مهم در جنوب ایران است و از نظر تاریخی و اقتصادی اهمیت زیادی دارد.', tags: ['جغرافیا', 'ایران'] }
+  ],
+  qa: [
+    { id: 'qa1', q: 'سلام', a: 'سلام! من استاد یار پلاس هستم. چطور می‌تونم کمکت کنم؟', cat: 'general' },
+    { id: 'qa2', q: 'درود', a: 'درود بر شما! آماده‌ام کمک کنم.', cat: 'general' },
+    { id: 'qa3', q: 'خداحافظ', a: 'خداحافظ! هر وقت سوال داشتی در خدمتم.', cat: 'general' },
+    { id: 'qa4', q: 'ممنون', a: 'خواهش می‌کنم! موفق باشی.', cat: 'general' },
+    { id: 'qa5', q: 'تو کی هستی؟', a: 'من استاد یار پلاس هستم؛ دستیار هوشمند آموزشی، پژوهشی و عمومی.', cat: 'general' },
+    { id: 'qa6', q: 'امروز چه روزی است؟', a: 'برای تاریخ دقیق دستگاه، می‌توانی از تقویم سیستم استفاده کنی.', cat: 'general' }
+  ],
+  async seed() {
+    const existingFacts = await Storage.getAll('facts');
+    if (existingFacts.length < 5) await Storage.putBatch('facts', this.facts);
+    const existingQA = await Storage.getAll('qa');
+    if (existingQA.length < 5) await Storage.putBatch('qa', this.qa);
+  },
+  async search(query, limit = 5) {
+    const q = Utils.normalizeFa(query);
+    if (!q) return [];
+    const items = await Storage.getAll('facts');
+    const words = q.split(' ').filter(Boolean);
+    return items.map(item => {
+      const title = Utils.normalizeFa(item.title || '');
+      const body = Utils.normalizeFa(item.body || '');
+      const tags = Utils.normalizeFa((item.tags || []).join(' '));
+      let score = 0;
+      words.forEach(w => {
+        if (title.includes(w)) score += 5;
+        if (body.includes(w)) score += 2;
+        if (tags.includes(w)) score += 3;
+      });
+      return { item, score };
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).slice(0, limit);
+  }
+};
+
 const LocalAI = {
-  concepts:{
-    'فتوسنتز':{def:'فرآیندی که گیاهان با استفاده از نور خورشید، آب و CO₂، گلوکز و اکسیژن تولید می‌کنند.',formula:'6CO₂ + 6H₂O + نور → C₆H₁₂O₆ + 6O₂'},
-    'مشتق':{def:'نرخ تغییرات لحظه‌ای یک تابع نسبت به متغیر آن.',formula:"f'(x) = lim[h→0] (f(x+h) - f(x)) / h"},
-    'انتگرال':{def:'معکوس مشتق. محاسبه مساحت زیر نمودار تابع.',formula:'∫xⁿ dx = xⁿ⁺¹/(n+1) + C'},
-    'کوروش بزرگ':{def:'بنیان‌گذار امپراتوری هخامنشی، اولین امپراتوری بزرگ جهان.',when:'حدود ۵۵۹ تا ۵۳۰ پیش از میلاد'},
-    'فردوسی':{def:'حکیم ابوالقاسم فردوسی، بزرگ‌ترین حماسه‌سرای فارسی و سراینده شاهنامه.',work:'شاهنامه: حماسه ملی ایران با حدود ۵۰,۰۰۰ بیت'},
-    'هوش مصنوعی':{def:'شاخه‌ای از علوم کامپیوتر که هدف آن ایجاد سیستم‌های هوشمند است.',types:'یادگیری ماشین، یادگیری عمیق، پردازش زبان طبیعی، بینایی ماشین'}
+  concepts: {
+    'فتوسنتز': { def: 'فرآیندی که گیاهان با استفاده از نور خورشید، آب و CO₂، گلوکز و اکسیژن تولید می‌کنند.', formula: '6CO₂ + 6H₂O + نور → C₆H₁₂O₆ + 6O₂' },
+    'مشتق': { def: 'نرخ تغییرات لحظه‌ای یک تابع نسبت به متغیر آن.', formula: "f'(x) = lim[h→0] (f(x+h) - f(x)) / h" },
+    'انتگرال': { def: 'معکوس مشتق. محاسبه مساحت زیر نمودار تابع.', formula: '∫xⁿ dx = xⁿ⁺¹/(n+1) + C' },
+    'کوروش بزرگ': { def: 'بنیان‌گذار امپراتوری هخامنشی، اولین امپراتوری بزرگ جهان.', when: 'حدود ۵۵۹ تا ۵۳۰ پیش از میلاد' },
+    'فردوسی': { def: 'حکیم ابوالقاسم فردوسی، بزرگ‌ترین حماسه‌سرای فارسی و سراینده شاهنامه.', work: 'شاهنامه: حماسه ملی ایران با حدود ۵۰,۰۰۰ بیت' },
+    'هوش مصنوعی': { def: 'شاخه‌ای از علوم کامپیوتر که هدف آن ایجاد سیستم‌های هوشمند است.', types: 'یادگیری ماشین، یادگیری عمیق، پردازش زبان طبیعی، بینایی ماشین' },
+    'قضیه فیثاغورس': { def: 'رابطه بین اضلاع مثلث قائم‌الزاویه.', formula: 'a² + b² = c²' },
+    'عدد پی': { def: 'نسبت محیط دایره به قطر آن.', formula: 'π ≈ 3.14159' }
   },
-  solveMath(expr){
-    try{
-      let clean=expr.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[^0-9+\-*/().\s^x=]/gi,'').trim();
-      if(!clean)return null;
-      let steps=[],result;
-      if(clean.includes('=')&&clean.toLowerCase().includes('x')){
-        const parts=clean.split('=');
-        if(parts.length===2){
-          const lhs=parts[0].trim(),rhs=parseFloat(parts[1].trim());
-          steps.push(`🔍 تحلیل معادله: ${lhs} = ${rhs}`);
-          let a=1,b=0;
-          const match=lhs.match(/([+-]?\d*\.?\d*)\s*\*?\s*x\s*([+-]\s*\d+\.?\d*)?/i);
-          if(match){
-            a=match[1]?parseFloat(match[1].replace(/\s/g,'')):1;
-            if(isNaN(a))a=1;
-            if(match[2])b=parseFloat(match[2].replace(/\s/g,''));
-            const rhsNew=rhs-b;
-            result=rhsNew/a;
-            steps.push(`➡️ انتقال ${b}: ${rhs} - (${b}) = ${rhsNew}`);
-            steps.push(`➡️ تقسیم بر ${a}: ${rhsNew} / ${a} = ${result}`);
-            steps.push(`✅ x = ${result}`);
-          }else return null;
-        }
-      }else if(/^\d+\s*[+\-*/]\s*\d+$/.test(clean)){
-        const parts=clean.match(/(\d+)\s*([+\-*/])\s*(\d+)/);
-        if(parts){
-          const a=parseFloat(parts[1]),op=parts[2],b=parseFloat(parts[3]);
-          steps.push(`🔍 محاسبه: ${a} ${op} ${b}`);
-          switch(op){case'+':result=a+b;break;case'-':result=a-b;break;case'*':result=a*b;break;case'/':if(b===0)return{error:'تقسیم بر صفر!'};result=a/b;break;}
-          steps.push(`✅ نتیجه: ${result}`);
-        }
-      }else{
-        try{result=new Function('return '+clean.replace('^','**').replace(/x/gi,'1'))();steps.push(`🔍 ${clean} = ${result}`);}catch(e){return null;}
-      }
-      return{steps,result};
-    }catch(e){return null;}
+
+  cleanMath(expr) {
+    return Utils.faDigits(expr || '')
+      .replace(/[×]/g, '*')
+      .replace(/[÷]/g, '/')
+      .replace(/[−–—]/g, '-')
+      .replace(/\^/g, '**')
+      .replace(/[^0-9+\-*/().\sx=]/gi, '')
+      .trim();
   },
-  generate(question){
-    const q=Utils.normalizeFa(question);
-    if(/^(سلام|درود|hello|hi|hey)/.test(q))return'سلام! من استاد یار پلاس هستم. چطور می‌تونم کمکت کنم؟';
-    if(/خداحافظ|بای|goodbye/.test(q))return'خداحافظ! هر وقت سوال داشتی در خدمتم.';
-    if(/ممنون|مرسی|thanks/.test(q))return'خواهش می‌کنم! موفق باشی.';
-    
-    const mathResult=this.solveMath(question);
-    if(mathResult){
-      if(mathResult.error)return`❌ خطا: ${mathResult.error}`;
-      return`🧮 حل گام‌به‌گام:\n${mathResult.steps.join('\n')}`;
+
+  evalExpr(expr, x) {
+    const clean = this.cleanMath(expr);
+    if (!clean) return NaN;
+    if (window.math) {
+      return math.evaluate(clean.replace(/\*\*/g, '^'), { x });
     }
-    
-    for(const[key,concept]of Object.entries(this.concepts)){
-      if(q.includes(key)){
-        let response=`🧠 **${key}**\n\n**تعریف:** ${concept.def}\n\n`;
-        if(concept.formula)response+=`**فرمول:** \`${concept.formula}\`\n\n`;
-        if(concept.when)response+=`**زمان:** ${concept.when}\n\n`;
-        if(concept.types)response+=`**انواع:** ${concept.types}\n\n`;
-        if(concept.work)response+=`**اثر:** ${concept.work}\n\n`;
-        response+=`💡 *برای پاسخ دقیق‌تر API Key را فعال کنید.*`;
+    return new Function('x', `return ${clean};`)(x);
+  },
+
+  solveMath(input) {
+    const clean = this.cleanMath(input);
+    if (!clean) return null;
+
+    if (clean.includes('=')) {
+      const parts = clean.split('=');
+      if (parts.length !== 2) return null;
+      const lhs = parts[0];
+      const rhs = parts[1];
+
+      if (lhs.includes('x') || rhs.includes('x')) {
+        try {
+          const b1 = this.evalExpr(lhs, 0);
+          const a1 = this.evalExpr(lhs, 1) - b1;
+          const b2 = this.evalExpr(rhs, 0);
+          const a2 = this.evalExpr(rhs, 1) - b2;
+          const a = a1 - a2;
+          const b = b2 - b1;
+
+          if (Math.abs(a) < 1e-12) {
+            return { error: Math.abs(b) < 1e-12 ? 'معادله بی‌نهایت جواب دارد.' : 'معادله جواب ندارد.' };
+          }
+
+          const x = b / a;
+          return {
+            steps: [
+              `🔍 معادله: ${lhs} = ${rhs}`,
+              `➡️ ضریب x در سمت چپ: ${a1}`,
+              `➡️ عدد ثابت در سمت چپ: ${b1}`,
+              `➡️ ضریب x در سمت راست: ${a2}`,
+              `➡️ عدد ثابت در سمت راست: ${b2}`,
+              `➡️ انتقال متغیرها: (${a1} - ${a2})x = ${b2} - ${b1}`,
+              `➡️ ساده‌سازی: ${a}x = ${b}`,
+              `✅ x = ${x}`
+            ],
+            result: x
+          };
+        } catch (e) {
+          return null;
+        }
+      } else {
+        try {
+          const l = this.evalExpr(lhs, 0);
+          const r = this.evalExpr(rhs, 0);
+          return {
+            steps: [
+              `🔍 بررسی تساوی: ${lhs} = ${rhs}`,
+              `➡️ سمت چپ: ${l}`,
+              `➡️ سمت راست: ${r}`,
+              l === r ? '✅ تساوی برقرار است.' : '❌ تساوی برقرار نیست.'
+            ],
+            result: l === r
+          };
+        } catch (e) {
+          return null;
+        }
+      }
+    }
+
+    try {
+      const result = window.math
+        ? math.evaluate(clean.replace(/\*\*/g, '^'))
+        : new Function('return ' + clean)();
+      if (typeof result === 'number' || typeof result === 'boolean' || typeof result === 'string') {
+        return { steps: [`🔍 محاسبه: ${clean} = ${result}`], result };
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  formatMath(r) {
+    if (!r) return null;
+    if (r.error) return `❌ ${r.error}`;
+    return `🧮 حل گام‌به‌گام:\n${r.steps.join('\n')}`;
+  },
+
+  shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  },
+
+  async generate(question) {
+    const q = Utils.normalizeFa(question);
+
+    if (/^(سلام|درود|hello|hi|hey)/.test(q)) return 'سلام! من استاد یار پلاس هستم. چطور می‌تونم کمکت کنم؟';
+    if (/خداحافظ|بای|goodbye/.test(q)) return 'خداحافظ! هر وقت سوال داشتی در خدمتم.';
+    if (/ممنون|مرسی|thanks/.test(q)) return 'خواهش می‌کنم! موفق باشی.';
+
+    const mathResult = this.solveMath(question);
+    if (mathResult) return this.formatMath(mathResult);
+
+    for (const [key, concept] of Object.entries(this.concepts)) {
+      if (q.includes(Utils.normalizeFa(key))) {
+        let response = `🧠 **${key}**\n\n**تعریف:** ${concept.def}\n\n`;
+        if (concept.formula) response += `**فرمول:** \`${concept.formula}\`\n\n`;
+        if (concept.when) response += `**زمان:** ${concept.when}\n\n`;
+        if (concept.types) response += `**انواع:** ${concept.types}\n\n`;
+        if (concept.work) response += `**اثر:** ${concept.work}\n\n`;
+        response += `💡 برای پاسخ دقیق‌تر، API Key را فعال کنید.`;
         return response;
       }
     }
-    
-    return`🧠 **استاد یار (آفلاین):**\n\nالگوی دقیقی یافت نشد.\n\n💡 API Key را وارد کنید یا سوال را ساده‌تر بپرسید.`;
+
+    const facts = await KnowledgeDB.search(question, 3);
+    if (facts.length) {
+      return `📚 **یافته‌های دانش محلی:**\n\n` + facts.map((f, i) => `${i + 1}. **${f.item.title}**\n${f.item.body}`).join('\n\n');
+    }
+
+    return `🧠 **استاد یار (آفلاین):**\n\nالگوی دقیقی یافت نشد.\n\n💡 برای پاسخ قوی‌تر:\n- API Key وارد کنید\n- یا حالت «جستجو/پژوهش» را انتخاب کنید.`;
+  },
+
+  async generateQuiz(topic, count = 5) {
+    count = Number(count) || 5;
+    const all = await Storage.getAll('facts');
+    const matched = (await KnowledgeDB.search(topic, Math.max(count * 3, 10))).map(x => x.item);
+    const source = matched.length >= 3 ? matched : all;
+
+    if (source.length >= 3) {
+      const chosen = this.shuffle(source).slice(0, Math.min(count, source.length));
+      return chosen.map(f => {
+        const correct = f.title || (f.body || '').substring(0, 60);
+        const distractors = this.shuffle(all.filter(x => x.id !== f.id).map(x => x.title).filter(Boolean))
+          .filter((v, i, a) => a.indexOf(v) === i)
+          .slice(0, 3);
+
+        while (distractors.length < 3) distractors.push(`گزینه ${distractors.length + 1}`);
+
+        const options = [correct, ...distractors];
+        const shuffled = this.shuffle(options.map((t, i) => ({ t, ok: i === 0 })));
+
+        return {
+          question: `کدام گزینه درباره «${f.title || topic}» صحیح است؟`,
+          options: shuffled.map(o => o.t),
+          correct: shuffled.findIndex(o => o.ok)
+        };
+      });
+    }
+
+    return this.sampleQuiz(count);
+  },
+
+  sampleQuiz(count = 5) {
+    const base = [
+      { question: 'پایتخت ایران کجاست؟', options: ['تهران', 'اصفهان', 'شیراز', 'تبریز'], correct: 0 },
+      { question: 'حاصل ۵ × ۶ چند است؟', options: ['۲۵', '۳۰', '۳۵', '۴۰'], correct: 1 },
+      { question: 'شاعر شاهنامه کیست؟', options: ['حافظ', 'سعدی', 'فردوسی', 'مولوی'], correct: 2 },
+      { question: 'فرمول آب کدام است؟', options: ['CO₂', 'H₂O', 'O₂', 'NaCl'], correct: 1 },
+      { question: 'بنیان‌گذار هخامنشیان کیست؟', options: ['داریوش', 'کوروش', 'خشایارشا', 'کمبوجیه'], correct: 1 }
+    ];
+    return base.slice(0, Math.min(count, base.length));
+  },
+
+  async generateFlashcards(topic, count = 10) {
+    const facts = (await KnowledgeDB.search(topic, count)).map(x => x.item);
+    if (facts.length >= 3) {
+      return facts.map(f => ({ front: f.title, back: f.body }));
+    }
+
+    const concepts = Object.entries(this.concepts)
+      .filter(([k]) => Utils.normalizeFa(topic).split(' ').some(w => Utils.normalizeFa(k).includes(w)))
+      .map(([k, v]) => ({ front: k, back: v.def + (v.formula ? `\nفرمول: ${v.formula}` : '') }));
+
+    if (concepts.length) return concepts.slice(0, count);
+
+    return [
+      { front: 'پایتخت فرانسه؟', back: 'پاریس' },
+      { front: 'بزرگ‌ترین سیاره؟', back: 'مشتری' },
+      { front: 'فرمول آب؟', back: 'H₂O' },
+      { front: 'شاعر شاهنامه؟', back: 'فردوسی' },
+      { front: 'واحد نیرو؟', back: 'نیوتون' }
+    ].slice(0, count);
   }
 };
 
-// ===== SEARCH ENGINE =====
 const SearchEngine = {
-  proxies:[
-    u=>`https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-    u=>`https://corsproxy.io/?${encodeURIComponent(u)}`,
-    u=>`https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(u)}`,
-    u=>`https://thingproxy.freeboard.io/fetch/${u}`,
-    u=>`https://cors.eu.org/${u}`
+  proxies: [
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    u => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(u)}`,
+    u => `https://thingproxy.freeboard.io/fetch/${u}`,
+    u => `https://cors.eu.org/${u}`
   ],
-  async fetch(url){
-    for(const proxy of this.proxies){
-      try{
-        const res=await fetch(proxy(url),{signal:AbortSignal.timeout(5000)});
-        if(res.ok)return await res.text();
-      }catch(e){continue;}
+
+  async fetchWithProxy(url, timeout = 7000) {
+    for (const proxy of this.proxies) {
+      try {
+        const res = await fetch(proxy(url), { signal: Utils.timeoutSignal(timeout) });
+        if (res.ok) return await res.text();
+      } catch (e) { }
     }
     return null;
   },
-  async ddg(query){
-    const html=await this.fetch(`https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(query)}`);
-    if(!html)return[];
-    const doc=new DOMParser().parseFromString(html,'text/html');
-    const results=[];
-    doc.querySelectorAll('.result,.web-result').forEach(el=>{
-      const a=el.querySelector('a.result__a,h2 a');
-      const snippet=el.querySelector('.result__snippet,.snippet');
-      if(a){
+
+  async ddg(query) {
+    const html = await this.fetchWithProxy(`https://lite.duckduckgo.com/lite/?q=${encodeURIComponent(query)}`);
+    if (!html) return [];
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const results = [];
+
+    doc.querySelectorAll('div.result, div.web-result, div.links_main, table').forEach(el => {
+      const a = el.querySelector('a.result__a, a.result-link, h2 a, a[href^="http"]');
+      const snippet = el.querySelector('.result__snippet, .snippet, td.result-snippet');
+      if (a && a.href && a.href.startsWith('http')) {
         results.push({
-          title:a.textContent.trim(),
-          link:a.href,
-          snippet:snippet?snippet.textContent.trim():''
+          title: a.textContent.trim(),
+          link: a.href,
+          snippet: snippet ? snippet.textContent.trim() : ''
         });
       }
     });
-    return results.slice(0,8);
+
+    return results.slice(0, 8);
   },
-  isSearchIntent(text){
-    const t=Utils.normalizeFa(text);
-    const keywords=['جستجو','سرچ','بگرد','پیدا کن','search','find','قیمت','خرید','دانلود','لینک','سایت'];
-    return keywords.some(k=>t.includes(k))||/https?:\/\//.test(text)||(text.includes('?')&&text.length>20);
+
+  async wikipedia(query) {
+    try {
+      const url = `https://fa.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*&srlimit=5`;
+      const res = await fetch(url, { signal: Utils.timeoutSignal(7000) });
+      if (!res.ok) return [];
+      const d = await res.json();
+      return (d.query?.search || []).map(s => ({
+        title: s.title,
+        snippet: new DOMParser().parseFromString(s.snippet || '', 'text/html').documentElement.textContent,
+        link: `https://fa.wikipedia.org/?curid=${s.pageid}`
+      }));
+    } catch (e) {
+      return [];
+    }
+  },
+
+  async research(query) {
+    const [ddg, wiki] = await Promise.all([
+      this.ddg(query),
+      this.wikipedia(query)
+    ]);
+
+    const merged = [...wiki, ...ddg]
+      .filter(x => x && x.title)
+      .map(x => ({
+        title: x.title,
+        snippet: x.snippet || '',
+        link: x.link || '#'
+      }));
+
+    const seen = new Set();
+    return merged.filter(x => {
+      const k = Utils.normalizeFa(x.title);
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    }).slice(0, 8);
+  },
+
+  isSearchIntent(text) {
+    const t = Utils.normalizeFa(text);
+    const keywords = ['جستجو', 'سرچ', 'بگرد', 'پیدا کن', 'search', 'find', 'قیمت', 'خرید', 'دانلود', 'لینک', 'سایت', 'آخرین', 'اخبار'];
+    return keywords.some(k => t.includes(k)) || /https?:\/\//.test(text) || (text.includes('?') && text.length > 25);
   }
 };
 
-// ===== CHAT =====
+const AI = {
+  defaultSystem: `تو «استاد یار پلاس» هستی؛ یک دستیار آموزشی، پژوهشی و برنامه‌نویسی فارسی‌زبان.
+- پاسخ‌ها را دقیق، ساختاریافته و آموزشی بده.
+- برای ریاضی گام‌به‌گام حل کن.
+- برای پژوهش، منابع را ذکر کن.
+- اگر نمی‌دانی، صادقانه بگو.
+- از Markdown مناسب استفاده کن.`,
+
+  getSystemPrompt(cfg) {
+    return (cfg.systemPrompt || '').trim() || this.defaultSystem;
+  },
+
+  getFormat(cfg, url, model) {
+    const f = (cfg.proxyFormat || 'auto').toLowerCase();
+    if (f === 'openai') return 'openai';
+    if (f === 'anthropic') return 'anthropic';
+
+    if (url.includes('openai') || url.includes('chat/completions')) return 'openai';
+    if (url.includes('anthropic')) return 'anthropic';
+    if (model.startsWith('gpt')) return 'openai';
+    if (model.startsWith('claude')) return 'anthropic';
+
+    return cfg.proxy?.trim() ? 'anthropic' : 'openai';
+  },
+
+  async callRemote(messages, cfg, opts = {}) {
+    const model = cfg.model || 'claude-3-5-sonnet-20241022';
+    const proxy = (cfg.proxy || '').trim();
+    const url = proxy || (model.startsWith('gpt')
+      ? 'https://api.openai.com/v1/chat/completions'
+      : 'https://api.anthropic.com/v1/messages');
+
+    const format = this.getFormat(cfg, url, model);
+    const headers = { 'Content-Type': 'application/json' };
+
+    if (format === 'anthropic') {
+      headers['x-api-key'] = cfg.apiKey;
+      headers['anthropic-version'] = '2023-06-01';
+      if (!proxy) headers['anthropic-dangerous-direct-browser-access'] = 'true';
+      else headers['Authorization'] = `Bearer ${cfg.apiKey}`;
+    } else {
+      headers['Authorization'] = `Bearer ${cfg.apiKey}`;
+    }
+
+    const system = opts.system || this.getSystemPrompt(cfg);
+
+    let body;
+    if (format === 'openai') {
+      body = {
+        model: model.startsWith('gpt') ? model : 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: system },
+          ...messages
+        ],
+        max_tokens: opts.maxTokens || 2000,
+        temperature: opts.temperature ?? 0.7
+      };
+      if (opts.jsonMode) {
+        body.response_format = { type: 'json_object' };
+      }
+    } else {
+      body = {
+        model: model.startsWith('claude') ? model : 'claude-3-5-sonnet-20241022',
+        system,
+        messages,
+        max_tokens: opts.maxTokens || 2000,
+        temperature: opts.temperature ?? 0.7
+      };
+    }
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), opts.timeout || 60000);
+    if (opts.signal) opts.signal.addEventListener('abort', () => controller.abort());
+
+    try {
+      const r = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+        signal: controller.signal
+      });
+
+      if (!r.ok) {
+        const txt = await r.text().catch(() => '');
+        throw new Error(`API ${r.status} ${txt.substring(0, 140)}`);
+      }
+
+      const d = await r.json();
+      return format === 'openai'
+        ? (d.choices?.[0]?.message?.content || '')
+        : (d.content?.[0]?.text || d.choices?.[0]?.message?.content || '');
+    } finally {
+      clearTimeout(timer);
+    }
+  },
+
+  async complete(prompt, opts = {}) {
+    const cfg = await Storage.getConfig();
+    const model = cfg.model || 'ostadyar';
+
+    if (opts.localOnly || !cfg.apiKey || model === 'ostadyar') {
+      return LocalAI.generate(prompt);
+    }
+
+    const messages = opts.messages || [{ role: 'user', content: prompt }];
+
+    try {
+      const text = await this.callRemote(messages, cfg, opts);
+      if (text && text.trim()) return text;
+      throw new Error('پاسخ خالی بود.');
+    } catch (e) {
+      if (opts.throw) throw e;
+      return await LocalAI.generate(prompt) + `\n\n⚠️ *(خطای API: ${e.message})*`;
+    }
+  },
+
+  async json(prompt, opts = {}) {
+    const cfg = await Storage.getConfig();
+    if (!cfg.apiKey || cfg.model === 'ostadyar') throw new Error('API Key فعال نیست.');
+
+    const text = await this.callRemote(
+      [{ role: 'user', content: prompt + '\nفقط JSON معتبر بدون توضیح اضافه بده.' }],
+      cfg,
+      { ...opts, jsonMode: true }
+    );
+
+    const cleaned = String(text || '').replace(/```json/gi, '').replace(/```/g, '').trim();
+    const m = cleaned.match(/\[[\s\S]*\]|\{[\s\S]*\}/);
+    if (!m) throw new Error('JSON پیدا نشد.');
+    return JSON.parse(m[0]);
+  },
+
+  async image(prompt) {
+    const seed = Math.floor(Math.random() * 1e6);
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${seed}`;
+    return `![generated image](${url})\n\n🎨 پرامپت: ${prompt}`;
+  },
+
+  async search(query) {
+    const results = await SearchEngine.research(query);
+    if (!results.length) return `⚠️ نتیجه‌ای برای «${query}» یافت نشد.`;
+    return `🔍 نتایج برای «${query}»:\n\n` + results.map((r, i) => `**${i + 1}. ${r.title}**\n${r.snippet}\n🔗 ${r.link}`).join('\n\n');
+  },
+
+  async research(query) {
+    const sources = await SearchEngine.research(query);
+    if (!sources.length) return `🧪 پژوهشی برای «${query}» یافت نشد.`;
+
+    const context = sources.map((s, i) => `[${i + 1}] ${s.title}: ${s.snippet}`).join('\n');
+    const cfg = await Storage.getConfig();
+
+    if (cfg.apiKey && cfg.model !== 'ostadyar') {
+      try {
+        const prompt = `با استفاده از منابع زیر به فارسی پاسخ جامع، دقیق و مستند بده.
+اگر اطلاعات کافی نیست، بگو اطلاعات کافی نیست.
+منابع:
+${context}
+
+سوال:
+${query}
+
+در پایان، منابع را با شماره فهرست کن.`;
+        const answer = await this.callRemote([{ role: 'user', content: prompt }], cfg, { maxTokens: 3000 });
+        return `🧪 پژوهش درباره «${query}»\n\n${answer}\n\n**منابع:**\n${sources.map((s, i) => `${i + 1}. ${s.title}\n${s.link}`).join('\n')}`;
+      } catch (e) { }
+    }
+
+    return `🧪 یافته‌های پژوهش برای «${query}»:\n\n${sources.map((s, i) => `**${i + 1}. ${s.title}**\n${s.snippet}\n🔗 ${s.link}`).join('\n\n')}`;
+  }
+};
+
+function renderRichMessage(el, text) {
+  if (window.marked && window.DOMPurify) {
+    try {
+      if (window.marked.setOptions) marked.setOptions({ breaks: true });
+      const html = DOMPurify.sanitize(marked.parse(text || ''), { ADD_ATTR: ['target'] });
+      el.innerHTML = html;
+
+      el.querySelectorAll('a').forEach(a => {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      });
+
+      if (window.hljs) {
+        el.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
+      }
+
+      if (window.renderMathInElement) {
+        renderMathInElement(el, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          throwOnError: false
+        });
+      }
+      return;
+    } catch (e) { }
+  }
+  el.textContent = text || '';
+}
+
+function createWhiteboard(canvasId) {
+  return {
+    canvas: null,
+    ctx: null,
+    drawing: false,
+    tool: 'pen',
+    color: '#fff',
+    history: [],
+    initialized: false,
+    afterStroke: null,
+    pendingImage: null,
+
+    init() {
+      this.canvas = document.getElementById(canvasId);
+      if (!this.canvas) return;
+
+      if (this.initialized) {
+        this.resize();
+        return;
+      }
+
+      this.ctx = this.canvas.getContext('2d');
+      this.resize();
+
+      this.canvas.addEventListener('pointerdown', e => this.pointerDown(e));
+      this.canvas.addEventListener('pointermove', e => this.pointerMove(e));
+      this.canvas.addEventListener('pointerup', () => this.pointerUp());
+      this.canvas.addEventListener('pointerleave', () => this.pointerUp());
+      window.addEventListener('resize', () => this.resize());
+
+      this.initialized = true;
+    },
+
+    resize() {
+      if (!this.canvas || !this.canvas.parentElement) return;
+      const rect = this.canvas.parentElement.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      const temp = document.createElement('canvas');
+      temp.width = this.canvas.width;
+      temp.height = this.canvas.height;
+      if (this.canvas.width > 0) temp.getContext('2d').drawImage(this.canvas, 0, 0);
+
+      this.canvas.width = rect.width;
+      this.canvas.height = rect.height;
+
+      this.ctx.fillStyle = '#1e293b';
+      this.ctx.fillRect(0, 0, rect.width, rect.height);
+
+      if (temp.width > 0) this.ctx.drawImage(temp, 0, 0);
+
+      this.ctx.lineCap = 'round';
+      this.ctx.lineJoin = 'round';
+
+      if (!this.history.length) this.history.push(this.canvas.toDataURL());
+      this.drawPending();
+    },
+
+    pos(e) {
+      const r = this.canvas.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    },
+
+    applyStyle() {
+      this.ctx.lineWidth = this.tool === 'eraser' ? 20 : 3;
+      this.ctx.strokeStyle = this.tool === 'eraser' ? '#1e293b' : this.color;
+    },
+
+    pointerDown(e) {
+      this.drawing = true;
+      this.applyStyle();
+      const { x, y } = this.pos(e);
+      this.ctx.beginPath();
+      this.ctx.moveTo(x, y);
+      this.ctx.lineTo(x + 0.1, y + 0.1);
+      this.ctx.stroke();
+    },
+
+    pointerMove(e) {
+      if (!this.drawing) return;
+      const { x, y } = this.pos(e);
+      this.ctx.lineTo(x, y);
+      this.ctx.stroke();
+    },
+
+    pointerUp() {
+      if (!this.drawing) return;
+      this.drawing = false;
+      this.ctx.beginPath();
+      this.saveState();
+      if (this.afterStroke) this.afterStroke();
+    },
+
+    setTool(t, el) {
+      this.tool = t;
+      const scope = el?.closest('.wb-tools') || this.canvas?.parentElement;
+      scope?.querySelectorAll('.wb-tool').forEach(b => b.classList.remove('active'));
+      el?.classList.add('active');
+    },
+
+    setColor(c, el) {
+      this.color = c;
+      this.tool = 'pen';
+      const scope = el?.closest('.wb-tools') || this.canvas?.parentElement;
+      scope?.querySelectorAll('.wb-color').forEach(b => b.classList.remove('active'));
+      scope?.querySelectorAll('.wb-tool').forEach(b => b.classList.remove('active'));
+      scope?.querySelector('.wb-tool')?.classList.add('active');
+      el?.classList.add('active');
+    },
+
+    saveState() {
+      if (!this.canvas) return;
+      if (this.history.length > 30) this.history.shift();
+      this.history.push(this.canvas.toDataURL());
+    },
+
+    undo() {
+      if (this.history.length <= 1) return;
+      this.history.pop();
+      const img = new Image();
+      img.onload = () => {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(img, 0, 0);
+      };
+      img.src = this.history[this.history.length - 1];
+    },
+
+    clear() {
+      if (!this.canvas || !confirm('پاک شود؟')) return;
+      this.ctx.fillStyle = '#1e293b';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.saveState();
+      if (this.afterStroke) this.afterStroke();
+    },
+
+    save() {
+      if (!this.canvas) return;
+      const a = document.createElement('a');
+      a.download = `whiteboard-${Date.now()}.png`;
+      a.href = this.canvas.toDataURL();
+      a.click();
+      Toast.show('ذخیره شد', 'success');
+    },
+
+    loadImage(dataUrl) {
+      this.pendingImage = dataUrl;
+      this.drawPending();
+    },
+
+    drawPending() {
+      if (!this.pendingImage || !this.canvas || !this.canvas.width) return;
+      const img = new Image();
+      img.onload = () => {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+      };
+      img.src = this.pendingImage;
+    }
+  };
+}
+
+const WB = createWhiteboard('wb-canvas');
+const ToolsWB = createWhiteboard('tools-wb-canvas');
+
 const Chat = {
-  sessions:[],
-  currentId:null,
-  history:[],
-  isProcessing:false,
-  
-  async init(){
-    this.sessions=await Storage.getAll('sessions');
-    if(this.sessions.length)this.load(this.sessions.sort((a,b)=>b.date-a.date)[0].id);
+  sessions: [],
+  currentId: null,
+  history: [],
+  isProcessing: false,
+  controller: null,
+
+  async init() {
+    this.sessions = await Storage.getAll('sessions');
+    if (this.sessions.length) this.load(this.sessions.sort((a, b) => b.date - a.date)[0].id);
     else this.newSession();
     this.renderList();
   },
-  
-  newSession(){
-    const s={id:Date.now(),title:'گفتگوی جدید',date:Date.now(),messages:[]};
+
+  newSession() {
+    const s = { id: Date.now(), title: 'گفتگوی جدید', date: Date.now(), messages: [] };
     this.sessions.push(s);
-    Storage.put('sessions',s);
+    Storage.put('sessions', s);
     this.load(s.id);
     this.renderList();
   },
-  
-  load(id){
-    this.currentId=id;
-    const s=this.sessions.find(x=>x.id===id);
-    this.history=s?.messages||[];
+
+  load(id) {
+    this.currentId = id;
+    const s = this.sessions.find(x => x.id === id);
+    this.history = s?.messages || [];
     this.render();
   },
-  
-  render(){
-    const c=document.getElementById('chat-messages');
-    if(!c)return;
-    c.innerHTML='';
-    this.history.forEach((m,i)=>{
-      const d=document.createElement('div');
-      d.className=`msg ${m.role}`;
-      if(m.role==='assistant'&&window.marked&&window.DOMPurify){
-        d.innerHTML=DOMPurify.sanitize(marked.parse(m.content));
-      }else{
-        d.textContent=m.content;
-      }
-      const actions=document.createElement('div');
-      actions.className='msg-actions';
-      actions.innerHTML=`<button class="msg-action" onclick="Chat.copy(${i})">📋</button>`;
-      if(m.role==='assistant')actions.innerHTML+=`<button class="msg-action" onclick="Chat.regenerate(${i})">🔄</button>`;
+
+  render() {
+    const c = document.getElementById('chat-messages');
+    if (!c) return;
+    c.innerHTML = '';
+
+    this.history.forEach((m, i) => {
+      const d = document.createElement('div');
+      d.className = `msg ${m.role === 'user' ? 'user' : 'ai'}`;
+
+      if (m.role === 'assistant') renderRichMessage(d, m.content);
+      else d.textContent = m.content;
+
+      const actions = document.createElement('div');
+      actions.className = 'msg-actions';
+      actions.innerHTML = `<button class="msg-action" onclick="Chat.copy(${i})">📋</button>`;
+      if (m.role === 'assistant') actions.innerHTML += `<button class="msg-action" onclick="Chat.regenerate(${i})">🔄</button>`;
       d.appendChild(actions);
+
       c.appendChild(d);
     });
-    c.scrollTop=c.scrollHeight;
+
+    c.scrollTop = c.scrollHeight;
   },
-  
-  renderList(){
-    const l=document.getElementById('chat-list');
-    if(!l)return;
-    l.innerHTML='';
-    this.sessions.sort((a,b)=>b.date-a.date).forEach(s=>{
-      const d=document.createElement('div');
-      d.style.cssText='padding:10px 12px;border-radius:8px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:.85rem';
-      if(s.id===this.currentId)d.style.cssText+='background:var(--bg3);color:var(--primary)';
-      d.innerHTML=`<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.title}</span>`;
-      d.onclick=()=>{this.load(s.id);UI.toggleSidebar(false)};
+
+  renderList() {
+    const l = document.getElementById('chat-list');
+    if (!l) return;
+    l.innerHTML = '';
+
+    this.sessions.sort((a, b) => b.date - a.date).forEach(s => {
+      const d = document.createElement('div');
+      d.style.cssText = 'padding:10px 12px;border-radius:8px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:.85rem';
+      if (s.id === this.currentId) d.style.cssText += 'background:var(--bg3);color:var(--primary)';
+      d.innerHTML = `<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${Utils.escapeHtml(s.title)}</span>`;
+      d.onclick = () => { this.load(s.id); UI.toggleSidebar(false); };
       l.appendChild(d);
     });
   },
-  
-  copy(i){
-    const t=this.history[i]?.content;
-    if(t)navigator.clipboard.writeText(t).then(()=>Toast.show('کپی شد','success'));
+
+  copy(i) {
+    const t = this.history[i]?.content;
+    if (t) navigator.clipboard.writeText(t).then(() => Toast.show('کپی شد', 'success'));
   },
-  
-  async regenerate(index){
-    if(this.isProcessing)return;
-    let userIdx=-1;
-    for(let i=index-1;i>=0;i--){
-      if(this.history[i].role==='user'){userIdx=i;break;}
+
+  async regenerate(index) {
+    if (this.isProcessing) return;
+
+    let userIdx = -1;
+    for (let i = index - 1; i >= 0; i--) {
+      if (this.history[i].role === 'user') { userIdx = i; break; }
     }
-    if(userIdx<0)return;
-    this.history=this.history.slice(0,index);
+    if (userIdx < 0) return;
+
+    this.history = this.history.slice(0, index);
     await this.save();
     this.render();
     await this.processAI(this.history[userIdx].content);
   },
-  
-  triggerImageGen(){
-    document.getElementById('ai-mode').value='image';
-    Toast.show('حالت تولید عکس فعال شد','info');
+
+  triggerImageGen() {
+    document.getElementById('ai-mode').value = 'image';
+    Toast.show('حالت تولید عکس فعال شد', 'info');
   },
-  
-  async send(){
-    if(this.isProcessing)return;
-    const inp=document.getElementById('chat-input');
-    const txt=inp.value.trim();
-    if(!txt)return;
-    
-    this.isProcessing=true;
-    inp.value='';
-    
-    this.history.push({role:'user',content:txt});
-    if(this.history.length===1){
-      const s=this.sessions.find(x=>x.id===this.currentId);
-      if(s){s.title=txt.substring(0,25);Storage.put('sessions',s);}
+
+  setTyping(show) {
+    const c = document.getElementById('chat-messages');
+    let t = document.getElementById('typing-indicator');
+    if (show) {
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'typing-indicator';
+        t.className = 'msg ai typing';
+        t.innerHTML = '<span></span><span></span><span></span>';
+        c.appendChild(t);
+      }
+      c.scrollTop = c.scrollHeight;
+    } else {
+      t?.remove();
+    }
+  },
+
+  async send() {
+    if (this.isProcessing) return;
+    const inp = document.getElementById('chat-input');
+    const txt = inp.value.trim();
+    if (!txt) return;
+
+    this.isProcessing = true;
+    this.controller = new AbortController();
+    inp.value = '';
+    inp.style.height = 'auto';
+
+    this.history.push({ role: 'user', content: txt });
+
+    if (this.history.length === 1) {
+      const s = this.sessions.find(x => x.id === this.currentId);
+      if (s) {
+        s.title = txt.substring(0, 30);
+        Storage.put('sessions', s);
+      }
       this.renderList();
     }
+
     this.render();
     await this.save();
     await this.processAI(txt);
-    this.isProcessing=false;
+    this.isProcessing = false;
+    this.controller = null;
   },
-  
-  async processAI(txt){
-    const mode=document.getElementById('ai-mode').value;
-    let res='';
-    
-    if(mode==='search'||(mode==='auto'&&SearchEngine.isSearchIntent(txt))){
-      this.history.push({role:'assistant',content:'🔍 در حال جستجو...'});
-      this.render();
-      const results=await SearchEngine.ddg(txt);
-      this.history.pop();
-      if(results.length){
-        res=`🔍 نتایج برای «${txt}»:\n\n`+results.map((r,i)=>`${i+1}. **${r.title}**\n${r.snippet}\n🔗 ${r.link}`).join('\n\n---\n\n');
-      }else{
-        res='⚠️ نتیجه‌ای یافت نشد.';
-      }
-    }else if(mode==='image'){
-      this.history.push({role:'assistant',content:'🎨 در حال تولید عکس...'});
-      this.render();
-      const cfg=await Storage.getConfig();
-      const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(txt)}?width=1024&height=1024&nologo=true`;
-      this.history.pop();
-      res=`![generated](${url})\n\nپرامپت: ${txt}`;
-    }else{
-      const cfg=await Storage.getConfig();
-      if(cfg.apiKey&&mode!=='local'){
-        try{
-          this.history.push({role:'assistant',content:'⏳ ...'});
-          this.render();
-          const apiUrl=cfg.proxy||'https://api.anthropic.com/v1/messages';
-          const headers={'Content-Type':'application/json'};
-          if(cfg.proxy){headers['Authorization']=`Bearer ${cfg.apiKey}`;}
-          else{headers['x-api-key']=cfg.apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}
-          const r=await fetch(apiUrl,{
-            method:'POST',
-            headers,
-            signal:AbortSignal.timeout(30000),
-            body:JSON.stringify({
-              model:cfg.model||'claude-3-5-sonnet-20241022',
-              max_tokens:4096,
-              messages:[{role:'user',content:txt}]
-            })
+
+  async processAI(txt) {
+    const mode = document.getElementById('ai-mode').value;
+    let res = '';
+
+    this.setTyping(true);
+
+    try {
+      if (mode === 'image') {
+        res = await AI.image(txt);
+      } else if (mode === 'search') {
+        res = await AI.search(txt);
+      } else if (mode === 'research') {
+        res = await AI.research(txt);
+      } else if (mode === 'local') {
+        res = await LocalAI.generate(txt);
+      } else {
+        const math = LocalAI.solveMath(txt);
+        if (math) {
+          res = LocalAI.formatMath(math);
+        } else if (SearchEngine.isSearchIntent(txt)) {
+          res = await AI.search(txt);
+        } else {
+          const messages = this.history
+            .filter(m => m.role === 'user' || m.role === 'assistant')
+            .slice(-12)
+            .map(m => ({ role: m.role, content: m.content }));
+
+          res = await AI.complete(txt, {
+            messages,
+            signal: this.controller?.signal,
+            maxTokens: 4096
           });
-          this.history.pop();
-          if(!r.ok)throw new Error(`API ${r.status}`);
-          const d=await r.json();
-          res=d.choices?.[0]?.message?.content||d.content?.[0]?.text||LocalAI.generate(txt);
-        }catch(e){
-          this.history.pop();
-          res=LocalAI.generate(txt)+`\n\n⚠️ *(خطا: ${e.message})*`;
         }
-      }else{
-        res=LocalAI.generate(txt);
       }
+    } catch (e) {
+      if (e.name === 'AbortError') res = '⏹️ درخواست متوقف شد.';
+      else res = await LocalAI.generate(txt) + `\n\n⚠️ ${e.message}`;
+    } finally {
+      this.setTyping(false);
     }
-    
-    this.history.push({role:'assistant',content:res});
+
+    this.history.push({ role: 'assistant', content: res });
     this.render();
     await this.save();
   },
-  
-  async save(){
-    const s=this.sessions.find(x=>x.id===this.currentId);
-    if(s){
-      s.messages=[...this.history];
-      s.date=Date.now();
-      await Storage.put('sessions',s);
+
+  async save() {
+    const s = this.sessions.find(x => x.id === this.currentId);
+    if (s) {
+      s.messages = [...this.history];
+      s.date = Date.now();
+      await Storage.put('sessions', s);
     }
   }
 };
 
-// ===== CLASSROOM (Firebase + WebRTC) =====
 const Classroom = {
-  peer:null,
-  localStream:null,
-  calls:{},
-  classId:null,
-  isTeacher:false,
-  micEnabled:true,
-  camEnabled:true,
-  
-  async create(){
-    const name=document.getElementById('class-name').value.trim();
-    const teacher=document.getElementById('class-teacher').value.trim();
-    if(!name||!teacher){Toast.show('نام کلاس و معلم را وارد کنید','warning');return;}
-    
-    this.classId=Utils.uid();
-    this.isTeacher=true;
-    
-    const cfg=await Storage.getConfig();
-    if(cfg.firebaseConfig){
-      try{
-        const fbCfg=JSON.parse(cfg.firebaseConfig);
-        if(!firebase.apps.length)firebase.initializeApp(fbCfg);
-        await firebase.firestore().collection('classes').doc(this.classId).set({
-          name,teacher,createdAt:Date.now(),active:true
-        });
-        Toast.show('کلاس در Firebase ثبت شد','success');
-      }catch(e){
-        console.warn('Firebase error:',e);
-        Toast.show('Firebase متصل نشد، از حالت محلی استفاده می‌شود','warning');
-      }
+  peer: null,
+  localStream: null,
+  calls: {},
+  dataConns: {},
+  teacherConn: null,
+  classId: null,
+  className: '',
+  teacherName: '',
+  displayName: '',
+  isTeacher: false,
+  micEnabled: true,
+  camEnabled: true,
+  participants: [],
+  rtcConfig: {
+    iceServers: [
+      { urls: 'stun:stun.l.google.com:19302' },
+      { urls: 'stun:stun1.l.google.com:19302' }
+    ]
+  },
+
+  parseCode(input) {
+    input = (input || '').trim();
+    const m = input.match(/[?&]class=([^&]+)/);
+    if (m) return decodeURIComponent(m[1]);
+    return input;
+  },
+
+  getBaseUrl() {
+    return location.href.split('?')[0];
+  },
+
+  async create() {
+    const name = document.getElementById('class-name').value.trim();
+    const teacher = document.getElementById('class-teacher').value.trim();
+    const display = document.getElementById('class-display-name').value.trim();
+
+    if (!name || !teacher) {
+      Toast.show('نام کلاس و معلم را وارد کنید', 'warning');
+      return;
     }
-    
-    const baseUrl=location.origin+location.pathname;
-    document.getElementById('teacher-link').textContent=`${baseUrl}?class=${this.classId}&role=teacher`;
-    document.getElementById('student-link').textContent=`${baseUrl}?class=${this.classId}&role=student`;
-    
-    document.getElementById('classroom-lobby').style.display='none';
-    document.getElementById('classroom-active').style.display='block';
-    
+
+    this.classId = Utils.uid();
+    this.className = name;
+    this.teacherName = teacher;
+    this.displayName = display || teacher;
+    this.isTeacher = true;
+
+    await this.enterRoom();
+    await this.saveFirebase();
+    Toast.show(`کلاس «${name}» ایجاد شد`, 'success');
+  },
+
+  async join() {
+    const raw = document.getElementById('class-code').value.trim();
+    const code = this.parseCode(raw);
+    if (!code) {
+      Toast.show('کد یا لینک کلاس را وارد کنید', 'warning');
+      return;
+    }
+
+    this.classId = code;
+    this.isTeacher = false;
+    this.displayName = document.getElementById('class-display-name').value.trim() || 'دانش‌آموز';
+    this.teacherName = document.getElementById('class-teacher').value.trim() || 'معلم';
+    this.className = document.getElementById('class-name').value.trim() || '';
+
+    await this.enterRoom();
+    Toast.show('در حال اتصال به کلاس...', 'info');
+  },
+
+  async enterRoom() {
+    document.getElementById('classroom-lobby').style.display = 'none';
+    document.getElementById('classroom-active').style.display = 'block';
+
+    this.addLocalParticipant();
+    this.updateLinks();
+    this.updateParticipants();
+
     await this.startMedia();
     this.initPeer();
-    this.updateParticipants();
-    
-    Toast.show(`کلاس «${name}» ایجاد شد`,'success');
+
+    WB.afterStroke = () => Classroom.broadcastWB();
   },
-  
-  async join(){
-    const code=document.getElementById('class-code').value.trim();
-    if(!code){Toast.show('کد کلاس را وارد کنید','warning');return;}
-    
-    this.classId=code;
-    this.isTeacher=false;
-    
-    document.getElementById('classroom-lobby').style.display='none';
-    document.getElementById('classroom-active').style.display='block';
-    
-    await this.startMedia();
-    this.initPeer();
-    
-    Toast.show('به کلاس پیوستید','success');
+
+  addLocalParticipant() {
+    this.participants = [
+      {
+        id: 'local',
+        name: this.displayName || (this.isTeacher ? 'معلم' : 'دانش‌آموز'),
+        role: this.isTeacher ? 'teacher' : 'student'
+      }
+    ];
+
+    if (!this.isTeacher) {
+      this.participants.push({
+        id: `ostadyar-teacher-${this.classId}`,
+        name: this.teacherName || 'معلم',
+        role: 'teacher'
+      });
+    }
   },
-  
-  async startMedia(){
-    try{
-      this.localStream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
-      const video=document.getElementById('local-video');
-      if(video)video.srcObject=this.localStream;
-    }catch(e){
-      console.warn('Media error:',e);
-      Toast.show('دسترسی به دوربین/میکروفون ممکن نشد','warning');
-      try{
-        this.localStream=await navigator.mediaDevices.getUserMedia({audio:true});
-      }catch(e2){
-        Toast.show('دسترسی به میکروفون هم ممکن نشد','error');
+
+  updateLinks() {
+    if (!this.classId) return;
+
+    const base = this.getBaseUrl();
+    const teacherUrl = `${base}?class=${encodeURIComponent(this.classId)}&role=teacher&class_name=${encodeURIComponent(this.className || '')}&name=${encodeURIComponent(this.teacherName || this.displayName || 'معلم')}`;
+    const studentUrl = `${base}?class=${encodeURIComponent(this.classId)}&role=student&class_name=${encodeURIComponent(this.className || '')}&teacher=${encodeURIComponent(this.teacherName || 'معلم')}`;
+
+    document.getElementById('class-id-box').textContent = this.classId;
+    document.getElementById('teacher-link').textContent = teacherUrl;
+    document.getElementById('student-link').textContent = studentUrl;
+  },
+
+  copyLink(role) {
+    const id = role === 'teacher' ? 'teacher-link' : 'student-link';
+    this.copyText(id);
+  },
+
+  copyText(id) {
+    const txt = document.getElementById(id)?.textContent || '';
+    navigator.clipboard.writeText(txt).then(() => Toast.show('کپی شد', 'success'));
+  },
+
+  async saveFirebase() {
+    const cfg = await Storage.getConfig();
+    if (!cfg.firebaseConfig || !window.firebase) return;
+
+    try {
+      const fbCfg = JSON.parse(cfg.firebaseConfig);
+      if (!firebase.apps.length) firebase.initializeApp(fbCfg);
+      await firebase.firestore().collection('classes').doc(this.classId).set({
+        name: this.className,
+        teacher: this.teacherName,
+        createdAt: Date.now(),
+        active: true
+      });
+      Toast.show('کلاس در Firebase ثبت شد', 'success');
+    } catch (e) {
+      console.warn('Firebase error:', e);
+    }
+  },
+
+  async startMedia() {
+    try {
+      this.localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    } catch (e) {
+      try {
+        this.localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        Toast.show('دوربین در دسترس نبود؛ فقط صدا فعال شد', 'warning');
+      } catch (e2) {
+        Toast.show('دسترسی به دوربین/میکروفون ممکن نشد', 'error');
+      }
+    }
+
+    const video = document.getElementById('local-video');
+    if (video && this.localStream) video.srcObject = this.localStream;
+
+    this.updateMediaUI();
+    this.updateLocalRole();
+  },
+
+  updateMediaUI() {
+    const mic = document.getElementById('ctrl-mic');
+    const cam = document.getElementById('ctrl-cam');
+    const micSmall = document.getElementById('mic-btn');
+    const camSmall = document.getElementById('cam-btn');
+
+    if (mic) mic.className = `ctrl-btn-lg ${this.micEnabled ? 'active' : 'muted'}`;
+    if (cam) cam.className = `ctrl-btn-lg ${this.camEnabled ? 'active' : 'muted'}`;
+    if (micSmall) micSmall.className = `ctrl-btn ${this.micEnabled ? '' : 'muted'}`;
+    if (camSmall) camSmall.className = `ctrl-btn ${this.camEnabled ? '' : 'muted'}`;
+  },
+
+  updateLocalRole() {
+    const tag = document.querySelector('#local-video-tile .name-tag');
+    if (tag) tag.textContent = this.isTeacher ? 'شما (معلم)' : 'شما (دانش‌آموز)';
+  },
+
+  initPeer() {
+    if (this.peer) {
+      try { this.peer.destroy(); } catch (e) { }
+      this.peer = null;
+    }
+
+    const peerId = this.isTeacher
+      ? `ostadyar-teacher-${this.classId}`
+      : `ostadyar-student-${this.classId}-${Utils.uid()}`;
+
+    this.peer = new Peer(peerId, { config: this.rtcConfig, debug: 1 });
+
+    this.peer.on('open', () => {
+      if (this.isTeacher) {
+        Toast.show('کلاس آماده دریافت اتصال است', 'success');
+      } else {
+        this.connectTeacher();
+        this.callTeacher();
+      }
+    });
+
+    this.peer.on('call', call => this.handleCall(call));
+    this.peer.on('connection', conn => this.handleConnection(conn));
+
+    this.peer.on('error', err => {
+      console.error('Peer error:', err);
+      if (err.type === 'unavailable-id') Toast.show('این شناسه کلاس قبلاً فعال است. صفحه را رفرش کنید.', 'error');
+      else Toast.show('خطا در اتصال: ' + err.type, 'error');
+    });
+
+    this.peer.on('disconnected', () => {
+      Toast.show('اتصال قطع شد؛ تلاش مجدد...', 'warning');
+      setTimeout(() => this.peer?.reconnect?.(), 2500);
+    });
+  },
+
+  handleCall(call) {
+    call.answer(this.localStream || undefined);
+
+    call.on('stream', remoteStream => {
+      const name = call.metadata?.name || (call.peer.includes('teacher') ? this.teacherName || 'معلم' : 'دانش‌آموز');
+      this.addRemoteVideo(call.peer, remoteStream, name);
+    });
+
+    call.on('close', () => this.removeRemoteVideo(call.peer));
+    this.calls[call.peer] = call;
+  },
+
+  connectTeacher() {
+    const teacherId = `ostadyar-teacher-${this.classId}`;
+    this.teacherConn = this.peer.connect(teacherId, {
+      metadata: { name: this.displayName || 'دانش‌آموز', role: 'student' }
+    });
+
+    this.teacherConn.on('open', () => {
+      this.teacherConn.send({ type: 'join', name: this.displayName || 'دانش‌آموز', role: 'student' });
+      this.teacherConn.send({ type: 'request-wb' });
+      Toast.show('اتصال داده با معلم برقرار شد', 'success');
+    });
+
+    this.teacherConn.on('data', data => this.onData(this.teacherConn, data));
+
+    this.teacherConn.on('close', () => {
+      this.teacherConn = null;
+      Toast.show('اتصال با معلم قطع شد؛ تلاش مجدد...', 'warning');
+      setTimeout(() => this.connectTeacher(), 3000);
+    });
+
+    this.teacherConn.on('error', e => console.error('teacherConn error', e));
+  },
+
+  callTeacher() {
+    const teacherId = `ostadyar-teacher-${this.classId}`;
+    if (!this.localStream) return;
+
+    const call = this.peer.call(teacherId, this.localStream, {
+      metadata: { name: this.displayName || 'دانش‌آموز', role: 'student' }
+    });
+
+    call.on('stream', remoteStream => {
+      this.addRemoteVideo(call.peer, remoteStream, this.teacherName || 'معلم');
+    });
+
+    call.on('close', () => this.removeRemoteVideo(call.peer));
+    this.calls[teacherId] = call;
+  },
+
+  handleConnection(conn) {
+    if (!this.isTeacher) {
+      conn.on('open', () => conn.close?.());
+      return;
+    }
+
+    conn.on('open', () => {
+      this.dataConns[conn.peer] = conn;
+
+      const name = conn.metadata?.name || 'دانش‌آموز';
+      if (!this.participants.find(p => p.id === conn.peer)) {
+        this.participants.push({ id: conn.peer, name, role: 'student' });
+      }
+
+      this.updateParticipants();
+      this.broadcastParticipants();
+
+      conn.send({ type: 'welcome', list: this.participants });
+      if (WB.canvas && WB.canvas.width) {
+        conn.send({ type: 'wb', image: WB.canvas.toDataURL('image/jpeg', 0.55) });
+      }
+
+      Toast.show(`${name} به کلاس پیوست`, 'success');
+    });
+
+    conn.on('data', data => this.onData(conn, data));
+
+    conn.on('close', () => {
+      delete this.dataConns[conn.peer];
+      this.participants = this.participants.filter(p => p.id !== conn.peer);
+      this.updateParticipants();
+      this.broadcastParticipants();
+      this.removeRemoteVideo(conn.peer);
+    });
+
+    conn.on('error', e => console.error('student conn error', e));
+  },
+
+  onData(conn, data) {
+    if (!data || !data.type) return;
+
+    if (data.type === 'chat') {
+      this.renderChatMessage(data);
+      if (this.isTeacher) this.broadcast(data, conn.peer);
+    }
+
+    else if (data.type === 'participants') {
+      if (!this.isTeacher && Array.isArray(data.list)) {
+        this.participants = data.list;
+        this.updateParticipants();
+      }
+    }
+
+    else if (data.type === 'wb') {
+      WB.loadImage(data.image);
+      if (this.isTeacher) this.broadcast(data, conn.peer);
+    }
+
+    else if (data.type === 'request-wb') {
+      if (this.isTeacher && WB.canvas && WB.canvas.width) {
+        conn.send({ type: 'wb', image: WB.canvas.toDataURL('image/jpeg', 0.55) });
+      }
+    }
+
+    else if (data.type === 'join') {
+      if (this.isTeacher && data.name) {
+        const p = this.participants.find(x => x.id === conn.peer);
+        if (p) p.name = data.name;
+        this.updateParticipants();
+        this.broadcastParticipants();
       }
     }
   },
-  
-  initPeer(){
-    const peerId=this.isTeacher?`teacher-${this.classId}`:`student-${this.classId}-${Utils.uid()}`;
-    this.peer=new Peer(peerId);
-    
-    this.peer.on('open',id=>{
-      console.log('Peer connected:',id);
-      if(!this.isTeacher){
-        const call=this.peer.call(`teacher-${this.classId}`,this.localStream);
-        if(call){
-          call.on('stream',remoteStream=>this.addRemoteVideo(call.peer,remoteStream));
-          this.calls[call.peer]=call;
-        }
+
+  broadcast(payload, excludePeerId = null) {
+    if (!this.isTeacher) {
+      if (this.teacherConn?.open) {
+        try { this.teacherConn.send(payload); } catch (e) { console.warn(e); }
+      }
+      return;
+    }
+
+    Object.values(this.dataConns).forEach(c => {
+      if (c.open && c.peer !== excludePeerId) {
+        try { c.send(payload); } catch (e) { console.warn(e); }
       }
     });
-    
-    this.peer.on('call',call=>{
-      call.answer(this.localStream);
-      call.on('stream',remoteStream=>this.addRemoteVideo(call.peer,remoteStream));
-      this.calls[call.peer]=call;
-    });
-    
-    this.peer.on('error',err=>{
-      console.error('Peer error:',err);
-      Toast.show('خطا در اتصال: '+err.type,'error');
-    });
   },
-  
-  addRemoteVideo(peerId,stream){
-    const grid=document.getElementById('video-grid');
-    if(!grid)return;
-    const tile=document.createElement('div');
-    tile.className='video-tile';
-    tile.id=`video-${peerId}`;
-    tile.innerHTML=`
-      <video autoplay playsinline></video>
-      <div class="name-tag">${peerId.includes('teacher')?'معلم':'دانش‌آموز'}</div>
-      <div class="controls">
-        <button class="ctrl-btn" onclick="Classroom.removeParticipant('${peerId}')">✖️</button>
-      </div>
-    `;
-    tile.querySelector('video').srcObject=stream;
-    grid.appendChild(tile);
-    this.updateParticipants();
+
+  broadcastParticipants() {
+    if (!this.isTeacher) return;
+    this.broadcast({ type: 'participants', list: this.participants });
   },
-  
-  removeParticipant(peerId){
-    const tile=document.getElementById(`video-${peerId}`);
-    if(tile)tile.remove();
-    if(this.calls[peerId]){
+
+  broadcastWB() {
+    if (!WB.canvas || !WB.canvas.width) return;
+    const image = WB.canvas.toDataURL('image/jpeg', 0.55);
+    this.broadcast({ type: 'wb', image });
+  },
+
+  sendChat() {
+    const input = document.getElementById('class-chat-input');
+    const txt = input.value.trim();
+    if (!txt) return;
+
+    const msg = {
+      type: 'chat',
+      id: Utils.uid(),
+      fromId: this.peer?.id || 'local',
+      fromName: this.displayName || (this.isTeacher ? 'معلم' : 'دانش‌آموز'),
+      role: this.isTeacher ? 'teacher' : 'student',
+      text: txt,
+      ts: Date.now()
+    };
+
+    this.renderChatMessage(msg);
+
+    if (this.isTeacher) this.broadcast(msg);
+    else if (this.teacherConn?.open) this.teacherConn.send(msg);
+    else Toast.show('اتصال برقرار نیست', 'warning');
+
+    input.value = '';
+  },
+
+  renderChatMessage(msg) {
+    const chat = document.getElementById('class-chat');
+    if (!chat) return;
+    if (msg.id && chat.querySelector(`[data-id="${msg.id}"]`)) return;
+
+    const div = document.createElement('div');
+    div.className = 'class-chat-msg';
+    if (msg.id) div.dataset.id = msg.id;
+
+    const roleLabel = msg.role === 'teacher' ? '👨‍🏫' : '👤';
+    const name = Utils.escapeHtml(msg.fromName || (msg.role === 'teacher' ? 'معلم' : 'دانش‌آموز'));
+
+    let fileHtml = '';
+    if (msg.file) {
+      const safe = Utils.safeDataUrl(msg.file.data);
+      if ((msg.file.type || '').startsWith('image/') && safe.startsWith('data:image/')) {
+        fileHtml = `<div class="class-chat-file"><img src="${safe}" alt="${Utils.escapeHtml(msg.file.name)}"></div>`;
+      } else {
+        fileHtml = `<div class="class-chat-file"><a href="${safe}" download="${Utils.escapeHtml(msg.file.name)}">📥 ${Utils.escapeHtml(msg.file.name)}</a></div>`;
+      }
+    }
+
+    div.innerHTML = `<strong>${roleLabel} ${name}:</strong> ${msg.text ? Utils.escapeHtml(msg.text) : ''}${fileHtml}`;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  },
+
+  uploadFile() {
+    const input = document.createElement('input');
+    input.type = 'file';
+
+    input.onchange = e => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      if (file.size > 1.5 * 1024 * 1024) {
+        Toast.show('حداکثر حجم فایل برای ارسال P2P: 1.5 مگابایت', 'warning');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const msg = {
+          type: 'chat',
+          id: Utils.uid(),
+          fromId: this.peer?.id || 'local',
+          fromName: this.displayName || (this.isTeacher ? 'معلم' : 'دانش‌آموز'),
+          role: this.isTeacher ? 'teacher' : 'student',
+          text: '',
+          file: { name: file.name, type: file.type, data: reader.result },
+          ts: Date.now()
+        };
+
+        this.renderChatMessage(msg);
+        if (this.isTeacher) this.broadcast(msg);
+        else if (this.teacherConn?.open) this.teacherConn.send(msg);
+        else Toast.show('اتصال برقرار نیست', 'warning');
+      };
+      reader.readAsDataURL(file);
+    };
+
+    input.click();
+  },
+
+  addRemoteVideo(peerId, stream, name) {
+    const grid = document.getElementById('video-grid');
+    if (!grid) return;
+
+    let tile = document.getElementById(`video-${peerId}`);
+    if (!tile) {
+      tile = document.createElement('div');
+      tile.className = 'video-tile';
+      tile.id = `video-${peerId}`;
+      tile.innerHTML = `
+        <video autoplay playsinline></video>
+        <div class="name-tag"></div>
+        <div class="controls">
+          <button class="ctrl-btn" onclick="Classroom.removeParticipant('${peerId}')">✖️</button>
+        </div>
+      `;
+      grid.appendChild(tile);
+    }
+
+    tile.querySelector('video').srcObject = stream;
+    tile.querySelector('.name-tag').textContent = name || (peerId.includes('teacher') ? 'معلم' : 'دانش‌آموز');
+  },
+
+  removeRemoteVideo(peerId) {
+    const tile = document.getElementById(`video-${peerId}`);
+    if (tile) tile.remove();
+  },
+
+  removeParticipant(peerId) {
+    if (this.calls[peerId]) {
       this.calls[peerId].close();
       delete this.calls[peerId];
     }
+
+    if (this.dataConns[peerId]) {
+      this.dataConns[peerId].close();
+      delete this.dataConns[peerId];
+    }
+
+    this.participants = this.participants.filter(p => p.id !== peerId);
     this.updateParticipants();
+    this.broadcastParticipants();
+    this.removeRemoteVideo(peerId);
   },
-  
-  updateParticipants(){
-    const count=Object.keys(this.calls).length+1;
-    const el=document.getElementById('participant-count');
-    if(el)el.textContent=count;
-    const list=document.getElementById('participant-list');
-    if(list){
-      list.innerHTML=`<div style="padding:6px 0;font-size:.85rem">👨‍🏫 شما (${this.isTeacher?'معلم':'دانش‌آموز'})</div>`;
-      Object.keys(this.calls).forEach(id=>{
-        list.innerHTML+=`<div style="padding:6px 0;font-size:.85rem">👤 ${id.includes('teacher')?'معلم':'دانش‌آموز'}</div>`;
+
+  updateParticipants() {
+    const count = this.participants.length || 1;
+    const el = document.getElementById('participant-count');
+    if (el) el.textContent = count;
+
+    const list = document.getElementById('participant-list');
+    if (!list) return;
+
+    list.innerHTML = this.participants.map(p => {
+      const icon = p.role === 'teacher' ? '👨‍🏫' : '👤';
+      return `<div style="padding:6px 0;font-size:.85rem">${icon} ${Utils.escapeHtml(p.name || 'کاربر')}</div>`;
+    }).join('');
+  },
+
+  toggleMic() {
+    if (!this.localStream) {
+      Toast.show('جریان رسانه‌ای فعال نیست', 'warning');
+      return;
+    }
+
+    this.micEnabled = !this.micEnabled;
+    this.localStream.getAudioTracks().forEach(t => t.enabled = this.micEnabled);
+    this.updateMediaUI();
+    Toast.show(this.micEnabled ? 'میکروفون روشن' : 'میکروفون خاموش', 'info');
+  },
+
+  toggleCam() {
+    if (!this.localStream) {
+      Toast.show('جریان رسانه‌ای فعال نیست', 'warning');
+      return;
+    }
+
+    this.camEnabled = !this.camEnabled;
+    this.localStream.getVideoTracks().forEach(t => t.enabled = this.camEnabled);
+    this.updateMediaUI();
+    Toast.show(this.camEnabled ? 'دوربین روشن' : 'دوربین خاموش', 'info');
+  },
+
+  async toggleScreen() {
+    try {
+      const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      const screenTrack = screenStream.getVideoTracks()[0];
+      const video = document.getElementById('local-video');
+      const cameraTrack = this.localStream?.getVideoTracks()?.[0] || null;
+
+      Object.values(this.calls).forEach(call => {
+        const pc = call.peerConnection;
+        const sender = pc?.getSenders?.().find(s => s.track?.kind === 'video');
+        if (sender) sender.replaceTrack(screenTrack).catch(console.warn);
       });
-    }
-  },
-  
-  toggleMic(){
-    if(!this.localStream)return;
-    this.micEnabled=!this.micEnabled;
-    this.localStream.getAudioTracks().forEach(t=>t.enabled=this.micEnabled);
-    const btn=document.getElementById('ctrl-mic');
-    const micBtn=document.getElementById('mic-btn');
-    if(btn)btn.className=`ctrl-btn-lg ${this.micEnabled?'active':'muted'}`;
-    if(micBtn)micBtn.className=`ctrl-btn ${this.micEnabled?'':'muted'}`;
-    Toast.show(this.micEnabled?'میکروفون روشن':'میکروفون خاموش','info');
-  },
-  
-  toggleCam(){
-    if(!this.localStream)return;
-    this.camEnabled=!this.camEnabled;
-    this.localStream.getVideoTracks().forEach(t=>t.enabled=this.camEnabled);
-    const btn=document.getElementById('ctrl-cam');
-    const camBtn=document.getElementById('cam-btn');
-    if(btn)btn.className=`ctrl-btn-lg ${this.camEnabled?'active':'muted'}`;
-    if(camBtn)camBtn.className=`ctrl-btn ${this.camEnabled?'':'muted'}`;
-    Toast.show(this.camEnabled?'دوربین روشن':'دوربین خاموش','info');
-  },
-  
-  async toggleScreen(){
-    try{
-      const screenStream=await navigator.mediaDevices.getDisplayMedia({video:true});
-      const video=document.getElementById('local-video');
-      if(video)video.srcObject=screenStream;
-      screenStream.getVideoTracks()[0].onended=()=>{
-        if(video&&this.localStream)video.srcObject=this.localStream;
+
+      if (video) video.srcObject = screenStream;
+
+      screenTrack.onended = () => {
+        Object.values(this.calls).forEach(call => {
+          const pc = call.peerConnection;
+          const sender = pc?.getSenders?.().find(s => s.track?.kind === 'video');
+          if (sender && cameraTrack) sender.replaceTrack(cameraTrack).catch(console.warn);
+        });
+
+        if (video && this.localStream) video.srcObject = this.localStream;
+        Toast.show('اشتراک صفحه متوقف شد', 'info');
       };
-      Toast.show('اشتراک صفحه شروع شد','success');
-    }catch(e){
-      Toast.show('اشتراک صفحه لغو شد','warning');
+
+      Toast.show('اشتراک صفحه شروع شد', 'success');
+    } catch (e) {
+      Toast.show('اشتراک صفحه لغو شد', 'warning');
     }
   },
-  
-  toggleWhiteboard(){
-    const wb=document.getElementById('wb-container');
-    const vg=document.querySelector('.video-grid');
-    if(wb.style.display==='none'){
-      wb.style.display='block';
-      if(vg)vg.style.display='none';
-      WB.init();
-      Toast.show('تخته سفید فعال شد','info');
-    }else{
-      wb.style.display='none';
-      if(vg)vg.style.display='grid';
+
+  toggleWhiteboard() {
+    const wb = document.getElementById('wb-container');
+    const vg = document.querySelector('.video-grid');
+
+    if (wb.style.display === 'none') {
+      wb.style.display = 'block';
+      if (vg) vg.style.display = 'none';
+
+      setTimeout(() => {
+        WB.init();
+        if (!this.isTeacher && this.teacherConn?.open) {
+          this.teacherConn.send({ type: 'request-wb' });
+        }
+      }, 50);
+
+      Toast.show('تخته سفید فعال شد', 'info');
+    } else {
+      wb.style.display = 'none';
+      if (vg) vg.style.display = 'grid';
     }
   },
-  
-  uploadFile(){
-    const input=document.createElement('input');
-    input.type='file';
-    input.onchange=e=>{
-      const file=e.target.files[0];
-      if(file){
-        this.sendChatMessage(`📁 فایل: ${file.name}`);
-        Toast.show('فایل ارسال شد','success');
-      }
-    };
-    input.click();
-  },
-  
-  sendChat(){
-    const input=document.getElementById('class-chat-input');
-    const txt=input.value.trim();
-    if(!txt)return;
-    this.sendChatMessage(txt);
-    input.value='';
-  },
-  
-  sendChatMessage(txt){
-    const chat=document.getElementById('class-chat');
-    if(!chat)return;
-    const msg=document.createElement('div');
-    msg.style.cssText='padding:8px 12px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:.85rem';
-    msg.innerHTML=`<strong>${this.isTeacher?'معلم':'شما'}:</strong> ${Utils.escapeHtml(txt)}`;
-    chat.appendChild(msg);
-    chat.scrollTop=chat.scrollHeight;
-  },
-  
-  copyLink(role){
-    const link=document.getElementById(role==='teacher'?'teacher-link':'student-link').textContent;
-    navigator.clipboard.writeText(link).then(()=>Toast.show('لینک کپی شد','success'));
-  },
-  
-  end(){
-    if(!confirm('پایان کلاس؟'))return;
-    Object.values(this.calls).forEach(c=>c.close());
-    if(this.peer)this.peer.destroy();
-    if(this.localStream)this.localStream.getTracks().forEach(t=>t.stop());
-    document.getElementById('classroom-active').style.display='none';
-    document.getElementById('classroom-lobby').style.display='block';
-    document.getElementById('video-grid').innerHTML='';
-    Toast.show('کلاس پایان یافت','info');
+
+  end() {
+    if (!confirm('پایان کلاس؟')) return;
+
+    Object.values(this.calls).forEach(c => c.close());
+    this.calls = {};
+
+    Object.values(this.dataConns).forEach(c => c.close());
+    this.dataConns = {};
+
+    if (this.teacherConn) {
+      this.teacherConn.close();
+      this.teacherConn = null;
+    }
+
+    if (this.peer) {
+      this.peer.destroy();
+      this.peer = null;
+    }
+
+    if (this.localStream) {
+      this.localStream.getTracks().forEach(t => t.stop());
+      this.localStream = null;
+    }
+
+    WB.afterStroke = null;
+
+    document.getElementById('classroom-active').style.display = 'none';
+    document.getElementById('classroom-lobby').style.display = 'block';
+
+    const grid = document.getElementById('video-grid');
+    if (grid) {
+      grid.querySelectorAll('.video-tile:not(#local-video-tile)').forEach(el => el.remove());
+    }
+
+    const chat = document.getElementById('class-chat');
+    if (chat) chat.innerHTML = '';
+
+    Toast.show('کلاس پایان یافت', 'info');
   }
 };
 
-// ===== WHITEBOARD =====
-const WB = {
-  canvas:null,ctx:null,drawing:false,tool:'pen',color:'#fff',history:[],
-  init(){
-    this.canvas=document.getElementById('wb-canvas');
-    if(!this.canvas)return;
-    this.ctx=this.canvas.getContext('2d');
-    this.resize();
-    this.canvas.addEventListener('pointerdown',e=>{this.drawing=true;this.saveState();this.draw(e)});
-    this.canvas.addEventListener('pointermove',e=>{if(this.drawing)this.draw(e)});
-    this.canvas.addEventListener('pointerup',()=>{this.drawing=false;this.ctx.beginPath()});
-    this.canvas.addEventListener('pointerleave',()=>{this.drawing=false;this.ctx.beginPath()});
-    window.addEventListener('resize',()=>this.resize());
-  },
-  resize(){
-    if(!this.canvas)return;
-    const rect=this.canvas.parentElement.getBoundingClientRect();
-    const temp=document.createElement('canvas');
-    temp.width=this.canvas.width;temp.height=this.canvas.height;
-    if(this.canvas.width>0)temp.getContext('2d').drawImage(this.canvas,0,0);
-    this.canvas.width=rect.width;
-    this.canvas.height=rect.height;
-    this.ctx.fillStyle='#1e293b';
-    this.ctx.fillRect(0,0,rect.width,rect.height);
-    if(temp.width>0)this.ctx.drawImage(temp,0,0);
-    this.ctx.lineCap='round';
-    this.ctx.lineJoin='round';
-  },
-  draw(e){
-    const rect=this.canvas.getBoundingClientRect();
-    const x=e.clientX-rect.left,y=e.clientY-rect.top;
-    this.ctx.lineWidth=this.tool==='eraser'?20:3;
-    this.ctx.strokeStyle=this.tool==='eraser'?'#1e293b':this.color;
-    this.ctx.lineTo(x,y);
-    this.ctx.stroke();
-    this.ctx.beginPath();
-    this.ctx.moveTo(x,y);
-  },
-  setTool(t,el){
-    this.tool=t;
-    document.querySelectorAll('.wb-tool').forEach(b=>b.classList.remove('active'));
-    if(el)el.classList.add('active');
-  },
-  setColor(c,el){
-    this.color=c;
-    this.tool='pen';
-    document.querySelectorAll('.wb-color').forEach(b=>b.classList.remove('active'));
-    if(el)el.classList.add('active');
-  },
-  saveState(){
-    if(this.history.length>10)this.history.shift();
-    this.history.push(this.canvas.toDataURL());
-  },
-  undo(){
-    if(this.history.length<=1)return;
-    this.history.pop();
-    const img=new Image();
-    img.onload=()=>{this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);this.ctx.drawImage(img,0,0)};
-    img.src=this.history[this.history.length-1];
-  },
-  clear(){
-    if(!confirm('پاک شود؟'))return;
-    this.ctx.fillStyle='#1e293b';
-    this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
-    this.saveState();
-  },
-  save(){
-    const a=document.createElement('a');
-    a.download=`whiteboard-${Date.now()}.png`;
-    a.href=this.canvas.toDataURL();
-    a.click();
-    Toast.show('ذخیره شد','success');
-  }
-};
-
-// ===== TOOLS WHITEBOARD =====
-const ToolsWB = {
-  canvas:null,ctx:null,drawing:false,tool:'pen',color:'#fff',history:[],
-  init(){
-    this.canvas=document.getElementById('tools-wb-canvas');
-    if(!this.canvas)return;
-    this.ctx=this.canvas.getContext('2d');
-    this.resize();
-    this.canvas.addEventListener('pointerdown',e=>{this.drawing=true;this.saveState();this.draw(e)});
-    this.canvas.addEventListener('pointermove',e=>{if(this.drawing)this.draw(e)});
-    this.canvas.addEventListener('pointerup',()=>{this.drawing=false;this.ctx.beginPath()});
-    this.canvas.addEventListener('pointerleave',()=>{this.drawing=false;this.ctx.beginPath()});
-    window.addEventListener('resize',()=>this.resize());
-  },
-  resize(){
-    if(!this.canvas)return;
-    const rect=this.canvas.parentElement.getBoundingClientRect();
-    const temp=document.createElement('canvas');
-    temp.width=this.canvas.width;temp.height=this.canvas.height;
-    if(this.canvas.width>0)temp.getContext('2d').drawImage(this.canvas,0,0);
-    this.canvas.width=rect.width;
-    this.canvas.height=rect.height;
-    this.ctx.fillStyle='#1e293b';
-    this.ctx.fillRect(0,0,rect.width,rect.height);
-    if(temp.width>0)this.ctx.drawImage(temp,0,0);
-    this.ctx.lineCap='round';
-    this.ctx.lineJoin='round';
-  },
-  draw(e){
-    const rect=this.canvas.getBoundingClientRect();
-    const x=e.clientX-rect.left,y=e.clientY-rect.top;
-    this.ctx.lineWidth=this.tool==='eraser'?20:3;
-    this.ctx.strokeStyle=this.tool==='eraser'?'#1e293b':this.color;
-    this.ctx.lineTo(x,y);
-    this.ctx.stroke();
-    this.ctx.beginPath();
-    this.ctx.moveTo(x,y);
-  },
-  setTool(t,el){
-    this.tool=t;
-    el.parentElement.querySelectorAll('.wb-tool').forEach(b=>b.classList.remove('active'));
-    el.classList.add('active');
-  },
-  setColor(c,el){
-    this.color=c;
-    this.tool='pen';
-    el.parentElement.querySelectorAll('.wb-color').forEach(b=>b.classList.remove('active'));
-    el.classList.add('active');
-  },
-  saveState(){
-    if(this.history.length>10)this.history.shift();
-    this.history.push(this.canvas.toDataURL());
-  },
-  undo(){
-    if(this.history.length<=1)return;
-    this.history.pop();
-    const img=new Image();
-    img.onload=()=>{this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);this.ctx.drawImage(img,0,0)};
-    img.src=this.history[this.history.length-1];
-  },
-  clear(){
-    if(!confirm('پاک شود؟'))return;
-    this.ctx.fillStyle='#1e293b';
-    this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
-    this.saveState();
-  },
-  save(){
-    const a=document.createElement('a');
-    a.download=`whiteboard-${Date.now()}.png`;
-    a.href=this.canvas.toDataURL();
-    a.click();
-    Toast.show('ذخیره شد','success');
-  }
-};
-
-// ===== CALCULATOR =====
 const Calc = {
-  expression:'',
-  input(v){
-    if(v==='C')this.expression='';
-    else this.expression+=v;
-    document.getElementById('calc-display').textContent=this.expression||'0';
+  expression: '',
+  input(v) {
+    if (v === 'C') this.expression = '';
+    else this.expression += v;
+    document.getElementById('calc-display').textContent = this.expression || '0';
   },
-  backspace(){
-    this.expression=this.expression.slice(0,-1);
-    document.getElementById('calc-display').textContent=this.expression||'0';
+  backspace() {
+    this.expression = this.expression.slice(0, -1);
+    document.getElementById('calc-display').textContent = this.expression || '0';
   },
-  calc(){
-    try{
-      const s=this.expression.replace(/[^0-9+\-*/().]/g,'');
-      if(!s)return;
-      if(window.math)this.expression=String(math.evaluate(s));
-      else this.expression=String(new Function('return '+s)());
-      document.getElementById('calc-display').textContent=this.expression;
-    }catch{
-      document.getElementById('calc-display').textContent='Error';
-      this.expression='';
+  calc() {
+    try {
+      const s = this.expression.replace(/[^0-9+\-*/().]/g, '');
+      if (!s) return;
+      if (window.math) this.expression = String(math.evaluate(s));
+      else this.expression = String(new Function('return ' + s)());
+      document.getElementById('calc-display').textContent = this.expression;
+    } catch {
+      document.getElementById('calc-display').textContent = 'Error';
+      this.expression = '';
     }
   }
 };
 
-// ===== POMODORO =====
 const Pomodoro = {
-  seconds:25*60,running:false,isBreak:false,timer:null,
-  toggle(){
-    if(this.running)this.pause();
+  seconds: 25 * 60,
+  running: false,
+  isBreak: false,
+  timer: null,
+
+  toggle() {
+    if (this.running) this.pause();
     else this.start();
   },
-  start(){
-    this.running=true;
-    document.getElementById('pomo-start').textContent='مکث';
-    this.timer=setInterval(()=>{
+
+  start() {
+    this.running = true;
+    document.getElementById('pomo-start').textContent = 'مکث';
+    this.timer = setInterval(() => {
       this.seconds--;
       this.updateDisplay();
-      if(this.seconds<=0){
+      if (this.seconds <= 0) {
         clearInterval(this.timer);
         this.onComplete();
       }
-    },1000);
+    }, 1000);
   },
-  pause(){
-    this.running=false;
+
+  pause() {
+    this.running = false;
     clearInterval(this.timer);
-    document.getElementById('pomo-start').textContent='شروع';
+    document.getElementById('pomo-start').textContent = 'شروع';
   },
-  onComplete(){
-    this.running=false;
-    if(this.isBreak){
-      this.seconds=25*60;
-      this.isBreak=false;
-      document.getElementById('pomo-status').textContent='⏳ زمان تمرکز';
-      Toast.show('استراحت تمام شد!','success');
-    }else{
-      this.seconds=5*60;
-      this.isBreak=true;
-      document.getElementById('pomo-status').textContent='☕ استراحت';
-      Toast.show('وقت استراحت است!','info');
+
+  onComplete() {
+    this.running = false;
+    if (this.isBreak) {
+      this.seconds = 25 * 60;
+      this.isBreak = false;
+      document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز';
+      Toast.show('استراحت تمام شد!', 'success');
+    } else {
+      this.seconds = 5 * 60;
+      this.isBreak = true;
+      document.getElementById('pomo-status').textContent = '☕ استراحت';
+      Toast.show('وقت استراحت است!', 'info');
     }
     this.updateDisplay();
-    document.getElementById('pomo-start').textContent='شروع';
+    document.getElementById('pomo-start').textContent = 'شروع';
   },
-  reset(){
+
+  reset() {
     this.pause();
-    this.seconds=25*60;
-    this.isBreak=false;
+    this.seconds = 25 * 60;
+    this.isBreak = false;
     this.updateDisplay();
-    document.getElementById('pomo-status').textContent='⏳ زمان تمرکز';
+    document.getElementById('pomo-status').textContent = '⏳ زمان تمرکز';
   },
-  updateDisplay(){
-    const m=Math.floor(this.seconds/60),s=this.seconds%60;
-    document.getElementById('pomo-display').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+  updateDisplay() {
+    const m = Math.floor(this.seconds / 60), s = this.seconds % 60;
+    document.getElementById('pomo-display').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   }
 };
 
-// ===== QR GENERATOR =====
 const QRGen = {
-  generate(){
-    const txt=document.getElementById('qr-input').value.trim();
-    if(!txt){Toast.show('متن یا لینک را وارد کنید','warning');return;}
-    const output=document.getElementById('qr-output');
-    if(window.qrcode){
-      const qr=qrcode(0,'M');
+  generate() {
+    const txt = document.getElementById('qr-input').value.trim();
+    if (!txt) {
+      Toast.show('متن یا لینک را وارد کنید', 'warning');
+      return;
+    }
+
+    const output = document.getElementById('qr-output');
+    if (window.qrcode) {
+      const qr = qrcode(0, 'M');
       qr.addData(txt);
       qr.make();
-      output.innerHTML=qr.createImgTag(6,12);
-      document.getElementById('qr-download').style.display='block';
-      Toast.show('QR ساخته شد','success');
-    }else{
-      output.innerHTML='<p style="color:var(--muted)">کتابخانه QR بارگذاری نشده</p>';
+      output.innerHTML = qr.createImgTag(6, 12);
+      document.getElementById('qr-download').style.display = 'block';
+      Toast.show('QR ساخته شد', 'success');
+    } else {
+      output.innerHTML = '<p style="color:var(--muted)">کتابخانه QR بارگذاری نشده</p>';
     }
   },
-  download(){
-    const img=document.querySelector('#qr-output img');
-    if(img){
-      const a=document.createElement('a');
-      a.download=`qr-${Date.now()}.png`;
-      a.href=img.src;
+
+  download() {
+    const img = document.querySelector('#qr-output img');
+    if (img) {
+      const a = document.createElement('a');
+      a.download = `qr-${Date.now()}.png`;
+      a.href = img.src;
       a.click();
-      Toast.show('دانلود شد','success');
+      Toast.show('دانلود شد', 'success');
     }
   }
 };
 
-// ===== FACTS =====
 const Facts = {
-  currentCat:'all',
-  async init(){
+  currentCat: 'all',
+
+  async init() {
     await KnowledgeDB.seed();
-    const facts=await Storage.getAll('facts');
-    const cats=['all',...new Set(facts.map(f=>f.category||'عمومی'))];
-    const tags=document.getElementById('facts-tags');
-    if(tags){
-      tags.innerHTML=cats.map(c=>`<button class="btn" style="padding:6px 12px;font-size:.75rem;${c===this.currentCat?'background:var(--primary);color:#fff':''}" onclick="Facts.setCat('${c}',this)">${c==='all'?'همه':c}</button>`).join('');
+    const facts = await Storage.getAll('facts');
+    const cats = ['all', ...new Set(facts.map(f => f.category || 'عمومی'))];
+    const tags = document.getElementById('facts-tags');
+
+    if (tags) {
+      tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentCat ? 'background:var(--primary);color:#fff' : ''}" onclick="Facts.setCat('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
+    }
+
+    this.render();
+    document.getElementById('stat-facts').textContent = facts.length;
+  },
+
+  setCat(cat, el) {
+    this.currentCat = cat;
+    document.querySelectorAll('#facts-tags .btn').forEach(b => {
+      b.style.background = 'var(--bg3)';
+      b.style.color = 'var(--text)';
+    });
+    if (el) {
+      el.style.background = 'var(--primary)';
+      el.style.color = '#fff';
     }
     this.render();
-    document.getElementById('stat-facts').textContent=facts.length;
   },
-  setCat(cat,el){
-    this.currentCat=cat;
-    document.querySelectorAll('#facts-tags .btn').forEach(b=>{b.style.background='var(--bg3)';b.style.color='var(--text)'});
-    if(el){el.style.background='var(--primary)';el.style.color='#fff';}
-    this.render();
-  },
-  async render(){
-    const list=document.getElementById('facts-list');
-    const search=Utils.normalizeFa(document.getElementById('facts-search')?.value||'');
-    let facts=await Storage.getAll('facts');
-    if(this.currentCat!=='all')facts=facts.filter(f=>(f.category||'عمومی')===this.currentCat);
-    if(search)facts=facts.filter(f=>Utils.normalizeFa(f.title).includes(search)||Utils.normalizeFa(f.body).includes(search));
-    if(!list)return;
-    list.innerHTML=facts.map(f=>`
+
+  async render() {
+    const list = document.getElementById('facts-list');
+    const search = Utils.normalizeFa(document.getElementById('facts-search')?.value || '');
+    let facts = await Storage.getAll('facts');
+
+    if (this.currentCat !== 'all') facts = facts.filter(f => (f.category || 'عمومی') === this.currentCat);
+    if (search) facts = facts.filter(f => Utils.normalizeFa(f.title).includes(search) || Utils.normalizeFa(f.body).includes(search));
+
+    if (!list) return;
+
+    list.innerHTML = facts.map(f => `
       <div class="fact-card">
-        <div class="fact-cat">${f.category||'عمومی'}</div>
-        <div style="font-weight:700;margin-bottom:6px">${f.title}</div>
-        <div style="color:var(--muted);line-height:1.7;font-size:.9rem">${f.body}</div>
+        <div class="fact-cat">${Utils.escapeHtml(f.category || 'عمومی')}</div>
+        <div style="font-weight:700;margin-bottom:6px">${Utils.escapeHtml(f.title)}</div>
+        <div style="color:var(--muted);line-height:1.7;font-size:.9rem">${Utils.escapeHtml(f.body)}</div>
       </div>
-    `).join('')||'<p style="text-align:center;color:var(--muted);padding:2rem">دانستنی‌ای یافت نشد</p>';
+    `).join('') || '<p style="text-align:center;color:var(--muted);padding:2rem">دانستنی‌ای یافت نشد</p>';
   },
-  async random(){
-    const facts=await Storage.getAll('facts');
-    if(!facts.length)return;
-    const f=facts[Math.floor(Math.random()*facts.length)];
-    Toast.show(`📚 ${f.title}: ${f.body}`,'info');
+
+  async random() {
+    const facts = await Storage.getAll('facts');
+    if (!facts.length) return;
+    const f = facts[Math.floor(Math.random() * facts.length)];
+    Toast.show(`📚 ${f.title}: ${f.body}`, 'info');
   }
 };
 
-// ===== QUIZ =====
 const Quiz = {
-  questions:[],answers:{},submitted:false,
-  loadSample(){
-    this.questions=[
-      {question:'پایتخت ایران کجاست؟',options:['تهران','اصفهان','شیراز','تبریز'],correct:0},
-      {question:'حاصل ۵ × ۶ چند است؟',options:['۲۵','۳۰','۳۵','۴۰'],correct:1},
-      {question:'شاعر شاهنامه کیست؟',options:['حافظ','سعدی','فردوسی','مولوی'],correct:2}
-    ];
-    this.answers={};
-    this.submitted=false;
-    document.getElementById('quiz-setup').style.display='none';
-    document.getElementById('quiz-active').style.display='block';
-    document.getElementById('quiz-result').style.display='none';
+  questions: [],
+  answers: {},
+  submitted: false,
+
+  normalizeQuestions(arr) {
+    return (Array.isArray(arr) ? arr : []).map(q => {
+      const question = String(q.question || q.q || '').trim();
+      let options = (q.options || q.choices || []).map(String);
+
+      while (options.length < 4) options.push('گزینه ' + (options.length + 1));
+      options = options.slice(0, 4);
+
+      let correct = parseInt(q.correct ?? q.answer ?? 0);
+      if (isNaN(correct) || correct < 0 || correct >= options.length) correct = 0;
+
+      return { question, options, correct };
+    }).filter(q => q.question);
+  },
+
+  loadSample() {
+    this.questions = LocalAI.sampleQuiz(5);
+    this.answers = {};
+    this.submitted = false;
+
+    document.getElementById('quiz-setup').style.display = 'none';
+    document.getElementById('quiz-active').style.display = 'block';
+    document.getElementById('quiz-result').style.display = 'none';
+
     this.render();
-    Toast.show('آزمون نمونه بارگذاری شد','success');
+    Toast.show('آزمون نمونه بارگذاری شد', 'success');
   },
-  async start(){
-    const topic=document.getElementById('quiz-topic').value.trim();
-    if(!topic){Toast.show('موضوع را وارد کنید','warning');return;}
-    const cfg=await Storage.getConfig();
-    if(!cfg.apiKey){Toast.show('API Key لازم است','error');UI.nav('settings');return;}
-    
-    document.getElementById('quiz-setup').style.display='none';
-    document.getElementById('quiz-active').style.display='block';
-    document.getElementById('quiz-questions').innerHTML='<div style="text-align:center;padding:2rem"><div class="spinner"></div>در حال تولید...</div>';
-    
-    try{
-      const count=document.getElementById('quiz-count').value;
-      const prompt=`Generate ${count} MCQ about "${topic}" in Persian. JSON only: [{"question":"","options":["","","",""],"correct":0}]`;
-      const apiUrl=cfg.proxy||'https://api.anthropic.com/v1/messages';
-      const headers={'Content-Type':'application/json'};
-      if(cfg.proxy)headers['Authorization']=`Bearer ${cfg.apiKey}`;
-      else{headers['x-api-key']=cfg.apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}
-      
-      const r=await fetch(apiUrl,{
-        method:'POST',headers,
-        signal:AbortSignal.timeout(30000),
-        body:JSON.stringify({model:cfg.model||'claude-3-5-sonnet-20241022',max_tokens:2000,messages:[{role:'user',content:prompt}]})
-      });
-      if(!r.ok)throw new Error('API');
-      const d=await r.json();
-      const text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';
-      const jm=text.match(/\[[\s\S]*\]/);
-      if(!jm)throw new Error('JSON');
-      this.questions=JSON.parse(jm[0]);
-      this.answers={};
-      this.submitted=false;
-      this.render();
-    }catch(e){
-      document.getElementById('quiz-setup').style.display='block';
-      document.getElementById('quiz-active').style.display='none';
-      Toast.show('خطا در تولید آزمون','error');
+
+  async start() {
+    const topic = document.getElementById('quiz-topic').value.trim();
+    if (!topic) {
+      Toast.show('موضوع را وارد کنید', 'warning');
+      return;
     }
+
+    const count = Number(document.getElementById('quiz-count').value) || 5;
+
+    document.getElementById('quiz-setup').style.display = 'none';
+    document.getElementById('quiz-active').style.display = 'block';
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('quiz-questions').innerHTML = '<div class="card" style="text-align:center">در حال تولید آزمون...</div>';
+
+    let questions = null;
+    const cfg = await Storage.getConfig();
+
+    if (cfg.apiKey && cfg.model !== 'ostadyar') {
+      try {
+        const prompt = `Generate ${count} multiple-choice questions in Persian about "${topic}". Return ONLY a JSON array: [{"question":"...","options":["...","...","...","..."],"correct":0}]`;
+        const data = await AI.json(prompt, { maxTokens: 2500 });
+        questions = this.normalizeQuestions(data);
+      } catch (e) {
+        console.warn('AI quiz failed:', e);
+      }
+    }
+
+    if (!questions || !questions.length) {
+      questions = this.normalizeQuestions(await LocalAI.generateQuiz(topic, count));
+    }
+
+    this.questions = questions.slice(0, count);
+    this.answers = {};
+    this.submitted = false;
+    this.render();
   },
-  render(){
-    const c=document.getElementById('quiz-questions');
-    if(!c)return;
-    c.innerHTML='';
-    this.questions.forEach((q,qi)=>{
-      const div=document.createElement('div');
-      div.className='card';
-      div.innerHTML=`<div style="font-weight:700;margin-bottom:12px">${qi+1}. ${q.question}</div>`;
-      q.options.forEach((opt,oi)=>{
-        div.innerHTML+=`<div class="quiz-option" data-qi="${qi}" data-oi="${oi}" onclick="Quiz.select(${qi},${oi})">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700">${String.fromCharCode(65+oi)}</span>
-          <span>${opt}</span>
-        </div>`;
+
+  render() {
+    const c = document.getElementById('quiz-questions');
+    if (!c) return;
+    c.innerHTML = '';
+
+    this.questions.forEach((q, qi) => {
+      const div = document.createElement('div');
+      div.className = 'card';
+
+      div.innerHTML = `<div style="font-weight:700;margin-bottom:12px">${qi + 1}. ${Utils.escapeHtml(q.question)}</div>`;
+
+      q.options.forEach((opt, oi) => {
+        div.innerHTML += `
+          <div class="quiz-option" data-qi="${qi}" data-oi="${oi}" onclick="Quiz.select(${qi},${oi})">
+            <span style="width:24px;height:24px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700">${String.fromCharCode(65 + oi)}</span>
+            <span>${Utils.escapeHtml(opt)}</span>
+          </div>
+        `;
       });
+
       c.appendChild(div);
     });
   },
-  select(qi,oi){
-    if(this.submitted)return;
-    this.answers[qi]=oi;
-    document.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(el=>{
+
+  select(qi, oi) {
+    if (this.submitted) return;
+    this.answers[qi] = oi;
+
+    document.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(el => {
       el.classList.remove('selected');
-      if(parseInt(el.dataset.oi)===oi)el.classList.add('selected');
+      if (parseInt(el.dataset.oi) === oi) el.classList.add('selected');
     });
   },
-  submit(){
-    const t=this.questions.length,a=Object.keys(this.answers).length;
-    if(a<t&&!confirm(`${t-a} بی‌پاسخ. ثبت؟`))return;
-    this.submitted=true;
-    let c=0;
-    this.questions.forEach((q,qi)=>{
-      const s=this.answers[qi],ok=s===q.correct;
-      if(ok)c++;
-      document.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(el=>{
-        const idx=parseInt(el.dataset.oi);
-        if(idx===q.correct)el.classList.add('correct');
-        if(idx===s&&!ok)el.classList.add('wrong');
-        el.style.cursor='default';
+
+  submit() {
+    const t = this.questions.length;
+    const a = Object.keys(this.answers).length;
+    if (a < t && !confirm(`${t - a} سوال بی‌پاسخ است. ثبت شود؟`)) return;
+
+    this.submitted = true;
+    let c = 0;
+
+    this.questions.forEach((q, qi) => {
+      const s = this.answers[qi];
+      const ok = s === q.correct;
+      if (ok) c++;
+
+      document.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(el => {
+        const idx = parseInt(el.dataset.oi);
+        if (idx === q.correct) el.classList.add('correct');
+        if (idx === s && !ok) el.classList.add('wrong');
+        el.style.cursor = 'default';
       });
     });
-    document.getElementById('quiz-active').style.display='none';
-    document.getElementById('quiz-result').style.display='block';
-    const pct=Math.round((c/t)*100);
-    document.getElementById('quiz-score').textContent=pct+'%';
-    document.getElementById('quiz-detail').textContent=`${c} از ${t} صحیح`;
-    Storage.put('quizzes',{id:Date.now(),topic:document.getElementById('quiz-topic').value.trim(),score:pct,total:t,correct:c,date:Date.now()});
-    document.getElementById('stat-quizzes').textContent=(parseInt(document.getElementById('stat-quizzes').textContent)||0)+1;
-    Toast.show(`نتیجه: ${pct}%`,pct>=70?'success':'warning');
+
+    document.getElementById('quiz-active').style.display = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+
+    const pct = Math.round((c / t) * 100);
+    document.getElementById('quiz-score').textContent = pct + '%';
+    document.getElementById('quiz-detail').textContent = `${c} از ${t} صحیح`;
+
+    Storage.put('quizzes', {
+      id: Date.now(),
+      topic: document.getElementById('quiz-topic').value.trim() || 'بدون موضوع',
+      score: pct,
+      total: t,
+      correct: c,
+      date: Date.now()
+    });
+
+    document.getElementById('stat-quizzes').textContent = (parseInt(document.getElementById('stat-quizzes').textContent) || 0) + 1;
+    Toast.show(`نتیجه: ${pct}%`, pct >= 70 ? 'success' : 'warning');
   },
-  reset(){
-    document.getElementById('quiz-result').style.display='none';
-    document.getElementById('quiz-setup').style.display='block';
-    document.getElementById('quiz-topic').value='';
+
+  reset() {
+    document.getElementById('quiz-result').style.display = 'none';
+    document.getElementById('quiz-setup').style.display = 'block';
+    document.getElementById('quiz-topic').value = '';
   }
 };
 
-// ===== FLASHCARDS =====
 const Flashcards = {
-  cards:[],currentIndex:0,
-  loadSample(){
-    this.cards=[
-      {front:'پایتخت فرانسه؟',back:'پاریس'},
-      {front:'بزرگ‌ترین سیاره؟',back:'مشتری'},
-      {front:'فرمول آب؟',back:'H₂O'},
-      {front:'شاعر شاهنامه؟',back:'فردوسی'},
-      {front:'واحد نیرو؟',back:'نیوتون'}
+  cards: [],
+  currentIndex: 0,
+
+  normalizeCards(arr) {
+    return (Array.isArray(arr) ? arr : []).map(c => ({
+      front: String(c.front || c.question || '').trim(),
+      back: String(c.back || c.answer || '').trim()
+    })).filter(c => c.front && c.back);
+  },
+
+  loadSample() {
+    this.cards = [
+      { front: 'پایتخت فرانسه؟', back: 'پاریس' },
+      { front: 'بزرگ‌ترین سیاره؟', back: 'مشتری' },
+      { front: 'فرمول آب؟', back: 'H₂O' },
+      { front: 'شاعر شاهنامه؟', back: 'فردوسی' },
+      { front: 'واحد نیرو؟', back: 'نیوتون' }
     ];
-    this.currentIndex=0;
-    document.getElementById('fc-setup').style.display='none';
-    document.getElementById('fc-active').style.display='block';
+
+    this.currentIndex = 0;
+    document.getElementById('fc-setup').style.display = 'none';
+    document.getElementById('fc-active').style.display = 'block';
     this.show();
-    Toast.show('فلش‌کارت نمونه بارگذاری شد','success');
+    Toast.show('فلش‌کارت نمونه بارگذاری شد', 'success');
   },
-  async generate(){
-    const topic=document.getElementById('fc-topic').value.trim();
-    if(!topic){Toast.show('موضوع را وارد کنید','warning');return;}
-    const cfg=await Storage.getConfig();
-    if(!cfg.apiKey){Toast.show('API Key لازم است','error');UI.nav('settings');return;}
-    
-    document.getElementById('fc-setup').style.display='none';
-    document.getElementById('fc-active').style.display='block';
-    document.getElementById('fc-front').textContent='در حال تولید...';
-    document.getElementById('fc-back').textContent='';
-    
-    try{
-      const prompt=`Generate 10 flashcards about "${topic}" in Persian. JSON only: [{"front":"","back":""}]`;
-      const apiUrl=cfg.proxy||'https://api.anthropic.com/v1/messages';
-      const headers={'Content-Type':'application/json'};
-      if(cfg.proxy)headers['Authorization']=`Bearer ${cfg.apiKey}`;
-      else{headers['x-api-key']=cfg.apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true';}
-      
-      const r=await fetch(apiUrl,{
-        method:'POST',headers,
-        signal:AbortSignal.timeout(30000),
-        body:JSON.stringify({model:cfg.model||'claude-3-5-sonnet-20241022',max_tokens:2000,messages:[{role:'user',content:prompt}]})
-      });
-      if(!r.ok)throw new Error('API');
-      const d=await r.json();
-      const text=d.choices?.[0]?.message?.content||d.content?.[0]?.text||'';
-      const jm=text.match(/\[[\s\S]*\]/);
-      if(!jm)throw new Error('JSON');
-      this.cards=JSON.parse(jm[0]);
-      this.currentIndex=0;
-      await Storage.put('flashcards',{id:Utils.uid(),topic,cards:this.cards,date:Date.now()});
-      this.show();
-    }catch(e){
-      document.getElementById('fc-setup').style.display='block';
-      document.getElementById('fc-active').style.display='none';
-      Toast.show('خطا در تولید','error');
+
+  async generate() {
+    const topic = document.getElementById('fc-topic').value.trim();
+    if (!topic) {
+      Toast.show('موضوع را وارد کنید', 'warning');
+      return;
     }
+
+    document.getElementById('fc-setup').style.display = 'none';
+    document.getElementById('fc-active').style.display = 'block';
+    document.getElementById('fc-front').textContent = 'در حال تولید...';
+    document.getElementById('fc-back').textContent = '';
+
+    let cards = null;
+    const cfg = await Storage.getConfig();
+
+    if (cfg.apiKey && cfg.model !== 'ostadyar') {
+      try {
+        const prompt = `Generate 10 flashcards in Persian about "${topic}". Return ONLY a JSON array: [{"front":"...","back":"..."}]`;
+        const data = await AI.json(prompt, { maxTokens: 2000 });
+        cards = this.normalizeCards(data);
+      } catch (e) {
+        console.warn('AI flashcards failed:', e);
+      }
+    }
+
+    if (!cards || !cards.length) {
+      cards = this.normalizeCards(await LocalAI.generateFlashcards(topic, 10));
+    }
+
+    this.cards = cards;
+    this.currentIndex = 0;
+
+    await Storage.put('flashcards', { id: Utils.uid(), topic, cards: this.cards, date: Date.now() });
+    this.show();
   },
-  show(){
-    const c=this.cards[this.currentIndex];
-    if(!c)return;
-    document.getElementById('fc-front').textContent=c.front;
-    document.getElementById('fc-back').textContent=c.back;
+
+  show() {
+    const c = this.cards[this.currentIndex];
+    if (!c) return;
+
+    document.getElementById('fc-front').textContent = c.front;
+    document.getElementById('fc-back').textContent = c.back;
     document.getElementById('fc-card').classList.remove('flipped');
-    document.getElementById('fc-counter').textContent=`کارت ${this.currentIndex+1} از ${this.cards.length}`;
+    document.getElementById('fc-counter').textContent = `کارت ${this.currentIndex + 1} از ${this.cards.length}`;
   },
-  flip(){document.getElementById('fc-card').classList.toggle('flipped')},
-  next(){if(this.currentIndex<this.cards.length-1){this.currentIndex++;this.show()}},
-  prev(){if(this.currentIndex>0){this.currentIndex--;this.show()}},
-  markEasy(){Toast.show('آسان ✓','success');this.next()},
-  markHard(){Toast.show('سخت ✗','warning');this.next()},
-  showSetup(){
-    document.getElementById('fc-active').style.display='none';
-    document.getElementById('fc-setup').style.display='block';
+
+  flip() {
+    document.getElementById('fc-card').classList.toggle('flipped');
+  },
+
+  next() {
+    if (this.currentIndex < this.cards.length - 1) {
+      this.currentIndex++;
+      this.show();
+    }
+  },
+
+  prev() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.show();
+    }
+  },
+
+  markEasy() {
+    Toast.show('آسان ✓', 'success');
+    this.next();
+  },
+
+  markHard() {
+    Toast.show('سخت ✗', 'warning');
+    this.next();
+  },
+
+  showSetup() {
+    document.getElementById('fc-active').style.display = 'none';
+    document.getElementById('fc-setup').style.display = 'block';
   }
 };
 
-// ===== BANK =====
 const Bank = {
-  data:[
-    {id:1,cat:'math',q:'حاصل ۲+۲×۲؟',a:'۶'},
-    {id:2,cat:'math',q:'مساحت دایره شعاع ۳؟',a:'۹π'},
-    {id:3,cat:'math',q:'√۱۴۴؟',a:'۱۲'},
-    {id:4,cat:'science',q:'واحد نیرو؟',a:'نیوتون'},
-    {id:5,cat:'science',q:'فرمول آب؟',a:'H₂O'},
-    {id:6,cat:'lit',q:'شاعر شاهنامه؟',a:'فردوسی'},
-    {id:7,cat:'history',q:'بنیان‌گذار هخامنشی؟',a:'کوروش'},
-    {id:8,cat:'lang',q:'معنی Knowledge؟',a:'دانش'}
-  ],
-  currentFilter:'all',
-  async init(){
-    const stored=await Storage.getAll('qa');
-    if(stored.length>5)this.data=stored.map(x=>({id:x.id,cat:x.cat||'general',q:x.q,a:x.a}));
-    const cats=['all',...new Set(this.data.map(q=>q.cat))];
-    const tags=document.getElementById('bank-tags');
-    if(tags){
-      tags.innerHTML=cats.map(c=>`<button class="btn" style="padding:6px 12px;font-size:.75rem;${c===this.currentFilter?'background:var(--primary);color:#fff':''}" onclick="Bank.setFilter('${c}',this)">${c==='all'?'همه':c}</button>`).join('');
+  data: [],
+  currentFilter: 'all',
+
+  async init() {
+    const stored = await Storage.getAll('qa');
+
+    if (stored.length) {
+      this.data = stored.filter(x => x.q && x.a).map(x => ({
+        id: x.id,
+        cat: x.cat || 'general',
+        q: x.q,
+        a: x.a
+      }));
+    } else {
+      this.data = [
+        { id: 1, cat: 'math', q: 'حاصل ۲+۲×۲؟', a: '۶' },
+        { id: 2, cat: 'math', q: 'مساحت دایره شعاع ۳؟', a: '۹π' },
+        { id: 3, cat: 'math', q: '√۱۴۴؟', a: '۱۲' },
+        { id: 4, cat: 'science', q: 'واحد نیرو؟', a: 'نیوتون' },
+        { id: 5, cat: 'science', q: 'فرمول آب؟', a: 'H₂O' },
+        { id: 6, cat: 'lit', q: 'شاعر شاهنامه؟', a: 'فردوسی' },
+        { id: 7, cat: 'history', q: 'بنیان‌گذار هخامنشی؟', a: 'کوروش' },
+        { id: 8, cat: 'lang', q: 'معنی Knowledge؟', a: 'دانش' }
+      ];
+    }
+
+    this.initTags();
+    this.render();
+  },
+
+  initTags() {
+    const cats = ['all', ...new Set(this.data.map(q => q.cat || 'general'))];
+    const tags = document.getElementById('bank-tags');
+    if (tags) {
+      tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentFilter ? 'background:var(--primary);color:#fff' : ''}" onclick="Bank.setFilter('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
+    }
+  },
+
+  setFilter(cat, el) {
+    this.currentFilter = cat;
+    document.querySelectorAll('#bank-tags .btn').forEach(b => {
+      b.style.background = 'var(--bg3)';
+      b.style.color = 'var(--text)';
+    });
+    if (el) {
+      el.style.background = 'var(--primary)';
+      el.style.color = '#fff';
     }
     this.render();
   },
-  setFilter(cat,el){
-    this.currentFilter=cat;
-    document.querySelectorAll('#bank-tags .btn').forEach(b=>{b.style.background='var(--bg3)';b.style.color='var(--text)'});
-    if(el){el.style.background='var(--primary)';el.style.color='#fff';}
+
+  async add() {
+    const q = document.getElementById('bank-q').value.trim();
+    const a = document.getElementById('bank-a').value.trim();
+    const cat = document.getElementById('bank-cat').value.trim() || 'general';
+
+    if (!q || !a) {
+      Toast.show('سوال و پاسخ را وارد کنید', 'warning');
+      return;
+    }
+
+    const item = { id: Utils.uid(), cat, q, a };
+    this.data.unshift(item);
+    await Storage.put('qa', item);
+
+    document.getElementById('bank-q').value = '';
+    document.getElementById('bank-a').value = '';
+    document.getElementById('bank-cat').value = '';
+
+    this.initTags();
     this.render();
+    Toast.show('سوال اضافه شد', 'success');
   },
-  render(){
-    const list=document.getElementById('bank-list');
-    const search=Utils.normalizeFa(document.getElementById('bank-search')?.value||'');
-    if(!list)return;
-    const filtered=this.data.filter(item=>{
-      const mc=this.currentFilter==='all'||item.cat===this.currentFilter;
-      const ms=Utils.normalizeFa(item.q).includes(search)||Utils.normalizeFa(item.a).includes(search);
-      return mc&&ms;
+
+  render() {
+    const list = document.getElementById('bank-list');
+    const search = Utils.normalizeFa(document.getElementById('bank-search')?.value || '');
+    if (!list) return;
+
+    const filtered = this.data.filter(item => {
+      const mc = this.currentFilter === 'all' || (item.cat || 'general') === this.currentFilter;
+      const ms = Utils.normalizeFa(item.q).includes(search) || Utils.normalizeFa(item.a).includes(search);
+      return mc && ms;
     });
-    list.innerHTML=filtered.slice(0,100).map(i=>`
-      <div style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer" onclick="this.querySelector('.bank-answer').style.display=this.querySelector('.bank-answer').style.display==='block'?'none':'block'">
-        <div style="font-weight:600">❓ ${i.q}</div>
-        <div class="bank-answer" style="display:none;margin-top:8px;padding:8px;background:rgba(99,102,241,.1);border-radius:8px;font-size:.9rem">✅ ${i.a}</div>
+
+    list.innerHTML = filtered.slice(0, 200).map(i => `
+      <div style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer"
+           onclick="this.querySelector('.bank-answer').style.display=this.querySelector('.bank-answer').style.display==='block'?'none':'block'">
+        <div style="font-weight:600">❓ ${Utils.escapeHtml(i.q)}</div>
+        <div class="bank-answer" style="display:none;margin-top:8px;padding:8px;background:rgba(99,102,241,.1);border-radius:8px;font-size:.9rem">
+          ✅ ${Utils.escapeHtml(i.a)}
+        </div>
       </div>
-    `).join('')||'<p style="text-align:center;color:var(--muted);padding:2rem">موردی یافت نشد</p>';
+    `).join('') || '<p style="text-align:center;color:var(--muted);padding:2rem">موردی یافت نشد</p>';
   }
 };
 
-// ===== SETTINGS =====
 const Settings = {
-  async init(){
-    const cfg=await Storage.getConfig();
-    if(cfg.apiKey)document.getElementById('api-key').value=cfg.apiKey;
-    if(cfg.proxy)document.getElementById('proxy-url').value=cfg.proxy;
-    if(cfg.model)document.getElementById('model-select').value=cfg.model;
-    if(cfg.imageToken)document.getElementById('image-token').value=cfg.imageToken;
-    if(cfg.firebaseConfig)document.getElementById('firebase-config').value=cfg.firebaseConfig;
+  async init() {
+    const cfg = await Storage.getConfig();
+
+    if (cfg.apiKey) document.getElementById('api-key').value = cfg.apiKey;
+    if (cfg.proxy) document.getElementById('proxy-url').value = cfg.proxy;
+    if (cfg.proxyFormat) document.getElementById('proxy-format').value = cfg.proxyFormat;
+    if (cfg.model) document.getElementById('model-select').value = cfg.model;
+    if (cfg.systemPrompt) document.getElementById('system-prompt').value = cfg.systemPrompt;
+    if (cfg.imageToken) document.getElementById('image-token').value = cfg.imageToken;
+    if (cfg.rtcConfig) document.getElementById('rtc-config').value = cfg.rtcConfig;
+    if (cfg.firebaseConfig) document.getElementById('firebase-config').value = cfg.firebaseConfig;
   },
-  async save(){
-    const cfg={
-      apiKey:document.getElementById('api-key').value.trim(),
-      proxy:document.getElementById('proxy-url').value.trim(),
-      model:document.getElementById('model-select').value,
-      imageToken:document.getElementById('image-token').value.trim(),
-      firebaseConfig:document.getElementById('firebase-config').value.trim()
+
+  async save() {
+    const cfg = {
+      apiKey: document.getElementById('api-key').value.trim(),
+      proxy: document.getElementById('proxy-url').value.trim(),
+      proxyFormat: document.getElementById('proxy-format').value,
+      model: document.getElementById('model-select').value,
+      systemPrompt: document.getElementById('system-prompt').value.trim(),
+      imageToken: document.getElementById('image-token').value.trim(),
+      rtcConfig: document.getElementById('rtc-config').value.trim(),
+      firebaseConfig: document.getElementById('firebase-config').value.trim()
     };
+
     await Storage.saveSettings(cfg);
-    Toast.show('تنظیمات ذخیره شد','success');
+
+    if (cfg.rtcConfig) {
+      try {
+        Classroom.rtcConfig = JSON.parse(cfg.rtcConfig);
+      } catch (e) {
+        Toast.show('RTC JSON نامعتبر است', 'error');
+      }
+    }
+
+    Toast.show('تنظیمات ذخیره شد', 'success');
+  },
+
+  async clearAll() {
+    if (!confirm('همه داده‌های محلی پاک شود؟')) return;
+    indexedDB.deleteDatabase('OstadYarDB_v100');
+    location.reload();
   }
 };
 
-// ===== UI =====
 const UI = {
-  currentView:'home',
-  nav(view,el){
-    this.currentView=view;
-    document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});
-    const target=document.getElementById(`view-${view}`);
-    if(target){
-      target.style.display=view==='chat'?'flex':'block';
+  currentView: 'home',
+
+  nav(view, el) {
+    this.currentView = view;
+
+    document.querySelectorAll('.view').forEach(v => {
+      v.classList.remove('active');
+      v.style.display = 'none';
+    });
+
+    const target = document.getElementById(`view-${view}`);
+    if (target) {
+      target.style.display = view === 'chat' ? 'flex' : 'block';
       target.classList.add('active');
     }
-    document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b=>b.classList.remove('active'));
-    if(el)el.classList.add('active');
-    const titles={home:'داشبورد',chat:'گفتگو',classroom:'کلاس مجازی',facts:'دانستنی',quiz:'آزمون',flashcards:'فلش‌کارت',bank:'بانک سوالات',tools:'جعبه ابزار',settings:'تنظیمات'};
-    document.getElementById('page-title').textContent=titles[view]||'استاد یار پلاس';
-    
-    if(view==='tools')setTimeout(()=>ToolsWB.init(),100);
-    if(view==='facts')Facts.render();
-    if(view==='bank')Bank.render();
-    
+
+    document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b => b.classList.remove('active'));
+
+    if (el) {
+      el.classList.add('active');
+    } else {
+      document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b => {
+        const onclick = b.getAttribute('onclick') || '';
+        if (onclick.includes(`UI.nav('${view}'`)) b.classList.add('active');
+      });
+    }
+
+    const titles = {
+      home: 'داشبورد',
+      chat: 'گفتگو',
+      classroom: 'کلاس مجازی',
+      facts: 'دانستنی',
+      quiz: 'آزمون',
+      flashcards: 'فلش‌کارت',
+      bank: 'بانک سوالات',
+      tools: 'جعبه ابزار',
+      settings: 'تنظیمات'
+    };
+
+    document.getElementById('page-title').textContent = titles[view] || 'استاد یار پلاس';
+
+    if (view === 'tools') setTimeout(() => ToolsWB.init(), 100);
+    if (view === 'facts') Facts.render();
+    if (view === 'bank') Bank.render();
+
     this.toggleSidebar(false);
   },
-  toggleSidebar(show){
-    const sb=document.getElementById('sidebar');
-    if(window.innerWidth<=768){
-      if(show===undefined)sb.classList.toggle('open');
-      else if(show)sb.classList.add('open');
+
+  toggleSidebar(show) {
+    const sb = document.getElementById('sidebar');
+    if (window.innerWidth <= 768) {
+      if (show === undefined) sb.classList.toggle('open');
+      else if (show) sb.classList.add('open');
       else sb.classList.remove('open');
     }
   },
-  filterChats(query){
-    const q=Utils.normalizeFa(query);
-    document.querySelectorAll('#chat-list > div').forEach(el=>{
-      const text=Utils.normalizeFa(el.textContent);
-      el.style.display=text.includes(q)?'':'none';
+
+  filterChats(query) {
+    const q = Utils.normalizeFa(query);
+    document.querySelectorAll('#chat-list > div').forEach(el => {
+      const text = Utils.normalizeFa(el.textContent);
+      el.style.display = text.includes(q) ? '' : 'none';
     });
   },
-  renderQuickLinks(){
-    const links=[
-      {title:'دیجی‌کالا',url:'https://www.digikala.com'},
-      {title:'ترب',url:'https://torob.com'},
-      {title:'باسلام',url:'https://basalam.com'},
-      {title:'دیوار',url:'https://divar.ir'},
-      {title:'ویکی‌پدیا',url:'https://fa.wikipedia.org'}
+
+  renderQuickLinks() {
+    const links = [
+      { title: 'دیجی‌کالا', url: 'https://www.digikala.com' },
+      { title: 'ترب', url: 'https://torob.com' },
+      { title: 'باسلام', url: 'https://basalam.com' },
+      { title: 'دیوار', url: 'https://divar.ir' },
+      { title: 'ویکی‌پدیا', url: 'https://fa.wikipedia.org' }
     ];
-    const el=document.getElementById('quick-links');
-    if(el){
-      el.innerHTML=links.map(l=>`<a href="${l.url}" target="_blank" style="padding:8px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:.85rem;transition:.2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">${l.title}</a>`).join('');
+
+    const el = document.getElementById('quick-links');
+    if (el) {
+      el.innerHTML = links.map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer" style="padding:8px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:.85rem;transition:.2s" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">${l.title}</a>`).join('');
     }
   }
 };
 
-// ===== INIT =====
-document.addEventListener('DOMContentLoaded',async()=>{
-  try{
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
     await Storage.init();
     await KnowledgeDB.seed();
     await Chat.init();
     await Facts.init();
     await Bank.init();
     await Settings.init();
-    
+
     UI.renderQuickLinks();
-    document.getElementById('stat-chats').textContent=Chat.sessions.length;
-    
-    // Check URL params for classroom
-    const params=new URLSearchParams(location.search);
-    const classId=params.get('class');
-    const role=params.get('role');
-    if(classId){
-      UI.nav('classroom');
-      Classroom.classId=classId;
-      Classroom.isTeacher=role==='teacher';
-      document.getElementById('classroom-lobby').style.display='none';
-      document.getElementById('classroom-active').style.display='block';
-      await Classroom.startMedia();
-      Classroom.initPeer();
-      Toast.show('به کلاس پیوستید','success');
+
+    document.getElementById('stat-chats').textContent = Chat.sessions.length;
+    document.getElementById('stat-quizzes').textContent = (await Storage.getAll('quizzes')).length;
+
+    const cfg = await Storage.getConfig();
+    if (cfg.rtcConfig) {
+      try { Classroom.rtcConfig = JSON.parse(cfg.rtcConfig); } catch (e) { }
     }
-    
-    // Mobile menu button
-    if(window.innerWidth<=768){
-      document.getElementById('menu-btn').style.display='flex';
-    }
-    window.addEventListener('resize',()=>{
-      document.getElementById('menu-btn').style.display=window.innerWidth<=768?'flex':'none';
+
+    const chatInput = document.getElementById('chat-input');
+    chatInput.addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
     });
-    
-    Toast.show('🚀 استاد یار پلاس v100.7 آماده است!','success');
-  }catch(e){
-    console.error('Init error:',e);
-    Toast.show('خطا در راه‌اندازی: '+e.message,'error');
+
+    const params = new URLSearchParams(location.search);
+    const classId = params.get('class');
+    const role = params.get('role');
+
+    if (classId) {
+      UI.nav('classroom');
+
+      Classroom.classId = classId;
+      Classroom.isTeacher = role === 'teacher';
+      Classroom.className = params.get('class_name') || '';
+      Classroom.teacherName = params.get('teacher') || (Classroom.isTeacher ? (params.get('name') || 'معلم') : 'معلم');
+      Classroom.displayName = params.get('name') || (Classroom.isTeacher ? Classroom.teacherName : 'دانش‌آموز');
+
+      document.getElementById('class-name').value = Classroom.className;
+      document.getElementById('class-teacher').value = Classroom.teacherName;
+      document.getElementById('class-display-name').value = Classroom.displayName;
+      document.getElementById('class-code').value = classId;
+
+      await Classroom.enterRoom();
+      Toast.show(Classroom.isTeacher ? 'کلاس از لینک معلم باز شد' : 'به کلاس پیوستید', 'success');
+    }
+
+    if (window.innerWidth <= 768) {
+      document.getElementById('menu-btn').style.display = 'flex';
+    }
+
+    window.addEventListener('resize', () => {
+      document.getElementById('menu-btn').style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+    });
+
+    Toast.show('🚀 استاد یار پلاس v100.8 آماده است!', 'success');
+  } catch (e) {
+    console.error('Init error:', e);
+    Toast.show('خطا در راه‌اندازی: ' + e.message, 'error');
   }
 });
 </script>
