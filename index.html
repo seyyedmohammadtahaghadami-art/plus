@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>استاد یار | v80 Ultimate Final</title>
+<title>استاد یار | v80.3.1 Ultimate</title>
 <meta name="theme-color" content="#6366f1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoi2KzZhSDYqtin2YrZhCIsInNob3J0X25hbWUiOiJPc3RhZFlhciIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzYzNjZmMSIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2ltZy5pY29uczguY29tL2ZsdWVuY3kvMjU2L3BsYXN0aWMucG5nIiwic2l6ZXMiOiIyNTZ4MjU2IiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<!-- FIX #1: Defer heavy libraries -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<!-- Core AI Libraries -->
-<script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js" defer></script>
+<!-- Tesseract loaded lazily in JS -->
 
 <style>
 :root {
@@ -54,7 +54,7 @@ aside { width: 280px; height: 100%; background: var(--bg-sidebar); border-inline
 main { flex: 1; position: relative; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
 header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg-glass); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; position: relative; }
 
-/* DOWNLOAD PROGRESS BAR V80 */
+/* DOWNLOAD PROGRESS BAR V80.3.1 */
 #download-progress-wrapper { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); border-top: 1px solid var(--border); padding: 12px 16px; display: none; flex-direction: column; gap: 8px; z-index: 100; animation: slideUp 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); }
 .progress-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-main); font-weight: 600; }
 .progress-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
@@ -93,7 +93,7 @@ textarea { flex: 1; background: transparent; border: none; color: var(--text-mai
 
 .card { background: var(--bg-glass); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem; transition: 0.3s; }
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; padding: 1rem; }
-.home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; padding: 1.2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+.home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; padding: 1.2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
 .stat-value { font-size: 2rem; font-weight: 900; color: var(--primary); }
 .stat-label { color: var(--text-muted); font-size: 0.85rem; }
 .section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--accent); display: flex; align-items: center; gap: 8px; }
@@ -154,6 +154,7 @@ textarea { flex: 1; background: transparent; border: none; color: var(--text-mai
 #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 20000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: 90%; max-width: 400px; }
 .toast { background: var(--bg-sidebar); border: 1px solid var(--border); padding: 10px 18px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); pointer-events: auto; backdrop-filter: blur(10px); animation: slideUp 0.3s ease; font-size: 0.9rem; border-inline-start: 4px solid var(--success); }
 
+/* FIX: Context Menu Smart Positioning */
 .ctx-menu { position: fixed; background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: var(--radius-md); min-width: 220px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 99998; display: none; flex-direction: column; overflow: hidden; backdrop-filter: blur(12px); }
 .ctx-menu.open { display: flex; animation: ctxFadeIn 0.15s ease-out; }
 @keyframes ctxFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
@@ -191,7 +192,7 @@ aside.mobile-open { transform: translateY(0); }
 .nav-desktop { display: none; }
 main { padding-bottom: calc(var(--nav-height) + var(--safe-bottom)); }
 .input-zone { padding-bottom: calc(0.8rem + var(--safe-bottom)); }
-.home-grid { padding: 0.8rem; gap: 0.8rem; grid-template-columns: 1fr 1fr; }
+.home-grid { padding: 0.8rem; gap: 0.8rem; grid-template-columns: repeat(2, 1fr); }
 .message { max-width: 95%; }
 .wb-container { height: 280px; }
 .quiz-container { margin: 0.8rem auto; padding: 0 0.8rem; }
@@ -279,7 +280,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<!-- DOWNLOAD PROGRESS UI V80 -->
+<!-- DOWNLOAD PROGRESS UI V80.3.1 -->
 <div id="download-progress-wrapper">
     <div class="progress-header">
         <span id="dl-status-text" data-i18n="dl_preparing">در حال آماده‌سازی...</span>
@@ -291,6 +292,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </header>
 
+<!-- CONTEXT MENU V80.3.1 (Smart Positioning) -->
 <div class="ctx-menu" id="ctx-menu">
 <button class="ctx-item" onclick="Chat.exportJSON(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> <span data-i18n="ctx_export">خروجی JSON</span></button>
 <button class="ctx-item" onclick="window.print(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-4h8v2zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg> <span data-i18n="ctx_print">چاپ / PDF</span></button>
@@ -502,7 +504,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div class="about-container">
 <div class="about-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
 <h1 class="about-title" data-i18n="app_name">استاد یار پلاس</h1>
-<span class="about-version">نسخه 80.0 Ultimate Final</span>
+<span class="about-version">نسخه 80.3.1 Ultimate</span>
 <p class="about-desc" data-i18n="about_desc">نسخه نهایی و پایدار با رفع کامل مشکلات فنی.</p>
 <div class="about-links">
 <a href="#" class="about-link" data-i18n="about_github">گیت‌هاب</a>
@@ -522,7 +524,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<div class="app-footer">استاد یار پلاس v80.0 | طراحی شده برای آموزش هوشمند</div>
+<div class="app-footer">استاد یار پلاس v80.3.1 | طراحی شده برای آموزش هوشمند</div>
 
 <div class="mobile-nav">
 <button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> <span data-i18n="nav_home">خانه</span></button>
@@ -578,7 +580,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 
 <script>
 // ============================================================
-// TRANSLATIONS V80
+// TRANSLATIONS V80.3.1
 // ============================================================
 const I18N = {
     fa: {
@@ -641,13 +643,12 @@ const I18N = {
 };
 
 // ============================================================
-// TRANSFORMERS.JS BACKEND V80 (FIXED DOWNLOAD)
+// TRANSFORMERS.JS BACKEND V80.3.1 (FIXED DOWNLOAD & ABORT)
 // ============================================================
 const TransformersAI = {
     pipeline: null,
     isLoaded: false,
     isLoading: false,
-    abortController: null,
     modelName: 'Xenova/t5-small',
 
     async downloadSelectedModel() {
@@ -655,6 +656,7 @@ const TransformersAI = {
         if(!select) return;
         const newModel = select.value;
         
+        // Prevent double init
         if(this.isLoading) {
             Toast.show('یک دانلود در حال انجام است', 'warning');
             return;
@@ -677,9 +679,9 @@ const TransformersAI = {
         await this.init();
     },
 
+    // FIX: Manual Abort without relying on unsupported signal
     abortDownload() {
-        if(this.abortController) {
-            this.abortController.abort();
+        if(this.isLoading) {
             this.isLoading = false;
             this.pipeline = null;
             document.getElementById('download-progress-wrapper').style.display = 'none';
@@ -693,14 +695,16 @@ const TransformersAI = {
         
         try {
             this.isLoading = true;
-            this.abortController = new AbortController();
             
             if (typeof transformers === 'undefined') throw new Error('Transformers.js library not loaded');
 
-            // FIX: Removed unsupported 'signal' parameter from pipeline options
+            // FIX: Removed 'signal' parameter which caused crashes in v2.15.0
+            // Abort is handled by checking isLoading flag in callback
             this.pipeline = await transformers.pipeline('text2text-generation', this.modelName, {
                 progress_callback: (data) => {
+                    // Check if aborted manually
                     if (!this.isLoading) return; 
+                    
                     const bar = document.getElementById('dl-progress-bar');
                     const status = document.getElementById('dl-status-text');
                     
@@ -715,6 +719,12 @@ const TransformersAI = {
                     }
                 }
             });
+
+            // Double check abort before marking as loaded
+            if (!this.isLoading) {
+                this.pipeline = null;
+                return;
+            }
 
             this.isLoaded = true;
             this.isLoading = false;
@@ -733,7 +743,7 @@ const TransformersAI = {
             this.pipeline = null;
             document.getElementById('download-progress-wrapper').style.display = 'none';
             UI.updateAIStatus('inactive', 'خطا در بارگذاری');
-            if(e.name !== 'AbortError') Toast.show('خطا در دانلود مدل', 'error');
+            Toast.show('خطا در دانلود مدل: ' + e.message, 'error');
         }
     },
 
@@ -862,7 +872,7 @@ const QuestionBank = {
 const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
 // ============================================================
-// CHAT ENGINE V80 (FIXED SEARCH & SECURITY)
+// CHAT ENGINE V80.3.1
 // ============================================================
 const PURIFY_CONFIG = {
     ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'i', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span'],
@@ -904,18 +914,27 @@ const Chat = {
         reader.onload=e=>{this.pendingFile={name:file.name,dataUrl:e.target.result};Toast.show('تصویر پیوست شد','success');};
         reader.readAsDataURL(file);
         
-        if(typeof Tesseract !== 'undefined') {
-            try {
-                const worker = await Tesseract.createWorker('fas+eng');
-                const {data:{text}} = await worker.recognize(file);
-                await worker.terminate();
-                if(text.trim()) document.getElementById('user-input').value = text.trim();
-            } catch(e){
-                console.warn('OCR failed',e);
-                Toast.show('OCR در دسترس نیست', 'warning');
-            }
+        // Lazy Load Tesseract
+        if(typeof Tesseract === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+            script.onload = () => this.processOCR(file);
+            document.head.appendChild(script);
+        } else {
+            this.processOCR(file);
         }
         input.value='';
+    },
+    async processOCR(file) {
+        try {
+            const worker = await Tesseract.createWorker('fas+eng');
+            const {data:{text}} = await worker.recognize(file);
+            await worker.terminate();
+            if(text.trim()) document.getElementById('user-input').value = text.trim();
+        } catch(e){
+            console.warn('OCR failed',e);
+            Toast.show('OCR در دسترس نیست', 'warning');
+        }
     },
     async send(){
         if(this.isProcessing)return;
@@ -929,7 +948,6 @@ const Chat = {
         let res = '';
         const mode = document.getElementById('ai-mode-select').value;
         
-        // FIXED REAL SEARCH V80
         if(mode === 'search') {
             this.history.push({role:'assistant',content:'🔍 در حال جستجو...'});
             this.render();
@@ -1142,7 +1160,7 @@ const Flashcards={
 const Planner={tasks:[],async init(){this.tasks=await Storage.getAll('tasks');this.render();},async add(){const inp=document.getElementById('task-input'),date=document.getElementById('task-date'),text=inp.value.trim();if(!text)return;const task={id:Date.now(),text,date:date.value||'',done:false};this.tasks.push(task);await Storage.put('tasks',task);inp.value='';this.render();},async toggle(id){const t=this.tasks.find(x=>x.id===id);if(t){t.done=!t.done;await Storage.put('tasks',t);this.render();}},async delete(id){this.tasks=this.tasks.filter(t=>t.id!==id);await Storage.delete('tasks',id);this.render();},render(){const c=document.getElementById('planner-list');if(!c)return;c.innerHTML=this.tasks.sort((a,b)=>a.done-b.done).map(t=>`<div class="task-item ${t.done?'completed':''}"><div class="task-check" onclick="Planner.toggle(${t.id})">${t.done?'✓':''}</div><div style="flex:1;">${t.text}</div><button class="btn" style="background:none;color:var(--danger);padding:4px;" onclick="Planner.delete(${t.id})">✕</button></div>`).join('');}};
 
 // ============================================================
-// POMODORO V80
+// POMODORO V80.3.1
 // ============================================================
 const Pomodoro = {
     seconds: 25*60, running: false, isBreak: false, timer: null, lastTick: 0,
@@ -1192,7 +1210,7 @@ const Pomodoro = {
 };
 
 // ============================================================
-// WHITEBOARD V80 (RETINA READY)
+// WHITEBOARD V80.3.1 (RETINA READY)
 // ============================================================
 const WB = {
     cvs:null,ctx:null,drawing:false,tool:'pen',color:'#ffffff',hist:[],
@@ -1227,7 +1245,7 @@ const WB = {
 };
 
 // ============================================================
-// UI CONTROLLER V80
+// UI CONTROLLER V80.3.1 (SMART CONTEXT MENU)
 // ============================================================
 const UI = {
     nav(view,el){
@@ -1253,7 +1271,43 @@ const UI = {
     async updateStats(){const chats=Chat.sessions.length;document.getElementById('stat-chats').textContent=chats;const quizzes=await Storage.getAll('quizzes');document.getElementById('stat-quizzes').textContent=quizzes.length;const tasks=await Storage.getAll('tasks');document.getElementById('stat-tasks').textContent=tasks.length;},
     renderChart(){const c=document.getElementById('chart');if(!c)return;if(window._ch)window._ch.destroy();window._ch=new Chart(c,{type:'bar',data:{labels:['ش','ی','د','س','چ','پ','ج'],datasets:[{data:[5,8,6,9,4,7,3],backgroundColor:'#6366f1',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{display:false},x:{grid:{display:false}}}}});},
     toggleSidebar(forceClose){const sb=document.getElementById('sidebar');if(window.innerWidth<=768){if(forceClose)sb.classList.remove('mobile-open');else sb.classList.toggle('mobile-open');}},
-    toggleContextMenu(e){e.stopPropagation();const menu=document.getElementById('ctx-menu');const rect=e.currentTarget.getBoundingClientRect();menu.style.top=`${rect.bottom+5}px`;menu.style.left=`${rect.left-180}px`;menu.classList.toggle('open');},
+    
+    // FIX: Smart Context Menu Positioning
+    toggleContextMenu(e){
+        e.stopPropagation();
+        const menu=document.getElementById('ctx-menu');
+        const btn=document.getElementById('ctx-toggle');
+        const rect=btn.getBoundingClientRect();
+        
+        // Calculate available space
+        const menuWidth = 220;
+        const menuHeight = 250; // Approximate
+        const winWidth = window.innerWidth;
+        const winHeight = window.innerHeight;
+        
+        let top = rect.bottom + 5;
+        let left = rect.left;
+        
+        // Adjust for RTL/LTR
+        const isRTL = document.documentElement.dir === 'rtl';
+        if (isRTL) {
+            left = rect.right - menuWidth;
+        }
+        
+        // Boundary Checks
+        if (left < 10) left = 10;
+        if (left + menuWidth > winWidth - 10) left = winWidth - menuWidth - 10;
+        
+        // Vertical Flip if needed
+        if (top + menuHeight > winHeight - 10) {
+            top = rect.top - menuHeight - 5;
+        }
+        
+        menu.style.top=`${top}px`;
+        menu.style.left=`${left}px`;
+        menu.style.right='auto';
+        menu.classList.toggle('open');
+    },
     closeContextMenu(){document.getElementById('ctx-menu').classList.remove('open');},
     openSettings(){document.getElementById('settings-modal').classList.add('open');this.toggleSidebar(true);},
     closeSettings(){document.getElementById('settings-modal').classList.remove('open');},
@@ -1280,7 +1334,7 @@ const UI = {
 };
 
 // ============================================================
-// STORAGE HELPER V80
+// STORAGE HELPER V80.3.1
 // ============================================================
 const Storage = {
     db: null,
@@ -1329,7 +1383,7 @@ const Profile = {
 const Toast = { show(msg, type='info') { const c=document.getElementById('toast-container'); const t=document.createElement('div'); t.className='toast'; t.style.borderInlineStartColor=type==='error'?'var(--danger)':type==='success'?'var(--success)':'var(--info)'; t.innerHTML=`<span>${msg}</span>`; c.appendChild(t); setTimeout(()=>t.remove(), 3000); } };
 
 // ============================================================
-// INITIALIZATION V80
+// INITIALIZATION V80.3.1
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
     await Storage.init();
@@ -1367,9 +1421,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 150) + 'px'; });
     ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Chat.send(); } });
     
-    document.addEventListener('click', e => { if (!e.target.closest('#ctx-toggle') && !e.target.closest('#ctx-menu')) UI.closeContextMenu(); });
+    // Global click to close context menu
+    document.addEventListener('click', e => { 
+        if (!e.target.closest('#ctx-toggle') && !e.target.closest('#ctx-menu')) UI.closeContextMenu(); 
+    });
     
-    Toast.show('🚀 استاد یار پلاس v80 آماده است!', 'success');
+    Toast.show('🚀 استاد یار پلاس v80.3.1 آماده است!', 'success');
 });
 </script>
 </body>
