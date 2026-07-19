@@ -133,7 +133,7 @@ textarea{flex:1;background:transparent;border:none;color:var(--text-main);resize
 .fc-back{transform:rotateY(180deg);background:var(--msg-user);color:var(--primary);font-weight:800}
 .task-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-glass);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:6px;transition:.2s}
 .task-item.completed{opacity:.5;text-decoration:line-through}
-.task-check{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.task-check{width:20px;height:20px;border-radius:4px;border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .task-item.completed .task-check{background:var(--success);border-color:var(--success);color:#fff}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);z-index:99999;display:none;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.open{display:flex;animation:fadeIn .2s}
@@ -189,8 +189,6 @@ textarea{flex:1;background:transparent;border:none;color:var(--text-main);resize
 .quick-links{display:flex;gap:8px;flex-wrap:wrap}
 .quick-link{padding:8px 12px;border-radius:12px;background:var(--bg-input);border:1px solid var(--border);color:var(--text-main);text-decoration:none;font-size:.82rem;transition:.2s}
 .quick-link:hover{border-color:var(--primary);color:var(--primary)}
-.persona-chip{padding:6px 12px;border-radius:999px;background:var(--bg-input);border:1px solid var(--border);cursor:pointer;font-size:.8rem}
-.persona-chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 @media (max-width:768px){
   body{flex-direction:column}
   aside{position:fixed;bottom:0;left:0;right:0;top:0;width:100%;height:100%;transform:translateY(100%);z-index:5000;border-left:none}
@@ -3012,7 +3010,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     };
 
     document.getElementById('header-model-select').addEventListener('change', syncModel);
-    document.getElementById('ai-model-select').addEventListener('change', syncModel);
+    document.getElementById('ai-mode-select').addEventListener('change', syncModel);
 
     await Chat.init();
     await Planner.init();
@@ -3059,4 +3057,4 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 });
 </script>
 </body>
-        </html>
+  </html>
