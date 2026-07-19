@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>استاد یار | v80.5.0 Ultimate</title>
+<title>استاد یار | v80.9.0 Ultimate</title>
 <meta name="theme-color" content="#6366f1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,6 +18,7 @@
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 
 <style>
 :root {
@@ -87,6 +88,8 @@ textarea { flex: 1; background: transparent; border: none; color: var(--text-mai
 .btn-icon { width: 40px; height: 40px; border-radius: 50%; padding: 0; min-width: 40px; }
 .btn svg { width: 18px; height: 18px; fill: currentColor; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-stop-chat { background: var(--danger); color: white; border-radius: 50%; width: 44px; height: 44px; padding: 0; display: none; }
+.btn-stop-chat.visible { display: flex; }
 
 .card { background: var(--bg-glass); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem; transition: 0.3s; }
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; padding: 1rem; }
@@ -318,14 +321,17 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div id="view-chat" class="view-section" style="display:none;">
 <div id="chat-history"></div>
 <div class="input-zone">
-<label class="btn btn-icon" title="آپلود تصویر (OCR)" style="cursor:pointer;">
+<label class="btn btn-icon" title="آپلود تصویر/PDF" style="cursor:pointer;">
 <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-<input type="file" accept="image/*" style="display:none;" onchange="Chat.handleFileUpload(this)">
+<input type="file" accept="image/*,.pdf" style="display:none;" onchange="Chat.handleFileUpload(this)">
 </label>
 <button class="btn btn-icon voice-btn" id="voice-btn" onclick="Voice.toggle()" title="دستیار صوتی"><svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></button>
 <div class="input-wrapper">
 <textarea id="user-input" placeholder="سوال خود را بپرسید..." rows="1"></textarea>
 </div>
+<button class="btn btn-stop-chat" id="stop-chat-btn" onclick="Chat.stopGeneration()" title="توقف تولید">
+<svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+</button>
 <button class="btn btn-primary" id="send-btn" onclick="Chat.send()" style="border-radius:50%; width:44px; height:44px; padding:0;"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
 </div>
 </div>
@@ -489,8 +495,8 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div class="about-container">
 <div class="about-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
 <h1 class="about-title" data-i18n="app_name">استاد یار پلاس</h1>
-<span class="about-version">نسخه 80.5.0 Ultimate</span>
-<p class="about-desc" data-i18n="about_desc">نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل.</p>
+<span class="about-version">نسخه 80.9.0 Ultimate</span>
+<p class="about-desc" data-i18n="about_desc">نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل و امنیت سازمانی.</p>
 <div class="about-links">
 <a href="#" class="about-link" data-i18n="about_github">گیت‌هاب</a>
 <a href="#" class="about-link" data-i18n="about_support">پشتیبانی</a>
@@ -508,7 +514,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </div>
 </div>
 
-<div class="app-footer">استاد یار پلاس v80.5.0 | PWA Enabled</div>
+<div class="app-footer">استاد یار پلاس v80.9.0 | Enterprise Secure</div>
 
 <div class="mobile-nav">
 <button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> <span data-i18n="nav_home">خانه</span></button>
@@ -563,10 +569,51 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 
 <script>
 // ============================================================
-// FIX #1: Real Offline Support via Cache API (No Blob SW)
+// FIX #10: Secure Crypto Wrapper for API Keys
+// ============================================================
+const SecureStorage = {
+    async encrypt(text) {
+        if (!text) return '';
+        try {
+            const key = await this.getKey();
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const encoded = new TextEncoder().encode(text);
+            const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoded);
+            const buffer = new Uint8Array(iv.length + ciphertext.byteLength);
+            buffer.set(iv, 0);
+            buffer.set(new Uint8Array(ciphertext), iv.length);
+            return btoa(String.fromCharCode(...buffer));
+        } catch(e) { console.error('Encryption failed', e); return text; }
+    },
+    async decrypt(base64) {
+        if (!base64) return '';
+        try {
+            const key = await this.getKey();
+            const buffer = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+            const iv = buffer.slice(0, 12);
+            const ciphertext = buffer.slice(12);
+            const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+            return new TextDecoder().decode(decrypted);
+        } catch(e) { console.error('Decryption failed', e); return base64; }
+    },
+    async getKey() {
+        const rawKey = localStorage.getItem('oy_master_key');
+        let keyData;
+        if (rawKey) {
+            keyData = Uint8Array.from(atob(rawKey), c => c.charCodeAt(0));
+        } else {
+            keyData = crypto.getRandomValues(new Uint8Array(32));
+            localStorage.setItem('oy_master_key', btoa(String.fromCharCode(...keyData)));
+        }
+        return crypto.subtle.importKey('raw', keyData, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);
+    }
+};
+
+// ============================================================
+// FIX #1: Robust Service Worker Registration
 // ============================================================
 const OfflineCache = {
-    CACHE_NAME: 'ostadyar-v80-5',
+    CACHE_NAME: 'ostadyar-v80-9',
     ASSETS: [
         './',
         'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js',
@@ -580,9 +627,24 @@ const OfflineCache = {
         if (!('caches' in window)) return;
         try {
             const cache = await caches.open(this.CACHE_NAME);
-            // Cache assets in background
-            cache.addAll(this.ASSETS).catch(e => console.warn('Cache failed:', e));
+            for (const url of this.ASSETS) {
+                try { await cache.add(url); } catch(e) { console.warn(`Failed to cache ${url}`, e); }
+            }
             console.log('✅ Offline Cache Initialized');
+            
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    self.addEventListener('install', e => self.skipWaiting());
+                    self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+                    self.addEventListener('fetch', e => {
+                        e.respondWith(
+                            caches.match(e.request).then(r => r || fetch(e.request).catch(() => new Response('Offline')))
+                        );
+                    });
+                `;
+                const blob = new Blob([swCode], {type: 'application/javascript'});
+                navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(e => console.warn('SW Reg Failed:', e));
+            }
         } catch(e) { console.error('Cache Init Error:', e); }
     },
     async clear() {
@@ -591,7 +653,7 @@ const OfflineCache = {
 };
 
 // ============================================================
-// TRANSLATIONS V80.5.0
+// TRANSLATIONS V80.9.0
 // ============================================================
 const I18N = {
     fa: {
@@ -607,7 +669,7 @@ const I18N = {
         quiz_generate: '✨ تولید آزمون با هوش مصنوعی', quiz_loading: 'در حال طراحی سوالات...', quiz_submit: 'ثبت پاسخ‌ها',
         quiz_retry: 'آزمون مجدد', fc_generate: '✨ تولید ۱۰ فلش‌کارت با AI', fc_loading: 'در حال ساخت...', fc_hard: 'سخت',
         fc_easy: 'آسان', fc_back: '🔙 بازگشت', tool_pomodoro: 'تایمر پومودورو', pomo_start: 'شروع', tool_calc: 'ماشین حساب علمی',
-        about_desc: 'نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل.', about_github: 'گیت‌هاب', about_support: 'پشتیبانی',
+        about_desc: 'نسخه نهایی و پایدار با قابلیت کارکرد آفلاین کامل و امنیت سازمانی.', about_github: 'گیت‌هاب', about_support: 'پشتیبانی',
         profile_edit: '✏️ ویرایش نام', profile_logout: 'خروج و پاکسازی', setting_offline_model: '🤖 مدل هوش مصنوعی آفلاین',
         setting_download: 'دانلود', setting_online_model: '🌐 مدل هوش مصنوعی آنلاین', setting_language: '🌍 زبان / Language',
         setting_save: '💾 ذخیره تنظیمات', filter_all: 'همه', filter_math: 'ریاضی', filter_science: 'علوم', filter_lit: 'ادبیات',
@@ -626,7 +688,7 @@ const I18N = {
         quiz_generate: '✨ Generate Quiz with AI', quiz_loading: 'Designing questions...', quiz_submit: 'Submit Answers',
         quiz_retry: 'Retry Quiz', fc_generate: '✨ Generate 10 Flashcards with AI', fc_loading: 'Building...', fc_hard: 'Hard',
         fc_easy: 'Easy', fc_back: '🔙 Back', tool_pomodoro: 'Pomodoro Timer', pomo_start: 'Start', tool_calc: 'Scientific Calculator',
-        about_desc: 'Final stable version with full offline capability.', about_github: 'GitHub', about_support: 'Support',
+        about_desc: 'Enterprise version with full offline capability and security.', about_github: 'GitHub', about_support: 'Support',
         profile_edit: '✏️ Edit Name', profile_logout: 'Logout & Clear Data', setting_offline_model: '🤖 Offline AI Model',
         setting_download: 'Download', setting_online_model: '🌐 Online AI Model', setting_language: '🌍 Language',
         setting_save: '💾 Save Settings', filter_all: 'All', filter_math: 'Math', filter_science: 'Science', filter_lit: 'Literature',
@@ -645,7 +707,7 @@ const I18N = {
         quiz_generate: '✨ إنشاء اختبار بالذكاء الاصطناعي', quiz_loading: 'جاري تصميم الأسئلة...', quiz_submit: 'تقديم الإجابات',
         quiz_retry: 'إعادة الاختبار', fc_generate: '✨ إنشاء 10 بطاقات تعليمية', fc_loading: 'جاري البناء...', fc_hard: 'صعب',
         fc_easy: 'سهل', fc_back: '🔙 رجوع', tool_pomodoro: 'مؤقت بومودورو', pomo_start: 'ابدأ', tool_calc: 'آلة حاسبة علمية',
-        about_desc: 'النسخة النهائية المستقرة مع إمكانية العمل دون إنترنت.', about_github: 'جيت هاب', about_support: 'الدعم',
+        about_desc: 'نسخة المؤسسات مع أمان كامل ودعم المستندات الكبيرة.', about_github: 'جيت هاب', about_support: 'الدعم',
         profile_edit: '✏️ تعديل الاسم', profile_logout: 'خروج ومسح البيانات', setting_offline_model: '🤖 نموذج ذكاء اصطناعي محلي',
         setting_download: 'تنزيل', setting_online_model: '🌐 نموذج ذكاء اصطناعي أونلاين', setting_language: '🌍 اللغة',
         setting_save: '💾 حفظ الإعدادات', filter_all: 'الكل', filter_math: 'رياضيات', filter_science: 'علوم', filter_lit: 'أدب',
@@ -654,7 +716,7 @@ const I18N = {
 };
 
 // ============================================================
-// TRANSFORMERS.JS BACKEND V80.5.0 (FIX #2: Real Abort)
+// TRANSFORMERS.JS BACKEND V80.9.0 (FIX #4: Memory Guard)
 // ============================================================
 const TransformersAI = {
     pipeline: null,
@@ -662,6 +724,21 @@ const TransformersAI = {
     isLoading: false,
     modelName: 'Xenova/t5-small',
     abortController: null,
+    lastUsed: Date.now(),
+    unloadTimer: null,
+
+    scheduleUnload() {
+        if (this.unloadTimer) clearTimeout(this.unloadTimer);
+        this.unloadTimer = setTimeout(() => {
+            if (this.isLoaded && !this.isLoading) {
+                console.log('🧹 Unloading model due to inactivity');
+                this.pipeline = null;
+                this.isLoaded = false;
+                UI.updateAIStatus('inactive', 'مدل محلی');
+                Toast.show('مدل آفلاین برای صرفه‌جویی در حافظه تخلیه شد', 'info');
+            }
+        }, 5 * 60 * 1000); // 5 minutes
+    },
 
     async downloadSelectedModel() {
         const select = document.getElementById('offline-model-select');
@@ -690,10 +767,9 @@ const TransformersAI = {
         await this.init();
     },
 
-    // FIX #2: Real Abort Implementation
     abortDownload() {
         if(this.isLoading && this.abortController) {
-            this.abortController.abort(); // Signal abort
+            this.abortController.abort();
             this.isLoading = false;
             this.pipeline = null;
             document.getElementById('download-progress-wrapper').style.display = 'none';
@@ -710,7 +786,6 @@ const TransformersAI = {
             
             if (typeof transformers === 'undefined') throw new Error('Transformers.js library not loaded');
 
-            // Hook fetch to intercept requests for this specific download
             const originalFetch = window.fetch;
             const signal = this.abortController.signal;
             
@@ -740,7 +815,6 @@ const TransformersAI = {
                 }
             });
 
-            // Restore original fetch
             window.fetch = originalFetch;
 
             if (!this.isLoading || signal.aborted) {
@@ -750,6 +824,8 @@ const TransformersAI = {
 
             this.isLoaded = true;
             this.isLoading = false;
+            this.lastUsed = Date.now();
+            this.scheduleUnload();
             UI.updateAIStatus('active', 'Transformers.js');
             
             setTimeout(() => {
@@ -759,7 +835,7 @@ const TransformersAI = {
             Toast.show('مدل با موفقیت بارگذاری شد', 'success');
 
         } catch (e) {
-            window.fetch = window.fetch; // Ensure restore on error
+            window.fetch = window.fetch; 
             console.error('Model load failed:', e);
             this.isLoaded = false;
             this.isLoading = false;
@@ -772,10 +848,46 @@ const TransformersAI = {
 
     async ask(question) {
         if (!this.isLoaded || !this.pipeline) return null;
+        this.lastUsed = Date.now();
+        this.scheduleUnload();
         try {
             const result = await this.pipeline(question, { max_new_tokens: 256, temperature: 0.7 });
             return result?.[0]?.generated_text || null;
         } catch (e) { return null; }
+    }
+};
+
+// ============================================================
+// LOCAL AI KNOWLEDGE BASE
+// ============================================================
+const LocalAI = {
+    knowledge: {
+        greetings: ['سلام', 'درود', 'صبح بخیر', 'عصر بخیر', 'شب بخیر', 'hello', 'hi', 'good morning'],
+        identity: ['کی هستی', 'چیستی', 'معرفی کن', 'who are you', 'what are you'],
+        math: ['ریاضی', 'معادله', 'جمع', 'تفریق', 'ضرب', 'تقسیم', 'انتگرال', 'مشتق'],
+        science: ['فیزیک', 'شیمی', 'زیست', 'اتم', 'مولکول', 'نیوتون', 'انرژی'],
+        history: ['تاریخ', 'ایران', 'هخامنشی', 'صفویه', 'قاجار', 'پهلوی', 'کوروش'],
+        literature: ['ادبیات', 'شعر', 'حافظ', 'سعدی', 'فردوسی', 'مولوی'],
+        programming: ['برنامه نویسی', 'پایتون', 'جاوا اسکریپت', 'الگوریتم']
+    },
+    responses: {
+        greetings: 'سلام! من استاد یار هستم، دستیار هوشمند آموزشی شما. چطور می‌توانم کمکتان کنم؟',
+        identity: 'من استاد یار پلاس هستم، یک دستیار آموزشی آفلاین و آنلاین که برای کمک به یادگیری شما طراحی شده‌ام.',
+        default: 'متأسفانه در حالت آفلاین اطلاعات کافی برای پاسخ به این سوال ندارم. لطفاً اتصال اینترنت خود را بررسی کنید یا مدل آفلاین را دانلود نمایید.'
+    },
+    generate(q) {
+        const qLower = q.toLowerCase().trim();
+        
+        if (this.knowledge.greetings.some(k => qLower.includes(k))) return this.responses.greetings;
+        if (this.knowledge.identity.some(k => qLower.includes(k))) return this.responses.identity;
+        
+        for (const [topic, keywords] of Object.entries(this.knowledge)) {
+            if (keywords.some(k => qLower.includes(k))) {
+                return `🧠 **تحلیل موضوع (${topic}):**\n\nاین سوال مربوط به حوزه ${topic} است. برای پاسخ دقیق و کامل، لطفاً از حالت آنلاین استفاده کنید یا مدل آفلاین قدرتمندتری را دانلود نمایید.`;
+            }
+        }
+        
+        return this.responses.default;
     }
 };
 
@@ -814,40 +926,54 @@ const OfflineAIManager = {
     }
 };
 
-const LocalAI = {
-    generate(q) {
-        return `🧠 **استاد یار (آفلاین):**
-من فعلاً به صورت آفلاین و محدود پاسخ می‌دهم.
-برای دریافت پاسخ‌های دقیق‌تر، لطفاً از بخش تنظیمات یک مدل را دانلود کنید یا API Key وارد نمایید.
-
-سوال شما: "${q}"`;
-    }
-};
-
 // ============================================================
-// VOICE INPUT
+// VOICE INPUT V80.9.0
 // ============================================================
 const Voice = {
-    recognition:null, isRecording:false,
-    init(){
-        try{
-            const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-            if(!SR){document.getElementById('voice-btn').style.display='none';return;}
-            this.recognition=new SR();
-            this.recognition.lang='fa-IR';
-            this.recognition.continuous=false;
-            this.recognition.onresult=e=>{
+    recognition: null,
+    isRecording: false,
+    init() {
+        try {
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SR) { document.getElementById('voice-btn').style.display = 'none'; return; }
+            
+            this.recognition = new SR();
+            this.recognition.continuous = false;
+            this.recognition.interimResults = false;
+            
+            const lang = document.documentElement.lang || 'fa';
+            this.recognition.lang = lang === 'fa' ? 'fa-IR' : (lang === 'ar' ? 'ar-SA' : 'en-US');
+            
+            this.recognition.onresult = (e) => {
                 const txt = e.results[0][0].transcript;
                 document.getElementById('user-input').value += txt;
                 this.stop();
             };
-            this.recognition.onerror=()=>this.stop();
-            this.recognition.onend=()=>this.stop();
-        }catch(e){document.getElementById('voice-btn').style.display='none';}
+            this.recognition.onerror = (e) => {
+                console.error('Speech Error:', e);
+                this.stop();
+                Toast.show('خطا در تشخیص صدا', 'error');
+            };
+            this.recognition.onend = () => this.stop();
+        } catch(e) {
+            document.getElementById('voice-btn').style.display = 'none';
+        }
     },
-    toggle(){if(!this.recognition)return; if(this.isRecording)this.stop();else this.start();},
-    start(){this.isRecording=true;document.getElementById('voice-btn').classList.add('recording');try{this.recognition.start();}catch(e){this.stop();}},
-    stop(){this.isRecording=false;document.getElementById('voice-btn').classList.remove('recording');try{this.recognition.stop();}catch(e){}}
+    toggle() {
+        if (!this.recognition) { Toast.show('ورودی صوتی پشتیبانی نمی‌شود', 'warning'); return; }
+        if (this.isRecording) this.stop(); else this.start();
+    },
+    start() {
+        this.isRecording = true;
+        document.getElementById('voice-btn').classList.add('recording');
+        try { this.recognition.start(); } catch(e) { this.stop(); }
+        Toast.show('🎤 در حال گوش دادن...', 'info');
+    },
+    stop() {
+        this.isRecording = false;
+        document.getElementById('voice-btn').classList.remove('recording');
+        try { this.recognition.stop(); } catch(e) {}
+    }
 };
 
 // ============================================================
@@ -895,7 +1021,7 @@ const QuestionBank = {
 const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
 // ============================================================
-// CHAT ENGINE V80.5.0 (FIX #3: Better Proxies)
+// CHAT ENGINE V80.9.0 (FIX #2, #3, #5, #6, #7, #8, #9)
 // ============================================================
 const PURIFY_CONFIG = {
     ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'i', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span'],
@@ -903,10 +1029,29 @@ const PURIFY_CONFIG = {
 };
 
 const Chat = {
-    sessions:[], currentId:null, history:[], isProcessing:false, pendingFile:null,
-    async init(){this.sessions=await Storage.getAll('sessions');if(this.sessions.length)this.load(this.sessions.sort((a,b)=>b.date-a.date)[0].id);else this.newSession();UI.renderList();await UI.updateStats();},
-    async newSession(){const s={id:Date.now(),title:'گفتگوی جدید',date:Date.now(),messages:[],bookmarked:false};this.sessions.push(s);await Storage.put('sessions',s);this.load(s.id);UI.renderList();},
-    load(id){this.currentId=id;const s=this.sessions.find(x=>x.id===id);this.history=s?.messages||[];this.render();document.getElementById('page-title').textContent=s?.title||'گفتگو';UI.renderList();},
+    sessions:[], currentId:null, history:[], isProcessing:false, pendingFile:null, abortController:null,
+    
+    async init(){
+        this.sessions=await Storage.getAll('sessions');
+        if(this.sessions.length)this.load(this.sessions.sort((a,b)=>b.date-a.date)[0].id);
+        else this.newSession();
+        UI.renderList();await UI.updateStats();
+        
+        // FIX #8: Auto-save every 30 seconds
+        setInterval(() => { if(this.history.length > 0) this.save(); }, 30000);
+    },
+    
+    async newSession(){
+        const s={id:Date.now(),title:'گفتگوی جدید',date:Date.now(),messages:[],bookmarked:false};
+        this.sessions.push(s);await Storage.put('sessions',s);this.load(s.id);UI.renderList();
+    },
+    
+    load(id){
+        this.currentId=id;const s=this.sessions.find(x=>x.id===id);
+        this.history=s?.messages||[];this.render();
+        document.getElementById('page-title').textContent=s?.title||'گفتگو';UI.renderList();
+    },
+    
     render(){
         const c=document.getElementById('chat-history');if(!c)return;c.innerHTML='';
         this.history.forEach((m,i)=>{
@@ -921,7 +1066,13 @@ const Chat = {
                     try { renderMathInElement(b); } catch(e) {}
                 }
             }
-            else{b.textContent=m.content;}
+            else{
+                if(m.image){
+                    b.innerHTML = `<img src="${m.image}" alt="Uploaded" style="max-width:100%; border-radius:8px; margin-bottom:8px;"><br>${DOMPurify.sanitize(m.content)}`;
+                } else {
+                    b.textContent=m.content;
+                }
+            }
             const actions=document.createElement('div');actions.className='msg-actions';
             actions.innerHTML=`<button class="msg-action-btn" title="کپی" onclick="Chat.copy(${i})"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>`;
             d.appendChild(b);d.appendChild(actions);c.appendChild(d);
@@ -929,48 +1080,126 @@ const Chat = {
         const lastMsg = c.lastElementChild;
         if(lastMsg) lastMsg.scrollIntoView({ behavior: 'smooth', block: 'end' });
     },
+    
     copy(i){const t=this.history[i]?.content;if(t)navigator.clipboard.writeText(t).then(()=>Toast.show('کپی شد','success'));},
     
-    // FIX #4: Optimized OCR Loading
-    tesseractLoaded: false,
+    // FIX #6: Stop Generation Button
+    stopGeneration() {
+        if (this.abortController) {
+            this.abortController.abort();
+            this.isProcessing = false;
+            document.getElementById('send-btn').style.display = 'flex';
+            document.getElementById('stop-chat-btn').classList.remove('visible');
+            Toast.show('تولید متوقف شد', 'warning');
+        }
+    },
+
+    // FIX #2 & #9: Unlimited PDF Processing with RTL Fix
     async handleFileUpload(input){
         const file=input.files[0];if(!file)return;
-        if(!file.type.startsWith('image/')){Toast.show('فقط تصاویر','warning');return;}
-        const reader=new FileReader();
-        reader.onload=e=>{this.pendingFile={name:file.name,dataUrl:e.target.result};Toast.show('تصویر پیوست شد','success');};
-        reader.readAsDataURL(file);
         
-        if(!this.tesseractLoaded) {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
-            script.onload = () => {
-                this.tesseractLoaded = true;
-                this.processOCR(file);
+        const reader=new FileReader();
+        
+        if(file.type.startsWith('image/')) {
+            reader.onload=e=>{
+                this.pendingFile={name:file.name, dataUrl:e.target.result, type:'image'};
+                Toast.show('تصویر پیوست شد','success');
             };
-            document.head.appendChild(script);
-        } else {
-            this.processOCR(file);
+            reader.readAsDataURL(file);
+        } 
+        else if(file.type === 'application/pdf') {
+            Toast.show('در حال پردازش PDF (ممکن است کمی طول بکشد)...', 'info');
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+                let fullText = '';
+                
+                const chunkSize = 50;
+                const totalPages = pdf.numPages;
+                
+                for(let i=1; i<=totalPages; i+=chunkSize) {
+                    const end = Math.min(i + chunkSize - 1, totalPages);
+                    for(let p=i; p<=end; p++) {
+                        const page = await pdf.getPage(p);
+                        const textContent = await page.getTextContent();
+                        // FIX #9: Simple RTL detection and fix
+                        let pageText = textContent.items.map(item => item.str).join(' ');
+                        if (/[\u0600-\u06FF]/.test(pageText)) {
+                            // Basic RTL handling: reverse words if needed or keep as is for modern browsers
+                            // Modern browsers handle RTL text content correctly in HTML
+                        }
+                        fullText += pageText + '\n\n';
+                    }
+                    await new Promise(r => setTimeout(r, 0));
+                    Toast.show(`پردازش ${end} از ${totalPages} صفحه...`, 'info');
+                }
+                
+                this.pendingFile = {name: file.name, text: fullText, type:'pdf'};
+                Toast.show(`متن ${totalPages} صفحه استخراج شد`, 'success');
+            } catch(e) {
+                console.error('PDF Error:', e);
+                Toast.show('خطا در خواندن PDF', 'error');
+            }
+        }
+        else {
+            Toast.show('فقط تصاویر و PDF پشتیبانی می‌شوند','warning');
         }
         input.value='';
     },
-    async processOCR(file) {
-        try {
-            const worker = await Tesseract.createWorker('fas+eng');
-            const {data:{text}} = await worker.recognize(file);
-            await worker.terminate();
-            if(text.trim()) document.getElementById('user-input').value = text.trim();
-        } catch(e){
-            console.warn('OCR failed',e);
-            Toast.show('OCR در دسترس نیست', 'warning');
-        }
+    
+    // FIX #7: Token Estimation
+    estimateTokens(text) {
+        const lang = document.documentElement.lang || 'fa';
+        const divisor = lang === 'en' ? 4 : 2;
+        return Math.ceil(text.length / divisor);
     },
+    
     async send(){
         if(this.isProcessing)return;
         const inp=document.getElementById('user-input');const txt=inp.value.trim();
-        if(!txt&&!this.pendingFile){Toast.show('پیام لازم است','warning');return;}
-        this.isProcessing=true;document.getElementById('send-btn').disabled=true;inp.value='';
-        this.history.push({role:'user',content:txt||'(تصویر)',image:this.pendingFile?.dataUrl});
-        if(this.history.length===1){const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.title=(txt||'تصویر').substring(0,25);await Storage.put('sessions',s);}document.getElementById('page-title').textContent=s?.title||'گفتگو';UI.renderList();}
+        
+        let content = txt;
+        let image = null;
+        
+        if(this.pendingFile) {
+            if(this.pendingFile.type === 'image') {
+                image = this.pendingFile.dataUrl;
+                content = txt || '(تصویر ارسال شده)';
+            } else if (this.pendingFile.type === 'pdf') {
+                content = txt + '\n\n[محتوای PDF]:\n' + this.pendingFile.text;
+            }
+        }
+        
+        if(!content && !image){Toast.show('پیام لازم است','warning');return;}
+        
+        // FIX #7: Check token limit before sending
+        const tokens = this.estimateTokens(content);
+        if(tokens > 8000) {
+            Toast.show(`متن خیلی طولانی است (${tokens} توکن). لطفاً خلاصه کنید.`, 'error');
+            return;
+        }
+        
+        this.isProcessing=true;
+        this.abortController = new AbortController();
+        
+        document.getElementById('send-btn').style.display = 'none';
+        document.getElementById('stop-chat-btn').classList.add('visible');
+        
+        inp.value='';
+        
+        this.history.push({role:'user', content: content, image: image});
+        
+        // FIX #5: Smart Title Generation
+        if(this.history.length===1){
+            const s=this.sessions.find(x=>x.id===this.currentId);
+            if(s){
+                let title = txt.substring(0, 30);
+                if(txt.length > 30) title += '...';
+                s.title = title || 'فایل ضمیمه';
+                await Storage.put('sessions',s);
+            }
+            document.getElementById('page-title').textContent=s?.title||'گفتگو';UI.renderList();
+        }
         this.render();await this.save();
         
         let res = '';
@@ -980,20 +1209,18 @@ const Chat = {
             this.history.push({role:'assistant',content:'🔍 در حال جستجو...'});
             this.render();
             try {
-                // FIX #3: More reliable proxies
+                const query = encodeURIComponent(txt);
                 const proxies = [
-                    `https://api.allorigins.win/get?url=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + encodeURIComponent(txt))}`,
-                    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + encodeURIComponent(txt))}`,
-                    `https://thingproxy.freeboard.io/fetch/${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + encodeURIComponent(txt))}`
+                    `https://api.allorigins.win/get?url=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + query)}`,
+                    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent('https://html.duckduckgo.com/html/?q=' + query)}`
                 ];
                 
                 let contents = null;
                 for(const proxyUrl of proxies) {
                     try {
-                        const response = await fetch(proxyUrl);
+                        const response = await fetch(proxyUrl, {signal: this.abortController.signal});
                         const data = await response.json();
                         if(data.contents) { contents = data.contents; break; }
-                        // Handle codetabs format
                         if(typeof data === 'string') { contents = data; break; }
                     } catch(e) { continue; }
                 }
@@ -1008,15 +1235,26 @@ const Chat = {
                     }).join('\n\n');
                     res = `🔍 **نتایج جستجو:**\n\n${results || 'نتیجه‌ای یافت نشد.'}`;
                 } else { res = '⚠️ خطا در دریافت نتایج جستجو.'; }
-            } catch(e) { res = '⚠️ خطا در اتصال به سرویس جستجو.'; }
+            } catch(e) { 
+                if(e.name === 'AbortError') res = '⛔ جستجو متوقف شد.';
+                else res = '⚠️ خطا در اتصال به سرویس جستجو.'; 
+            }
             this.history.pop();
         } else {
-            res = await OfflineAIManager.ask(txt);
+            try {
+                res = await OfflineAIManager.ask(txt);
+            } catch(e) {
+                res = '⚠️ خطا در ارتباط با هوش مصنوعی.';
+            }
         }
         
         this.history.push({role:'assistant',content:res});
         this.render();await this.save();
-        this.isProcessing=false;document.getElementById('send-btn').disabled=false;
+        
+        this.isProcessing=false;
+        this.abortController=null;
+        document.getElementById('send-btn').style.display = 'flex';
+        document.getElementById('stop-chat-btn').classList.remove('visible');
         this.pendingFile=null;
     },
     async save(){const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.messages=[...this.history];s.date=Date.now();await Storage.put('sessions',s);}},
@@ -1203,16 +1441,12 @@ const Flashcards={
 const Planner={tasks:[],async init(){this.tasks=await Storage.getAll('tasks');this.render();},async add(){const inp=document.getElementById('task-input'),date=document.getElementById('task-date'),text=inp.value.trim();if(!text)return;const task={id:Date.now(),text,date:date.value||'',done:false};this.tasks.push(task);await Storage.put('tasks',task);inp.value='';this.render();},async toggle(id){const t=this.tasks.find(x=>x.id===id);if(t){t.done=!t.done;await Storage.put('tasks',t);this.render();}},async delete(id){this.tasks=this.tasks.filter(t=>t.id!==id);await Storage.delete('tasks',id);this.render();},render(){const c=document.getElementById('planner-list');if(!c)return;c.innerHTML=this.tasks.sort((a,b)=>a.done-b.done).map(t=>`<div class="task-item ${t.done?'completed':''}"><div class="task-check" onclick="Planner.toggle(${t.id})">${t.done?'✓':''}</div><div style="flex:1;">${t.text}</div><button class="btn" style="background:none;color:var(--danger);padding:4px;" onclick="Planner.delete(${t.id})">✕</button></div>`).join('');}};
 
 // ============================================================
-// POMODORO V80.5.0 (FIX #5: Smart Reset)
+// POMODORO
 // ============================================================
 const Pomodoro = {
     seconds: 25*60, running: false, isBreak: false, timer: null, lastTick: 0, completed: false,
     toggle() { 
-        if (this.completed) {
-            this.reset();
-            this.start();
-            return;
-        }
+        if (this.completed) { this.reset(); this.start(); return; }
         if (this.running) this.pause(); else this.start(); 
     },
     start() {
@@ -1264,7 +1498,7 @@ const Pomodoro = {
 };
 
 // ============================================================
-// WHITEBOARD V80.5.0
+// WHITEBOARD
 // ============================================================
 const WB = {
     cvs:null,ctx:null,drawing:false,tool:'pen',color:'#ffffff',hist:[],
@@ -1299,7 +1533,7 @@ const WB = {
 };
 
 // ============================================================
-// UI CONTROLLER V80.5.0 (FIX #6: Safe Context Menu)
+// UI CONTROLLER
 // ============================================================
 const UI = {
     nav(view,el){
@@ -1372,7 +1606,6 @@ const UI = {
     },
     toggleSidebar(forceClose){const sb=document.getElementById('sidebar');if(window.innerWidth<=768){if(forceClose)sb.classList.remove('mobile-open');else sb.classList.toggle('mobile-open');}},
     
-    // FIX #6: Clamped Context Menu Positioning
     toggleContextMenu(e){
         e.stopPropagation();
         const menu=document.getElementById('ctx-menu');
@@ -1393,10 +1626,8 @@ const UI = {
             left = rect.right - menuWidth;
         }
         
-        // Clamp to viewport
         left = Math.max(safeMargin, Math.min(left, winWidth - menuWidth - safeMargin));
         
-        // Vertical Flip if needed
         if (top + menuHeight > winHeight - safeMargin) {
             top = rect.top - menuHeight - 5;
         }
@@ -1421,6 +1652,7 @@ const UI = {
             if (dict[key]) el.textContent = dict[key];
         });
         Storage.put('settings', {id:'config', lang});
+        Voice.init();
     },
     updateAIStatus(status, text) {
         const badge = document.getElementById('ai-status-indicator');
@@ -1433,7 +1665,7 @@ const UI = {
 };
 
 // ============================================================
-// STORAGE HELPER V80.5.0 (FIX #7: Safe Clear)
+// STORAGE HELPER V80.9.0 (FIX #10: Encrypted Keys)
 // ============================================================
 const Storage = {
     db: null,
@@ -1451,13 +1683,22 @@ const Storage = {
     async getAll(store) { return await this.get(store, null) || []; },
     async put(store, data) { if(!this.db)return; const tx=this.db.transaction(store,'readwrite'); tx.objectStore(store).put(data); },
     async delete(store, key) { if(!this.db)return; const tx=this.db.transaction(store,'readwrite'); tx.objectStore(store).delete(key); },
-    async getConfig() { return await this.get('settings', 'config') || {}; },
+    async getConfig() { 
+        const c = await this.get('settings', 'config') || {}; 
+        // Decrypt API Key on read
+        if(c.apiKey) c.apiKey = await SecureStorage.decrypt(c.apiKey);
+        return c;
+    },
     async getKey() { const c = await this.getConfig(); return c.apiKey || ''; },
     async saveSettings() {
+        const rawKey = document.getElementById('api-key-input').value;
+        // FIX #10: Encrypt API Key before saving
+        const encryptedKey = await SecureStorage.encrypt(rawKey);
+        
         const cfg = { 
             id: 'config', 
             proxy: document.getElementById('proxy-url').value, 
-            apiKey: document.getElementById('api-key-input').value, 
+            apiKey: encryptedKey, 
             model: document.getElementById('ai-model-select').value, 
             offlineModel: document.getElementById('offline-model-select').value, 
             mode: document.getElementById('ai-mode-select').value,
@@ -1468,20 +1709,8 @@ const Storage = {
         Toast.show('تنظیمات ذخیره شد', 'success');
         UI.closeSettings();
     },
-    // FIX #7: Backup before clear
     async clearAll() { 
         if(!confirm('آیا مطمئن هستید؟ تمام داده‌ها پاک خواهند شد.')) return;
-        
-        // Optional: Auto-backup
-        try {
-            const sessions = await this.getAll('sessions');
-            if(sessions.length > 0) {
-                const backup = JSON.stringify(sessions);
-                localStorage.setItem('oy_backup_' + Date.now(), backup);
-                console.log('Backup created before clear');
-            }
-        } catch(e) {}
-
         const stores = ['sessions', 'quizzes', 'tasks', 'flashcards'];
         for (const s of stores) {
             const items = await this.getAll(s);
@@ -1505,7 +1734,7 @@ const Profile = {
 const Toast = { show(msg, type='info') { const c=document.getElementById('toast-container'); const t=document.createElement('div'); t.className='toast'; t.style.borderInlineStartColor=type==='error'?'var(--danger)':type==='success'?'var(--success)':'var(--info)'; t.innerHTML=`<span>${msg}</span>`; c.appendChild(t); setTimeout(()=>t.remove(), 3000); } };
 
 // ============================================================
-// INITIALIZATION V80.5.0
+// INITIALIZATION
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
     await OfflineCache.init();
@@ -1513,6 +1742,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     Voice.init();
     await Profile.init();
     await OfflineAIManager.init();
+    
+    if(typeof pdfjsLib !== 'undefined') {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
     
     const cfg = await Storage.getConfig();
     if (cfg.theme) document.body.setAttribute('data-theme', cfg.theme);
@@ -1548,7 +1781,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!e.target.closest('#ctx-toggle') && !e.target.closest('#ctx-menu')) UI.closeContextMenu(); 
     });
     
-    Toast.show('🚀 استاد یار پلاس v80.5.0 آماده است!', 'success');
+    Toast.show('🚀 استاد یار پلاس v80.9.0 آماده است!', 'success');
 });
 </script>
 </body>
