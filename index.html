@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>استاد یار | v71 Ultimate Stable</title>
+<title>استاد یار | v80 Ultimate Final</title>
 <meta name="theme-color" content="#6366f1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoi2KzZhSDYqtin2YrZhCIsInNob3J0X25hbWUiOiJPc3RhZFlhciIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBmMTcyYSIsInRoZW1lX2NvbG9yIjoiIzYzNjZmMSIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2ltZy5pY29uczguY29tL2ZsdWVuY3kvMjU2L3BsYXN0aWMucG5nIiwic2l6ZXMiOiIyNTZ4MjU2IiwidHlwZSI6ImltYWdlL3BuZyJ9XX0=">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
@@ -16,7 +17,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-<!-- FIX #3 & #6: Explicit CDN loading with error handling in JS -->
+<!-- Core AI Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.15.0/dist/transformers.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
@@ -29,12 +30,18 @@
 --danger: #ef4444; --success: #22c55e; --warning: #f59e0b; --info: #0ea5e9;
 --radius-lg: 24px; --radius-md: 16px; --radius-sm: 12px;
 --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px);
---nav-height: 60px;
+--nav-height: 60px; --font-main: 'Vazirmatn', sans-serif;
 }
 [data-theme="light"] { --bg-body: #f8fafc; --bg-sidebar: rgba(255,255,255,0.98); --bg-glass: rgba(255,255,255,0.7); --bg-input: rgba(0,0,0,0.03); --primary: #4f46e5; --text-main: #1e293b; --text-muted: #64748b; --border: rgba(0,0,0,0.06); --msg-user: rgba(79,70,229,0.1); --msg-ai: rgba(0,0,0,0.02); }
+[data-theme="ocean"] { --bg-body: #0c1222; --bg-sidebar: rgba(12, 18, 34, 0.98); --bg-glass: rgba(14, 165, 233, 0.1); --bg-input: rgba(14, 165, 233, 0.05); --primary: #0ea5e9; --primary-glow: rgba(14, 165, 233, 0.4); --accent: #38bdf8; --text-main: #e0f2fe; --text-muted: #7dd3fc; --border: rgba(56,189,248,0.15); --msg-user: rgba(14, 165, 233, 0.15); --msg-ai: rgba(14, 165, 233, 0.05); }
+[data-theme="forest"] { --bg-body: #0a1a0f; --bg-sidebar: rgba(10, 26, 15, 0.98); --bg-glass: rgba(34, 197, 94, 0.1); --bg-input: rgba(34, 197, 94, 0.05); --primary: #22c55e; --primary-glow: rgba(34, 197, 94, 0.4); --accent: #86efac; --text-main: #dcfce7; --text-muted: #86efac; --border: rgba(34,197,94,0.15); --msg-user: rgba(34, 197, 94, 0.15); --msg-ai: rgba(34, 197, 94, 0.05); }
+[data-theme="sunset"] { --bg-body: #1a0f0a; --bg-sidebar: rgba(26, 15, 10, 0.98); --bg-glass: rgba(249, 115, 22, 0.1); --bg-input: rgba(249, 115, 22, 0.05); --primary: #f97316; --primary-glow: rgba(249, 115, 22, 0.4); --accent: #fdba74; --text-main: #ffedd5; --text-muted: #fdba74; --border: rgba(249,115,22,0.15); --msg-user: rgba(249, 115, 22, 0.15); --msg-ai: rgba(249, 115, 22, 0.05); }
 * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; scrollbar-width: thin; }
-body { margin: 0; font-family: 'Vazirmatn', sans-serif; background: var(--bg-body); color: var(--text-main); height: 100dvh; overflow: hidden; display: flex; transition: background 0.5s ease; }
-aside { width: 280px; height: 100%; background: var(--bg-sidebar); border-left: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; flex-shrink: 0; }
+body { margin: 0; font-family: var(--font-main); background: var(--bg-body); color: var(--text-main); height: 100dvh; overflow: hidden; display: flex; transition: background 0.5s ease; }
+[dir="ltr"] body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+[dir="rtl"][lang="ar"] body { font-family: 'Tajawal', sans-serif; }
+
+aside { width: 280px; height: 100%; background: var(--bg-sidebar); border-inline-start: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; flex-shrink: 0; }
 .brand { padding: 1.2rem 1.5rem; font-size: 1.4rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
 .chat-list { flex: 1; overflow-y: auto; padding: 0.5rem 1rem; }
 .chat-item { padding: 10px 12px; border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 10px; margin-bottom: 2px; transition: 0.2s; font-size: 0.9rem; position: relative; }
@@ -43,27 +50,16 @@ aside { width: 280px; height: 100%; background: var(--bg-sidebar); border-left: 
 .nav-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 6px; border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; font-size: 0.65rem; transition: 0.2s; border: none; background: none; font-family: inherit; }
 .nav-btn svg { width: 20px; height: 20px; fill: currentColor; }
 .nav-btn.active, .nav-btn:hover { background: var(--bg-input); color: var(--primary); }
+
 main { flex: 1; position: relative; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
 header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg-glass); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 50; flex-shrink: 0; position: relative; }
 
-/* DOWNLOAD PROGRESS BAR V71 */
-#download-progress-wrapper {
-    position: absolute; bottom: 0; left: 0; right: 0; 
-    background: rgba(15, 23, 42, 0.95); 
-    border-top: 1px solid var(--border);
-    padding: 8px 16px;
-    display: none; 
-    flex-direction: column; gap: 6px;
-    z-index: 100;
-    animation: slideUp 0.3s ease;
-}
-.progress-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
-.progress-track { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; position: relative; }
+/* DOWNLOAD PROGRESS BAR V80 */
+#download-progress-wrapper { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); border-top: 1px solid var(--border); padding: 12px 16px; display: none; flex-direction: column; gap: 8px; z-index: 100; animation: slideUp 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); }
+.progress-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-main); font-weight: 600; }
+.progress-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: width 0.2s linear; box-shadow: 0 0 10px var(--primary); }
-.btn-stop-download { 
-    background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); 
-    padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; cursor: pointer; transition: 0.2s; 
-}
+.btn-stop-download { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; cursor: pointer; font-weight: bold; transition: 0.2s; }
 .btn-stop-download:hover { background: var(--danger); color: white; }
 
 .view-section { flex: 1; overflow-y: auto; padding: 0; display: none; }
@@ -76,15 +72,14 @@ header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); backgro
 .message.user { align-self: flex-start; } .message.ai { align-self: flex-end; align-items: flex-end; }
 .bubble { padding: 0.9rem 1.3rem; border-radius: var(--radius-lg); line-height: 1.7; border: 1px solid var(--border); word-wrap: break-word; overflow-wrap: break-word; font-size: 0.95rem; position: relative; }
 .user .bubble { background: var(--msg-user); border-bottom-right-radius: 4px; }
+[dir="ltr"] .user .bubble { border-bottom-left-radius: 4px; border-bottom-right-radius: var(--radius-lg); }
 .ai .bubble { background: var(--msg-ai); border-bottom-left-radius: 4px; }
-.bubble pre { background: #282c34; border-radius: 8px; margin: 8px 0; border: 1px solid var(--border); direction: ltr; text-align: left; overflow-x: auto; position: relative; }
-.bubble code.hljs { padding: 0.8rem !important; background: transparent !important; font-size: 0.85em; }
-.msg-actions { position: absolute; bottom: -28px; left: 0; display: flex; gap: 4px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 10; }
+[dir="ltr"] .ai .bubble { border-bottom-right-radius: 4px; border-bottom-left-radius: var(--radius-lg); }
+.bubble pre { background: #282c34; border-radius: 8px; margin: 8px 0; border: 1px solid var(--border); direction: ltr; text-align: left; overflow-x: auto; }
+.msg-actions { position: absolute; bottom: -28px; inset-inline-start: 0; display: flex; gap: 4px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 10; }
 .message:hover .msg-actions { opacity: 1; pointer-events: auto; }
-.msg-action-btn { background: var(--bg-sidebar); border: 1px solid var(--border); color: var(--text-muted); width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: all 0.2s; }
-.msg-action-btn:hover { color: var(--primary); border-color: var(--primary); background: var(--bg-body); }
+.msg-action-btn { background: var(--bg-sidebar); border: 1px solid var(--border); color: var(--text-muted); width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 .msg-action-btn svg { width: 14px; height: 14px; fill: currentColor; }
-.message.ai .msg-actions { left: auto; right: 0; }
 
 .input-zone { padding: 0.8rem 1.2rem; background: var(--bg-glass); border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0; position: relative; z-index: 20; }
 .input-wrapper { flex: 1; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 8px 14px; display: flex; align-items: center; transition: 0.2s; gap: 8px; }
@@ -92,10 +87,9 @@ header { padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border); backgro
 textarea { flex: 1; background: transparent; border: none; color: var(--text-main); resize: none; max-height: 150px; min-height: 24px; font-family: inherit; font-size: 0.95rem; padding: 4px 0; }
 .btn { border: none; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease; min-width: 40px; min-height: 40px; border-radius: var(--radius-md); padding: 8px 16px; background: var(--bg-input); color: var(--text-muted); }
 .btn-primary { background: linear-gradient(135deg, var(--primary), #818cf8); color: white; font-weight: 600; }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 15px var(--primary-glow); }
 .btn-icon { width: 40px; height: 40px; border-radius: 50%; padding: 0; min-width: 40px; }
 .btn svg { width: 18px; height: 18px; fill: currentColor; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .card { background: var(--bg-glass); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem; transition: 0.3s; }
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; padding: 1rem; }
@@ -224,38 +218,38 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div id="profile-modal" class="modal-overlay" style="z-index: 100001;">
 <div class="modal-content" style="max-width: 400px; text-align: center;">
 <svg viewBox="0 0 24 24" style="width:48px;height:48px;fill:var(--primary);margin-bottom:1rem;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-<h3 style="margin:0 0 0.5rem;">خوش آمدید!</h3>
-<p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">لطفاً اطلاعات خود را وارد کنید.</p>
+<h3 style="margin:0 0 0.5rem;" data-i18n="welcome">خوش آمدید!</h3>
+<p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;" data-i18n="profile_desc">لطفاً اطلاعات خود را وارد کنید.</p>
 <input type="text" id="profile-name-input" class="form-input" placeholder="نام و نام خانوادگی..." autofocus>
 <select id="profile-grade-input" class="form-input">
-<option value="">انتخاب پایه تحصیلی...</option>
-<option value="ابتدایی">ابتدایی</option>
-<option value="متوسطه اول">متوسطه اول</option>
-<option value="متوسطه دوم">متوسطه دوم</option>
-<option value="دانشجو">دانشجو</option>
-<option value="فارغ‌التحصیل">فارغ‌التحصیل</option>
+<option value="" data-i18n="select_grade">انتخاب پایه تحصیلی...</option>
+<option value="ابتدایی" data-i18n="grade_primary">ابتدایی</option>
+<option value="متوسطه اول" data-i18n="grade_middle">متوسطه اول</option>
+<option value="متوسطه دوم" data-i18n="grade_high">متوسطه دوم</option>
+<option value="دانشجو" data-i18n="grade_uni">دانشجو</option>
+<option value="فارغ‌التحصیل" data-i18n="graduated">فارغ‌التحصیل</option>
 </select>
-<button class="btn btn-primary" style="width:100%;" onclick="Profile.saveName()">ثبت و شروع</button>
+<button class="btn btn-primary" style="width:100%;" onclick="Profile.saveName()" data-i18n="start_btn">ثبت و شروع</button>
 </div>
 </div>
 
 <aside id="sidebar">
 <div class="brand">
 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-استاد یار پلاس
+<span data-i18n="app_name">استاد یار پلاس</span>
 <button class="btn btn-icon mobile-toggle" style="margin-right:auto; min-width:32px; height:32px; width:32px; padding:0;" onclick="UI.toggleSidebar()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
 </div>
 <div style="padding: 0 1rem 0.6rem;">
-<button class="btn btn-primary" style="width:100%; font-size:0.85rem; padding:8px;" onclick="Chat.newSession(); UI.toggleSidebar(true)"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> گفتگوی جدید</button>
+<button class="btn btn-primary" style="width:100%; font-size:0.85rem; padding:8px;" onclick="Chat.newSession(); UI.toggleSidebar(true)" data-i18n="new_chat"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> گفتگوی جدید</button>
 </div>
 <div class="chat-list" id="chat-history-list"></div>
 <div class="nav-desktop nav-bottom">
-<button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> خانه</button>
-<button class="nav-btn" onclick="UI.nav('quiz', this)"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg> آزمون</button>
-<button class="nav-btn" onclick="UI.nav('flashcards', this)"><svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16z"/></svg> فلش</button>
-<button class="nav-btn" onclick="UI.nav('planner', this)"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg> برنامه</button>
-<button class="nav-btn" onclick="UI.nav('tools', this)"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg> ابزار</button>
-<button class="nav-btn" onclick="UI.nav('about', this)"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> درباره ما</button>
+<button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> <span data-i18n="nav_home">خانه</span></button>
+<button class="nav-btn" onclick="UI.nav('quiz', this)"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg> <span data-i18n="nav_quiz">آزمون</span></button>
+<button class="nav-btn" onclick="UI.nav('flashcards', this)"><svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27-7.38 5.74zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16z"/></svg> <span data-i18n="nav_flash">فلش</span></button>
+<button class="nav-btn" onclick="UI.nav('planner', this)"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg> <span data-i18n="nav_planner">برنامه</span></button>
+<button class="nav-btn" onclick="UI.nav('tools', this)"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg> <span data-i18n="nav_tools">ابزار</span></button>
+<button class="nav-btn" onclick="UI.nav('about', this)"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> <span data-i18n="nav_about">درباره ما</span></button>
 </div>
 </aside>
 
@@ -263,34 +257,33 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <header>
 <div style="display:flex; align-items:center; gap:8px;">
 <button class="btn btn-icon mobile-toggle" style="min-width:36px; height:36px; width:36px;" onclick="UI.toggleSidebar()"><svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></button>
-<span style="font-weight:700; font-size:1rem;" id="page-title">داشبورد</span>
+<span style="font-weight:700; font-size:1rem;" id="page-title" data-i18n="dashboard">داشبورد</span>
 <div id="ai-status-indicator" class="ai-status-badge" title="وضعیت موتور هوش مصنوعی">
 <div class="ai-status-dot"></div>
-<span id="ai-status-text">آماده</span>
+<span id="ai-status-text" data-i18n="status_ready">آماده</span>
 </div>
 </div>
 <div style="display:flex; gap:6px; align-items:center;">
-<!-- FIX #10: Synced Model Select -->
 <select id="header-model-select" class="form-input" style="margin:0; width:auto; padding:4px 8px; font-size:0.7rem; min-height:32px; border-radius:30px; background:var(--bg-input); display:none;">
-<option value="ostadyar">🧠 استاد یار (آفلاین)</option>
+<option value="ostadyar" data-i18n="model_offline">🧠 استاد یار (آفلاین)</option>
 <option value="claude-3-5-sonnet-20241022">Sonnet 3.5</option>
 <option value="gpt-4o">GPT-4o (Doona)</option>
 </select>
 <select id="ai-mode-select" class="form-input" style="margin:0; width:auto; padding:4px 10px; font-size:0.75rem; min-height:32px; border-radius:30px; background:var(--bg-input);">
-<option value="local">🧠 استاد یار (آفلاین)</option>
-<option value="search">🔍 جستجو (DDG)</option>
-<option value="wikipedia">📚 ویکی‌پدیا</option>
+<option value="local" data-i18n="mode_local">🧠 استاد یار (آفلاین)</option>
+<option value="search" data-i18n="mode_search">🔍 جستجو (DDG)</option>
+<option value="wikipedia" data-i18n="mode_wiki">📚 ویکی‌پدیا</option>
 </select>
 <div style="position:relative;">
 <button class="btn btn-icon" id="ctx-toggle" style="min-width:36px; height:36px; width:36px;" onclick="UI.toggleContextMenu(event)"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></button>
 </div>
 </div>
 
-<!-- DOWNLOAD PROGRESS UI V71 -->
+<!-- DOWNLOAD PROGRESS UI V80 -->
 <div id="download-progress-wrapper">
     <div class="progress-header">
-        <span id="dl-status-text">در حال آماده‌سازی...</span>
-        <button class="btn-stop-download" onclick="TransformersAI.abortDownload()">توقف دانلود</button>
+        <span id="dl-status-text" data-i18n="dl_preparing">در حال آماده‌سازی...</span>
+        <button class="btn-stop-download" onclick="TransformersAI.abortDownload()" data-i18n="dl_stop">توقف دانلود</button>
     </div>
     <div class="progress-track">
         <div class="progress-fill" id="dl-progress-bar"></div>
@@ -299,30 +292,30 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 </header>
 
 <div class="ctx-menu" id="ctx-menu">
-<button class="ctx-item" onclick="Chat.exportJSON(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> خروجی JSON</button>
-<button class="ctx-item" onclick="window.print(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-4h8v2zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg> چاپ / PDF</button>
-<button class="ctx-item" onclick="UI.toggleFullscreen(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg> تمام صفحه</button>
+<button class="ctx-item" onclick="Chat.exportJSON(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> <span data-i18n="ctx_export">خروجی JSON</span></button>
+<button class="ctx-item" onclick="window.print(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-4h8v2zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z"/></svg> <span data-i18n="ctx_print">چاپ / PDF</span></button>
+<button class="ctx-item" onclick="UI.toggleFullscreen(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg> <span data-i18n="ctx_fullscreen">تمام صفحه</span></button>
 <div class="ctx-divider"></div>
-<button class="ctx-item danger" onclick="Chat.clearCurrent(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg> پاک کردن چت</button>
-<button class="ctx-item" onclick="UI.openSettings(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> تنظیمات</button>
+<button class="ctx-item danger" onclick="Chat.clearCurrent(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg> <span data-i18n="ctx_clear">پاک کردن چت</span></button>
+<button class="ctx-item" onclick="UI.openSettings(); UI.closeContextMenu()"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> <span data-i18n="ctx_settings">تنظیمات</span></button>
 </div>
 
 <!-- HOME VIEW -->
 <div id="view-home" class="view-section active" style="overflow-y:auto;">
 <div class="home-grid">
-<div class="card"><div class="stat-value" id="stat-chats">0</div><div class="stat-label">گفتگوها</div></div>
-<div class="card"><div class="stat-value" id="stat-quizzes">0</div><div class="stat-label">آزمون‌ها</div></div>
-<div class="card"><div class="stat-value" id="stat-tasks">0</div><div class="stat-label">تکالیف</div></div>
+<div class="card"><div class="stat-value" id="stat-chats">0</div><div class="stat-label" data-i18n="stat_chats">گفتگوها</div></div>
+<div class="card"><div class="stat-value" id="stat-quizzes">0</div><div class="stat-label" data-i18n="stat_quizzes">آزمون‌ها</div></div>
+<div class="card"><div class="stat-value" id="stat-tasks">0</div><div class="stat-label" data-i18n="stat_tasks">تکالیف</div></div>
 <div class="card" style="grid-column: 1/-1;">
-<div class="section-title"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--accent);"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg> دسترسی سریع</div>
+<div class="section-title"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--accent);"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg> <span data-i18n="quick_access">دسترسی سریع</span></div>
 <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
-<button class="btn btn-primary" onclick="Chat.newSession(); UI.nav('chat')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg> چت</button>
-<button class="btn btn-primary" onclick="UI.nav('quiz')" style="background:linear-gradient(135deg, var(--accent), #f59e0b);"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg> آزمون</button>
-<button class="btn btn-primary" onclick="UI.nav('bank')" style="background:linear-gradient(135deg, #8b5cf6, #6d28d9);"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9v2h10v-2zm0-4H9v2h10V7z"/></svg> بانک سوالات</button>
+<button class="btn btn-primary" onclick="Chat.newSession(); UI.nav('chat')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg> <span data-i18n="nav_chat">چت</span></button>
+<button class="btn btn-primary" onclick="UI.nav('quiz')" style="background:linear-gradient(135deg, var(--accent), #f59e0b);"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg> <span data-i18n="nav_quiz">آزمون</span></button>
+<button class="btn btn-primary" onclick="UI.nav('bank')" style="background:linear-gradient(135deg, #8b5cf6, #6d28d9);"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9v2h10v-2zm0-4H9v2h10V7z"/></svg> <span data-i18n="nav_bank">بانک سوالات</span></button>
 </div>
 </div>
 <div class="card" style="grid-column: 1/-1;">
-<div class="section-title"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--accent);"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg> فعالیت هفتگی</div>
+<div class="section-title"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--accent);"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg> <span data-i18n="weekly_activity">فعالیت هفتگی</span></div>
 <div style="height:180px;"><canvas id="chart"></canvas></div>
 </div>
 </div>
@@ -347,16 +340,16 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <!-- BANK VIEW -->
 <div id="view-bank" class="view-section" style="display:none; overflow-y:auto; padding:1rem;">
 <div style="max-width:800px; margin:0 auto; width:100%;">
-<h2 style="margin:0 0 1rem; font-size:1.2rem;">بانک سوالات آموزشی</h2>
+<h2 style="margin:0 0 1rem; font-size:1.2rem;" data-i18n="nav_bank">بانک سوالات آموزشی</h2>
 <div class="card">
 <input type="text" id="qb-search" class="form-input" placeholder="جستجو در سوالات...">
 <div class="qb-filters" id="qb-tags">
-<div class="qb-tag active" onclick="QuestionBank.filter('all', this)">همه</div>
-<div class="qb-tag" onclick="QuestionBank.filter('math', this)">ریاضی</div>
-<div class="qb-tag" onclick="QuestionBank.filter('science', this)">علوم</div>
-<div class="qb-tag" onclick="QuestionBank.filter('lit', this)">ادبیات</div>
-<div class="qb-tag" onclick="QuestionBank.filter('history', this)">تاریخ</div>
-<div class="qb-tag" onclick="QuestionBank.filter('lang', this)">زبان</div>
+<div class="qb-tag active" onclick="QuestionBank.filter('all', this)" data-i18n="filter_all">همه</div>
+<div class="qb-tag" onclick="QuestionBank.filter('math', this)" data-i18n="filter_math">ریاضی</div>
+<div class="qb-tag" onclick="QuestionBank.filter('science', this)" data-i18n="filter_science">علوم</div>
+<div class="qb-tag" onclick="QuestionBank.filter('lit', this)" data-i18n="filter_lit">ادبیات</div>
+<div class="qb-tag" onclick="QuestionBank.filter('history', this)" data-i18n="filter_history">تاریخ</div>
+<div class="qb-tag" onclick="QuestionBank.filter('lang', this)" data-i18n="filter_lang">زبان</div>
 </div>
 <div id="qb-list" style="max-height: 60vh; overflow-y: auto;"></div>
 </div>
@@ -368,20 +361,20 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div class="quiz-container">
 <div id="quiz-setup">
 <div class="card">
-<label style="display:block; margin-bottom:6px; font-weight:600;">موضوع آزمون</label>
+<label style="display:block; margin-bottom:6px; font-weight:600;" data-i18n="quiz_topic">موضوع آزمون</label>
 <input type="text" id="quiz-topic" placeholder="مثلاً: تاریخ صفویه..." class="form-input" style="margin-bottom:0.8rem;">
-<label style="display:block; margin-bottom:6px; font-weight:600;">تعداد سوالات</label>
+<label style="display:block; margin-bottom:6px; font-weight:600;" data-i18n="quiz_count">تعداد سوالات</label>
 <select id="quiz-count" class="form-input" style="margin-bottom:1rem;">
 <option value="3">۳ سوال (سریع)</option>
 <option value="5" selected>۵ سوال (استاندارد)</option>
 <option value="10">۱۰ سوال (جامع)</option>
 </select>
-<button class="btn btn-primary" style="width:100%;" onclick="Quiz.start()">✨ تولید آزمون با هوش مصنوعی</button>
+<button class="btn btn-primary" style="width:100%;" onclick="Quiz.start()" data-i18n="quiz_generate">✨ تولید آزمون با هوش مصنوعی</button>
 </div>
 </div>
 <div id="quiz-loading" style="display:none; text-align:center; padding:2rem;">
 <div class="spinner"></div>
-<div>در حال طراحی سوالات...</div>
+<div data-i18n="quiz_loading">در حال طراحی سوالات...</div>
 </div>
 <div id="quiz-active" style="display:none;">
 <div class="quiz-progress">
@@ -389,13 +382,13 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill" style="width:0%;"></div></div>
 </div>
 <div id="quiz-questions"></div>
-<button class="btn btn-primary" id="quiz-submit" onclick="Quiz.submit()" style="width:100%; margin-top:0.8rem;">ثبت پاسخ‌ها</button>
+<button class="btn btn-primary" id="quiz-submit" onclick="Quiz.submit()" style="width:100%; margin-top:0.8rem;" data-i18n="quiz_submit">ثبت پاسخ‌ها</button>
 </div>
 <div id="quiz-result" style="display:none;">
 <div class="card" style="text-align:center;">
 <div style="font-size:3.5rem; font-weight:900; color:var(--primary);" id="quiz-score">0%</div>
 <p style="color:var(--text-muted);" id="quiz-detail">۰ از ۵ صحیح</p>
-<button class="btn btn-primary" onclick="Quiz.reset()">آزمون مجدد</button>
+<button class="btn btn-primary" onclick="Quiz.reset()" data-i18n="quiz_retry">آزمون مجدد</button>
 </div>
 </div>
 </div>
@@ -407,10 +400,10 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div id="fc-setup" style="display:block;">
 <div class="card">
 <input type="text" id="fc-topic" placeholder="موضوع فلش‌کارت..." class="form-input" style="margin-bottom:0.8rem;">
-<button class="btn btn-primary" style="width:100%;" onclick="Flashcards.generate()">✨ تولید ۱۰ فلش‌کارت با AI</button>
+<button class="btn btn-primary" style="width:100%;" onclick="Flashcards.generate()" data-i18n="fc_generate">✨ تولید ۱۰ فلش‌کارت با AI</button>
 </div>
 </div>
-<div id="fc-loading" style="display:none; text-align:center; padding:2rem;"><div class="spinner"></div><div>در حال ساخت...</div></div>
+<div id="fc-loading" style="display:none; text-align:center; padding:2rem;"><div class="spinner"></div><div data-i18n="fc_loading">در حال ساخت...</div></div>
 <div id="fc-active" style="display:none;">
 <div class="fc-scene" onclick="Flashcards.flip()">
 <div class="fc-card" id="fc-card">
@@ -421,11 +414,11 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div style="text-align:center; color:var(--text-muted); font-size:0.85rem;" id="fc-counter">کارت ۱ از ۱۰</div>
 <div style="display:flex; justify-content:center; gap:0.8rem; margin-top:0.8rem;">
 <button class="btn btn-icon" onclick="Flashcards.prev()"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-<button class="btn btn-danger" onclick="Flashcards.markHard()" style="border-radius:var(--radius-md); padding:0 16px;">سخت</button>
-<button class="btn btn-success" onclick="Flashcards.markEasy()" style="border-radius:var(--radius-md); padding:0 16px;">آسان</button>
+<button class="btn btn-danger" onclick="Flashcards.markHard()" style="border-radius:var(--radius-md); padding:0 16px;" data-i18n="fc_hard">سخت</button>
+<button class="btn btn-success" onclick="Flashcards.markEasy()" style="border-radius:var(--radius-md); padding:0 16px;" data-i18n="fc_easy">آسان</button>
 <button class="btn btn-icon" onclick="Flashcards.next()"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
 </div>
-<button class="btn" style="width:100%; margin-top:1rem;" onclick="Flashcards.showSetup()">🔙 بازگشت</button>
+<button class="btn" style="width:100%; margin-top:1rem;" onclick="Flashcards.showSetup()" data-i18n="fc_back">🔙 بازگشت</button>
 </div>
 </div>
 </div>
@@ -433,7 +426,7 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <!-- PLANNER VIEW -->
 <div id="view-planner" class="view-section" style="display:none; overflow-y:auto; padding:1rem;">
 <div style="max-width:600px; margin:0 auto; width:100%;">
-<h2 style="margin:0 0 1rem; font-size:1.2rem;">برنامه‌ریزی</h2>
+<h2 style="margin:0 0 1rem; font-size:1.2rem;" data-i18n="nav_planner">برنامه‌ریزی</h2>
 <div style="display:flex; gap:6px; margin-bottom:1rem;">
 <input type="text" id="task-input" placeholder="تکلیف جدید..." class="form-input" style="margin:0; flex:1;">
 <input type="date" id="task-date" class="form-input" style="margin:0; width:auto; min-width:120px;">
@@ -446,19 +439,19 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <!-- TOOLS VIEW -->
 <div id="view-tools" class="view-section" style="display:none; overflow-y:auto;">
 <div style="max-width:1000px; margin:0 auto; width:100%; padding:1rem;">
-<h2 style="margin:0 0 1rem; font-size:1.2rem;">جعبه ابزار جامع</h2>
+<h2 style="margin:0 0 1rem; font-size:1.2rem;" data-i18n="nav_tools">جعبه ابزار جامع</h2>
 <div class="tools-grid">
 <div class="card" style="text-align:center;">
-<div class="section-title" style="justify-content:center;">تایمر پومودورو</div>
+<div class="section-title" style="justify-content:center;"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> <span data-i18n="tool_pomodoro">تایمر پومودورو</span></div>
 <div style="color:var(--accent); font-weight:700;" id="pomo-status">⏳ زمان تمرکز</div>
 <div class="pomo-display" id="pomo-display">25:00</div>
 <div style="display:flex; justify-content:center; gap:0.8rem;">
-<button class="btn btn-primary" id="pomo-start" onclick="Pomodoro.toggle()">شروع</button>
+<button class="btn btn-primary" id="pomo-start" onclick="Pomodoro.toggle()" data-i18n="pomo_start">شروع</button>
 <button class="btn btn-icon" onclick="Pomodoro.reset()"><svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
 </div>
 </div>
 <div class="card">
-<div class="section-title">ماشین حساب علمی</div>
+<div class="section-title"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4H6v-2h4V7h2v4h4v2h-4v4z"/></svg> <span data-i18n="tool_calc">ماشین حساب علمی</span></div>
 <div class="calc-display" id="calc-display">0</div>
 <div class="calc-grid">
 <button class="calc-btn" onclick="Calc.input('C')">C</button>
@@ -508,12 +501,12 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div id="view-about" class="view-section" style="display:none; overflow-y:auto; align-items:center; justify-content:center;">
 <div class="about-container">
 <div class="about-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
-<h1 class="about-title">استاد یار پلاس</h1>
-<span class="about-version">نسخه 71.0 Ultimate Stable</span>
-<p class="about-desc">نسخه نهایی و پایدار با رفع کامل مشکلات فنی.</p>
+<h1 class="about-title" data-i18n="app_name">استاد یار پلاس</h1>
+<span class="about-version">نسخه 80.0 Ultimate Final</span>
+<p class="about-desc" data-i18n="about_desc">نسخه نهایی و پایدار با رفع کامل مشکلات فنی.</p>
 <div class="about-links">
-<a href="#" class="about-link">گیت‌هاب</a>
-<a href="#" class="about-link">پشتیبانی</a>
+<a href="#" class="about-link" data-i18n="about_github">گیت‌هاب</a>
+<a href="#" class="about-link" data-i18n="about_support">پشتیبانی</a>
 </div>
 </div>
 </div>
@@ -524,19 +517,19 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div style="width:100px; height:100px; border-radius:50%; background:var(--primary); margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem; color:white;"><svg viewBox="0 0 24 24" style="width:50px;height:50px;fill:white;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
 <h2 id="p-name" style="margin:0 0 0.3rem;">کاربر مهمان</h2>
 <div id="p-grade" style="color:var(--accent); font-weight:700; margin-bottom:1rem;">پایه تحصیلی نامشخص</div>
-<button class="btn btn-primary" style="margin-bottom:0.8rem;" onclick="Profile.editName()">✏️ ویرایش نام</button>
-<button class="btn btn-danger" onclick="Storage.clearAll()">خروج و پاکسازی</button>
+<button class="btn btn-primary" style="margin-bottom:0.8rem;" onclick="Profile.editName()" data-i18n="profile_edit">✏️ ویرایش نام</button>
+<button class="btn btn-danger" onclick="Storage.clearAll()" data-i18n="profile_logout">خروج و پاکسازی</button>
 </div>
 </div>
 
-<div class="app-footer">استاد یار پلاس v71.0 | طراحی شده برای آموزش هوشمند</div>
+<div class="app-footer">استاد یار پلاس v80.0 | طراحی شده برای آموزش هوشمند</div>
 
 <div class="mobile-nav">
-<button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> خانه</button>
-<button class="nav-btn" onclick="UI.nav('chat', this)"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg> چت</button>
-<button class="nav-btn" onclick="UI.nav('quiz', this)"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg> آزمون</button>
-<button class="nav-btn" onclick="UI.nav('tools', this)"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg> ابزار</button>
-<button class="nav-btn" onclick="UI.nav('profile', this)"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> من</button>
+<button class="nav-btn active" onclick="UI.nav('home', this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> <span data-i18n="nav_home">خانه</span></button>
+<button class="nav-btn" onclick="UI.nav('chat', this)"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/></svg> <span data-i18n="nav_chat">چت</span></button>
+<button class="nav-btn" onclick="UI.nav('quiz', this)"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg> <span data-i18n="nav_quiz">آزمون</span></button>
+<button class="nav-btn" onclick="UI.nav('tools', this)"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg> <span data-i18n="nav_tools">ابزار</span></button>
+<button class="nav-btn" onclick="UI.nav('profile', this)"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> <span data-i18n="nav_profile">من</span></button>
 </div>
 </main>
 
@@ -544,21 +537,21 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <div id="settings-modal" class="modal-overlay">
 <div class="modal-content">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
-<h3 style="margin:0;">تنظیمات امن</h3>
+<h3 style="margin:0;" data-i18n="ctx_settings">تنظیمات امن</h3>
 <button class="btn btn-icon" style="min-width:32px; height:32px; width:32px;" onclick="UI.closeSettings()"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
 </div>
-<label style="display:block; margin-bottom:4px; font-weight:600;">🤖 مدل هوش مصنوعی آفلاین</label>
+<label style="display:block; margin-bottom:4px; font-weight:600;" data-i18n="setting_offline_model">🤖 مدل هوش مصنوعی آفلاین</label>
 <div style="display:flex; gap:8px; margin-bottom:0.8rem; align-items:center;">
 <select id="offline-model-select" class="form-input" style="margin-bottom:0; flex:1;">
 <option value="Xenova/t5-small">⚡ Xenova/t5-small (242MB • سریع)</option>
 <option value="Xenova/flan-t5-small">🧠 Xenova/flan-t5-small (300MB • متوسط)</option>
 <option value="Xenova/flan-t5-base">💪 Xenova/flan-t5-base (990MB • قدرتمند)</option>
 </select>
-<button class="btn btn-primary" style="margin-bottom:0; padding:0 16px;" onclick="TransformersAI.downloadSelectedModel()">دانلود</button>
+<button class="btn btn-primary" style="margin-bottom:0; padding:0 16px;" onclick="TransformersAI.downloadSelectedModel()" data-i18n="setting_download">دانلود</button>
 </div>
-<label style="display:block; margin-bottom:4px; font-weight:600;">🌐 مدل هوش مصنوعی آنلاین</label>
+<label style="display:block; margin-bottom:4px; font-weight:600;" data-i18n="setting_online_model">🌐 مدل هوش مصنوعی آنلاین</label>
 <select id="ai-model-select" class="form-input" style="margin-bottom:0.8rem;">
-<option value="ostadyar">🧠 استاد یار (آفلاین)</option>
+<option value="ostadyar" data-i18n="model_offline">🧠 استاد یار (آفلاین)</option>
 <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option>
 <option value="gpt-4o">GPT-4o (Doona)</option>
 </select>
@@ -566,25 +559,89 @@ header { padding-top: calc(0.6rem + var(--safe-top)); }
 <input type="url" id="proxy-url" class="form-input" placeholder="https://platform.doona.ai/v1/chat/completions" style="direction:ltr; text-align:left; margin-bottom:0.8rem;">
 <label style="display:block; margin-bottom:4px; font-weight:600;">API Key</label>
 <input type="password" id="api-key-input" class="form-input" placeholder="sk-... یا sk-ant-..." style="direction:ltr; text-align:left; margin-bottom:0.8rem;">
+<label style="display:block; margin-bottom:4px; font-weight:600;" data-i18n="setting_language">🌍 زبان / Language</label>
+<select id="language-select" class="form-input" style="margin-bottom:0.8rem;" onchange="UI.setLanguage(this.value)">
+<option value="fa">فارسی</option>
+<option value="en">English</option>
+<option value="ar">العربية</option>
+</select>
 <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:0.8rem;">
 <button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem;" onclick="UI.setTheme('dark')">🌙 تاریک</button>
 <button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem;" onclick="UI.setTheme('light')">☀️ روشن</button>
+<button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#0ea5e9;" onclick="UI.setTheme('ocean')">🌊 اقیانوس</button>
+<button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#22c55e;" onclick="UI.setTheme('forest')">🌲 جنگل</button>
+<button class="btn btn-icon" style="width:auto; padding:6px 14px; border-radius:30px; font-size:0.8rem; border-color:#f97316;" onclick="UI.setTheme('sunset')">🌅 غروب</button>
 </div>
-<button class="btn btn-primary" style="width:100%;" onclick="Storage.saveSettings()">💾 ذخیره تنظیمات</button>
+<button class="btn btn-primary" style="width:100%;" onclick="Storage.saveSettings()" data-i18n="setting_save">💾 ذخیره تنظیمات</button>
 </div>
 </div>
 
 <script>
 // ============================================================
-// FIX #15: Secure DOMPurify Config
+// TRANSLATIONS V80
 // ============================================================
-const PURIFY_CONFIG = {
-    ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'i', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span'],
-    ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'style']
+const I18N = {
+    fa: {
+        welcome: 'خوش آمدید!', profile_desc: 'لطفاً اطلاعات خود را وارد کنید.', select_grade: 'انتخاب پایه تحصیلی...',
+        grade_primary: 'ابتدایی', grade_middle: 'متوسطه اول', grade_high: 'متوسطه دوم', grade_uni: 'دانشجو', graduated: 'فارغ‌التحصیل',
+        start_btn: 'ثبت و شروع', app_name: 'استاد یار پلاس', new_chat: 'گفتگوی جدید', nav_home: 'خانه', nav_quiz: 'آزمون',
+        nav_flash: 'فلش', nav_planner: 'برنامه', nav_tools: 'ابزار', nav_about: 'درباره ما', dashboard: 'داشبورد',
+        status_ready: 'آماده', model_offline: '🧠 استاد یار (آفلاین)', mode_local: '🧠 استاد یار (آفلاین)',
+        mode_search: '🔍 جستجو (DDG)', mode_wiki: '📚 ویکی‌پدیا', dl_preparing: 'در حال آماده‌سازی...', dl_stop: 'توقف دانلود',
+        ctx_export: 'خروجی JSON', ctx_print: 'چاپ / PDF', ctx_fullscreen: 'تمام صفحه', ctx_clear: 'پاک کردن چت', ctx_settings: 'تنظیمات',
+        stat_chats: 'گفتگوها', stat_quizzes: 'آزمون‌ها', stat_tasks: 'تکالیف', quick_access: 'دسترسی سریع', nav_chat: 'چت',
+        nav_bank: 'بانک سوالات', weekly_activity: 'فعالیت هفتگی', quiz_topic: 'موضوع آزمون', quiz_count: 'تعداد سوالات',
+        quiz_generate: '✨ تولید آزمون با هوش مصنوعی', quiz_loading: 'در حال طراحی سوالات...', quiz_submit: 'ثبت پاسخ‌ها',
+        quiz_retry: 'آزمون مجدد', fc_generate: '✨ تولید ۱۰ فلش‌کارت با AI', fc_loading: 'در حال ساخت...', fc_hard: 'سخت',
+        fc_easy: 'آسان', fc_back: '🔙 بازگشت', tool_pomodoro: 'تایمر پومودورو', pomo_start: 'شروع', tool_calc: 'ماشین حساب علمی',
+        about_desc: 'نسخه نهایی و پایدار با رفع کامل مشکلات فنی.', about_github: 'گیت‌هاب', about_support: 'پشتیبانی',
+        profile_edit: '✏️ ویرایش نام', profile_logout: 'خروج و پاکسازی', setting_offline_model: '🤖 مدل هوش مصنوعی آفلاین',
+        setting_download: 'دانلود', setting_online_model: '🌐 مدل هوش مصنوعی آنلاین', setting_language: '🌍 زبان / Language',
+        setting_save: '💾 ذخیره تنظیمات', filter_all: 'همه', filter_math: 'ریاضی', filter_science: 'علوم', filter_lit: 'ادبیات',
+        filter_history: 'تاریخ', filter_lang: 'زبان'
+    },
+    en: {
+        welcome: 'Welcome!', profile_desc: 'Please enter your information.', select_grade: 'Select Grade...',
+        grade_primary: 'Primary', grade_middle: 'Middle School', grade_high: 'High School', grade_uni: 'University', graduated: 'Graduated',
+        start_btn: 'Start', app_name: 'OstadYar Plus', new_chat: 'New Chat', nav_home: 'Home', nav_quiz: 'Quiz',
+        nav_flash: 'Flash', nav_planner: 'Planner', nav_tools: 'Tools', nav_about: 'About', dashboard: 'Dashboard',
+        status_ready: 'Ready', model_offline: '🧠 OstadYar (Offline)', mode_local: '🧠 OstadYar (Offline)',
+        mode_search: '🔍 Search (DDG)', mode_wiki: '📚 Wikipedia', dl_preparing: 'Preparing...', dl_stop: 'Stop Download',
+        ctx_export: 'Export JSON', ctx_print: 'Print / PDF', ctx_fullscreen: 'Fullscreen', ctx_clear: 'Clear Chat', ctx_settings: 'Settings',
+        stat_chats: 'Chats', stat_quizzes: 'Quizzes', stat_tasks: 'Tasks', quick_access: 'Quick Access', nav_chat: 'Chat',
+        nav_bank: 'Question Bank', weekly_activity: 'Weekly Activity', quiz_topic: 'Quiz Topic', quiz_count: 'Number of Questions',
+        quiz_generate: '✨ Generate Quiz with AI', quiz_loading: 'Designing questions...', quiz_submit: 'Submit Answers',
+        quiz_retry: 'Retry Quiz', fc_generate: '✨ Generate 10 Flashcards with AI', fc_loading: 'Building...', fc_hard: 'Hard',
+        fc_easy: 'Easy', fc_back: '🔙 Back', tool_pomodoro: 'Pomodoro Timer', pomo_start: 'Start', tool_calc: 'Scientific Calculator',
+        about_desc: 'Final stable version with all technical issues resolved.', about_github: 'GitHub', about_support: 'Support',
+        profile_edit: '✏️ Edit Name', profile_logout: 'Logout & Clear Data', setting_offline_model: '🤖 Offline AI Model',
+        setting_download: 'Download', setting_online_model: '🌐 Online AI Model', setting_language: '🌍 Language',
+        setting_save: '💾 Save Settings', filter_all: 'All', filter_math: 'Math', filter_science: 'Science', filter_lit: 'Literature',
+        filter_history: 'History', filter_lang: 'Language'
+    },
+    ar: {
+        welcome: 'أهلاً بك!', profile_desc: 'الرجاء إدخال معلوماتك.', select_grade: 'اختر المرحلة الدراسية...',
+        grade_primary: 'ابتدائي', grade_middle: 'متوسط', grade_high: 'ثانوي', grade_uni: 'جامعة', graduated: 'خريج',
+        start_btn: 'ابدأ', app_name: 'أستاذ يار بلس', new_chat: 'محادثة جديدة', nav_home: 'الرئيسية', nav_quiz: 'اختبار',
+        nav_flash: 'بطاقات', nav_planner: 'المخطط', nav_tools: 'الأدوات', nav_about: 'عن التطبيق', dashboard: 'لوحة التحكم',
+        status_ready: 'جاهز', model_offline: '🧠 أستاذ يار (بدون إنترنت)', mode_local: '🧠 أستاذ يار (بدون إنترنت)',
+        mode_search: '🔍 بحث (DDG)', mode_wiki: '📚 ويكيبيديا', dl_preparing: 'جاري التحضير...', dl_stop: 'إيقاف التنزيل',
+        ctx_export: 'تصدير JSON', ctx_print: 'طباعة / PDF', ctx_fullscreen: 'ملء الشاشة', ctx_clear: 'مسح المحادثة', ctx_settings: 'الإعدادات',
+        stat_chats: 'المحادثات', stat_quizzes: 'الاختبارات', stat_tasks: 'المهام', quick_access: 'وصول سريع', nav_chat: 'محادثة',
+        nav_bank: 'بنك الأسئلة', weekly_activity: 'النشاط الأسبوعي', quiz_topic: 'موضوع الاختبار', quiz_count: 'عدد الأسئلة',
+        quiz_generate: '✨ إنشاء اختبار بالذكاء الاصطناعي', quiz_loading: 'جاري تصميم الأسئلة...', quiz_submit: 'تقديم الإجابات',
+        quiz_retry: 'إعادة الاختبار', fc_generate: '✨ إنشاء 10 بطاقات تعليمية', fc_loading: 'جاري البناء...', fc_hard: 'صعب',
+        fc_easy: 'سهل', fc_back: '🔙 رجوع', tool_pomodoro: 'مؤقت بومودورو', pomo_start: 'ابدأ', tool_calc: 'آلة حاسبة علمية',
+        about_desc: 'النسخة النهائية المستقرة مع حل جميع المشاكل التقنية.', about_github: 'جيت هاب', about_support: 'الدعم',
+        profile_edit: '✏️ تعديل الاسم', profile_logout: 'خروج ومسح البيانات', setting_offline_model: '🤖 نموذج ذكاء اصطناعي محلي',
+        setting_download: 'تنزيل', setting_online_model: '🌐 نموذج ذكاء اصطناعي أونلاين', setting_language: '🌍 اللغة',
+        setting_save: '💾 حفظ الإعدادات', filter_all: 'الكل', filter_math: 'رياضيات', filter_science: 'علوم', filter_lit: 'أدب',
+        filter_history: 'تاريخ', filter_lang: 'لغة'
+    }
 };
 
 // ============================================================
-// TRANSFORMERS.JS BACKEND V71 (FIXED SIGNAL & ABORT)
+// TRANSFORMERS.JS BACKEND V80 (FIXED DOWNLOAD)
 // ============================================================
 const TransformersAI = {
     pipeline: null,
@@ -620,7 +677,6 @@ const TransformersAI = {
         await this.init();
     },
 
-    // FIX #8: Proper Abort & State Reset
     abortDownload() {
         if(this.abortController) {
             this.abortController.abort();
@@ -641,11 +697,10 @@ const TransformersAI = {
             
             if (typeof transformers === 'undefined') throw new Error('Transformers.js library not loaded');
 
-            // FIX #3: Removed unsupported 'signal' parameter from pipeline options
-            // Abort is handled by checking isLoading flag or reloading page if stuck
+            // FIX: Removed unsupported 'signal' parameter from pipeline options
             this.pipeline = await transformers.pipeline('text2text-generation', this.modelName, {
                 progress_callback: (data) => {
-                    if (!this.isLoading) return; // Stop updating UI if aborted
+                    if (!this.isLoading) return; 
                     const bar = document.getElementById('dl-progress-bar');
                     const status = document.getElementById('dl-status-text');
                     
@@ -663,7 +718,6 @@ const TransformersAI = {
 
             this.isLoaded = true;
             this.isLoading = false;
-            // FIX #9: Correctly update status to active
             UI.updateAIStatus('active', 'Transformers.js');
             
             setTimeout(() => {
@@ -693,17 +747,15 @@ const TransformersAI = {
 };
 
 // ============================================================
-// OFFLINE AI MANAGER (FIX #5: Proper Init Check)
+// OFFLINE AI MANAGER
 // ============================================================
 const OfflineAIManager = {
     async init() {
-        // Check Ollama silently
         try {
             const r = await fetch('http://localhost:11434/api/tags', {signal: AbortSignal.timeout(1000)});
             if(r.ok) { UI.updateAIStatus('active', 'Ollama'); return; }
         } catch(e) {}
         
-        // Check if Transformers is already loaded (e.g. from cache)
         if(TransformersAI.isLoaded) {
              UI.updateAIStatus('active', 'Transformers.js');
              return;
@@ -712,7 +764,6 @@ const OfflineAIManager = {
         UI.updateAIStatus('inactive', 'مدل محلی');
     },
     async ask(question) {
-        // Try Ollama first
         try {
             const r = await fetch('http://localhost:11434/api/generate', {
                 method: 'POST', body: JSON.stringify({model:'phi', prompt:question, stream:false}),
@@ -721,20 +772,15 @@ const OfflineAIManager = {
             if(r.ok) { const d = await r.json(); if(d.response) return d.response; }
         } catch(e) {}
 
-        // Try Transformers
         if(TransformersAI.isLoaded) {
             const res = await TransformersAI.ask(question);
             if(res) return res;
         }
 
-        // Fallback
         return LocalAI.generate(question);
     }
 };
 
-// ============================================================
-// LOCAL AI FALLBACK
-// ============================================================
 const LocalAI = {
     generate(q) {
         return `🧠 **استاد یار (آفلاین):**
@@ -772,7 +818,7 @@ const Voice = {
 };
 
 // ============================================================
-// QUESTION BANK (FIX #14: Expanded Data)
+// QUESTION BANK
 // ============================================================
 const QuestionBank = {
     data:[
@@ -816,8 +862,13 @@ const QuestionBank = {
 const Calc={expression:'',input(v){if(v==='C')this.expression='';else this.expression+=v;document.getElementById('calc-display').textContent=this.expression||'0';},calc(){try{const s=this.expression.replace(/[^0-9+\-*/().]/g,'');if(!s)return;this.expression=String(new Function('return '+s)());document.getElementById('calc-display').textContent=this.expression;}catch{document.getElementById('calc-display').textContent='Error';this.expression='';}}};
 
 // ============================================================
-// CHAT ENGINE (FIX #1, #2, #6, #7, #15)
+// CHAT ENGINE V80 (FIXED SEARCH & SECURITY)
 // ============================================================
+const PURIFY_CONFIG = {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'i', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'div', 'span'],
+    ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'style']
+};
+
 const Chat = {
     sessions:[], currentId:null, history:[], isProcessing:false, pendingFile:null,
     async init(){this.sessions=await Storage.getAll('sessions');if(this.sessions.length)this.load(this.sessions.sort((a,b)=>b.date-a.date)[0].id);else this.newSession();UI.renderList();await UI.updateStats();},
@@ -829,17 +880,10 @@ const Chat = {
             const d=document.createElement('div');d.className=`message ${m.role}`;
             const b=document.createElement('div');b.className='bubble';
             if(m.role==='assistant'){
-                // FIX #15: Secure Sanitization
                 b.innerHTML = DOMPurify.sanitize(marked.parse(m.content), PURIFY_CONFIG);
-                
-                // FIX #2: Safe Highlighting
                 if (typeof hljs !== 'undefined') {
-                    b.querySelectorAll('pre code').forEach(bl => {
-                        try { hljs.highlightElement(bl); } catch(e) {}
-                    });
+                    b.querySelectorAll('pre code').forEach(bl => { try { hljs.highlightElement(bl); } catch(e) {} });
                 }
-                
-                // FIX #1: Safe Math Rendering
                 if (typeof renderMathInElement === 'function') {
                     try { renderMathInElement(b); } catch(e) {}
                 }
@@ -853,7 +897,6 @@ const Chat = {
     },
     copy(i){const t=this.history[i]?.content;if(t)navigator.clipboard.writeText(t).then(()=>Toast.show('کپی شد','success'));},
     
-    // FIX #6: Robust OCR Handling
     async handleFileUpload(input){
         const file=input.files[0];if(!file)return;
         if(!file.type.startsWith('image/')){Toast.show('فقط تصاویر','warning');return;}
@@ -886,7 +929,7 @@ const Chat = {
         let res = '';
         const mode = document.getElementById('ai-mode-select').value;
         
-        // FIX #7: Real Search Implementation
+        // FIXED REAL SEARCH V80
         if(mode === 'search') {
             this.history.push({role:'assistant',content:'🔍 در حال جستجو...'});
             this.render();
@@ -922,7 +965,7 @@ const Chat = {
 };
 
 // ============================================================
-// QUIZ & FLASHCARDS (FIX #11: Restored Full Logic)
+// QUIZ & FLASHCARDS
 // ============================================================
 const Quiz={
     questions:[],answers:{},submitted:false,
@@ -1099,7 +1142,7 @@ const Flashcards={
 const Planner={tasks:[],async init(){this.tasks=await Storage.getAll('tasks');this.render();},async add(){const inp=document.getElementById('task-input'),date=document.getElementById('task-date'),text=inp.value.trim();if(!text)return;const task={id:Date.now(),text,date:date.value||'',done:false};this.tasks.push(task);await Storage.put('tasks',task);inp.value='';this.render();},async toggle(id){const t=this.tasks.find(x=>x.id===id);if(t){t.done=!t.done;await Storage.put('tasks',t);this.render();}},async delete(id){this.tasks=this.tasks.filter(t=>t.id!==id);await Storage.delete('tasks',id);this.render();},render(){const c=document.getElementById('planner-list');if(!c)return;c.innerHTML=this.tasks.sort((a,b)=>a.done-b.done).map(t=>`<div class="task-item ${t.done?'completed':''}"><div class="task-check" onclick="Planner.toggle(${t.id})">${t.done?'✓':''}</div><div style="flex:1;">${t.text}</div><button class="btn" style="background:none;color:var(--danger);padding:4px;" onclick="Planner.delete(${t.id})">✕</button></div>`).join('');}};
 
 // ============================================================
-// POMODORO V71 (FIX #12: Visibility Aware Timer)
+// POMODORO V80
 // ============================================================
 const Pomodoro = {
     seconds: 25*60, running: false, isBreak: false, timer: null, lastTick: 0,
@@ -1149,7 +1192,7 @@ const Pomodoro = {
 };
 
 // ============================================================
-// WHITEBOARD (FIX #13: Retina Display Support)
+// WHITEBOARD V80 (RETINA READY)
 // ============================================================
 const WB = {
     cvs:null,ctx:null,drawing:false,tool:'pen',color:'#ffffff',hist:[],
@@ -1159,12 +1202,10 @@ const WB = {
         const rect=this.cvs.parentElement.getBoundingClientRect();
         const dpr = window.devicePixelRatio || 1;
         
-        // Save current content
         const temp=document.createElement('canvas');
         temp.width=this.cvs.width; temp.height=this.cvs.height;
         temp.getContext('2d').drawImage(this.cvs,0,0);
         
-        // Resize with DPR
         this.cvs.width=rect.width * dpr;
         this.cvs.height=rect.height * dpr;
         this.cvs.style.width = rect.width + 'px';
@@ -1186,7 +1227,7 @@ const WB = {
 };
 
 // ============================================================
-// UI CONTROLLER
+// UI CONTROLLER V80
 // ============================================================
 const UI = {
     nav(view,el){
@@ -1198,7 +1239,6 @@ const UI = {
         const titles={home:'داشبورد',chat:'گفتگو',quiz:'آزمون',flashcards:'فلش‌کارت',planner:'برنامه‌ریزی',tools:'جعبه ابزار',profile:'پروفایل',bank:'بانک سوالات',about:'درباره ما'};
         document.getElementById('page-title').textContent=titles[view]||'استاد یار پلاس';
         
-        // FIX #10: Show/Hide Header Model Select properly
         const ms=document.getElementById('header-model-select');
         if(view==='chat')ms.style.display='block';else ms.style.display='none';
         
@@ -1219,6 +1259,16 @@ const UI = {
     closeSettings(){document.getElementById('settings-modal').classList.remove('open');},
     toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen();},
     async setTheme(theme){document.body.setAttribute('data-theme',theme);await Storage.put('settings',{id:'config',theme});Toast.show(`تم ${theme}`,'success');},
+    setLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+        const dict = I18N[lang] || I18N.fa;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) el.textContent = dict[key];
+        });
+        Storage.put('settings', {id:'config', lang});
+    },
     updateAIStatus(status, text) {
         const badge = document.getElementById('ai-status-indicator');
         const textEl = document.getElementById('ai-status-text');
@@ -1230,13 +1280,13 @@ const UI = {
 };
 
 // ============================================================
-// STORAGE HELPER (FIX #4: Save Mode)
+// STORAGE HELPER V80
 // ============================================================
 const Storage = {
     db: null,
     async init() {
         return new Promise((resolve) => {
-            const req = indexedDB.open('OstadYarDB_v71', 1);
+            const req = indexedDB.open('OstadYarDB_v80', 1);
             req.onupgradeneeded = e => {
                 const db = e.target.result;
                 ['settings','sessions','quizzes','tasks','flashcards'].forEach(s=>{if(!db.objectStoreNames.contains(s))db.createObjectStore(s,{keyPath:'id'});});
@@ -1257,7 +1307,8 @@ const Storage = {
             apiKey: document.getElementById('api-key-input').value, 
             model: document.getElementById('ai-model-select').value, 
             offlineModel: document.getElementById('offline-model-select').value, 
-            mode: document.getElementById('ai-mode-select').value, // FIX #4
+            mode: document.getElementById('ai-mode-select').value,
+            lang: document.getElementById('language-select').value,
             theme: document.body.getAttribute('data-theme') 
         };
         await this.put('settings', cfg);
@@ -1278,7 +1329,7 @@ const Profile = {
 const Toast = { show(msg, type='info') { const c=document.getElementById('toast-container'); const t=document.createElement('div'); t.className='toast'; t.style.borderInlineStartColor=type==='error'?'var(--danger)':type==='success'?'var(--success)':'var(--info)'; t.innerHTML=`<span>${msg}</span>`; c.appendChild(t); setTimeout(()=>t.remove(), 3000); } };
 
 // ============================================================
-// INITIALIZATION
+// INITIALIZATION V80
 // ============================================================
 document.addEventListener('DOMContentLoaded', async () => {
     await Storage.init();
@@ -1290,13 +1341,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (cfg.theme) document.body.setAttribute('data-theme', cfg.theme);
     if (cfg.proxy) document.getElementById('proxy-url').value = cfg.proxy;
     if (cfg.mode) document.getElementById('ai-mode-select').value = cfg.mode;
+    if (cfg.lang) { 
+        document.getElementById('language-select').value = cfg.lang; 
+        UI.setLanguage(cfg.lang);
+    }
     if (cfg.model) { 
         document.getElementById('ai-model-select').value = cfg.model; 
         document.getElementById('header-model-select').value = cfg.model; 
     }
     if (cfg.offlineModel) document.getElementById('offline-model-select').value = cfg.offlineModel;
     
-    // FIX #10: Sync Model Selectors
     const syncModel = (e) => { 
         const v = e.target.value; 
         document.getElementById('ai-model-select').value = v; 
@@ -1315,7 +1369,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     document.addEventListener('click', e => { if (!e.target.closest('#ctx-toggle') && !e.target.closest('#ctx-menu')) UI.closeContextMenu(); });
     
-    Toast.show('🚀 استاد یار پلاس v71 آماده است!', 'success');
+    Toast.show('🚀 استاد یار پلاس v80 آماده است!', 'success');
 });
 </script>
 </body>
