@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>استاد یار پلاس | v104.0 Ultimate</title>
-<meta name="theme-color" content="#0f172a">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<title>استاد یار پلاس | v105.0 Ultimate</title>
+<meta name="theme-color" content="#0a1020">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
 
 <script>
 try {
@@ -26,84 +26,92 @@ try {
 
 <style>
 /* ============================================================
-   THEMES — 5 حالته
+   5 THEME — فیروزه‌ای / زعفرانی (الهام از هنر ایرانی)
 ============================================================ */
 :root{
-  --bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--glass:rgba(30,41,59,.86);
-  --primary:#6366f1;--primary2:#818cf8;--accent:#fbbf24;--text:#f8fafc;
-  --muted:#94a3b8;--border:rgba(255,255,255,.08);--success:#22c55e;
-  --danger:#ef4444;--warning:#f59e0b;--info:#0ea5e9;
-  --r:16px;--r2:12px;--r3:8px;--user-bg:rgba(99,102,241,.15);
-  --glow:rgba(99,102,241,.14);--glow2:rgba(14,165,233,.10);
+  --bg:#0a1020;--bg2:#101a30;--bg3:#1b2942;--glass:rgba(16,26,48,.88);
+  --primary:#14b8a6;--primary2:#2dd4bf;--accent:#f59e0b;--accent2:#fbbf24;
+  --text:#f1f5f9;--muted:#8fa3bf;--border:rgba(148,163,184,.14);
+  --success:#22c55e;--danger:#ef4444;--warning:#f59e0b;--info:#38bdf8;
+  --r:16px;--r2:12px;--r3:8px;--user-bg:rgba(20,184,166,.14);
+  --glow:rgba(20,184,166,.16);--glow2:rgba(245,158,11,.10);--glow3:rgba(56,189,248,.08);
+  --display:'Lalezar',cursive;--body:'Vazirmatn',sans-serif;
 }
 html[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--glass:rgba(30,41,59,.86);
-  --primary:#6366f1;--primary2:#818cf8;--accent:#fbbf24;--text:#f8fafc;
-  --muted:#94a3b8;--border:rgba(255,255,255,.08);--success:#22c55e;
-  --danger:#ef4444;--warning:#f59e0b;--info:#0ea5e9;--user-bg:rgba(99,102,241,.15);
-  --glow:rgba(99,102,241,.14);--glow2:rgba(14,165,233,.10);
+  --bg:#0a1020;--bg2:#101a30;--bg3:#1b2942;--glass:rgba(16,26,48,.88);
+  --primary:#14b8a6;--primary2:#2dd4bf;--accent:#f59e0b;--accent2:#fbbf24;
+  --text:#f1f5f9;--muted:#8fa3bf;--border:rgba(148,163,184,.14);
+  --success:#22c55e;--danger:#ef4444;--warning:#f59e0b;--info:#38bdf8;
+  --user-bg:rgba(20,184,166,.14);
+  --glow:rgba(20,184,166,.16);--glow2:rgba(245,158,11,.10);--glow3:rgba(56,189,248,.08);
 }
 html[data-theme="light"]{
   color-scheme:light;
-  --bg:#eef2f7;--bg2:#ffffff;--bg3:#dbe3ee;--glass:rgba(255,255,255,.92);
-  --primary:#4f46e5;--primary2:#6366f1;--accent:#b45309;--text:#0f172a;
-  --muted:#475569;--border:rgba(15,23,42,.14);--success:#16a34a;
-  --danger:#dc2626;--warning:#d97706;--info:#0284c7;--user-bg:rgba(79,70,229,.12);
-  --glow:rgba(79,70,229,.10);--glow2:rgba(2,132,199,.08);
+  --bg:#f2f6f5;--bg2:#ffffff;--bg3:#e2ece9;--glass:rgba(255,255,255,.92);
+  --primary:#0d9488;--primary2:#14b8a6;--accent:#b45309;--accent2:#d97706;
+  --text:#0f172a;--muted:#475569;--border:rgba(15,23,42,.14);
+  --success:#16a34a;--danger:#dc2626;--warning:#d97706;--info:#0284c7;
+  --user-bg:rgba(13,148,136,.12);
+  --glow:rgba(13,148,136,.10);--glow2:rgba(180,83,9,.08);--glow3:rgba(2,132,199,.06);
 }
 html[data-theme="night"]{
   color-scheme:dark;
-  --bg:#000000;--bg2:#09090b;--bg3:#18181b;--glass:rgba(9,9,11,.88);
-  --primary:#8b5cf6;--primary2:#a78bfa;--accent:#f59e0b;--text:#f4f4f5;
-  --muted:#a1a1aa;--border:rgba(255,255,255,.12);--success:#4ade80;
-  --danger:#f87171;--warning:#fbbf24;--info:#38bdf8;--user-bg:rgba(139,92,246,.16);
-  --glow:rgba(139,92,246,.12);--glow2:rgba(56,189,248,.08);
+  --bg:#000000;--bg2:#0a0a0c;--bg3:#16161a;--glass:rgba(8,8,10,.9);
+  --primary:#2dd4bf;--primary2:#5eead4;--accent:#fbbf24;--accent2:#fcd34d;
+  --text:#f4f4f5;--muted:#a1a1aa;--border:rgba(255,255,255,.12);
+  --success:#4ade80;--danger:#f87171;--warning:#fbbf24;--info:#38bdf8;
+  --user-bg:rgba(45,212,191,.14);
+  --glow:rgba(45,212,191,.12);--glow2:rgba(251,191,36,.08);--glow3:rgba(56,189,248,.06);
 }
 html[data-theme="sepia"]{
   color-scheme:light;
-  --bg:#f7eede;--bg2:#fff8ec;--bg3:#ead9bf;--glass:rgba(255,248,236,.92);
-  --primary:#9a3412;--primary2:#c2410c;--accent:#a16207;--text:#431407;
-  --muted:#78350f;--border:rgba(67,20,7,.16);--success:#15803d;
-  --danger:#b91c1c;--warning:#b45309;--info:#0369a1;--user-bg:rgba(154,52,18,.12);
-  --glow:rgba(154,52,18,.08);--glow2:rgba(161,98,7,.08);
+  --bg:#f5ecdc;--bg2:#fdf6e8;--bg3:#e8d9bd;--glass:rgba(253,246,232,.92);
+  --primary:#0f766e;--primary2:#0d9488;--accent:#a16207;--accent2:#ca8a04;
+  --text:#3f2d16;--muted:#78603e;--border:rgba(63,45,22,.16);
+  --success:#15803d;--danger:#b91c1c;--warning:#b45309;--info:#0369a1;
+  --user-bg:rgba(15,118,110,.12);
+  --glow:rgba(15,118,110,.08);--glow2:rgba(161,98,7,.08);--glow3:rgba(3,105,161,.05);
 }
 html[data-theme="ocean"]{
   color-scheme:dark;
-  --bg:#022c3a;--bg2:#053f52;--bg3:#07586e;--glass:rgba(2,44,58,.88);
-  --primary:#06b6d4;--primary2:#22d3ee;--accent:#facc15;--text:#e0f2fe;
-  --muted:#7dd3fc;--border:rgba(224,242,254,.14);--success:#34d399;
-  --danger:#fb7185;--warning:#fbbf24;--info:#38bdf8;--user-bg:rgba(6,182,212,.16);
-  --glow:rgba(6,182,212,.14);--glow2:rgba(56,189,248,.10);
+  --bg:#03222e;--bg2:#063445;--bg3:#0a4a5f;--glass:rgba(3,34,46,.9);
+  --primary:#22d3ee;--primary2:#67e8f9;--accent:#facc15;--accent2:#fde047;
+  --text:#e0f2fe;--muted:#7dd3fc;--border:rgba(224,242,254,.14);
+  --success:#34d399;--danger:#fb7185;--warning:#fbbf24;--info:#38bdf8;
+  --user-bg:rgba(34,211,238,.14);
+  --glow:rgba(34,211,238,.16);--glow2:rgba(250,204,21,.08);--glow3:rgba(56,189,248,.10);
 }
 
 /* ============================================================
-   BASE
+   BASE + AMBIENT LAYERED BACKGROUND
 ============================================================ */
 *{box-sizing:border-box;margin:0;padding:0;outline:none;-webkit-tap-highlight-color:transparent}
 body{
-  font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);
+  font-family:var(--body);background:var(--bg);color:var(--text);
   height:100dvh;overflow:hidden;font-size:15px;line-height:1.7;
 }
 body::before{
   content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:
-    radial-gradient(1000px 620px at 88% -12%, var(--glow), transparent 62%),
-    radial-gradient(820px 540px at -12% 112%, var(--glow2), transparent 62%),
+    radial-gradient(1100px 700px at 90% -15%, var(--glow), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, var(--glow2), transparent 60%),
+    radial-gradient(700px 500px at 50% 120%, var(--glow3), transparent 60%),
     var(--bg);
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:radial-gradient(rgba(148,163,184,.08) 1px, transparent 1px);
+  background-image:radial-gradient(rgba(148,163,184,.09) 1px, transparent 1px);
   background-size:26px 26px;
-  -webkit-mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);
-  mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);
+  mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);
 }
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
 ::-webkit-scrollbar-thumb:hover{background:var(--muted)}
-button,input,textarea,select{font-family:inherit}
+button,input,textarea,select{font-family:var(--body)}
 .hidden{display:none!important}
+.display{font-family:var(--display);font-weight:400;letter-spacing:.01em}
 
 /* ============================================================
    LAYOUT
@@ -116,7 +124,7 @@ button,input,textarea,select{font-family:inherit}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .header{
   padding:.6rem 1rem;border-bottom:1px solid var(--border);background:var(--glass);
-  backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center;
+  backdrop-filter:blur(14px);display:flex;justify-content:space-between;align-items:center;
   flex-shrink:0;gap:10px;
 }
 .content{flex:1;overflow-y:auto;padding:1.1rem;scroll-behavior:smooth}
@@ -125,18 +133,19 @@ button,input,textarea,select{font-family:inherit}
    COMPONENTS
 ============================================================ */
 .btn{
-  border:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;
+  border:none;cursor:pointer;font-family:var(--body);display:inline-flex;align-items:center;
   justify-content:center;gap:7px;padding:10px 16px;border-radius:var(--r2);
-  background:var(--bg3);color:var(--text);font-size:.9rem;transition:.18s;min-height:40px;
-  border:1px solid transparent;
+  background:var(--bg3);color:var(--text);font-size:.9rem;font-weight:600;transition:.18s;
+  min-height:40px;border:1px solid transparent;
 }
 .btn:hover{opacity:.92;transform:translateY(-1px);border-color:var(--border)}
-.btn:active{transform:translateY(0) scale(.98)}
+.btn:active{transform:translateY(0) scale(.97)}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:700;box-shadow:0 6px 18px -8px var(--primary)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#04211d;font-weight:800;box-shadow:0 8px 20px -8px var(--primary)}
 .btn-success{background:linear-gradient(135deg,var(--success),#16a34a);color:#fff;font-weight:700}
 .btn-danger{background:linear-gradient(135deg,var(--danger),#b91c1c);color:#fff;font-weight:700}
 .btn-warning{background:linear-gradient(135deg,var(--warning),#d97706);color:#fff;font-weight:700}
+.btn-accent{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#2b1a02;font-weight:800;box-shadow:0 8px 20px -8px var(--accent)}
 .btn-icon{width:40px;height:40px;border-radius:50%;padding:0}
 .btn svg{width:18px;height:18px;fill:currentColor}
 
@@ -145,15 +154,15 @@ button,input,textarea,select{font-family:inherit}
   padding:1.25rem;margin-bottom:1rem;backdrop-filter:blur(10px);
   transition:transform .2s,border-color .2s,box-shadow .2s;
 }
-.card:hover{border-color:rgba(99,102,241,.28)}
-.card.lift:hover{transform:translateY(-3px);box-shadow:0 16px 34px -18px rgba(0,0,0,.5)}
+.card:hover{border-color:rgba(20,184,166,.3)}
+.card.lift:hover{transform:translateY(-3px);box-shadow:0 18px 38px -18px rgba(0,0,0,.55)}
 
 .input{
   width:100%;padding:12px 15px;background:var(--bg);border:1px solid var(--border);
-  border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:.9rem;
+  border-radius:var(--r2);color:var(--text);font-family:var(--body);font-size:.9rem;
   margin-bottom:.8rem;transition:.2s;
 }
-.input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.18)}
+.input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(20,184,166,.18)}
 select.input{cursor:pointer}
 .small{color:var(--muted);font-size:.82rem;line-height:1.8}
 
@@ -163,61 +172,70 @@ select.input{cursor:pointer}
 }
 .badge.success{border-color:var(--success);color:var(--success)}
 .badge.warning{border-color:var(--warning);color:var(--warning)}
+.badge.accent{border-color:var(--accent);color:var(--accent)}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* ============================================================
-   SIDEBAR NAV
+   SIDEBAR / NAV
 ============================================================ */
-.brand{padding:1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.brand{padding:1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
 .brand-logo{
-  width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));flex-shrink:0;
-  box-shadow:0 8px 20px -8px var(--primary);
+  width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));flex-shrink:0;
+  box-shadow:0 10px 24px -8px var(--primary);animation:logoFloat 5s ease-in-out infinite;
 }
-.brand-title{font-weight:900;font-size:1.15rem;letter-spacing:-.02em}
-.brand-sub{font-size:.68rem;color:var(--muted);font-weight:600}
+@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(3deg)}}
+.brand-title{font-family:var(--display);font-size:1.5rem;line-height:1.1;color:var(--primary2)}
+.brand-sub{font-size:.66rem;color:var(--muted);font-weight:700;letter-spacing:.06em}
 
 .nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:.8rem}
 .nav-btn{
   display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 4px;
   border-radius:var(--r3);background:none;border:1px solid transparent;color:var(--muted);
-  cursor:pointer;font-family:inherit;font-size:.66rem;font-weight:600;transition:.18s;
+  cursor:pointer;font-family:var(--body);font-size:.66rem;font-weight:700;transition:.18s;
 }
 .nav-btn svg{width:20px;height:20px;fill:currentColor;transition:.18s}
 .nav-btn:hover{background:var(--bg3);color:var(--text)}
 .nav-btn:hover svg{transform:translateY(-2px)}
-.nav-btn.active{background:rgba(99,102,241,.14);color:var(--primary);border-color:rgba(99,102,241,.3)}
+.nav-btn.active{background:rgba(20,184,166,.14);color:var(--primary2);border-color:rgba(20,184,166,.32)}
 
 .chat-item{
   padding:10px 12px;border-radius:10px;color:var(--muted);cursor:pointer;display:flex;
   align-items:center;gap:8px;margin-bottom:4px;font-size:.84rem;border:1px solid transparent;
   transition:.15s;
 }
-.chat-item:hover{background:var(--bg3);color:var(--text)}
-.chat-item.active{background:rgba(99,102,241,.12);color:var(--primary);border-color:rgba(99,102,241,.25)}
+.chat-item:hover{background:var(--bg3);color:var(--text);transform:translateX(-3px)}
+.chat-item.active{background:rgba(20,184,166,.12);color:var(--primary2);border-color:rgba(20,184,166,.25)}
 
 /* ============================================================
    VIEWS
 ============================================================ */
 .view{display:none}
-.view.active{display:block;animation:viewIn .3s ease}
-@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
+.view.active{display:block;animation:viewIn .32s ease}
+@keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .page-head{margin-bottom:1.1rem}
-.page-head h2{font-weight:900;font-size:1.6rem;letter-spacing:-.02em}
+.page-head h2{font-family:var(--display);font-size:2.1rem;line-height:1.1;color:var(--text)}
+.page-head h2 em{font-style:normal;color:var(--accent)}
 .page-head p{color:var(--muted);font-size:.85rem;margin-top:2px}
 
 /* ============================================================
-   HOME
+   HOME — STATUS STRIP
 ============================================================ */
+.status-strip{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  background:linear-gradient(120deg,rgba(20,184,166,.12),rgba(245,158,11,.08));
+  border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:1rem;
+}
+.clock-big{font-family:var(--display);font-size:2.4rem;line-height:1;color:var(--primary2);font-variant-numeric:tabular-nums}
+.date-fa{color:var(--muted);font-size:.85rem;font-weight:600}
 .stat-card{text-align:center;position:relative;overflow:hidden}
 .stat-card::after{
   content:"";position:absolute;inset-inline-start:-30%;bottom:-55%;width:90%;height:90%;
   background:radial-gradient(circle,var(--glow),transparent 70%);pointer-events:none;
 }
-.stat-num{font-size:2.3rem;font-weight:900;color:var(--primary);letter-spacing:-.03em;line-height:1.2}
-.stat-label{color:var(--muted);font-size:.82rem;font-weight:600}
+.stat-num{font-family:var(--display);font-size:2.8rem;color:var(--primary2);line-height:1.15}
+.stat-label{color:var(--muted);font-size:.82rem;font-weight:700}
 
 /* ============================================================
    CHAT
@@ -241,7 +259,7 @@ select.input{cursor:pointer}
   color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;
   font-size:.7rem;transition:.15s;
 }
-.msg-action:hover{color:var(--primary);border-color:var(--primary);transform:translateY(-1px)}
+.msg-action:hover{color:var(--primary2);border-color:var(--primary);transform:translateY(-1px)}
 .msg-attachments{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 .file-chip{
   display:inline-flex;align-items:center;gap:6px;background:rgba(15,23,42,.7);
@@ -251,7 +269,7 @@ select.input{cursor:pointer}
 .chat-input-zone{padding:.8rem 1rem;border-top:1px solid var(--border);background:var(--glass);display:flex;gap:8px;align-items:flex-end}
 .chat-input{
   flex:1;background:var(--bg);border:1px solid var(--border);border-radius:var(--r);
-  padding:10px 14px;color:var(--text);font-family:inherit;font-size:.95rem;resize:none;
+  padding:10px 14px;color:var(--text);font-family:var(--body);font-size:.95rem;resize:none;
   max-height:120px;min-height:44px;transition:border-color .2s;
 }
 .chat-input:focus{border-color:var(--primary)}
@@ -281,76 +299,105 @@ select.input{cursor:pointer}
 .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem}
 .role-btn{min-height:132px;flex-direction:column;font-size:1.05rem;font-weight:800}
 .role-btn span{font-size:2.5rem;transition:.2s}
-.role-btn:hover span{transform:scale(1.15) rotate(-6deg)}
+.role-btn:hover span{transform:scale(1.18) rotate(-6deg)}
+
 .classroom-active{display:none;height:calc(100dvh - 140px);flex-direction:column;gap:10px}
 .classroom-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0}
 .classroom-tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tab-btn{
   padding:9px 13px;border-radius:11px;background:var(--bg3);border:1px solid var(--border);
-  color:var(--text);cursor:pointer;font-size:.84rem;font-weight:600;transition:.18s;
+  color:var(--text);cursor:pointer;font-size:.84rem;font-weight:700;transition:.18s;position:relative;
 }
-.tab-btn:hover{border-color:var(--primary)}
-.tab-btn.active{background:var(--primary);color:#fff;font-weight:700;box-shadow:0 6px 16px -8px var(--primary)}
+.tab-btn:hover{border-color:var(--primary);transform:translateY(-1px)}
+.tab-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#04211d;box-shadow:0 8px 18px -8px var(--primary)}
+.tab-btn .dot{position:absolute;top:-3px;left:-3px;width:9px;height:9px;border-radius:50%;background:var(--accent);display:none;animation:blink 1.2s infinite}
+.tab-btn.has-new .dot{display:block}
+
 .classroom-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 340px;gap:10px}
-#jitsi-container{min-height:0;background:#000;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);position:relative}
-#jitsi-container iframe{width:100%;height:100%;border:0}
 .classroom-side{min-height:0;overflow:auto;margin:0}
+
+/* panels — فقط با کلاس، بدون style اینلاین */
+.panel{display:none;height:100%;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem;overflow:auto}
+.panel.active{display:block}
+#tab-media.panel{padding:0;overflow:hidden}
+#tab-media.panel.active{display:flex;flex-direction:column}
+#tab-board.panel{padding:0;overflow:hidden}
+#tab-board.panel.active{display:block}
+
+#jitsi-container{flex:1;min-height:0;background:#000;position:relative}
+#jitsi-container iframe{width:100%;height:100%;border:0}
+.media-controls{display:flex;gap:8px;flex-wrap:wrap;padding:10px;background:var(--bg2);border-bottom:1px solid var(--border)}
+#board-frame{width:100%;height:100%;border:0;background:#fff;border-radius:12px}
+
 .code-pill{
-  font-family:monospace;font-size:.95rem;font-weight:900;color:var(--accent);background:var(--bg);
-  border:1px dashed var(--primary);padding:5px 12px;border-radius:11px;letter-spacing:2px;
+  font-family:monospace;font-size:.95rem;font-weight:900;color:var(--accent2);background:var(--bg);
+  border:1px dashed var(--accent);padding:5px 12px;border-radius:11px;letter-spacing:2px;
 }
 .code-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.code-box{background:var(--bg);border:1px dashed var(--primary);border-radius:14px;padding:12px;text-align:center}
-.code-value{font-family:monospace;font-size:1.5rem;font-weight:900;color:var(--accent);letter-spacing:3px;margin:6px 0}
+.code-box{background:var(--bg);border:1px dashed var(--accent);border-radius:14px;padding:12px;text-align:center}
+.code-value{font-family:var(--display);font-size:1.9rem;color:var(--accent2);letter-spacing:3px;margin:6px 0}
 .link-box{
   background:var(--bg);border:1px solid var(--border);border-radius:var(--r2);padding:11px;
   margin:8px 0;font-family:monospace;font-size:.8rem;direction:ltr;text-align:left;
-  word-break:break-all;color:#dbeafe;
+  word-break:break-all;color:#99f6e4;
 }
 .qr-box{display:flex;justify-content:center;margin:12px 0}
 .qr-box img{border-radius:12px;border:4px solid #fff}
 .hint{
-  color:var(--muted);font-size:.8rem;line-height:1.9;background:rgba(14,165,233,.07);
-  border:1px solid rgba(14,165,233,.18);border-radius:12px;padding:10px 12px;
+  color:var(--muted);font-size:.8rem;line-height:1.9;background:rgba(56,189,248,.07);
+  border:1px solid rgba(56,189,248,.18);border-radius:12px;padding:10px 12px;
 }
-.media-controls{display:flex;gap:8px;flex-wrap:wrap;padding:10px;background:var(--bg2);border-bottom:1px solid var(--border);border-radius:var(--r) var(--r) 0 0}
-#tab-media{display:none;flex-direction:column;padding:0;overflow:hidden}
-#tab-media.active{display:flex}
-#tab-board{padding:0;overflow:hidden}
-#board-frame{width:100%;height:100%;border:0;background:#fff;border-radius:12px}
+
 .chat-box{display:flex;flex-direction:column;height:100%}
 .chat-messages-class{flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
 .chat-msg{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:10px 12px;max-width:85%;animation:msgIn .2s ease}
-.chat-msg.teacher{border-color:rgba(99,102,241,.4);background:rgba(99,102,241,.08)}
+.chat-msg.teacher{border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.08)}
 .chat-msg.self{align-self:flex-end}
 .chat-meta{display:flex;justify-content:space-between;gap:10px;font-size:.72rem;color:var(--muted);margin-bottom:6px}
 .chat-text{white-space:pre-wrap;word-break:break-word;line-height:1.7}
 .chat-input-row{display:flex;gap:8px}
-.file-list,.hand-list,.attendance-list,.poll-box{display:flex;flex-direction:column;gap:10px}
+
+.file-list,.hand-list,.attendance-list,.poll-box,.announce-list,.hw-list,.points-list{display:flex;flex-direction:column;gap:10px}
 .file-item{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px;animation:msgIn .2s ease}
 .file-thumb{width:56px;height:56px;border-radius:12px;object-fit:cover;border:1px solid var(--border)}
 .file-icon{width:56px;height:56px;border-radius:12px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
 .file-body{flex:1;min-width:0}
 .file-name{font-weight:700;word-break:break-word}
 .file-sub{color:var(--muted);font-size:.78rem;margin-top:4px}
+
 .hand-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px;flex-wrap:wrap;animation:msgIn .2s ease}
 .hand-status{padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:700}
 .status-waiting{background:rgba(245,158,11,.14);color:var(--warning);border:1px solid rgba(245,158,11,.3)}
 .status-approved{background:rgba(34,197,94,.14);color:var(--success);border:1px solid rgba(34,197,94,.3)}
 .status-revoked{background:rgba(239,68,68,.14);color:var(--danger);border:1px solid rgba(239,68,68,.3)}
+
 .poll-option{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;transition:.18s}
 .poll-option:hover{border-color:var(--primary);transform:translateX(-2px)}
 .poll-bar-wrap{background:var(--bg);border:1px solid var(--border);border-radius:10px;height:16px;overflow:hidden;margin-top:8px}
-.poll-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));width:0;transition:width .4s ease}
+.poll-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));width:0;transition:width .4s ease}
+
+.announce-item{background:linear-gradient(120deg,rgba(245,158,11,.12),rgba(245,158,11,.04));border:1px solid rgba(245,158,11,.3);border-radius:14px;padding:14px;animation:msgIn .25s ease}
+.announce-item .title{font-family:var(--display);font-size:1.2rem;color:var(--accent2)}
+
+.hw-item{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;animation:msgIn .25s ease}
+.hw-item .title{font-weight:800;color:var(--primary2)}
+
+.points-row{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:10px 14px}
+.points-score{font-family:var(--display);font-size:1.5rem;color:var(--accent2)}
+
+.timer-display{font-family:var(--display);font-size:4.5rem;text-align:center;color:var(--primary2);font-variant-numeric:tabular-nums;line-height:1.1}
+
 .emoji-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:10px}
 .emoji-btn{font-size:2rem;min-height:72px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;cursor:pointer;transition:.15s}
-.emoji-btn:hover{transform:scale(1.1) rotate(6deg);border-color:var(--primary)}
+.emoji-btn:hover{transform:scale(1.12) rotate(6deg);border-color:var(--accent)}
 #emoji-layer{position:fixed;inset:0;pointer-events:none;z-index:12000;overflow:hidden}
 .float-emoji{position:absolute;bottom:-50px;font-size:2.5rem;animation:floatUp 3s ease-out forwards;filter:drop-shadow(0 8px 18px rgba(0,0,0,.25))}
 @keyframes floatUp{to{transform:translateY(-115vh) scale(1.4);opacity:0}}
+
 .stat-mini{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
-.stat-mini b{display:block;font-size:1.4rem;color:var(--primary);font-weight:900}
+.stat-mini b{display:block;font-family:var(--display);font-size:1.7rem;color:var(--primary2)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 
 /* ============================================================
    TOOLS
@@ -363,10 +410,10 @@ select.input{cursor:pointer}
 }
 .calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .calc-btn{padding:14px;border-radius:var(--r3);background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:1.1rem;cursor:pointer;transition:.15s}
-.calc-btn:hover{background:var(--primary);color:#fff;transform:translateY(-1px)}
+.calc-btn:hover{background:var(--primary);color:#04211d;transform:translateY(-1px)}
 .calc-btn.op{color:var(--accent);font-weight:bold}
-.calc-btn.eq{background:var(--primary);color:#fff;grid-column:span 2}
-.pomo-display{font-size:3.6rem;font-weight:900;font-variant-numeric:tabular-nums;color:var(--primary);text-align:center;margin:1rem 0;letter-spacing:-.02em}
+.calc-btn.eq{background:var(--primary);color:#04211d;grid-column:span 2}
+.pomo-display{font-family:var(--display);font-size:4rem;color:var(--primary2);text-align:center;margin:1rem 0;font-variant-numeric:tabular-nums}
 .qr-output{display:flex;justify-content:center;margin:1rem 0}
 .qr-output canvas,.qr-output img{border-radius:12px;border:4px solid #fff}
 .plot-canvas{width:100%;height:320px;background:#0b1220;border:1px solid var(--border);border-radius:12px}
@@ -374,7 +421,7 @@ select.input{cursor:pointer}
 .wb-canvas{width:100%;height:100%;cursor:crosshair;display:block}
 .wb-tools{position:absolute;top:10px;inset-inline-start:10px;display:flex;gap:6px;background:var(--bg2);padding:6px;border-radius:30px;border:1px solid var(--border);flex-wrap:wrap;align-items:center}
 .wb-tool{width:32px;height:32px;border-radius:50%;border:none;background:transparent;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
-.wb-tool:hover,.wb-tool.active{background:var(--primary);color:#fff}
+.wb-tool:hover,.wb-tool.active{background:var(--primary);color:#04211d}
 .wb-color{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);cursor:pointer;transition:.15s}
 .wb-color:hover,.wb-color.active{border-color:#fff;transform:scale(1.15)}
 
@@ -382,21 +429,21 @@ select.input{cursor:pointer}
    FACTS / QUIZ / FLASHCARDS / BANK
 ============================================================ */
 .fact-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.8rem;transition:.2s}
-.fact-card:hover{transform:translateY(-2px);border-color:var(--primary)}
-.fact-cat{display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(99,102,241,.15);color:var(--primary);font-size:.7rem;font-weight:700;margin-bottom:6px}
+.fact-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.fact-cat{display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(245,158,11,.15);color:var(--accent2);font-size:.7rem;font-weight:700;margin-bottom:6px}
 .quiz-option{padding:12px 16px;border:2px solid var(--border);border-radius:var(--r2);cursor:pointer;transition:.18s;display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .quiz-option:hover{border-color:var(--primary);background:var(--bg3);transform:translateX(-3px)}
-.quiz-option.selected{border-color:var(--primary);background:rgba(99,102,241,.1)}
+.quiz-option.selected{border-color:var(--primary);background:rgba(20,184,166,.1)}
 .quiz-option.correct{border-color:var(--success)!important;background:rgba(34,197,94,.15)!important}
 .quiz-option.wrong{border-color:var(--danger)!important;background:rgba(239,68,68,.15)!important}
 .fc-scene{perspective:1000px;width:100%;max-width:500px;height:260px;margin:1rem auto;cursor:pointer}
 .fc-card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;border-radius:var(--r)}
 .fc-card.flipped{transform:rotateY(180deg)}
 .fc-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center;font-size:1.1rem;line-height:1.8;border-radius:var(--r);border:1px solid var(--border);background:var(--glass)}
-.fc-back{transform:rotateY(180deg);background:rgba(99,102,241,.1);color:var(--primary);font-weight:700}
+.fc-back{transform:rotateY(180deg);background:rgba(20,184,166,.12);color:var(--primary2);font-weight:700}
 
 /* ============================================================
-   PALETTE / MODAL / TOAST
+   PALETTE / MODAL / TOAST / OVERLAYS
 ============================================================ */
 .palette-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:10001;display:none;align-items:flex-start;justify-content:center;padding-top:12vh}
 .palette-overlay.open{display:flex}
@@ -406,12 +453,22 @@ select.input{cursor:pointer}
 .palette-item{padding:12px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--text);transition:.12s}
 .palette-item.active,.palette-item:hover{background:var(--bg3)}
 .palette-empty{padding:16px;text-align:center;color:var(--muted)}
+
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(5px);z-index:13000;display:none;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.open{display:flex}
 .modal{width:min(94%,700px);max-height:90dvh;overflow:auto;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:1.2rem;animation:msgIn .2s ease}
-.worker-pre{white-space:pre-wrap;direction:ltr;text-align:left;font-family:monospace;font-size:.72rem;background:#0b1220;color:#dbeafe;padding:12px;border-radius:12px;max-height:280px;overflow:auto;margin-top:10px}
+.worker-pre{white-space:pre-wrap;direction:ltr;text-align:left;font-family:monospace;font-size:.72rem;background:#0b1220;color:#99f6e4;padding:12px;border-radius:12px;max-height:280px;overflow:auto;margin-top:10px}
 details.worker-details{border:1px solid var(--border);border-radius:12px;padding:10px;background:var(--bg)}
 summary{cursor:pointer;font-weight:700}
+
+#break-overlay{position:fixed;inset:0;z-index:15000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:radial-gradient(circle at 50% 40%,rgba(245,158,11,.25),rgba(10,16,32,.97));backdrop-filter:blur(8px)}
+#break-overlay.open{display:flex}
+#break-timer{font-family:var(--display);font-size:7rem;color:var(--accent2);font-variant-numeric:tabular-nums;animation:blink 2s infinite}
+
+#picker-overlay{position:fixed;inset:0;z-index:15000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:20px;background:rgba(10,16,32,.92);backdrop-filter:blur(8px)}
+#picker-overlay.open{display:flex}
+#picker-name{font-family:var(--display);font-size:3.5rem;color:var(--primary2);text-align:center;padding:0 1rem}
+
 .toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:14000;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:90%;max-width:430px}
 .toast{background:var(--bg2);border:1px solid var(--border);padding:12px 18px;border-radius:var(--r2);display:flex;align-items:center;gap:10px;box-shadow:0 12px 32px rgba(0,0,0,.35);pointer-events:auto;animation:slideUp .3s ease;font-size:.88rem;border-inline-start:4px solid var(--success)}
 @keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -420,13 +477,13 @@ summary{cursor:pointer;font-weight:700}
    MOBILE
 ============================================================ */
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--bg2);border-top:1px solid var(--border);justify-content:space-around;align-items:center;z-index:999}
-.mobile-nav button{background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem;font-family:inherit}
+.mobile-nav button{background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem;font-family:var(--body)}
 .mobile-nav button svg{width:22px;height:22px;fill:currentColor}
-.mobile-nav button.active{color:var(--primary)}
+.mobile-nav button.active{color:var(--primary2)}
 @media(max-width:950px){
   .classroom-grid{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto}
   .classroom-side{max-height:35vh}
-  .code-grid,.grid-2,.role-grid{grid-template-columns:1fr}
+  .code-grid,.grid-2,.grid-3,.role-grid{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   .sidebar{position:fixed;inset:0;z-index:1000;transform:translateX(100%);transition:.3s}
@@ -442,7 +499,26 @@ summary{cursor:pointer;font-weight:700}
 <div class="toast-container" id="toast-container"></div>
 <div id="emoji-layer"></div>
 
-<!-- ===================== COMMAND PALETTE ===================== -->
+<!-- BREAK OVERLAY -->
+<div id="break-overlay">
+  <div style="font-size:4rem">☕</div>
+  <div class="display" style="font-size:2.2rem;color:var(--accent2)">زنگ تفریح</div>
+  <div id="break-timer">05:00</div>
+  <button class="btn btn-accent" onclick="BreakMode.endEarly()">پایان زنگ تفریح</button>
+</div>
+
+<!-- RANDOM PICKER OVERLAY -->
+<div id="picker-overlay" onclick="if(event.target===this)Picker.close()">
+  <div style="font-size:3rem">🎲</div>
+  <div class="display" style="font-size:1.6rem;color:var(--muted)">انتخاب تصادفی دانش‌آموز</div>
+  <div id="picker-name">...</div>
+  <div style="display:flex;gap:10px">
+    <button class="btn btn-primary" onclick="Picker.spin()">🔄 دوباره</button>
+    <button class="btn" onclick="Picker.close()">بستن</button>
+  </div>
+</div>
+
+<!-- COMMAND PALETTE -->
 <div class="palette-overlay" id="palette-overlay" onclick="if(event.target===this)Palette.close()">
   <div class="palette">
     <input id="palette-input" class="input" placeholder="فرمان... (Ctrl+K)" oninput="Palette.filter(this.value)" onkeydown="Palette.keydown(event)">
@@ -451,15 +527,14 @@ summary{cursor:pointer;font-weight:700}
 </div>
 
 <div class="app">
-  <!-- ===================== SIDEBAR ===================== -->
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="brand-logo">
-        <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:#fff"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:#04211d"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
       </div>
       <div>
         <div class="brand-title">استاد یار پلاس</div>
-        <div class="brand-sub">v104.0 Ultimate</div>
+        <div class="brand-sub">v105.0 ULTIMATE</div>
       </div>
     </div>
 
@@ -489,14 +564,13 @@ summary{cursor:pointer;font-weight:700}
     </div>
   </aside>
 
-  <!-- ===================== MAIN ===================== -->
   <main class="main">
     <header class="header">
       <div style="display:flex;align-items:center;gap:10px">
         <button class="btn btn-icon" onclick="UI.toggleSidebar()" style="display:none" id="menu-btn">
           <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
         </button>
-        <span style="font-weight:800;font-size:1.05rem" id="page-title">داشبورد</span>
+        <span style="font-family:var(--display);font-size:1.3rem" id="page-title">داشبورد</span>
         <span class="badge success" id="ai-status"><span class="badge-dot"></span> آماده</span>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
@@ -522,30 +596,48 @@ summary{cursor:pointer;font-weight:700}
       <!-- ===================== HOME ===================== -->
       <div class="view active" id="view-home">
         <div class="page-head">
-          <h2>داشبورد</h2>
-          <p>دستیار هوشمند آموزشی، پژوهشی و کلاس مجازی</p>
+          <h2>داشبورد <em>آموزشی</em></h2>
+          <p>دستیار هوشمند آموزش، پژوهش و کلاس مجازی</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1rem">
+        <div class="status-strip">
+          <div>
+            <div class="clock-big" id="live-clock">--:--:--</div>
+            <div class="date-fa" id="live-date">در حال بارگذاری...</div>
+          </div>
+          <div style="flex:1"></div>
+          <div style="text-align:end">
+            <div class="badge success"><span class="badge-dot"></span> سیستم آماده</div>
+            <div class="small" style="margin-top:6px">نسخه ۱۰۵.۰ آلتیمیت</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1rem">
           <div class="card stat-card lift"><div class="stat-num" id="stat-chats">0</div><div class="stat-label">گفتگوها</div></div>
           <div class="card stat-card lift"><div class="stat-num" id="stat-quizzes">0</div><div class="stat-label">آزمون‌ها</div></div>
           <div class="card stat-card lift"><div class="stat-num" id="stat-facts">0</div><div class="stat-label">دانستنی‌ها</div></div>
+          <div class="card stat-card lift"><div class="stat-num" id="stat-bank">0</div><div class="stat-label">بانک سوال</div></div>
         </div>
 
         <div class="card lift">
-          <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">⚡ دسترسی سریع</div>
+          <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">⚡ دسترسی سریع</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-primary" onclick="UI.nav('chat')">💬 چت</button>
-            <button class="btn btn-success" onclick="UI.nav('classroom')">🎓 کلاس مجازی</button>
-            <button class="btn" onclick="UI.nav('facts')" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff">⭐ دانستنی</button>
-            <button class="btn" onclick="UI.nav('quiz')" style="background:linear-gradient(135deg,var(--accent),#f59e0b);color:#fff">📝 آزمون</button>
+            <button class="btn btn-primary" onclick="UI.nav('chat')">💬 چت هوشمند</button>
+            <button class="btn btn-accent" onclick="UI.nav('classroom')">🎓 کلاس مجازی</button>
+            <button class="btn" onclick="UI.nav('facts')" style="background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff">⭐ دانستنی</button>
+            <button class="btn" onclick="UI.nav('quiz')" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#2b1a02">📝 آزمون</button>
             <button class="btn" onclick="UI.nav('tools')" style="background:linear-gradient(135deg,var(--info),#0369a1);color:#fff">🧰 ابزار</button>
             <button class="btn" onclick="Palette.openPalette()">⌘ پالت فرمان</button>
           </div>
         </div>
 
         <div class="card lift">
-          <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">💾 پشتیبان‌گیری و بازیابی</div>
+          <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">💡 دانستنی امروز</div>
+          <div id="daily-fact" class="small">در حال بارگذاری...</div>
+        </div>
+
+        <div class="card lift">
+          <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">💾 پشتیبان‌گیری و بازیابی</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="btn" onclick="Chat.exportAllJSON()">📦 خروجی JSON همه چت‌ها</button>
             <button class="btn" onclick="Chat.exportCurrentMarkdown()">📝 خروجی Markdown چت فعلی</button>
@@ -555,7 +647,7 @@ summary{cursor:pointer;font-weight:700}
         </div>
 
         <div class="card lift">
-          <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">🔗 لینک‌های سریع</div>
+          <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">🔗 لینک‌های سریع</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap" id="quick-links"></div>
         </div>
       </div>
@@ -582,7 +674,7 @@ summary{cursor:pointer;font-weight:700}
 
         <div id="classroom-step-name" class="card classroom-center" style="text-align:center">
           <div style="font-size:3rem;margin-bottom:.4rem">👤</div>
-          <h2 style="margin-bottom:.5rem;font-weight:900">نام شما</h2>
+          <h2 class="display" style="font-size:1.8rem;margin-bottom:.5rem">نام شما</h2>
           <p class="small">برای ورود به کلاس، نام الزامی است.</p>
           <input class="input" id="classroom-fullname" placeholder="نام و نام خانوادگی" onkeydown="if(event.key==='Enter')Classroom.continueName()">
           <button class="btn btn-primary" style="width:100%" onclick="Classroom.continueName()">ادامه</button>
@@ -593,17 +685,17 @@ summary{cursor:pointer;font-weight:700}
             <span class="badge" id="classroom-name-badge">👤</span>
             <button class="btn" onclick="Classroom.showStep('name')">تغییر نام</button>
           </div>
-          <h2 style="margin-bottom:.5rem;font-weight:900">نقش خود را انتخاب کنید</h2>
+          <h2 class="display" style="font-size:1.8rem;margin-bottom:.5rem">نقش خود را انتخاب کنید</h2>
           <p class="small">مدیر/معلم کلاس را می‌سازد و کد ۶ رقمی معلم + کد ۵ رقمی دانش‌آموز دریافت می‌کند.</p>
           <div class="role-grid">
             <button class="btn btn-primary role-btn" onclick="Classroom.chooseRole('teacher')"><span>👨‍🏫</span> معلم / مدیر</button>
-            <button class="btn btn-success role-btn" onclick="Classroom.chooseRole('student')"><span>👨‍🎓</span> دانش‌آموز</button>
+            <button class="btn btn-accent role-btn" onclick="Classroom.chooseRole('student')"><span>👨‍🎓</span> دانش‌آموز</button>
           </div>
         </div>
 
         <div id="classroom-step-teacher" class="card classroom-center" style="display:none">
           <button class="btn" onclick="Classroom.showStep('role')" style="margin-bottom:12px">🔙 بازگشت</button>
-          <h2 style="margin-bottom:1rem;font-weight:900">👨‍🏫 معلم / مدیر</h2>
+          <h2 class="display" style="font-size:1.8rem;margin-bottom:1rem">👨‍🏫 معلم / مدیر</h2>
           <input class="input" id="teacher-name" placeholder="نام معلم (اجباری)">
           <input class="input" id="teacher-class-name" placeholder="نام کلاس (اختیاری)">
           <input class="input" id="teacher-code" placeholder="کد معلم ۶ رقمی (برای ورود مجدد، اختیاری)" oninput="Classroom.updateTeacherButton()">
@@ -612,10 +704,10 @@ summary{cursor:pointer;font-weight:700}
 
         <div id="classroom-step-student" class="card classroom-center" style="display:none">
           <button class="btn" onclick="Classroom.showStep('role')" style="margin-bottom:12px">🔙 بازگشت</button>
-          <h2 style="margin-bottom:1rem;font-weight:900">👨‍🎓 دانش‌آموز</h2>
+          <h2 class="display" style="font-size:1.8rem;margin-bottom:1rem">👨‍🎓 دانش‌آموز</h2>
           <input class="input" id="student-name" placeholder="نام شما (اجباری)">
           <input class="input" id="student-code" placeholder="کد ۵ رقمی دانش‌آموز" onkeydown="if(event.key==='Enter')Classroom.studentJoin()">
-          <button class="btn btn-success" style="width:100%" onclick="Classroom.studentJoin()">📥 ورود به کلاس</button>
+          <button class="btn btn-accent" style="width:100%" onclick="Classroom.studentJoin()">📥 ورود به کلاس</button>
         </div>
 
         <div id="classroom-active" class="classroom-active">
@@ -633,35 +725,40 @@ summary{cursor:pointer;font-weight:700}
           </div>
 
           <div class="classroom-tabs">
-            <button class="tab-btn active" data-tab="media" onclick="Classroom.switchTab('media',this)">🎥 رسانه</button>
-            <button class="tab-btn" data-tab="chat" onclick="Classroom.switchTab('chat',this)">💬 چت کلاسی</button>
-            <button class="tab-btn" data-tab="board" onclick="Classroom.switchTab('board',this)">🖌️ تخته مشترک</button>
-            <button class="tab-btn" data-tab="files" onclick="Classroom.switchTab('files',this)">📁 فایل‌ها</button>
-            <button class="tab-btn" data-tab="hands" onclick="Classroom.switchTab('hands',this)">✋ دست‌ها و مجوزها</button>
-            <button class="tab-btn" data-tab="poll" onclick="Classroom.switchTab('poll',this)">📊 نظرسنجی</button>
-            <button class="tab-btn" data-tab="reactions" onclick="Classroom.switchTab('reactions',this)">😀 واکنش‌ها</button>
-            <button class="tab-btn" data-tab="attendance" onclick="Classroom.switchTab('attendance',this)">🧾 حضور و غیاب</button>
+            <button class="tab-btn active" data-tab="media" onclick="Classroom.switchTab('media',this)">🎥 رسانه<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="chat" onclick="Classroom.switchTab('chat',this)">💬 چت<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="board" onclick="Classroom.switchTab('board',this)">🖌️ تخته<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="files" onclick="Classroom.switchTab('files',this)">📁 فایل‌ها<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="hands" onclick="Classroom.switchTab('hands',this)">✋ دست‌ها<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="poll" onclick="Classroom.switchTab('poll',this)">📊 نظرسنجی<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="announce" onclick="Classroom.switchTab('announce',this)">📢 اطلاعیه<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="homework" onclick="Classroom.switchTab('homework',this)">📚 تکالیف<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="points" onclick="Classroom.switchTab('points',this)">⭐ امتیاز<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="timer" onclick="Classroom.switchTab('timer',this)">⏱️ تایمر<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="reactions" onclick="Classroom.switchTab('reactions',this)">😀 واکنش<span class="dot"></span></button>
+            <button class="tab-btn" data-tab="attendance" onclick="Classroom.switchTab('attendance',this)">🧾 حضور<span class="dot"></span></button>
           </div>
 
           <div class="classroom-grid">
             <div style="min-height:0;display:flex;flex-direction:column;gap:10px">
 
-              <div id="tab-media" class="panel active" style="flex:1;min-height:0;display:flex;flex-direction:column;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+              <div id="tab-media" class="panel active">
                 <div class="media-controls">
                   <button id="btn-audio" class="btn" onclick="Classroom.toggleAudio()">🎤 میکروفون</button>
                   <button id="btn-video" class="btn" onclick="Classroom.toggleVideo()">📷 دوربین</button>
                   <button id="btn-screen" class="btn" onclick="Classroom.toggleScreen()">🖥️ اشتراک صفحه</button>
                   <button class="btn" onclick="Classroom.openJitsiChat()">💬 چت Jitsi</button>
                   <button class="btn" onclick="Classroom.openJitsiParticipants()">👥 شرکت‌کننده‌ها</button>
-                  <button id="btn-mute-all" class="btn btn-danger" onclick="Classroom.muteAll()">🔇 بی‌صدا کردن همه</button>
+                  <button class="btn btn-accent" id="btn-picker" onclick="Picker.open()">🎲 انتخاب تصادفی</button>
+                  <button id="btn-mute-all" class="btn btn-danger" onclick="Classroom.muteAll()">🔇 بی‌صدا همه</button>
                   <span class="badge" id="permission-badge">وضعیت مجوز: در انتظار</span>
                 </div>
-                <div id="jitsi-container" style="flex:1;min-height:0;border-radius:0"></div>
+                <div id="jitsi-container"></div>
               </div>
 
-              <div id="tab-chat" class="panel" style="display:none;height:100%;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem">
+              <div id="tab-chat" class="panel">
                 <div class="chat-box">
-                  <div style="font-weight:800;margin-bottom:12px;color:var(--accent)">💬 چت درون کلاسی</div>
+                  <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">💬 چت درون کلاسی</div>
                   <div id="chat-messages-class" class="chat-messages-class"></div>
                   <div class="chat-input-row">
                     <input id="chat-input-class" class="input" style="margin:0;flex:1" placeholder="پیام خود را بنویسید..." onkeydown="if(event.key==='Enter')ClassChat.send()">
@@ -670,12 +767,12 @@ summary{cursor:pointer;font-weight:700}
                 </div>
               </div>
 
-              <div id="tab-board" class="panel" style="display:none;height:100%;background:var(--glass);border:1px solid var(--border);border-radius:var(--r)">
+              <div id="tab-board" class="panel">
                 <iframe id="board-frame" title="تخته مشترک"></iframe>
               </div>
 
-              <div id="tab-files" class="panel" style="display:none;height:100%;overflow:auto;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem">
-                <div style="font-weight:800;margin-bottom:8px;color:var(--accent)">📁 آپلود و اشتراک فایل</div>
+              <div id="tab-files" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:8px;color:var(--accent2)">📁 آپلود و اشتراک فایل</div>
                 <p class="small" style="margin-bottom:12px">پشتیبانی از MP3، MP4، MKV، JPG، PNG، PDF، Word، Excel، PowerPoint و سایر فایل‌ها.</p>
                 <input id="file-input" class="input" type="file" multiple accept="audio/*,video/*,image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.rar,.mkv,.csv,.json">
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
@@ -686,8 +783,8 @@ summary{cursor:pointer;font-weight:700}
                 <div id="file-list" class="file-list"></div>
               </div>
 
-              <div id="tab-hands" class="panel" style="display:none;height:100%;overflow:auto;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem">
-                <div style="font-weight:800;margin-bottom:12px;color:var(--accent)">✋ دست بلند کردن و مجوز صحبت</div>
+              <div id="tab-hands" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">✋ دست بلند کردن و مجوز صحبت</div>
                 <div id="hand-student" class="card">
                   <p class="small" style="margin-bottom:12px">دانش‌آموز فقط باید دست بلند کند. اگر معلم قبول کرد، دکمه‌های میکروفون، دوربین و اشتراک صفحه فعال می‌شوند.</p>
                   <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -702,8 +799,8 @@ summary{cursor:pointer;font-weight:700}
                 </div>
               </div>
 
-              <div id="tab-poll" class="panel" style="display:none;height:100%;overflow:auto;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem">
-                <div style="font-weight:800;margin-bottom:12px;color:var(--accent)">📊 نظرسنجی زنده کلاسی</div>
+              <div id="tab-poll" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">📊 نظرسنجی زنده کلاسی</div>
                 <div id="poll-teacher" class="card hidden">
                   <input id="poll-question" class="input" placeholder="سوال نظرسنجی">
                   <textarea id="poll-options" class="input" rows="4" placeholder="گزینه‌ها، هر خط یک گزینه"></textarea>
@@ -716,8 +813,54 @@ summary{cursor:pointer;font-weight:700}
                 <div id="poll-view" class="poll-box"></div>
               </div>
 
-              <div id="tab-reactions" class="panel" style="display:none;height:100%;overflow:auto;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem">
-                <div style="font-weight:800;margin-bottom:8px;color:var(--accent)">😀 واکنش‌های زنده</div>
+              <div id="tab-announce" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">📢 اطلاعیه‌های کلاس</div>
+                <div id="announce-teacher" class="card hidden">
+                  <input id="announce-title" class="input" placeholder="عنوان اطلاعیه">
+                  <textarea id="announce-body" class="input" rows="3" placeholder="متن اطلاعیه..."></textarea>
+                  <button class="btn btn-accent" onclick="Announce.post()">📢 ارسال اطلاعیه به همه</button>
+                </div>
+                <div id="announce-list" class="announce-list"></div>
+              </div>
+
+              <div id="tab-homework" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">📚 تکالیف کلاس</div>
+                <div id="hw-teacher" class="card hidden">
+                  <input id="hw-title" class="input" placeholder="عنوان تکلیف">
+                  <textarea id="hw-desc" class="input" rows="3" placeholder="شرح تکلیف..."></textarea>
+                  <input id="hw-deadline" class="input" type="datetime-local">
+                  <button class="btn btn-primary" onclick="Homework.create()">➕ ثبت تکلیف</button>
+                </div>
+                <div id="hw-list" class="hw-list"></div>
+              </div>
+
+              <div id="tab-points" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">⭐ امتیاز و ستاره دانش‌آموزان</div>
+                <div id="points-teacher" class="card hidden">
+                  <div class="small" style="margin-bottom:8px">برای دادن امتیاز، از لیست پایین دکمه + یا - را بزنید.</div>
+                </div>
+                <div id="points-list" class="points-list"></div>
+              </div>
+
+              <div id="tab-timer" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">⏱️ تایمر کلاس و زنگ تفریح</div>
+                <div class="timer-display" id="class-timer-display">00:00</div>
+                <div id="timer-teacher" class="card">
+                  <div class="small" style="margin-bottom:8px">تنظیم تایمر (دقیقه):</div>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                    <input id="timer-minutes" class="input" style="width:90px;margin:0" type="number" value="5" min="1" max="120">
+                    <button class="btn btn-primary" onclick="ClassTimer.startFromUI()">▶️ شروع برای همه</button>
+                    <button class="btn btn-danger" onclick="ClassTimer.stopForAll()">⏹️ توقف</button>
+                  </div>
+                  <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+                    <button class="btn btn-accent" onclick="BreakMode.startFromUI()">☕ شروع زنگ تفریح</button>
+                    <button class="btn" onclick="BreakMode.endEarly()">پایان زنگ تفریح</button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="tab-reactions" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:8px;color:var(--accent2)">😀 واکنش‌های زنده</div>
                 <p class="small" style="margin-bottom:12px">واکنش‌ها برای همه شرکت‌کننده‌ها نمایش داده می‌شوند.</p>
                 <div class="emoji-grid">
                   <button class="emoji-btn" onclick="Reactions.send('👍')">👍</button>
@@ -735,16 +878,17 @@ summary{cursor:pointer;font-weight:700}
                 </div>
               </div>
 
-              <div id="tab-attendance" class="panel" style="display:none;height:100%;overflow:auto;background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:1rem">
-                <div style="font-weight:800;margin-bottom:12px;color:var(--accent)">🧾 حضور و غیاب</div>
+              <div id="tab-attendance" class="panel">
+                <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:12px;color:var(--accent2)">🧾 حضور و غیاب و آمار</div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
                   <button class="btn btn-primary" onclick="Attendance.exportCSV()">📥 خروجی CSV</button>
                   <button class="btn" onclick="Attendance.exportJSON()">📦 خروجی JSON</button>
                   <button class="btn" onclick="Attendance.render()">🔄 بروزرسانی</button>
                 </div>
-                <div class="grid-2" style="margin-bottom:12px">
+                <div class="grid-3" style="margin-bottom:12px">
                   <div class="stat-mini"><b id="att-count">0</b><span class="small">شرکت‌کننده</span></div>
-                  <div class="stat-mini"><b id="hand-count">0</b><span class="small">دست‌های بلند شده</span></div>
+                  <div class="stat-mini"><b id="hand-count">0</b><span class="small">دست‌ها</span></div>
+                  <div class="stat-mini"><b id="msg-count">0</b><span class="small">پیام‌ها</span></div>
                 </div>
                 <div id="attendance-list" class="attendance-list"></div>
               </div>
@@ -752,7 +896,7 @@ summary{cursor:pointer;font-weight:700}
             </div>
 
             <div class="card classroom-side">
-              <h3 style="margin-bottom:.6rem;font-weight:900">🔑 کدها و لینک‌ها</h3>
+              <h3 style="font-family:var(--display);font-size:1.3rem;margin-bottom:.6rem;color:var(--accent2)">🔑 کدها و لینک‌ها</h3>
               <div id="side-codes" class="code-grid"></div>
               <div style="margin-top:14px">
                 <div class="small">لینک دانش‌آموز:</div>
@@ -774,8 +918,8 @@ summary{cursor:pointer;font-weight:700}
               <div class="hint" style="margin-top:14px">
                 <b>کد معلم:</b> ۶ رقمی و فقط برای مدیر/معلم.<br>
                 <b>کد دانش‌آموز:</b> ۵ رقمی و قابل اشتراک بین دانش‌آموزان.<br><br>
-                <b>اشتراک صفحه:</b> داخل کلاس دکمه Screen Share را بزنید و در کروم/اج گزینه Share audio را فعال کنید.<br><br>
-                <b>سرور:</b> اگر سرور پیش‌فرض فیلتر بود، دامنه Jitsi اختصاصی یا Signal Server را در تنظیمات وارد کنید.
+                <b>اشتراک صفحه:</b> در کروم/اج گزینه Share audio را فعال کنید تا صدا هم برود.<br><br>
+                <b>سرور:</b> اگر سرور فیلتر بود، دامنه Jitsi یا Signal Server اختصاصی را در تنظیمات وارد کنید.
               </div>
             </div>
           </div>
@@ -785,7 +929,7 @@ summary{cursor:pointer;font-weight:700}
       <!-- ===================== FACTS ===================== -->
       <div class="view" id="view-facts">
         <div style="max-width:900px;margin:0 auto">
-          <div class="page-head"><h2>⭐ دانستنی‌ها</h2><p>دانشنامه کوچک آموزشی</p></div>
+          <div class="page-head"><h2>⭐ دانستنی‌<em>ها</em></h2><p>دانشنامه کوچک آموزشی</p></div>
           <div class="card">
             <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
               <input class="input" id="facts-search" placeholder="جستجو..." style="flex:1;margin:0" oninput="Facts.render()">
@@ -800,7 +944,7 @@ summary{cursor:pointer;font-weight:700}
       <!-- ===================== QUIZ ===================== -->
       <div class="view" id="view-quiz">
         <div style="max-width:700px;margin:0 auto">
-          <div class="page-head"><h2>📝 آزمون هوشمند</h2><p>تولید سوال با هوش مصنوعی یا دانش محلی</p></div>
+          <div class="page-head"><h2>📝 آزمون <em>هوشمند</em></h2><p>تولید سوال با هوش مصنوعی یا دانش محلی</p></div>
           <div id="quiz-setup" class="card">
             <input class="input" id="quiz-topic" placeholder="موضوع آزمون (مثلاً: تاریخ صفویه)">
             <select class="input" id="quiz-count">
@@ -816,7 +960,7 @@ summary{cursor:pointer;font-weight:700}
             <button class="btn btn-primary" style="width:100%;margin-top:1rem" onclick="Quiz.submit()">ثبت پاسخ‌ها</button>
           </div>
           <div id="quiz-result" class="card" style="display:none;text-align:center">
-            <div style="font-size:3rem;font-weight:900;color:var(--primary)" id="quiz-score">0%</div>
+            <div style="font-family:var(--display);font-size:3.5rem;color:var(--primary2)" id="quiz-score">0%</div>
             <p style="color:var(--muted)" id="quiz-detail"></p>
             <button class="btn btn-primary" onclick="Quiz.reset()">آزمون مجدد</button>
           </div>
@@ -826,7 +970,7 @@ summary{cursor:pointer;font-weight:700}
       <!-- ===================== FLASHCARDS ===================== -->
       <div class="view" id="view-flashcards">
         <div style="max-width:550px;margin:0 auto">
-          <div class="page-head"><h2>🃏 فلش‌کارت</h2><p>مرور با کارت‌های چرخشی</p></div>
+          <div class="page-head"><h2>🃏 فلش‌<em>کارت</em></h2><p>مرور با کارت‌های چرخشی</p></div>
           <div id="fc-setup" class="card">
             <input class="input" id="fc-topic" placeholder="موضوع فلش‌کارت">
             <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="Flashcards.generate()">✨ تولید ۱۰ فلش‌کارت</button>
@@ -854,7 +998,7 @@ summary{cursor:pointer;font-weight:700}
       <!-- ===================== BANK ===================== -->
       <div class="view" id="view-bank">
         <div style="max-width:800px;margin:0 auto">
-          <div class="page-head"><h2>📚 بانک سوالات</h2><p>سوالات را ذخیره و مرور کنید</p></div>
+          <div class="page-head"><h2>📚 بانک <em>سوالات</em></h2><p>سوالات را ذخیره و مرور کنید</p></div>
           <div class="card">
             <input class="input" id="bank-q" placeholder="سوال جدید">
             <input class="input" id="bank-a" placeholder="پاسخ">
@@ -870,10 +1014,10 @@ summary{cursor:pointer;font-weight:700}
       <!-- ===================== TOOLS ===================== -->
       <div class="view" id="view-tools">
         <div style="max-width:1100px;margin:0 auto">
-          <div class="page-head"><h2>🧰 جعبه ابزار پیشرفته</h2><p>تایمر، ماشین حساب، QR، رسم تابع و تخته سفید</p></div>
+          <div class="page-head"><h2>🧰 جعبه <em>ابزار</em></h2><p>تایمر، ماشین حساب، QR، رسم تابع و تخته سفید</p></div>
           <div class="tools-grid">
             <div class="card lift">
-              <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">⏱️ تایمر پومودورو</div>
+              <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">⏱️ تایمر پومودورو</div>
               <div style="text-align:center;color:var(--accent);font-weight:700" id="pomo-status">⏳ زمان تمرکز</div>
               <div class="pomo-display" id="pomo-display">25:00</div>
               <div style="display:flex;justify-content:center;gap:12px">
@@ -882,7 +1026,7 @@ summary{cursor:pointer;font-weight:700}
               </div>
             </div>
             <div class="card lift">
-              <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">🔢 ماشین حساب</div>
+              <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">🔢 ماشین حساب</div>
               <div class="calc-display" id="calc-display">0</div>
               <div class="calc-grid">
                 <button class="calc-btn" onclick="Calc.input('C')">C</button>
@@ -908,21 +1052,21 @@ summary{cursor:pointer;font-weight:700}
               </div>
             </div>
             <div class="card lift">
-              <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">📱 QR ساز</div>
+              <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">📱 QR ساز</div>
               <input class="input" id="qr-input" placeholder="متن یا لینک...">
               <button class="btn btn-primary" style="width:100%;margin-bottom:12px" onclick="QRGen.generate()">ساخت QR</button>
               <div class="qr-output" id="qr-output"></div>
               <button class="btn btn-success" style="width:100%;display:none" id="qr-download" onclick="QRGen.download()">💾 دانلود</button>
             </div>
             <div class="card lift" style="grid-column:1/-1">
-              <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">📈 رسم تابع پیشرفته</div>
+              <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">📈 رسم تابع پیشرفته</div>
               <input class="input" id="plot-func" placeholder="مثلاً: sin(x), x^2, log(x), cos(x)*x">
               <input class="input" id="plot-range" placeholder="xmin,xmax,ymin,ymax (اختیاری) مثال: -10,10,-10,10">
               <button class="btn btn-primary" style="width:100%;margin-bottom:12px" onclick="Plotter.draw()">🎨 رسم نمودار</button>
               <canvas id="plot-canvas" class="plot-canvas" width="900" height="360"></canvas>
             </div>
             <div class="card lift" style="grid-column:1/-1">
-              <div style="font-weight:800;margin-bottom:1rem;color:var(--accent)">✏️ تخته سفید</div>
+              <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">✏️ تخته سفید</div>
               <div class="wb-container" style="height:400px">
                 <canvas class="wb-canvas" id="tools-wb-canvas"></canvas>
                 <div class="wb-tools">
@@ -932,7 +1076,7 @@ summary{cursor:pointer;font-weight:700}
                   <div class="wb-color active" style="background:#fff" onclick="ToolsWB.setColor('#fff',this)"></div>
                   <div class="wb-color" style="background:#ef4444" onclick="ToolsWB.setColor('#ef4444',this)"></div>
                   <div class="wb-color" style="background:#22c55e" onclick="ToolsWB.setColor('#22c55e',this)"></div>
-                  <div class="wb-color" style="background:#6366f1" onclick="ToolsWB.setColor('#6366f1',this)"></div>
+                  <div class="wb-color" style="background:#14b8a6" onclick="ToolsWB.setColor('#14b8a6',this)"></div>
                   <button class="wb-tool" onclick="ToolsWB.clear()">🗑️</button>
                   <button class="wb-tool" onclick="ToolsWB.save()">💾</button>
                 </div>
@@ -1030,7 +1174,6 @@ summary{cursor:pointer;font-weight:700}
   </main>
 </div>
 
-<!-- ===================== MOBILE NAV ===================== -->
 <div class="mobile-nav">
   <button class="active" onclick="UI.nav('home',this)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>خانه</button>
   <button onclick="UI.nav('chat',this)"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>چت</button>
@@ -1038,7 +1181,6 @@ summary{cursor:pointer;font-weight:700}
   <button onclick="UI.nav('tools',this)"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>ابزار</button>
 </div>
 
-<!-- ===================== WORKER SOURCE ===================== -->
 <script type="text/plain" id="worker-js">
 // worker.js — سرور سیگنالینگ + فایل موقت روی Cloudflare KV
 // یک KV Namespace بسازید و binding آن را با نام KV قرار دهید.
@@ -1192,7 +1334,7 @@ const Utils = {
     return (bytes / 1073741824).toFixed(2) + ' GB';
   },
   fileIcon(type = '', name = '') {
-    const t = type.toLowerCase(), n = name.toLowerCase();
+    const t = String(type).toLowerCase(), n = String(name).toLowerCase();
     if (t.startsWith('image/')) return '🖼️';
     if (t.startsWith('audio/')) return '🎵';
     if (t.startsWith('video/') || n.endsWith('.mkv')) return '🎬';
@@ -1209,6 +1351,20 @@ const Utils = {
       .replace(/```[\s\S]*?```/g, ' ').replace(/`([^`]+)`/g, '$1')
       .replace(/!\[.*?\]\(.*?\)/g, ' ').replace(/\[(.*?)\]\(.*?\)/g, '$1')
       .replace(/[#>*_~|]/g, '').replace(/\n+/g, '. ').trim();
+  },
+  beep(freq = 880, dur = 0.12) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(0.001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(); o.stop(ctx.currentTime + dur + 0.05);
+    } catch (e) {}
   }
 };
 
@@ -1237,7 +1393,7 @@ const Storage = {
   async init() {
     return new Promise((resolve, reject) => {
       try {
-        const req = indexedDB.open('OstadYarDB_v104', 1);
+        const req = indexedDB.open('OstadYarDB_v105', 1);
         req.onupgradeneeded = e => {
           const db = e.target.result;
           ['settings', 'sessions', 'quizzes', 'flashcards', 'facts', 'qa'].forEach(s => {
@@ -1730,10 +1886,7 @@ function renderRichMessage(el, text) {
 ============================================================ */
 const Themes = {
   available: ['dark', 'light', 'night', 'sepia', 'ocean'],
-  init() {
-    const saved = localStorage.getItem('appTheme') || 'dark';
-    this.apply(saved);
-  },
+  init() { this.apply(localStorage.getItem('appTheme') || 'dark'); },
   apply(theme) {
     if (!this.available.includes(theme)) theme = 'dark';
     document.documentElement.setAttribute('data-theme', theme);
@@ -1744,8 +1897,8 @@ const Themes = {
     if (settingsSelect) settingsSelect.value = theme;
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
-      const colors = { dark: '#0f172a', light: '#eef2f7', night: '#000000', sepia: '#f7eede', ocean: '#022c3a' };
-      metaTheme.setAttribute('content', colors[theme] || '#0f172a');
+      const colors = { dark: '#0a1020', light: '#f2f6f5', night: '#000000', sepia: '#f5ecdc', ocean: '#03222e' };
+      metaTheme.setAttribute('content', colors[theme] || '#0a1020');
     }
   },
   set(theme) { this.apply(theme); Toast.show(`تم تغییر کرد: ${theme}`, 'success'); },
@@ -1859,10 +2012,10 @@ const Plotter = {
     const xmin = range[0] ?? -10, xmax = range[1] ?? 10, ymin = range[2] ?? -10, ymax = range[3] ?? 10;
     const w = canvas.width, h = canvas.height;
     const styles = getComputedStyle(document.documentElement);
-    const bg = styles.getPropertyValue('--bg').trim() || '#0b1220';
-    const border = styles.getPropertyValue('--border').trim() || 'rgba(255,255,255,.08)';
-    const muted = styles.getPropertyValue('--muted').trim() || '#94a3b8';
-    const primary = styles.getPropertyValue('--primary').trim() || '#6366f1';
+    const bg = '#0b1220';
+    const border = 'rgba(148,163,184,.12)';
+    const muted = '#8fa3bf';
+    const primary = '#14b8a6';
     ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
     const X = x => ((x - xmin) / (xmax - xmin)) * w;
     const Y = y => h - ((y - ymin) / (ymax - ymin)) * h;
@@ -1994,7 +2147,7 @@ const Speech = {
 };
 
 /* ============================================================
-   CHAT
+   CHAT (AI)
 ============================================================ */
 const Chat = {
   sessions: [], currentId: null, history: [], isProcessing: false, controller: null, attachments: [],
@@ -2480,11 +2633,16 @@ const Classroom = {
     document.getElementById('hand-teacher').classList.toggle('hidden', this.role !== 'teacher');
     document.getElementById('hand-student').classList.toggle('hidden', this.role === 'teacher');
     document.getElementById('poll-teacher').classList.toggle('hidden', this.role !== 'teacher');
+    document.getElementById('announce-teacher').classList.toggle('hidden', this.role !== 'teacher');
+    document.getElementById('hw-teacher').classList.toggle('hidden', this.role !== 'teacher');
+    document.getElementById('points-teacher').classList.toggle('hidden', this.role !== 'teacher');
     document.getElementById('btn-mute-all').disabled = this.role !== 'teacher';
+    document.getElementById('btn-picker').style.display = this.role === 'teacher' ? '' : 'none';
 
     Attendance.initLocal(this.displayName, this.role);
     Hands.initStudentStatus();
     Poll.initRole();
+    Points.render();
     this.updateMediaControls();
     this.updateActiveUI();
     this.switchTab('media', document.querySelector('.tab-btn[data-tab="media"]'));
@@ -2496,10 +2654,17 @@ const Classroom = {
       else if (msg.type === 'hand') Hands.receiveHand(msg);
       else if (msg.type === 'hand-lower') Hands.receiveLower(msg);
       else if (msg.type === 'permission') Hands.receivePermission(msg);
+      else if (msg.type === 'kick') this.receiveKick(msg);
       else if (msg.type === 'poll') Poll.receivePoll(msg);
       else if (msg.type === 'poll-vote') Poll.receiveVote(msg);
       else if (msg.type === 'poll-result') Poll.receiveResult(msg);
       else if (msg.type === 'reaction') Reactions.receive(msg);
+      else if (msg.type === 'announce') Announce.receive(msg);
+      else if (msg.type === 'homework') Homework.receive(msg);
+      else if (msg.type === 'homework-sub') Homework.receiveSub(msg);
+      else if (msg.type === 'points') Points.receive(msg);
+      else if (msg.type === 'timer') ClassTimer.receive(msg);
+      else if (msg.type === 'break') BreakMode.receive(msg);
     });
 
     this.startJitsi();
@@ -2511,6 +2676,19 @@ const Classroom = {
     } else {
       Toast.show('در حال ورود به کلاس...', 'info');
     }
+  },
+
+  receiveKick(msg) {
+    if (msg.to !== Signal.myId) return;
+    Toast.show('شما توسط معلم از کلاس اخراج شدید.', 'error');
+    setTimeout(() => this.leave(false), 1200);
+  },
+
+  kick(id, name) {
+    if (this.role !== 'teacher') return;
+    Signal.send(id, { type: 'kick', to: id });
+    Attendance.markLeft(id, name);
+    Toast.show(`${name} اخراج شد.`, 'warning');
   },
 
   leave(ask) {
@@ -2595,14 +2773,28 @@ const Classroom = {
   switchTab(tab, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    else document.querySelector(`.tab-btn[data-tab="${tab}"]`)?.classList.add('active');
-    document.getElementById('tab-' + tab).classList.add('active');
+    if (btn) {
+      btn.classList.add('active');
+      btn.classList.remove('has-new');
+    } else {
+      const b = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+      if (b) { b.classList.add('active'); b.classList.remove('has-new'); }
+    }
+    const panel = document.getElementById('tab-' + tab);
+    if (panel) panel.classList.add('active');
     if (tab === 'board') this.loadBoard();
     if (tab === 'attendance') Attendance.render();
     if (tab === 'hands') Hands.renderTeacher();
     if (tab === 'poll') Poll.render();
     if (tab === 'files') ClassFiles.render();
+    if (tab === 'points') Points.render();
+    if (tab === 'announce') Announce.render();
+    if (tab === 'homework') Homework.render();
+  },
+
+  markTabNew(tab) {
+    const b = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+    if (b && !b.classList.contains('active')) b.classList.add('has-new');
   },
 
   loadBoard() {
@@ -2612,7 +2804,7 @@ const Classroom = {
     const boardRoom = `OstadYarPlus_${this.studentCode}`;
     const user = encodeURIComponent(this.displayName || 'user');
     iframe.src = `https://${domain}/boards/${boardRoom}?username=${user}&lang=fa`;
-    Toast.show('تخته مشترک بارگذاری شد. همه با همین کد کلاس می‌توانند وارد تخته شوند.', 'info');
+    Toast.show('تخته مشترک بارگذاری شد.', 'info');
   },
 
   updateMediaControls() {
@@ -2639,6 +2831,7 @@ const Classroom = {
   },
   toggleScreen() {
     if (this.role !== 'teacher' && !this.allowed) { Toast.show('ابتدا باید معلم اجازه اشتراک صفحه بدهد.', 'warning'); return; }
+    if (!this.api) { Toast.show('هنوز اتصال رسانه برقرار نشده.', 'warning'); return; }
     try { this.api.executeCommand('toggleScreenShare'); }
     catch (e) {
       try { this.api.executeCommand('toggleScreenSharing'); }
@@ -2651,6 +2844,29 @@ const Classroom = {
     if (this.role !== 'teacher') return;
     this.jitsiCommand('muteEveryone');
     Toast.show('همه بی‌صدا شدند.', 'info');
+  },
+
+  getToolbarButtons() {
+    const isTeacher = this.role === 'teacher';
+    const allowed = isTeacher || this.allowed;
+    const btns = [];
+    if (allowed) btns.push('microphone', 'camera', 'toggle-screen-share');
+    btns.push('chat', 'participants-pane', 'raise-hand', 'videoquality', 'tileview', 'settings', 'fullscreen');
+    if (isTeacher) btns.push('mute-everyone');
+    btns.push('hangup');
+    return btns;
+  },
+
+  reinitJitsi() {
+    if (this.api) { try { this.api.dispose(); } catch (e) {} this.api = null; }
+    this._joined = false;
+    this._trying = false;
+    this._retrying = false;
+    if (this._currentDomain) {
+      const idx = this._domains.indexOf(this._currentDomain);
+      this._domainIndex = idx >= 0 ? idx : 0;
+    }
+    this.tryNextDomain();
   },
 
   possibleDomains() {
@@ -2677,14 +2893,14 @@ const Classroom = {
     this._domains = this.possibleDomains();
     this._domainIndex = 0;
     const container = document.getElementById('jitsi-container');
-    container.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#94a3b8;padding:1rem;text-align:center">در حال اتصال به سرور رسانه...</div>`;
+    container.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8fa3bf;padding:1rem;text-align:center">در حال اتصال به سرور رسانه...</div>`;
     await this.tryNextDomain();
   },
 
   async tryNextDomain() {
     if (this._leaving || this._trying) return;
     if (this._domainIndex >= this._domains.length) {
-      document.getElementById('jitsi-container').innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;color:#f87171;padding:1.5rem;text-align:center"><div>هیچ سرور Jitsi در دسترس نبود.</div><div style="color:#94a3b8;font-size:.82rem;line-height:1.8">در تنظیمات، دامنه Jitsi اختصاصی وارد کنید.</div></div>`;
+      document.getElementById('jitsi-container').innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;color:#f87171;padding:1.5rem;text-align:center"><div>هیچ سرور Jitsi در دسترس نبود.</div><div style="color:#8fa3bf;font-size:.82rem;line-height:1.8">در تنظیمات، دامنه Jitsi اختصاصی وارد کنید.<br>چت، تخته، فایل و سایر امکانات بدون رسانه فعال هستند.</div></div>`;
       Toast.show('هیچ سرور Jitsi در دسترس نبود.', 'error');
       return;
     }
@@ -2692,14 +2908,13 @@ const Classroom = {
     const domain = this._domains[this._domainIndex++];
     const container = document.getElementById('jitsi-container');
     try {
-      container.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#94a3b8;padding:1rem;text-align:center">تلاش برای اتصال به: <b style="margin:0 6px;font-family:monospace">${Utils.escapeHtml(domain)}</b></div>`;
+      container.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8fa3bf;padding:1rem;text-align:center">تلاش برای اتصال به: <b style="margin:0 6px;font-family:monospace">${Utils.escapeHtml(domain)}</b></div>`;
       if (!window.JitsiMeetExternalAPI) await this.loadScript(`https://${domain}/external_api.js`);
       if (!window.JitsiMeetExternalAPI) throw new Error('JitsiMeetExternalAPI not found');
       if (this.api) { try { this.api.dispose(); } catch (e) {} this.api = null; }
       container.innerHTML = '';
       const isTeacher = this.role === 'teacher';
-      const toolbarButtons = ['microphone', 'camera', 'toggle-screen-share', 'chat', 'participants-pane', 'videoquality', 'tileview', 'settings', 'fullscreen', 'raise-hand', 'hangup'];
-      if (isTeacher) toolbarButtons.push('mute-everyone');
+      const toolbarButtons = this.getToolbarButtons();
       const options = {
         roomName: this.room,
         parentNode: container,
@@ -2775,6 +2990,12 @@ const Classroom = {
       Attendance.markLeft(participant?.id || '', name);
       Toast.show(`${name} از کلاس خارج شد.`, 'warning');
     });
+    this.api.addEventListener('raiseHandUpdated', data => {
+      if (data && data.id && this.role === 'teacher') {
+        Toast.show('یک شرکت‌کننده در Jitsi دست بلند کرد.', 'warning');
+        this.markTabNew('hands');
+      }
+    });
     this.api.addEventListener('screenSharingStatusChanged', status => {
       if (status && status.sharing) Toast.show('اشتراک صفحه فعال شد.', 'success');
     });
@@ -2818,6 +3039,7 @@ const ClassChat = {
   },
   send() {
     const input = document.getElementById('chat-input-class');
+    if (!input) return;
     const text = input.value.trim();
     if (!text) return;
     const msg = { id: Utils.uid(), type: 'chat', to: '*', text, fromName: Classroom.displayName, fromRole: Classroom.role, ts: Date.now() };
@@ -2829,7 +3051,11 @@ const ClassChat = {
   receive(msg) {
     this.messages.push(msg);
     this.render();
-    if (msg.fromRole === 'teacher') Toast.show(`پیام معلم: ${String(msg.text).slice(0, 60)}`, 'info');
+    Classroom.markTabNew('chat');
+    Utils.beep(760, 0.1);
+    if (msg.fromRole === 'teacher' && Classroom.role !== 'teacher') {
+      Toast.show(`پیام معلم: ${String(msg.text).slice(0, 60)}`, 'info');
+    }
   },
   render() {
     const box = document.getElementById('chat-messages-class');
@@ -2866,6 +3092,7 @@ const ClassFiles = {
     if (!msg.file) return;
     this.files.unshift(msg.file);
     this.render();
+    Classroom.markTabNew('files');
     Toast.show(`فایل جدید از ${msg.file.uploader || 'شرکت‌کننده'}: ${msg.file.name}`, 'info');
   },
   clearList() { this.files = []; this.render(); },
@@ -2976,6 +3203,8 @@ const Hands = {
     this.requests[msg.handId] = { id: msg.handId, name: msg.name || msg.fromName || 'دانش‌آموز', ts: msg.ts, status: 'waiting' };
     Attendance.updateHand(this.requests[msg.handId].name, 'waiting');
     this.renderTeacher();
+    Classroom.markTabNew('hands');
+    Utils.beep(660, 0.12);
     Toast.show(`${this.requests[msg.handId].name} دست بلند کرد.`, 'warning');
   },
   receiveLower(msg) {
@@ -3010,6 +3239,7 @@ const Hands = {
     Classroom.allowed = !!msg.approved;
     this.myStatus = msg.approved ? 'approved' : 'revoked';
     Classroom.updateMediaControls();
+    Classroom.reinitJitsi();
     this.renderStudentStatus();
     if (msg.approved) Toast.show('معلم به شما اجازه صحبت، دوربین و اشتراک صفحه داد.', 'success');
     else Toast.show('مجوز شما توسط معلم لغو شد.', 'warning');
@@ -3035,7 +3265,7 @@ const Hands = {
       div.className = 'hand-item';
       const statusClass = req.status === 'approved' ? 'status-approved' : req.status === 'revoked' ? 'status-revoked' : 'status-waiting';
       const statusText = req.status === 'approved' ? 'فعال' : req.status === 'revoked' ? 'لغو شده' : 'در انتظار';
-      div.innerHTML = `<div><div style="font-weight:800">✋ ${Utils.escapeHtml(req.name)}</div><div class="small">${new Date(req.ts).toLocaleTimeString('fa-IR')}</div></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="hand-status ${statusClass}">${statusText}</span><button class="btn btn-success" onclick="Hands.approve('${req.id}')">✅ قبول</button><button class="btn btn-danger" onclick="Hands.revoke('${req.id}')">❌ لغو</button></div>`;
+      div.innerHTML = `<div><div style="font-weight:800">✋ ${Utils.escapeHtml(req.name)}</div><div class="small">${new Date(req.ts).toLocaleTimeString('fa-IR')}</div></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="hand-status ${statusClass}">${statusText}</span><button class="btn btn-success" onclick="Hands.approve('${req.id}')">✅ قبول</button><button class="btn btn-danger" onclick="Hands.revoke('${req.id}')">❌ لغو</button><button class="btn" onclick="Classroom.kick('${req.id}','${Utils.escapeHtml(req.name)}')">🚫 اخراج</button></div>`;
       list.appendChild(div);
     });
   }
@@ -3066,6 +3296,7 @@ const Poll = {
   receivePoll(msg) {
     this.current = msg.poll;
     this.votes = {}; this.votedIndex = null; this.resultsPublished = null;
+    Classroom.markTabNew('poll');
     Toast.show('یک نظرسنجی جدید شروع شد.', 'info');
     this.render();
   },
@@ -3131,6 +3362,289 @@ const Poll = {
 };
 
 /* ============================================================
+   ANNOUNCE
+============================================================ */
+const Announce = {
+  list: [],
+  post() {
+    if (Classroom.role !== 'teacher') return;
+    const title = document.getElementById('announce-title').value.trim();
+    const body = document.getElementById('announce-body').value.trim();
+    if (!title && !body) { Toast.show('عنوان یا متن اطلاعیه را وارد کنید.', 'warning'); return; }
+    const item = { id: Utils.uid(), title: title || 'اطلاعیه', body, ts: Date.now(), from: Classroom.displayName };
+    Signal.send('*', { type: 'announce', announce: item });
+    this.list.unshift(item);
+    document.getElementById('announce-title').value = '';
+    document.getElementById('announce-body').value = '';
+    this.render();
+    Toast.show('اطلاعیه برای همه ارسال شد.', 'success');
+  },
+  receive(msg) {
+    if (!msg.announce) return;
+    this.list.unshift(msg.announce);
+    this.render();
+    Classroom.markTabNew('announce');
+    Utils.beep(880, 0.15);
+    Toast.show(`📢 اطلاعیه جدید: ${msg.announce.title}`, 'info');
+  },
+  render() {
+    const list = document.getElementById('announce-list');
+    if (!list) return;
+    list.innerHTML = '';
+    if (!this.list.length) { list.innerHTML = '<p class="small">هیچ اطلاعیه‌ای وجود ندارد.</p>'; return; }
+    this.list.forEach(a => {
+      const div = document.createElement('div');
+      div.className = 'announce-item';
+      div.innerHTML = `<div class="title">📢 ${Utils.escapeHtml(a.title)}</div><div style="margin-top:6px;white-space:pre-wrap">${Utils.escapeHtml(a.body || '')}</div><div class="small" style="margin-top:8px">${Utils.escapeHtml(a.from)} • ${new Date(a.ts).toLocaleString('fa-IR')}</div>`;
+      list.appendChild(div);
+    });
+  }
+};
+
+/* ============================================================
+   HOMEWORK
+============================================================ */
+const Homework = {
+  list: [],
+  subs: {},
+  create() {
+    if (Classroom.role !== 'teacher') return;
+    const title = document.getElementById('hw-title').value.trim();
+    const desc = document.getElementById('hw-desc').value.trim();
+    const deadline = document.getElementById('hw-deadline').value;
+    if (!title) { Toast.show('عنوان تکلیف را وارد کنید.', 'warning'); return; }
+    const item = { id: Utils.uid(), title, desc, deadline, ts: Date.now(), from: Classroom.displayName };
+    Signal.send('*', { type: 'homework', hw: item });
+    this.list.unshift(item);
+    document.getElementById('hw-title').value = '';
+    document.getElementById('hw-desc').value = '';
+    this.render();
+    Toast.show('تکلیف برای کلاس ثبت شد.', 'success');
+  },
+  receive(msg) {
+    if (!msg.hw) return;
+    this.list.unshift(msg.hw);
+    this.render();
+    Classroom.markTabNew('homework');
+    Toast.show(`📚 تکلیف جدید: ${msg.hw.title}`, 'info');
+  },
+  submit(hwId) {
+    const input = document.getElementById('hw-answer-' + hwId);
+    if (!input) return;
+    const answer = input.value.trim();
+    if (!answer) { Toast.show('پاسخ خود را بنویسید.', 'warning'); return; }
+    Signal.send('teacher', { type: 'homework-sub', hwId, answer, name: Classroom.displayName });
+    input.value = '';
+    Toast.show('پاسخ شما برای معلم ارسال شد.', 'success');
+  },
+  receiveSub(msg) {
+    if (Classroom.role !== 'teacher') return;
+    if (!this.subs[msg.hwId]) this.subs[msg.hwId] = [];
+    this.subs[msg.hwId].push({ name: msg.name || msg.fromName, answer: msg.answer, ts: msg.ts });
+    this.render();
+    Classroom.markTabNew('homework');
+    Toast.show(`پاسخ تکلیف از ${msg.name} دریافت شد.`, 'info');
+  },
+  render() {
+    const list = document.getElementById('hw-list');
+    if (!list) return;
+    list.innerHTML = '';
+    if (!this.list.length) { list.innerHTML = '<p class="small">هیچ تکلیفی ثبت نشده است.</p>'; return; }
+    this.list.forEach(hw => {
+      const div = document.createElement('div');
+      div.className = 'hw-item';
+      const deadlineText = hw.deadline ? new Date(hw.deadline).toLocaleString('fa-IR') : 'بدون مهلت';
+      let html = `<div class="title">📚 ${Utils.escapeHtml(hw.title)}</div>`;
+      if (hw.desc) html += `<div style="margin-top:6px;white-space:pre-wrap">${Utils.escapeHtml(hw.desc)}</div>`;
+      html += `<div class="small" style="margin-top:8px">⏰ مهلت: ${Utils.escapeHtml(deadlineText)} • ${Utils.escapeHtml(hw.from)}</div>`;
+      if (Classroom.role !== 'teacher') {
+        html += `<div style="margin-top:10px;display:flex;gap:8px"><input id="hw-answer-${hw.id}" class="input" style="margin:0;flex:1" placeholder="پاسخ خود را بنویسید..."><button class="btn btn-primary" onclick="Homework.submit('${hw.id}')">ارسال</button></div>`;
+      } else {
+        const subs = this.subs[hw.id] || [];
+        html += `<div style="margin-top:10px;font-weight:700">پاسخ‌های دریافتی (${subs.length}):</div>`;
+        if (subs.length) {
+          subs.forEach(s => {
+            html += `<div style="margin-top:8px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px"><b>${Utils.escapeHtml(s.name)}</b><div class="small" style="margin-top:4px;white-space:pre-wrap">${Utils.escapeHtml(s.answer)}</div></div>`;
+          });
+        } else {
+          html += `<div class="small" style="margin-top:6px">هنوز پاسخی دریافت نشده.</div>`;
+        }
+      }
+      div.innerHTML = html;
+      list.appendChild(div);
+    });
+  }
+};
+
+/* ============================================================
+   POINTS
+============================================================ */
+const Points = {
+  board: {},
+  add(name, delta) {
+    if (Classroom.role !== 'teacher') return;
+    this.board[name] = (this.board[name] || 0) + delta;
+    Signal.send('*', { type: 'points', board: this.board, target: name, delta });
+    this.render();
+    Toast.show(`${delta > 0 ? '+' : ''}${delta} امتیاز برای ${name}`, delta > 0 ? 'success' : 'warning');
+  },
+  receive(msg) {
+    if (msg.board) this.board = msg.board;
+    this.render();
+    if (msg.target && msg.delta) {
+      Toast.show(`${msg.delta > 0 ? '⭐' : '⚠️'} ${msg.delta > 0 ? '+' : ''}${msg.delta} امتیاز برای ${msg.target}`, msg.delta > 0 ? 'success' : 'warning');
+    }
+  },
+  render() {
+    const list = document.getElementById('points-list');
+    if (!list) return;
+    const entries = Object.entries(this.board).sort((a, b) => b[1] - a[1]);
+    if (!entries.length) {
+      list.innerHTML = '<p class="small">هنوز امتیازی ثبت نشده است. معلم می‌تواند امتیاز بدهد.</p>';
+      return;
+    }
+    list.innerHTML = '';
+    entries.forEach(([name, score], i) => {
+      const div = document.createElement('div');
+      div.className = 'points-row';
+      const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '🎖️';
+      let controls = '';
+      if (Classroom.role === 'teacher') {
+        controls = `<div style="display:flex;gap:6px"><button class="btn btn-success" style="min-height:34px" onclick="Points.add('${Utils.escapeHtml(name)}',1)">+۱</button><button class="btn btn-danger" style="min-height:34px" onclick="Points.add('${Utils.escapeHtml(name)}',-1)">-۱</button></div>`;
+      }
+      div.innerHTML = `<div style="display:flex;align-items:center;gap:10px"><span style="font-size:1.4rem">${medal}</span><b>${Utils.escapeHtml(name)}</b></div><div style="display:flex;align-items:center;gap:10px">${controls}<span class="points-score">${score}</span></div>`;
+      list.appendChild(div);
+    });
+  }
+};
+
+/* ============================================================
+   CLASS TIMER + BREAK
+============================================================ */
+const ClassTimer = {
+  remaining: 0, interval: null,
+  startFromUI() {
+    if (Classroom.role !== 'teacher') return;
+    const minutes = parseInt(document.getElementById('timer-minutes').value) || 5;
+    const seconds = minutes * 60;
+    Signal.send('*', { type: 'timer', action: 'start', seconds });
+    this.begin(seconds);
+    Toast.show(`تایمر ${minutes} دقیقه‌ای برای همه شروع شد.`, 'success');
+  },
+  stopForAll() {
+    if (Classroom.role !== 'teacher') return;
+    Signal.send('*', { type: 'timer', action: 'stop' });
+    this.stop();
+    Toast.show('تایمر متوقف شد.', 'info');
+  },
+  receive(msg) {
+    if (msg.action === 'start') this.begin(msg.seconds);
+    else if (msg.action === 'stop') this.stop();
+  },
+  begin(seconds) {
+    this.remaining = seconds;
+    clearInterval(this.interval);
+    this.update();
+    this.interval = setInterval(() => {
+      this.remaining--;
+      this.update();
+      if (this.remaining <= 0) {
+        clearInterval(this.interval);
+        Toast.show('⏰ زمان تمام شد!', 'warning');
+        Utils.beep(990, 0.3);
+      }
+    }, 1000);
+  },
+  stop() {
+    clearInterval(this.interval);
+    this.remaining = 0;
+    this.update();
+  },
+  update() {
+    const el = document.getElementById('class-timer-display');
+    if (!el) return;
+    const m = Math.floor(this.remaining / 60), s = this.remaining % 60;
+    el.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+};
+
+const BreakMode = {
+  remaining: 0, interval: null,
+  startFromUI() {
+    if (Classroom.role !== 'teacher') return;
+    const minutes = 5;
+    Signal.send('*', { type: 'break', on: true, minutes });
+    this.begin(minutes * 60);
+    Toast.show('زنگ تفریح برای همه شروع شد.', 'success');
+  },
+  endEarly() {
+    if (Classroom.role === 'teacher') Signal.send('*', { type: 'break', on: false });
+    this.end();
+  },
+  receive(msg) {
+    if (msg.on) this.begin((msg.minutes || 5) * 60);
+    else this.end();
+  },
+  begin(seconds) {
+    this.remaining = seconds;
+    document.getElementById('break-overlay').classList.add('open');
+    clearInterval(this.interval);
+    this.update();
+    this.interval = setInterval(() => {
+      this.remaining--;
+      this.update();
+      if (this.remaining <= 0) this.end();
+    }, 1000);
+  },
+  update() {
+    const el = document.getElementById('break-timer');
+    if (!el) return;
+    const m = Math.floor(this.remaining / 60), s = this.remaining % 60;
+    el.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  },
+  end() {
+    clearInterval(this.interval);
+    document.getElementById('break-overlay').classList.remove('open');
+    Toast.show('زنگ تفریح تمام شد. برگردیم به درس!', 'info');
+  }
+};
+
+/* ============================================================
+   RANDOM PICKER
+============================================================ */
+const Picker = {
+  names: [], interval: null,
+  open() {
+    if (Classroom.role !== 'teacher') return;
+    const students = Object.values(Attendance.list).filter(p => p.role !== 'teacher').map(p => p.name);
+    if (!students.length) { Toast.show('هیچ دانش‌آموزی ثبت نشده است.', 'warning'); return; }
+    this.names = students;
+    document.getElementById('picker-overlay').classList.add('open');
+    this.spin();
+  },
+  spin() {
+    const nameEl = document.getElementById('picker-name');
+    let count = 0; const total = 22;
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      nameEl.textContent = this.names[Math.floor(Math.random() * this.names.length)];
+      count++;
+      if (count >= total) {
+        clearInterval(this.interval);
+        const winner = this.names[Math.floor(Math.random() * this.names.length)];
+        nameEl.textContent = '🎯 ' + winner;
+        Utils.beep(880, 0.2);
+        Toast.show(`انتخاب شد: ${winner}`, 'success');
+      }
+    }, 90);
+  },
+  close() {
+    clearInterval(this.interval);
+    document.getElementById('picker-overlay').classList.remove('open');
+  }
+};
+
+/* ============================================================
    REACTIONS
 ============================================================ */
 const Reactions = {
@@ -3152,7 +3666,7 @@ const Reactions = {
 };
 
 /* ============================================================
-   ATTENDANCE
+   ATTENDANCE + STATS
 ============================================================ */
 const Attendance = {
   list: {},
@@ -3180,6 +3694,7 @@ const Attendance = {
     const items = Object.values(this.list);
     document.getElementById('att-count').textContent = items.length;
     document.getElementById('hand-count').textContent = items.filter(i => i.hand === 'waiting' || i.hand === 'approved').length;
+    document.getElementById('msg-count').textContent = ClassChat.messages.length;
     list.innerHTML = '';
     if (!items.length) { list.innerHTML = '<p class="small">هیچ شرکت‌کننده‌ای ثبت نشده است.</p>'; return; }
     items.forEach(item => {
@@ -3190,7 +3705,8 @@ const Attendance = {
         : item.hand === 'approved' ? '<span class="hand-status status-approved">✅ فعال</span>'
         : item.hand === 'revoked' ? '<span class="hand-status status-revoked">❌ لغو</span>'
         : '<span class="badge">—</span>';
-      div.innerHTML = `<div><div style="font-weight:800">${roleIcon} ${Utils.escapeHtml(item.name)}</div><div class="small">زمان: ${Utils.escapeHtml(item.time)} | وضعیت: ${Utils.escapeHtml(item.status)}</div></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${handBadge}</div>`;
+      const kickBtn = (Classroom.role === 'teacher' && item.role !== 'teacher') ? `<button class="btn" onclick="Classroom.kick('${item.id}','${Utils.escapeHtml(item.name)}')">🚫 اخراج</button>` : '';
+      div.innerHTML = `<div><div style="font-weight:800">${roleIcon} ${Utils.escapeHtml(item.name)}</div><div class="small">زمان: ${Utils.escapeHtml(item.time)} | وضعیت: ${Utils.escapeHtml(item.status)}</div></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${handBadge}${kickBtn}</div>`;
       list.appendChild(div);
     });
   },
@@ -3302,14 +3818,22 @@ const Facts = {
     const facts = await Storage.getAll('facts');
     const cats = ['all', ...new Set(facts.map(f => f.category || 'عمومی'))];
     const tags = document.getElementById('facts-tags');
-    if (tags) tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentCat ? 'background:var(--primary);color:#fff' : ''}" onclick="Facts.setCat('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
+    if (tags) tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentCat ? 'background:var(--primary);color:#04211d' : ''}" onclick="Facts.setCat('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
     this.render();
     document.getElementById('stat-facts').textContent = facts.length;
+    this.dailyFact(facts);
+  },
+  dailyFact(facts) {
+    const el = document.getElementById('daily-fact');
+    if (!el || !facts.length) return;
+    const dayIndex = Math.floor(Date.now() / 86400000) % facts.length;
+    const f = facts[dayIndex];
+    el.innerHTML = `<b style="color:var(--accent2)">${Utils.escapeHtml(f.title)}</b><br>${Utils.escapeHtml(f.body)}`;
   },
   setCat(cat, el) {
     this.currentCat = cat;
     document.querySelectorAll('#facts-tags .btn').forEach(b => { b.style.background = 'var(--bg3)'; b.style.color = 'var(--text)'; });
-    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#fff'; }
+    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#04211d'; }
     this.render();
   },
   async render() {
@@ -3504,16 +4028,17 @@ const Bank = {
     }
     this.initTags();
     this.render();
+    document.getElementById('stat-bank').textContent = this.data.length;
   },
   initTags() {
     const cats = ['all', ...new Set(this.data.map(q => q.cat || 'general'))];
     const tags = document.getElementById('bank-tags');
-    if (tags) tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentFilter ? 'background:var(--primary);color:#fff' : ''}" onclick="Bank.setFilter('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
+    if (tags) tags.innerHTML = cats.map(c => `<button class="btn" style="padding:6px 12px;font-size:.75rem;${c === this.currentFilter ? 'background:var(--primary);color:#04211d' : ''}" onclick="Bank.setFilter('${c}',this)">${c === 'all' ? 'همه' : c}</button>`).join('');
   },
   setFilter(cat, el) {
     this.currentFilter = cat;
     document.querySelectorAll('#bank-tags .btn').forEach(b => { b.style.background = 'var(--bg3)'; b.style.color = 'var(--text)'; });
-    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#fff'; }
+    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#04211d'; }
     this.render();
   },
   async add() {
@@ -3528,6 +4053,7 @@ const Bank = {
     document.getElementById('bank-cat').value = '';
     this.initTags();
     this.render();
+    document.getElementById('stat-bank').textContent = this.data.length;
     Toast.show('سوال اضافه شد', 'success');
   },
   render() {
@@ -3539,7 +4065,7 @@ const Bank = {
       const ms = Utils.normalizeFa(item.q).includes(search) || Utils.normalizeFa(item.a).includes(search);
       return mc && ms;
     });
-    list.innerHTML = filtered.slice(0, 200).map(i => `<div style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer" onclick="this.querySelector('.bank-answer').style.display=this.querySelector('.bank-answer').style.display==='block'?'none':'block'"><div style="font-weight:600">❓ ${Utils.escapeHtml(i.q)}</div><div class="bank-answer" style="display:none;margin-top:8px;padding:8px;background:rgba(99,102,241,.1);border-radius:8px;font-size:.9rem">✅ ${Utils.escapeHtml(i.a)}</div></div>`).join('') || '<p style="text-align:center;color:var(--muted);padding:2rem">موردی یافت نشد</p>';
+    list.innerHTML = filtered.slice(0, 200).map(i => `<div style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer" onclick="this.querySelector('.bank-answer').style.display=this.querySelector('.bank-answer').style.display==='block'?'none':'block'"><div style="font-weight:600">❓ ${Utils.escapeHtml(i.q)}</div><div class="bank-answer" style="display:none;margin-top:8px;padding:8px;background:rgba(20,184,166,.1);border-radius:8px;font-size:.9rem">✅ ${Utils.escapeHtml(i.a)}</div></div>`).join('') || '<p style="text-align:center;color:var(--muted);padding:2rem">موردی یافت نشد</p>';
   }
 };
 
@@ -3610,7 +4136,7 @@ const Settings = {
   },
   async clearAll() {
     if (!confirm('همه داده‌های محلی پاک شود؟')) return;
-    indexedDB.deleteDatabase('OstadYarDB_v104');
+    indexedDB.deleteDatabase('OstadYarDB_v105');
     location.reload();
   }
 };
@@ -3671,6 +4197,33 @@ const UI = {
 };
 
 /* ============================================================
+   LIVE CLOCK + COUNTERS
+============================================================ */
+function startClock() {
+  const clockEl = document.getElementById('live-clock');
+  const dateEl = document.getElementById('live-date');
+  const update = () => {
+    const now = new Date();
+    if (clockEl) clockEl.textContent = now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    if (dateEl) dateEl.textContent = now.toLocaleDateString('fa-IR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  };
+  update();
+  setInterval(update, 1000);
+}
+
+function animateCount(id, target) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let current = 0;
+  const step = Math.max(1, Math.ceil(target / 30));
+  const interval = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(interval); }
+    el.textContent = current;
+  }, 30);
+}
+
+/* ============================================================
    INIT
 ============================================================ */
 document.addEventListener('DOMContentLoaded', async () => {
@@ -3687,9 +4240,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     TTS.init();
     Palette.init();
     UI.renderQuickLinks();
+    startClock();
 
-    document.getElementById('stat-chats').textContent = Chat.sessions.length;
-    document.getElementById('stat-quizzes').textContent = (await Storage.getAll('quizzes')).length;
+    animateCount('stat-chats', Chat.sessions.length);
+    animateCount('stat-quizzes', (await Storage.getAll('quizzes')).length);
+    animateCount('stat-facts', (await Storage.getAll('facts')).length);
+    animateCount('stat-bank', (await Storage.getAll('qa')).length || 8);
 
     const chatInput = document.getElementById('chat-input');
     chatInput.addEventListener('input', function () {
@@ -3719,7 +4275,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
-    Toast.show('🚀 استاد یار پلاس v104.0 آماده است!', 'success');
+    Toast.show('🚀 استاد یار پلاس v105.0 آماده است!', 'success');
   } catch (e) {
     console.error('Init error:', e);
     Toast.show('خطا در راه‌اندازی: ' + e.message, 'error');
@@ -3727,4 +4283,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 </script>
 </body>
-  </html>
+                </html>
