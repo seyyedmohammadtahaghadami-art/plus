@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>استاد یار پلاس | v111.0 ULTIMATE</title>
+<title>استاد یار پلاس | v113.0 ULTIMATE</title>
 <meta name="theme-color" content="#0a1020">
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
 <script>
@@ -202,94 +202,6 @@ select {
 }
 
 /* ================================================================
-   ENTRY GATE (کد ورود)
-================================================================ */
-.gate {
-  position: fixed;
-  inset: 0;
-  z-index: 20000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(1000px 700px at 80% -10%, var(--glow), transparent 60%),
-    radial-gradient(800px 600px at 0% 110%, var(--glow2), transparent 60%),
-    var(--bg);
-}
-.gate-card {
-  width: min(92%, 420px);
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  backdrop-filter: blur(16px);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
-  animation: gateIn .5s ease;
-}
-@keyframes gateIn {
-  from { opacity: 0; transform: translateY(30px) scale(.96); }
-  to { opacity: 1; transform: none; }
-}
-.gate-logo {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 1rem;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.6rem;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 16px 40px -10px var(--primary);
-  animation: float 5s ease-in-out infinite;
-}
-.gate-title {
-  font-family: var(--display);
-  font-size: 2.2rem;
-  line-height: 1.1;
-  color: var(--primary2);
-  margin-bottom: .3rem;
-}
-.gate-sub {
-  color: var(--muted);
-  font-size: .9rem;
-  margin-bottom: 1.5rem;
-}
-.gate-input {
-  width: 100%;
-  padding: 14px 16px;
-  text-align: center;
-  font-size: 1.3rem;
-  letter-spacing: 6px;
-  font-family: monospace;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  color: var(--text);
-  margin-bottom: 1rem;
-}
-.gate-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, .18);
-}
-.gate-hint {
-  margin-top: 1rem;
-  font-size: .75rem;
-  color: var(--muted);
-}
-.shake {
-  animation: shake .5s ease;
-}
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-10px); }
-  40% { transform: translateX(10px); }
-  60% { transform: translateX(-8px); }
-  80% { transform: translateX(8px); }
-}
-
-/* ================================================================
    LAYOUT
 ================================================================ */
 .app {
@@ -330,6 +242,10 @@ select {
   padding: 1.1rem;
   scroll-behavior: smooth;
 }
+
+/* ================================================================
+   BRAND
+================================================================ */
 .brand {
   padding: 1.2rem;
   border-bottom: 1px solid var(--border);
@@ -674,7 +590,7 @@ select.input {
 }
 
 /* ================================================================
-   CHAT (AI)
+   CHAT
 ================================================================ */
 .chat-messages {
   flex: 1;
@@ -1104,12 +1020,6 @@ select.input {
   white-space: pre-wrap;
   word-break: break-word;
   line-height: 1.7;
-}
-.chat-msg img.chat-photo {
-  max-width: 200px;
-  border-radius: 10px;
-  margin-top: 6px;
-  display: block;
 }
 .chat-input-row {
   display: flex;
@@ -1893,6 +1803,98 @@ canvas.chart {
 .mobile-nav button.active {
   color: var(--primary2);
 }
+
+/* ================================================================
+   GATE
+================================================================ */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(1000px 700px at 80% -10%, var(--glow), transparent 60%),
+    radial-gradient(800px 600px at 0% 110%, var(--glow2), transparent 60%),
+    var(--bg);
+}
+.gate-card {
+  width: min(92%, 420px);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
+  animation: gateIn .5s ease;
+}
+@keyframes gateIn {
+  from { opacity: 0; transform: translateY(30px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+.gate-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 16px 40px -10px var(--primary);
+  animation: float 5s ease-in-out infinite;
+}
+.gate-title {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  line-height: 1.1;
+  color: var(--primary2);
+  margin-bottom: .3rem;
+}
+.gate-sub {
+  color: var(--muted);
+  font-size: .9rem;
+  margin-bottom: 1.5rem;
+}
+.gate-input {
+  width: 100%;
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 6px;
+  font-family: monospace;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.gate-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, .18);
+}
+.gate-hint {
+  margin-top: 1rem;
+  font-size: .75rem;
+  color: var(--muted);
+}
+.shake {
+  animation: shake .5s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
 @media (max-width: 950px) {
   .classroom-grid {
     grid-template-columns: 1fr;
@@ -1930,7 +1932,6 @@ canvas.chart {
 </style>
 </head>
 <body>
-
 <div class="toast-container" id="toast-container"></div>
 <div id="emoji-layer"></div>
 
@@ -1942,7 +1943,7 @@ canvas.chart {
     <div class="gate-sub">برای ورود، کد دسترسی را وارد کنید</div>
     <input class="gate-input" id="gate-code" type="password" inputmode="numeric" placeholder="••••••••" onkeydown="if(event.key==='Enter')Gate.unlock()">
     <button class="btn btn-primary btn-block" onclick="Gate.unlock()">🔓 ورود به برنامه</button>
-    <div class="gate-hint">نسخه ۱۱۱.۰ آلتیمیت — دسترسی محافظت‌شده</div>
+    <div class="gate-hint">نسخه ۱۱۳.۰ آلتیمیت — دسترسی محافظت‌شده</div>
   </div>
 </div>
 
@@ -1954,7 +1955,7 @@ canvas.chart {
       <div class="brand-logo"><svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:#04211d"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
       <div>
         <div class="brand-title">استاد یار پلاس</div>
-        <div class="brand-sub">v111.0 ULTIMATE</div>
+        <div class="brand-sub">v113.0 ULTIMATE</div>
       </div>
     </div>
     <div style="padding:.8rem">
@@ -2005,12 +2006,22 @@ canvas.chart {
     </header>
 
     <div class="content" id="content">
+      <!-- ============ HOME ============ -->
       <div class="view active" id="view-home">
-        <div class="page-head"><h2>داشبورد <em>آموزشی</em></h2><p>دستیار هوشمند آموزش، پژوهش و کلاس مجازی</p></div>
+        <div class="page-head">
+          <h2>داشبورد <em>آموزشی</em></h2>
+          <p>دستیار هوشمند آموزش، پژوهش و کلاس مجازی</p>
+        </div>
         <div class="status-strip">
-          <div><div class="clock-big" id="live-clock">--:--:--</div><div class="small" id="live-date">...</div></div>
+          <div>
+            <div class="clock-big" id="live-clock">--:--:--</div>
+            <div class="small" id="live-date">...</div>
+          </div>
           <div style="flex:1"></div>
-          <div style="text-align:end"><span class="badge green"><span class="badge-dot"></span> سیستم آماده</span><div class="small" style="margin-top:6px">نسخه ۱۱۱.۰ آلتیمیت</div></div>
+          <div style="text-align:end">
+            <span class="badge green"><span class="badge-dot"></span> سیستم آماده</span>
+            <div class="small" style="margin-top:6px">نسخه ۱۱۳.۰ آلتیمیت</div>
+          </div>
         </div>
         <div class="grid cols-4" style="margin-bottom:1rem">
           <div class="stat"><div class="num" id="stat-chats">0</div><div class="lbl">گفتگوها</div></div>
@@ -2018,7 +2029,8 @@ canvas.chart {
           <div class="stat"><div class="num" id="stat-facts">0</div><div class="lbl">دانستنی‌ها</div></div>
           <div class="stat"><div class="num" id="stat-bank">0</div><div class="lbl">بانک سوال</div></div>
         </div>
-        <div class="card lift"><div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">⚡ دسترسی سریع</div>
+        <div class="card lift">
+          <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">⚡ دسترسی سریع</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="btn btn-primary" onclick="UI.nav('chat')">💬 چت هوشمند</button>
             <button class="btn btn-accent" onclick="UI.nav('classroom')">🎓 کلاس مجازی</button>
@@ -2026,8 +2038,12 @@ canvas.chart {
             <button class="btn" onclick="UI.nav('tools')" style="background:linear-gradient(135deg,var(--info),#0369a1);color:#fff">🧰 ابزار</button>
           </div>
         </div>
-        <div class="card lift"><div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">💡 دانستنی امروز</div><div id="daily-fact" class="small">...</div></div>
-        <div class="card lift"><div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">💾 پشتیبان‌گیری</div>
+        <div class="card lift">
+          <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">💡 دانستنی امروز</div>
+          <div id="daily-fact" class="small">...</div>
+        </div>
+        <div class="card lift">
+          <div style="font-family:var(--display);font-size:1.3rem;margin-bottom:1rem;color:var(--accent2)">💾 پشتیبان‌گیری</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="btn" onclick="Chat.exportAllJSON()">📦 خروجی JSON</button>
             <button class="btn" onclick="Chat.triggerImport()">📥 بازیابی</button>
@@ -2037,6 +2053,7 @@ canvas.chart {
         </div>
       </div>
 
+      <!-- ============ CHAT ============ -->
       <div class="view" id="view-chat" style="display:none;flex-direction:column;height:calc(100dvh - 120px)">
         <div class="chat-messages" id="chat-messages"></div>
         <div class="attachments-preview" id="chat-attachments" style="display:none"></div>
@@ -2050,6 +2067,7 @@ canvas.chart {
         </div>
       </div>
 
+      <!-- ============ CLASSROOM ============ -->
       <div class="view" id="view-classroom">
         <div id="classroom-step-name" class="card classroom-center" style="text-align:center">
           <div style="font-size:3rem;margin-bottom:.4rem">👤</div>
@@ -2129,6 +2147,7 @@ canvas.chart {
                   <select id="server-select" class="input"></select>
                   <button class="btn btn-sm" onclick="Media.reconnectTo(document.getElementById('server-select').value)">🔌 اتصال به این سرور</button>
                   <button class="btn btn-sm btn-primary" onclick="Media.connectWithFailover()">🔄 تلاش خودکار همه سرورها</button>
+                  <button class="btn btn-sm btn-accent" onclick="Media.requestFullscreen()">⛶ تمام‌صفحه</button>
                 </div>
                 <div class="media-controls">
                   <button id="btn-audio" class="btn btn-sm" onclick="Media.toggleAudio()">🎤 میکروفون</button>
@@ -2278,12 +2297,13 @@ canvas.chart {
               <div style="margin-top:14px"><div class="small">لینک دانش‌آموز (همراه با سرور فعال):</div><div class="link-box" id="student-link"></div><div style="display:flex;gap:8px"><button class="btn btn-sm" style="flex:1" onclick="Classroom.copyStudentLink()">📋 کپی</button><button class="btn btn-sm" style="flex:1" onclick="Classroom.showQR('student')">📱 QR</button></div></div>
               <div id="teacher-link-section" style="margin-top:14px"><div class="small">لینک معلم:</div><div class="link-box" id="teacher-link"></div><div style="display:flex;gap:8px"><button class="btn btn-sm" style="flex:1" onclick="Classroom.copyTeacherLink()">📋 کپی</button><button class="btn btn-sm" style="flex:1" onclick="Classroom.showQR('teacher')">📱 QR</button></div></div>
               <div id="classroom-qr" class="qr-box" style="display:none"></div>
-              <div class="hint" style="margin-top:14px"><b>کد معلم:</b> ۶ رقمی، فقط مدیر.<br><b>کد دانش‌آموز:</b> ۵ رقمی، قابل اشتراک.<br><b>سرور:</b> لینک‌ها شامل سرور فعال هستند تا دانش‌آموز به همان سرور معلم وصل شود.<br><b>اشتراک صفحه:</b> در کروم/اج گزینه Share audio را فعال کنید.</div>
+              <div class="hint" style="margin-top:14px"><b>کد معلم:</b> ۶ رقمی، فقط مدیر.<br><b>کد دانش‌آموز:</b> ۵ رقمی، قابل اشتراک.<br><b>سرور:</b> لینک‌ها شامل سرور فعال هستند تا دانش‌آموز به همان سرور معلم وصل شود.<br><b>اشتراک صفحه:</b> در کروم/اج گزینه Share audio را فعال کنید.<br><b>تمام‌صفحه:</b> دکمه ⛶ تصویر را بزرگ و تمام‌صفحه می‌کند.</div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- ============ FACTS ============ -->
       <div class="view" id="view-facts">
         <div style="max-width:900px;margin:0 auto">
           <div class="page-head"><h2>⭐ دانستنی‌<em>ها</em></h2><p>دانشنامه کوچک آموزشی</p></div>
@@ -2295,6 +2315,7 @@ canvas.chart {
         </div>
       </div>
 
+      <!-- ============ QUIZ ============ -->
       <div class="view" id="view-quiz">
         <div style="max-width:700px;margin:0 auto">
           <div class="page-head"><h2>📝 آزمون <em>هوشمند</em></h2><p>تولید سوال با هوش مصنوعی یا دانش محلی</p></div>
@@ -2304,6 +2325,7 @@ canvas.chart {
         </div>
       </div>
 
+      <!-- ============ FLASHCARDS ============ -->
       <div class="view" id="view-flashcards">
         <div style="max-width:550px;margin:0 auto">
           <div class="page-head"><h2>🃏 فلش‌<em>کارت</em></h2><p>مرور با کارت‌های چرخشی</p></div>
@@ -2317,6 +2339,7 @@ canvas.chart {
         </div>
       </div>
 
+      <!-- ============ BANK ============ -->
       <div class="view" id="view-bank">
         <div style="max-width:800px;margin:0 auto">
           <div class="page-head"><h2>📚 بانک <em>سوالات</em></h2><p>سوالات را ذخیره و مرور کنید</p></div>
@@ -2330,6 +2353,7 @@ canvas.chart {
         </div>
       </div>
 
+      <!-- ============ TOOLS ============ -->
       <div class="view" id="view-tools">
         <div style="max-width:1100px;margin:0 auto">
           <div class="page-head"><h2>🧰 جعبه <em>ابزار</em></h2><p>تایمر، ماشین حساب، QR، رسم تابع و تخته سفید</p></div>
@@ -2343,6 +2367,7 @@ canvas.chart {
         </div>
       </div>
 
+      <!-- ============ SETTINGS ============ -->
       <div class="view" id="view-settings">
         <div style="max-width:640px;margin:0 auto">
           <div class="page-head"><h2>⚙️ تنظیمات</h2><p>هوش مصنوعی، Ollama، سرورها و تم</p></div>
@@ -2388,10 +2413,6 @@ canvas.chart {
 
 <script>
 'use strict';
-
-/* ================================================================
-   12 JITSI SERVERS — لیست سرورهای رسانه
-================================================================ */
 const JITSI_SERVERS = [
   'meet.jit.si',
   '8x8.vc',
@@ -2406,10 +2427,6 @@ const JITSI_SERVERS = [
   'jitsi.tetaneutral.net',
   'meet.osna.social'
 ];
-
-/* ================================================================
-   UTILS
-================================================================ */
 const U = {
   uid() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -2477,10 +2494,6 @@ const U = {
     return String(u || '').replace(/^data:image\/[a-zA-Z+]+;base64,/, '');
   }
 };
-
-/* ================================================================
-   TOAST
-================================================================ */
 const Toast = {
   show(m, type = 'info') {
     const c = document.getElementById('toast-container');
@@ -2498,10 +2511,6 @@ const Toast = {
     }, 4200);
   }
 };
-
-/* ================================================================
-   ENTRY GATE — کد ورود 20261405
-================================================================ */
 const Gate = {
   CODE: '20261405',
   booted: false,
@@ -2546,10 +2555,6 @@ const Gate = {
     location.reload();
   }
 };
-
-/* ================================================================
-   STORE / IDB
-================================================================ */
 const Store = {
   get(k, d) {
     try {
@@ -2570,7 +2575,7 @@ const IDB = {
   async init() {
     return new Promise((res, rej) => {
       try {
-        const r = indexedDB.open('OstadYarDB_v111', 1);
+        const r = indexedDB.open('OstadYarDB_v113', 1);
         r.onupgradeneeded = e => {
           const db = e.target.result;
           ['settings', 'sessions', 'quizzes', 'flashcards', 'facts', 'qa'].forEach(s => {
@@ -2648,10 +2653,6 @@ const IDB = {
     await this.put('settings', { id: 'config', ...c });
   }
 };
-
-/* ================================================================
-   SIGNAL — همگام‌سازی بین دستگاه‌ها + سرور فعال کلاس
-================================================================ */
 const Signal = {
   room: '',
   me: '',
@@ -2664,11 +2665,11 @@ const Signal = {
     this.me = me;
     this.url = (Store.get('oy_signal_url', '') || '').replace(/\/$/, '');
     if (window.BroadcastChannel) {
-      this.channel = new BroadcastChannel('oy111-' + room);
+      this.channel = new BroadcastChannel('oy113-' + room);
       this.channel.onmessage = e => this.receive(e.data);
     }
     window.addEventListener('storage', e => {
-      if (e.key === 'oy111-sig-' + room && e.newValue) {
+      if (e.key === 'oy113-sig-' + room && e.newValue) {
         try {
           this.receive(JSON.parse(e.newValue));
         } catch (err) {}
@@ -2683,7 +2684,7 @@ const Signal = {
     const msg = { id: U.uid(), from: this.me, type, ts: Date.now(), ...payload };
     if (this.channel) this.channel.postMessage(msg);
     try {
-      localStorage.setItem('oy111-sig-' + this.room, JSON.stringify(msg));
+      localStorage.setItem('oy113-sig-' + this.room, JSON.stringify(msg));
     } catch (e) {}
     if (this.url) {
       fetch(`${this.url}/signal?room=${encodeURIComponent(this.room)}&user=${encodeURIComponent(this.me)}`, {
@@ -2724,10 +2725,6 @@ const Signal = {
     }, 3000);
   }
 };
-
-/* ================================================================
-   THEMES
-================================================================ */
 const Themes = {
   available: ['dark', 'light', 'night', 'sepia', 'ocean'],
   init() {
@@ -2747,10 +2744,6 @@ const Themes = {
     Toast.show(`تم: ${t}`, 'success');
   }
 };
-
-/* ================================================================
-   NOTIFY — اعلان‌های صوتی
-================================================================ */
 const Notify = {
   ctx: null,
   enabled: Store.get('oy_notify', { message: true, homework: true, reminder: true, emergency: true, break: true, success: true }),
@@ -2841,10 +2834,6 @@ const Notify = {
     `).join('');
   }
 };
-
-/* ================================================================
-   KNOWLEDGE DB
-================================================================ */
 const KDB = {
   facts: [
     { id: 'f1', category: 'نجوم', title: 'نزدیک‌ترین ستاره', body: 'نزدیک‌ترین ستاره به زمین، خورشید است که حدود ۱۵۰ میلیون کیلومتر فاصله دارد.', tags: ['نجوم'] },
@@ -2898,10 +2887,6 @@ const KDB = {
     }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).slice(0, limit);
   }
 };
-
-/* ================================================================
-   LOCAL AI
-================================================================ */
 const LocalAI = {
   concepts: {
     'فتوسنتز': { def: 'فرآیندی که گیاهان با نور، آب و CO₂ گلوکز و اکسیژن تولید می‌کنند.', formula: '6CO₂ + 6H₂O + نور → C₆H₁₂O₆ + 6O₂' },
@@ -3048,10 +3033,6 @@ const LocalAI = {
     ].slice(0, count);
   }
 };
-
-/* ================================================================
-   SEARCH ENGINE — پروکسی‌های اصلاح‌شده برای DuckDuckGo
-================================================================ */
 const SearchEngine = {
   proxies: [
     u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
@@ -3084,7 +3065,7 @@ const SearchEngine = {
       if (!html) continue;
       const doc = new DOMParser().parseFromString(html, 'text/html');
       const results = [];
-      const links = doc.querySelectorAll('a.result-link, a.result__a, a[data-testid="result-title-a"], .result a[href^="http"], a[href^="http"]');
+      const links = doc.querySelectorAll('a.result-link,a.result__a,a[data-testid="result-title-a"],.result a[href^="http"],a[href^="http"]');
       links.forEach(a => {
         const href = a.getAttribute('href') || '';
         if (!href.startsWith('http')) return;
@@ -3092,9 +3073,9 @@ const SearchEngine = {
         const title = a.textContent.trim();
         if (!title || title.length < 3) return;
         let snippet = '';
-        const row = a.closest('tr, div.result, div.web-result, div');
+        const row = a.closest('tr,div.result,div.web-result,div');
         if (row) {
-          const sn = row.querySelector('.result-snippet, .result__snippet, [data-result-snippet], .snippet, td.result-snippet');
+          const sn = row.querySelector('.result-snippet,.result__snippet,[data-result-snippet],.snippet,td.result-snippet');
           if (sn) snippet = sn.textContent.trim();
         }
         results.push({ title, link: href, snippet });
@@ -3144,10 +3125,6 @@ const SearchEngine = {
     return kw.some(k => t.includes(k)) || /https?:\/\//.test(t);
   }
 };
-
-/* ================================================================
-   AI — Ollama + OpenAI + Anthropic
-================================================================ */
 const AI = {
   defaultSystem: 'تو «استاد یار پلاس» هستی؛ دستیار آموزشی، پژوهشی و برنامه‌نویسی فارسی‌زبان. پاسخ‌ها دقیق، ساختاریافته و آموزشی. برای ریاضی گام‌به‌گام حل کن. از Markdown استفاده کن.',
   sys(cfg) {
@@ -3270,7 +3247,6 @@ const AI = {
     return `🔍 نتایج برای «${query}»:\n\n` + results.map((r, i) => `**${i + 1}. ${r.title}**\n${r.snippet}\n🔗 ${r.link}`).join('\n\n');
   }
 };
-
 function renderRich(el, text) {
   if (window.marked && window.DOMPurify) {
     try {
@@ -3284,10 +3260,6 @@ function renderRich(el, text) {
   }
   el.textContent = text || '';
 }
-
-/* ================================================================
-   SPEECH — صوت به متن
-================================================================ */
 const Speech = {
   recognition: null,
   active: false,
@@ -3349,10 +3321,6 @@ const Speech = {
     if (b) b.classList.toggle('recording', this.active);
   }
 };
-
-/* ================================================================
-   CHAT — با آپلود عکس و فایل
-================================================================ */
 const Chat = {
   sessions: [],
   currentId: null,
@@ -3433,9 +3401,7 @@ const Chat = {
     }
     c.style.display = 'flex';
     c.innerHTML = this.attachments.map((a, i) => {
-      if (a.kind === 'image') {
-        return `<div class="attachment-item"><button class="attachment-remove" onclick="Chat.removeAttachment(${i})">✕</button><img class="attachment-thumb" src="${a.data}" alt="${U.esc(a.name)}"><span>${U.esc(a.name)}</span></div>`;
-      }
+      if (a.kind === 'image') return `<div class="attachment-item"><button class="attachment-remove" onclick="Chat.removeAttachment(${i})">✕</button><img class="attachment-thumb" src="${a.data}" alt="${U.esc(a.name)}"><span>${U.esc(a.name)}</span></div>`;
       const icon = a.kind === 'text' ? '📄' : '📎';
       return `<div class="attachment-item"><button class="attachment-remove" onclick="Chat.removeAttachment(${i})">✕</button><span>${icon} ${U.esc(a.name)}</span></div>`;
     }).join('');
@@ -3459,9 +3425,7 @@ const Chat = {
     return parts.join('\n\n');
   },
   getImagesBase64(attachments) {
-    return (attachments || [])
-      .filter(a => a.kind === 'image' && a.data && a.data.startsWith('data:image/'))
-      .map(a => U.stripDataUrlPrefix(a.data));
+    return (attachments || []).filter(a => a.kind === 'image' && a.data && a.data.startsWith('data:image/')).map(a => U.stripDataUrlPrefix(a.data));
   },
   exportAllJSON() {
     U.download('ostadyar-chats.json', JSON.stringify(this.sessions, null, 2), 'application/json');
@@ -3624,19 +3588,14 @@ const Chat = {
     let res = '';
     this.setTyping(true);
     try {
-      if (mode === 'image') {
-        res = await AI.image(prompt || 'تصویر آموزشی');
-      } else if (mode === 'search') {
-        res = await AI.search(rawText || prompt);
-      } else if (mode === 'local') {
-        res = await LocalAI.generate(prompt);
-      } else {
+      if (mode === 'image') res = await AI.image(prompt || 'تصویر آموزشی');
+      else if (mode === 'search') res = await AI.search(rawText || prompt);
+      else if (mode === 'local') res = await LocalAI.generate(prompt);
+      else {
         const math = LocalAI.solveMath(rawText || prompt);
-        if (math) {
-          res = LocalAI.formatMath(math);
-        } else if (rawText && SearchEngine.isSearch(rawText)) {
-          res = await AI.search(rawText);
-        } else {
+        if (math) res = LocalAI.formatMath(math);
+        else if (rawText && SearchEngine.isSearch(rawText)) res = await AI.search(rawText);
+        else {
           const prev = this.history.slice(0, -1).filter(m => m.role === 'user' || m.role === 'assistant').slice(-12).map(m => ({ role: m.role, content: m.content }));
           const messages = [...prev, { role: 'user', content: prompt }];
           res = await AI.complete(prompt, { messages, images, signal: this.controller?.signal, maxTokens: 4096 });
@@ -3661,10 +3620,6 @@ const Chat = {
     }
   }
 };
-
-/* ================================================================
-   MEDIA — 12 سرور + failover + اتصال به سرور معلم
-================================================================ */
 const Media = {
   api: null,
   role: 'student',
@@ -3677,7 +3632,6 @@ const Media = {
   preferredDomain: null,
   loading: {},
   onConnected: null,
-
   setServerStatus(state, domain, idx, total) {
     const el = document.getElementById('server-status');
     if (!el) return;
@@ -3692,7 +3646,6 @@ const Media = {
       el.textContent = '❌ هیچ سروری وصل نشد — دوباره تلاش کنید';
     }
   },
-
   populateServerSelect() {
     const sel = document.getElementById('server-select');
     if (!sel) return;
@@ -3704,7 +3657,6 @@ const Media = {
     });
     sel.innerHTML = list.map(s => `<option value="${s}">${s}</option>`).join('');
   },
-
   orderedServers() {
     const custom = (Store.get('oy_jitsi_domain', '') || '').trim();
     const list = [];
@@ -3715,7 +3667,6 @@ const Media = {
     });
     return list;
   },
-
   start(room, name, role, allowed, preferredDomain) {
     this.room = room;
     this.name = name;
@@ -3725,7 +3676,6 @@ const Media = {
     this.populateServerSelect();
     this.connectWithFailover();
   },
-
   loadScript(src) {
     if (this.loading[src]) return this.loading[src];
     this.loading[src] = new Promise((res, rej) => {
@@ -3743,7 +3693,6 @@ const Media = {
     });
     return this.loading[src];
   },
-
   dispose() {
     if (this.api) {
       try { this.api.dispose(); } catch (e) {}
@@ -3751,13 +3700,10 @@ const Media = {
     }
     this.joined = false;
   },
-
   async tryServer(domain) {
     const c = document.getElementById('jitsi-container');
     try {
-      if (!window.JitsiMeetExternalAPI) {
-        await this.loadScript(`https://${domain}/external_api.js`);
-      }
+      if (!window.JitsiMeetExternalAPI) await this.loadScript(`https://${domain}/external_api.js`);
       if (!window.JitsiMeetExternalAPI) return false;
       this.dispose();
       if (c) c.innerHTML = '';
@@ -3787,7 +3733,7 @@ const Media = {
           SHOW_BRAND_WATERMARK: false,
           SHOW_CHROME_EXTENSION_BANNER: false,
           DISABLE_FOCUS_INDICATOR: true,
-          TILE_VIEW_MAX_COLUMNS: 4,
+          TILE_VIEW_MAX_COLUMNS: 5,
           DEFAULT_LOCAL_DISPLAY_NAME: this.name
         }
       });
@@ -3798,7 +3744,6 @@ const Media = {
       return false;
     }
   },
-
   waitJoin(domain) {
     return new Promise(resolve => {
       const t = setTimeout(() => resolve(false), 15000);
@@ -3825,7 +3770,6 @@ const Media = {
       });
     });
   },
-
   async connectWithFailover() {
     if (this.connecting) return;
     this.connecting = true;
@@ -3840,11 +3784,8 @@ const Media = {
         this.setServerStatus('connected', domain, i, list.length);
         this.attachEvents();
         if (this.onConnected) this.onConnected(domain);
-        if (this.preferredDomain && domain !== this.preferredDomain) {
-          Toast.show(`⚠️ به سرور جایگزین ${domain} وصل شدید (سرور اصلی ${this.preferredDomain} در دسترس نبود).`, 'warning');
-        } else {
-          Toast.show(`✅ رسانه به ${domain} وصل شد.`, 'success');
-        }
+        if (this.preferredDomain && domain !== this.preferredDomain) Toast.show(`⚠️ به سرور جایگزین ${domain} وصل شدید (سرور اصلی ${this.preferredDomain} در دسترس نبود).`, 'warning');
+        else Toast.show(`✅ رسانه به ${domain} وصل شد.`, 'success');
         this.connecting = false;
         return;
       }
@@ -3853,7 +3794,6 @@ const Media = {
     Toast.show('❌ هیچ سرور رسانه‌ای وصل نشد. سرور دلخواه را انتخاب و دوباره تلاش کنید.', 'error');
     this.connecting = false;
   },
-
   reconnectTo(domain) {
     if (!domain) return;
     this.preferredDomain = domain;
@@ -3861,7 +3801,6 @@ const Media = {
     this.dispose();
     this.connectWithFailover();
   },
-
   attachEvents() {
     if (!this.api) return;
     this.api.addEventListener('participantJoined', p => Toast.show(`${p.displayName || 'شرکت‌کننده'} وارد شد.`, 'info'));
@@ -3870,7 +3809,6 @@ const Media = {
       if (s && s.sharing) Toast.show('اشتراک صفحه فعال شد.', 'success');
     });
   },
-
   toolbar() {
     const isT = this.role === 'teacher';
     const ok = isT || this.allowed;
@@ -3881,7 +3819,6 @@ const Media = {
     b.push('hangup');
     return b;
   },
-
   cmd(c) {
     if (!this.api) {
       Toast.show('رسانه وصل نشده.', 'warning');
@@ -3895,7 +3832,6 @@ const Media = {
       return false;
     }
   },
-
   toggleAudio() {
     if (this.role !== 'teacher' && !this.allowed) {
       Toast.show('ابتدا معلم اجازه دهد.', 'warning');
@@ -3920,10 +3856,19 @@ const Media = {
       return;
     }
     if (!this.cmd('toggleShareScreen')) {
-      if (!this.cmd('toggleScreenShare')) {
-        this.cmd('toggleScreenSharing');
-      }
+      if (!this.cmd('toggleScreenShare')) this.cmd('toggleScreenSharing');
     }
+  },
+  requestFullscreen() {
+    const el = document.getElementById('jitsi-container');
+    if (!el) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+      return;
+    }
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else Toast.show('مرورگر تمام‌صفحه را پشتیبانی نمی‌کند.', 'warning');
   },
   openChat() {
     this.cmd('toggleChat');
@@ -3946,10 +3891,6 @@ const Media = {
     if (m) m.style.display = this.role === 'teacher' ? '' : 'none';
   }
 };
-
-/* ================================================================
-   RECORDER — ضبط جلسه
-================================================================ */
 const Recorder = {
   rec: null,
   chunks: [],
@@ -3995,10 +3936,6 @@ const Recorder = {
     this.rec = null;
   }
 };
-
-/* ================================================================
-   SMART BOARD — تشخیص اشکال
-================================================================ */
 const SmartBoard = {
   canvas: null,
   ctx: null,
@@ -4011,7 +3948,10 @@ const SmartBoard = {
   init() {
     this.canvas = document.getElementById('sb-canvas');
     if (!this.canvas) return;
-    if (this._init) { this.redraw(); return; }
+    if (this._init) {
+      this.redraw();
+      return;
+    }
     this.ctx = this.canvas.getContext('2d');
     this._init = true;
     this.canvas.addEventListener('pointerdown', e => this.down(e));
@@ -4145,14 +4085,15 @@ const SmartBoard = {
     this.history.push(this.canvas.toDataURL());
   },
   undo() {
-    if (!this.history.length) return;
+    if (this.history.length <= 1) return;
+    this.history.pop();
     const img = new Image();
     img.onload = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawGrid();
       this.ctx.drawImage(img, 0, 0);
     };
-    img.src = this.history.pop();
+    img.src = this.history[this.history.length - 1];
   },
   drawGrid() {
     if (!this.grid) return;
@@ -4193,10 +4134,6 @@ const SmartBoard = {
     Toast.show('تخته ذخیره شد.', 'success');
   }
 };
-
-/* ================================================================
-   LIBRARY — کتابخانه دیجیتال
-================================================================ */
 const Library = {
   items: [],
   load() {
@@ -4265,10 +4202,6 @@ const Library = {
     }).join('');
   }
 };
-
-/* ================================================================
-   CLASS CHAT
-================================================================ */
 const ClassChat = {
   msgs: [],
   send() {
@@ -4298,10 +4231,6 @@ const ClassChat = {
     box.scrollTop = box.scrollHeight;
   }
 };
-
-/* ================================================================
-   CLASS FILES — با پیش‌نمایش عکس
-================================================================ */
 const ClassFiles = {
   files: [],
   setStatus(t) {
@@ -4327,9 +4256,7 @@ const ClassFiles = {
       this.setStatus(`آماده‌سازی ${f.name}...`);
       let url = URL.createObjectURL(f);
       let preview = null;
-      if (f.type.startsWith('image/') && f.size < 1.5 * 1024 * 1024) {
-        preview = await this.readFileAsDataURL(f);
-      }
+      if (f.type.startsWith('image/') && f.size < 1.5 * 1024 * 1024) preview = await this.readFileAsDataURL(f);
       this.files.unshift({ id: U.uid(), name: f.name, size: f.size, mime: f.type || 'application/octet-stream', url, preview, by: Classroom.displayName, ts: Date.now() });
       Signal.send('file', { name: f.name, size: f.size, mime: f.type, by: Classroom.displayName, preview });
       this.render();
@@ -4355,20 +4282,12 @@ const ClassFiles = {
     }
     list.innerHTML = this.files.map(f => {
       const icon = U.fileIcon(f.mime, f.name);
-      const visual = f.preview
-        ? `<img class="file-thumb" src="${f.preview}" alt="${U.esc(f.name)}">`
-        : `<div class="file-icon">${icon}</div>`;
-      const dl = f.url
-        ? `<a class="btn btn-sm btn-primary" href="${f.url}" download="${U.esc(f.name)}">📥 دریافت</a>`
-        : `<span class="badge">در دستگاه فرستنده</span>`;
+      const visual = f.preview ? `<img class="file-thumb" src="${f.preview}" alt="${U.esc(f.name)}">` : `<div class="file-icon">${icon}</div>`;
+      const dl = f.url ? `<a class="btn btn-sm btn-primary" href="${f.url}" download="${U.esc(f.name)}">📥 دریافت</a>` : `<span class="badge">در دستگاه فرستنده</span>`;
       return `<div class="file-item">${visual}<div class="file-body"><div class="file-name">${U.esc(f.name)}</div><div class="file-sub">${U.esc(f.by)} • ${U.fmtSize(f.size)} • ${U.faTime(new Date(f.ts))}</div></div>${dl}</div>`;
     }).join('');
   }
 };
-
-/* ================================================================
-   HANDS — دست‌ها و مجوزها
-================================================================ */
 const Hands = {
   requests: {},
   myStatus: 'none',
@@ -4461,10 +4380,6 @@ const Hands = {
     }).join('');
   }
 };
-
-/* ================================================================
-   FOLDERS — پوشه‌بندی جلسات
-================================================================ */
 const Folders = {
   sessions: [],
   current: null,
@@ -4537,10 +4452,6 @@ const Folders = {
     }).join('');
   }
 };
-
-/* ================================================================
-   NOTES — یادداشت مشترک
-================================================================ */
 const Notes = {
   timer: null,
   key() {
@@ -4626,10 +4537,6 @@ const Notes = {
     w.print();
   }
 };
-
-/* ================================================================
-   POLL — نظرسنجی
-================================================================ */
 const Poll = {
   key() {
     return 'oy_polls_' + (Folders.current ? Folders.current.id : 'none');
@@ -4723,6 +4630,7 @@ const Poll = {
   render() {
     const b = document.getElementById('poll-list');
     if (!b) return;
+    b.innerHTML = '';
     const l = this.list();
     document.getElementById('poll-create').style.display = Classroom.role === 'teacher' ? '' : 'none';
     if (!l.length) {
@@ -4755,10 +4663,6 @@ const Poll = {
     });
   }
 };
-
-/* ================================================================
-   ANNOUNCE / HOMEWORK
-================================================================ */
 const Announce = {
   list: [],
   post() {
@@ -4856,9 +4760,8 @@ const Homework = {
       let html = `<div class="hw-item"><div style="font-weight:800;color:var(--primary2)">📚 ${U.esc(hw.title)}</div>`;
       if (hw.desc) html += `<div style="margin-top:6px;white-space:pre-wrap">${U.esc(hw.desc)}</div>`;
       html += `<div class="small" style="margin-top:8px">⏰ ${U.esc(deadlineText)} • ${U.esc(hw.from)}</div>`;
-      if (Classroom.role !== 'teacher') {
-        html += `<div style="margin-top:10px;display:flex;gap:8px"><input id="hw-answer-${hw.id}" class="input" style="margin:0;flex:1" placeholder="پاسخ..."><button class="btn btn-primary btn-sm" onclick="Homework.submit('${hw.id}')">ارسال</button></div>`;
-      } else {
+      if (Classroom.role !== 'teacher') html += `<div style="margin-top:10px;display:flex;gap:8px"><input id="hw-answer-${hw.id}" class="input" style="margin:0;flex:1" placeholder="پاسخ..."><button class="btn btn-primary btn-sm" onclick="Homework.submit('${hw.id}')">ارسال</button></div>`;
+      else {
         const subs = this.subs[hw.id] || [];
         html += `<div style="margin-top:10px;font-weight:700">پاسخ‌ها (${subs.length}):</div>`;
         if (subs.length) subs.forEach(s => { html += `<div style="margin-top:8px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px"><b>${U.esc(s.name)}</b><div class="small" style="margin-top:4px;white-space:pre-wrap">${U.esc(s.answer)}</div></div>`; });
@@ -4869,10 +4772,6 @@ const Homework = {
     }).join('');
   }
 };
-
-/* ================================================================
-   GAME — گیمیفیکیشن
-================================================================ */
 const Game = {
   levels: [
     { name: 'تازه‌کار', min: 0 },
@@ -4892,7 +4791,10 @@ const Game = {
     let lv = this.levels[0];
     let idx = 0;
     this.levels.forEach((l, i) => {
-      if (xp >= l.min) { lv = l; idx = i; }
+      if (xp >= l.min) {
+        lv = l;
+        idx = i;
+      }
     });
     return { name: lv.name, idx: idx + 1 };
   },
@@ -4968,10 +4870,6 @@ const Game = {
     Classroom.refreshLevel();
   }
 };
-
-/* ================================================================
-   DASHBOARD / REPORTS / ASSISTANT / TIMER / REACTIONS / ATTENDANCE
-================================================================ */
 const Dashboard = {
   refresh() {
     const s = Folders.sessions;
@@ -5273,10 +5171,6 @@ const Attendance = {
     Toast.show('JSON ذخیره شد.', 'success');
   }
 };
-
-/* ================================================================
-   CLASSROOM — کنترلر اصلی + اتصال به سرور معلم
-================================================================ */
 const Classroom = {
   role: 'student',
   displayName: '',
@@ -5289,7 +5183,6 @@ const Classroom = {
   pendingCode: '',
   pendingRole: '',
   mediaServer: null,
-
   showStep(step) {
     ['name', 'role', 'teacher', 'student'].forEach(s => {
       const el = document.getElementById('classroom-step-' + s);
@@ -5733,10 +5626,6 @@ const Classroom = {
     return false;
   }
 };
-
-/* ================================================================
-   TOOLS — Calc / Pomodoro / QR / Plotter / Whiteboard
-================================================================ */
 const Calc = {
   expression: '',
   input(v) {
@@ -5901,11 +5790,18 @@ const Plotter = {
       const x = xmin + (i * (xmax - xmin)) / steps;
       try {
         const y = window.math ? math.evaluate(func, { x }) : new Function('x', `with(Math){return ${func.replace(/\^/g, '**')}}`)(x);
-        if (!Number.isFinite(y)) { started = false; continue; }
+        if (!Number.isFinite(y)) {
+          started = false;
+          continue;
+        }
         const px = X(x);
         const py = Y(y);
-        if (!started) { ctx.moveTo(px, py); started = true; }
-        else ctx.lineTo(px, py);
+        if (!started) {
+          ctx.moveTo(px, py);
+          started = true;
+        } else {
+          ctx.lineTo(px, py);
+        }
       } catch (e) {
         started = false;
       }
@@ -5928,7 +5824,10 @@ function createWhiteboard(canvasId) {
     init() {
       this.canvas = document.getElementById(canvasId);
       if (!this.canvas) return;
-      if (this.initialized) { this.resize(); return; }
+      if (this.initialized) {
+        this.resize();
+        return;
+      }
       this.ctx = this.canvas.getContext('2d');
       this.resize();
       this.canvas.addEventListener('pointerdown', e => this.pointerDown(e));
@@ -6034,10 +5933,6 @@ function createWhiteboard(canvasId) {
   };
 }
 const ToolsWB = createWhiteboard('tools-wb-canvas');
-
-/* ================================================================
-   FACTS / QUIZ / FLASHCARDS / BANK
-================================================================ */
 const Facts = {
   currentCat: 'all',
   async init() {
@@ -6059,8 +5954,14 @@ const Facts = {
   },
   setCat(cat, el) {
     this.currentCat = cat;
-    document.querySelectorAll('#facts-tags .btn').forEach(b => { b.style.background = 'var(--bg3)'; b.style.color = 'var(--text)'; });
-    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#04211d'; }
+    document.querySelectorAll('#facts-tags .btn').forEach(b => {
+      b.style.background = 'var(--bg3)';
+      b.style.color = 'var(--text)';
+    });
+    if (el) {
+      el.style.background = 'var(--primary)';
+      el.style.color = '#04211d';
+    }
     this.render();
   },
   async render() {
@@ -6243,10 +6144,16 @@ const Flashcards = {
     document.getElementById('fc-card').classList.toggle('flipped');
   },
   next() {
-    if (this.currentIndex < this.cards.length - 1) { this.currentIndex++; this.show(); }
+    if (this.currentIndex < this.cards.length - 1) {
+      this.currentIndex++;
+      this.show();
+    }
   },
   prev() {
-    if (this.currentIndex > 0) { this.currentIndex--; this.show(); }
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.show();
+    }
   },
   markEasy() {
     Toast.show('آسان ✓', 'success');
@@ -6288,8 +6195,14 @@ const Bank = {
   },
   setFilter(cat, el) {
     this.currentFilter = cat;
-    document.querySelectorAll('#bank-tags .btn').forEach(b => { b.style.background = 'var(--bg3)'; b.style.color = 'var(--text)'; });
-    if (el) { el.style.background = 'var(--primary)'; el.style.color = '#04211d'; }
+    document.querySelectorAll('#bank-tags .btn').forEach(b => {
+      b.style.background = 'var(--bg3)';
+      b.style.color = 'var(--text)';
+    });
+    if (el) {
+      el.style.background = 'var(--primary)';
+      el.style.color = '#04211d';
+    }
     this.render();
   },
   async add() {
@@ -6322,10 +6235,6 @@ const Bank = {
     list.innerHTML = filtered.slice(0, 200).map(i => `<div style="padding:12px;border-bottom:1px solid var(--border);cursor:pointer" onclick="this.querySelector('.bank-answer').style.display=this.querySelector('.bank-answer').style.display==='block'?'none':'block'"><div style="font-weight:600">❓ ${U.esc(i.q)}</div><div class="bank-answer" style="display:none;margin-top:8px;padding:8px;background:rgba(20,184,166,.1);border-radius:8px;font-size:.9rem">✅ ${U.esc(i.a)}</div></div>`).join('') || '<p style="text-align:center;color:var(--muted);padding:2rem">موردی یافت نشد</p>';
   }
 };
-
-/* ================================================================
-   SETTINGS
-================================================================ */
 const Settings = {
   async init() {
     const cfg = await IDB.cfg();
@@ -6359,19 +6268,18 @@ const Settings = {
   },
   async clearAll() {
     if (!confirm('همه داده‌های محلی پاک شود؟')) return;
-    indexedDB.deleteDatabase('OstadYarDB_v111');
+    indexedDB.deleteDatabase('OstadYarDB_v113');
     location.reload();
   }
 };
-
-/* ================================================================
-   UI
-================================================================ */
 const UI = {
   currentView: 'home',
   nav(view, el) {
     this.currentView = view;
-    document.querySelectorAll('.view').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; });
+    document.querySelectorAll('.view').forEach(v => {
+      v.classList.remove('active');
+      v.style.display = 'none';
+    });
     const target = document.getElementById(`view-${view}`);
     if (target) {
       target.style.display = view === 'chat' ? 'flex' : 'block';
@@ -6379,10 +6287,12 @@ const UI = {
     }
     document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b => b.classList.remove('active'));
     if (el) el.classList.add('active');
-    else document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b => {
-      const onclick = b.getAttribute('onclick') || '';
-      if (onclick.includes(`UI.nav('${view}'`)) b.classList.add('active');
-    });
+    else {
+      document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b => {
+        const onclick = b.getAttribute('onclick') || '';
+        if (onclick.includes(`UI.nav('${view}'`)) b.classList.add('active');
+      });
+    }
     const titles = { home: 'داشبورد', chat: 'گفتگو', classroom: 'کلاس مجازی', facts: 'دانستنی', quiz: 'آزمون', flashcards: 'فلش‌کارت', bank: 'بانک سوالات', tools: 'جعبه ابزار', settings: 'تنظیمات' };
     document.getElementById('page-title').textContent = titles[view] || 'استاد یار پلاس';
     if (view === 'tools') setTimeout(() => ToolsWB.init(), 100);
@@ -6405,7 +6315,6 @@ const UI = {
     });
   }
 };
-
 function startClock() {
   const clockEl = document.getElementById('live-clock');
   const dateEl = document.getElementById('live-date');
@@ -6431,10 +6340,6 @@ function animateCount(id, target) {
     el.textContent = current;
   }, 30);
 }
-
-/* ================================================================
-   BOOT — بعد از ورود از Gate اجرا می‌شود
-================================================================ */
 const Boot = {
   async init() {
     try {
@@ -6465,17 +6370,16 @@ const Boot = {
       window.addEventListener('resize', () => {
         document.getElementById('menu-btn').style.display = window.innerWidth <= 768 ? 'flex' : 'none';
       });
-      Toast.show('🚀 استاد یار پلاس v111.0 آماده است!', 'success');
+      Toast.show('🚀 استاد یار پلاس v113.0 آماده است!', 'success');
     } catch (e) {
       console.error('Init error:', e);
       Toast.show('خطا در راه‌اندازی: ' + e.message, 'error');
     }
   }
 };
-
 document.addEventListener('DOMContentLoaded', () => {
   Gate.init();
 });
 </script>
 </body>
-                                                                                                                                                                                                                  </html>
+  </html>
