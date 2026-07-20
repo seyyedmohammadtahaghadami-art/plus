@@ -74,7 +74,6 @@
         letter-spacing: 4px;
         font-family: monospace;
         transition: all 0.3s;
-        maxlength="8"
     }
 
     input:focus {
@@ -132,8 +131,8 @@
         <p>برای ورود، کد ۸ رقمی کلاس را وارد کنید</p>
         
         <div class="input-group">
-            <input id="codeInput" type="tel" placeholder="---- ----" maxlength="8" 
-                   autocomplete="off">
+            <input id="codeInput" type="text" placeholder="---- ----" maxlength="8" 
+                   autocomplete="off" inputmode="numeric">
         </div>
         
         <button onclick="checkCode()">ورود به کلاس 🚀</button>
@@ -141,7 +140,7 @@
         <div class="error-msg" id="errorMsg">❌ کد اشتباه است</div>
         
         <div class="hint">
-            🔑 کد دسترسی را از معلم خود دریافت کنید<br>
+            🔑 کد دسترسی: <span style="color:#2dd4bf; direction:ltr; display:inline-block;">20262026</span><br>
             <span style="font-size: 0.7rem; opacity: 0.7;">نسخه تابستانه v110</span>
         </div>
     </div>
@@ -149,23 +148,28 @@
 
 <script>
     // ==========================================
-    // تنظیمات کد دسترسی (تابستانه)
+    // تنظیمات کد دسترسی
     // ==========================================
-    // کد ۸ رقمی جدید
     const VALID_CLASS_CODE = "20262026"; 
     
-    // نام فایل اصلی برنامه شما (بعد از لاگین)
+    // نام فایل اصلی برنامه شما
     const MAIN_APP_FILE = "app.html"; 
 
     const input = document.getElementById('codeInput');
     const errorMsg = document.getElementById('errorMsg');
 
-    // اجازه دادن فقط به اعداد (فارسی و انگلیسی)
+    // فقط اجازه ورود عدد
     input.addEventListener('input', function(e) {
         let val = this.value;
         // تبدیل اعداد فارسی به انگلیسی
-        val = val.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
-        // حذف هر چیزی غیر از عدد
+        const persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
+        const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        
+        for(let i=0; i<10; i++) {
+            val = val.replace(persianNumbers[i], englishNumbers[i]);
+        }
+        
+        // حذف کاراکترهای غیر عددی
         this.value = val.replace(/[^0-9]/g, '');
     });
 
@@ -184,10 +188,24 @@
             // افکت موفقیت
             input.style.borderColor = '#10b981';
             input.style.color = '#10b981';
+            document.querySelector('button').innerHTML = '✅ در حال ورود...';
             
             setTimeout(() => {
-                window.location.href = MAIN_APP_FILE;
-            }, 500);
+                // بررسی وجود فایل app.html
+                fetch(MAIN_APP_FILE)
+                    .then(response => {
+                        if(response.ok) {
+                            window.location.href = MAIN_APP_FILE;
+                        } else {
+                            alert('فایل app.html یافت نشد! لطفاً فایل اصلی برنامه را در کنار این فایل قرار دهید.');
+                            // برای تست، اگر فایل نبود به گوگل میرود (این خط را بعداً پاک کن)
+                            // window.location.href = "https://google.com"; 
+                        }
+                    })
+                    .catch(() => {
+                        alert('خطا در بررسی فایل app.html');
+                    });
+            }, 800);
         } else {
             // ❌ خطا
             errorMsg.style.opacity = '1';
@@ -204,7 +222,11 @@
 
     // چک کردن اینکه آیا قبلاً لاگین کرده یا نه
     if (localStorage.getItem('oy_auth') === 'true') {
-        window.location.href = MAIN_APP_FILE;
+        // اگر فایل app.html وجود داشت مستقیم برود
+        fetch(MAIN_APP_FILE)
+            .then(response => {
+                if(response.ok) window.location.href = MAIN_APP_FILE;
+            });
     }
 </script>
 
