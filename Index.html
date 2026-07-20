@@ -74,6 +74,7 @@
         letter-spacing: 4px;
         font-family: monospace;
         transition: all 0.3s;
+        maxlength="8"
     }
 
     input:focus {
@@ -128,10 +129,10 @@
     <div class="login-box">
         <div class="icon">🔐</div>
         <h2>کلاس مجازی</h2>
-        <p>برای ورود، کد ۱۲ رقمی کلاس را وارد کنید</p>
+        <p>برای ورود، کد ۸ رقمی کلاس را وارد کنید</p>
         
         <div class="input-group">
-            <input id="codeInput" type="tel" placeholder="---- ---- ----" maxlength="12" 
+            <input id="codeInput" type="tel" placeholder="---- ----" maxlength="8" 
                    autocomplete="off">
         </div>
         
@@ -150,8 +151,8 @@
     // ==========================================
     // تنظیمات کد دسترسی (تابستانه)
     // ==========================================
-    // اینجا کد ۱۲ رقمی دلخواه خود را به صورت اعداد انگلیسی وارد کنید
-    const VALID_CLASS_CODE = "140308201234"; 
+    // کد ۸ رقمی جدید
+    const VALID_CLASS_CODE = "20262026"; 
     
     // نام فایل اصلی برنامه شما (بعد از لاگین)
     const MAIN_APP_FILE = "app.html"; 
@@ -162,7 +163,7 @@
     // اجازه دادن فقط به اعداد (فارسی و انگلیسی)
     input.addEventListener('input', function(e) {
         let val = this.value;
-        // تبدیل اعداد فارسی به انگلیسی برای مقایسه راحت‌تر
+        // تبدیل اعداد فارسی به انگلیسی
         val = val.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
         // حذف هر چیزی غیر از عدد
         this.value = val.replace(/[^0-9]/g, '');
