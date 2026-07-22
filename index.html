@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>استاد یار پلاس | v121 P2P — بدون سرور، بدون خارجی</title>
- <link rel="icon" type="image/png" href="/file_00000000467c81fb8917adb78e29eb3e.png">
+<title>استاد یار پلاس | v122 P2P + Server</title>
+<link rel="icon" type="image/png" href="/file_00000000467c81fb8917adb78e29eb3e.png">
 <meta name="theme-color" content="#0a1020">
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('oy_theme')||'dark')}catch(e){}</script>
 <style>
@@ -13,6 +13,9 @@ html[data-theme="light"]{color-scheme:light;--bg:#eef2f6;--bg2:#fff;--bg3:#e3e9f
 html[data-theme="night"]{color-scheme:dark;--bg:#000;--bg2:#0a0a0c;--bg3:#17171b;--glass:rgba(8,8,10,.9);--p:#2dd4bf;--p2:#5eead4;--ac:#fbbf24;--t:#f4f4f5;--m:#a1a1aa;--bd:rgba(255,255,255,.12);--ok:#4ade80;--no:#f87171;--warn:#fbbf24;--info:#38bdf8;--ub:rgba(45,212,191,.14);--glow:rgba(45,212,191,.12);--glow2:rgba(251,191,36,.08)}
 html[data-theme="sepia"]{color-scheme:light;--bg:#f3ead9;--bg2:#fdf6e8;--bg3:#e8d9bd;--glass:rgba(253,246,232,.92);--p:#0f766e;--p2:#0d9488;--ac:#a16207;--t:#3f2d16;--m:#78603e;--bd:rgba(63,45,22,.16);--ok:#15803d;--no:#b91c1c;--warn:#b45309;--info:#0369a1;--ub:rgba(15,118,110,.12);--glow:rgba(15,118,110,.08);--glow2:rgba(161,98,7,.08)}
 html[data-theme="ocean"]{color-scheme:dark;--bg:#03222e;--bg2:#063445;--bg3:#0a4a5f;--glass:rgba(3,34,46,.9);--p:#22d3ee;--p2:#67e8f9;--ac:#facc15;--t:#e0f2fe;--m:#7dd3fc;--bd:rgba(224,242,254,.14);--ok:#34d399;--no:#fb7185;--warn:#fbbf24;--info:#38bdf8;--ub:rgba(34,211,238,.14);--glow:rgba(34,211,238,.16);--glow2:rgba(250,204,21,.08)}
+html[data-theme="forest"]{color-scheme:dark;--bg:#0a1f0a;--bg2:#122912;--bg3:#1a3a1a;--glass:rgba(10,31,10,.9);--p:#22c55e;--p2:#4ade80;--ac:#facc15;--t:#dcfce7;--m:#86efac;--bd:rgba(220,252,231,.14);--ok:#4ade80;--no:#f87171;--warn:#fbbf24;--info:#38bdf8;--ub:rgba(34,197,94,.14);--glow:rgba(34,197,94,.16);--glow2:rgba(250,204,21,.08)}
+html[data-theme="sakura"]{color-scheme:light;--bg:#fff0f5;--bg2:#fff5f8;--bg3:#ffe4ec;--glass:rgba(255,240,245,.92);--p:#ec4899;--p2:#f472b6;--ac:#f59e0b;--t:#500724;--m:#9d174d;--bd:rgba(80,7,36,.14);--ok:#16a34a;--no:#dc2626;--warn:#d97706;--info:#0284c7;--ub:rgba(236,72,153,.12);--glow:rgba(236,72,153,.10);--glow2:rgba(245,158,11,.08)}
+html[data-theme="royal"]{color-scheme:dark;--bg:#1a0a2e;--bg2:#251242;--bg3:#341b5e;--glass:rgba(26,10,46,.9);--p:#a855f7;--p2:#c084fc;--ac:#fbbf24;--t:#f3e8ff;--m:#d8b4fe;--bd:rgba(243,232,255,.14);--ok:#4ade80;--no:#f87171;--warn:#fbbf24;--info:#38bdf8;--ub:rgba(168,85,247,.14);--glow:rgba(168,85,247,.16);--glow2:rgba(251,191,36,.08)}
 *{box-sizing:border-box;margin:0;padding:0;outline:none;-webkit-tap-highlight-color:transparent}
 body{font-family:var(--body);background:var(--bg);color:var(--t);height:100dvh;overflow:hidden;font-size:15px;line-height:1.7}
 body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(1100px 700px at 90% -15%,var(--glow),transparent 60%),radial-gradient(900px 600px at -10% 110%,var(--glow2),transparent 60%),var(--bg)}
@@ -26,7 +29,7 @@ button,input,textarea,select{font-family:var(--body)}
 .side-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1100;opacity:0;pointer-events:none;transition:.3s}
 .app.side-hidden .side-backdrop.show{opacity:1;pointer-events:auto}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.header{padding:.6rem 1rem;border-bottom:1px solid var(--bd);background:var(--glass);backdrop-filter:blur(14px);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:10px}
+.header{padding:.6rem 1rem;border-bottom:1px solid var(--bd);background:var(--glass);backdrop-filter:blur(14px);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:10px;flex-wrap:wrap}
 .content{flex:1;overflow-y:auto;padding:1.2rem 1.6rem;scroll-behavior:smooth}
 .brand{padding:1.2rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:12px}
 .brand-logo{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--p),var(--ac));flex-shrink:0;font-size:1.4rem}
@@ -105,7 +108,7 @@ select.input{cursor:pointer}
 .role-btn:hover span{transform:scale(1.18) rotate(-6deg)}
 .classroom-active{display:none;height:calc(100dvh - 140px);flex-direction:column;gap:10px}
 .classroom-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0}
-.classroom-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.classroom-tabs{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .tab-btn{padding:8px 12px;border-radius:11px;background:var(--bg3);border:1px solid var(--bd);color:var(--t);cursor:pointer;font-size:.82rem;font-weight:700;transition:.18s;position:relative}
 .tab-btn:hover{border-color:var(--p)}
 .tab-btn.active{background:linear-gradient(135deg,var(--p),var(--p2));color:#04211d}
@@ -255,28 +258,90 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 .mobile-nav button{background:none;border:none;color:var(--m);cursor:pointer;padding:8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.6rem}
 .mobile-nav button .ic{font-size:1.3rem}
 .mobile-nav button.active{color:var(--p2)}
+.conn-modal{position:fixed;inset:0;z-index:21000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+.conn-card{width:min(94%,560px);background:var(--glass);border:1px solid var(--bd);border-radius:24px;padding:2rem;text-align:center;backdrop-filter:blur(16px);box-shadow:0 30px 80px rgba(0,0,0,.5);animation:gateIn .4s ease}
+.conn-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1.2rem}
+.conn-opt{padding:1.4rem 1rem;border-radius:18px;border:2px solid var(--bd);background:var(--bg2);cursor:pointer;transition:.2s;text-align:center}
+.conn-opt:hover{border-color:var(--p);transform:translateY(-3px)}
+.conn-opt.selected{border-color:var(--p);background:rgba(20,184,166,.1)}
+.conn-opt .ic{font-size:2.4rem;display:block;margin-bottom:.5rem}
+.conn-opt b{display:block;font-size:1rem;margin-bottom:.3rem}
+.conn-opt span{font-size:.78rem;color:var(--m);line-height:1.6;display:block}
+.dropdown-wrap{position:relative;display:inline-block}
+.dropdown-menu{position:absolute;top:110%;inset-inline-start:0;z-index:1000;min-width:240px;background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.4);display:none;max-height:340px;overflow-y:auto}
+.dropdown-menu.show{display:block;animation:viewIn .2s ease}
+.dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--t);transition:.15s;border:1px solid transparent}
+.dropdown-item:hover{background:var(--bg3);border-color:var(--bd)}
+.dropdown-item.active{background:rgba(20,184,166,.12);color:var(--p2);border-color:rgba(20,184,166,.25)}
+.dropdown-cat{padding:6px 10px;font-size:.72rem;color:var(--m);font-weight:700}
+.accordion{border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:10px;background:var(--glass)}
+.accordion-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;background:var(--bg2);cursor:pointer;font-weight:700;transition:.15s}
+.accordion-head:hover{background:var(--bg3)}
+.accordion-body{padding:0 16px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.accordion.open .accordion-body{max-height:1200px;padding:14px 16px}
+.accordion-arrow{transition:transform .3s}
+.accordion.open .accordion-arrow{transform:rotate(180deg)}
+.tool-card{background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px}
+.tool-head{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;font-weight:700}
+.tool-body{margin-top:12px;display:none}
+.tool-card.open .tool-body{display:block}
+.server-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.server-status{font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.server-online{background:rgba(34,197,94,.14);color:var(--ok);border:1px solid rgba(34,197,94,.3)}
+.server-offline{background:rgba(239,68,68,.14);color:var(--no);border:1px solid rgba(239,68,68,.3)}
+.server-checking{background:rgba(245,158,11,.14);color:var(--warn);border:1px solid rgba(245,158,11,.3)}
+.search-featured{background:linear-gradient(120deg,rgba(20,184,166,.14),rgba(251,191,36,.08));border:1px solid rgba(20,184,166,.3);border-radius:16px;padding:16px;margin-bottom:12px}
+.search-result{background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:10px}
+.search-result a{color:var(--p2);font-weight:700;text-decoration:none}
+.search-result .snippet{color:var(--m);font-size:.86rem;margin-top:6px;line-height:1.8}
 @media(max-width:1100px){.classroom-grid{grid-template-columns:1fr 280px}}
-@media(max-width:950px){.classroom-grid{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto}.classroom-side{max-height:35vh}.code-grid,.role-grid{grid-template-columns:1fr}}
-@media(max-width:768px){.sidebar{position:fixed;inset-block:0;inset-inline-start:0;z-index:1200;transform:translateX(100%)}.sidebar.open{transform:translateX(0)}.tools-grid{grid-template-columns:1fr}.mobile-nav{display:flex!important}.classroom-active{height:calc(100dvh - 190px)}.content{padding:1rem}}
+@media(max-width:950px){.classroom-grid{grid-template-columns:1fr;grid-template-rows:minmax(320px,1fr) auto}.classroom-side{max-height:35vh}.code-grid,.role-grid,.conn-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.sidebar{position:fixed;inset-block:0;inset-inline-start:0;z-index:1200;transform:translateX(100%)}.sidebar.open{transform:translateX(0)}.tools-grid{grid-template-columns:1fr}.mobile-nav{display:flex!important}.classroom-active{height:calc(100dvh - 190px)}.content{padding:1rem}.header{padding:.5rem .8rem}}
+@media print{body *{visibility:hidden}#print-area,#print-area *{visibility:visible}#print-area{position:absolute;inset:0;padding:40px;background:#fff;color:#000;z-index:99999}}
 </style>
 </head>
 <body>
 <div class="toast-container" id="toast-container"></div>
 <div id="emoji-layer"></div>
+<div id="print-area" style="display:none"></div>
+
 <div class="gate" id="gate">
 <div class="gate-card" id="gate-card">
 <div class="gate-logo">🎓</div>
 <div class="gate-title">استاد یار پلاس</div>
-<div class="gate-sub">نسخه ۱۲۱ — P2P بدون سرور، بدون خارجی<br>برای ورود، کد دسترسی را وارد کنید</div>
+<div class="gate-sub">نسخه ۱۲۲ — P2P + سرور جهانی<br>برای ورود، کد دسترسی را وارد کنید</div>
 <input class="gate-input" id="gate-code" type="password" inputmode="numeric" placeholder="••••••••" onkeydown="if(event.key==='Enter')Gate.unlock()">
 <button class="btn btn-primary btn-block" onclick="Gate.unlock()">🔓 ورود به برنامه</button>
 <div class="small" style="margin-top:1rem">کد پیش‌فرض: ۲۰۲۶۱۴۰۵</div>
 </div>
 </div>
+
+<div class="conn-modal hidden" id="conn-modal">
+<div class="conn-card">
+<div style="font-size:2.6rem;margin-bottom:.4rem">🌐</div>
+<h2 style="font-family:var(--disp);font-size:1.7rem;margin-bottom:.4rem;color:var(--p2)">حالت اتصال را انتخاب کنید</h2>
+<p class="small" style="margin-bottom:.6rem">این انتخاب بعداً از تنظیمات قابل تغییر است.</p>
+<div class="conn-grid">
+<div class="conn-opt" id="conn-p2p" onclick="Conn.select('p2p')">
+<span class="ic">🔗</span>
+<b>P2P سریع</b>
+<span>بدون سرور خارجی • مناسب تا ۱۰ نفر • آفلاین‌تر</span>
+</div>
+<div class="conn-opt" id="conn-server" onclick="Conn.select('server')">
+<span class="ic">🌍</span>
+<b>سرور جهانی</b>
+<span>۵۰+ سرور رایگان • مناسب تعداد بیشتر • fallback خودکار ۱۲ ثانیه</span>
+</div>
+</div>
+<button class="btn btn-primary btn-block" style="margin-top:1.2rem" onclick="Conn.confirm()">✅ تأیید و ادامه</button>
+<button class="btn btn-block" style="margin-top:.6rem" onclick="Conn.skip()">بعداً انتخاب می‌کنم</button>
+</div>
+</div>
+
 <div id="app-root" style="display:none;height:100dvh">
 <div class="app" id="app">
 <aside class="sidebar" id="sidebar">
-<div class="brand"><div class="brand-logo">🎓</div><div><div class="brand-title">استاد یار پلاس</div><div class="brand-sub">v121 P2P • بدون سرور</div></div></div>
+<div class="brand"><div class="brand-logo">🎓</div><div><div class="brand-title">استاد یار پلاس</div><div class="brand-sub">v122 P2P+Server</div></div></div>
 <div style="padding:.8rem"><button class="btn btn-primary btn-block" onclick="Chat.newSession()">➕ گفتگوی جدید</button></div>
 <div style="padding:0 .8rem .8rem"><input class="input" placeholder="جستجو در چت‌ها..." oninput="UI.filterChats(this.value)" style="margin:0"></div>
 <div id="chat-list" style="flex:1;overflow-y:auto;padding:0 .8rem"></div>
@@ -295,29 +360,41 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <div class="side-backdrop" id="side-backdrop" onclick="UI.toggleSidebar(false)"></div>
 <main class="main">
 <header class="header">
-<div style="display:flex;align-items:center;gap:10px">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
 <button class="btn btn-icon" onclick="UI.toggleSidebar()" id="menu-btn">☰</button>
 <button class="btn btn-icon pin-btn pinned" onclick="UI.togglePin()" id="pin-btn">📌</button>
 <span style="font-family:var(--disp);font-size:1.3rem" id="page-title">داشبورد</span>
 <span class="badge green" id="ai-status"><span class="badge-dot"></span> آماده</span>
+<span class="badge" id="conn-badge">🔗 P2P</span>
 </div>
 <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+<button class="btn btn-sm" onclick="PDF.exportCurrent()" title="خروجی PDF از صفحه فعلی">📄 PDF</button>
 <select class="input" id="theme-select" onchange="Themes.set(this.value)" style="margin:0;width:auto;padding:6px 10px;font-size:.8rem">
-<option value="dark">🌙 تیره</option><option value="light">☀️ روشن</option><option value="night">🌑 شب</option><option value="sepia">📜 سپیا</option><option value="ocean">🌊 اقیانوس</option>
+<option value="dark">🌙 تیره</option>
+<option value="light">☀️ روشن</option>
+<option value="night">🌑 شب</option>
+<option value="sepia">📜 سپیا</option>
+<option value="ocean">🌊 اقیانوس</option>
+<option value="forest">🌲 جنگلی</option>
+<option value="sakura">🌸 صورتی</option>
+<option value="royal">👑 بنفش</option>
 </select>
 <select class="input" id="ai-mode" style="margin:0;width:auto;padding:6px 12px;font-size:.8rem">
-<option value="auto">🤖 خودکار</option><option value="local">🧠 آفلاین</option><option value="search">🔍 جستجو</option><option value="image">🎨 عکس</option>
+<option value="auto">🤖 خودکار</option>
+<option value="local">🧠 آفلاین</option>
+<option value="search">🔍 جستجو</option>
+<option value="image">🎨 عکس</option>
 </select>
 </div>
 </header>
 <div class="content" id="content">
 
 <div class="view active" id="view-home">
-<div class="page-head"><h2>داشبورد <em>آموزشی</em></h2><p>دستیار هوشمند P2P — بدون سرور، بدون اینترنت بین‌الملل</p></div>
+<div class="page-head"><h2>داشبورد <em>آموزشی</em></h2><p>دستیار هوشمند P2P + سرور جهانی</p></div>
 <div class="status-strip">
 <div><div class="clock-big" id="live-clock">--:--:--</div><div class="small" id="live-date">...</div></div>
 <div style="flex:1"></div>
-<div style="text-align:end"><span class="badge green"><span class="badge-dot"></span> سیستم آماده</span><div class="small" style="margin-top:6px">نسخه ۱۲۱ P2P</div></div>
+<div style="text-align:end"><span class="badge green"><span class="badge-dot"></span> سیستم آماده</span><div class="small" style="margin-top:6px">نسخه ۱۲۲ P2P+Server</div></div>
 </div>
 <div class="grid cols-4" style="margin-bottom:1rem">
 <div class="stat"><div class="num" id="stat-chats">0</div><div class="lbl">گفتگوها</div></div>
@@ -332,14 +409,15 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <button class="btn" onclick="UI.nav('quiz')" style="background:linear-gradient(135deg,var(--ac),#f59e0b);color:#2b1a02">📝 آزمون</button>
 <button class="btn" onclick="UI.nav('tools')" style="background:linear-gradient(135deg,var(--info),#0369a1);color:#fff">🧰 ابزار</button>
 </div></div>
-<div class="card lift"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">🛡️ وضعیت پدافند دیجیتال</div>
-<div class="small" style="line-height:2.2">
-✅ بدون هیچ CDN خارجی — کاملاً آفلاین<br>
-✅ بدون Jitsi و سرور خارجی — P2P بومی مرورگر<br>
-✅ بدون Termux — مستقیم روی مرورگر موبایل<br>
-✅ ارتباط با BroadcastChannel + WebRTC + localStorage<br>
-✅ مناسب زمان قطع اینترنت بین‌الملل
-</div></div>
+<div class="card lift"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">🛡️ وضعیت اتصال</div>
+<div class="small" style="line-height:2.2" id="conn-status-text">
+✅ حالت فعلی: P2P محلی<br>
+✅ BroadcastChannel + WebRTC + localStorage<br>
+✅ مناسب زمان قطع اینترنت بین‌الملل<br>
+⚠️ برای تعداد بیشتر، حالت سرور را فعال کنید
+</div>
+<button class="btn btn-sm" style="margin-top:8px" onclick="Conn.showModal()">🔄 تغییر حالت اتصال</button>
+</div>
 <div class="card lift"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">💡 دانستنی امروز</div><div id="daily-fact" class="small">...</div></div>
 <div class="card lift"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">💾 پشتیبان‌گیری</div>
 <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -365,7 +443,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <div id="classroom-step-name" class="card classroom-center" style="text-align:center">
 <div style="font-size:3rem;margin-bottom:.4rem">👤</div>
 <h2 style="font-family:var(--disp);font-size:1.8rem;margin-bottom:.5rem">نام شما</h2>
-<p class="small">برای ورود به کلاس P2P، نام الزامی است.</p>
+<p class="small">برای ورود به کلاس، نام الزامی است.</p>
 <input class="input" id="classroom-fullname" placeholder="نام و نام خانوادگی" onkeydown="if(event.key==='Enter')Classroom.continueName()">
 <button class="btn btn-primary btn-block" onclick="Classroom.continueName()">ادامه</button>
 </div>
@@ -387,7 +465,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <input class="input" id="teacher-name" placeholder="نام معلم (اجباری)">
 <input class="input" id="teacher-class-name" placeholder="نام کلاس (اختیاری)">
 <input class="input" id="teacher-code" placeholder="کد معلم ۶ رقمی (ورود مجدد، اختیاری)" oninput="Classroom.updateTeacherButton()">
-<button class="btn btn-primary btn-block" id="teacher-submit" onclick="Classroom.teacherSubmit()">🚀 ساخت کلاس P2P</button>
+<button class="btn btn-primary btn-block" id="teacher-submit" onclick="Classroom.teacherSubmit()">🚀 ساخت کلاس</button>
 </div>
 <div id="classroom-step-student" class="card classroom-center" style="display:none">
 <button class="btn btn-sm" onclick="Classroom.showStep('role')" style="margin-bottom:12px">🔙 بازگشت</button>
@@ -410,27 +488,15 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <button class="btn btn-sm btn-danger" onclick="Classroom.leave(true)">📞 خروج</button>
 </div>
 </div>
-<div class="classroom-tabs">
-<button class="tab-btn active" data-tab="media" onclick="Classroom.switchTab('media',this)">🎥 رسانه<span class="dot"></span></button>
+<div class="classroom-tabs" id="classroom-tabs-bar">
+<div class="dropdown-wrap">
+<button class="tab-btn active" id="class-tab-main" onclick="Classroom.toggleTabDropdown()">📂 بخش‌های کلاس <span style="font-size:.7rem">▼</span></button>
+<div class="dropdown-menu" id="class-tab-dropdown"></div>
+</div>
+<button class="tab-btn" data-tab="media" onclick="Classroom.switchTab('media',this)">🎥 رسانه<span class="dot"></span></button>
 <button class="tab-btn" data-tab="chat" onclick="Classroom.switchTab('chat',this)">💬 چت<span class="dot"></span></button>
 <button class="tab-btn" data-tab="board" onclick="Classroom.switchTab('board',this)">🖌️ تخته<span class="dot"></span></button>
 <button class="tab-btn" data-tab="smartboard" onclick="Classroom.switchTab('smartboard',this)">🎨 هوشمند<span class="dot"></span></button>
-<button class="tab-btn" data-tab="files" onclick="Classroom.switchTab('files',this)">📁 فایل<span class="dot"></span></button>
-<button class="tab-btn" data-tab="library" onclick="Classroom.switchTab('library',this)">📚 کتابخانه<span class="dot"></span></button>
-<button class="tab-btn" data-tab="hands" onclick="Classroom.switchTab('hands',this)">✋ دست‌ها<span class="dot"></span></button>
-<button class="tab-btn" data-tab="poll" onclick="Classroom.switchTab('poll',this)">📊 نظرسنجی<span class="dot"></span></button>
-<button class="tab-btn" data-tab="announce" onclick="Classroom.switchTab('announce',this)">📢 اطلاعیه<span class="dot"></span></button>
-<button class="tab-btn" data-tab="homework" onclick="Classroom.switchTab('homework',this)">📚 تکالیف<span class="dot"></span></button>
-<button class="tab-btn" data-tab="sessions" onclick="Classroom.switchTab('sessions',this)">📂 جلسات<span class="dot"></span></button>
-<button class="tab-btn" data-tab="notes" onclick="Classroom.switchTab('notes',this)">📝 یادداشت<span class="dot"></span></button>
-<button class="tab-btn" data-tab="game" onclick="Classroom.switchTab('game',this)">🎮 امتیاز<span class="dot"></span></button>
-<button class="tab-btn" data-tab="dashboard" onclick="Classroom.switchTab('dashboard',this)">📈 داشبورد<span class="dot"></span></button>
-<button class="tab-btn" data-tab="report" onclick="Classroom.switchTab('report',this)">📤 گزارش<span class="dot"></span></button>
-<button class="tab-btn" data-tab="assistant" onclick="Classroom.switchTab('assistant',this)">🤖 دستیار<span class="dot"></span></button>
-<button class="tab-btn" data-tab="timer" onclick="Classroom.switchTab('timer',this)">⏱️ تایمر<span class="dot"></span></button>
-<button class="tab-btn" data-tab="reactions" onclick="Classroom.switchTab('reactions',this)">😀 واکنش<span class="dot"></span></button>
-<button class="tab-btn" data-tab="attendance" onclick="Classroom.switchTab('attendance',this)">🧾 حضور<span class="dot"></span></button>
-<button class="tab-btn" data-tab="notify" onclick="Classroom.switchTab('notify',this)">🔊 صدا<span class="dot"></span></button>
 </div>
 <div class="classroom-grid">
 <div style="min-height:0;display:flex;flex-direction:column;gap:10px">
@@ -516,7 +582,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <div style="font-family:var(--disp);font-size:1.2rem;margin-bottom:10px;color:var(--ac)">📝 یادداشت مشترک</div>
 <div class="note-status"><span class="live"></span><span id="note-save-status">ذخیره خودکار فعال</span></div>
 <textarea class="input" id="note-area" placeholder="یادداشت‌های کلاس..." style="min-height:220px" oninput="Notes.onEdit()"></textarea>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="btn btn-primary btn-sm" onclick="Notes.saveNow()">💾 ذخیره</button><button class="btn btn-sm" onclick="Notes.snapshot()">📸 ثبت نسخه</button><button class="btn btn-sm" onclick="Notes.exportTxt()">📄 TXT</button><button class="btn btn-sm" onclick="Notes.print()">🖨️ PDF</button></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="btn btn-primary btn-sm" onclick="Notes.saveNow()">💾 ذخیره</button><button class="btn btn-sm" onclick="Notes.snapshot()">📸 ثبت نسخه</button><button class="btn btn-sm" onclick="Notes.exportTxt()">📄 TXT</button><button class="btn btn-sm" onclick="PDF.exportNotes()">🖨️ PDF</button></div>
 <div style="font-weight:800;margin-bottom:8px">🕓 تاریخچه</div>
 <div id="note-history"></div>
 </div>
@@ -543,7 +609,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 </div>
 <div id="tab-report" class="panel">
 <div style="font-family:var(--disp);font-size:1.2rem;margin-bottom:10px;color:var(--ac)">📤 گزارش خودکار</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn btn-primary btn-sm" onclick="Reports.generate()">🔄 تولید</button><button class="btn btn-sm" onclick="Reports.exportHTML()">🌐 HTML</button><button class="btn btn-sm" onclick="Reports.copyText()">📋 کپی</button></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn btn-primary btn-sm" onclick="Reports.generate()">🔄 تولید</button><button class="btn btn-sm" onclick="Reports.exportHTML()">🌐 HTML</button><button class="btn btn-sm" onclick="Reports.copyText()">📋 کپی</button><button class="btn btn-sm" onclick="PDF.exportReport()">📄 PDF</button></div>
 <div class="report-box" id="report-box">دکمه «تولید» را بزنید.</div>
 </div>
 <div id="tab-assistant" class="panel">
@@ -562,7 +628,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 </div>
 <div id="tab-attendance" class="panel">
 <div style="font-family:var(--disp);font-size:1.2rem;margin-bottom:10px;color:var(--ac)">🧾 حضور و غیاب</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn btn-primary btn-sm" onclick="Attendance.exportCSV()">📥 CSV</button><button class="btn btn-sm" onclick="Attendance.exportJSON()">📦 JSON</button></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn btn-primary btn-sm" onclick="Attendance.exportCSV()">📥 CSV</button><button class="btn btn-sm" onclick="Attendance.exportJSON()">📦 JSON</button><button class="btn btn-sm" onclick="PDF.exportAttendance()">📄 PDF</button></div>
 <div class="grid cols-3" style="margin-bottom:12px">
 <div class="stat"><div class="num" id="att-count">0</div><div class="lbl">حاضر</div></div>
 <div class="stat"><div class="num" id="hand-count">0</div><div class="lbl">دست‌ها</div></div>
@@ -577,7 +643,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <div id="side-codes" class="code-grid"></div>
 <div style="margin-top:14px"><div class="small">لینک دانش‌آموز:</div><div class="link-box" id="student-link"></div><button class="btn btn-sm btn-block" onclick="Classroom.copyStudentLink()">📋 کپی لینک</button></div>
 <div id="teacher-link-section" style="margin-top:14px"><div class="small">لینک معلم:</div><div class="link-box" id="teacher-link"></div><button class="btn btn-sm btn-block" onclick="Classroom.copyTeacherLink()">📋 کپی لینک</button></div>
-<div class="hint" style="margin-top:14px"><b>کد معلم:</b> ۶ رقمی، فقط مدیر.<br><b>کد دانش‌آموز:</b> ۵ رقمی، قابل اشتراک.<br><b>P2P:</b> ارتباط مستقیم بین مرورگرها با BroadcastChannel + WebRTC.<br><b>بدون سرور:</b> همه‌چیز روی مرورگر موبایل اجرا می‌شود.</div>
+<div class="hint" style="margin-top:14px"><b>کد معلم:</b> ۶ رقمی، فقط مدیر.<br><b>کد دانش‌آموز:</b> ۵ رقمی، قابل اشتراک.<br><b>P2P:</b> ارتباط مستقیم بین مرورگرها با BroadcastChannel + WebRTC.<br><b>سرور جهانی:</b> اتصال به ۵۰+ سرور رایگان با fallback خودکار.</div>
 </div>
 </div>
 </div>
@@ -586,7 +652,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <div class="view" id="view-facts">
 <div class="page-head"><h2>⭐ دانستنی‌<em>ها</em></h2><p>دانشنامه کوچک آموزشی</p></div>
 <div class="card">
-<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"><input class="input" id="facts-search" placeholder="جستجو..." style="flex:1;margin:0" oninput="Facts.render()"><button class="btn btn-primary" onclick="Facts.random()">🎲 تصادفی</button></div>
+<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"><input class="input" id="facts-search" placeholder="جستجو..." style="flex:1;margin:0" oninput="Facts.render()"><button class="btn btn-primary" onclick="Facts.random()">🎲 تصادفی</button><button class="btn" onclick="PDF.exportFacts()">📄 PDF</button></div>
 <div id="facts-tags" style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap"></div>
 <div id="facts-list" style="max-height:60vh;overflow-y:auto"></div>
 </div>
@@ -597,7 +663,7 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <div class="page-head"><h2>📝 آزمون <em>هوشمند</em></h2><p>تولید سوال با هوش مصنوعی یا دانش محلی</p></div>
 <div id="quiz-setup" class="card"><input class="input" id="quiz-topic" placeholder="موضوع آزمون"><select class="input" id="quiz-count"><option value="3">۳ سوال</option><option value="5" selected>۵ سوال</option><option value="10">۱۰ سوال</option></select><button class="btn btn-primary btn-block" style="margin-bottom:8px" onclick="Quiz.start()">✨ تولید آزمون</button><button class="btn btn-success btn-block" onclick="Quiz.loadSample()">📦 نمونه آماده</button></div>
 <div id="quiz-active" style="display:none"><div id="quiz-questions"></div><button class="btn btn-primary btn-block" style="margin-top:1rem" onclick="Quiz.submit()">ثبت پاسخ‌ها</button></div>
-<div id="quiz-result" class="card" style="display:none;text-align:center"><div style="font-family:var(--disp);font-size:3.5rem;color:var(--p2)" id="quiz-score">0%</div><p style="color:var(--m)" id="quiz-detail"></p><button class="btn btn-primary" onclick="Quiz.reset()">آزمون مجدد</button></div>
+<div id="quiz-result" class="card" style="display:none;text-align:center"><div style="font-family:var(--disp);font-size:3.5rem;color:var(--p2)" id="quiz-score">0%</div><p style="color:var(--m)" id="quiz-detail"></p><button class="btn btn-primary" onclick="Quiz.reset()">آزمون مجدد</button><button class="btn" style="margin-top:8px" onclick="PDF.exportQuiz()">📄 PDF نتیجه</button></div>
 </div>
 </div>
 
@@ -623,39 +689,54 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <input class="input" id="bank-search" placeholder="جستجو..." oninput="Bank.render()">
 <div id="bank-tags" style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap"></div>
 <div id="bank-list" style="max-height:55vh;overflow-y:auto"></div>
+<button class="btn btn-block" style="margin-top:10px" onclick="PDF.exportBank()">📄 PDF بانک</button>
 </div>
 </div>
 </div>
 
 <div class="view" id="view-tools">
-<div class="page-head"><h2>🧰 جعبه <em>ابزار</em></h2><p>تایمر، ماشین حساب، رسم تابع و تخته سفید — همه آفلاین</p></div>
-<div class="tools-grid">
+<div class="page-head"><h2>🧰 جعبه <em>ابزار</em></h2><p>۳۴ ابزار کاربردی — همه آفلاین</p></div>
+<div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap">
+<input class="input" id="tools-search" placeholder="جستجوی ابزار..." style="flex:1;margin:0;min-width:200px" oninput="Tools.filter(this.value)">
+<button class="btn" onclick="PDF.exportTools()">📄 PDF راهنما</button>
+</div>
+<div id="tools-accordion-container"></div>
+<div class="tools-grid" id="tools-grid-main">
 <div class="card lift"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">⏱️ پومودورو</div><div style="text-align:center;color:var(--ac);font-weight:700" id="pomo-status">⏳ تمرکز</div><div class="pomo-display" id="pomo-display">25:00</div><div style="display:flex;justify-content:center;gap:12px"><button class="btn btn-primary" id="pomo-start" onclick="Pomodoro.toggle()">شروع</button><button class="btn" onclick="Pomodoro.reset()">🔄 ریست</button></div></div>
 <div class="card lift"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">🔢 ماشین حساب</div><div class="calc-display" id="calc-display">0</div><div class="calc-grid"><button class="calc-btn" onclick="Calc.input('C')">C</button><button class="calc-btn" onclick="Calc.backspace()">⌫</button><button class="calc-btn" onclick="Calc.input('(')">(</button><button class="calc-btn" onclick="Calc.input(')')">)</button><button class="calc-btn op" onclick="Calc.input('/')">÷</button><button class="calc-btn" onclick="Calc.input('7')">7</button><button class="calc-btn" onclick="Calc.input('8')">8</button><button class="calc-btn" onclick="Calc.input('9')">9</button><button class="calc-btn op" onclick="Calc.input('*')">×</button><button class="calc-btn" onclick="Calc.input('4')">4</button><button class="calc-btn" onclick="Calc.input('5')">5</button><button class="calc-btn" onclick="Calc.input('6')">6</button><button class="calc-btn op" onclick="Calc.input('-')">-</button><button class="calc-btn" onclick="Calc.input('1')">1</button><button class="calc-btn" onclick="Calc.input('2')">2</button><button class="calc-btn" onclick="Calc.input('3')">3</button><button class="calc-btn op" onclick="Calc.input('+')">+</button><button class="calc-btn" onclick="Calc.input('0')">0</button><button class="calc-btn" onclick="Calc.input('.')">.</button><button class="calc-btn eq" onclick="Calc.calc()">=</button></div></div>
 <div class="card lift" style="grid-column:1/-1"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">📈 رسم تابع</div><input class="input" id="plot-func" placeholder="مثلاً: sin(x), x^2"><input class="input" id="plot-range" placeholder="xmin,xmax,ymin,ymax (اختیاری)"><button class="btn btn-primary btn-block" style="margin-bottom:12px" onclick="Plotter.draw()">🎨 رسم</button><canvas id="plot-canvas" class="plot-canvas" width="900" height="360"></canvas></div>
 <div class="card lift" style="grid-column:1/-1"><div style="font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem;color:var(--ac)">✏️ تخته سفید</div><div class="wb-container" style="height:400px"><canvas class="wb-canvas" id="tools-wb-canvas"></canvas><div class="wb-tools"><button class="wb-tool active" onclick="ToolsWB.setTool('pen',this)">✏️</button><button class="wb-tool" onclick="ToolsWB.setTool('eraser',this)">🧹</button><button class="wb-tool" onclick="ToolsWB.undo()">↩️</button><div class="wb-color active" style="background:#fff" onclick="ToolsWB.setColor('#fff',this)"></div><div class="wb-color" style="background:#ef4444" onclick="ToolsWB.setColor('#ef4444',this)"></div><div class="wb-color" style="background:#22c55e" onclick="ToolsWB.setColor('#22c55e',this)"></div><div class="wb-color" style="background:#14b8a6" onclick="ToolsWB.setColor('#14b8a6',this)"></div><button class="wb-tool" onclick="ToolsWB.clear()">🗑️</button><button class="wb-tool" onclick="ToolsWB.save()">💾</button></div></div></div>
 </div>
+<div id="tools-extra-container" class="tools-grid" style="margin-top:1rem"></div>
 </div>
 
 <div class="view" id="view-settings">
 <div style="max-width:700px;margin:0 auto">
-<div class="page-head"><h2>⚙️ تنظیمات</h2><p>هوش مصنوعی، تم و P2P</p></div>
+<div class="page-head"><h2>⚙️ تنظیمات</h2><p>هوش مصنوعی، تم و اتصال</p></div>
 <div class="card">
 <label style="display:block;margin-bottom:6px;font-weight:700">🎨 تم</label>
-<select class="input" id="theme-select-settings" onchange="Themes.set(this.value)"><option value="dark">🌙 تیره</option><option value="light">☀️ روشن</option><option value="night">🌑 شب</option><option value="sepia">📜 سپیا</option><option value="ocean">🌊 اقیانوس</option></select>
-<label style="display:block;margin-bottom:6px;font-weight:700">🔑 API Key (اختیاری — برای هوش مصنوعی آنلاین)</label>
-<input class="input" id="api-key" type="password" placeholder="sk-... یا sk-ant-...">
-<label style="display:block;margin-bottom:6px;font-weight:700">🌐 Proxy URL</label>
-<input class="input" id="proxy-url" placeholder="https://...">
-<label style="display:block;margin-bottom:6px;font-weight:700">🤖 مدل</label>
-<select class="input" id="model-select"><option value="ostadyar">🧠 استاد یار (آفلاین)</option><option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option><option value="gpt-4o">GPT-4o</option><option value="gpt-4o-mini">GPT-4o Mini</option></select>
+<select class="input" id="theme-select-settings" onchange="Themes.set(this.value)">
+<option value="dark">🌙 تیره</option>
+<option value="light">☀️ روشن</option>
+<option value="night">🌑 شب</option>
+<option value="sepia">📜 سپیا</option>
+<option value="ocean">🌊 اقیانوس</option>
+<option value="forest">🌲 جنگلی</option>
+<option value="sakura">🌸 صورتی</option>
+<option value="royal">👑 بنفش</option>
+</select>
+<label style="display:block;margin-bottom:6px;font-weight:700">🌐 حالت اتصال</label>
+<select class="input" id="conn-mode-select" onchange="Conn.setMode(this.value)">
+<option value="p2p">🔗 P2P محلی (تا ۱۰ نفر)</option>
+<option value="server">🌍 سرور جهانی (۵۰+ سرور)</option>
+</select>
 <label style="display:block;margin-bottom:6px;font-weight:700">🧠 System Prompt</label>
 <textarea class="input" id="system-prompt" rows="3"></textarea>
 <label style="display:block;margin-bottom:6px;font-weight:700">🖌️ دامنه تخته WBO (اختیاری)</label>
 <input class="input" id="wbo-domain" placeholder="wbo.ophir.dev">
 <button class="btn btn-primary btn-block" style="margin-bottom:8px" onclick="Settings.save()">💾 ذخیره</button>
 <button class="btn btn-danger btn-block" onclick="Settings.clearAll()">🗑️ پاک کردن همه داده‌ها</button>
-<p class="small" style="margin-top:10px">💡 این نسخه P2P است و به سرور خارجی نیاز ندارد. API Key فقط برای هوش مصنوعی آنلاین است.</p>
+<p class="small" style="margin-top:10px">💡 این نسخه P2P + سرور جهانی است. API خارجی حذف شده و هوش مصنوعی محلی تقویت شده است.</p>
 </div>
 </div>
 </div>
@@ -670,8 +751,13 @@ canvas.chart{width:100%;height:240px;background:var(--bg);border:1px solid var(-
 <button onclick="UI.nav('tools',this)"><span class="ic">🧰</span>ابزار</button>
 </div>
 </div>
+
 <script>
 'use strict';
+/* ===================== PART 2 STARTS IN NEXT MESSAGE ===================== */
+</script>
+</body>
+</html>'use strict';
 /* ===================== ابزارهای پایه ===================== */
 const U={
 uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)},
@@ -681,7 +767,9 @@ faDate(d=new Date()){try{return d.toLocaleDateString('fa-IR',{year:'numeric',mon
 faTime(d=new Date()){try{return d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}catch(e){return d.toLocaleTimeString()}},
 download(n,t,type='text/plain'){const b=new Blob([t],{type});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),200)},
 fmtSize(b){if(!Number.isFinite(b))return'';if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';if(b<1073741824)return(b/1048576).toFixed(1)+' MB';return(b/1073741824).toFixed(2)+' GB'},
-fileIcon(t='',n=''){t=String(t).toLowerCase();n=String(n).toLowerCase();if(t.startsWith('image/'))return'🖼️';if(t.startsWith('audio/'))return'🎵';if(t.startsWith('video/')||n.endsWith('.mkv'))return'🎬';if(t.includes('pdf')||n.endsWith('.pdf'))return'📕';if(t.includes('word')||n.endsWith('.doc')||n.endsWith('.docx'))return'📘';if(t.includes('excel')||t.includes('sheet')||n.endsWith('.xls')||n.endsWith('.xlsx')||n.endsWith('.csv'))return'📗';if(t.includes('powerpoint')||n.endsWith('.ppt')||n.endsWith('.pptx'))return'📙';if(t.includes('zip')||t.includes('rar'))return'📦';return'📎'}
+fileIcon(t='',n=''){t=String(t).toLowerCase();n=String(n).toLowerCase();if(t.startsWith('image/'))return'🖼️';if(t.startsWith('audio/'))return'🎵';if(t.startsWith('video/')||n.endsWith('.mkv'))return'🎬';if(t.includes('pdf')||n.endsWith('.pdf'))return'📕';if(t.includes('word')||n.endsWith('.doc')||n.endsWith('.docx'))return'📘';if(t.includes('excel')||t.includes('sheet')||n.endsWith('.xls')||n.endsWith('.xlsx')||n.endsWith('.csv'))return'📗';if(t.includes('powerpoint')||n.endsWith('.ppt')||n.endsWith('.pptx'))return'📙';if(t.includes('zip')||t.includes('rar'))return'📦';return'📎'},
+lev(a,b){a=String(a);b=String(b);const m=a.length,n=b.length;const dp=Array.from({length:m+1},()=>Array(n+1).fill(0));for(let i=0;i<=m;i++)dp[i][0]=i;for(let j=0;j<=n;j++)dp[0][j]=j;for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return dp[m][n]},
+fuzzy(q,t,max=3){q=U.norm(q);t=U.norm(t);if(t.includes(q))return true;const words=t.split(' ');for(const w of words){if(U.lev(q,w)<=max)return true}return false}
 };
 const Toast={show(m,type='info'){const c=document.getElementById('toast-container');if(!c)return;const t=document.createElement('div');t.className='toast';const col={success:'var(--ok)',error:'var(--no)',warning:'var(--warn)',info:'var(--info)'};t.style.borderInlineStartColor=col[type]||col.info;t.textContent=m;c.appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(20px)';setTimeout(()=>t.remove(),300)},4200)}};
 const Gate={CODE:'20261405',booted:false,
@@ -693,7 +781,7 @@ lock(){if(!confirm('برنامه قفل شود؟'))return;localStorage.removeIte
 };
 const Store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const IDB={db:null,
-async init(){return new Promise((res,rej)=>{try{const r=indexedDB.open('OstadYarDB_v121',1);r.onupgradeneeded=e=>{const db=e.target.result;['settings','sessions','quizzes','flashcards','facts','qa'].forEach(s=>{if(!db.objectStoreNames.contains(s))db.createObjectStore(s,{keyPath:'id'})})};r.onsuccess=e=>{this.db=e.target.result;res()};r.onerror=e=>rej(e)}catch(e){rej(e)}})},
+async init(){return new Promise((res,rej)=>{try{const r=indexedDB.open('OstadYarDB_v122',1);r.onupgradeneeded=e=>{const db=e.target.result;['settings','sessions','quizzes','flashcards','facts','qa'].forEach(s=>{if(!db.objectStoreNames.contains(s))db.createObjectStore(s,{keyPath:'id'})})};r.onsuccess=e=>{this.db=e.target.result;res()};r.onerror=e=>rej(e)}catch(e){rej(e)}})},
 async get(s,k){return new Promise(r=>{if(!this.db)return r(null);try{const tx=this.db.transaction(s,'readonly');const st=tx.objectStore(s);const q=k?st.get(k):st.getAll();q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}})},
 async all(s){return await this.get(s,null)||[]},
 async put(s,d){return new Promise(r=>{if(!this.db)return r(false);try{const tx=this.db.transaction(s,'readwrite');tx.objectStore(s).put(d);tx.oncomplete=()=>r(true);tx.onerror=()=>r(false)}catch(e){r(false)}})},
@@ -701,7 +789,6 @@ async batch(s,items){return new Promise(r=>{if(!this.db||!items.length)return r(
 async cfg(){return await this.get('settings','config')||{}},
 async saveCfg(c){await this.put('settings',{id:'config',...c})}
 };
-/* ===================== Markdown parser داخلی (بدون marked) ===================== */
 const MD={parse(t){if(!t)return'';let s=U.esc(t);
 s=s.replace(/```([\s\S]*?)```/g,(m,c)=>'<pre><code>'+c.trim()+'</code></pre>');
 s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
@@ -715,11 +802,34 @@ s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1" style="max-width
 s=s.replace(/^\s*[-•] (.+)$/gm,'<li>$1</li>');
 s=s.replace(/\n/g,'<br>');
 return s}};
-/* ===================== تم‌ها ===================== */
-const Themes={available:['dark','light','night','sepia','ocean'],
+/* ===================== تم‌ها (۸ تم) ===================== */
+const Themes={available:['dark','light','night','sepia','ocean','forest','sakura','royal'],
 init(){this.apply(localStorage.getItem('oy_theme')||'dark')},
 apply(t){if(!this.available.includes(t))t='dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('oy_theme',t);const h=document.getElementById('theme-select');if(h)h.value=t;const s=document.getElementById('theme-select-settings');if(s)s.value=t},
 set(t){this.apply(t);Toast.show('تم: '+t,'success')}};
+/* ===================== حالت اتصال ===================== */
+const Conn={mode:'p2p',selected:'p2p',servers:[],currentServer:null,
+init(){this.mode=localStorage.getItem('oy_conn_mode')||'p2p';this.updateBadge();this.updateStatus();const sel=document.getElementById('conn-mode-select');if(sel)sel.value=this.mode;if(!localStorage.getItem('oy_conn_chosen')){setTimeout(()=>this.showModal(),600)}},
+showModal(){this.selected=this.mode;document.getElementById('conn-p2p').classList.toggle('selected',this.selected==='p2p');document.getElementById('conn-server').classList.toggle('selected',this.selected==='server');document.getElementById('conn-modal').classList.remove('hidden')},
+select(m){this.selected=m;document.getElementById('conn-p2p').classList.toggle('selected',m==='p2p');document.getElementById('conn-server').classList.toggle('selected',m==='server')},
+confirm(){this.setMode(this.selected);localStorage.setItem('oy_conn_chosen','1');document.getElementById('conn-modal').classList.add('hidden');Toast.show('حالت اتصال: '+(this.mode==='p2p'?'P2P محلی':'سرور جهانی'),'success')},
+skip(){localStorage.setItem('oy_conn_chosen','1');document.getElementById('conn-modal').classList.add('hidden');Toast.show('بعداً از تنظیمات می‌توانید تغییر دهید','info')},
+setMode(m){this.mode=m;localStorage.setItem('oy_conn_mode',m);this.updateBadge();this.updateStatus();const sel=document.getElementById('conn-mode-select');if(sel)sel.value=m;Toast.show('حالت اتصال تغییر کرد: '+(m==='p2p'?'P2P':'سرور'),'info')},
+updateBadge(){const b=document.getElementById('conn-badge');if(b)b.innerHTML=this.mode==='p2p'?'🔗 P2P':'🌍 سرور'},
+updateStatus(){const el=document.getElementById('conn-status-text');if(!el)return;if(this.mode==='p2p'){el.innerHTML='✅ حالت فعلی: P2P محلی<br>✅ BroadcastChannel + WebRTC + localStorage<br>✅ مناسب تا ۱۰ نفر و زمان قطع اینترنت<br>⚠️ برای تعداد بیشتر، حالت سرور را فعال کنید'}else{el.innerHTML='✅ حالت فعلی: سرور جهانی<br>✅ ۵۰+ سرور رایگان با fallback خودکار ۱۲ ثانیه<br>✅ مناسب تعداد بیشتر و ارتباط بین‌دستگاهی<br>⚠️ سرورهای عمومی ممکن است ناپایدار باشند'}}
+};
+/* ===================== PDF ===================== */
+const PDF={
+exportCurrent(){const title=document.getElementById('page-title').textContent||'استاد یار پلاس';const content=document.getElementById('content').innerHTML;this.printHTML(title,content)},
+exportNotes(){const a=document.getElementById('note-area');const txt=a?a.value:'';this.printHTML('یادداشت کلاس','<pre style="white-space:pre-wrap;font-family:Tahoma;line-height:2">'+U.esc(txt)+'</pre>')},
+exportReport(){const txt=document.getElementById('report-box').textContent||'';this.printHTML('گزارش کلاس','<pre style="white-space:pre-wrap;font-family:Tahoma;line-height:2">'+U.esc(txt)+'</pre>')},
+exportAttendance(){const items=Object.values(Attendance.list);let html='<h2>حضور و غیاب</h2><table border="1" cellpadding="8" style="width:100%;border-collapse:collapse"><tr><th>نام</th><th>نقش</th><th>وضعیت</th><th>دست</th><th>زمان</th></tr>';items.forEach(i=>{html+='<tr><td>'+U.esc(i.name)+'</td><td>'+U.esc(i.role)+'</td><td>'+U.esc(i.status)+'</td><td>'+U.esc(i.hand)+'</td><td>'+U.esc(i.time)+'</td></tr>'});html+='</table>';this.printHTML('حضور و غیاب',html)},
+exportFacts(){const list=document.getElementById('facts-list').innerHTML;this.printHTML('دانستنی‌ها',list)},
+exportQuiz(){const score=document.getElementById('quiz-score').textContent;const detail=document.getElementById('quiz-detail').textContent;const qs=document.getElementById('quiz-questions').innerHTML;this.printHTML('نتیجه آزمون','<h2>نمره: '+U.esc(score)+'</h2><p>'+U.esc(detail)+'</p><hr>'+qs)},
+exportBank(){const list=document.getElementById('bank-list').innerHTML;this.printHTML('بانک سوالات',list)},
+exportTools(){this.printHTML('راهنمای ابزارها','<h2>جعبه ابزار استاد یار پلاس</h2><p>شامل ۳۴ ابزار کاربردی: پومودورو، ماشین حساب، رسم تابع، تخته سفید، تبدیل واحدها، درصدگیر، BMI، سن، تقویم، رمزساز، Base64، JSON، Regex، رنگ‌ساز و...</p>')},
+printHTML(title,body){const w=window.open('','','width=900,height=700');if(!w){Toast.show('پنجره چاپ مسدود شد. لطفاً پاپ‌آپ را مجاز کنید.','warning');return}w.document.write('<html dir="rtl"><head><meta charset="utf-8"><title>'+U.esc(title)+'</title><style>body{font-family:Tahoma,sans-serif;line-height:2;padding:40px;color:#111}h1,h2,h3{color:#0d9488}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border:1px solid #ccc;padding:8px;text-align:right}pre{white-space:pre-wrap;background:#f6f6f6;padding:14px;border-radius:8px}.card,.fact-card,.hw-item,.poll-card{border:1px solid #ddd;border-radius:10px;padding:12px;margin-bottom:10px}.small{color:#666;font-size:.85rem}@media print{body{padding:20px}}</style></head><body><h1>🎓 '+U.esc(title)+'</h1><div class="small">استاد یار پلاس — '+U.faDate()+' — '+U.faTime()+'</div><hr style="margin:12px 0">'+body+'</body></html>');w.document.close();setTimeout(()=>{w.focus();w.print()},400)}
+};
 /* ===================== اعلان صوتی ===================== */
 const Notify={ctx:null,enabled:Store.get('oy_notify',{message:true,homework:true,reminder:true,emergency:true,break:true,success:true}),
 defs:[{key:'message',emoji:'💬',label:'پیام جدید'},{key:'homework',emoji:'📚',label:'تکلیف/نظرسنجی'},{key:'reminder',emoji:'⏰',label:'یادآوری'},{key:'emergency',emoji:'🚨',label:'فوری'},{key:'break',emoji:'☕',label:'زنگ تفریح'},{key:'success',emoji:'✅',label:'موفقیت'}],
@@ -728,17 +838,17 @@ tone(f,dur,type='sine',vol=0.18,delay=0){const c=this.ensure();if(!c)return;cons
 play(k){if(this.enabled[k]===false)return;switch(k){case'message':this.tone(880,0.09);break;case'homework':this.tone(660,0.12);this.tone(880,0.14,'sine',0.18,0.13);break;case'reminder':this.tone(700,0.1);this.tone(880,0.1,'sine',0.18,0.12);this.tone(1046,0.14,'sine',0.18,0.24);break;case'emergency':for(let i=0;i<3;i++){this.tone(760,0.16,'square',0.14,i*0.22);this.tone(520,0.16,'square',0.14,i*0.22+0.08)}break;case'break':this.tone(523,0.4);this.tone(659,0.4,'sine',0.12,0.02);this.tone(784,0.5,'sine',0.12,0.04);break;case'success':this.tone(660,0.1);this.tone(880,0.1,'sine',0.18,0.1);this.tone(1174,0.18,'sine',0.18,0.2);break;default:this.tone(880,0.1)}},
 toggle(k){this.enabled[k]=!this.enabled[k];Store.set('oy_notify',this.enabled);this.render();if(this.enabled[k])this.play(k)},
 render(){const l=document.getElementById('sound-list');if(!l)return;l.innerHTML=this.defs.map(d=>'<div class="sound-row"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:1.5rem">'+d.emoji+'</span><b>'+d.label+'</b></div><div style="display:flex;gap:8px;align-items:center"><button class="btn btn-sm" onclick="Notify.play(\''+d.key+'\')">▶ تست</button><div class="toggle '+(this.enabled[d.key]?'on':'')+'" onclick="Notify.toggle(\''+d.key+'\')"></div></div></div>').join('')}};
-/* ===================== Signal: لایه ارتباطی P2P (BroadcastChannel + localStorage) ===================== */
+/* ===================== Signal ===================== */
 const Signal={room:'',me:'',handlers:[],seen:new Set(),channel:null,
 start(room,me){this.room=room;this.me=me;
-try{this.channel=new BroadcastChannel('oy121-'+room);this.channel.onmessage=e=>this.receive(e.data)}catch(e){console.log('BroadcastChannel not supported, using localStorage')}
-window.addEventListener('storage',e=>{if(e.key==='oy121-sig-'+room&&e.newValue){try{this.receive(JSON.parse(e.newValue))}catch(err){}}})},
+try{this.channel=new BroadcastChannel('oy122-'+room);this.channel.onmessage=e=>this.receive(e.data)}catch(e){console.log('BroadcastChannel not supported, using localStorage')}
+window.addEventListener('storage',e=>{if(e.key==='oy122-sig-'+room&&e.newValue){try{this.receive(JSON.parse(e.newValue))}catch(err){}}})},
 on(cb){this.handlers.push(cb)},
 send(type,payload){const msg=Object.assign({id:U.uid(),from:this.me,type,ts:Date.now()},payload||{});
 if(this.channel){try{this.channel.postMessage(msg)}catch(e){}}
-try{localStorage.setItem('oy121-sig-'+this.room,JSON.stringify(msg))}catch(e){}},
+try{localStorage.setItem('oy122-sig-'+this.room,JSON.stringify(msg))}catch(e){}},
 receive(msg){if(!msg||!msg.id||this.seen.has(msg.id))return;if(msg.from===this.me){this.seen.add(msg.id);return}this.seen.add(msg.id);if(this.seen.size>2500)this.seen=new Set(Array.from(this.seen).slice(-1200));this.handlers.forEach(cb=>{try{cb(msg)}catch(e){console.error(e)}})}};
-/* ===================== P2PMedia: ویدیو/صوت/صفحه با WebRTC بومی (جایگزین Jitsi) ===================== */
+/* ===================== P2PMedia ===================== */
 const P2PMedia={localStream:null,screenStream:null,audioOn:false,videoOn:false,screenOn:false,peers:new Map(),myVideoEl:null,
 async init(){this.renderVideos();this.addLocalPlaceholder()},
 addLocalPlaceholder(){const wrap=document.createElement('div');wrap.className='p2p-video-wrap';wrap.id='p2p-local';wrap.innerHTML='<div class="p2p-placeholder">📷</div><div class="p2p-video-label">شما ('+U.esc(Classroom.displayName||'کاربر')+')</div>';const v=document.getElementById('p2p-videos');if(v&&!document.getElementById('p2p-local'))v.appendChild(wrap)},
@@ -752,51 +862,391 @@ updatePeerCount(){const el=document.getElementById('p2p-peers');if(el)el.innerHT
 addPeer(name){if(!this.peers.has(name)){this.peers.set(name,{name});const wrap=document.createElement('div');wrap.className='p2p-video-wrap';wrap.id='p2p-peer-'+U.norm(name);wrap.innerHTML='<div class="p2p-placeholder">👤</div><div class="p2p-video-label">'+U.esc(name)+'</div>';const v=document.getElementById('p2p-videos');if(v)v.appendChild(wrap);this.updatePeerCount()}},
 removePeer(name){if(this.peers.has(name)){this.peers.delete(name);const el=document.getElementById('p2p-peer-'+U.norm(name));if(el)el.remove();this.updatePeerCount()}},
 dispose(){if(this.localStream)this.localStream.getTracks().forEach(t=>t.stop());if(this.screenStream)this.screenStream.getTracks().forEach(t=>t.stop());this.peers.clear()}};
-/* ===================== دانش محلی ===================== */
+/* ===================== ۳۰۰ دانستنی ===================== */
 const KDB={facts:[
-{id:'f1',category:'نجوم',title:'نزدیک‌ترین ستاره',body:'نزدیک‌ترین ستاره به زمین، خورشید است که حدود ۱۵۰ میلیون کیلومتر فاصله دارد.',tags:['نجوم']},
-{id:'f2',category:'نجوم',title:'کهکشان راه شیری',body:'منظومه شمسی در کهکشان راه شیری قرار دارد که حدود ۲۰۰ میلیارد ستاره دارد.',tags:['نجوم']},
-{id:'f3',category:'ریاضی',title:'عدد پی',body:'عدد پی تقریباً ۳٫۱۴۱۵۹ است و نسبت محیط دایره به قطر آن است.',tags:['ریاضی']},
-{id:'f4',category:'ریاضی',title:'مجموع زوایای مثلث',body:'مجموع زوایای داخلی هر مثلث ۱۸۰ درجه است.',tags:['ریاضی']},
-{id:'f5',category:'حیوانات',title:'بزرگ‌ترین پستاندار',body:'نهنگ آبی بزرگ‌ترین پستاندار جهان است و طول آن به ۳۰ متر می‌رسد.',tags:['حیوانات']},
-{id:'f6',category:'علوم',title:'قلب انسان',body:'قلب انسان روزانه حدود ۱۰۰ هزار بار می‌تپد.',tags:['علوم']},
-{id:'f7',category:'تاریخ',title:'کوروش بزرگ',body:'کوروش بزرگ بنیان‌گذار امپراتوری هخامنشی و نویسنده نخستین منشور حقوق بشر بود.',tags:['تاریخ']},
-{id:'f8',category:'ادبیات',title:'فردوسی',body:'فردوسی سراینده شاهنامه، حدود ۳۰ سال برای سرودن آن وقت گذاشت.',tags:['ادبیات']},
-{id:'f9',category:'تکنولوژی',title:'اینترنت',body:'اینترنت ابتدا با نام ARPANET در سال ۱۹۶۹ ساخته شد.',tags:['تکنولوژی']},
-{id:'f10',category:'جغرافیا',title:'اورست',body:'قله اورست با ارتفاع ۸۸۴۹ متر بلندترین نقطه زمین است.',tags:['جغرافیا']},
-{id:'f11',category:'فیزیک',title:'سرعت نور',body:'سرعت نور در خلأ تقریباً ۲۹۹٬۷۹۲٬۴۵۸ متر بر ثانیه است.',tags:['فیزیک']},
-{id:'f12',category:'شیمی',title:'فرمول آب',body:'آب از دو اتم هیدروژن و یک اتم اکسیژن تشکیل شده: H₂O.',tags:['شیمی']},
-{id:'f13',category:'ریاضی',title:'قضیه فیثاغورس',body:'در مثلث قائم‌الزاویه: a² + b² = c².',tags:['ریاضی']},
-{id:'f14',category:'زیست',title:'فتوسنتز',body:'گیاهان با فتوسنتز، نور، آب و CO₂ را به گلوکز و اکسیژن تبدیل می‌کنند.',tags:['زیست']},
-{id:'f15',category:'تاریخ',title:'صفویه',body:'دولت صفویه توسط شاه اسماعیل یکم بنیان گذاشته شد.',tags:['تاریخ']},
-{id:'f16',category:'ادبیات',title:'حافظ',body:'حافظ شیرازی از بزرگ‌ترین شاعران غزل‌سرای فارسی است.',tags:['ادبیات']},
-{id:'f17',category:'کامپیوتر',title:'هوش مصنوعی',body:'هوش مصنوعی شاخه‌ای از علوم کامپیوتر برای ساخت سیستم‌های هوشمند است.',tags:['کامپیوتر']},
-{id:'f18',category:'جغرافیا',title:'خلیج فارس',body:'خلیج فارس آبراهی مهم در جنوب ایران است.',tags:['جغرافیا']}],
+{id:'f1',category:'نجوم',title:'نزدیک‌ترین ستاره',body:'نزدیک‌ترین ستاره به زمین، خورشید است که حدود ۱۵۰ میلیون کیلومتر فاصله دارد.',tags:['نجوم','خورشید']},
+{id:'f2',category:'نجوم',title:'کهکشان راه شیری',body:'منظومه شمسی در کهکشان راه شیری قرار دارد که حدود ۲۰۰ میلیارد ستاره دارد.',tags:['نجوم','کهکشان']},
+{id:'f3',category:'نجوم',title:'سیاه‌چاله',body:'سیاه‌چاله ناحیه‌ای از فضا-زمان است که گرانش آن قدر قوی است که هیچ چیز، حتی نور، نمی‌تواند از آن فرار کند.',tags:['نجوم','سیاه‌چاله']},
+{id:'f4',category:'نجوم',title:'سال نوری',body:'سال نوری مسافتی است که نور در یک سال طی می‌کند، حدود ۹٫۴۶ تریلیون کیلومتر.',tags:['نجوم','سال نوری']},
+{id:'f5',category:'نجوم',title:'مشتری',body:'مشتری بزرگ‌ترین سیاره منظومه شمسی است و بیش از ۷۹ قمر دارد.',tags:['نجوم','مشتری']},
+{id:'f6',category:'نجوم',title:'زحل',body:'زحل به خاطر حلقه‌های زیبایش معروف است که از یخ و سنگ تشکیل شده‌اند.',tags:['نجوم','زحل']},
+{id:'f7',category:'نجوم',title:'ماه',body:'ماه تنها قمر طبیعی زمین است و حدود ۳۸۴,۴۰۰ کیلومتر از زمین فاصله دارد.',tags:['نجوم','ماه']},
+{id:'f8',category:'نجوم',title:'خورشید',body:'خورشید یک ستاره کوتوله زرد است که ۹۹٫۸٪ جرم منظومه شمسی را تشکیل می‌دهد.',tags:['نجوم','خورشید']},
+{id:'f9',category:'نجوم',title:'مریخ',body:'مریخ به سیاره سرخ معروف است و بلندترین کوه منظومه شمسی، المپوس مونس، در آن قرار دارد.',tags:['نجوم','مریخ']},
+{id:'f10',category:'نجوم',title:'ستاره قطبی',body:'ستاره قطبی نزدیک‌ترین ستاره به قطب شمال آسمانی است و برای جهت‌یابی استفاده می‌شود.',tags:['نجوم','ستاره قطبی']},
+{id:'f11',category:'نجوم',title:'سحابی',body:'سحابی ابری از گاز و غبار در فضا است که محل تولد ستارگان جدید است.',tags:['نجوم','سحابی']},
+{id:'f12',category:'نجوم',title:'سیارک',body:'سیارک‌ها اجرام سنگی کوچکی هستند که عمدتاً در کمربند سیارکی بین مریخ و مشتری قرار دارند.',tags:['نجوم','سیارک']},
+{id:'f13',category:'نجوم',title:'دنباله‌دار',body:'دنباله‌دارها اجرام یخی هستند که با نزدیک شدن به خورشید، دمی از گاز و غبار تشکیل می‌دهند.',tags:['نجوم','دنباله‌دار']},
+{id:'f14',category:'نجوم',title:'انفجار ابرنواختری',body:'ابرنواختر انفجار عظیم یک ستاره در پایان عمرش است که می‌تواند برای مدتی از کل کهکشان روشن‌تر باشد.',tags:['نجوم','ابرنواختر']},
+{id:'f15',category:'نجوم',title:'ستاره نوترونی',body:'ستاره نوترونی بقایای فشرده یک ستاره بزرگ است که یک قاشق چایخوری از آن میلیاردها تن وزن دارد.',tags:['نجوم','ستاره نوترونی']},
+{id:'f16',category:'نجوم',title:'کهکشان آندرومدا',body:'آندرومدا نزدیک‌ترین کهکشان بزرگ به راه شیری است و حدود ۲٫۵ میلیون سال نوری فاصله دارد.',tags:['نجوم','آندرومدا']},
+{id:'f17',category:'نجوم',title:'تلسکوپ هابل',body:'تلسکوپ فضایی هابل از سال ۱۹۹۰ تصاویر بی‌نظیری از کیهان ارسال کرده است.',tags:['نجوم','هابل']},
+{id:'f18',category:'نجوم',title:'کمربند کویپر',body:'کمربند کویپر منطقه‌ای فراتر از نپتون است که حاوی اجرام یخی و سیاره‌های کوتوله است.',tags:['نجوم','کویپر']},
+{id:'f19',category:'نجوم',title:'نپتون',body:'نپتون دورترین سیاره منظومه شمسی است و بادهای آن به ۲۱۰۰ کیلومتر بر ساعت می‌رسد.',tags:['نجوم','نپتون']},
+{id:'f20',category:'نجوم',title:'اورانوس',body:'اورانوس تنها سیاره‌ای است که تقریباً به پهلو می‌چرخد و محور چرخش آن ۹۸ درجه کج است.',tags:['نجوم','اورانوس']},
+{id:'f21',category:'ریاضی',title:'عدد پی',body:'عدد پی تقریباً ۳٫۱۴۱۵۹ است و نسبت محیط دایره به قطر آن است.',tags:['ریاضی','پی']},
+{id:'f22',category:'ریاضی',title:'مجموع زوایای مثلث',body:'مجموع زوایای داخلی هر مثلث ۱۸۰ درجه است.',tags:['ریاضی','مثلث']},
+{id:'f23',category:'ریاضی',title:'قضیه فیثاغورس',body:'در مثلث قائم‌الزاویه: a² + b² = c².',tags:['ریاضی','فیثاغورس']},
+{id:'f24',category:'ریاضی',title:'عدد صفر',body:'صفر نه مثبت است نه منفی و عنصر خنثی جمع است.',tags:['ریاضی','صفر']},
+{id:'f25',category:'ریاضی',title:'اعداد اول',body:'عدد اول عددی بزرگ‌تر از ۱ است که فقط بر ۱ و خودش بخش‌پذیر است.',tags:['ریاضی','اعداد اول']},
+{id:'f26',category:'ریاضی',title:'دنباله فیبوناچی',body:'در دنباله فیبوناچی هر عدد حاصل جمع دو عدد قبلی است: ۱، ۱، ۲، ۳، ۵، ۸، ...',tags:['ریاضی','فیبوناچی']},
+{id:'f27',category:'ریاضی',title:'عدد e',body:'عدد e تقریباً ۲٫۷۱۸۲۸ است و پایه لگاریتم طبیعی است.',tags:['ریاضی','e']},
+{id:'f28',category:'ریاضی',title:'مشتق',body:'مشتق نرخ تغییرات لحظه‌ای یک تابع را نشان می‌دهد.',tags:['ریاضی','مشتق']},
+{id:'f29',category:'ریاضی',title:'انتگرال',body:'انتگرال معکوس مشتق است و مساحت زیر نمودار تابع را محاسبه می‌کند.',tags:['ریاضی','انتگرال']},
+{id:'f30',category:'ریاضی',title:'ماتریس',body:'ماتریس آرایه‌ای مستطیلی از اعداد است که در حل دستگاه معادلات خطی کاربرد دارد.',tags:['ریاضی','ماتریس']},
+{id:'f31',category:'ریاضی',title:'لگاریتم',body:'لگاریتم معکوس توان است: اگر a^b = c آنگاه log_a(c) = b.',tags:['ریاضی','لگاریتم']},
+{id:'f32',category:'ریاضی',title:'مثلثات',body:'سینوس، کسینوس و تانژانت نسبت‌های اضلاع مثلث قائم‌الزاویه هستند.',tags:['ریاضی','مثلثات']},
+{id:'f33',category:'ریاضی',title:'عدد گویا',body:'عدد گویا عددی است که می‌توان آن را به صورت کسر دو عدد صحیح نوشت.',tags:['ریاضی','گویا']},
+{id:'f34',category:'ریاضی',title:'عدد گنگ',body:'عدد گنگ عددی است که نمی‌توان آن را به صورت کسر نوشت، مانند √۲.',tags:['ریاضی','گنگ']},
+{id:'f35',category:'ریاضی',title:'احتمال',body:'احتمال وقوع یک پیشامد عددی بین ۰ و ۱ است.',tags:['ریاضی','احتمال']},
+{id:'f36',category:'ریاضی',title:'آمار',body:'میانگین، میانه و مد سه معیار مرکزی در آمار هستند.',tags:['ریاضی','آمار']},
+{id:'f37',category:'ریاضی',title:'توان',body:'توان نشان‌دهنده ضرب مکرر یک عدد در خودش است: a^n.',tags:['ریاضی','توان']},
+{id:'f38',category:'ریاضی',title:'جذر',body:'جذر مربع عددی است که اگر در خودش ضرب شود، عدد اصلی را می‌دهد.',tags:['ریاضی','جذر']},
+{id:'f39',category:'ریاضی',title:'تابع',body:'تابع رابطه‌ای است که به هر عنصر از دامنه، دقیقاً یک عنصر از برد را نسبت می‌دهد.',tags:['ریاضی','تابع']},
+{id:'f40',category:'ریاضی',title:'حد',body:'حد مقدار میل یک تابع را وقتی متغیر به عددی نزدیک می‌شود، نشان می‌دهد.',tags:['ریاضی','حد']},
+{id:'f41',category:'فیزیک',title:'سرعت نور',body:'سرعت نور در خلأ تقریباً ۲۹۹٬۷۹۲٬۴۵۸ متر بر ثانیه است.',tags:['فیزیک','نور']},
+{id:'f42',category:'فیزیک',title:'قوانین نیوتن',body:'قانون اول: جسم در حالت سکون یا حرکت یکنواخت می‌ماند مگر نیرویی بر آن وارد شود.',tags:['فیزیک','نیوتن']},
+{id:'f43',category:'فیزیک',title:'گرانش',body:'نیروی گرانش بین دو جسم با حاصل‌ضرب جرم‌ها نسبت مستقیم و با مربع فاصله نسبت عکس دارد.',tags:['فیزیک','گرانش']},
+{id:'f44',category:'فیزیک',title:'انرژی',body:'انرژی نه به وجود می‌آید نه از بین می‌رود، بلکه از شکلی به شکل دیگر تبدیل می‌شود.',tags:['فیزیک','انرژی']},
+{id:'f45',category:'فیزیک',title:'الکتریسیته',body:'جریان الکتریکی حرکت منظم الکترون‌ها در یک رسانا است.',tags:['فیزیک','الکتریسیته']},
+{id:'f46',category:'فیزیک',title:'مغناطیس',body:'هر جریان الکتریکی یک میدان مغناطیسی ایجاد می‌کند.',tags:['فیزیک','مغناطیس']},
+{id:'f47',category:'فیزیک',title:'صوت',body:'صوت یک موج مکانیکی است که برای انتشار به محیط مادی نیاز دارد.',tags:['فیزیک','صوت']},
+{id:'f48',category:'فیزیک',title:'دوپلر',body:'اثر دوپلر تغییر فرکانس موج به دلیل حرکت منبع یا ناظر است.',tags:['فیزیک','دوپلر']},
+{id:'f49',category:'فیزیک',title:'نسبیت خاص',body:'طبق نسبیت خاص اینشتین، سرعت نور برای همه ناظران ثابت است.',tags:['فیزیک','نسبیت']},
+{id:'f50',category:'فیزیک',title:'E=mc²',body:'معادله معروف اینشتین نشان می‌دهد جرم و انرژی معادل یکدیگرند.',tags:['فیزیک','اینشتین']},
+{id:'f51',category:'فیزیک',title:'کوانتوم',body:'در فیزیک کوانتوم، انرژی به صورت بسته‌های گسسته به نام کوانتوم منتشر می‌شود.',tags:['فیزیک','کوانتوم']},
+{id:'f52',category:'فیزیک',title:'اصطکاک',body:'اصطکاک نیرویی است که در خلاف جهت حرکت جسم عمل می‌کند.',tags:['فیزیک','اصطکاک']},
+{id:'f53',category:'فیزیک',title:'فشار',body:'فشار نیروی وارد بر واحد سطح است: P = F/A.',tags:['فیزیک','فشار']},
+{id:'f54',category:'فیزیک',title:'چگالی',body:'چگالی جرم واحد حجم است: ρ = m/V.',tags:['فیزیک','چگالی']},
+{id:'f55',category:'فیزیک',title:'گرمای ویژه',body:'گرمای ویژه مقدار گرمایی است که برای بالا بردن دمای یک کیلوگرم ماده به اندازه یک درجه لازم است.',tags:['فیزیک','گرما']},
+{id:'f56',category:'فیزیک',title:'بازتاب',body:'زاویه تابش با زاویه بازتاب برابر است.',tags:['فیزیک','بازتاب']},
+{id:'f57',category:'فیزیک',title:'شکست نور',body:'وقتی نور از یک محیط به محیط دیگر می‌رود، سرعت و جهت آن تغییر می‌کند.',tags:['فیزیک','شکست']},
+{id:'f58',category:'فیزیک',title:'موج الکترومغناطیسی',body:'امواج الکترومغناطیسی برای انتشار به محیط مادی نیاز ندارند.',tags:['فیزیک','موج']},
+{id:'f59',category:'فیزیک',title:'توان',body:'توان نرخ انجام کار است: P = W/t.',tags:['فیزیک','توان']},
+{id:'f60',category:'فیزیک',title:'تکانه',body:'تکانه حاصل‌ضرب جرم در سرعت است: p = mv.',tags:['فیزیک','تکانه']},
+{id:'f61',category:'شیمی',title:'فرمول آب',body:'آب از دو اتم هیدروژن و یک اتم اکسیژن تشکیل شده: H₂O.',tags:['شیمی','آب']},
+{id:'f62',category:'شیمی',title:'جدول تناوبی',body:'جدول تناوبی عناصر بر اساس عدد اتمی مرتب شده‌اند.',tags:['شیمی','جدول تناوبی']},
+{id:'f63',category:'شیمی',title:'اتم',body:'اتم از پروتون، نوترون و الکترون تشکیل شده است.',tags:['شیمی','اتم']},
+{id:'f64',category:'شیمی',title:'پیوند کووالانسی',body:'در پیوند کووالانسی، اتم‌ها الکترون‌های خود را به اشتراک می‌گذارند.',tags:['شیمی','پیوند']},
+{id:'f65',category:'شیمی',title:'پیوند یونی',body:'در پیوند یونی، یک اتم الکترون از دست می‌دهد و اتم دیگر می‌گیرد.',tags:['شیمی','پیوند']},
+{id:'f66',category:'شیمی',title:'اسید و باز',body:'اسیدها pH کمتر از ۷ و بازها pH بیشتر از ۷ دارند.',tags:['شیمی','اسید','باز']},
+{id:'f67',category:'شیمی',title:'واکنش شیمیایی',body:'در واکنش شیمیایی، مواد اولیه به مواد جدید تبدیل می‌شوند.',tags:['شیمی','واکنش']},
+{id:'f68',category:'شیمی',title:'اکسایش و کاهش',body:'اکسایش از دست دادن الکترون و کاهش گرفتن الکترون است.',tags:['شیمی','اکسایش']},
+{id:'f69',category:'شیمی',title:'مول',body:'مول واحد مقدار ماده است و برابر ۶٫۰۲۲ × ۱۰²۳ ذره است.',tags:['شیمی','مول']},
+{id:'f70',category:'شیمی',title:'گازهای نجیب',body:'گازهای نجیب مانند هلیوم و نئون بسیار پایدارند و به ندرت واکنش می‌دهند.',tags:['شیمی','گاز نجیب']},
+{id:'f71',category:'شیمی',title:'فلزات',body:'فلزات معمولاً رسانای خوب الکتریسیته و گرما هستند.',tags:['شیمی','فلز']},
+{id:'f72',category:'شیمی',title:'آلیاژ',body:'آلیاژ مخلوطی از دو یا چند فلز است، مانند برنج (مس و روی).',tags:['شیمی','آلیاژ']},
+{id:'f73',category:'شیمی',title:'پلیمر',body:'پلیمرها مولکول‌های بزرگی هستند از تکرار واحدهای کوچک‌تر، مانند پلاستیک.',tags:['شیمی','پلیمر']},
+{id:'f74',category:'شیمی',title:'کاتالیزور',body:'کاتالیزور سرعت واکنش شیمیایی را افزایش می‌دهد بدون اینکه مصرف شود.',tags:['شیمی','کاتالیزور']},
+{id:'f75',category:'شیمی',title:'تعادل شیمیایی',body:'در تعادل شیمیایی، سرعت واکنش رفت و برگشت برابر است.',tags:['شیمی','تعادل']},
+{id:'f76',category:'شیمی',title:'الکتروشیمی',body:'الکتروشیمی رابطه بین واکنش‌های شیمیایی و جریان الکتریکی را بررسی می‌کند.',tags:['شیمی','الکتروشیمی']},
+{id:'f77',category:'شیمی',title:'هیدروکربن',body:'هیدروکربن‌ها ترکیباتی هستند که فقط از کربن و هیدروژن تشکیل شده‌اند.',tags:['شیمی','هیدروکربن']},
+{id:'f78',category:'شیمی',title:'الکل',body:'الکل‌ها ترکیبات آلی هستند که گروه عاملی هیدروکسیل (-OH) دارند.',tags:['شیمی','الکل']},
+{id:'f79',category:'شیمی',title:'نمک',body:'نمک‌ها از واکنش اسید و باز به وجود می‌آیند، مانند NaCl.',tags:['شیمی','نمک']},
+{id:'f80',category:'شیمی',title:'رادیواکتیو',body:'عناصر رادیواکتیو به صورت خودبه‌خود ذرات و انرژی ساطع می‌کنند.',tags:['شیمی','رادیواکتیو']},
+{id:'f81',category:'زیست',title:'فتوسنتز',body:'گیاهان با فتوسنتز، نور، آب و CO₂ را به گلوکز و اکسیژن تبدیل می‌کنند.',tags:['زیست','فتوسنتز']},
+{id:'f82',category:'زیست',title:'DNA',body:'DNA حامل اطلاعات ژنتیکی است و ساختار دو مارپیچی دارد.',tags:['زیست','DNA']},
+{id:'f83',category:'زیست',title:'سلول',body:'سلول واحد ساختاری و عملکردی همه موجودات زنده است.',tags:['زیست','سلول']},
+{id:'f84',category:'زیست',title:'میتوکندری',body:'میتوکندری نیروگاه سلول است و انرژی ATP تولید می‌کند.',tags:['زیست','میتوکندری']},
+{id:'f85',category:'زیست',title:'تنفس سلولی',body:'در تنفس سلولی، گلوکز و اکسیژن به CO₂، آب و انرژی تبدیل می‌شوند.',tags:['زیست','تنفس']},
+{id:'f86',category:'زیست',title:'تکامل',body:'تکامل فرآیند تغییر تدریجی موجودات زنده در طول نسل‌ها است.',tags:['زیست','تکامل']},
+{id:'f87',category:'زیست',title:'انتخاب طبیعی',body:'انتخاب طبیعی مکانیسم اصلی تکامل است که داروین آن را مطرح کرد.',tags:['زیست','داروین']},
+{id:'f88',category:'زیست',title:'اکوسیستم',body:'اکوسیستم مجموعه‌ای از موجودات زنده و محیط غیرزنده آن‌ها است.',tags:['زیست','اکوسیستم']},
+{id:'f89',category:'زیست',title:'زنجیره غذایی',body:'زنجیره غذایی مسیر انتقال انرژی از تولیدکنندگان به مصرف‌کنندگان است.',tags:['زیست','زنجیره غذایی']},
+{id:'f90',category:'زیست',title:'ویروس',body:'ویروس‌ها برای تکثیر به سلول میزبان نیاز دارند و موجود زنده محسوب نمی‌شوند.',tags:['زیست','ویروس']},
+{id:'f91',category:'زیست',title:'باکتری',body:'باکتری‌ها موجودات تک‌سلولی بدون هسته مشخص هستند.',tags:['زیست','باکتری']},
+{id:'f92',category:'زیست',title:'قلب انسان',body:'قلب انسان روزانه حدود ۱۰۰ هزار بار می‌تپد.',tags:['زیست','قلب']},
+{id:'f93',category:'زیست',title:'مغز',body:'مغز انسان حدود ۸۶ میلیارد نورون دارد.',tags:['زیست','مغز']},
+{id:'f94',category:'زیست',title:'خون',body:'خون از پلاسما، گلبول‌های قرمز، گلبول‌های سفید و پلاکت تشکیل شده است.',tags:['زیست','خون']},
+{id:'f95',category:'زیست',title:'ریه',body:'ریه‌ها اکسیژن را به خون منتقل و CO₂ را دفع می‌کنند.',tags:['زیست','ریه']},
+{id:'f96',category:'زیست',title:'کبد',body:'کبد بزرگ‌ترین غده بدن است و بیش از ۵۰۰ عملکرد دارد.',tags:['زیست','کبد']},
+{id:'f97',category:'زیست',title:'کلیه',body:'کلیه‌ها خون را تصفیه و ادرار تولید می‌کنند.',tags:['زیست','کلیه']},
+{id:'f98',category:'زیست',title:'استخوان',body:'بدن انسان ۲۰۶ استخوان دارد.',tags:['زیست','استخوان']},
+{id:'f99',category:'زیست',title:'ماهیچه',body:'بدن انسان بیش از ۶۰۰ ماهیچه دارد.',tags:['زیست','ماهیچه']},
+{id:'f100',category:'زیست',title:'پوست',body:'پوست بزرگ‌ترین اندام بدن است.',tags:['زیست','پوست']},
+{id:'f101',category:'تاریخ ایران',title:'کوروش بزرگ',body:'کوروش بزرگ بنیان‌گذار امپراتوری هخامنشی و نویسنده نخستین منشور حقوق بشر بود.',tags:['تاریخ','کوروش']},
+{id:'f102',category:'تاریخ ایران',title:'هخامنشیان',body:'امپراتوری هخامنشی بزرگ‌ترین امپراتوری جهان باستان بود.',tags:['تاریخ','هخامنشی']},
+{id:'f103',category:'تاریخ ایران',title:'داریوش بزرگ',body:'داریوش بزرگ راه شاهی را ساخت و سیستم پستی را ایجاد کرد.',tags:['تاریخ','داریوش']},
+{id:'f104',category:'تاریخ ایران',title:'تخت جمشید',body:'تخت جمشید پایتخت تشریفاتی هخامنشیان بود که توسط داریوش ساخته شد.',tags:['تاریخ','تخت جمشید']},
+{id:'f105',category:'تاریخ ایران',title:'صفویه',body:'دولت صفویه توسط شاه اسماعیل یکم بنیان گذاشته شد و شیعه را مذهب رسمی کرد.',tags:['تاریخ','صفویه']},
+{id:'f106',category:'تاریخ ایران',title:'شاه عباس',body:'شاه عباس بزرگ‌ترین پادشاه صفوی بود و اصفهان را پایتخت کرد.',tags:['تاریخ','شاه عباس']},
+{id:'f107',category:'تاریخ ایران',title:'نادرشاه',body:'نادرشاه افشار ایران را پس از حمله افغان‌ها متحد کرد و به هند لشکر کشید.',tags:['تاریخ','نادرشاه']},
+{id:'f108',category:'تاریخ ایران',title:'قاجار',body:'سلسله قاجار توسط آقا محمد خان بنیان گذاشته شد و تهران پایتخت شد.',tags:['تاریخ','قاجار']},
+{id:'f109',category:'تاریخ ایران',title:'مشروطه',body:'انقلاب مشروطه در سال ۱۲۸۵ شمسی منجر به تشکیل مجلس شد.',tags:['تاریخ','مشروطه']},
+{id:'f110',category:'تاریخ ایران',title:'پهلوی',body:'رضاشاه سلسله پهلوی را بنیان گذاشت و نوسازی ایران را آغاز کرد.',tags:['تاریخ','پهلوی']},
+{id:'f111',category:'تاریخ ایران',title:'انقلاب اسلامی',body:'انقلاب اسلامی ایران در سال ۱۳۵۷ به رهبری امام خمینی به پیروزی رسید.',tags:['تاریخ','انقلاب']},
+{id:'f112',category:'تاریخ ایران',title:'جنگ تحمیلی',body:'جنگ ایران و عراق از ۱۳۵۹ تا ۱۳۶۷ ادامه داشت.',tags:['تاریخ','جنگ']},
+{id:'f113',category:'تاریخ ایران',title:'ساسانیان',body:'امپراتوری ساسانی آخرین امپراتوری بزرگ ایران پیش از اسلام بود.',tags:['تاریخ','ساسانی']},
+{id:'f114',category:'تاریخ ایران',title:'اشکانیان',body:'اشکانیان حدود ۵۰۰ سال بر ایران حکومت کردند.',tags:['تاریخ','اشکانی']},
+{id:'f115',category:'تاریخ ایران',title:'مادها',body:'مادها نخستین حکومت ایرانی را تشکیل دادند.',tags:['تاریخ','ماد']},
+{id:'f116',category:'تاریخ ایران',title:'فردوسی',body:'فردوسی سراینده شاهنامه، حدود ۳۰ سال برای سرودن آن وقت گذاشت.',tags:['تاریخ','فردوسی']},
+{id:'f117',category:'تاریخ ایران',title:'ابوعلی سینا',body:'ابوعلی سینا دانشمند و پزشک بزرگ ایرانی بود و کتاب قانون را نوشت.',tags:['تاریخ','ابوعلی']},
+{id:'f118',category:'تاریخ ایران',title:'خوارزمی',body:'خوارزمی پدر علم جبر است و الگوریتم از نام او گرفته شده.',tags:['تاریخ','خوارزمی']},
+{id:'f119',category:'تاریخ ایران',title:'رازی',body:'زکریای رازی پزشک و شیمی‌دان بزرگ ایرانی بود و الکل را کشف کرد.',tags:['تاریخ','رازی']},
+{id:'f120',category:'تاریخ ایران',title:'بیرونی',body:'ابوریحان بیرونی دانشمند بزرگ ایرانی بود و در نجوم و ریاضی آثار مهمی دارد.',tags:['تاریخ','بیرونی']},
+{id:'f121',category:'تاریخ جهان',title:'مصر باستان',body:'تمدن مصر باستان حدود ۳۰۰۰ سال پیش از میلاد در کنار رود نیل شکل گرفت.',tags:['تاریخ','مصر']},
+{id:'f122',category:'تاریخ جهان',title:'اهرام مصر',body:'اهرام مصر از عجایب هفت‌گانه جهان باستان هستند.',tags:['تاریخ','اهرام']},
+{id:'f123',category:'تاریخ جهان',title:'یونان باستان',body:'یونان باستان زادگاه دموکراسی و فلسفه غرب است.',tags:['تاریخ','یونان']},
+{id:'f124',category:'تاریخ جهان',title:'امپراتوری روم',body:'امپراتوری روم یکی از بزرگ‌ترین امپراتوری‌های تاریخ بود.',tags:['تاریخ','روم']},
+{id:'f125',category:'تاریخ جهان',title:'جنگ جهانی اول',body:'جنگ جهانی اول از ۱۹۱۴ تا ۱۹۱۸ ادامه داشت و میلیون‌ها کشته داشت.',tags:['تاریخ','جنگ جهانی']},
+{id:'f126',category:'تاریخ جهان',title:'جنگ جهانی دوم',body:'جنگ جهانی دوم از ۱۹۳۹ تا ۱۹۴۵ ادامه داشت و مرگبارترین جنگ تاریخ بود.',tags:['تاریخ','جنگ جهانی']},
+{id:'f127',category:'تاریخ جهان',title:'انقلاب فرانسه',body:'انقلاب فرانسه در سال ۱۷۸۹ آغاز شد و نظام پادشاهی را سرنگون کرد.',tags:['تاریخ','فرانسه']},
+{id:'f128',category:'تاریخ جهان',title:'انقلاب صنعتی',body:'انقلاب صنعتی از اواخر قرن ۱۸ در انگلستان آغاز شد.',tags:['تاریخ','انقلاب صنعتی']},
+{id:'f129',category:'تاریخ جهان',title:'جنگ سرد',body:'جنگ سرد رقابت بین آمریکا و شوروی از ۱۹۴۷ تا ۱۹۹۱ بود.',tags:['تاریخ','جنگ سرد']},
+{id:'f130',category:'تاریخ جهان',title:'فرود بر ماه',body:'در سال ۱۹۶۹، نیل آرمسترانگ اولین انسانی شد که بر ماه قدم گذاشت.',tags:['تاریخ','ماه']},
+{id:'f131',category:'تاریخ جهان',title:'دیوار برلین',body:'دیوار برلین در سال ۱۹۸۹ فرو ریخت و نماد پایان جنگ سرد بود.',tags:['تاریخ','برلین']},
+{id:'f132',category:'تاریخ جهان',title:'امپراتوری مغول',body:'امپراتوری مغول به رهبری چنگیزخان بزرگ‌ترین امپراتوری پیوسته تاریخ بود.',tags:['تاریخ','مغول']},
+{id:'f133',category:'تاریخ جهان',title:'رنسانس',body:'رنسانس دوره شکوفایی هنر و علم در اروپا از قرن ۱۴ تا ۱۷ بود.',tags:['تاریخ','رنسانس']},
+{id:'f134',category:'تاریخ جهان',title:'کشف آمریکا',body:'کریستف کلمب در سال ۱۴۹۲ به قاره آمریکا رسید.',tags:['تاریخ','آمریکا']},
+{id:'f135',category:'تاریخ جهان',title:'امپراتوری عثمانی',body:'امپراتوری عثمانی حدود ۶۰۰ سال دوام آورد و در ۱۹۲۲ فروپاشید.',tags:['تاریخ','عثمانی']},
+{id:'f136',category:'تاریخ جهان',title:'انقلاب روسیه',body:'انقلاب روسیه در سال ۱۹۱۷ منجر به تشکیل اتحاد شوروی شد.',tags:['تاریخ','روسیه']},
+{id:'f137',category:'تاریخ جهان',title:'آپارتاید',body:'آپارتاید نظام تبعیض نژادی در آفریقای جنوبی بود که در ۱۹۹۴ پایان یافت.',tags:['تاریخ','آپارتاید']},
+{id:'f138',category:'تاریخ جهان',title:'فروپاشی شوروی',body:'اتحاد شوروی در سال ۱۹۹۱ فروپاشید و ۱۵ کشور مستقل شدند.',tags:['تاریخ','شوروی']},
+{id:'f139',category:'تاریخ جهان',title:'اینترنت',body:'اینترنت ابتدا با نام ARPANET در سال ۱۹۶۹ ساخته شد.',tags:['تاریخ','اینترنت']},
+{id:'f140',category:'تاریخ جهان',title:'هوش مصنوعی',body:'واژه هوش مصنوعی اولین بار در سال ۱۹۵۶ در کنفرانس دارتموث مطرح شد.',tags:['تاریخ','هوش مصنوعی']},
+{id:'f141',category:'جغرافیا',title:'اورست',body:'قله اورست با ارتفاع ۸۸۴۹ متر بلندترین نقطه زمین است.',tags:['جغرافیا','اورست']},
+{id:'f142',category:'جغرافیا',title:'خلیج فارس',body:'خلیج فارس آبراهی مهم در جنوب ایران است.',tags:['جغرافیا','خلیج فارس']},
+{id:'f143',category:'جغرافیا',title:'رود نیل',body:'رود نیل با حدود ۶۶۵۰ کیلومتر یکی از بلندترین رودهای جهان است.',tags:['جغرافیا','نیل']},
+{id:'f144',category:'جغرافیا',title:'آمازون',body:'جنگل آمازون بزرگ‌ترین جنگل بارانی جهان است و حدود ۱۰٪ گونه‌های شناخته‌شده را دارد.',tags:['جغرافیا','آمازون']},
+{id:'f145',category:'جغرافیا',title:'اقیانوس آرام',body:'اقیانوس آرام بزرگ‌ترین و عمیق‌ترین اقیانوس جهان است.',tags:['جغرافیا','اقیانوس']},
+{id:'f146',category:'جغرافیا',title:'صحرای بزرگ آفریقا',body:'صحرای بزرگ آفریقا بزرگ‌ترین بیابان گرم جهان است.',tags:['جغرافیا','صحرا']},
+{id:'f147',category:'جغرافیا',title:'دریاچه خزر',body:'دریاچه خزر بزرگ‌ترین دریاچه جهان است و در شمال ایران قرار دارد.',tags:['جغرافیا','خزر']},
+{id:'f148',category:'جغرافیا',title:'دماوند',body:'قله دماوند با ارتفاع ۵۶۱۰ متر بلندترین قله ایران و خاورمیانه است.',tags:['جغرافیا','دماوند']},
+{id:'f149',category:'جغرافیا',title:'تهران',body:'تهران پایتخت ایران و پرجمعیت‌ترین شهر ایران است.',tags:['جغرافیا','تهران']},
+{id:'f150',category:'جغرافیا',title:'اصفهان',body:'اصفهان به نصف جهان معروف است و آثار تاریخی زیادی دارد.',tags:['جغرافیا','اصفهان']},
+{id:'f151',category:'جغرافیا',title:'شیراز',body:'شیراز شهر شعر و ادب فارسی و آرامگاه حافظ و سعدی است.',tags:['جغرافیا','شیراز']},
+{id:'f152',category:'جغرافیا',title:'تبریز',body:'تبریز یکی از شهرهای تاریخی ایران و پایتخت ایلخانیان بود.',tags:['جغرافیا','تبریز']},
+{id:'f153',category:'جغرافیا',title:'مشهد',body:'مشهد دومین شهر پرجمعیت ایران و حرم امام رضا در آن قرار دارد.',tags:['جغرافیا','مشهد']},
+{id:'f154',category:'جغرافیا',title:'یزد',body:'یزد به شهر بادگیرها معروف است و در فهرست میراث جهانی یونسکو ثبت شده.',tags:['جغرافیا','یزد']},
+{id:'f155',category:'جغرافیا',title:'قشم',body:'جزیره قشم بزرگ‌ترین جزیره ایران و خلیج فارس است.',tags:['جغرافیا','قشم']},
+{id:'f156',category:'جغرافیا',title:'کیش',body:'جزیره کیش یکی از مقاصد گردشگری مهم ایران در خلیج فارس است.',tags:['جغرافیا','کیش']},
+{id:'f157',category:'جغرافیا',title:'زاگرس',body:'رشته‌کوه زاگرس از بزرگ‌ترین رشته‌کوه‌های ایران است.',tags:['جغرافیا','زاگرس']},
+{id:'f158',category:'جغرافیا',title:'البرز',body:'رشته‌کوه البرز در شمال ایران قرار دارد و دماوند در آن است.',tags:['جغرافیا','البرز']},
+{id:'f159',category:'جغرافیا',title:'کویر لوت',body:'کویر لوت یکی از گرم‌ترین نقاط جهان است و در ایران قرار دارد.',tags:['جغرافیا','لوت']},
+{id:'f160',category:'جغرافیا',title:'هیمالیا',body:'رشته‌کوه هیمالیا بلندترین رشته‌کوه جهان است.',tags:['جغرافیا','هیمالیا']},
+{id:'f161',category:'ادبیات فارسی',title:'فردوسی',body:'فردوسی سراینده شاهنامه، حدود ۳۰ سال برای سرودن آن وقت گذاشت.',tags:['ادبیات','فردوسی']},
+{id:'f162',category:'ادبیات فارسی',title:'حافظ',body:'حافظ شیرازی از بزرگ‌ترین شاعران غزل‌سرای فارسی است.',tags:['ادبیات','حافظ']},
+{id:'f163',category:'ادبیات فارسی',title:'سعدی',body:'سعدی شیرازی نویسنده گلستان و بوستان است.',tags:['ادبیات','سعدی']},
+{id:'f164',category:'ادبیات فارسی',title:'مولوی',body:'مولوی شاعر بزرگ عرفانی و نویسنده مثنوی معنوی است.',tags:['ادبیات','مولوی']},
+{id:'f165',category:'ادبیات فارسی',title:'شاهنامه',body:'شاهنامه حماسه ملی ایران و بزرگ‌ترین اثر فردوسی است.',tags:['ادبیات','شاهنامه']},
+{id:'f166',category:'ادبیات فارسی',title:'گلستان',body:'گلستان اثر سعدی شامل حکایت‌ها و پندهای اخلاقی است.',tags:['ادبیات','گلستان']},
+{id:'f167',category:'ادبیات فارسی',title:'بوستان',body:'بوستان اثر سعدی به نظم و در ده باب است.',tags:['ادبیات','بوستان']},
+{id:'f168',category:'ادبیات فارسی',title:'مثنوی معنوی',body:'مثنوی معنوی اثر مولوی در شش دفتر و حدود ۲۶ هزار بیت است.',tags:['ادبیات','مثنوی']},
+{id:'f169',category:'ادبیات فارسی',title:'دیوان حافظ',body:'دیوان حافظ شامل حدود ۵۰۰ غزل است.',tags:['ادبیات','حافظ']},
+{id:'f170',category:'ادبیات فارسی',title:'خیام',body:'خیام نیشابوری شاعر و ریاضی‌دان بزرگ ایرانی و سراینده رباعیات است.',tags:['ادبیات','خیام']},
+{id:'f171',category:'ادبیات فارسی',title:'نظامی',body:'نظامی گنجوی شاعر بزرگ حماسی و عاشقانه فارسی است.',tags:['ادبیات','نظامی']},
+{id:'f172',category:'ادبیات فارسی',title:'عطار',body:'عطار نیشابوری شاعر عارف و نویسنده منطق‌الطیر است.',tags:['ادبیات','عطار']},
+{id:'f173',category:'ادبیات فارسی',title:'سهراب سپهری',body:'سهراب سپهری شاعر و نقاش معاصر ایرانی است.',tags:['ادبیات','سپهری']},
+{id:'f174',category:'ادبیات فارسی',title:'نیما یوشیج',body:'نیما یوشیج پدر شعر نو فارسی است.',tags:['ادبیات','نیما']},
+{id:'f175',category:'ادبیات فارسی',title:'احمد شاملو',body:'احمد شاملو از شاعران بزرگ معاصر ایران است.',tags:['ادبیات','شاملو']},
+{id:'f176',category:'ادبیات فارسی',title:'فروغ فرخزاد',body:'فروغ فرخزاد شاعر پیشرو و معاصر ایرانی است.',tags:['ادبیات','فروغ']},
+{id:'f177',category:'ادبیات فارسی',title:'جلال آل‌احمد',body:'جلال آل‌احمد نویسنده و روشنفکر ایرانی و نویسنده غرب‌زدگی است.',tags:['ادبیات','آل‌احمد']},
+{id:'f178',category:'ادبیات فارسی',title:'صادق هدایت',body:'صادق هدایت نویسنده بزرگ ایرانی و نویسنده بوف کور است.',tags:['ادبیات','هدایت']},
+{id:'f179',category:'ادبیات فارسی',title:'بوف کور',body:'بوف کور معروف‌ترین رمان صادق هدایت است.',tags:['ادبیات','بوف کور']},
+{id:'f180',category:'ادبیات فارسی',title:'رباعیات خیام',body:'رباعیات خیام به زبان‌های زیادی ترجمه شده است.',tags:['ادبیات','خیام']},
+{id:'f181',category:'کامپیوتر',title:'اینترنت',body:'اینترنت ابتدا با نام ARPANET در سال ۱۹۶۹ ساخته شد.',tags:['کامپیوتر','اینترنت']},
+{id:'f182',category:'کامپیوتر',title:'هوش مصنوعی',body:'هوش مصنوعی شاخه‌ای از علوم کامپیوتر برای ساخت سیستم‌های هوشمند است.',tags:['کامپیوتر','هوش مصنوعی']},
+{id:'f183',category:'کامپیوتر',title:'الگوریتم',body:'الگوریتم مجموعه‌ای از مراحل مشخص برای حل یک مسئله است.',tags:['کامپیوتر','الگوریتم']},
+{id:'f184',category:'کامپیوتر',title:'سیستم‌عامل',body:'سیستم‌عامل نرم‌افزاری است که سخت‌افزار و نرم‌افزار را مدیریت می‌کند.',tags:['کامپیوتر','سیستم‌عامل']},
+{id:'f185',category:'کامپیوتر',title:'پردازنده',body:'پردازنده مغز کامپیوتر است و دستورات را اجرا می‌کند.',tags:['کامپیوتر','پردازنده']},
+{id:'f186',category:'کامپیوتر',title:'حافظه RAM',body:'حافظه RAM حافظه موقت است که با خاموش شدن کامپیوتر پاک می‌شود.',tags:['کامپیوتر','RAM']},
+{id:'f187',category:'کامپیوتر',title:'هارد دیسک',body:'هارد دیسک حافظه دائمی برای ذخیره اطلاعات است.',tags:['کامپیوتر','هارد']},
+{id:'f188',category:'کامپیوتر',title:'شبکه',body:'شبکه اتصال دو یا چند کامپیوتر برای اشتراک منابع است.',tags:['کامپیوتر','شبکه']},
+{id:'f189',category:'کامپیوتر',title:'پروتکل TCP/IP',body:'TCP/IP مجموعه پروتکل‌های اصلی اینترنت است.',tags:['کامپیوتر','TCP']},
+{id:'f190',category:'کامپیوتر',title:'HTML',body:'HTML زبان نشانه‌گذاری برای ساخت صفحات وب است.',tags:['کامپیوتر','HTML']},
+{id:'f191',category:'کامپیوتر',title:'CSS',body:'CSS زبان استایل‌دهی به صفحات وب است.',tags:['کامپیوتر','CSS']},
+{id:'f192',category:'کامپیوتر',title:'جاوااسکریپت',body:'جاوااسکریپت زبان برنامه‌نویسی اصلی وب است.',tags:['کامپیوتر','جاوااسکریپت']},
+{id:'f193',category:'کامپیوتر',title:'پایتون',body:'پایتون زبان برنامه‌نویسی ساده و قدرتمند برای هوش مصنوعی و علم داده است.',tags:['کامپیوتر','پایتون']},
+{id:'f194',category:'کامپیوتر',title:'لینوکس',body:'لینوکس سیستم‌عامل متن‌باز و رایگان است.',tags:['کامپیوتر','لینوکس']},
+{id:'f195',category:'کامپیوتر',title:'گیت',body:'گیت سیستم کنترل نسخه برای مدیریت کد است.',tags:['کامپیوتر','گیت']},
+{id:'f196',category:'کامپیوتر',title:'دیتابیس',body:'دیتابیس سیستم سازمان‌دهی و ذخیره داده‌ها است.',tags:['کامپیوتر','دیتابیس']},
+{id:'f197',category:'کامپیوتر',title:'API',body:'API رابط برنامه‌نویسی برای ارتباط بین نرم‌افزارها است.',tags:['کامپیوتر','API']},
+{id:'f198',category:'کامپیوتر',title:'رایانش ابری',body:'رایانش ابری ارائه خدمات کامپیوتری از طریق اینترنت است.',tags:['کامپیوتر','ابر']},
+{id:'f199',category:'کامپیوتر',title:'بلاکچین',body:'بلاکچین فناوری دفتر کل توزیع‌شده برای ثبت امن تراکنش‌ها است.',tags:['کامپیوتر','بلاکچین']},
+{id:'f200',category:'کامپیوتر',title:'رمزنگاری',body:'رمزنگاری علم محافظت از اطلاعات با تبدیل آن به فرمت ناخوانا است.',tags:['کامپیوتر','رمزنگاری']},
+{id:'f201',category:'هوش مصنوعی',title:'یادگیری ماشین',body:'یادگیری ماشین شاخه‌ای از هوش مصنوعی است که سیستم‌ها از داده یاد می‌گیرند.',tags:['هوش مصنوعی','ML']},
+{id:'f202',category:'هوش مصنوعی',title:'یادگیری عمیق',body:'یادگیری عمیق از شبکه‌های عصبی چندلایه برای یادگیری استفاده می‌کند.',tags:['هوش مصنوعی','DL']},
+{id:'f203',category:'هوش مصنوعی',title:'شبکه عصبی',body:'شبکه عصبی مصنوعی از ساختار مغز انسان الهام گرفته شده است.',tags:['هوش مصنوعی','شبکه عصبی']},
+{id:'f204',category:'هوش مصنوعی',title:'پردازش زبان طبیعی',body:'NLP شاخه‌ای از هوش مصنوعی برای درک و تولید زبان انسان است.',tags:['هوش مصنوعی','NLP']},
+{id:'f205',category:'هوش مصنوعی',title:'بینایی ماشین',body:'بینایی ماشین به کامپیوترها امکان درک تصاویر و ویدیو را می‌دهد.',tags:['هوش مصنوعی','بینایی']},
+{id:'f206',category:'هوش مصنوعی',title:'رباتیک',body:'رباتیک ترکیب مهندسی و هوش مصنوعی برای ساخت ربات‌ها است.',tags:['هوش مصنوعی','ربات']},
+{id:'f207',category:'هوش مصنوعی',title:'خودرو خودران',body:'خودروهای خودران از هوش مصنوعی برای رانندگی بدون انسان استفاده می‌کنند.',tags:['هوش مصنوعی','خودرو']},
+{id:'f208',category:'هوش مصنوعی',title:'چت‌بات',body:'چت‌بات برنامه‌ای است که با انسان گفتگو می‌کند.',tags:['هوش مصنوعی','چت‌بات']},
+{id:'f209',category:'هوش مصنوعی',title:'تشخیص گفتار',body:'تشخیص گفتار تبدیل صدای انسان به متن است.',tags:['هوش مصنوعی','گفتار']},
+{id:'f210',category:'هوش مصنوعی',title:'تولید تصویر',body:'مدل‌های تولید تصویر می‌توانند از متن، تصویر بسازند.',tags:['هوش مصنوعی','تصویر']},
+{id:'f211',category:'هوش مصنوعی',title:'یادگیری تقویتی',body:'یادگیری تقویتی یادگیری از طریق آزمون و خطا و پاداش است.',tags:['هوش مصنوعی','RL']},
+{id:'f212',category:'هوش مصنوعی',title:'داده‌کاوی',body:'داده‌کاوی کشف الگوها و دانش از داده‌های بزرگ است.',tags:['هوش مصنوعی','داده']},
+{id:'f213',category:'هوش مصنوعی',title:'کلان‌داده',body:'کلان‌داده به مجموعه‌های بسیار بزرگ داده گفته می‌شود.',tags:['هوش مصنوعی','کلان‌داده']},
+{id:'f214',category:'هوش مصنوعی',title:'اینترنت اشیا',body:'اینترنت اشیا اتصال دستگاه‌های روزمره به اینترنت است.',tags:['هوش مصنوعی','IoT']},
+{id:'f215',category:'هوش مصنوعی',title:'واقعیت مجازی',body:'واقعیت مجازی ایجاد محیط سه‌بعدی مصنوعی است.',tags:['هوش مصنوعی','VR']},
+{id:'f216',category:'هوش مصنوعی',title:'واقعیت افزوده',body:'واقعیت افزوده افزودن اطلاعات دیجیتال به دنیای واقعی است.',tags:['هوش مصنوعی','AR']},
+{id:'f217',category:'هوش مصنوعی',title:'متاورس',body:'متاورس فضای مجازی مشترک و سه‌بعدی است.',tags:['هوش مصنوعی','متاورس']},
+{id:'f218',category:'هوش مصنوعی',title:'اخلاق هوش مصنوعی',body:'اخلاق هوش مصنوعی به بررسی پیامدهای اخلاقی AI می‌پردازد.',tags:['هوش مصنوعی','اخلاق']},
+{id:'f219',category:'هوش مصنوعی',title:'تست تورینگ',body:'تست تورینگ معیاری برای سنجش هوشمندی ماشین است.',tags:['هوش مصنوعی','تورینگ']},
+{id:'f220',category:'هوش مصنوعی',title:'سینگولاریتی',body:'سینگولاریتی نقطه فرضی است که هوش مصنوعی از هوش انسان فراتر می‌رود.',tags:['هوش مصنوعی','سینگولاریتی']},
+{id:'f221',category:'ورزش',title:'فوتبال',body:'فوتبال پرطرفدارترین ورزش جهان است.',tags:['ورزش','فوتبال']},
+{id:'f222',category:'ورزش',title:'المپیک',body:'المپیک بزرگ‌ترین رویداد ورزشی جهان است که هر ۴ سال برگزار می‌شود.',tags:['ورزش','المپیک']},
+{id:'f223',category:'ورزش',title:'جام جهانی فوتبال',body:'جام جهانی فوتبال هر ۴ سال یک‌بار برگزار می‌شود.',tags:['ورزش','جام جهانی']},
+{id:'f224',category:'ورزش',title:'بسکتبال',body:'بسکتبال ورزشی تیمی با ۵ بازیکن در هر تیم است.',tags:['ورزش','بسکتبال']},
+{id:'f225',category:'ورزش',title:'والیبال',body:'والیبال ورزشی تیمی با ۶ بازیکن در هر تیم است.',tags:['ورزش','والیبال']},
+{id:'f226',category:'ورزش',title:'تنیس',body:'تنیس ورزشی راکتی است که به صورت انفرادی یا دوبل بازی می‌شود.',tags:['ورزش','تنیس']},
+{id:'f227',category:'ورزش',title:'شنا',body:'شنا یکی از ورزش‌های المپیکی و بسیار مفید برای سلامتی است.',tags:['ورزش','شنا']},
+{id:'f228',category:'ورزش',title:'دو و میدانی',body:'دو و میدانی مجموعه‌ای از ورزش‌های دو، پرش و پرتاب است.',tags:['ورزش','دو و میدانی']},
+{id:'f229',category:'ورزش',title:'کشتی',body:'کشتی ورزش ملی ایران و از قدیمی‌ترین ورزش‌های جهان است.',tags:['ورزش','کشتی']},
+{id:'f230',category:'ورزش',title:'تکواندو',body:'تکواندو ورزش رزمی کره‌ای و از ورزش‌های المپیکی است.',tags:['ورزش','تکواندو']},
+{id:'f231',category:'ورزش',title:'شطرنج',body:'شطرنج بازی استراتژیک و فکری با ۶۴ خانه است.',tags:['ورزش','شطرنج']},
+{id:'f232',category:'ورزش',title:'دوچرخه‌سواری',body:'دوچرخه‌سواری ورزشی هوازی و مفید برای قلب است.',tags:['ورزش','دوچرخه']},
+{id:'f233',category:'ورزش',title:'کوهنوردی',body:'کوهنوردی ورزش صعود به قله‌ها و ارتفاعات است.',tags:['ورزش','کوهنوردی']},
+{id:'f234',category:'ورزش',title:'اسکی',body:'اسکی ورزش زمستانی روی برف است.',tags:['ورزش','اسکی']},
+{id:'f235',category:'ورزش',title:'ژیمناستیک',body:'ژیمناستیک ورزش انعطاف‌پذیری و قدرت بدنی است.',tags:['ورزش','ژیمناستیک']},
+{id:'f236',category:'سلامت',title:'ویتامین C',body:'ویتامین C برای سیستم ایمنی بدن مفید است و در مرکبات یافت می‌شود.',tags:['سلامت','ویتامین']},
+{id:'f237',category:'سلامت',title:'خواب کافی',body:'بزرگسالان به ۷ تا ۹ ساعت خواب در شبانه‌روز نیاز دارند.',tags:['سلامت','خواب']},
+{id:'f238',category:'سلامت',title:'آب',body:'بدن انسان حدود ۶۰٪ آب است و روزانه به ۸ لیوان آب نیاز دارد.',tags:['سلامت','آب']},
+{id:'f239',category:'سلامت',title:'ورزش منظم',body:'ورزش منظم خطر بیماری‌های قلبی را کاهش می‌دهد.',tags:['سلامت','ورزش']},
+{id:'f240',category:'سلامت',title:'تغذیه سالم',body:'تغذیه سالم شامل میوه، سبزی، غلات کامل و پروتئین است.',tags:['سلامت','تغذیه']},
+{id:'f241',category:'سلامت',title:'استرس',body:'استرس مزمن می‌تواند به سلامت جسم و روان آسیب بزند.',tags:['سلامت','استرس']},
+{id:'f242',category:'سلامت',title:'مدیتیشن',body:'مدیتیشن تمرین ذهن‌آگاهی و کاهش استرس است.',tags:['سلامت','مدیتیشن']},
+{id:'f243',category:'سلامت',title:'واکسن',body:'واکسن سیستم ایمنی را برای مبارزه با بیماری‌ها تقویت می‌کند.',tags:['سلامت','واکسن']},
+{id:'f244',category:'سلامت',title:'آنتی‌بیوتیک',body:'آنتی‌بیوتیک‌ها فقط روی باکتری‌ها اثر دارند نه ویروس‌ها.',tags:['سلامت','آنتی‌بیوتیک']},
+{id:'f245',category:'سلامت',title:'فشار خون',body:'فشار خون طبیعی حدود ۱۲۰/۸۰ میلی‌متر جیوه است.',tags:['سلامت','فشار خون']},
+{id:'f246',category:'سلامت',title:'قند خون',body:'قند خون ناشتای طبیعی بین ۷۰ تا ۱۰۰ میلی‌گرم در دسی‌لیتر است.',tags:['سلامت','قند خون']},
+{id:'f247',category:'سلامت',title:'کلسترول',body:'کلسترول بالا خطر بیماری‌های قلبی را افزایش می‌دهد.',tags:['سلامت','کلسترول']},
+{id:'f248',category:'سلامت',title:'سیگار',body:'سیگار کشیدن عامل اصلی سرطان ریه است.',tags:['سلامت','سیگار']},
+{id:'f249',category:'سلامت',title:'چاقی',body:'چاقی خطر دیابت، بیماری قلبی و فشار خون را افزایش می‌دهد.',tags:['سلامت','چاقی']},
+{id:'f250',category:'سلامت',title:'بهداشت دست',body:'شستن دست‌ها ساده‌ترین راه پیشگیری از بیماری‌ها است.',tags:['سلامت','بهداشت']},
+{id:'f251',category:'هنر',title:'نقاشی',body:'نقاشی هنر خلق تصاویر با رنگ و قلم‌مو است.',tags:['هنر','نقاشی']},
+{id:'f252',category:'هنر',title:'موسیقی',body:'موسیقی هنر ترکیب صداها و سکوت در زمان است.',tags:['هنر','موسیقی']},
+{id:'f253',category:'هنر',title:'سینما',body:'سینما هنر روایت داستان با تصاویر متحرک است.',tags:['هنر','سینما']},
+{id:'f254',category:'هنر',title:'تئاتر',body:'تئاتر هنر اجرای زنده نمایش روی صحنه است.',tags:['هنر','تئاتر']},
+{id:'f255',category:'هنر',title:'معماری',body:'معماری هنر و علم طراحی و ساخت بناها است.',tags:['هنر','معماری']},
+{id:'f256',category:'هنر',title:'خوشنویسی',body:'خوشنویسی هنر نوشتن زیبا و هنرمندانه است.',tags:['هنر','خوشنویسی']},
+{id:'f257',category:'هنر',title:'مینیاتور',body:'مینیاتور نقاشی ظریف و دقیق ایرانی است.',tags:['هنر','مینیاتور']},
+{id:'f258',category:'هنر',title:'سفالگری',body:'سفالگری هنر ساخت ظروف از خاک رس است.',tags:['هنر','سفال']},
+{id:'f259',category:'هنر',title:'قالی ایرانی',body:'قالی ایرانی از هنرهای دستی و فرهنگی ایران است.',tags:['هنر','قالی']},
+{id:'f260',category:'هنر',title:'خاتم‌کاری',body:'خاتم‌کاری هنر تزئین سطوح با مثلث‌های کوچک چوبی است.',tags:['هنر','خاتم']},
+{id:'f261',category:'هنر',title:'معرق',body:'معرق هنر چسباندن قطعات چوب رنگی روی سطح است.',tags:['هنر','معرق']},
+{id:'f262',category:'هنر',title:'کاشی‌کاری',body:'کاشی‌کاری هنر تزئین بناها با کاشی‌های رنگی است.',tags:['هنر','کاشی']},
+{id:'f263',category:'هنر',title:'عکاسی',body:'عکاسی هنر ثبت لحظه‌ها با دوربین است.',tags:['هنر','عکاسی']},
+{id:'f264',category:'هنر',title:'مجسمه‌سازی',body:'مجسمه‌سازی هنر خلق آثار سه‌بعدی است.',tags:['هنر','مجسمه']},
+{id:'f265',category:'هنر',title:'گرافیک',body:'گرافیک هنر ارتباط بصری با تصویر و متن است.',tags:['هنر','گرافیک']},
+{id:'f266',category:'فلسفه',title:'سقراط',body:'سقراط فیلسوف یونانی و بنیان‌گذار فلسفه غرب است.',tags:['فلسفه','سقراط']},
+{id:'f267',category:'فلسفه',title:'افلاطون',body:'افلاطون شاگرد سقراط و بنیان‌گذار آکادمی بود.',tags:['فلسفه','افلاطون']},
+{id:'f268',category:'فلسفه',title:'ارسطو',body:'ارسطو شاگرد افلاطون و معلم اسکندر مقدونی بود.',tags:['فلسفه','ارسطو']},
+{id:'f269',category:'فلسفه',title:'دکارت',body:'دکارت فیلسوف فرانسوی و صاحب جمله «می‌اندیشم، پس هستم» است.',tags:['فلسفه','دکارت']},
+{id:'f270',category:'فلسفه',title:'کانت',body:'کانت فیلسوف آلمانی و نویسنده نقد عقل محض است.',tags:['فلسفه','کانت']},
+{id:'f271',category:'فلسفه',title:'نیچه',body:'نیچه فیلسوف آلمانی و صاحب مفهوم ابرانسان است.',tags:['فلسفه','نیچه']},
+{id:'f272',category:'فلسفه',title:'اگزیستانسیالیسم',body:'اگزیستانسیالیسم فلسفه‌ای درباره آزادی و مسئولیت فردی است.',tags:['فلسفه','اگزیستانسیالیسم']},
+{id:'f273',category:'فلسفه',title:'منطق',body:'منطق علم استدلال صحیح و تمایز درست از نادرست است.',tags:['فلسفه','منطق']},
+{id:'f274',category:'فلسفه',title:'اخلاق',body:'اخلاق فلسفه‌ای درباره خوب و بد و درست و نادرست است.',tags:['فلسفه','اخلاق']},
+{id:'f275',category:'فلسفه',title:'معرفت‌شناسی',body:'معرفت‌شناسی شاخه‌ای از فلسفه درباره ماهیت دانش است.',tags:['فلسفه','معرفت']},
+{id:'f276',category:'فلسفه',title:'متافیزیک',body:'متافیزیک شاخه‌ای از فلسفه درباره ماهیت واقعیت است.',tags:['فلسفه','متافیزیک']},
+{id:'f277',category:'فلسفه',title:'زیبایی‌شناسی',body:'زیبایی‌شناسی فلسفه‌ای درباره هنر و زیبایی است.',tags:['فلسفه','زیبایی']},
+{id:'f278',category:'فلسفه',title:'فلسفه سیاسی',body:'فلسفه سیاسی درباره دولت، عدالت و حقوق است.',tags:['فلسفه','سیاسی']},
+{id:'f279',category:'فلسفه',title:'فلسفه ذهن',body:'فلسفه ذهن درباره ماهیت آگاهی و ذهن است.',tags:['فلسفه','ذهن']},
+{id:'f280',category:'فلسفه',title:'فلسفه علم',body:'فلسفه علم درباره مبانی و روش‌های علم است.',tags:['فلسفه','علم']},
+{id:'f281',category:'اقتصاد',title:'عرضه و تقاضا',body:'قیمت کالا بر اساس عرضه و تقاضا تعیین می‌شود.',tags:['اقتصاد','عرضه']},
+{id:'f282',category:'اقتصاد',title:'تورم',body:'تورم افزایش سطح عمومی قیمت‌ها در طول زمان است.',tags:['اقتصاد','تورم']},
+{id:'f283',category:'اقتصاد',title:'تولید ناخالص داخلی',body:'GDP ارزش کل کالاها و خدمات تولیدشده در یک کشور است.',tags:['اقتصاد','GDP']},
+{id:'f284',category:'اقتصاد',title:'بیکاری',body:'بیکاری وضعیت افرادی است که کار ندارند ولی دنبال کار می‌گردند.',tags:['اقتصاد','بیکاری']},
+{id:'f285',category:'اقتصاد',title:'بانک مرکزی',body:'بانک مرکزی مسئول سیاست‌های پولی و کنترل تورم است.',tags:['اقتصاد','بانک']},
+{id:'f286',category:'اقتصاد',title:'بورس',body:'بورس بازاری برای خرید و فروش سهام شرکت‌ها است.',tags:['اقتصاد','بورس']},
+{id:'f287',category:'اقتصاد',title:'سرمایه‌گذاری',body:'سرمایه‌گذاری تخصیص منابع برای کسب سود در آینده است.',tags:['اقتصاد','سرمایه']},
+{id:'f288',category:'اقتصاد',title:'پس‌انداز',body:'پس‌انداز بخشی از درآمد است که خرج نمی‌شود.',tags:['اقتصاد','پس‌انداز']},
+{id:'f289',category:'اقتصاد',title:'مالیات',body:'مالیات مبلغی است که دولت از درآمد یا مصرف دریافت می‌کند.',tags:['اقتصاد','مالیات']},
+{id:'f290',category:'اقتصاد',title:'تجارت بین‌الملل',body:'تجارت بین‌الملل تبادل کالا و خدمات بین کشورها است.',tags:['اقتصاد','تجارت']},
+{id:'f291',category:'اقتصاد',title:'ارز دیجیتال',body:'ارز دیجیتال پول الکترونیکی مبتنی بر رمزنگاری است.',tags:['اقتصاد','ارز دیجیتال']},
+{id:'f292',category:'اقتصاد',title:'بیت‌کوین',body:'بیت‌کوین اولین و معروف‌ترین ارز دیجیتال است.',tags:['اقتصاد','بیت‌کوین']},
+{id:'f293',category:'اقتصاد',title:'رکود اقتصادی',body:'رکود کاهش فعالیت اقتصادی برای حداقل دو فصل متوالی است.',tags:['اقتصاد','رکود']},
+{id:'f294',category:'اقتصاد',title:'انحصار',body:'انحصار وضعیتی است که یک فروشنده کنترل بازار را دارد.',tags:['اقتصاد','انحصار']},
+{id:'f295',category:'اقتصاد',title:'رقابت',body:'رقابت باعث بهبود کیفیت و کاهش قیمت می‌شود.',tags:['اقتصاد','رقابت']},
+{id:'f296',category:'روانشناسی',title:'هوش هیجانی',body:'هوش هیجانی توانایی درک و مدیریت احساسات خود و دیگران است.',tags:['روانشناسی','هوش هیجانی']},
+{id:'f297',category:'روانشناسی',title:'ناخودآگاه',body:'ناخودآگاه بخشی از ذهن است که خارج از آگاهی عمل می‌کند.',tags:['روانشناسی','ناخودآگاه']},
+{id:'f298',category:'روانشناسی',title:'شرطی‌سازی',body:'شرطی‌سازی یادگیری از طریق تداعی محرک و پاسخ است.',tags:['روانشناسی','شرطی‌سازی']},
+{id:'f299',category:'روانشناسی',title:'هرم مازلو',body:'هرم مازلو سلسله‌مراتب نیازهای انسان را نشان می‌دهد.',tags:['روانشناسی','مازلو']},
+{id:'f300',category:'روانشناسی',title:'اختلال اضطراب',body:'اختلال اضطراب نگرانی بیش از حد و مداوم است که زندگی روزمره را مختل می‌کند.',tags:['روانشناسی','اضطراب']}],
 qa:[{id:'qa1',q:'سلام',a:'سلام! من استاد یار پلاس هستم.',cat:'general'},{id:'qa2',q:'درود',a:'درود بر شما!',cat:'general'},{id:'qa3',q:'خداحافظ',a:'خداحافظ!',cat:'general'},{id:'qa4',q:'ممنون',a:'خواهش می‌کنم!',cat:'general'},{id:'qa5',q:'تو کی هستی؟',a:'من استاد یار پلاس هستم؛ دستیار هوشمند آموزشی.',cat:'general'}],
 async seed(){const f=await IDB.all('facts');if(f.length<5)await IDB.batch('facts',this.facts);const q=await IDB.all('qa');if(q.length<5)await IDB.batch('qa',this.qa)},
 async search(query,limit=5){const q=U.norm(query);if(!q)return[];const items=await IDB.all('facts');const words=q.split(' ').filter(Boolean);return items.map(item=>{const title=U.norm(item.title||'');const body=U.norm(item.body||'');const tags=U.norm((item.tags||[]).join(' '));let score=0;words.forEach(w=>{if(title.includes(w))score+=5;if(body.includes(w))score+=2;if(tags.includes(w))score+=3});return{item,score}}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,limit)}};
-const LocalAI={concepts:{'فتوسنتز':{def:'فرآیندی که گیاهان با نور، آب و CO₂ گلوکز و اکسیژن تولید می‌کنند.',formula:'6CO₂ + 6H₂O + نور → C₆H₁₂O₆ + 6O₂'},'مشتق':{def:'نرخ تغییرات لحظه‌ای تابع.',formula:"f'(x) = lim[h→0] (f(x+h)-f(x))/h"},'انتگرال':{def:'معکوس مشتق؛ مساحت زیر نمودار.',formula:'∫xⁿ dx = xⁿ⁺¹/(n+1) + C'},'کوروش بزرگ':{def:'بنیان‌گذار امپراتوری هخامنشی.',when:'حدود ۵۵۹ تا ۵۳۰ پ.م'},'فردوسی':{def:'بزرگ‌ترین حماسه‌سرای فارسی و سراینده شاهنامه.',work:'شاهنامه با حدود ۵۰,۰۰۰ بیت'},'هوش مصنوعی':{def:'شاخه‌ای از علوم کامپیوتر برای ساخت سیستم‌های هوشمند.',types:'یادگیری ماشین، یادگیری عمیق، NLP، بینایی ماشین'},'قضیه فیثاغورس':{def:'رابطه اضلاع مثلث قائم‌الزاویه.',formula:'a² + b² = c²'},'عدد پی':{def:'نسبت محیط دایره به قطر آن.',formula:'π ≈ 3.14159'}},
+/* ===================== LocalAI قوی ===================== */
+const LocalAI={
+aliases:{'خمینی':['روح‌الله خمینی','امام خمینی','سید روح‌الله خمینی','روح الله موسوی خمینی'],'حافظ':['حافظ شیرازی','خواجه شمس‌الدین محمد حافظ شیرازی'],'سعدی':['سعدی شیرازی','مصلح‌الدین سعدی شیرازی'],'فردوسی':['ابوالقاسم فردوسی','فردوسی توسی'],'مولوی':['مولانا','مولانا جلال‌الدین محمد بلخی','جلال‌الدین محمد بلخی'],'خیام':['خیام نیشابوری','غیاث‌الدین ابوالفتح عمر بن ابراهیم خیام'],'کوروش':['کوروش بزرگ','کوروش دوم','کوروش کبیر'],'داریوش':['داریوش بزرگ','داریوش یکم','داریوش اول'],'ابوعلی':['ابوعلی سینا','ابن سینا','شیخ‌الرئیس','پورسینا'],'خوارزمی':['محمد بن موسی خوارزمی','خوارزمی','پدر جبر'],'رازی':['زکریای رازی','محمد بن زکریای رازی'],'بیرونی':['ابوریحان بیرونی','بیرونی'],'فیثاغورس':['فیثاغورث','قضیه فیثاغورس'],'انیشتین':['آلبرت انیشتین','اینشتین'],'نیوتن':['آیزاک نیوتن','اسحاق نیوتن'],'داروین':['چارلز داروین'],'تسلا':['نیکولا تسلا'],'ادیسون':['توماس ادیسون'],'گالیله':['گالیلئو گالیله'],'کوپرنیک':['نیکلاس کوپرنیک'],'شکسپیر':['ویلیام شکسپیر'],'داوینچی':['لئوناردو داوینچی'],'میکل‌آنژ':['میکل‌آنژ بوناروتی'],'پیکاسو':['پابلو پیکاسو'],'وان‌گوگ':['وینسنت ون گوگ'],'موتسارت':['ولفگانگ آمادئوس موتسارت'],'بتهوون':['لودویگ فان بتهوون'],'باخ':['یوهان سباستین باخ'],'چایکوفسکی':['پیوتر ایلیچ چایکوفسکی'],'فروید':['زیگموند فروید'],'یونگ':['کارل گوستاو یونگ'],'پاولوف':['ایوان پاولوف'],'اسکینر':['بی‌اف اسکینر'],'گاندی':['ماهاتما گاندی'],'ماندلا':['نلسون ماندلا'],'لینکلن':['آبراهام لینکلن'],'واشنگتن':['جورج واشنگتن'],'ناپلئون':['ناپلئون بناپارت'],'هیتلر':['آدولف هیتلر'],'استالین':['ژوزف استالین'],'لنین':['ولادیمیر لنین'],'مارکس':['کارل مارکس'],'انگلس':['فریدریش انگلس'],'اسمیت':['آدام اسمیت'],'کینز':['جان مینارد کینز'],'شومپیتر':['ژوزف شومپیتر'],'هایک':['فریدریش هایک'],'فریدمن':['میلتون فریدمن'],'ساموئلسون':['پل ساموئلسون'],'کریستف کلمب':['کلمب'],'ماژلان':['فرناندو ماژلان'],'واسکو دوگاما':['واسکو دوگاما'],'آرمسترانگ':['نیل آرمسترانگ'],'گاگارین':['یوری گاگارین'],'تورینگ':['آلن تورینگ'],'لاولیس':['آدا لاولیس'],'بabbage':['چارلز ببیج'],'فون نویمان':['جان فون نویمان'],'شانون':['کلاد شانون'],'مک‌کارتی':['جان مک‌کارتی'],'مینسکی':['ماروین مینسکی'],'هینتون':['جفری هینتون'],'لکان':['یان لکان'],'بنجیو':['یوشوا بنجیو'],'اندرو ان‌جی':['اندرو ان‌جی'],'فای‌فای':['فای‌فای لی']},
+concepts:{'فتوسنتز':{def:'فرآیندی که گیاهان با نور، آب و CO₂ گلوکز و اکسیژن تولید می‌کنند.',formula:'6CO₂ + 6H₂O + نور → C₆H₁₂O₆ + 6O₂'},'مشتق':{def:'نرخ تغییرات لحظه‌ای تابع.',formula:"f'(x) = lim[h→0] (f(x+h)-f(x))/h"},'انتگرال':{def:'معکوس مشتق؛ مساحت زیر نمودار.',formula:'∫xⁿ dx = xⁿ⁺¹/(n+1) + C'},'کوروش بزرگ':{def:'بنیان‌گذار امپراتوری هخامنشی.',when:'حدود ۵۵۹ تا ۵۳۰ پ.م'},'فردوسی':{def:'بزرگ‌ترین حماسه‌سرای فارسی و سراینده شاهنامه.',work:'شاهنامه با حدود ۵۰,۰۰۰ بیت'},'هوش مصنوعی':{def:'شاخه‌ای از علوم کامپیوتر برای ساخت سیستم‌های هوشمند.',types:'یادگیری ماشین، یادگیری عمیق، NLP، بینایی ماشین'},'قضیه فیثاغورس':{def:'رابطه اضلاع مثلث قائم‌الزاویه.',formula:'a² + b² = c²'},'عدد پی':{def:'نسبت محیط دایره به قطر آن.',formula:'π ≈ 3.14159'},'جبر':{def:'شاخه‌ای از ریاضیات که با نمادها و متغیرها سروکار دارد.',founder:'خوارزمی'},'لگاریتم':{def:'معکوس توان است.',formula:'log_a(b) = c ⇔ a^c = b'},'مثلثات':{def:'مطالعه روابط بین زوایا و اضلاع مثلث.',formula:'sin²θ + cos²θ = 1'},'احتمال':{def:'سنجه شانس وقوع یک پیشامد.',formula:'P(A) = تعداد حالات مطلوب / کل حالات'},'آمار':{def:'علم جمع‌آوری، تحلیل و تفسیر داده‌ها.',measures:'میانگین، میانه، مد، واریانس، انحراف معیار'},'تابع':{def:'رابطه‌ای که به هر ورودی دقیقاً یک خروجی نسبت می‌دهد.',formula:'f: X → Y'},'حد':{def:'مقداری که تابع به آن میل می‌کند.',formula:'lim[x→a] f(x) = L'},'پیوستگی':{def:'تابعی که حد آن در نقطه برابر مقدار تابع است.',formula:'lim[x→a] f(x) = f(a)'},'ماتریس':{def:'آرایه مستطیلی از اعداد.',operations:'جمع، ضرب، دترمینان، معکوس'},'بردار':{def:'کمیتی دارای اندازه و جهت.',formula:'v = (x, y, z)'},'فضا':{def:'مجموعه‌ای با ساختار ریاضی.',types:'فضای اقلیدسی، فضای برداری، فضای متریک'},'گروه':{def:'مجموعه‌ای با عمل دوتایی که چهار اصل را ارضا می‌کند.',axioms:'بسته، شرکت‌پذیر، عضو خنثی، عضو معکوس'},'حلقه':{def:'ساختار جبری با دو عمل جمع و ضرب.',examples:'اعداد صحیح، ماتریس‌ها'},'میدان':{def:'حلقه‌ای که هر عضو غیرصفر معکوس ضربی دارد.',examples:'اعداد گویا، اعداد حقیقی'},'گراف':{def:'مجموعه‌ای از رأس‌ها و یال‌ها.',types:'جهت‌دار، بی‌جهت، وزن‌دار'},'درخت':{def:'گراف همبند بدون دور.',properties:'n رأس و n-1 یال'},'الگوریتم':{def:'مجموعه مراحل مشخص برای حل مسئله.',examples:'مرتب‌سازی، جستجو، رمزنگاری'},'پیچیدگی':{def:'میزان منابع مورد نیاز الگوریتم.',classes:'O(1), O(log n), O(n), O(n²), O(2ⁿ)'},'رمزنگاری':{def:'علم محافظت از اطلاعات.',types:'متقارن، نامتقارن، هش'},'شبکه عصبی':{def:'مدل محاسباتی الهام‌گرفته از مغز.',layers:'ورودی، پنهان، خروجی'},'یادگیری ماشین':{def:'شاخه‌ای از هوش مصنوعی که سیستم‌ها از داده یاد می‌گیرند.',types:'نظارتی، بدون نظارت، تقویتی'},'یادگیری عمیق':{def:'یادگیری ماشین با شبکه‌های عصبی عمیق.',applications:'بینایی، گفتار، NLP'},'پردازش زبان طبیعی':{def:'شاخه‌ای از هوش مصنوعی برای درک زبان انسان.',tasks:'ترجمه، خلاصه‌سازی، تحلیل احساسات'},'بینایی ماشین':{def:'شاخه‌ای از هوش مصنوعی برای درک تصاویر.',tasks:'تشخیص اشیا، بخش‌بندی، تشخیص چهره'},'رباتیک':{def:'علم طراحی و ساخت ربات‌ها.',components:'حسگرها، عملگرها، کنترل‌کننده'},'اینترنت اشیا':{def:'اتصال دستگاه‌های روزمره به اینترنت.',examples:'خانه هوشمند، شهر هوشمند'},'بلاکچین':{def:'دفتر کل توزیع‌شده و تغییرناپذیر.',applications:'ارز دیجیتال، قراردادهای هوشمند'},'رایانش ابری':{def:'ارائه خدمات کامپیوتری از طریق اینترنت.',models:'IaaS, PaaS, SaaS'},'کلان‌داده':{def:'مجموعه‌های بسیار بزرگ داده.',characteristics:'حجم، سرعت، تنوع'},'داده‌کاوی':{def:'کشف الگوها از داده‌های بزرگ.',techniques:'خوشه‌بندی، طبقه‌بندی، رگرسیون'},'واقعیت مجازی':{def:'محیط سه‌بعدی مصنوعی.',devices:'هدست VR'},'واقعیت افزوده':{def:'افزودن اطلاعات دیجیتال به دنیای واقعی.',examples:'Pokemon Go، فیلترهای اینستاگرام'},'متاورس':{def:'فضای مجازی مشترک و پایدار.',components:'آواتار، اقتصاد دیجیتال، تعامل اجتماعی'},'اخلاق هوش مصنوعی':{def:'بررسی پیامدهای اخلاقی AI.',issues:'تعصب، حریم خصوصی، شفافیت'},'تست تورینگ':{def:'آزمونی برای سنجش هوشمندی ماشین.',proposer:'آلن تورینگ، ۱۹۵۰'},'سینگولاریتی':{def:'نقطه فرضی فراتر رفتن هوش مصنوعی از انسان.',prediction:'ری کرزویل، ۲۰۴۵'}},
 cleanMath(e){return e.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[×]/g,'*').replace(/[÷]/g,'/').replace(/[−–—]/g,'-').replace(/\^/g,'**').replace(/[^0-9+\-*/().\sx=]/gi,'').trim()},
 evalExpr(expr,x){const c=this.cleanMath(expr);if(!c)return NaN;return new Function('x','return '+c)(x)},
-solveMath(input){const clean=this.cleanMath(input);if(!clean)return null;if(clean.includes('=')){const parts=clean.split('=');if(parts.length!==2)return null;const lhs=parts[0];const rhs=parts[1];if(lhs.includes('x')||rhs.includes('x')){try{const b1=this.evalExpr(lhs,0);const a1=this.evalExpr(lhs,1)-b1;const b2=this.evalExpr(rhs,0);const a2=this.evalExpr(rhs,1)-b2;const a=a1-a2;const b=b2-b1;if(Math.abs(a)<1e-12)return{error:Math.abs(b)<1e-12?'بی‌نهایت جواب دارد.':'جواب ندارد.'};const x=b/a;return{steps:['🔍 '+lhs+' = '+rhs,'➡️ ثابت: '+a+',➡️ نتیجه: x = '+x],result:x}}catch(e){return null}}else{try{const l=this.evalExpr(lhs,0);const r=this.evalExpr(rhs,0);return{steps:['🔍 '+lhs+' = '+rhs,'➡️ چپ: '+l+',➡️ راست: '+r,l===r?'✅ برقرار':'❌ برقرار نیست'],result:l===r}}catch(e){return null}}}try{const result=new Function('return '+clean)();if(typeof result==='number'||typeof result==='boolean')return{steps:['🔍 '+clean+' = '+result],result};return null}catch(e){return null}},
+solveMath(input){const clean=this.cleanMath(input);if(!clean)return null;if(clean.includes('=')){const parts=clean.split('=');if(parts.length!==2)return null;const lhs=parts[0];const rhs=parts[1];if(lhs.includes('x')||rhs.includes('x')){try{const b1=this.evalExpr(lhs,0);const a1=this.evalExpr(lhs,1)-b1;const b2=this.evalExpr(rhs,0);const a2=this.evalExpr(rhs,1)-b2;const a=a1-a2;const b=b2-b1;if(Math.abs(a)<1e-12)return{error:Math.abs(b)<1e-12?'بی‌نهایت جواب دارد.':'جواب ندارد.'};const x=b/a;return{steps:['🔍 '+lhs+' = '+rhs,'➡️ ثابت: '+a,'➡️ نتیجه: x = '+x],result:x}}catch(e){return null}}else{try{const l=this.evalExpr(lhs,0);const r=this.evalExpr(rhs,0);return{steps:['🔍 '+lhs+' = '+rhs,'➡️ چپ: '+l,'➡️ راست: '+r,l===r?'✅ برقرار':'❌ برقرار نیست'],result:l===r}}catch(e){return null}}}try{const result=new Function('return '+clean)();if(typeof result==='number'||typeof result==='boolean')return{steps:['🔍 '+clean+' = '+result],result};return null}catch(e){return null}},
 formatMath(r){if(!r)return null;if(r.error)return'❌ '+r.error;return'🧮 حل گام‌به‌گام:\n'+r.steps.join('\n')},
 shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a},
-async generate(question){const q=U.norm(question);if(/^(سلام|درود|hello|hi|hey)/.test(q))return'سلام! من استاد یار پلاس هستم. چطور کمک کنم؟';if(/خداحافظ|بای|goodbye/.test(q))return'خداحافظ!';if(/ممنون|مرسی|thanks/.test(q))return'خواهش می‌کنم!';const math=this.solveMath(question);if(math)return this.formatMath(math);for(const[key,c]of Object.entries(this.concepts)){if(q.includes(U.norm(key))){let r='🧠 **'+key+'**\n**تعریف:** '+c.def+'\n';if(c.formula)r+='**فرمول:** `'+c.formula+'`\n';if(c.when)r+='**زمان:** '+c.when+'\n';if(c.types)r+='**انواع:** '+c.types+'\n';if(c.work)r+='**اثر:** '+c.work+'\n';r+='💡 برای پاسخ دقیق‌تر API Key را فعال کنید.';return r}}const facts=await KDB.search(question,3);if(facts.length)return'📚 یافته‌های محلی:\n'+facts.map((f,i)=>(i+1)+'. **'+f.item.title+'**\n'+f.item.body).join('\n');return'🧠 **استاد یار (آفلاین):**\nالگوی دقیقی یافت نشد.\n💡 API Key را وارد کنید.'},
+expandQuery(q){const n=U.norm(q);const expanded=new Set([n]);for(const[key,aliases]of Object.entries(this.aliases)){if(n.includes(U.norm(key))||aliases.some(a=>n.includes(U.norm(a)))){expanded.add(U.norm(key));aliases.forEach(a=>expanded.add(U.norm(a)))}}return Array.from(expanded)},
+detectIntent(text){const t=U.norm(text);if(/^(سلام|درود|hello|hi|hey)/.test(t))return'greeting';if(/خداحافظ|بای|goodbye/.test(t))return'farewell';if(/ممنون|مرسی|thanks/.test(t))return'thanks';if(/کی هستی|چی هستی|معرفی/.test(t))return'identity';if(/ساعت|زمان|تاریخ|امروز/.test(t))return'time';if(/هوا|آب و هوا/.test(t))return'weather';if(/قیمت|خرید|فروش|ارز|دلار|یورو|طلا|سکه/.test(t))return'price';if(/ترجمه|translate/.test(t))return'translate';if(/خلاصه|summary/.test(t))return'summary';if(/سوال|تست|آزمون|exam/.test(t))return'quiz';if(/فلش|کارت/.test(t))return'flashcard';if(/فرمول|فرمولاسیون/.test(t))return'formula';if(/تعریف|معنی|چیست|چیه/.test(t))return'definition';if(/چطور|چگونه|how/.test(t))return'howto';if(/چرا|why/.test(t))return'why';if(/مقایسه|تفاوت|فرق/.test(t))return'compare';if(/لیست|فهرست|نام/.test(t))return'list';if(/تاریخ|سال|قرن|دوره/.test(t))return'history';if(/کشور|شهر|پایتخت|مکان/.test(t))return'geography';if(/عدد|ارقام|محاسبه|جمع|تفریق|ضرب|تقسیم/.test(t))return'math';if(/کد|برنامه|python|javascript|html|css/.test(t))return'code';if(/عکس|تصویر|image|picture/.test(t))return'image';if(/جستجو|سرچ|بگرد|پیدا کن|search|find/.test(t))return'search';return'general'},
+async generate(question){const q=U.norm(question);const intent=this.detectIntent(question);if(intent==='greeting')return'سلام! من استاد یار پلاس هستم. چطور کمک کنم؟';if(intent==='farewell')return'خداحافظ!';if(intent==='thanks')return'خواهش می‌کنم!';if(intent==='identity')return'من استاد یار پلاس هستم؛ دستیار هوشمند آموزشی.';if(intent==='time')return'🕐 '+U.faDate()+' — '+U.faTime();const math=this.solveMath(question);if(math)return this.formatMath(math);const expanded=this.expandQuery(question);for(const term of expanded){for(const[key,c]of Object.entries(this.concepts)){if(U.norm(key)===term||U.fuzzy(term,U.norm(key),2)){let r='🧠 **'+key+'**\n**تعریف:** '+c.def+'\n';if(c.formula)r+='**فرمول:** `'+c.formula+'`\n';if(c.when)r+='**زمان:** '+c.when+'\n';if(c.types)r+='**انواع:** '+c.types+'\n';if(c.work)r+='**اثر:** '+c.work+'\n';if(c.founder)r+='**بنیان‌گذار:** '+c.founder+'\n';if(c.layers)r+='**لایه‌ها:** '+c.layers+'\n';if(c.applications)r+='**کاربردها:** '+c.applications+'\n';if(c.tasks)r+='**وظایف:** '+c.tasks+'\n';if(c.components)r+='**اجزا:** '+c.components+'\n';if(c.examples)r+='**مثال‌ها:** '+c.examples+'\n';if(c.models)r+='**مدل‌ها:** '+c.models+'\n';if(c.characteristics)r+='**ویژگی‌ها:** '+c.characteristics+'\n';if(c.techniques)r+='**تکنیک‌ها:** '+c.techniques+'\n';if(c.devices)r+='**دستگاه‌ها:** '+c.devices+'\n';if(c.issues)r+='**مسائل:** '+c.issues+'\n';if(c.proposer)r+='**پیشنهاددهنده:** '+c.proposer+'\n';if(c.prediction)r+='**پیش‌بینی:** '+c.prediction+'\n';if(c.axioms)r+='**اصول:** '+c.axioms+'\n';if(c.operations)r+='**عملیات:** '+c.operations+'\n';if(c.properties)r+='**خواص:** '+c.properties+'\n';if(c.classes)r+='**کلاس‌ها:** '+c.classes+'\n';if(c.measures)r+='**معیارها:** '+c.measures+'\n';r+='💡 برای پاسخ دقیق‌تر، حالت جستجو را فعال کنید.';return r}}}const facts=await KDB.search(question,5);if(facts.length){const best=facts[0];let r='📚 **بهترین نتیجه:** '+best.item.title+'\n'+best.item.body+'\n';if(facts.length>1){r+='\n**نتایج مرتبط:**\n';facts.slice(1).forEach((f,i)=>{r+=(i+2)+'. '+f.item.title+'\n'})}return r}return'🧠 **استاد یار (آفلاین):**\nالگوی دقیقی یافت نشد.\n💡 حالت جستجو را فعال کنید یا سوال را دقیق‌تر بپرسید.'},
 async generateQuiz(topic,count=5){count=Number(count)||5;const all=await IDB.all('facts');const matched=(await KDB.search(topic,Math.max(count*3,10))).map(x=>x.item);const source=matched.length>=3?matched:all;if(source.length>=3){const chosen=this.shuffle(source).slice(0,Math.min(count,source.length));return chosen.map(f=>{const correct=f.title;const distractors=this.shuffle(all.filter(x=>x.id!==f.id).map(x=>x.title).filter(Boolean)).filter((v,i,a)=>a.indexOf(v)===i).slice(0,3);while(distractors.length<3)distractors.push('گزینه '+(distractors.length+1));const options=[correct,...distractors];const sh=this.shuffle(options.map((t,i)=>({t,ok:i===0})));return{question:'کدام گزینه درباره «'+(f.title||topic)+'» صحیح است؟',options:sh.map(o=>o.t),correct:sh.findIndex(o=>o.ok)}})}return this.sampleQuiz(count)},
 sampleQuiz(count=5){const base=[{question:'پایتخت ایران؟',options:['تهران','اصفهان','شیراز','تبریز'],correct:0},{question:'۵ × ۶ = ؟',options:['۲۵','۳۰','۳۵','۴۰'],correct:1},{question:'شاعر شاهنامه؟',options:['حافظ','سعدی','فردوسی','مولوی'],correct:2},{question:'فرمول آب؟',options:['CO₂','H₂O','O₂','NaCl'],correct:1},{question:'بنیان‌گذار هخامنشی؟',options:['داریوش','کوروش','خشایارشا','کمبوجیه'],correct:1}];return base.slice(0,Math.min(count,base.length))},
 async generateFlashcards(topic,count=10){const facts=(await KDB.search(topic,count)).map(x=>x.item);if(facts.length>=3)return facts.map(f=>({front:f.title,back:f.body}));const concepts=Object.entries(this.concepts).filter(([k])=>U.norm(topic).split(' ').some(w=>U.norm(k).includes(w))).map(([k,v])=>({front:k,back:v.def+(v.formula?'\nفرمول: '+v.formula:'')}));if(concepts.length)return concepts.slice(0,count);return[{front:'پایتخت فرانسه؟',back:'پاریس'},{front:'بزرگ‌ترین سیاره؟',back:'مشتری'},{front:'فرمول آب؟',back:'H₂O'},{front:'شاعر شاهنامه؟',back:'فردوسی'},{front:'واحد نیرو؟',back:'نیوتن'}].slice(0,count)}};
-const SearchEngine={proxies:[u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),u=>'https://corsproxy.io/?'+encodeURIComponent(u),u=>'https://api.cors.lol/?url='+encodeURIComponent(u)],
-async fetchP(url,timeout=8000){for(const p of this.proxies){try{const r=await fetch(p(url),{signal:AbortSignal.timeout(timeout)});if(r.ok){const t=await r.text();if(t&&t.length>50)return t}}catch(e){}}return null},
-async ddg(query){const endpoints=['https://lite.duckduckgo.com/lite/?q='+encodeURIComponent(query),'https://html.duckduckgo.com/html/?q='+encodeURIComponent(query)];for(const ep of endpoints){const html=await this.fetchP(ep);if(!html)continue;const doc=new DOMParser().parseFromString(html,'text/html');const results=[];const links=doc.querySelectorAll('a.result-link,a.result__a,a[data-testid="result-title-a"],.result a[href^="http"],a[href^="http"]');links.forEach(a=>{const href=a.getAttribute('href')||'';if(!href.startsWith('http'))return;if(href.includes('duckduckgo.com'))return;const title=a.textContent.trim();if(!title||title.length<3)return;let snippet='';const row=a.closest('tr,div.result,div.web-result,div');if(row){const sn=row.querySelector('.result-snippet,.result__snippet,[data-result-snippet],.snippet,td.result-snippet');if(sn)snippet=sn.textContent.trim()}results.push({title,link:href,snippet})});const unique=[];const seen=new Set();results.forEach(r=>{const k=U.norm(r.title);if(!seen.has(k)){seen.add(k);unique.push(r)}});if(unique.length)return unique.slice(0,8)}return[]},
+/* ===================== SearchEngine پیشرفته (۵۰+ پروکسی) ===================== */
+const SearchEngine={
+proxies:[
+u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
+u=>'https://corsproxy.io/?'+encodeURIComponent(u),
+u=>'https://api.cors.lol/?url='+encodeURIComponent(u),
+u=>'https://proxy.cors.sh/'+u,
+u=>'https://cors-anywhere.herokuapp.com/'+u,
+u=>'https://thingproxy.freeboard.io/fetch/'+u,
+u=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u),
+u=>'https://crossorigin.me/'+u,
+u=>'https://yacdn.org/proxy/'+u,
+u=>'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(u),
+u=>'https://cors.bridged.cc/'+u,
+u=>'https://proxy.corsfix.com/?'+encodeURIComponent(u),
+u=>'https://test.cors.workers.dev/?'+encodeURIComponent(u),
+u=>'https://cors.eu.org/'+u,
+u=>'https://cors.isteed.cc/'+u,
+u=>'https://notion-proxy.scrumpy.io/'+u,
+u=>'https://api.allorigins.win/get?url='+encodeURIComponent(u),
+u=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u)+'&format=json',
+u=>'https://cors-proxy.htmldriven.com/?url='+encodeURIComponent(u),
+u=>'https://cors-proxy.fringe.zone/'+u,
+u=>'https://cors-proxy.elfsight.com/'+u,
+u=>'https://cors-proxy.service.echobind.com/'+u,
+u=>'https://cors.sh/'+u,
+u=>'https://corsproxy.htmldriven.com/?url='+encodeURIComponent(u),
+u=>'https://proxy.cors.sh/'+u,
+u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)+'&callback=',
+u=>'https://corsproxy.io/?url='+encodeURIComponent(u),
+u=>'https://api.cors.lol/?url='+encodeURIComponent(u)+'&format=json',
+u=>'https://cors-anywhere.herokuapp.com/'+u+'?format=json',
+u=>'https://thingproxy.freeboard.io/fetch/'+u+'?format=json',
+u=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u)+'&format=json',
+u=>'https://crossorigin.me/'+u+'?format=json',
+u=>'https://yacdn.org/proxy/'+u+'?format=json',
+u=>'https://cors.bridged.cc/'+u+'?format=json',
+u=>'https://proxy.corsfix.com/?'+encodeURIComponent(u)+'&format=json',
+u=>'https://test.cors.workers.dev/?'+encodeURIComponent(u)+'&format=json',
+u=>'https://cors.eu.org/'+u+'?format=json',
+u=>'https://cors.isteed.cc/'+u+'?format=json',
+u=>'https://notion-proxy.scrumpy.io/'+u+'?format=json',
+u=>'https://api.allorigins.win/get?url='+encodeURIComponent(u)+'&format=json',
+u=>'https://cors-proxy.htmldriven.com/?url='+encodeURIComponent(u)+'&format=json',
+u=>'https://cors-proxy.fringe.zone/'+u+'?format=json',
+u=>'https://cors-proxy.elfsight.com/'+u+'?format=json',
+u=>'https://cors-proxy.service.echobind.com/'+u+'?format=json',
+u=>'https://cors.sh/'+u+'?format=json',
+u=>'https://corsproxy.htmldriven.com/?url='+encodeURIComponent(u)+'&format=json',
+u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)+'&format=json',
+u=>'https://corsproxy.io/?url='+encodeURIComponent(u)+'&format=json',
+u=>'https://api.cors.lol/?url='+encodeURIComponent(u)+'&format=json&callback=',
+u=>'https://cors-anywhere.herokuapp.com/'+u+'?format=json&callback='
+],
+async fetchP(url,timeout=12000){for(const p of this.proxies){try{const r=await fetch(p(url),{signal:AbortSignal.timeout(timeout)});if(r.ok){const t=await r.text();if(t&&t.length>50)return t}}catch(e){}}return null},
+async ddg(query){const expanded=LocalAI.expandQuery(query);const endpoints=['https://lite.duckduckgo.com/lite/?q='+encodeURIComponent(query),'https://html.duckduckgo.com/html/?q='+encodeURIComponent(query)];for(const term of expanded){for(const ep of endpoints){const html=await this.fetchP(ep.replace(encodeURIComponent(query),encodeURIComponent(term)));if(!html)continue;const doc=new DOMParser().parseFromString(html,'text/html');const results=[];const links=doc.querySelectorAll('a.result-link,a.result__a,a[data-testid="result-title-a"],.result a[href^="http"],a[href^="http"]');links.forEach(a=>{const href=a.getAttribute('href')||'';if(!href.startsWith('http'))return;if(href.includes('duckduckgo.com'))return;const title=a.textContent.trim();if(!title||title.length<3)return;let snippet='';const row=a.closest('tr,div.result,div.web-result,div');if(row){const sn=row.querySelector('.result-snippet,.result__snippet,[data-result-snippet],.snippet,td.result-snippet');if(sn)snippet=sn.textContent.trim()}results.push({title,link:href,snippet})});const unique=[];const seen=new Set();results.forEach(r=>{const k=U.norm(r.title);if(!seen.has(k)){seen.add(k);unique.push(r)}});if(unique.length)return unique.slice(0,8)}}return[]},
 isSearchIntent(text){const t=U.norm(text);const keywords=['جستجو','سرچ','بگرد','پیدا کن','search','find','قیمت','خرید','دانلود','لینک','سایت'];return keywords.some(k=>t.includes(k))||/https?:\/\//.test(text)},
-formatResults(results,query){if(!results.length)return'⚠️ نتیجه‌ای برای «'+query+'» پیدا نشد.';return'🔍 نتایج برای «'+query+'»:\n'+results.slice(0,8).map((r,i)=>(i+1)+'. **'+r.title+'**\n'+r.snippet+'\n🔗 '+r.link).join('\n---\n')}};
-const AI={async ask(messages,cfg){const apiKey=cfg.apiKey;const model=cfg.model||'claude-3-5-sonnet-20241022';if(!apiKey||model==='ostadyar')return null;try{const isDoona=apiKey.startsWith('sk-')&&!apiKey.startsWith('sk-ant-');let url=cfg.proxy||(isDoona?'https://platform.doona.ai/v1/chat/completions':'https://api.anthropic.com/v1/messages');const headers={'Content-Type':'application/json'};if(cfg.proxy){const isOpenAI=cfg.proxy.includes('chat/completions')||cfg.proxy.includes('doona');if(isOpenAI)headers['Authorization']='Bearer '+apiKey;else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true'}}else if(isDoona)headers['Authorization']='Bearer '+apiKey;else{headers['x-api-key']=apiKey;headers['anthropic-version']='2023-06-01';headers['anthropic-dangerous-direct-browser-access']='true'}const body={model,max_tokens:4096,messages};const r=await fetch(url,{method:'POST',headers,body:JSON.stringify(body),signal:AbortSignal.timeout(30000)});if(!r.ok)throw new Error('API '+r.status);const d=await r.json();return d.choices?.[0]?.message?.content||d.content?.[0]?.text||null}catch(e){console.error(e);return null}},
-async json(prompt,opts={}){const cfg=await IDB.cfg();const txt=await this.ask([{role:'user',content:prompt}],cfg);if(!txt)return null;const m=txt.match(/\[[\s\S]*\]/);if(m)return JSON.parse(m[0]);const o=txt.match(/\{[\s\S]*\}/);if(o)return JSON.parse(o[0]);return null}};
+formatResults(results,query){if(!results.length)return'⚠️ نتیجه‌ای برای «'+query+'» پیدا نشد.';const featured=results[0];let out='🔍 **بهترین نتیجه برای «'+query+'»:**\n\n';out+='### '+featured.title+'\n'+featured.snippet+'\n🔗 '+featured.link+'\n\n';if(results.length>1){out+='**نتایج دیگر:**\n';results.slice(1,8).forEach((r,i)=>{out+=(i+2)+'. '+r.title+'\n'+r.snippet+'\n🔗 '+r.link+'\n'})}return out}};
+/* ===================== Speech ===================== */
 const Speech={rec:null,active:false,
 init(){try{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){const b=document.getElementById('voice-btn');if(b)b.style.display='none';return}this.rec=new SR();this.rec.lang='fa-IR';this.rec.continuous=false;this.rec.interimResults=false;this.rec.onresult=e=>{const t=e.results[0][0].transcript;const inp=document.getElementById('chat-input');inp.value+=(inp.value?' ':'')+t;inp.focus()};this.rec.onerror=()=>this.stop();this.rec.onend=()=>this.stop()}catch(e){}},
 toggle(){if(!this.rec){Toast.show('ورودی صوتی پشتیبانی نمی‌شود','warning');return}if(this.active)this.stop();else this.start()},
 start(){this.active=true;document.getElementById('voice-btn').classList.add('recording');try{this.rec.start()}catch(e){this.stop()}Toast.show('🎤 در حال گوش دادن...','info')},
 stop(){this.active=false;const b=document.getElementById('voice-btn');if(b)b.classList.remove('recording');try{this.rec.stop()}catch(e){}}};
+/* ===================== Chat ===================== */
 const Chat={sessions:[],currentId:null,history:[],isProcessing:false,
 async init(){this.sessions=await IDB.all('sessions');if(this.sessions.length)this.load(this.sessions.sort((a,b)=>b.date-a.date)[0].id);else this.newSession();UI.renderList();document.getElementById('stat-chats').textContent=this.sessions.length},
 newSession(){const s={id:Date.now(),title:'گفتگوی جدید',date:Date.now(),messages:[]};this.sessions.push(s);IDB.put('sessions',s);this.load(s.id);UI.renderList()},
@@ -805,12 +1255,32 @@ render(){const c=document.getElementById('chat-messages');if(!c)return;c.innerHT
 copy(i){const t=this.history[i]?.content;if(t)navigator.clipboard.writeText(t).then(()=>Toast.show('کپی شد','success'))},
 triggerImageGen(){document.getElementById('ai-mode').value='image';Toast.show('حالت تولید عکس فعال شد. توصیف را بنویسید.','info')},
 async send(){if(this.isProcessing){Toast.show('صبر کنید...','warning');return}const inp=document.getElementById('chat-input');const txt=inp.value.trim();if(!txt){Toast.show('پیام را بنویسید','warning');return}this.isProcessing=true;inp.value='';this.history.push({role:'user',content:txt});if(this.history.length===1){const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.title=txt.substring(0,25);IDB.put('sessions',s)}document.getElementById('page-title').textContent=s?s.title:'گفتگو';UI.renderList()}this.render();await this.save();await this.processAI(txt);this.isProcessing=false},
-async processAI(txt){const mode=document.getElementById('ai-mode').value;let res='';if(mode==='image'){this.history.push({role:'assistant',content:'🎨 در حال تولید عکس...'});this.render();res='![generated](https://image.pollinations.ai/prompt/'+encodeURIComponent(txt)+'?width=1024&height=1024&nologo=true)\nپرامپت: '+txt;this.history.pop()}else if(mode==='search'||(mode==='auto'&&SearchEngine.isSearchIntent(txt))){this.history.push({role:'assistant',content:'🔍 در حال جستجو...'});this.render();const results=await SearchEngine.ddg(txt);this.history.pop();res=SearchEngine.formatResults(results,txt)}else{const cfg=await IDB.cfg();if(cfg.apiKey&&cfg.model!=='ostadyar'&&mode!=='local'){this.history.push({role:'assistant',content:'⏳ ...'});this.render();const sys=cfg.systemPrompt||'تو استاد یار پلاس هستی؛ دستیار هوشمند آموزشی فارسی‌زبان.';const aiRes=await AI.ask([{role:'system',content:sys},{role:'user',content:txt}],cfg);this.history.pop();res=aiRes||await LocalAI.generate(txt)}else res=await LocalAI.generate(txt)}this.history.push({role:'assistant',content:res});this.render();await this.save()},
+async processAI(txt){const mode=document.getElementById('ai-mode').value;let res='';if(mode==='image'){this.history.push({role:'assistant',content:'🎨 در حال تولید عکس...'});this.render();res='![generated](https://image.pollinations.ai/prompt/'+encodeURIComponent(txt)+'?width=1024&height=1024&nologo=true)\nپرامپت: '+txt;this.history.pop()}else if(mode==='search'||(mode==='auto'&&SearchEngine.isSearchIntent(txt))){this.history.push({role:'assistant',content:'🔍 در حال جستجو...'});this.render();const results=await SearchEngine.ddg(txt);this.history.pop();res=SearchEngine.formatResults(results,txt)}else{res=await LocalAI.generate(txt)}this.history.push({role:'assistant',content:res});this.render();await this.save()},
 async save(){const s=this.sessions.find(x=>x.id===this.currentId);if(s){s.messages=[...this.history];s.date=Date.now();await IDB.put('sessions',s)}},
 deleteCurrent(){if(!confirm('چت فعلی حذف شود؟'))return;const id=this.currentId;IDB.del('sessions',id);this.sessions=this.sessions.filter(s=>s.id!==id);if(this.sessions.length)this.load(this.sessions[0].id);else this.newSession();UI.renderList();Toast.show('حذف شد','success')},
 exportAllJSON(){U.download('ostadyar-backup.json',JSON.stringify(this.sessions,null,2),'application/json');Toast.show('خروجی ذخیره شد','success')},
 triggerImport(){document.getElementById('import-file').click()},
 importJSON(files){const f=files[0];if(!f)return;const r=new FileReader();r.onload=e=>{try{const data=JSON.parse(e.target.result);if(Array.isArray(data)){data.forEach(s=>{if(s.id&&s.messages){this.sessions.push(s);IDB.put('sessions',s)}});UI.renderList();Toast.show('بازیابی شد','success')}}catch(err){Toast.show('فایل نامعتبر','error')}};r.readAsText(f)}};
+/* ===================== ادامه در بخش ۳ ===================== *//* ===================== اصلاح LocalAI ===================== */
+LocalAI.formatMath=function(r){if(!r)return null;if(r.error)return'❌ '+r.error;return'🧮 حل گام‌به‌گام:\n'+r.steps.join('\n')};
+/* ===================== AI stub (API خارجی حذف شد) ===================== */
+const AI={async ask(){return null},async json(){return null}};
+/* ===================== سرورهای جهانی (۵۰+) ===================== */
+const GlobalServers={list:[],current:null,checking:false,
+init(){
+const jitsi=['meet.jit.si','8x8.vc','meet.element.io','jitsi.riot.im','meet.mayfirst.org','jitsi.hamburg.ccc.de','jitsi.fem.tu-ilmenau.de','meet.infomaniak.com','meet.ffmuc.net','jitsi.berlin.ccc.de','jitsi.dresden.network','meet.osna.social','jitsi.tu-dresden.de','jitsi.hs-osnabrueck.de','jitsi.uni-koeln.de','meet.dfn.de','jitsi.vienna.ccc.de','jitsi.zrh.ch','meet.piratpartiet.se','jitsi.skynetcloud.site','meet.jitsi.gr','jitsi.madrid.ccc.de','jitsi.nixnet.services','jitsi.101010.pl','meet.jabberfr.org','jitsi.luga.at','jitsi.nextcloud.com','meet.jitsi.483d.com','jitsi.lavatech.view','meet.jitsi.co'];
+const mqtt=['wss://broker.emqx.io:8084/mqtt','wss://broker.hivemq.com:8884/mqtt','wss://test.mosquitto.org:8081/mqtt','wss://mqtt.eclipseprojects.io/mqtt','wss://broker.mqttdashboard.com:8883/mqtt','wss://mqtt.fluux.io/mqtt','wss://demo.broker.io/mqtt','wss://mqtt.iot.bzh:8083/mqtt','wss://mqtt.swifitch.cz:8083/mqtt','wss://mqtt.myhome-server.de:8083/mqtt','wss://mqtt.cedalo.cloud:8883/mqtt','wss://mqtt.hslu.ch:8883/mqtt','wss://mqtt.opendxl.com:8883/mqtt','wss://mqtt.smartmechatronics.com:8883/mqtt','wss://mqtt.thingsboard.cloud:8883/mqtt'];
+const ws=['wss://echo.websocket.org','wss://ws.postman-echo.com/raw','wss://demo.piesocket.com/v3/channel_1','wss://ws.vi-server.org/mirror','wss://echo-rfc864.herokuapp.com','wss://ws.ifelse.io','wss://socketsbay.com/wss/v2/1/demo/','wss://ws.vi-server.org','wss://echo-rfc6455.herokuapp.com','wss://wss-echo.cyclic.app','wss://websocket-echo.com','wss://ws.vi-server.org/echo','wss://echo.run.app','wss://ws.postman-echo.com','wss://demo.piesocket.com'];
+this.list=[];
+jitsi.forEach((d,i)=>this.list.push({id:'jitsi-'+i,name:'Jitsi '+d,type:'jitsi',url:'https://'+d,timeout:12000}));
+mqtt.forEach((u,i)=>this.list.push({id:'mqtt-'+i,name:'MQTT '+u.replace('wss://',''),type:'mqtt',url:u,timeout:12000}));
+ws.forEach((u,i)=>this.list.push({id:'ws-'+i,name:'WS '+u.replace('wss://',''),type:'ws',url:u,timeout:12000}));
+Conn.servers=this.list;
+},
+async test(server){try{if(server.type==='jitsi'){await fetch(server.url,{mode:'no-cors',signal:AbortSignal.timeout(server.timeout||12000)});return true}if(server.type==='mqtt'||server.type==='ws'){await new Promise((res,rej)=>{const t=setTimeout(()=>rej(new Error('timeout')),server.timeout||12000);try{const s=new WebSocket(server.url);s.onopen=()=>{clearTimeout(t);s.close();res(true)};s.onerror=()=>{clearTimeout(t);rej(new Error('ws error'))}}catch(e){clearTimeout(t);rej(e)}});return true}return false}catch(e){return false}},
+async autoConnect(){if(Conn.mode!=='server')return;if(this.checking)return;this.checking=true;Toast.show('در حال اتصال به سرور جهانی...','info');for(let i=0;i<this.list.length;i++){const s=this.list[i];this.current=s;const ok=await this.test(s);if(ok){Conn.currentServer=s;Toast.show('✅ سرور متصل: '+s.name,'success');this.updateStatus(s);this.checking=false;return s}if(i<this.list.length-1){Toast.show('سرور '+s.name+' پاسخ نداد؛尝试 بعدی...','warning');await new Promise(r=>setTimeout(r,1200))}}this.checking=false;Toast.show('هیچ سروری متصل نشد؛ حالت P2P فعال می‌ماند.','error');Conn.currentServer=null;this.updateStatus(null);return null},
+updateStatus(s){const el=document.getElementById('conn-status-text');if(!el)return;if(Conn.mode==='server'){if(s){el.innerHTML='✅ حالت فعلی: سرور جهانی<br>✅ سرور متصل: '+U.esc(s.name)+'<br>✅ نوع: '+U.esc(s.type)+'<br>⚠️ اگر قطع شد، fallback خودکار ۱۲ ثانیه'}else{el.innerHTML='⚠️ حالت فعلی: سرور جهانی<br>❌ هیچ سروری متصل نشد<br>✅ حالت P2P محلی همچنان فعال است<br>🔄 بعداً دوباره تلاش کنید'}}},
+next(){if(!this.list.length)return null;const idx=this.current?this.list.findIndex(s=>s.id===this.current.id):-1;const nxt=this.list[(idx+1)%this.list.length];this.current=nxt;return nxt}};
 /* ===================== ماژول‌های کلاس P2P ===================== */
 const ClassChat={msgs:[],
 send(){const inp=document.getElementById('chat-input-class');const t=inp.value.trim();if(!t)return;inp.value='';const msg={from:Classroom.displayName,role:Classroom.role,text:t,ts:Date.now()};Signal.send('chat',{msg});this.msgs.push(msg);this.render();Notify.play('message')},
@@ -826,7 +1296,7 @@ receivePermission(m){if(m.name===Classroom.displayName){this.myStatus=m.status;t
 approve(name){Signal.send('permission',{name,status:'approved'});if(this.requests[name])this.requests[name].status='approved';this.renderTeacher()},
 revoke(name){Signal.send('permission',{name,status:'revoked'});if(this.requests[name])this.requests[name].status='revoked';this.renderTeacher()},
 renderSelf(){const e=document.getElementById('hand-student-status');if(!e)return;e.innerHTML=this.myStatus==='waiting'?'<span class="hand-status status-waiting">✋ در انتظار تأیید معلم</span>':this.myStatus==='approved'?'<span class="hand-status status-approved">✅ مجاز به صحبت</span>':this.myStatus==='revoked'?'<span class="hand-status status-revoked">❌ مجوز لغو شد</span>':''},
-renderTeacher(){const l=document.getElementById('hand-list');if(!l)return;const req=Object.values(this.requests);if(!req.length){l.innerHTML='<p class="small">درخواستی نیست.</p>';return}l.innerHTML=req.map(r=>'<div class="hand-item"><div><b>'+U.esc(r.name)+'</b></div><div style="display:flex;gap:8px;align-items:center"><span class="hand-status '+(r.status==='waiting'?'status-waiting':r.status==='approved'?'status-approved':'status-revoked')+'">'+(r.status==='waiting'?'در انتظار':r.status==='approved'?'مجاز':'لغو')+'</span><button class="btn btn-success btn-sm" onclick="Hands.approve(\''+U.esc(r.name)+'\')">✅</button><button class="btn btn-danger btn-sm" onclick="Hands.revoke(\''+U.esc(r.name)+'\')">❌</button></div></div>').join('')}};
+renderTeacher(){const l=document.getElementById('hand-list');if(!l)return;const req=Object.values(this.requests);if(!req.length){l.innerHTML='<p class="small">درخواستی نیست.</p>';return}l.innerHTML=req.map(r=>'<div class="hand-item"><div><b>'+U.esc(r.name)+'</b></div><div style="display:flex;gap:8px;align-items:center"><span class="hand-status '+(r.status==='waiting'?'status-waiting':r.status==='approved'?'status-approved':'status-revoked')+'">'+(r.status==='waiting'?'در انتظار':r.status==='approved'?'مجاز':'لغو')+'</span><button class="btn btn-success btn-sm" onclick="Hands.approve(\''+U.esc(r.name).replace(/'/g,"\\'")+'\')">✅</button><button class="btn btn-danger btn-sm" onclick="Hands.revoke(\''+U.esc(r.name).replace(/'/g,"\\'")+'\')">❌</button></div></div>').join('')}};
 const Poll={list:[],
 toggleOptions(){const t=document.getElementById('poll-type').value;document.getElementById('poll-opts').style.display=t==='choice'?'':'none'},
 create(){if(Classroom.role!=='teacher')return;const q=document.getElementById('poll-q').value.trim();const ptype=document.getElementById('poll-type').value;const opts=document.getElementById('poll-opts').value.split('\n').map(s=>s.trim()).filter(Boolean);if(!q){Toast.show('سوال را وارد کنید','warning');return}if(ptype==='choice'&&opts.length<2){Toast.show('حداقل ۲ گزینه','warning');return}const poll={id:U.uid(),q,type:ptype,opts,votes:{},openAnswers:[],ts:Date.now(),from:Classroom.displayName};Signal.send('poll-new',{poll});this.list.unshift(poll);document.getElementById('poll-q').value='';document.getElementById('poll-opts').value='';this.render();Toast.show('📊 نظرسنجی منتشر شد','success')},
@@ -859,8 +1329,7 @@ receive(m){const a=document.getElementById('note-area');if(a&&document.activeEle
 snapshot(){const d=Store.get(this.key,{text:'',history:[]});d.history=d.history||[];d.history.unshift({text:d.text,ts:Date.now()});if(d.history.length>30)d.history.pop();Store.set(this.key,d);this.renderHistory();Toast.show('📸 نسخه ثبت شد','success')},
 renderHistory(){const c=document.getElementById('note-history');if(!c)return;const d=Store.get(this.key,{history:[]});const h=d.history||[];if(!h.length){c.innerHTML='<p class="small">تاریخچه‌ای نیست.</p>';return}c.innerHTML=h.map((x,i)=>'<div class="history-item"><span class="small">'+U.faDate(new Date(x.ts))+' '+U.faTime(new Date(x.ts))+'</span><button class="btn btn-sm" onclick="Notes.restore('+i+')">↩️</button></div>').join('')},
 restore(i){const d=Store.get(this.key,{history:[]});const h=d.history||[];if(h[i]){const a=document.getElementById('note-area');if(a)a.value=h[i].text;d.text=h[i].text;Store.set(this.key,d);Toast.show('بازیابی شد','success')}},
-exportTxt(){const a=document.getElementById('note-area');U.download('یادداشت-کلاس.txt',a?a.value:'')},
-print(){const a=document.getElementById('note-area');const w=window.open('','','width=800,height=600');if(w){w.document.write('<html dir="rtl"><head><meta charset="utf-8"><title>یادداشت</title></head><body style="font-family:Tahoma;line-height:2;padding:40px"><h1>📝 یادداشت کلاس</h1><pre style="white-space:pre-wrap">'+U.esc(a?a.value:'')+'</pre></body></html>');w.document.close();w.print()}}};
+exportTxt(){const a=document.getElementById('note-area');U.download('یادداشت-کلاس.txt',a?a.value:'')}};
 const Game={levels:[{name:'تازه‌کار',min:0},{name:'کوشا',min:100},{name:'پرتلاش',min:250},{name:'حرفه‌ای',min:500},{name:'نخبه',min:900},{name:'استاد',min:1500}],
 data(){return Store.get('oy_game',{xp:{},badges:{}})},save(d){Store.set('oy_game',d)},
 levelOf(xp){let lv=this.levels[0];let idx=0;this.levels.forEach((l,i)=>{if(xp>=l.min){lv=l;idx=i}});return{name:lv.name,idx:idx+1}},
@@ -929,8 +1398,29 @@ const Recorder={rec:null,chunks:[],stream:null,
 async start(){try{this.stream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:true});this.chunks=[];this.rec=new MediaRecorder(this.stream);this.rec.ondataavailable=e=>{if(e.data.size)this.chunks.push(e.data)};this.rec.onstop=()=>this.finish();this.rec.start();document.getElementById('rec-start').disabled=true;document.getElementById('rec-stop').disabled=false;document.getElementById('rec-status').innerHTML='<span class="badge red"><span class="badge-dot"></span> در حال ضبط...</span>';this.stream.getVideoTracks()[0].onended=()=>this.stop();Toast.show('⏺️ ضبط شروع شد','info')}catch(e){Toast.show('ضبط ممکن نشد: '+e.message,'error')}},
 stop(){if(this.rec&&this.rec.state!=='inactive')this.rec.stop();if(this.stream)this.stream.getTracks().forEach(t=>t.stop())},
 finish(){document.getElementById('rec-start').disabled=false;document.getElementById('rec-stop').disabled=true;document.getElementById('rec-status').textContent='';const blob=new Blob(this.chunks,{type:'video/webm'});const url=URL.createObjectURL(blob);document.getElementById('rec-result').innerHTML='<div class="file-item"><div class="file-icon">🎬</div><div class="file-body"><div class="file-name">ضبط جلسه</div><div class="file-sub">'+U.fmtSize(blob.size)+'</div></div><a class="btn btn-sm btn-success" href="'+url+'" download="class-recording-'+Date.now()+'.webm">💾 دانلود</a></div>';Toast.show('ضبط ذخیره شد','success')}};
-/* ===================== Classroom اصلی (P2P) ===================== */
+/* ===================== Classroom اصلی + منوی کشویی ===================== */
 const Classroom={role:'student',displayName:'',teacherName:'',className:'',teacherCode:'',studentCode:'',allowed:false,pendingCode:'',pendingRole:'',
+tabDefs:[
+{id:'media',label:'🎥 رسانه',cat:'رسانه'},
+{id:'chat',label:'💬 چت',cat:'گفتگو'},
+{id:'board',label:'🖌️ تخته',cat:'تخته'},
+{id:'smartboard',label:'🎨 هوشمند',cat:'تخته'},
+{id:'files',label:'📁 فایل',cat:'فایل و کتابخانه'},
+{id:'library',label:'📚 کتابخانه',cat:'فایل و کتابخانه'},
+{id:'hands',label:'✋ دست‌ها',cat:'مدیریت کلاس'},
+{id:'poll',label:'📊 نظرسنجی',cat:'مدیریت کلاس'},
+{id:'announce',label:'📢 اطلاعیه',cat:'مدیریت کلاس'},
+{id:'homework',label:'📚 تکالیف',cat:'مدیریت کلاس'},
+{id:'sessions',label:'📂 جلسات',cat:'مدیریت کلاس'},
+{id:'notes',label:'📝 یادداشت',cat:'یادگیری'},
+{id:'game',label:'🎮 امتیاز',cat:'یادگیری'},
+{id:'dashboard',label:'📈 داشبورد',cat:'گزارش و دستیار'},
+{id:'report',label:'📤 گزارش',cat:'گزارش و دستیار'},
+{id:'assistant',label:'🤖 دستیار',cat:'گزارش و دستیار'},
+{id:'timer',label:'⏱️ تایمر',cat:'ابزار کلاس'},
+{id:'reactions',label:'😀 واکنش',cat:'ابزار کلاس'},
+{id:'attendance',label:'🧾 حضور',cat:'ابزار کلاس'},
+{id:'notify',label:'🔊 صدا',cat:'ابزار کلاس'}],
 showStep(step){['name','role','teacher','student'].forEach(s=>{const el=document.getElementById('classroom-step-'+s);if(el)el.style.display='none'});document.getElementById('classroom-active').style.display='none';if(step==='active')document.getElementById('classroom-active').style.display='flex';else{const el=document.getElementById('classroom-step-'+step);if(el)el.style.display='block'}if(step==='role')document.getElementById('classroom-name-badge').textContent='👤 '+(this.displayName||localStorage.getItem('classroomUserName')||'بدون نام');if(step==='teacher')document.getElementById('teacher-name').value=this.displayName||'';if(step==='student')document.getElementById('student-name').value=this.displayName||''},
 continueName(){const name=document.getElementById('classroom-fullname').value.trim();if(!name){Toast.show('نام الزامی است','warning');return}this.displayName=name;localStorage.setItem('classroomUserName',name);if(this.pendingCode)this.goToPending();else this.showStep('role')},
 chooseRole(role){if(!this.displayName){this.showStep('name');return}this.showStep(role)},
@@ -947,10 +1437,11 @@ Signal.start('class-'+this.studentCode,this.displayName);
 Signal.on(m=>{if(m.type==='chat')ClassChat.receive(m);else if(m.type==='note')Notes.receive(m);else if(m.type==='xp'||m.type==='badge')Game.receive(m);else if(m.type==='poll-new'||m.type==='poll-vote'||m.type==='poll-open')Poll.receive(m);else if(m.type==='file')ClassFiles.receive(m);else if(m.type==='hand')Hands.receiveHand(m);else if(m.type==='hand-lower')Hands.receiveLower(m);else if(m.type==='permission')Hands.receivePermission(m);else if(m.type==='announce')Announce.receive(m);else if(m.type==='homework')Homework.receive(m);else if(m.type==='homework-sub')Homework.receiveSub(m);else if(m.type==='timer')ClassTimer.receive(m);else if(m.type==='reaction')Reactions.receive(m);else if(m.type==='presence'){P2PMedia.addPeer(m.name);Attendance.add({id:m.from||U.uid(),name:m.name,role:m.role||'student',status:'joined',hand:'none',time:U.faTime()})}});
 Signal.send('presence',{name:this.displayName,role:this.role});
 Folders.load();if(!Folders.current){const s={id:U.uid(),topic:this.role==='teacher'?'جلسه اول':'جلسه عمومی',date:U.faDate(),createdAt:Date.now(),archived:false};Folders.sessions.unshift(s);Folders.current=s;Folders.save()}
-this.refreshPill();this.refreshLevel();this.updateActiveUI();Notes.loadForSession();Notes.renderHistory();Folders.render();Poll.render();Game.render();ClassFiles.render();Library.load();Dashboard.refresh();Assistant.init();SmartBoard.init();Announce.render();Homework.render();Hands.init();Attendance.initLocal(this.displayName,this.role);P2PMedia.init();
+this.refreshPill();this.refreshLevel();this.updateActiveUI();this.buildTabDropdown();Notes.loadForSession();Notes.renderHistory();Folders.render();Poll.render();Game.render();ClassFiles.render();Library.load();Dashboard.refresh();Assistant.init();SmartBoard.init();Announce.render();Homework.render();Hands.init();Attendance.initLocal(this.displayName,this.role);P2PMedia.init();
+if(Conn.mode==='server')GlobalServers.autoConnect();
 setInterval(()=>Dashboard.refresh(),15000);
 this.copyText(this.studentCode);
-if(this.role==='teacher')Toast.show('کد معلم: '+this.teacherCode+' | کد دانش‌آموز: '+this.studentCode,'success');else Toast.show('در حال ورود به کلاس P2P...','info');Notify.play('break')},
+if(this.role==='teacher')Toast.show('کد معلم: '+this.teacherCode+' | کد دانش‌آموز: '+this.studentCode,'success');else Toast.show('در حال ورود به کلاس...','info');Notify.play('break')},
 leave(ask){if(ask&&!confirm('از کلاس خارج شوید؟'))return;P2PMedia.dispose();location.reload()},
 updateActiveUI(){const codes=[];if(this.role==='teacher'&&this.teacherCode)codes.push({label:'کد معلم (۶ رقمی)',value:this.teacherCode});if(this.studentCode)codes.push({label:'کد دانش‌آموز (۵ رقمی)',value:this.studentCode});const sc=document.getElementById('side-codes');if(sc)sc.innerHTML=codes.map(c=>'<div class="code-box"><div class="small">'+c.label+'</div><div class="code-value">'+U.esc(c.value)+'</div><button class="btn btn-sm" style="width:100%" onclick="Classroom.copyText(\''+U.esc(c.value)+'\')">📋 کپی</button></div>').join('');const sl=document.getElementById('student-link');const tl=document.getElementById('teacher-link');const ts=document.getElementById('teacher-link-section');if(sl)sl.textContent=this.buildLink('student');if(tl)tl.textContent=this.buildLink('teacher');if(ts)ts.style.display=this.role==='teacher'?'block':'none'},
 buildLink(role){const base=location.href.split('?')[0];const params=new URLSearchParams();const code=role==='teacher'?(this.teacherCode||''):(this.studentCode||'');params.set('class',code);params.set('role',role);if(role==='teacher'&&this.displayName)params.set('name',this.displayName);if(this.className)params.set('class_name',this.className);return base+'?'+params.toString()},
@@ -960,7 +1451,10 @@ copyStudentLink(){this.copyText(this.buildLink('student'))},
 copyTeacherLink(){this.copyText(this.buildLink('teacher'))},
 copyText(text){if(!text)return;if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>Toast.show('کپی شد','success')).catch(()=>this.fallbackCopy(text));return}this.fallbackCopy(text)},
 fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();Toast.show('کپی شد','success')},
-switchTab(tab,btn){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));if(btn){btn.classList.add('active');btn.classList.remove('has-new')}else{const b=document.querySelector('.tab-btn[data-tab="'+tab+'"]');if(b){b.classList.add('active');b.classList.remove('has-new')}}const panel=document.getElementById('tab-'+tab);if(panel)panel.classList.add('active');if(tab==='board')this.loadBoard();if(tab==='attendance')Attendance.render();if(tab==='hands')Hands.renderTeacher();if(tab==='poll')Poll.render();if(tab==='files')ClassFiles.render();if(tab==='game')Game.render();if(tab==='dashboard')Dashboard.refresh();if(tab==='notify')Notify.render();if(tab==='notes')Notes.renderHistory();if(tab==='smartboard')SmartBoard.init();if(tab==='library')Library.render();if(tab==='announce')Announce.render();if(tab==='homework')Homework.render();if(tab==='sessions')Folders.render()},
+buildTabDropdown(){const dd=document.getElementById('class-tab-dropdown');if(!dd)return;const cats={};this.tabDefs.forEach(t=>{if(!cats[t.cat])cats[t.cat]=[];cats[t.cat].push(t)});let html='';Object.entries(cats).forEach(([cat,items])=>{html+='<div class="dropdown-cat">'+cat+'</div>';items.forEach(t=>{html+='<div class="dropdown-item" data-tab="'+t.id+'" onclick="Classroom.switchTab(\''+t.id+'\',null);Classroom.closeTabDropdown()">'+t.label+'</div>'})});dd.innerHTML=html},
+toggleTabDropdown(){const dd=document.getElementById('class-tab-dropdown');if(dd)dd.classList.toggle('show')},
+closeTabDropdown(){const dd=document.getElementById('class-tab-dropdown');if(dd)dd.classList.remove('show')},
+switchTab(tab,btn){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));if(btn){btn.classList.add('active');btn.classList.remove('has-new')}else{const b=document.querySelector('.tab-btn[data-tab="'+tab+'"]');if(b){b.classList.add('active');b.classList.remove('has-new')}}const panel=document.getElementById('tab-'+tab);if(panel)panel.classList.add('active');const ddItem=document.querySelector('.dropdown-item[data-tab="'+tab+'"]');if(ddItem)ddItem.classList.add('active');if(tab==='board')this.loadBoard();if(tab==='attendance')Attendance.render();if(tab==='hands')Hands.renderTeacher();if(tab==='poll')Poll.render();if(tab==='files')ClassFiles.render();if(tab==='game')Game.render();if(tab==='dashboard')Dashboard.refresh();if(tab==='notify')Notify.render();if(tab==='notes')Notes.renderHistory();if(tab==='smartboard')SmartBoard.init();if(tab==='library')Library.render();if(tab==='announce')Announce.render();if(tab==='homework')Homework.render();if(tab==='sessions')Folders.render()},
 markNew(tab){const b=document.querySelector('.tab-btn[data-tab="'+tab+'"]');if(b&&!b.classList.contains('active'))b.classList.add('has-new')},
 loadBoard(){const f=document.getElementById('board-frame');if(f.src)return;const dom=(Store.get('oy_wbo_domain','')||'wbo.ophir.dev').trim();f.src='https://'+dom+'/boards/OstadYarPlus_'+this.studentCode+'?username='+encodeURIComponent(this.displayName||'user')+'&lang=fa'},
 refreshPill(){const e=document.getElementById('current-session-name');if(e)e.textContent=Folders.current?Folders.current.topic:'—'},
@@ -985,6 +1479,75 @@ undo(){if(this.history.length<=1)return;this.history.pop();const img=new Image()
 clear(){if(!this.canvas||!confirm('پاک شود؟'))return;this.ctx.fillStyle='#1e293b';this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);this.saveState()},
 save(){if(!this.canvas)return;const a=document.createElement('a');a.download='whiteboard-'+Date.now()+'.png';a.href=this.canvas.toDataURL();a.click();Toast.show('ذخیره شد','success')}}}
 const ToolsWB=createWhiteboard('tools-wb-canvas');
+const Tools={filter(q){const norm=U.norm(q);document.querySelectorAll('#tools-grid-main .card').forEach(c=>{c.style.display=U.norm(c.textContent).includes(norm)?'':'none'});ToolsExtra.filter(q)}};
+const ToolsExtra={defs:[
+{id:'unit-length',cat:'تبدیل واحد',icon:'📏',title:'تبدیل طول',body:'<input class="input" id="ul-val" type="number" placeholder="مقدار"><select class="input" id="ul-from"><option value="1">متر</option><option value="0.001">کیلومتر</option><option value="100">سانتی‌متر</option><option value="1000">میلی‌متر</option><option value="3.28084">فوت</option><option value="39.3701">اینچ</option></select><select class="input" id="ul-to"><option value="1">متر</option><option value="0.001">کیلومتر</option><option value="100">سانتی‌متر</option><option value="1000">میلی‌متر</option><option value="3.28084">فوت</option><option value="39.3701">اینچ</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'ul\')">تبدیل</button><div id="ul-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-weight',cat:'تبدیل واحد',icon:'⚖️',title:'تبدیل وزن',body:'<input class="input" id="uw-val" type="number" placeholder="مقدار"><select class="input" id="uw-from"><option value="1">کیلوگرم</option><option value="1000">گرم</option><option value="0.001">تن</option><option value="2.20462">پوند</option></select><select class="input" id="uw-to"><option value="1">کیلوگرم</option><option value="1000">گرم</option><option value="0.001">تن</option><option value="2.20462">پوند</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'uw\')">تبدیل</button><div id="uw-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-temp',cat:'تبدیل واحد',icon:'🌡️',title:'تبدیل دما',body:'<input class="input" id="ut-val" type="number" placeholder="مقدار"><select class="input" id="ut-from"><option value="c">سلسیوس</option><option value="f">فارنهایت</option><option value="k">کلوین</option></select><select class="input" id="ut-to"><option value="c">سلسیوس</option><option value="f">فارنهایت</option><option value="k">کلوین</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcTemp()">تبدیل</button><div id="ut-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-volume',cat:'تبدیل واحد',icon:'🧪',title:'تبدیل حجم',body:'<input class="input" id="uv-val" type="number" placeholder="مقدار"><select class="input" id="uv-from"><option value="1">لیتر</option><option value="0.001">میلی‌لیتر</option><option value="1000">متر مکعب</option><option value="0.264172">گالن</option></select><select class="input" id="uv-to"><option value="1">لیتر</option><option value="0.001">میلی‌لیتر</option><option value="1000">متر مکعب</option><option value="0.264172">گالن</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'uv\')">تبدیل</button><div id="uv-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-speed',cat:'تبدیل واحد',icon:'🚀',title:'تبدیل سرعت',body:'<input class="input" id="us-val" type="number" placeholder="مقدار"><select class="input" id="us-from"><option value="1">متر/ثانیه</option><option value="3.6">کیلومتر/ساعت</option><option value="2.23694">مایل/ساعت</option></select><select class="input" id="us-to"><option value="1">متر/ثانیه</option><option value="3.6">کیلومتر/ساعت</option><option value="2.23694">مایل/ساعت</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'us\')">تبدیل</button><div id="us-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-time',cat:'تبدیل واحد',icon:'⏳',title:'تبدیل زمان',body:'<input class="input" id="uti-val" type="number" placeholder="مقدار"><select class="input" id="uti-from"><option value="1">ثانیه</option><option value="0.0166667">دقیقه</option><option value="0.000277778">ساعت</option><option value="0.000011574">روز</option></select><select class="input" id="uti-to"><option value="1">ثانیه</option><option value="0.0166667">دقیقه</option><option value="0.000277778">ساعت</option><option value="0.000011574">روز</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'uti\')">تبدیل</button><div id="uti-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-energy',cat:'تبدیل واحد',icon:'⚡',title:'تبدیل انرژی',body:'<input class="input" id="ue-val" type="number" placeholder="مقدار"><select class="input" id="ue-from"><option value="1">ژول</option><option value="0.001">کیلوژول</option><option value="0.239006">کالری</option><option value="0.000277778">وات‌ساعت</option></select><select class="input" id="ue-to"><option value="1">ژول</option><option value="0.001">کیلوژول</option><option value="0.239006">کالری</option><option value="0.000277778">وات‌ساعت</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'ue\')">تبدیل</button><div id="ue-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-pressure',cat:'تبدیل واحد',icon:'🎈',title:'تبدیل فشار',body:'<input class="input" id="up-val" type="number" placeholder="مقدار"><select class="input" id="up-from"><option value="1">پاسکال</option><option value="0.00001">بار</option><option value="0.000145038">psi</option><option value="0.000009869">اتمسفر</option></select><select class="input" id="up-to"><option value="1">پاسکال</option><option value="0.00001">بار</option><option value="0.000145038">psi</option><option value="0.000009869">اتمسفر</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'up\')">تبدیل</button><div id="up-res" class="small" style="margin-top:8px"></div>'},
+{id:'unit-data',cat:'تبدیل واحد',icon:'💾',title:'تبدیل داده',body:'<input class="input" id="ud-val" type="number" placeholder="مقدار"><select class="input" id="ud-from"><option value="1">بایت</option><option value="0.001">کیلوبایت</option><option value="0.000001">مگابایت</option><option value="0.000000001">گیگابایت</option></select><select class="input" id="ud-to"><option value="1">بایت</option><option value="0.001">کیلوبایت</option><option value="0.000001">مگابایت</option><option value="0.000000001">گیگابایت</option></select><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcUnit(\'ud\')">تبدیل</button><div id="ud-res" class="small" style="margin-top:8px"></div>'},
+{id:'currency',cat:'مالی',icon:'💱',title:'تبدیل ارز ساده',body:'<input class="input" id="cur-amt" type="number" placeholder="مبلغ"><input class="input" id="cur-rate" type="number" placeholder="نرخ تبدیل (مثلاً ۵۰۰۰۰)"><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcCurrency()">تبدیل</button><div id="cur-res" class="small" style="margin-top:8px"></div>'},
+{id:'percent',cat:'ریاضی',icon:'٪',title:'درصدگیر',body:'<input class="input" id="pc-val" type="number" placeholder="عدد"><input class="input" id="pc-per" type="number" placeholder="درصد"><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcPercent()">محاسبه</button><div id="pc-res" class="small" style="margin-top:8px"></div>'},
+{id:'bmi',cat:'سلامت',icon:'🧍',title:'محاسبه BMI',body:'<input class="input" id="bmi-w" type="number" placeholder="وزن (کیلوگرم)"><input class="input" id="bmi-h" type="number" placeholder="قد (سانتی‌متر)"><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcBMI()">محاسبه</button><div id="bmi-res" class="small" style="margin-top:8px"></div>'},
+{id:'age',cat:'زمان',icon:'🎂',title:'محاسبه سن',body:'<input class="input" id="age-date" type="date"><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcAge()">محاسبه</button><div id="age-res" class="small" style="margin-top:8px"></div>'},
+{id:'countdown',cat:'زمان',icon:'⏳',title:'شمارش معکوس',body:'<input class="input" id="cd-sec" type="number" value="60" placeholder="ثانیه"><div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="ToolsExtra.startCountdown()">شروع</button><button class="btn" onclick="ToolsExtra.stopCountdown()">توقف</button></div><div id="cd-res" style="font-family:var(--disp);font-size:2rem;text-align:center;margin-top:10px;color:var(--p2)">00:00</div>'},
+{id:'stopwatch',cat:'زمان',icon:'⏱️',title:'کرنومتر',body:'<div id="sw-res" style="font-family:var(--disp);font-size:2.4rem;text-align:center;color:var(--p2);margin:10px 0">00:00.0</div><div style="display:flex;gap:8px;justify-content:center"><button class="btn btn-primary" onclick="ToolsExtra.swToggle()">شروع/توقف</button><button class="btn" onclick="ToolsExtra.swReset()">ریست</button></div>'},
+{id:'jalali',cat:'زمان',icon:'📅',title:'تقویم شمسی',body:'<button class="btn btn-primary btn-block" onclick="ToolsExtra.showJalali()">نمایش تاریخ شمسی</button><div id="jalali-res" class="small" style="margin-top:8px"></div>'},
+{id:'gregorian',cat:'زمان',icon:'🗓️',title:'تقویم میلادی',body:'<button class="btn btn-primary btn-block" onclick="ToolsExtra.showGregorian()">نمایش تاریخ میلادی</button><div id="gregorian-res" class="small" style="margin-top:8px"></div>'},
+{id:'dateconvert',cat:'زمان',icon:'🔄',title:'تبدیل تاریخ',body:'<input class="input" id="dc-in" type="date"><button class="btn btn-primary btn-block" onclick="ToolsExtra.convertDate()">تبدیل</button><div id="dc-res" class="small" style="margin-top:8px"></div>'},
+{id:'password',cat:'امنیت',icon:'🔑',title:'مولد رمز عبور',body:'<input class="input" id="pw-len" type="number" value="16" min="4" max="64"><button class="btn btn-primary btn-block" onclick="ToolsExtra.genPass()">تولید</button><div id="pw-res" class="link-box" style="margin-top:8px;direction:ltr;text-align:left"></div>'},
+{id:'hash',cat:'امنیت',icon:'#️⃣',title:'هش ساده (djb2)',body:'<input class="input" id="hash-in" placeholder="متن..."><button class="btn btn-primary btn-block" onclick="ToolsExtra.calcHash()">محاسبه</button><div id="hash-res" class="link-box" style="margin-top:8px;direction:ltr;text-align:left"></div>'},
+{id:'base64',cat:'برنامه‌نویسی',icon:'🔤',title:'Base64',body:'<textarea class="input" id="b64-in" rows="3" placeholder="متن..."></textarea><div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="ToolsExtra.b64Encode()">Encode</button><button class="btn" onclick="ToolsExtra.b64Decode()">Decode</button></div><textarea class="input" id="b64-out" rows="3" readonly style="margin-top:8px"></textarea>'},
+{id:'urlencode',cat:'برنامه‌نویسی',icon:'🌐',title:'URL Encode',body:'<textarea class="input" id="url-in" rows="3" placeholder="متن..."></textarea><div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="ToolsExtra.urlEncode()">Encode</button><button class="btn" onclick="ToolsExtra.urlDecode()">Decode</button></div><textarea class="input" id="url-out" rows="3" readonly style="margin-top:8px;direction:ltr;text-align:left"></textarea>'},
+{id:'json-fmt',cat:'برنامه‌نویسی',icon:'📋',title:'JSON Formatter',body:'<textarea class="input" id="json-in" rows="4" placeholder=\'{"key":"value"}\'></textarea><button class="btn btn-primary btn-block" onclick="ToolsExtra.fmtJSON()">فرمت</button><textarea class="input" id="json-out" rows="4" readonly style="margin-top:8px;direction:ltr;text-align:left"></textarea>'},
+{id:'html-escape',cat:'برنامه‌نویسی',icon:'🛡️',title:'HTML Escape',body:'<textarea class="input" id="html-in" rows="3" placeholder="<div>...</div>"></textarea><div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="ToolsExtra.htmlEscape()">Escape</button><button class="btn" onclick="ToolsExtra.htmlUnescape()">Unescape</button></div><textarea class="input" id="html-out" rows="3" readonly style="margin-top:8px;direction:ltr;text-align:left"></textarea>'},
+{id:'regex',cat:'برنامه‌نویسی',icon:'🔍',title:'Regex Tester',body:'<input class="input" id="regex-pattern" placeholder="الگو (مثلاً \\d+)"><input class="input" id="regex-text" placeholder="متن..."><button class="btn btn-primary btn-block" onclick="ToolsExtra.testRegex()">تست</button><div id="regex-res" class="small" style="margin-top:8px;direction:ltr;text-align:left"></div>'},
+{id:'color-picker',cat:'گرافیک',icon:'🎨',title:'رنگ‌ساز',body:'<input type="color" id="cp-in" value="#14b8a6" style="width:100%;height:50px;border-radius:10px;border:1px solid var(--bd);cursor:pointer"><div id="cp-res" class="small" style="margin-top:8px;direction:ltr;text-align:left"></div>'},
+{id:'gradient',cat:'گرافیک',icon:'🌈',title:'گرادیان‌ساز',body:'<input type="color" id="grad1" value="#14b8a6" style="width:48%;height:40px;border-radius:10px;border:1px solid var(--bd)"><input type="color" id="grad2" value="#fbbf24" style="width:48%;height:40px;border-radius:10px;border:1px solid var(--bd)"><button class="btn btn-primary btn-block" style="margin-top:8px" onclick="ToolsExtra.makeGradient()">ساخت</button><div id="grad-res" style="height:60px;border-radius:10px;margin-top:8px;border:1px solid var(--bd)"></div><div id="grad-css" class="link-box" style="margin-top:8px;direction:ltr;text-align:left"></div>'},
+{id:'shadow',cat:'گرافیک',icon:'🌑',title:'سایه‌ساز CSS',body:'<input class="input" id="sh-x" type="number" value="0" placeholder="X"><input class="input" id="sh-y" type="number" value="10" placeholder="Y"><input class="input" id="sh-blur" type="number" value="20" placeholder="Blur"><input class="input" id="sh-color" type="color" value="#000000"><button class="btn btn-primary btn-block" onclick="ToolsExtra.makeShadow()">ساخت</button><div id="sh-preview" style="height:60px;border-radius:10px;margin-top:8px;background:var(--bg2)"></div><div id="sh-css" class="link-box" style="margin-top:8px;direction:ltr;text-align:left"></div>'},
+{id:'num2fa',cat:'متفرقه',icon:'🔢',title:'عدد به حروف فارسی',body:'<input class="input" id="n2f-in" type="number" placeholder="عدد..."><button class="btn btn-primary btn-block" onclick="ToolsExtra.num2fa()">تبدیل</button><div id="n2f-res" class="small" style="margin-top:8px"></div>'},
+{id:'word-count',cat:'متفرقه',icon:'📝',title:'شمارنده کلمات',body:'<textarea class="input" id="wc-in" rows="4" placeholder="متن خود را بنویسید..." oninput="ToolsExtra.countWords()"></textarea><div id="wc-res" class="small" style="margin-top:8px"></div>'}
+],
+init(){const container=document.getElementById('tools-extra-container');if(!container)return;const cats={};this.defs.forEach(d=>{if(!cats[d.cat])cats[d.cat]=[];cats[d.cat].push(d)});let html='';Object.entries(cats).forEach(([cat,items])=>{html+='<div class="accordion" id="acc-'+U.norm(cat)+'"><div class="accordion-head" onclick="ToolsExtra.toggleAcc(\''+U.norm(cat)+'\')"><span>'+cat+' ('+items.length+')</span><span class="accordion-arrow">▼</span></div><div class="accordion-body"><div class="tools-grid">';items.forEach(d=>{html+='<div class="tool-card" id="tool-'+d.id+'"><div class="tool-head" onclick="ToolsExtra.toggleTool(\''+d.id+'\')"><span style="font-weight:700">'+d.icon+' '+d.title+'</span><span style="color:var(--m)">▼</span></div><div class="tool-body">'+d.body+'</div></div>'});html+='</div></div></div>'});container.innerHTML=html;const cp=document.getElementById('cp-in');if(cp)cp.addEventListener('input',()=>this.updateColor())},
+toggleAcc(id){const el=document.getElementById('acc-'+id);if(el)el.classList.toggle('open')},
+toggleTool(id){const el=document.getElementById('tool-'+id);if(el)el.classList.toggle('open')},
+filter(q){const norm=U.norm(q);document.querySelectorAll('#tools-extra-container .tool-card').forEach(c=>{const txt=U.norm(c.textContent);c.style.display=txt.includes(norm)?'':'none'});document.querySelectorAll('#tools-extra-container .accordion').forEach(a=>{const hasVisible=a.querySelector('.tool-card[style*="block"], .tool-card:not([style*="none"])');a.style.display=hasVisible?'':'none'})},
+calcUnit(prefix){const val=parseFloat(document.getElementById(prefix+'-val').value)||0;const from=parseFloat(document.getElementById(prefix+'-from').value)||1;const to=parseFloat(document.getElementById(prefix+'-to').value)||1;const res=val*from/to;document.getElementById(prefix+'-res').textContent='نتیجه: '+res.toLocaleString('fa-IR')},
+calcTemp(){const val=parseFloat(document.getElementById('ut-val').value)||0;const from=document.getElementById('ut-from').value;const to=document.getElementById('ut-to').value;let c=val;if(from==='f')c=(val-32)*5/9;if(from==='k')c=val-273.15;let res=c;if(to==='f')res=c*9/5+32;if(to==='k')res=c+273.15;document.getElementById('ut-res').textContent='نتیجه: '+res.toFixed(2)},
+calcCurrency(){const amt=parseFloat(document.getElementById('cur-amt').value)||0;const rate=parseFloat(document.getElementById('cur-rate').value)||0;document.getElementById('cur-res').textContent='نتیجه: '+(amt*rate).toLocaleString('fa-IR')},
+calcPercent(){const val=parseFloat(document.getElementById('pc-val').value)||0;const per=parseFloat(document.getElementById('pc-per').value)||0;document.getElementById('pc-res').textContent=per+'٪ از '+val+' = '+(val*per/100).toLocaleString('fa-IR')},
+calcBMI(){const w=parseFloat(document.getElementById('bmi-w').value)||0;const h=parseFloat(document.getElementById('bmi-h').value)||0;if(!h){document.getElementById('bmi-res').textContent='قد را وارد کنید';return}const bmi=w/((h/100)**2);let cat='نرمال';if(bmi<18.5)cat='لاغر';else if(bmi>=25&&bmi<30)cat='اضافه وزن';else if(bmi>=30)cat='چاق';document.getElementById('bmi-res').textContent='BMI: '+bmi.toFixed(1)+' — '+cat},
+calcAge(){const d=document.getElementById('age-date').value;if(!d){document.getElementById('age-res').textContent='تاریخ را انتخاب کنید';return}const b=new Date(d);const n=new Date();let y=n.getFullYear()-b.getFullYear();let m=n.getMonth()-b.getMonth();if(m<0||(m===0&&n.getDate()<b.getDate())){y--;m+=12}document.getElementById('age-res').textContent=y+' سال و '+m+' ماه'},
+cdTimer:null,
+startCountdown(){let sec=parseInt(document.getElementById('cd-sec').value)||60;clearInterval(this.cdTimer);this.cdTimer=setInterval(()=>{sec--;const m=Math.floor(sec/60);const s=sec%60;document.getElementById('cd-res').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(sec<=0){clearInterval(this.cdTimer);Toast.show('⏳ زمان تمام شد!','warning')}},1000)},
+stopCountdown(){clearInterval(this.cdTimer)},
+swRunning:false,swTime:0,swTimer:null,
+swToggle(){this.swRunning=!this.swRunning;if(this.swRunning){this.swTimer=setInterval(()=>{this.swTime+=100;const m=Math.floor(this.swTime/60000);const s=Math.floor((this.swTime%60000)/1000);const ms=Math.floor((this.swTime%1000)/100);document.getElementById('sw-res').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+'.'+ms},100)}else clearInterval(this.swTimer)},
+swReset(){this.swRunning=false;clearInterval(this.swTimer);this.swTime=0;document.getElementById('sw-res').textContent='00:00.0'},
+showJalali(){document.getElementById('jalali-res').textContent='امروز: '+U.faDate()},
+showGregorian(){document.getElementById('gregorian-res').textContent='Today: '+new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})},
+convertDate(){const v=document.getElementById('dc-in').value;if(!v){document.getElementById('dc-res').textContent='تاریخ را انتخاب کنید';return}const d=new Date(v);document.getElementById('dc-res').innerHTML='شمسی: '+U.faDate(d)+'<br>میلادی: '+d.toLocaleDateString('en-US')},
+genPass(){const len=parseInt(document.getElementById('pw-len').value)||16;const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';let p='';for(let i=0;i<len;i++)p+=chars[Math.floor(Math.random()*chars.length)];document.getElementById('pw-res').textContent=p},
+calcHash(){const str=document.getElementById('hash-in').value;let hash=5381;for(let i=0;i<str.length;i++){hash=((hash<<5)+hash)+str.charCodeAt(i);hash=hash&hash}document.getElementById('hash-res').textContent=String(hash>>>0)},
+b64Encode(){try{document.getElementById('b64-out').value=btoa(unescape(encodeURIComponent(document.getElementById('b64-in').value)))}catch(e){Toast.show('خطا در encode','error')}},
+b64Decode(){try{document.getElementById('b64-out').value=decodeURIComponent(escape(atob(document.getElementById('b64-in').value)))}catch(e){Toast.show('متن Base64 نامعتبر است','error')}},
+urlEncode(){document.getElementById('url-out').value=encodeURIComponent(document.getElementById('url-in').value)},
+urlDecode(){try{document.getElementById('url-out').value=decodeURIComponent(document.getElementById('url-in').value)}catch(e){Toast.show('متن نامعتبر است','error')}},
+fmtJSON(){try{const obj=JSON.parse(document.getElementById('json-in').value);document.getElementById('json-out').value=JSON.stringify(obj,null,2)}catch(e){document.getElementById('json-out').value='❌ JSON نامعتبر است'}},
+htmlEscape(){document.getElementById('html-out').value=U.esc(document.getElementById('html-in').value)},
+htmlUnescape(){const ta=document.createElement('textarea');ta.innerHTML=document.getElementById('html-in').value;document.getElementById('html-out').value=ta.value},
+testRegex(){try{const p=document.getElementById('regex-pattern').value;const t=document.getElementById('regex-text').value;const re=new RegExp(p,'g');const matches=t.match(re);document.getElementById('regex-res').textContent=matches?('یافته‌ها: '+matches.length+' — '+matches.join(', ')):'موردی یافت نشد'}catch(e){document.getElementById('regex-res').textContent='❌ الگو نامعتبر است'}},
+updateColor(){const hex=document.getElementById('cp-in').value;const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);document.getElementById('cp-res').innerHTML='HEX: '+hex+'<br>RGB: rgb('+r+', '+g+', '+b+')<br>HSL: '+this.rgb2hsl(r,g,b)},
+rgb2hsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break}h/=6}return'hsl('+Math.round(h*360)+', '+Math.round(s*100)+'%, '+Math.round(l*100)+'%)'},
+makeGradient(){const c1=document.getElementById('grad1').value;const c2=document.getElementById('grad2').value;const css='linear-gradient(135deg, '+c1+', '+c2+')';document.getElementById('grad-res').style.background=css;document.getElementById('grad-css').textContent='background: '+css+';'},
+makeShadow(){const x=document.getElementById('sh-x').value||0;const y=document.getElementById('sh-y').value||0;const blur=document.getElementById('sh-blur').value||0;const color=document.getElementById('sh-color').value;const css='box-shadow: '+x+'px '+y+'px '+blur+'px '+color+';';document.getElementById('sh-preview').style.boxShadow=x+'px '+y+'px '+blur+'px '+color;document.getElementById('sh-css').textContent=css},
+num2fa(){const n=parseInt(document.getElementById('n2f-in').value);if(isNaN(n)){document.getElementById('n2f-res').textContent='عدد وارد کنید';return}document.getElementById('n2f-res').textContent=this.toFaWords(n)},
+toFaWords(n){if(n===0)return'صفر';const y=['','یک','دو','سه','چهار','پنج','شش','هفت','هشت','نه','ده','یازده','دوازده','سیزده','چهارده','پانزده','شانزده','هفده','هجده','نوزده'];const d=['','','بیست','سی','چهل','پنجاه','شصت','هفتاد','هشتاد','نود'];const h=['','صد','دویست','سیصد','چهارصد','پانصد','ششصد','هفتصد','هشتصد','نهصد'];const scales=['',' هزار',' میلیون',' میلیارد'];let words='';let scale=0;while(n>0){const chunk=n%1000;if(chunk){let cw='';const hh=Math.floor(chunk/100);const rem=chunk%100;if(hh)cw+=h[hh];if(rem){if(cw)cw+=' و ';if(rem<20)cw+=y[rem];else{const tt=Math.floor(rem/10);const oo=rem%10;cw+=d[tt];if(oo)cw+=' و '+y[oo]}}words=cw+scales[scale]+(words?' و '+words:'')}n=Math.floor(n/1000);scale++}return words},
+countWords(){const t=document.getElementById('wc-in').value;const words=t.trim()?t.trim().split(/\s+/).length:0;const chars=t.length;const lines=t?t.split('\n').length:0;document.getElementById('wc-res').innerHTML='کلمات: '+words+'<br>کاراکترها: '+chars+'<br>خطوط: '+lines}};
 /* ===================== دانستنی/آزمون/فلش/بانک ===================== */
 const Facts={currentCat:'all',
 async init(){await KDB.seed();const facts=await IDB.all('facts');const cats=['all',...new Set(facts.map(f=>f.category||'عمومی'))];const tags=document.getElementById('facts-tags');if(tags)tags.innerHTML=cats.map(c=>'<button class="btn btn-sm" style="'+(c===this.currentCat?'background:var(--p);color:#04211d':'')+'" onclick="Facts.setCat(\''+c+'\',this)">'+(c==='all'?'همه':c)+'</button>').join('');this.render();document.getElementById('stat-facts').textContent=facts.length;this.daily(facts)},
@@ -995,7 +1558,7 @@ async random(){const facts=await IDB.all('facts');if(!facts.length)return;const 
 const Quiz={questions:[],answers:{},submitted:false,
 normalize(arr){return(Array.isArray(arr)?arr:[]).map(q=>{const question=String(q.question||q.q||'').trim();let options=(q.options||q.choices||[]).map(String);while(options.length<4)options.push('گزینه '+(options.length+1));options=options.slice(0,4);let correct=parseInt(q.correct!=null?q.correct:(q.answer!=null?q.answer:0));if(isNaN(correct)||correct<0||correct>=options.length)correct=0;return{question,options,correct}}).filter(q=>q.question)},
 loadSample(){this.questions=LocalAI.sampleQuiz(5);this.answers={};this.submitted=false;document.getElementById('quiz-setup').style.display='none';document.getElementById('quiz-active').style.display='block';document.getElementById('quiz-result').style.display='none';this.render();Toast.show('آزمون نمونه بارگذاری شد','success')},
-async start(){const topic=document.getElementById('quiz-topic').value.trim();if(!topic){Toast.show('موضوع را وارد کنید','warning');return}const count=Number(document.getElementById('quiz-count').value)||5;document.getElementById('quiz-setup').style.display='none';document.getElementById('quiz-active').style.display='block';document.getElementById('quiz-result').style.display='none';document.getElementById('quiz-questions').innerHTML='<div class="card" style="text-align:center">در حال تولید...</div>';let questions=null;const cfg=await IDB.cfg();if(cfg.apiKey&&cfg.model!=='ostadyar'){try{const data=await AI.json('Generate '+count+' multiple-choice questions in Persian about "'+topic+'". Return ONLY a JSON array: [{"question":"...","options":["...","...","...","..."],"correct":0}]');questions=this.normalize(data)}catch(e){console.warn(e)}}if(!questions||!questions.length)questions=this.normalize(await LocalAI.generateQuiz(topic,count));this.questions=questions.slice(0,count);this.answers={};this.submitted=false;this.render()},
+async start(){const topic=document.getElementById('quiz-topic').value.trim();if(!topic){Toast.show('موضوع را وارد کنید','warning');return}const count=Number(document.getElementById('quiz-count').value)||5;document.getElementById('quiz-setup').style.display='none';document.getElementById('quiz-active').style.display='block';document.getElementById('quiz-result').style.display='none';document.getElementById('quiz-questions').innerHTML='<div class="card" style="text-align:center">در حال تولید...</div>';const questions=this.normalize(await LocalAI.generateQuiz(topic,count));this.questions=questions.slice(0,count);this.answers={};this.submitted=false;this.render()},
 render(){const c=document.getElementById('quiz-questions');if(!c)return;c.innerHTML='';this.questions.forEach((q,qi)=>{const div=document.createElement('div');div.className='card';div.innerHTML='<div style="font-weight:700;margin-bottom:12px">'+(qi+1)+'. '+U.esc(q.question)+'</div>';q.options.forEach((opt,oi)=>{div.innerHTML+='<div class="quiz-option" data-qi="'+qi+'" data-oi="'+oi+'" onclick="Quiz.select('+qi+','+oi+')"><span style="width:24px;height:24px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700">'+String.fromCharCode(65+oi)+'</span><span>'+U.esc(opt)+'</span></div>'});c.appendChild(div)})},
 select(qi,oi){if(this.submitted)return;this.answers[qi]=oi;document.querySelectorAll('.quiz-option[data-qi="'+qi+'"]').forEach(el=>{el.classList.remove('selected');if(parseInt(el.dataset.oi)===oi)el.classList.add('selected')})},
 submit(){const t=this.questions.length;const a=Object.keys(this.answers).length;if(a<t&&!confirm((t-a)+' سوال بی‌پاسخ است. ثبت شود؟'))return;this.submitted=true;let c=0;this.questions.forEach((q,qi)=>{const s=this.answers[qi];const ok=s===q.correct;if(ok)c++;document.querySelectorAll('.quiz-option[data-qi="'+qi+'"]').forEach(el=>{const idx=parseInt(el.dataset.oi);if(idx===q.correct)el.classList.add('correct');if(idx===s&&!ok)el.classList.add('wrong');el.style.cursor='default'})});document.getElementById('quiz-active').style.display='none';document.getElementById('quiz-result').style.display='block';const pct=Math.round((c/t)*100);document.getElementById('quiz-score').textContent=pct+'%';document.getElementById('quiz-detail').textContent=c+' از '+t+' صحیح';IDB.put('quizzes',{id:Date.now(),topic:document.getElementById('quiz-topic').value.trim(),score:pct,total:t,correct:c,date:Date.now()});document.getElementById('stat-quizzes').textContent=(document.getElementById('stat-quizzes').textContent|0)+1;Toast.show('نتیجه: '+pct+'%',pct>=70?'success':'warning')},
@@ -1003,7 +1566,7 @@ reset(){document.getElementById('quiz-result').style.display='none';document.get
 const Flashcards={cards:[],currentIndex:0,
 normalize(arr){return(Array.isArray(arr)?arr:[]).map(c=>({front:String(c.front||c.question||'').trim(),back:String(c.back||c.answer||'').trim()})).filter(c=>c.front&&c.back)},
 loadSample(){this.cards=[{front:'پایتخت فرانسه؟',back:'پاریس'},{front:'بزرگ‌ترین سیاره؟',back:'مشتری'},{front:'فرمول آب؟',back:'H₂O'},{front:'شاعر شاهنامه؟',back:'فردوسی'},{front:'واحد نیرو؟',back:'نیوتن'}];this.currentIndex=0;document.getElementById('fc-setup').style.display='none';document.getElementById('fc-active').style.display='block';this.show();Toast.show('فلش‌کارت نمونه بارگذاری شد','success')},
-async generate(){const topic=document.getElementById('fc-topic').value.trim();if(!topic){Toast.show('موضوع را وارد کنید','warning');return}document.getElementById('fc-setup').style.display='none';document.getElementById('fc-active').style.display='block';document.getElementById('fc-front').textContent='در حال تولید...';document.getElementById('fc-back').textContent='';let cards=null;const cfg=await IDB.cfg();if(cfg.apiKey&&cfg.model!=='ostadyar'){try{const data=await AI.json('Generate 10 flashcards in Persian about "'+topic+'". Return ONLY a JSON array: [{"front":"...","back":"..."}]');cards=this.normalize(data)}catch(e){console.warn(e)}}if(!cards||!cards.length)cards=this.normalize(await LocalAI.generateFlashcards(topic,10));this.cards=cards;this.currentIndex=0;await IDB.put('flashcards',{id:U.uid(),topic,cards:this.cards,date:Date.now()});this.show()},
+async generate(){const topic=document.getElementById('fc-topic').value.trim();if(!topic){Toast.show('موضوع را وارد کنید','warning');return}document.getElementById('fc-setup').style.display='none';document.getElementById('fc-active').style.display='block';document.getElementById('fc-front').textContent='در حال تولید...';document.getElementById('fc-back').textContent='';const cards=this.normalize(await LocalAI.generateFlashcards(topic,10));this.cards=cards;this.currentIndex=0;await IDB.put('flashcards',{id:U.uid(),topic,cards:this.cards,date:Date.now()});this.show()},
 show(){const c=this.cards[this.currentIndex];if(!c)return;document.getElementById('fc-front').textContent=c.front;document.getElementById('fc-back').textContent=c.back;document.getElementById('fc-card').classList.remove('flipped');document.getElementById('fc-counter').textContent='کارت '+(this.currentIndex+1)+' از '+this.cards.length},
 flip(){document.getElementById('fc-card').classList.toggle('flipped')},
 next(){if(this.currentIndex<this.cards.length-1){this.currentIndex++;this.show()}},
@@ -1018,20 +1581,20 @@ setFilter(cat,el){this.currentFilter=cat;document.querySelectorAll('#bank-tags .
 async add(){const q=document.getElementById('bank-q').value.trim();const a=document.getElementById('bank-a').value.trim();const cat=document.getElementById('bank-cat').value.trim()||'general';if(!q||!a){Toast.show('سوال و پاسخ را وارد کنید','warning');return}this.data.unshift({id:U.uid(),cat,q,a});await IDB.put('qa',this.data[0]);document.getElementById('bank-q').value='';document.getElementById('bank-a').value='';document.getElementById('bank-cat').value='';this.initTags();this.render();document.getElementById('stat-bank').textContent=this.data.length;Toast.show('سوال اضافه شد','success')},
 render(){const list=document.getElementById('bank-list');const search=U.norm(document.getElementById('bank-search')?.value||'');if(!list)return;const filtered=this.data.filter(item=>{const mc=this.currentFilter==='all'||(item.cat||'general')===this.currentFilter;const ms=U.norm(item.q).includes(search)||U.norm(item.a).includes(search);return mc&&ms});list.innerHTML=filtered.slice(0,200).map(i=>'<div style="padding:12px;border-bottom:1px solid var(--bd);cursor:pointer" onclick="this.querySelector(\'.bank-answer\').style.display=this.querySelector(\'.bank-answer\').style.display===\'block\'?\'none\':\'block\'"><div style="font-weight:600">❓ '+U.esc(i.q)+'</div><div class="bank-answer" style="display:none;margin-top:8px;padding:8px;background:var(--ub);border-radius:8px">✅ '+U.esc(i.a)+'</div></div>').join('')||'<p style="text-align:center;color:var(--m);padding:2rem">موردی یافت نشد</p>'}};
 /* ===================== تنظیمات و UI ===================== */
-const Settings={async init(){const cfg=await IDB.cfg();if(cfg.apiKey)document.getElementById('api-key').value=cfg.apiKey;if(cfg.proxy)document.getElementById('proxy-url').value=cfg.proxy;if(cfg.model)document.getElementById('model-select').value=cfg.model;if(cfg.systemPrompt)document.getElementById('system-prompt').value=cfg.systemPrompt;if(cfg.wboDomain)document.getElementById('wbo-domain').value=cfg.wboDomain},
-async save(){const cfg={apiKey:document.getElementById('api-key').value.trim(),proxy:document.getElementById('proxy-url').value.trim(),model:document.getElementById('model-select').value,systemPrompt:document.getElementById('system-prompt').value.trim(),wboDomain:document.getElementById('wbo-domain').value.trim()};await IDB.saveCfg(cfg);Store.set('oy_wbo_domain',cfg.wboDomain);Toast.show('تنظیمات ذخیره شد','success')},
-clearAll(){if(!confirm('همه داده‌های محلی پاک شود؟'))return;indexedDB.deleteDatabase('OstadYarDB_v121');location.reload()}};
+const Settings={async init(){const cfg=await IDB.cfg();const sp=document.getElementById('system-prompt');if(sp&&cfg.systemPrompt)sp.value=cfg.systemPrompt;const wd=document.getElementById('wbo-domain');if(wd&&cfg.wboDomain)wd.value=cfg.wboDomain},
+async save(){const sp=document.getElementById('system-prompt');const wd=document.getElementById('wbo-domain');const cfg={systemPrompt:sp?sp.value.trim():'',wboDomain:wd?wd.value.trim():''};await IDB.saveCfg(cfg);Store.set('oy_wbo_domain',cfg.wboDomain);Toast.show('تنظیمات ذخیره شد','success')},
+clearAll(){if(!confirm('همه داده‌های محلی پاک شود؟'))return;indexedDB.deleteDatabase('OstadYarDB_v122');location.reload()}};
 const UI={currentView:'home',pinned:true,
 initSidebar(){this.pinned=localStorage.getItem('oy_side_pinned')!=='0'&&window.innerWidth>768;this.applyPin()},
 togglePin(){this.pinned=!this.pinned;localStorage.setItem('oy_side_pinned',this.pinned?'1':'0');this.applyPin()},
 applyPin(){const app=document.getElementById('app');const pin=document.getElementById('pin-btn');if(this.pinned&&window.innerWidth>768){app.classList.remove('side-hidden');if(pin)pin.classList.add('pinned')}else{app.classList.add('side-hidden');if(pin)pin.classList.remove('pinned')}},
 toggleSidebar(force){const sb=document.getElementById('sidebar');const bd=document.getElementById('side-backdrop');if(this.pinned&&window.innerWidth>768){this.pinned=false;localStorage.setItem('oy_side_pinned','0');this.applyPin();return}const open=force===undefined?!sb.classList.contains('open'):force;sb.classList.toggle('open',open);if(bd)bd.classList.toggle('show',open)},
-nav(view,el){this.currentView=view;document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});const target=document.getElementById('view-'+view);if(target){target.style.display=view==='chat'?'flex':'block';target.classList.add('active')}document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');else document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b=>{const onclick=b.getAttribute('onclick')||'';if(onclick.includes("UI.nav('"+view+"'"))b.classList.add('active')});const titles={home:'داشبورد',chat:'گفتگو',classroom:'کلاس P2P',facts:'دانستنی',quiz:'آزمون',flashcards:'فلش‌کارت',bank:'بانک سوالات',tools:'جعبه ابزار',settings:'تنظیمات'};document.getElementById('page-title').textContent=titles[view]||'استاد یار پلاس';if(view==='tools')setTimeout(()=>ToolsWB.init(),100);if(view==='facts')Facts.render();if(view==='bank')Bank.render();this.toggleSidebar(false)},
+nav(view,el){this.currentView=view;document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none'});const target=document.getElementById('view-'+view);if(target){target.style.display=view==='chat'?'flex':'block';target.classList.add('active')}document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');else document.querySelectorAll('.nav-btn,.mobile-nav button').forEach(b=>{const onclick=b.getAttribute('onclick')||'';if(onclick.includes("UI.nav('"+view+"'"))b.classList.add('active')});const titles={home:'داشبورد',chat:'گفتگو',classroom:'کلاس P2P',facts:'دانستنی',quiz:'آزمون',flashcards:'فلش‌کارت',bank:'بانک سوالات',tools:'جعبه ابزار',settings:'تنظیمات'};document.getElementById('page-title').textContent=titles[view]||'استاد یار پلاس';if(view==='tools'){setTimeout(()=>ToolsWB.init(),100);ToolsExtra.init()}if(view==='facts')Facts.render();if(view==='bank')Bank.render();this.toggleSidebar(false)},
 filterChats(query){const q=U.norm(query);document.querySelectorAll('#chat-list > div').forEach(el=>{el.style.display=U.norm(el.textContent).includes(q)?'':'none'})},
 renderList(){const l=document.getElementById('chat-list');if(!l)return;l.innerHTML='';Chat.sessions.sort((a,b)=>b.date-a.date).forEach(s=>{const d=document.createElement('div');d.className='chat-item '+(s.id===Chat.currentId?'active':'');d.innerHTML='<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+U.esc(s.title)+'</span>';d.onclick=()=>{Chat.load(s.id);this.toggleSidebar(false)};l.appendChild(d)})}};
-function startClock(){const clockEl=document.getElementById('live-clock');const dateEl=document.getElementById('live-date');const update=()=>{const now=new Date();if(clockEl)clockEl.textContent=now.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});if(dateEl)dateEl.textContent=now.toLocaleDateString('fa-IR',{weekday:'long',year:'numeric',month:'long',day:'numeric'})};update();setInterval(update,1000)}
+function startClock(){const clockEl=document.getElementById('live-clock');const dateEl=document.getElementById('live-date');const update=()=>{const now=new Date();if(clockEl)clockEl.textContent=now.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});if(dateEl)dateEl.textContent=now.toLocaleDateString('fa-IR',{weekday:'long',year:'numeric',month:'long',day:'numeric'})};update();setInterval(update,250)}
 function animateCount(id,target){const el=document.getElementById(id);if(!el)return;let current=0;const step=Math.max(1,Math.ceil(target/30));const interval=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(interval)}el.textContent=current},30)}
-const Boot={async init(){try{await IDB.init();await KDB.seed();await Chat.init();await Facts.init();await Bank.init();await Settings.init();Speech.init();Themes.init();UI.initSidebar();startClock();animateCount('stat-chats',Chat.sessions.length);animateCount('stat-quizzes',(await IDB.all('quizzes')).length);animateCount('stat-facts',(await IDB.all('facts')).length);animateCount('stat-bank',(await IDB.all('qa')).length||8);const chatInput=document.getElementById('chat-input');chatInput.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'});const params=new URLSearchParams(location.search);if(params.get('class')||params.get('code')){UI.nav('classroom');Classroom.initFromUrl(params)}if(window.innerWidth<=768)document.getElementById('menu-btn').style.display='flex';window.addEventListener('resize',()=>{document.getElementById('menu-btn').style.display=window.innerWidth<=768?'flex':'none';UI.applyPin()});document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='b'){e.preventDefault();UI.toggleSidebar()}});Toast.show('🚀 استاد یار پلاس v121 P2P آماده است!','success')}catch(e){console.error('Init error:',e);Toast.show('خطا در راه‌اندازی: '+e.message,'error')}}};
+const Boot={async init(){try{await IDB.init();await KDB.seed();await Chat.init();await Facts.init();await Bank.init();await Settings.init();Speech.init();Themes.init();Conn.init();GlobalServers.init();UI.initSidebar();ToolsExtra.init();startClock();animateCount('stat-chats',Chat.sessions.length);animateCount('stat-quizzes',(await IDB.all('quizzes')).length);animateCount('stat-facts',(await IDB.all('facts')).length);animateCount('stat-bank',(await IDB.all('qa')).length||8);const chatInput=document.getElementById('chat-input');chatInput.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'});const params=new URLSearchParams(location.search);if(params.get('class')||params.get('code')){UI.nav('classroom');Classroom.initFromUrl(params)}if(window.innerWidth<=768)document.getElementById('menu-btn').style.display='flex';window.addEventListener('resize',()=>{document.getElementById('menu-btn').style.display=window.innerWidth<=768?'flex':'none';UI.applyPin()});document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='b'){e.preventDefault();UI.toggleSidebar()}});document.addEventListener('click',e=>{const dd=document.getElementById('class-tab-dropdown');if(dd&&dd.classList.contains('show')&&!e.target.closest('#classroom-tabs-bar'))dd.classList.remove('show')});if(Conn.mode==='server')GlobalServers.autoConnect();Toast.show('🚀 استاد یار پلاس v122 آماده است!','success')}catch(e){console.error('Init error:',e);Toast.show('خطا در راه‌اندازی: '+e.message,'error')}}};
 document.addEventListener('DOMContentLoaded',()=>{Gate.init()});
 </script>
 </body>
